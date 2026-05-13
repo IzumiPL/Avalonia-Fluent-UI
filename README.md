@@ -4,7 +4,7 @@
   Avalonia-Fluent-UI
 </h1>
 <p align="center">
-适用于Avalonia应用的现代流畅设计UI, 在<a href="https://github.com/amwx/FluentAvalonia.git"></a>的基础上修改的,增加了一些控件
+适用于Avalonia应用的现代流畅设计UI, 在<a href="https://github.com/amwx/FluentAvalonia.git">FluentAvalonia</a>的基础上修改的,增加了一些控件
 </p>
 
 <div align="center">
