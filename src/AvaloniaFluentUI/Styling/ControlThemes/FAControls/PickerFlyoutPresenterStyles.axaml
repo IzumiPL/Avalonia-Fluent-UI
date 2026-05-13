@@ -1,0 +1,121 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.UI.Controls;assembly=AvaloniaFluentUI"
+  x:CompileBindings="True">
+  <Design.PreviewWith>
+    <Border Padding="50">
+      <ui:PickerFlyoutPresenter Width="300" Height="300"/>
+    </Border>
+  </Design.PreviewWith>
+
+  <x:Double x:Key="PickerAcceptDismissRegionHeight">40</x:Double>
+
+  <ControlTheme x:Key="FlyoutAcceptDismiss" TargetType="Button">
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
+    <Setter Property="Background" Value="{DynamicResource PickerFlyoutPresenterAcceptDismissBackground}"/>
+    <Setter Property="BorderBrush" Value="{x:Null}"/>
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter
+          Name="ContentPresenter"
+          Padding="{TemplateBinding Padding}"
+          HorizontalContentAlignment="Stretch"
+          VerticalContentAlignment="Stretch"
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          Content="{TemplateBinding Content}"
+          ContentTemplate="{TemplateBinding ContentTemplate}"
+          CornerRadius="{TemplateBinding CornerRadius}"/>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:pointerover /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource PickerFlyoutPresenterAcceptDismissBackgroundPointerOver}"/>
+    </Style>
+    <Style Selector="^:pressed /template/ ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource PickerFlyoutPresenterAcceptDismissBackgroundPressed}"/>
+      <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type ui:PickerFlyoutPresenter}" TargetType="ui:PickerFlyoutPresenter">
+    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+    <Setter Property="Background" Value="{DynamicResource FlyoutPresenterBackground}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource FlyoutBorderThemeBrush}"/>
+    <Setter Property="BorderThickness" Value="{StaticResource FlyoutBorderThemeThickness}"/>
+    <Setter Property="Padding" Value="0"/>
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+    <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}"/>
+    <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
+    <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Padding="{DynamicResource FlyoutBorderThemePadding}"
+          Background="{TemplateBinding Background}"
+          BackgroundSizing="InnerBorderEdge"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <DockPanel>
+            <Panel
+              Name="AcceptDismissContainer"
+              Height="{DynamicResource PickerAcceptDismissRegionHeight}"
+              DockPanel.Dock="Bottom"
+              IsVisible="False">
+              <Grid ColumnDefinitions="*,*">
+                <Button
+                  Name="AcceptButton"
+                  Margin="4,4,2,4"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Theme="{StaticResource FlyoutAcceptDismiss}">
+                  <ui:SymbolIcon FontSize="18" Symbol="Checkmark"/>
+                </Button>
+                <Button
+                  Name="DismissButton"
+                  Grid.Column="1"
+                  Margin="2,4,4,4"
+                  HorizontalAlignment="Stretch"
+                  VerticalAlignment="Stretch"
+                  Theme="{StaticResource FlyoutAcceptDismiss}">
+                  <ui:SymbolIcon FontSize="16" Symbol="Dismiss"/>
+                </Button>
+              </Grid>
+
+            </Panel>
+
+            <Rectangle
+              Height="1"
+              DockPanel.Dock="Bottom"
+              Fill="{DynamicResource PickerFlyoutPresenterDivider}"/>
+
+            <ui:SmoothScrollViewer
+              Name="ScrollViewer"
+              HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+              VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+              <ContentPresenter
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                Content="{TemplateBinding Content}"
+                ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            </ui:SmoothScrollViewer>
+          </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:acceptdismiss /template/ Panel#AcceptDismissContainer">
+      <Setter Property="IsVisible" Value="True"/>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>
