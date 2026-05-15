@@ -124,12 +124,23 @@
         -->
 
         <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/SmoothScrollViewer/SmoothScrollViewerStyles.axaml"/>
+        <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/SmoothScrollViewer/SingleDirectionScrollViewer.axaml"/>
+
         <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/FluentMenu/FluentContextMenuStyle.axaml"/>
+        <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/ComboBox/FluentComboBoxStyle.axaml"/>
+        <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/Flyout/FluentFlyoutPresenter.axaml"/>
+
         <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/Button/PushButtonStyle.axaml"/>
         <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/Button/ToolButtonStyle.axaml"/>
-        <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/ComboBox/FluentComboBoxStyle.axaml"/>
+        <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/Button/FilledPushButtonStyle.axaml"/>
+        <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/Button/OutlinePushButtonStyle.axaml"/>
+        <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/Button/OutlineToolButtonStyle.axaml"/>
+        <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/Button/SubTitleRadioButtonStyle.axaml"/>
+
         <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/Slider/ToolTipSliderStyle.axaml"/>
-        <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/Flyout/FluentFlyoutPresenter.axaml"/>
+        <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/Pager/DotPagerStyle.axaml"/>
+        <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/View/FlipViewStyle.axaml"/>
+        <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/ListBox/RoundListBox.axaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Styles.Resources>

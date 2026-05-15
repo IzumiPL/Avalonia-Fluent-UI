@@ -9,11 +9,9 @@
 
 <div align="center">
 
-[//]: # ([![Version]&#40;https://img.shields.io/pypi/v/pyside6-fluent-ui?color=%2334D058&label=Version&#41;]&#40;https://pypi.org/project/PySide6-Fluent-UI&#41;)
-[//]: # ([![Download]&#40;https://static.pepy.tech/personalized-badge/pyside6-fluent-ui?period=total&units=international_system&left_color=grey&right_color=brightgreen&left_text=Downloads&#41;]&#40;&#41;)
-[//]: # ([![GPLv3]&#40;https://img.shields.io/badge/License-GPLv3-blue?color=#4ec820&#41;]&#40;LICENSE&#41;)
-[![Platform Win32 | Linux | macOS](https://img.shields.io/badge/Platform-Win32%20|%20Linux%20|%20macOS-blue?color=#4ec820)]()
-
+[![MIT](https://img.shields.io/badge/License-MIT-blue?color=#4ec820)](LICENSE)
+[![Avalonia](https://img.shields.io/badge/Avalonia-blue?color=%238b44ac)](https://avaloniaui.net/)
+[![NuGet](https://img.shields.io/nuget/v/AvaloniaFluentUI?color=%236A5ACD&label=AvaloniaFluentUI%20%28nuget%29)](https://www.nuget.org/packages/AvaloniaFluentUI/)
 </div>
 
 ![gallery](README.png)

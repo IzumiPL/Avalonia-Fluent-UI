@@ -105,6 +105,16 @@
       <Color x:Key="SystemFillColorNeutralBackground">#06000000</Color>
       <Color x:Key="SystemFillColorSolidAttentionBackground">#F7F7F7</Color>
       <Color x:Key="SystemFillColorSolidNeutralBackground">#F3F3F3</Color>
+
+      <!--  Filled  -->
+      <Color x:Key="Information">#787878</Color>
+      <Color x:Key="Success">#0F7B0F</Color>
+      <Color x:Key="Attention">#009FAA</Color>
+      <Color x:Key="Warning">#9D9D00</Color>
+      <Color x:Key="Error">#D83F40</Color>
+      <Color x:Key="FilledPointerOver">#C9CACB</Color>
+      <Color x:Key="FilledPressed">#979798</Color>
+      <Color x:Key="FilledBorderPointerOver">#85898B</Color>
     </ResourceDictionary>
 
     <ResourceDictionary x:Key="Dark">
@@ -208,6 +218,16 @@
       <Color x:Key="SystemFillColorNeutralBackground">#08FFFFFF</Color>
       <Color x:Key="SystemFillColorSolidAttentionBackground">#2E2E2E</Color>
       <Color x:Key="SystemFillColorSolidNeutralBackground">#2E2E2E</Color>
+
+      <!--  Filled  -->
+      <Color x:Key="Information">#787878</Color>
+      <Color x:Key="Success">#0F7B0F</Color>
+      <Color x:Key="Attention">#009FAA</Color>
+      <Color x:Key="Waring">#9D9D00</Color>
+      <Color x:Key="Error">#D83F40</Color>
+      <Color x:Key="FilledPointerOver">#4F4F50</Color>
+      <Color x:Key="FilledPressed">#7B7978</Color>
+      <Color x:Key="FilledBorderPointerOver">#85898B</Color>
     </ResourceDictionary>
     <ResourceDictionary x:Key="{x:Static sty:FluentAvaloniaTheme.HighContrastTheme}">
       <!--  These defaults are taken from Windows 10 High Contrast theme  -->
@@ -301,6 +321,16 @@
       <Color x:Key="ControlStrokeColorForStrongFillWhenOnImage">#FF0000</Color>
       <Color x:Key="ControlStrongStrokeColorDefault">#FF0000</Color>
       <Color x:Key="ControlStrongStrokeColorDisabled">#FF0000</Color>
+
+      <!--  Filled  -->
+      <Color x:Key="Information">#FF0000</Color>
+      <Color x:Key="Success">#FF0000</Color>
+      <Color x:Key="Attention">#FF0000</Color>
+      <Color x:Key="Waring">#FF0000</Color>
+      <Color x:Key="Error">#FF0000</Color>
+      <Color x:Key="FilledPointerOver">#FF0000</Color>
+      <Color x:Key="FilledPressed">#FF0000</Color>
+      <Color x:Key="FilledBorderPointerOver">#FF0000</Color>
     </ResourceDictionary>
   </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>

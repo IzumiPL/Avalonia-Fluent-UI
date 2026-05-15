@@ -172,14 +172,14 @@
               </Grid>
             </Button>
 
-            <ui:FluentPopup
+            <ui:ScaleFluentPopup
               Name="PART_Popup"
               IsLightDismissEnabled="True"
               Placement="Bottom"
               PlacementTarget="{TemplateBinding}"
               WindowManagerAddShadowHint="False">
               <TimePickerPresenter Name="PART_PickerPresenter"/>
-            </ui:FluentPopup>
+            </ui:ScaleFluentPopup>
 
           </Grid>
         </DataValidationErrors>

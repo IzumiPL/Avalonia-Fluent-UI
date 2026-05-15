@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Input.Platform;
+using Avalonia.Media;
+using AvaloniaFluentUI.Animations;
 using AvaloniaFluentUI.UI.Input;
 
 namespace AvaloniaFluentUI.UI.Controls;
@@ -91,6 +93,11 @@ public class TextCommandBarFlyout : CommandBarFlyout
         addButtonToCommandsIfPresent(TextControlButtons.Undo, SecondaryCommands);
         addButtonToCommandsIfPresent(TextControlButtons.Redo, SecondaryCommands);
         addButtonToCommandsIfPresent(TextControlButtons.SelectAll, SecondaryCommands);
+        
+        if (Popup.Child is { } presenter)
+        {
+            _=FluentAnimation.SlideInAsync(presenter, -32D, TranslateTransform.YProperty, 150D);
+        }
     }
 
     private TextControlButtons GetButtonsToAdd()

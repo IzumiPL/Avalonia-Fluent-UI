@@ -194,8 +194,29 @@
       <SolidColorBrush x:Key="AccentAcrylicBackgroundFillColorBaseBrush" Color="{DynamicResource SystemAccentColorLight3}"/>
       <SolidColorBrush x:Key="AccentAcrylicInAppFillColorBaseBrush" Color="{DynamicResource SystemAccentColorLight3}"/>
 
+      <!--  //////////  -->
+      <!--  Filled  -->
+      <SolidColorBrush x:Key="InformationDefaultBrush" Color="{StaticResource Information}"/>
+      <SolidColorBrush x:Key="SuccessDefaultBrush" Color="{StaticResource Success}"/>
+      <SolidColorBrush x:Key="AttentionDefaultBrush" Color="{StaticResource Attention}"/>
+      <SolidColorBrush x:Key="WarningDefaultBrush" Color="{StaticResource Warning}"/>
+      <SolidColorBrush x:Key="ErrorDefaultBrush" Color="{StaticResource Error}"/>
+      <SolidColorBrush x:Key="FilledBackgroundPointerOver" Color="{StaticResource FilledPointerOver}"/>
+      <SolidColorBrush x:Key="FilledBackgroundPressed" Color="{StaticResource FilledPressed}"/>
+      <SolidColorBrush x:Key="FilledBorderBackgroundPointerOver" Color="{StaticResource FilledBorderPointerOver}"/>
+
 
       <!--  BEGIN CONTROL RESOURCES  -->
+      <!--  FilledPushButton  -->
+      <StaticResource x:Key="InformationFilledButtonBackground" ResourceKey="InformationDefaultBrush"/>
+      <StaticResource x:Key="SuccessFilledButtonBackground" ResourceKey="SuccessDefaultBrush"/>
+      <StaticResource x:Key="AttentionFilledButtonBackground" ResourceKey="AttentionDefaultBrush"/>
+      <StaticResource x:Key="WarningFilledButtonBackground" ResourceKey="WarningDefaultBrush"/>
+      <StaticResource x:Key="ErrorFilledButtonBackground" ResourceKey="ErrorDefaultBrush"/>
+      <StaticResource x:Key="FilledButtonBackgroundPointerOver" ResourceKey="FilledBackgroundPointerOver"/>
+      <StaticResource x:Key="FilledButtonBackgroundPressed" ResourceKey="FilledBackgroundPressed"/>
+      <StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="FilledBorderBackgroundPointerOver"/>
+
       <!--  Normal Button  -->
       <StaticResource x:Key="AccentButtonBackground" ResourceKey="AccentFillColorDefaultBrush"/>
       <StaticResource x:Key="AccentButtonBackgroundPointerOver" ResourceKey="AccentFillColorSecondaryBrush"/>
@@ -1991,9 +2012,29 @@
       <SolidColorBrush x:Key="AccentAcrylicBackgroundFillColorBaseBrush" Color="{DynamicResource SystemAccentColorDark2}"/>
       <SolidColorBrush x:Key="AccentAcrylicInAppFillColorBaseBrush" Color="{DynamicResource SystemControlAccentColorDark2}"/>
 
+      <!--  //////////  -->
+      <!--  Filled  -->
+      <SolidColorBrush x:Key="InformationDefaultBrush" Color="{StaticResource Information}"/>
+      <SolidColorBrush x:Key="SuccessDefaultBrush" Color="{StaticResource Success}"/>
+      <SolidColorBrush x:Key="AttentionDefaultBrush" Color="{StaticResource Attention}"/>
+      <SolidColorBrush x:Key="WarningDefaultBrush" Color="{StaticResource Warning}"/>
+      <SolidColorBrush x:Key="ErrorDefaultBrush" Color="{StaticResource Error}"/>
+      <SolidColorBrush x:Key="FilledBackgroundPointerOver" Color="{StaticResource FilledPointerOver}"/>
+      <SolidColorBrush x:Key="FilledBackgroundPressed" Color="{StaticResource FilledPressed}"/>
+      <SolidColorBrush x:Key="FilledBorderBackgroundPointerOver" Color="{StaticResource FilledBorderPointerOver}"/>
+
 
 
       <!--  BEGIN CONTROL RESOURCES  -->
+      <!--  FilledPushButton  -->
+      <StaticResource x:Key="InformationFilledButtonBackground" ResourceKey="InformationDefaultBrush"/>
+      <StaticResource x:Key="SuccessFilledButtonBackground" ResourceKey="SuccessDefaultBrush"/>
+      <StaticResource x:Key="AttentionFilledButtonBackground" ResourceKey="AttentionDefaultBrush"/>
+      <StaticResource x:Key="WarningFilledButtonBackground" ResourceKey="WarningDefaultBrush"/>
+      <StaticResource x:Key="ErrorFilledButtonBackground" ResourceKey="ErrorDefaultBrush"/>
+      <StaticResource x:Key="FilledButtonBackgroundPointerOver" ResourceKey="FilledBackgroundPointerOver"/>
+      <StaticResource x:Key="FilledButtonBackgroundPressed" ResourceKey="FilledBackgroundPressed"/>
+      <StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="FilledBorderBackgroundPointerOver"/>
 
       <!--  Normal Button  -->
       <StaticResource x:Key="AccentButtonBackground" ResourceKey="AccentFillColorDefaultBrush"/>
@@ -3921,11 +3962,29 @@
       <SolidColorBrush x:Key="SystemControlForegroundChromeMediumBrush" Color="{StaticResource SystemColorButtonTextColor}"/>
       <StaticResource x:Key="SystemControlTransientBorderBrush" ResourceKey="SystemControlForegroundChromeHighBrush"/>
 
-
+      <!--  //////////  -->
+      <!--  Filled  -->
+      <SolidColorBrush x:Key="InformationDefaultBrush" Color="{StaticResource Information}"/>
+      <SolidColorBrush x:Key="SuccessDefaultBrush" Color="{StaticResource Success}"/>
+      <SolidColorBrush x:Key="AttentionDefaultBrush" Color="{StaticResource Attention}"/>
+      <SolidColorBrush x:Key="WarningDefaultBrush" Color="{StaticResource Warning}"/>
+      <SolidColorBrush x:Key="ErrorDefaultBrush" Color="{StaticResource Error}"/>
+      <SolidColorBrush x:Key="FilledBackgroundPointerOver" Color="{StaticResource FilledPointerOver}"/>
+      <SolidColorBrush x:Key="FilledBackgroundPressed" Color="{StaticResource FilledPressed}"/>
+      <SolidColorBrush x:Key="FilledBorderBackgroundPointerOver" Color="{StaticResource FilledBorderPointerOver}"/>
 
 
 
       <!--  BEGIN CONTROL RESOURCES  -->
+      <!--  FilledPushButton  -->
+      <StaticResource x:Key="InformationFilledButtonBackground" ResourceKey="InformationDefaultBrush"/>
+      <StaticResource x:Key="SuccessFilledButtonBackground" ResourceKey="SuccessDefaultBrush"/>
+      <StaticResource x:Key="AttentionFilledButtonBackground" ResourceKey="AttentionDefaultBrush"/>
+      <StaticResource x:Key="WarningFilledButtonBackground" ResourceKey="WarningDefaultBrush"/>
+      <StaticResource x:Key="ErrorFilledButtonBackground" ResourceKey="ErrorDefaultBrush"/>
+      <StaticResource x:Key="FilledButtonBackgroundPointerOver" ResourceKey="FilledBackgroundPointerOver"/>
+      <StaticResource x:Key="FilledButtonBackgroundPressed" ResourceKey="FilledBackgroundPressed"/>
+      <StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="FilledBorderBackgroundPointerOver"/>
 
       <!--  Normal Button  -->
       <StaticResource x:Key="AccentButtonBackground" ResourceKey="SystemControlHighlightAccentBrush"/>
