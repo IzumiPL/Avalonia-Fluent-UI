@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Media;
 using AvaloniaFluentUI.Animations;
 
@@ -15,8 +16,7 @@ public class FluentPopup : Avalonia.Controls.Primitives.Popup
         get => GetValue(OffSetProperty);
         set => SetValue(OffSetProperty, value);
     }
-    
-    
+
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
@@ -36,7 +36,20 @@ public class FluentPopup : Avalonia.Controls.Primitives.Popup
         var child = Child as Visual;
         if (child == null) return;
 
-        await FluentAnimation.SlideInAsync(child, OffSet, TranslateTransform.YProperty);
+        var property = Placement switch
+        { 
+            PlacementMode.Left or 
+                PlacementMode.Right or 
+                PlacementMode.LeftEdgeAlignedBottom or 
+                PlacementMode.LeftEdgeAlignedTop or 
+                PlacementMode.RightEdgeAlignedBottom or 
+                PlacementMode.RightEdgeAlignedTop 
+                => TranslateTransform.XProperty,
+            
+            _ => TranslateTransform.YProperty
+        };
+
+        await FluentAnimation.SlideInAsync(child, OffSet, property);
     }
 }
 

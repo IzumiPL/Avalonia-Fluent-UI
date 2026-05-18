@@ -9,12 +9,12 @@ namespace AvaloniaFluentUI.UI.Controls;
 [TemplatePart("PART_ScrollViewer", typeof(IScrollable))]
 [TemplatePart("PART_PreviousButton", typeof(ToolButton))]
 [TemplatePart("PART_NextButton", typeof(ToolButton))]
-public class DotPager : ListBox
+public class PipsPager : ListBox
 {
     private ToolButton _previousButton;
     private ToolButton _nextButton;
     
-    public DotPager()
+    public PipsPager()
     {
         
     }
@@ -22,17 +22,25 @@ public class DotPager : ListBox
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
-        if (change.Property == SelectedItemProperty)
+        if (change.Property == ItemsSourceProperty)
         {
-            if (SelectedItem is DotItem item && Scroll != null)
-            {
-                var point = item.TranslatePoint(new Point(0, 0), this);
-                if (!point.HasValue) { return; }
-
-                double target = point.Value.Y + item.Bounds.Height / 2 - Scroll.Viewport.Height / 2;
-                Scroll.Offset = Scroll.Offset.WithY(target);
-            }
+            if (ItemCount > 0) { SelectedIndex = 0; }
         }
+        
+        // if (change.Property == SelectedItemProperty)
+        // {
+        //     if (SelectedItem is PipsPagerItem item && Scroll is ScrollViewer viewer)
+        //     {
+        //     var point = item.TranslatePoint(new Point(0, 0), viewer);
+        //     if (!point.HasValue) { return; }
+        //
+        //     double target = point.Value.X - viewer.Viewport.Width / 2 + item.Bounds.Width / 2;
+        //     Scroll.Offset = Scroll.Offset.WithX(target);
+
+            // double target = point.Value.Y + item.Bounds.Height / 2 - Scroll.Viewport.Height / 2;
+            // Scroll.Offset = Scroll.Offset.WithY(target);
+            // }
+        // }
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -64,7 +72,7 @@ public class DotPager : ListBox
 
     private void OnNextClicked(object sender, RoutedEventArgs e)
     {
-        if (SelectedIndex < ItemCount)
+        if (SelectedIndex < ItemCount - 1)
         {
             SetCurrentValue(SelectedIndexProperty, SelectedIndex + 1);
         }
@@ -78,14 +86,13 @@ public class DotPager : ListBox
         }
     }
 
-
     protected  override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
 	{
-		return new DotItem();
+		return new PipsPagerItem();
 	}
 
 	protected  override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
 	{
-		return NeedsContainer<DotItem>(item, out recycleKey);
+		return NeedsContainer<PipsPagerItem>(item, out recycleKey);
 	}
 }

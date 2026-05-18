@@ -253,11 +253,12 @@
               Focusable="False"
               HorizontalOffset="{DynamicResource NumberBoxPopupHorizontalOffset}"
               IsLightDismissEnabled="True"
-              Placement="AnchorAndGravity"
-              PlacementAnchor="Right"
-              PlacementGravity="Bottom"
+              Placement="RightEdgeAlignedTop"
               VerticalOffset="{DynamicResource NumberBoxPopupVerticalOffset}"
               WindowManagerAddShadowHint="False">
+              <!--  Placement="AnchorAndGravity"  -->
+              <!--  PlacementAnchor="Right"  -->
+              <!--  PlacementGravity="Bottom"  -->
 
               <Border
                 Name="PopupContentRoot"

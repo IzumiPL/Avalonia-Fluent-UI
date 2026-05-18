@@ -2,7 +2,7 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.UI.Controls">
-  <ControlTheme x:Key="{x:Type ui:DotPager}" TargetType="ui:DotPager">
+  <ControlTheme x:Key="{x:Type ui:PipsPager}" TargetType="ui:PipsPager">
     <Setter Property="Foreground" Value="Transparent"/>
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
@@ -17,10 +17,7 @@
     <Setter Property="SelectionMode" Value="Single"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <Border
-          Name="border"
-          BorderBrush="{TemplateBinding BorderBrush}"
-          BorderThickness="{TemplateBinding BorderThickness}">
+        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
           <Grid ColumnDefinitions="Auto, *, Auto">
             <ui:ToolButton
               Name="PART_PreviousButton"
@@ -91,7 +88,7 @@
 
   <!--
   -->
-  <ControlTheme x:Key="{x:Type ui:DotItem}" TargetType="ui:DotItem">
+  <ControlTheme x:Key="{x:Type ui:PipsPagerItem}" TargetType="ui:PipsPagerItem">
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="Foreground" Value="{DynamicResource ListViewItemForeground}"/>
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -101,13 +98,20 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Ellipse
-          Name="Dot"
+          Name="Pips"
           Width="{TemplateBinding Width}"
           Height="{TemplateBinding Height}"
           Fill="{TemplateBinding Foreground}"
           Opacity="0.4"/>
       </ControlTemplate>
     </Setter>
+
+    <Style Selector="^ /template/ ui|ToolButton#PART_PreviousButton:pointerover">
+      <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+    </Style>
+    <Style Selector="^ /template/ ui|ToolButton#PART_NextButton:pointerover">
+      <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+    </Style>
 
     <Style Selector="^:disabled">
       <!--  There's no Disabled brush for LVI, so just dim opacity  -->
@@ -118,7 +122,7 @@
       <Setter Property="Width" Value="8"/>
       <Setter Property="Height" Value="8"/>
 
-      <Style Selector="^ /template/ Ellipse#Dot">
+      <Style Selector="^ /template/ Ellipse#Pips">
         <Setter Property="Opacity" Value="0.7"/>
       </Style>
     </Style>
@@ -126,7 +130,7 @@
     <Style Selector="^:pointerover">
       <Setter Property="Width" Value="8"/>
       <Setter Property="Height" Value="8"/>
-      <Style Selector="^ /template/ Ellipse#Dot">
+      <Style Selector="^ /template/ Ellipse#Pips">
         <Setter Property="Opacity" Value="0.6"/>
       </Style>
     </Style>

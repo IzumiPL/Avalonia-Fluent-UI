@@ -5,7 +5,6 @@ using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
-using Avalonia.Interactivity;
 
 namespace AvaloniaFluentUI.UI.Controls;
 
@@ -58,7 +57,7 @@ public class RoundListBoxItem : ListBoxItem
         if (_editTextBox != null)
         {
             _editTextBox.KeyDown -= OnTextBoxEnterKeyDown;
-            _editTextBox.LostFocus -= OnTextBoxLostFocus;
+            // _editTextBox.LostFocus -= OnTextBoxLostFocus;
         }
         
         _editTextBox = e.NameScope.Find<TextBox>("PART_EditTextBox");
@@ -67,22 +66,21 @@ public class RoundListBoxItem : ListBoxItem
         if (_editTextBox != null)
         {
             _editTextBox.KeyDown += OnTextBoxEnterKeyDown;
-            _editTextBox.LostFocus += OnTextBoxLostFocus;
-
+            // _editTextBox.LostFocus += OnTextBoxLostFocus;
         }
     }
 
-    private void OnTextBoxLostFocus(object sender, RoutedEventArgs e)
-    {
-        Console.WriteLine($"Lost Focus, Content: {Content?.GetType()}");
-        
-        if (Content is String)
-        {
-            _editTextBox.IsVisible = false;
-            Content = _editTextBox.Text;
-            _presenter?.IsVisible = true;
-        }
-    }
+    // private void OnTextBoxLostFocus(object sender, RoutedEventArgs e)
+    // {
+    //     Console.WriteLine($"Lost Focus, Content: {Content?.GetType()}");
+    //     
+    //     if (Content is String)
+    //     {
+    //         _editTextBox.IsVisible = false;
+    //         Content = _editTextBox.Text;
+    //         _presenter?.IsVisible = true;
+        // }
+    // }
 
     private void OnTextBoxEnterKeyDown(object sender, KeyEventArgs e)
     {

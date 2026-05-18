@@ -7,69 +7,76 @@
   <StreamGeometry x:Key="Next">M4 28.031v-24.063q0-0.828 0.32-1.547t0.859-1.258 1.266-0.852 1.555-0.313q1.234 0 2.281 0.719l15.141 10.406q1.219 0.844 1.898 2.125t0.68 2.75-0.68 2.75-1.898 2.125l-15.141 10.406q-1.047 0.719-2.281 0.719-0.828 0-1.555-0.313t-1.266-0.852-0.859-1.258-0.32-1.547z</StreamGeometry>
 
   <ControlTheme x:Key="{x:Type ui:FlipView}" TargetType="ui:FlipView">
-    <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="False"/>
     <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0"/>
     <Setter Property="CornerRadius" Value="8"/>
     <Setter Property="ClipToBounds" Value="True"/>
-    <Setter Property="PageTransition">
-      <PageSlide
-        Orientation="Horizontal"
-        SlideInEasing="CubicEaseOut"
-        Duration="00:00:0.3"/>
-    </Setter>
+    <Setter Property="Height" Value="520"/>
+    <Setter Property="ImageInterpolationMode" Value="MediumQuality"/>
+    <Setter Property="Stretch" Value="UniformToFill"/>
 
     <Setter Property="Template">
       <ControlTemplate>
-        <Grid RowDefinitions="*, Auto" RowSpacing="8">
+        <Grid
+          Margin="0"
+          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+          VerticalAlignment="{TemplateBinding VerticalAlignment}"
+          RowDefinitions="*, Auto"
+          RowSpacing="8">
           <Border
-            Padding="{TemplateBinding Padding}"
+            Grid.Row="0"
             Background="{TemplateBinding Background}"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
             ClipToBounds="{TemplateBinding ClipToBounds}"
             CornerRadius="{TemplateBinding CornerRadius}">
-            <ScrollViewer
-              Name="PART_ScrollViewer"
-              BringIntoViewOnFocusChange="False"
-              HorizontalScrollBarVisibility="Hidden"
-              VerticalScrollBarVisibility="Hidden">
-              <ItemsPresenter
-                Name="PART_ItemsPresenter"
-                Margin="{TemplateBinding Padding}"
-                ItemsPanel="{TemplateBinding ItemsPanel}"/>
-            </ScrollViewer>
+            <Grid>
+              <Image
+                Name="PART_CurrentImage"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                RenderOptions.BitmapInterpolationMode="{TemplateBinding ImageInterpolationMode}"
+                Stretch="{TemplateBinding Stretch}"/>
+              <Image
+                Name="PART_NextImage"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                IsVisible="False"
+                RenderOptions.BitmapInterpolationMode="{TemplateBinding ImageInterpolationMode}"
+                Stretch="{TemplateBinding Stretch}"/>
+            </Grid>
           </Border>
 
           <ui:ToolButton
-            Name="PreviousButton"
+            Name="PART_PreviousButton"
             Width="20"
             Height="36"
             Margin="5,0,0,0"
             Padding="5"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Command="{Binding $parent[Carousel].Previous}"
             IconData="{StaticResource Previous}"
             IconHeight="10"
             IconWidth="10"
             IsVisible="False"
             ZIndex="10"/>
           <ui:ToolButton
-            Name="NextButton"
+            Name="PART_NextButton"
             Width="20"
             Height="36"
             Margin="0,0,5,0"
             Padding="5"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
-            Command="{Binding $parent[Carousel].Next}"
             IconData="{StaticResource Next}"
             IconHeight="10"
             IconWidth="10"
             IsVisible="False"
             ZIndex="10"/>
 
-          <ui:DotPager
+          <ui:PipsPager
+            Name="PART_PipsPager"
             Grid.Row="1"
             MinWidth="128"
             MaxWidth="256"
@@ -77,36 +84,14 @@
             VerticalAlignment="Bottom"
             Background="Transparent"
             BorderThickness="0"
-            ItemsSource="{TemplateBinding ItemsSource}"
+            ItemsSource="{TemplateBinding ImageSource}"
             ScrollViewer.BringIntoViewOnFocusChange="False"
-            SelectedIndex="{TemplateBinding SelectedIndex,
-                                            Mode=TwoWay}"/>
+            SelectedIndex="{Binding SelectedIndex, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
         </Grid>
       </ControlTemplate>
     </Setter>
 
-    <Setter Property="ItemTemplate">
-      <DataTemplate x:DataType="ui:FlipViewItem" DataType="ui:FlipViewItem">
-        <Grid Background="Transparent">
-          <Image
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Source="{Binding ImageSource}"
-            Stretch="UniformToFill"/>
-        </Grid>
-      </DataTemplate>
-    </Setter>
-
-    <!-- <Style Selector="^:pointerover"> -->
-    <!--   <Style Selector="^ /template/ ui|ToolButton#PreviousButton"> -->
-    <!--     <Setter Property="IsVisible" Value="True"/> -->
-    <!--   </Style> -->
-    <!--   <Style Selector="^ /template/ ui|ToolButton#NextButton"> -->
-    <!--     <Setter Property="IsVisible" Value="True"/> -->
-    <!--   </Style> -->
-    <!-- </Style> -->
-
-    <Style Selector="^ /template/ ui|ToolButton#PreviousButton">
+    <Style Selector="^ /template/ ui|ToolButton#PART_PreviousButton">
       <Setter Property="RenderTransformOrigin" Value="50%, 50%"/>
       <Setter Property="Transitions">
         <Transitions>
@@ -118,7 +103,7 @@
       </Setter>
     </Style>
 
-    <Style Selector="^ /template/ ui|ToolButton#NextButton">
+    <Style Selector="^ /template/ ui|ToolButton#PART_NextButton">
       <Setter Property="RenderTransformOrigin" Value="50%, 50%"/>
       <Setter Property="Transitions">
         <Transitions>
@@ -130,11 +115,11 @@
       </Setter>
     </Style>
 
-    <Style Selector="^ /template/ ui|ToolButton#PreviousButton:pressed">
+    <Style Selector="^ /template/ ui|ToolButton#PART_PreviousButton:pressed">
       <Setter Property="RenderTransform" Value="scale(0.85, 1.0)"/>
     </Style>
 
-    <Style Selector="^ /template/ ui|ToolButton#NextButton:pressed">
+    <Style Selector="^ /template/ ui|ToolButton#PART_NextButton:pressed">
       <Setter Property="RenderTransform" Value="scale(0.85, 1.0)"/>
     </Style>
   </ControlTheme>

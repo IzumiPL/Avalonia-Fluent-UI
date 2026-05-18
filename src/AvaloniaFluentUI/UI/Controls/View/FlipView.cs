@@ -1,42 +1,73 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Animation;
+using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using Avalonia.Styling;
 using Avalonia.Threading;
+using Avalonia.VisualTree;
 
 namespace AvaloniaFluentUI.UI.Controls;
 
-[TemplatePart(Name = "PreviousButton", Type = typeof(ToolButton))]
-[TemplatePart(Name = "NextButton", Type = typeof(ToolButton))]
-public class FlipView : Carousel
+[TemplatePart("PART_CurrentImage", typeof(Image))]
+[TemplatePart("PART_NextImage", typeof(Image))]
+[TemplatePart("PART_PreviousButton", typeof(ToolButton))]
+[TemplatePart("PART_NextButton", typeof(ToolButton))]
+public class FlipView : TemplatedControl
 {
-    private ToolButton _previousButton;
-    private ToolButton _nextButton;
-    private DispatcherTimer _autoPlayTimer;
+    private bool _isRunning;
+    private Image? _currentImage;
+    private Image? _nextImage;
+    private ToolButton? _previousButton;
+    private ToolButton? _nextButton;
 
-    // public static readonly StyledProperty<double> ViewPortWidthProperty =
-    //     AvaloniaProperty.Register<FlipView, double>(nameof(ViewPortWidth));
-    //
-    // public double ViewPortWidth
-    // {
-    //     get => GetValue(ViewPortWidthProperty);
-    //     set => SetValue(ViewPortWidthProperty, value);
-    // }
+    private readonly DispatcherTimer _autoPlayTimer;
+    private readonly TranslateTransform _currentTransform = new();
+    private readonly TranslateTransform _nextTransform = new();
+
+    public static readonly StyledProperty<IEnumerable<string>?> ImageSourceProperty =
+        AvaloniaProperty.Register<FlipView, IEnumerable<string>?>(nameof(ImageSource));
+
+    public static readonly StyledProperty<int> SelectedIndexProperty =
+        AvaloniaProperty.Register<FlipView, int>(nameof(SelectedIndex), defaultValue: -1);
+
+    public static readonly StyledProperty<BitmapInterpolationMode> ImageInterpolationModeProperty =
+        AvaloniaProperty.Register<FlipView, BitmapInterpolationMode>(nameof(ImageInterpolationMode));
+
+    public static readonly StyledProperty<Stretch> StretchProperty =
+        AvaloniaProperty.Register<FlipView, Stretch>(nameof(Stretch));
+
+    public static readonly StyledProperty<int> DecodeToHeightProperty =
+        AvaloniaProperty.Register<FlipView, int>(nameof(DecodeToHeight), defaultValue: 0);
+
+    public static readonly StyledProperty<int> DecodeToWidthProperty =
+        AvaloniaProperty.Register<FlipView, int>(nameof(DecodeToWidth), defaultValue: 0);
 
     public static readonly StyledProperty<double> IntervalProperty =
-        AvaloniaProperty.Register<FlipView, double>(nameof(Interval), defaultValue: 1500);
+        AvaloniaProperty.Register<FlipView, double>(nameof(Interval), defaultValue: 1500, validate: value => value >= 400);
 
+    public static readonly StyledProperty<bool> IsAutoPlayProperty =
+        AvaloniaProperty.Register<FlipView, bool>(nameof(IsAutoPlay));
+    
+    public static readonly StyledProperty<int> ItemCountProperty =
+        AvaloniaProperty.Register<FlipView, int>(nameof(ItemCount));
+    
     public double Interval
     {
         get => GetValue(IntervalProperty);
         set => SetValue(IntervalProperty, value);
     }
-
-    public static readonly StyledProperty<bool> IsAutoPlayProperty =
-        AvaloniaProperty.Register<FlipView, bool>(nameof(IsAutoPlay));
 
     public bool IsAutoPlay
     {
@@ -44,118 +75,370 @@ public class FlipView : Carousel
         set => SetValue(IsAutoPlayProperty, value);
     }
 
-    public void Start()
+    public int DecodeToWidth
     {
-        _autoPlayTimer.Start();
+        get => GetValue(DecodeToWidthProperty);
+        set => SetValue(DecodeToWidthProperty, value);
     }
 
-    public void Stop()
+    public int DecodeToHeight
     {
-        _autoPlayTimer.Stop();
+        get => GetValue(DecodeToHeightProperty);
+        set => SetValue(DecodeToHeightProperty, value);
     }
 
-    private void OnAutoPlay(object sender, EventArgs e)
+    public Stretch Stretch
     {
-        if (SelectedIndex >= ItemCount - 1)
-        {
-            SetCurrentValue(SelectedIndexProperty, 0);
-        }
-        else
-        {
-            Next();
-        }
-        // else if (SelectedIndex <= 0) { Next(); }
+        get => GetValue(StretchProperty);
+        set => SetValue(StretchProperty, value);
+    }
+    
+    public BitmapInterpolationMode ImageInterpolationMode
+    {
+        get => GetValue(ImageInterpolationModeProperty);
+        set => SetValue(ImageInterpolationModeProperty, value);
     }
 
-    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    public IEnumerable<string>? ImageSource
     {
-        base.OnAttachedToVisualTree(e);
-        if (IsAutoPlay) { _autoPlayTimer.Start(); }
+        get => GetValue(ImageSourceProperty);
+        set => SetValue(ImageSourceProperty, value);
     }
 
-    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    public int SelectedIndex
     {
-        base.OnDetachedFromVisualTree(e);
-        _autoPlayTimer.Stop();
+        get => GetValue(SelectedIndexProperty);
+        set => SetValue(SelectedIndexProperty, value);
     }
+
+    public int ItemCount
+    {
+        get => GetValue(ItemCountProperty);
+        private set => SetValue(ItemCountProperty, value);
+    }
+
+    private List<Bitmap> _items = new List<Bitmap>();
+
+    public List<Bitmap> Items => _items;
+    
+    public TimeSpan Duration { get; set; }
+
+    public PageSlide.SlideAxis Orientation { get; set; } = PageSlide.SlideAxis.Horizontal;
+
+    public Easing SlideInEasing { get; set; } = new CubicEaseOut();
+
+    public Easing SlideOutEasing { get; set; } = new LinearEasing();
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
-        base.OnApplyTemplate(e);
+#if DEBUG
+        Debug.WriteLine("Apply Template");
+#endif
         
-        _previousButton = e.NameScope.Find<ToolButton>("PreviousButton");
-        _nextButton = e.NameScope.Find<ToolButton>("NextButton");
-
-        var scroller = e.NameScope.Find<ScrollViewer>("PART_ScrollViewer");
-        if (scroller != null)
+        base.OnApplyTemplate(e);
+        if (_previousButton != null)
         {
-            scroller.BringIntoViewOnFocusChange = false;
+            _previousButton.Click -= OnPreviousButtonClick;
         }
+        if (_nextButton != null)
+        {
+            _nextButton.Click -= OnNextButtonClick;
+        }
+
+        _currentImage = e.NameScope.Find<Image>("PART_CurrentImage");
+        _nextImage = e.NameScope.Find<Image>("PART_NextImage");
+        _previousButton = e.NameScope.Find<ToolButton>("PART_PreviousButton");
+        _nextButton = e.NameScope.Find<ToolButton>("PART_NextButton");
+
+        if (_previousButton != null)
+        {
+            _previousButton.Click += OnPreviousButtonClick;
+        }
+        if (_nextButton != null)
+        {
+            _nextButton.Click += OnNextButtonClick;
+        }
+
+        _currentImage?.RenderTransform = _currentTransform;
+        _nextImage?.RenderTransform = _nextTransform;
+        
+        // if (_items.Count <= 0 && ItemCount > 0) { ReloadImages(); }
     }
 
     public FlipView()
     {
-        _autoPlayTimer = new DispatcherTimer{ Interval = TimeSpan.FromMilliseconds(Interval) };
+        _autoPlayTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(Interval) };
         _autoPlayTimer.Tick += OnAutoPlay;
-        
-        AddHandler(RequestBringIntoViewEvent, OnRequestBringIntoView);
+        this.AddHandler(RequestBringIntoViewEvent, OnRequestBringIntoView);
     }
 
-    private void OnRequestBringIntoView(object sender, RequestBringIntoViewEventArgs e)
-    {
-        e.Handled = true;
-    }
+    private void OnRequestBringIntoView(object? sender, RequestBringIntoViewEventArgs e) => e.Handled = true;
 
-    private void UpdateButtonStatus()
+    private void OnAutoPlay(object? sender, EventArgs e)
     {
-        _previousButton?.IsVisible = SelectedIndex != 0;
-        _nextButton?.IsVisible = SelectedIndex != ItemCount - 1;
-    }
-
-    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
-    {
-        base.OnPropertyChanged(change);
-        if (change.Property == SelectedIndexProperty)
+        if (ItemCount <= 1)
         {
-            UpdateButtonStatus();
+            Stop(); 
+            return;
         }
 
-        if (change.Property == IsAutoPlayProperty)
+        if (SelectedIndex >= ItemCount - 1)
         {
-            if (IsAutoPlay) { Start(); }
-            else { Stop(); }
+            SelectedIndex = 0;
         }
-
-        if (change.Property == IntervalProperty)
-        {
-            Stop();
-            _autoPlayTimer.Interval = TimeSpan.FromMilliseconds(Interval);
-            if (IsAutoPlay) { Start(); }
-        }
+        Next();
     }
 
     protected override void OnPointerEntered(PointerEventArgs e)
     {
         base.OnPointerEntered(e);
-        UpdateButtonStatus();
+        UpdateButtonVisibility();
     }
 
     protected override void OnPointerExited(PointerEventArgs e)
     {
         base.OnPointerExited(e);
-        _previousButton?.IsVisible = false;
-        _nextButton?.IsVisible = false;
+        HideButtons();
     }
+
+    private void HandleAutoPlayChanged(bool value)
+    {
+        if (value && this.IsAttachedToVisualTree())
+        {
+            Start();
+        }
+        else
+        {
+            Stop();
+        }
+    }
+
+    private void HandleIntervalChanged()
+    {
+        if (IsAutoPlay)
+        {
+            Stop();
+        }
+
+        Stop();
+        _autoPlayTimer.Interval = TimeSpan.FromMilliseconds(Interval);
+        Start();
+    }
+
+    private void UpdateButtonVisibility()
+    {
+        if (_previousButton != null) { _previousButton.IsVisible = ItemCount > 1 && SelectedIndex > 0; }
+        if (_nextButton != null) { _nextButton.IsVisible = ItemCount > 1 && SelectedIndex < ItemCount - 1; }
+    }
+
+    private void HideButtons()
+    {
+        if (_previousButton != null) { _previousButton.IsVisible = false; }
+        if (_nextButton != null) { _nextButton.IsVisible = false; }
+    }
+
+    public void Start()
+    {
+        if (ItemCount < 2) { return; }
+
+        IsAutoPlay = true;
+        _autoPlayTimer.Start();
+    }
+
+    public void Stop()
+    {
+        IsAutoPlay = false;
+        _autoPlayTimer.Stop();
+    }
+
+    private void OnPreviousButtonClick(object? sender, RoutedEventArgs e) => Previous();
+
+    private void OnNextButtonClick(object? sender, RoutedEventArgs e) => Next();
+
+    protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnAttachedToVisualTree(e);
+
+        if (_items.Count <= 0 && ItemCount > 0)
+        {
+            ReloadImages();
+        }
+    }
+
+    protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+    {
+        base.OnDetachedFromVisualTree(e);
+
+        Stop();
+        Dispatcher.UIThread.Post(() =>
+        {
+            DisposeImage();
+        },
+        DispatcherPriority.Background);
+        // await Task.Yield();
+        // DisposeImage();
+    }
+
+    private void DisposeImage()
+    {
+        if (_items.Count > 0)
+        {
+            _currentImage?.Source = null;
+            _nextImage?.Source = null;
+            SelectedIndex = -1;
+#if DEBUG
+            Debug.WriteLine("Dispose Image");
+#endif
+            foreach (var bitmap in _items)
+            {
+                bitmap.Dispose();
+            }
+
+            _items.Clear();
+        }
+    }
+
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    {
+        base.OnPropertyChanged(change);
+
+        if (change.Property == ImageSourceProperty)
+        {
+            Stop();
+            DisposeImage();
+            
+            if (this.IsAttachedToVisualTree())
+            {
+                ReloadImages();
+            }
+            else
+            {
+                var newValue = ImageSource?.ToList();
+                if (newValue != null)
+                {
+                    ItemCount = newValue.Count;
+                }
+            }
+        }
+        else if (change.Property == SelectedIndexProperty)
+        {
+            int ov = change.GetOldValue<int>();
+            int nv = change.GetNewValue<int>();
+
+            if (ov == -1 || nv < 0 || nv >= _items.Count)
+            {
+                return;
+            }
+            if (IsPointerOver) { UpdateButtonVisibility(); }
+            _=RunSliderAnimationAsync(_items[nv], nv, nv > ov);
+        }
+        else if (change.Property == ImageInterpolationModeProperty)
+        {
+            HandleImageInterpolationModeChanged(change.GetNewValue<BitmapInterpolationMode>());
+        }
+        else if (change.Property == IsAutoPlayProperty)
+        {
+            HandleAutoPlayChanged(change.GetNewValue<bool>());
+        }
+        else if (change.Property == IntervalProperty)
+        {
+            HandleIntervalChanged();
+        }
+    }
+
+    private void HandleImageInterpolationModeChanged(BitmapInterpolationMode mode)
+    {
+        if (_currentImage != null && _nextImage != null)
+        {
+            RenderOptions.SetBitmapInterpolationMode(_currentImage, mode);
+            RenderOptions.SetBitmapInterpolationMode(_nextImage, mode);
+        }
+    }
+
+    private async void ReloadImages()
+    {
+        DisposeImage();
+        var imagePaths = ImageSource?.ToList();
+        if (imagePaths == null || !imagePaths.Any())
+        {
+            ItemCount = 0;
+            return;
+        }
+
+#if DEBUG
+        Debug.WriteLine("Reload Image");
+#endif
+
+        ItemCount = imagePaths.Count;
+        bool isFirstImage = true;
+
+        await foreach (var bitmap in LoadImagesAsync(imagePaths))
+        {
+            _items.Add(bitmap);
+
+            if (isFirstImage)
+            {
+                isFirstImage = false;
+                _currentImage?.Source = _items[0];
+                SelectedIndex = 0;
+                ResetTransform();
+            }
+        }
+        
+        if (IsAutoPlay) { Start(); }
+    }
+
+    private async IAsyncEnumerable<Bitmap> LoadImagesAsync(IEnumerable<string> imagePaths)
+{
+    int decodeHeight = DecodeToHeight;
+    int decodeWidth = DecodeToWidth;
+
+    foreach (var path in imagePaths)
+    {
+        Bitmap? bitmap = null;
+        try
+        {
+            bitmap = await Task.Run(() =>
+            {
+                if (path.StartsWith("avares://"))
+                {
+                    using var stream = AssetLoader.Open(new Uri(path));
+                    if (decodeHeight > 0) { return Bitmap.DecodeToHeight(stream, decodeHeight); }
+                    if (decodeWidth > 0) { return Bitmap.DecodeToWidth(stream, decodeWidth); }
+                    return new Bitmap(stream);
+                }
+                else
+                {
+                    using var stream = new System.IO.FileStream(path, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+                    if (decodeHeight > 0) { return Bitmap.DecodeToHeight(stream, decodeHeight); }
+                    if (decodeWidth > 0) { return Bitmap.DecodeToWidth(stream, decodeWidth); }
+                    return new Bitmap(stream);
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+#if DEBUG
+            Debug.WriteLine($"Failed to load image '{path}': {ex.Message}");
+#endif
+        }
+
+        if (bitmap != null)
+        {
+            yield return bitmap;
+        }
+    }
+}
 
     protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
     {
-        Console.WriteLine(true);
-        Console.WriteLine(e.Delta.Y < 0);
+        if (ItemCount == 0) { return; }
+
         if (e.Delta.Y < 0)
         {
             Next();
         }
-        else
+        else if (e.Delta.Y > 0)
         {
             Previous();
         }
@@ -163,10 +446,106 @@ public class FlipView : Carousel
         e.Handled = true;
         base.OnPointerWheelChanged(e);
     }
+
+    private async Task RunSliderAnimationAsync(IImage image, int targetIndex, bool forward)
+    {
+        double distance = Orientation == PageSlide.SlideAxis.Horizontal ? Bounds.Width : Bounds.Height;
+        var property = Orientation == PageSlide.SlideAxis.Horizontal ? TranslateTransform.XProperty : TranslateTransform.YProperty;
+        
+        if (_currentImage == null || _nextImage == null) { return; }
+        _isRunning = true;
+        _nextImage.Source = image;
+        _nextImage.IsVisible = true;
+
+        if (forward)
+        {
+            Duration = TimeSpan.FromMilliseconds(300);
+        }
+        else
+        {
+            Duration = TimeSpan.FromMilliseconds(400);
+        }
+
+        var currentAnimation = new Animation
+        {
+            Duration = Duration,
+            FillMode = FillMode.Forward,
+            Easing = SlideOutEasing,
+            Children =
+            {
+                new KeyFrame
+                {
+                    Cue = new Cue(0),
+                    Setters = { new Setter(property, 0d) }
+                },
+                new KeyFrame
+                {
+                    Cue = new Cue(1),
+                    Setters = { new Setter(property, forward ? -distance : distance) }
+                }
+            }
+        };
+
+        var nextAnimation = new Animation
+        {
+            Duration = Duration,
+            FillMode = FillMode.Forward,
+            Easing = SlideInEasing,
+            Children =
+            {
+                new KeyFrame
+                {
+                    Cue = new Cue(0),
+                    Setters = { new Setter(property, forward ? distance : -distance) }
+                },
+                new KeyFrame
+                {
+                    Cue = new Cue(1), 
+                    Setters = { new Setter(property, 0d) }
+                }
+            }
+        };
+        
+        await Task.WhenAll(currentAnimation.RunAsync(_currentImage), nextAnimation.RunAsync(_nextImage));
+
+        SelectedIndex = targetIndex;
+        _currentImage.Source = image;
+
+        _nextImage.Source = null;
+        _nextImage.IsVisible = false;
+        ResetTransform();
+        
+        _isRunning = false;
+    }
+
+    private void ResetTransform()
+    {
+        _currentTransform.X = 0;
+        _currentTransform.Y = 0;
+
+        _nextTransform.X = 0;
+        _nextTransform.Y = 0;
+    }
+
+    public void Next()
+    {
+        if (_isRunning || SelectedIndex >= ItemCount - 1)
+        {
+            return;
+        }
+    
+        SelectedIndex++;
+    }
+
+    public void Previous()
+    {
+        if (_isRunning || SelectedIndex <= 0) 
+        {
+            return;
+        }
+
+        SelectedIndex--;
+    }
 }
 
-public class FlipViewItem
-{
-    public IImage? ImageSource { get; set; }
-    // public string? Title { get; set; }
-}
+
