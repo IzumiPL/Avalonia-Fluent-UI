@@ -9,13 +9,13 @@ namespace Gallery;
 public class ViewLocator : IDataTemplate
 {
     private readonly Dictionary<Type, Func<Control>> _factory = new();
-    private readonly Dictionary<Type, Control> _cache = new();
+    private readonly Dictionary<Type, Control> _views = new();
 
     public ViewLocator()
     {
         Register();
     }
-
+    
     private void Register()
     {
         _factory[typeof(HomeViewModel)] = () => new Views.HomeView();
@@ -35,17 +35,10 @@ public class ViewLocator : IDataTemplate
 
     public Control? Build(object? param)
     {
-        if (param is null)
-            return null;
-
+        Console.WriteLine(param);
+        if (param is null) { return null; }
         var vmType = param.GetType();
-
-        if (_cache.TryGetValue(vmType, out var cached))
-        {
-            cached.DataContext = param;
-            return cached;
-        }
-
+        
         if (!_factory.TryGetValue(vmType, out var creator))
         {
             return new TextBlock
@@ -54,12 +47,13 @@ public class ViewLocator : IDataTemplate
             };
         }
 
-        var view = creator();
-
-        view.DataContext = param;
-
-        _cache[vmType] = view;
-
+        if (_views.TryGetValue(vmType, out var view))
+        {
+            return view;
+        }
+        
+        view = creator();
+        _views[vmType] = view;
         return view;
     }
 

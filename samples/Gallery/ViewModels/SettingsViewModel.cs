@@ -1,5 +1,5 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Animation;
@@ -9,7 +9,6 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Gallery.Messages.MainWindowMessages;
-using Gallery.Models;
 using Gallery.Services;
 
 namespace Gallery.ViewModels;
@@ -78,7 +77,7 @@ public partial class SettingsViewModel : ViewModelBase
     }
 
     [ObservableProperty]
-    private Color _selectedAccentColor = Colors.DeepPink;
+    private Color _selectedAccentColor = Colors.Transparent;
 
     partial void OnSelectedAccentColorChanged(Color value)
     {
@@ -111,8 +110,22 @@ public partial class SettingsViewModel : ViewModelBase
     
     [ObservableProperty]
     private bool _isEnabledWindowEffect = true;
-    
+
+    public bool WindowEffectCardIsEnabled => !IsEnabledBackgroundImage && RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+
     [ObservableProperty]
+    private bool _isCustomColor;
+
+    partial void OnIsCustomColorChanged(bool value)
+    {
+        if (value)
+        {
+            ThemeService.SetAccentColor(SelectedAccentColor);
+        }
+    }
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(WindowEffectCardIsEnabled))]
     private bool _isEnabledBackgroundImage;
 
     partial void OnIsEnabledTogglePageAnimationChanged(bool value) => WeakReferenceMessenger.Default.Send(new PageAnimationStatusChangedMessage(value));

@@ -37,7 +37,7 @@ public partial class View : ViewBase
         {
             {"ListBox", ListBoxCard},
             {"TreeView", TreeViewCard},
-            {"Carousel", CarouselCard}
+            {"FlipView", FlipViewCard}
         };
 
         // Carousel.Loaded += (_, e) =>

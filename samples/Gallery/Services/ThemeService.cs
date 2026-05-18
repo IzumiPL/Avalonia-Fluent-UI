@@ -15,6 +15,7 @@ namespace Gallery.Services;
 public class ThemeService
 {
     private static string ConfigDir => Path.Combine(AppContext.BaseDirectory, "Config");
+    // private static string ConfigDir => Path.Combine("/home/interval", "Config");
 
     private static string AppConfigPath => Path.Combine(ConfigDir, "config.json");
 
@@ -56,7 +57,7 @@ public class ThemeService
         Application.Current?.RequestedThemeVariant = theme;
     }
 
-    public static async Task SaveConfig(AppConfig config)
+    public static void SaveConfig(AppConfig config)
     {
         try
         {
@@ -67,8 +68,8 @@ public class ThemeService
             Directory.CreateDirectory(ConfigDir); 
             var json = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
             
-            await File.WriteAllTextAsync(AppConfigPath, json, Encoding.UTF8);
-            // File.WriteAllText(AppConfigPath, json, Encoding.UTF8);
+            // await File.WriteAllTextAsync(AppConfigPath, json, Encoding.UTF8);
+            File.WriteAllText(AppConfigPath, json, Encoding.UTF8);
         }
         catch (Exception e)
         {

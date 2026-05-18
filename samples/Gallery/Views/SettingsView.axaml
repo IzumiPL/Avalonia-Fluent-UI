@@ -38,93 +38,93 @@
         VerticalAlignment="Stretch"
         Orientation="Vertical"
         Spacing="10">
-        <ui:Card>
-          <Grid
-            VerticalAlignment="Center"
-            ColumnDefinitions="*, Auto"
-            RowDefinitions="*, *">
-            <TextBlock
-              Grid.Row="0"
-              Grid.Column="0"
-              Classes="Title"
-              Text="动画"/>
-            <TextBlock
-              Grid.Row="1"
-              Grid.Column="0"
-              Classes="Content"
-              Text="启用切换Interface动画"/>
-            <ToggleSwitch
-              Grid.RowSpan="2"
-              Grid.Column="1"
-              HorizontalAlignment="Right"
-              IsChecked="{Binding IsEnabledTogglePageAnimation}"/>
-          </Grid>
-        </ui:Card>
-        <ui:Card>
-          <Grid
-            VerticalAlignment="Center"
-            ColumnDefinitions="*, Auto, Auto"
-            RowDefinitions="*, *">
-            <TextBlock
-              Grid.Row="0"
-              Grid.Column="0"
-              Classes="Title"
-              Text="动画类型"/>
-            <TextBlock
-              Grid.Row="1"
-              Grid.Column="0"
-              Classes="Content"
-              Text="设置切换Interface动画类型(切换为3D有BUG🥵)"/>
-            <fui:FluentComboBox
-              Grid.RowSpan="2"
-              Grid.Column="1"
-              MinWidth="168"
-              HorizontalAlignment="Right"
-              VerticalAlignment="Center"
-              IsEnabled="{Binding IsEnabledTogglePageAnimation}"
-              ItemsSource="{Binding AnimationTypes}"
-              SelectedItem="{Binding AnimationType}"/>
-
-            <fui:FluentComboBox
-              Grid.RowSpan="2"
-              Grid.Column="2"
-              MinWidth="128"
-              Margin="5,0,0,0"
-              HorizontalAlignment="Right"
-              VerticalAlignment="Center"
-              IsEnabled="{Binding IsEnabledTogglePageAnimation}"
-              IsVisible="{Binding AnimationSlideAxisBoxIsVisible}"
-              ItemsSource="{Binding AnimationSlideAxisItems}"
-              SelectedItem="{Binding AnimationSlideAxis}"/>
-          </Grid>
-        </ui:Card>
-        <ui:Card>
-          <Grid
-            VerticalAlignment="Center"
-            ColumnDefinitions="*, Auto"
-            RowDefinitions="*, *">
-            <TextBlock
-              Grid.Row="0"
-              Grid.Column="0"
-              Classes="Title"
-              Text="持续时间"/>
-            <TextBlock
-              Grid.Row="1"
-              Grid.Column="0"
-              Classes="Content"
-              Text="设置动画的持续时长"/>
-            <fui:FluentComboBox
-              Grid.RowSpan="2"
-              Grid.Column="1"
-              MinWidth="168"
-              HorizontalAlignment="Right"
-              VerticalAlignment="Center"
-              IsEnabled="{Binding IsEnabledTogglePageAnimation}"
-              ItemsSource="{Binding AnimationDurations}"
-              SelectedItem="{Binding AnimationDuration}"/>
-          </Grid>
-        </ui:Card>
-        <ui:Card IsEnabled="{Binding !IsEnabledBackgroundImage}">
+        <!-- <ui:Card> -->
+        <!--  <Grid  -->
+        <!--  VerticalAlignment="Center"  -->
+        <!--  ColumnDefinitions="*, Auto"  -->
+        <!--  RowDefinitions="*, *">  -->
+        <!--  <TextBlock  -->
+        <!--  Grid.Row="0"  -->
+        <!--  Grid.Column="0"  -->
+        <!--  Classes="Title"  -->
+        <!--  Text="动画"/>  -->
+        <!--  <TextBlock  -->
+        <!--  Grid.Row="1"  -->
+        <!--  Grid.Column="0"  -->
+        <!--  Classes="Content"  -->
+        <!--  Text="启用切换Interface动画"/>  -->
+        <!--  <ToggleSwitch  -->
+        <!--  Grid.RowSpan="2"  -->
+        <!--  Grid.Column="1"  -->
+        <!--  HorizontalAlignment="Right"  -->
+        <!--  IsChecked="{Binding IsEnabledTogglePageAnimation}"/>  -->
+        <!--   </Grid> -->
+        <!-- </ui:Card> -->
+        <!-- <ui:Card> -->
+        <!--  <Grid  -->
+        <!--  VerticalAlignment="Center"  -->
+        <!--  ColumnDefinitions="*, Auto, Auto"  -->
+        <!--  RowDefinitions="*, *">  -->
+        <!--  <TextBlock  -->
+        <!--  Grid.Row="0"  -->
+        <!--  Grid.Column="0"  -->
+        <!--  Classes="Title"  -->
+        <!--  Text="动画类型"/>  -->
+        <!--  <TextBlock  -->
+        <!--  Grid.Row="1"  -->
+        <!--  Grid.Column="0"  -->
+        <!--  Classes="Content"  -->
+        <!--  Text="设置切换Interface动画类型(切换为3D有BUG🥵)"/>  -->
+        <!--  <fui:FluentComboBox  -->
+        <!--  Grid.RowSpan="2"  -->
+        <!--  Grid.Column="1"  -->
+        <!--  MinWidth="168"  -->
+        <!--  HorizontalAlignment="Right"  -->
+        <!--  VerticalAlignment="Center"  -->
+        <!--  IsEnabled="{Binding IsEnabledTogglePageAnimation}"  -->
+        <!--  ItemsSource="{Binding AnimationTypes}"  -->
+        <!--  SelectedItem="{Binding AnimationType}"/>  -->
+        <!--    -->
+        <!--  <fui:FluentComboBox  -->
+        <!--  Grid.RowSpan="2"  -->
+        <!--  Grid.Column="2"  -->
+        <!--  MinWidth="128"  -->
+        <!--  Margin="5,0,0,0"  -->
+        <!--  HorizontalAlignment="Right"  -->
+        <!--  VerticalAlignment="Center"  -->
+        <!--  IsEnabled="{Binding IsEnabledTogglePageAnimation}"  -->
+        <!--  IsVisible="{Binding AnimationSlideAxisBoxIsVisible}"  -->
+        <!--  ItemsSource="{Binding AnimationSlideAxisItems}"  -->
+        <!--  SelectedItem="{Binding AnimationSlideAxis}"/>  -->
+        <!--   </Grid> -->
+        <!-- </ui:Card> -->
+        <!-- <ui:Card> -->
+        <!--  <Grid  -->
+        <!--  VerticalAlignment="Center"  -->
+        <!--  ColumnDefinitions="*, Auto"  -->
+        <!--  RowDefinitions="*, *">  -->
+        <!--  <TextBlock  -->
+        <!--  Grid.Row="0"  -->
+        <!--  Grid.Column="0"  -->
+        <!--  Classes="Title"  -->
+        <!--  Text="持续时间"/>  -->
+        <!--  <TextBlock  -->
+        <!--  Grid.Row="1"  -->
+        <!--  Grid.Column="0"  -->
+        <!--  Classes="Content"  -->
+        <!--  Text="设置动画的持续时长"/>  -->
+        <!--  <fui:FluentComboBox  -->
+        <!--  Grid.RowSpan="2"  -->
+        <!--  Grid.Column="1"  -->
+        <!--  MinWidth="168"  -->
+        <!--  HorizontalAlignment="Right"  -->
+        <!--  VerticalAlignment="Center"  -->
+        <!--  IsEnabled="{Binding IsEnabledTogglePageAnimation}"  -->
+        <!--  ItemsSource="{Binding AnimationDurations}"  -->
+        <!--  SelectedItem="{Binding AnimationDuration}"/>  -->
+        <!--   </Grid> -->
+        <!-- </ui:Card> -->
+        <ui:Card IsEnabled="{Binding WindowEffectCardIsEnabled}">
           <Grid
             VerticalAlignment="Center"
             ColumnDefinitions="*, Auto"
@@ -181,7 +181,10 @@
           IconSource="M20.983 22.423l0.3 0.027 0.276 0.082 0.253 0.136 0.23 0.191 0.191 0.23 0.136 0.253 0.082 0.276 0.027 0.3-0.027 0.3-0.082 0.276-0.136 0.253-0.191 0.23-0.23 0.191-0.253 0.136-0.276 0.082-0.3 0.027-0.3-0.027-0.276-0.082-0.253-0.136-0.23-0.191-0.191-0.23-0.136-0.253-0.082-0.276-0.027-0.3 0.027-0.3 0.082-0.276 0.136-0.253 0.191-0.23 0.23-0.191 0.253-0.136 0.276-0.082 0.3-0.027zM24.969 18.437l0.3 0.027 0.276 0.082 0.253 0.136 0.23 0.191 0.191 0.23 0.136 0.253 0.082 0.276 0.027 0.3-0.027 0.3-0.082 0.276-0.136 0.253-0.191 0.23-0.23 0.191-0.253 0.136-0.276 0.082-0.3 0.027-0.3-0.027-0.276-0.082-0.253-0.136-0.23-0.191-0.191-0.23-0.136-0.253-0.082-0.276-0.027-0.3 0.027-0.3 0.082-0.276 0.136-0.253 0.191-0.23 0.23-0.191 0.253-0.136 0.276-0.082 0.3-0.027zM24.969 12.457l0.3 0.027 0.276 0.082 0.253 0.136 0.23 0.191 0.191 0.23 0.136 0.253 0.082 0.276 0.027 0.3-0.027 0.3-0.082 0.276-0.136 0.253-0.191 0.23-0.23 0.191-0.253 0.136-0.276 0.082-0.3 0.027-0.3-0.027-0.276-0.082-0.253-0.136-0.23-0.191-0.191-0.23-0.136-0.253-0.082-0.276-0.027-0.3 0.027-0.3 0.082-0.276 0.136-0.253 0.191-0.23 0.23-0.191 0.253-0.136 0.276-0.082 0.3-0.027zM21.481 7.973l0.3 0.027 0.276 0.082 0.253 0.136 0.23 0.191 0.191 0.23 0.136 0.253 0.082 0.276 0.027 0.3-0.027 0.3-0.082 0.276-0.136 0.253-0.191 0.23-0.23 0.191-0.253 0.136-0.276 0.082-0.3 0.027-0.3-0.027-0.276-0.082-0.253-0.136-0.23-0.191-0.191-0.23-0.136-0.253-0.082-0.276-0.027-0.3 0.027-0.3 0.082-0.276 0.136-0.253 0.191-0.23 0.23-0.191 0.253-0.136 0.276-0.082 0.3-0.027zM15.502 5.98l0.3 0.027 0.276 0.082 0.253 0.136 0.23 0.191 0.191 0.23 0.136 0.253 0.082 0.276 0.027 0.3-0.027 0.3-0.082 0.276-0.136 0.253-0.191 0.23-0.23 0.191-0.253 0.136-0.276 0.082-0.3 0.027-0.3-0.027-0.276-0.082-0.253-0.136-0.23-0.191-0.191-0.23-0.136-0.253-0.082-0.276-0.027-0.3 0.027-0.3 0.082-0.276 0.136-0.253 0.191-0.23 0.23-0.191 0.253-0.136 0.276-0.082 0.3-0.027zM15.377 1.978l-1.057 0.043-1.023 0.128-0.989 0.214-0.955 0.3-0.918 0.375-0.878 0.44-0.838 0.506-0.799 0.571-0.758 0.63-0.717 0.682-0.676 0.735-0.636 0.787-0.591 0.83-0.542 0.862-0.493 0.894-0.445 0.926-0.399 0.965-0.325 0.997-0.126 0.509-0.090 0.515-0.054 0.521-0.018 0.527 0.016 0.396 0.047 0.377 0.078 0.359 0.109 0.34 0.147 0.324 0.192 0.309 0.236 0.294 0.281 0.28 0.193 0.163 0.236 0.179 0.537 0.35 0.561 0.28 0.269 0.088 0.245 0.029 0.222-0.018 0.23-0.054 0.237-0.090 0.245-0.126 0.524-0.3 0.574-0.323 0.629-0.323 0.687-0.3 0.369-0.126 0.39-0.090 0.412-0.054 0.433-0.018 0.483 0.021 0.483 0.064 0.475 0.099 0.459 0.127 0.477 0.181 0.418 0.216 0.36 0.251 0.302 0.286 0.255 0.315 0.219 0.337 0.182 0.36 0.146 0.382 0.116 0.402 0.092 0.419 0.068 0.437 0.043 0.454 0.117 1.892 0.078 0.965 0.125 0.965 0.091 0.476 0.125 0.464 0.159 0.451 0.193 0.438 0.234 0.423 0.28 0.404 0.327 0.386 0.374 0.367 0.431 0.343 0.499 0.311 0.567 0.28 0.636 0.249 0.501 0.157 0.507 0.112 0.513 0.067 0.519 0.022 0.577-0.028 0.564-0.083 0.55-0.139 0.536-0.194 0.52-0.24 0.5-0.276 0.481-0.312 0.461-0.348 0.595-0.521 0.554-0.565 0.513-0.61 0.472-0.655 0.432-0.689 0.393-0.711 0.354-0.733 0.315-0.756 0.276-0.773 0.237-0.784 0.199-0.796 0.16-0.808 0.123-0.808 0.088-0.798 0.053-0.787 0.018-0.776-0.034-1.068-0.101-1.038-0.168-1.009-0.235-0.98-0.299-0.948-0.361-0.914-0.422-0.88-0.483-0.846-0.542-0.81-0.599-0.772-0.655-0.734-0.711-0.696-0.765-0.657-0.816-0.616-0.866-0.575-0.917-0.534-0.766-0.39-0.787-0.345-0.809-0.301-0.83-0.256-0.845-0.204-0.853-0.146-0.86-0.088-0.868-0.029zM15.377 0.016l0.985 0.032 0.977 0.096 0.969 0.161 0.962 0.225 0.947 0.283 0.926 0.336 0.904 0.388 0.883 0.441 1.038 0.608 0.981 0.657 0.923 0.706 0.866 0.754 0.805 0.8 0.741 0.843 0.676 0.886 0.612 0.928 0.546 0.969 0.476 1.007 0.407 1.045 0.338 1.083 0.266 1.117 0.19 1.147 0.114 1.177 0.038 1.207-0.014 0.746-0.042 0.743-0.071 0.74-0.099 0.737-0.126 0.733-0.152 0.728-0.179 0.724-0.205 0.719-0.387 1.108-0.477 1.111-0.566 1.090-0.656 1.043-0.74 0.989-0.818 0.927-0.437 0.433-0.456 0.402-0.474 0.372-0.493 0.342-0.511 0.309-0.528 0.274-0.546 0.239-0.564 0.204-0.58 0.163-0.594 0.117-0.609 0.070-0.623 0.023-0.695-0.031-0.683-0.093-0.672-0.152-0.66-0.206-0.661-0.256-0.612-0.285-0.564-0.314-0.515-0.344-0.47-0.373-0.428-0.402-0.386-0.431-0.344-0.46-0.304-0.49-0.265-0.519-0.226-0.548-0.187-0.577-0.152-0.606-0.122-0.636-0.092-0.665-0.062-0.694-0.086-1.713-0.068-0.853-0.158-0.845-0.14-0.498-0.101-0.241-0.148-0.195-0.191-0.175-0.23-0.152-0.257-0.125-0.273-0.093-0.568-0.117-0.537-0.039-0.343 0.018-0.327 0.053-0.311 0.088-0.296 0.123-0.57 0.296-0.559 0.327-0.563 0.327-0.582 0.296-0.304 0.123-0.319 0.088-0.335 0.053-0.35 0.018-0.477-0.029-0.465-0.088-0.454-0.146-0.442-0.204-0.829-0.502-0.744-0.572-0.443-0.428-0.379-0.458-0.314-0.488-0.25-0.518-0.191-0.545-0.136-0.567-0.082-0.589-0.027-0.612 0.021-0.622 0.064-0.621 0.107-0.62 0.15-0.619 0.381-1.209 0.459-1.15 0.588-1.195 0.673-1.156 0.747-1.109 0.81-1.055 0.786-0.909 0.833-0.858 0.899-0.788 0.985-0.699 0.894-0.527 0.922-0.461 0.95-0.395 0.979-0.329 0.999-0.259 1.012-0.185 1.024-0.111 1.037-0.037z">
           <fui:SettingsExpanderItem Margin="-24,0,0,0">
             <StackPanel HorizontalAlignment="Left" Orientation="Vertical">
-              <RadioButton Name="CustomColorRadioButton" Content="自定义颜色"/>
+              <RadioButton
+                Name="CustomColorRadioButton"
+                Content="自定义颜色"
+                IsChecked="{Binding IsCustomColor}"/>
               <RadioButton Content="默认颜色" IsChecked="{Binding IsDefaultAccentColor}"/>
             </StackPanel>
           </fui:SettingsExpanderItem>

@@ -7,7 +7,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:vm="using:Gallery.ViewModels"
-  Title="Avalonia"
+  Title="Avalonia Fluent UI Gallery"
   Width="1200"
   Height="800"
   MinWidth="750"

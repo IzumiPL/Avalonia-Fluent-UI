@@ -63,7 +63,7 @@
           Width="128"
           Content="显示弹出视图">
           <Button.Flyout>
-            <fui:FluentFlyout IsOpen="{Binding FluentFlyoutIsOpen}" Placement="{Binding FlyoutPlacement}">
+            <fui:FluentFlyout IsOpen="{Binding FluentFlyoutIsOpen, Mode=TwoWay}" Placement="{Binding FlyoutPlacement}">
               <Border Margin="0" Padding="0">
                 <Grid
                   Margin="0"
@@ -153,7 +153,7 @@
               RowDefinitions="*, Auto, Auto, Auto">
               <Image
                 Grid.Row="0"
-                Source="avares://Gallery/Assets/Images/mc.png"
+                Source="avares://Gallery/Assets/Images/mc.jpg"
                 Stretch="UniformToFill"/>
               <TextBlock
                 Grid.Row="1"

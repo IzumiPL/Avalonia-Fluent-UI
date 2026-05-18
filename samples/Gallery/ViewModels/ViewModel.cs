@@ -24,7 +24,7 @@ public partial class ViewModel : ViewModelBase
     ];
 
     [ObservableProperty]
-    private ObservableCollection<Person> _people;
+    private Person[] _people;
 
     public ViewModel()
     {
@@ -51,7 +51,7 @@ public partial class ViewModel : ViewModelBase
     {
         await Task.Run(async () =>
         {
-            var people = new Person[]
+            People = new Person[]
             {
                 new Person("Neil", "Armstrong"),
                 new Person("Buzz", "Lightyear"), 
@@ -94,68 +94,66 @@ public partial class ViewModel : ViewModelBase
                 new Person("Flame", "Summer"), 
                 new Person("Secret", "Shining"),
             };
-            People = new ObservableCollection<Person>(people);
             
-            TreeViewItems = new ObservableCollection<Node>
+            TreeViewItems = new Node[] 
             { 
                 new Node("Technology",
-                new ObservableCollection<Node>
+                new Node[]
                 {
                     new Node("Programming",
-                        new ObservableCollection<Node>
+                        new Node[]
                         {
                             new Node("C#"), new Node("Python"), new Node("Rust"), new Node("Go")
                         }),
                     new Node("Frontend",
-                        new ObservableCollection<Node>
+                        new Node[]
                         {
                             new Node("React"), new Node("Vue"), new Node("Avalonia"), new Node("WPF")
                         })
                 }),
                 new Node("Games",
-                new ObservableCollection<Node>
+                    new Node[]
                 {
                     new Node("RPG",
-                        new ObservableCollection<Node>
+                        new Node[]
                         {
                             new Node("Genshin Impact"), new Node("Honkai Star Rail"), new Node("Persona 5")
                         }),
                     new Node("Sandbox",
-                        new ObservableCollection<Node>
+                        new Node[]
                         {
                             new Node("Minecraft"), new Node("Terraria"), new Node("Roblox")
                         })
                 }),
                 new Node("Music",
-                new ObservableCollection<Node>
+                    new Node[]
                 {
                     new Node("Pop",
-                        new ObservableCollection<Node>
+                        new Node[]
                         {
                             new Node("Taylor Swift"), new Node("Ariana Grande"), new Node("Ed Sheeran")
                         }),
                     new Node("Anime Songs",
-                        new ObservableCollection<Node>
+                        new Node[]
                         {
                             new Node("YOASOBI"), new Node("Aimer"), new Node("EGOIST")
                         })
                 }),
                 new Node("Movies",
-                new ObservableCollection<Node>
+                    new Node[]
                 {
                     new Node("Sci-Fi",
-                        new ObservableCollection<Node>
+                        new Node[]
                         {
                             new Node("Interstellar"), new Node("The Matrix"), new Node("Blade Runner 2049")
                         }),
                     new Node("Animation",
-                        new ObservableCollection<Node>
+                        new Node[]
                         {
                             new Node("Your Name"), new Node("Spirited Away"), new Node("Suzume")
                         })
                 })
             };
-            
             
             CarouselData[] pages = new CarouselData[CarouselAllCount];
             for (int i = 1; i <= CarouselAllCount; i++)
@@ -165,6 +163,21 @@ public partial class ViewModel : ViewModelBase
 
             CarouselItems = new ObservableCollection<CarouselData>(pages);
         });
+
+            FlipViewItems = new ObservableCollection<string>()
+            {
+                                "avares://Gallery/Assets/Images/mc.jpg",
+
+                                "avares://Gallery/Assets/Images/1.jpg",
+
+                            "avares://Gallery/Assets/Images/2.jpg",
+     
+                            "avares://Gallery/Assets/Images/3.jpg",
+          
+                            "avares://Gallery/Assets/Images/4.jpg",
+           
+                                "avares://Gallery/Assets/Images/bg.jpg",
+            };
     }
 
     private int _target = 1;
@@ -195,7 +208,7 @@ public partial class ViewModel : ViewModelBase
     private DataGridGridLinesVisibility _dataGridLinesVisibilityMode = DataGridGridLinesVisibility.All;
 
     [ObservableProperty]
-    private ObservableCollection<Node> _treeViewItems;
+    private Node[] _treeViewItems;
 
     public SelectionMode[] TreeViewSelectedModes => 
     [
@@ -229,17 +242,9 @@ public partial class ViewModel : ViewModelBase
     public string CarouselCurrentIndexFormat => $"当前页面: " + (CarouselCurrentIndex + 1);
 
     public string CarouselAllCountFormat => "页面数量: " + CarouselAllCount;
-    
 
-    public ObservableCollection<FlipViewItem> FlipViewItems => 
-    [
-        new FlipViewItem{ ImageSource = Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/mc.png")), 1000)},
-        new FlipViewItem{ ImageSource = Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/1.png")), 1000)},
-        new FlipViewItem{ ImageSource = Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/2.png")), 1000)},
-        new FlipViewItem{ ImageSource = Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/3.png")), 1000)},
-        new FlipViewItem{ ImageSource = Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/4.jpg")), 1000)},
-        new FlipViewItem{ ImageSource = Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/bg.jpg")), 1000)},
-    ]; 
+    [ObservableProperty]
+    private ObservableCollection<string> _flipViewItems;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(CarouselAllCountFormat))]
@@ -281,7 +286,7 @@ public partial class ViewModel : ViewModelBase
     
     public class Node
     {
-        public ObservableCollection<Node>? SubNodes { get; }
+        public Node[]? SubNodes { get; }
         public string Title { get; }
   
         public Node(string title)
@@ -289,7 +294,7 @@ public partial class ViewModel : ViewModelBase
             Title = title;
         }
 
-        public Node(string title, ObservableCollection<Node> subNodes)
+        public Node(string title, Node[] subNodes)
         {
             Title = title;
             SubNodes = subNodes;

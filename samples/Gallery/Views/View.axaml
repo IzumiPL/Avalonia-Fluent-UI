@@ -1,4 +1,4 @@
-﻿<ui:ViewBase
+<ui:ViewBase
   x:Class="Gallery.Views.View"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -14,13 +14,15 @@
   x:DataType="viewModel:ViewModel"
   mc:Ignorable="d">
   <StackPanel Orientation="Vertical" Spacing="50">
-    <ui:CodeCard>
+    <ui:CodeCard Name="FlipViewCard">
       <Grid ColumnDefinitions="*, Auto">
         <fui:FlipView
           Height="400"
+          HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch"
+          ImageSource="{Binding FlipViewItems}"
           Interval="{Binding FlipViewAutoPlayInterval}"
-          IsAutoPlay="{Binding FlipViewIsAutoPlay}"
-          ItemsSource="{Binding FlipViewItems}"
+          IsAutoPlay="{Binding FlipViewIsAutoPlay, Mode=TwoWay}"
           SelectedIndex="0"/>
         <ui:Card
           Grid.Column="1"
@@ -113,10 +115,7 @@
       </Grid>
     </ui:CodeCard>
 
-    <ui:CodeCard
-      Name="CarouselCard"
-      Title="轮播页面"
-      Height="400">
+    <ui:CodeCard Title="轮播页面" Height="400">
       <Grid ColumnDefinitions="*, Auto">
         <Carousel
           Name="Carousel"

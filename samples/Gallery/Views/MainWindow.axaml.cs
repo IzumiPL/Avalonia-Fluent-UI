@@ -47,7 +47,6 @@ public partial class MainWindow : Window
         ThemeService.ThemeChanged += _ => { EnableWindowEffect(_isEnabledWindowEffect); };
         
         WeakReferenceMessenger.Default.Register<JumpToControlMessage>(this, OnJumpToControl);
-        
     }
 
     private void OnJumpToControl(object recipient, JumpToControlMessage message)
@@ -66,20 +65,27 @@ public partial class MainWindow : Window
 
     protected override void OnClosing(WindowClosingEventArgs e)
     {
-        base.OnClosing(e);
         if (DataContext is MainWindowViewModel viewModel)
         {
             var svm = viewModel.SettingsViewModel;
-            _=ThemeService.SaveConfig(new AppConfig
+            try
             {
-                AccentColor = svm.IsDefaultAccentColor ? ThemeService.FluentTheme?.CustomAccentColor.ToString() : svm.SelectedAccentColor.ToString(),
-                Theme = Application.Current?.RequestedThemeVariant.ToString(),
-                IsWindowEffectEnabled = svm.IsEnabledWindowEffect,
-                IsEnabledBackgroundImage = svm.IsEnabledBackgroundImage
-            });
-            Console.WriteLine("Save Config Success");
+                ThemeService.SaveConfig(new AppConfig
+                {
+                    AccentColor = svm.IsDefaultAccentColor ? ThemeService.FluentTheme?.CustomAccentColor.ToString() : svm.SelectedAccentColor.ToString(),
+                    Theme = Application.Current?.RequestedThemeVariant.ToString(),
+                    IsWindowEffectEnabled = svm.IsEnabledWindowEffect,
+                    IsEnabledBackgroundImage = svm.IsEnabledBackgroundImage
+                });
+                Console.WriteLine("Save Config Success");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
         }
         else { Console.WriteLine("Save Config Error");}
+        base.OnClosing(e);
     }
 
     private void OnLoaded(object? sender, RoutedEventArgs e)
@@ -92,12 +98,12 @@ public partial class MainWindow : Window
             EnableWindowEffect(svm.IsEnabledWindowEffect);
             BackgroundImage.IsVisible = svm.IsEnabledBackgroundImage;
             // viewModel.ViewModelChangedEvent += OnViewModelChanged;
-            TransitioningContentControlPanel.PageTransition = new PageSlide
-            {
-                Orientation = svm.AnimationSlideAxis, 
-                SlideInEasing = new CubicEaseIn(),
-                Duration = TimeSpan.FromMilliseconds(svm.AnimationDuration)
-            };
+            // TransitioningContentControlPanel.PageTransition = new PageSlide
+            // {
+                // Orientation = svm.AnimationSlideAxis, 
+                // SlideInEasing = new CubicEaseIn(),
+                // Duration = TimeSpan.FromMilliseconds(svm.AnimationDuration)
+            // };
         }
     }
 
@@ -127,7 +133,7 @@ public partial class MainWindow : Window
 
     public void SetPageTransition(IPageTransition? pageTransition)
     {
-        TransitioningContentControlPanel.PageTransition = pageTransition;
+        // TransitioningContentControlPanel.PageTransition = pageTransition;
         _currentPageTransition = pageTransition;
     }
 
@@ -170,15 +176,18 @@ public partial class MainWindow : Window
     {
         if (enable)
         {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && Environment.OSVersion.Version.Build >= 22000)
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                Background = Brushes.Transparent;
-                TransparencyLevelHint = [WindowTransparencyLevel.Mica];
-            }
-            else
-            {
-                Background = Brush.Parse("#C1FFFFFF");
-                TransparencyLevelHint = [WindowTransparencyLevel.AcrylicBlur];
+                if (Environment.OSVersion.Version.Build >= 22000)
+                {
+                    Background = Brushes.Transparent;
+                    TransparencyLevelHint = [WindowTransparencyLevel.Mica];
+                }
+                else
+                {
+                    Background = Brush.Parse(ThemeService.IsDarkTheme() ? "#A1000000" : "#C1FFFFFF");
+                    TransparencyLevelHint = [WindowTransparencyLevel.AcrylicBlur];
+                }
             }
         }
         else

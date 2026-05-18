@@ -95,7 +95,7 @@ public partial class HomeViewModel : ViewModelBase
         {
             new ButtonItemModel(LoadImage("ListBox"), "ListBox", "List box, can display multiple items"),
             new ButtonItemModel(LoadImage("TreeView"), "TreeView", "A tree view"),
-            new ButtonItemModel(LoadImage("ScrollViewer"), "Carousel", "Controls that can rotate content")
+            new ButtonItemModel(LoadImage("ScrollViewer"), "FlipView", "Carousel view, a control suitable for displaying multiple pictures")
         };
     }
 

@@ -310,6 +310,10 @@
                 <MenuItem.Icon>
                   <PathIcon Data="{StaticResource Send}"/>
                 </MenuItem.Icon>
+                <MenuItem.Items>
+                  <MenuItem Header="发送到本地"/>
+                  <MenuItem Header="发送到网络"/>
+                </MenuItem.Items>
               </MenuItem>
               <MenuItem Header="保存">
                 <MenuItem.Icon>
@@ -348,6 +352,10 @@
                 <MenuItem.Icon>
                   <PathIcon Data="{StaticResource Send}"/>
                 </MenuItem.Icon>
+                <MenuItem.Items>
+                  <MenuItem Header="发送到本地"/>
+                  <MenuItem Header="发送到网络"/>
+                </MenuItem.Items>
               </MenuItem>
               <MenuItem Header="保存">
                 <MenuItem.Icon>

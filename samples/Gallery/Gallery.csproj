@@ -9,15 +9,15 @@
         <ApplicationIcon>Assets\app.ico</ApplicationIcon>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 
-        <PublishAot>true</PublishAot>
+<!--        <PublishAot>true</PublishAot>-->
 <!--        <PublishTrimmed>true</PublishTrimmed>-->
 <!--        <TrimMode>full</TrimMode>-->
-        <StripSymbols>true</StripSymbols>
-        <DebuggerSupport>false</DebuggerSupport>
-        <InvariantGlobalization>true</InvariantGlobalization>
+<!--        <StripSymbols>true</StripSymbols>-->
+<!--        <DebuggerSupport>false</DebuggerSupport>-->
+<!--        <InvariantGlobalization>true</InvariantGlobalization>-->
       
 <!--      <PublishTrimmed>true</PublishTrimmed>-->
-<!--      <PublishReadyToRun>true</PublishReadyToRun>-->
+      <PublishReadyToRun>true</PublishReadyToRun>
       <PublishSingleFile>false</PublishSingleFile>
 <!--      <SelfContained>true</SelfContained>-->
       <TrimMode>partial</TrimMode>
