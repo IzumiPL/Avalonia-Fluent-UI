@@ -125,6 +125,8 @@
     <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
     <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="IconWidth" Value="14"/>
+    <Setter Property="IconHeight" Value="14"/>
     <Setter Property="BackgroundSizing" Value="InnerBorderEdge"/>
     <Setter Property="Padding" Value="{StaticResource ButtonPadding}"/>
     <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -149,8 +151,8 @@
           CornerRadius="{TemplateBinding CornerRadius}">
           <Viewbox
             Name="IcViewbox"
-            Width="{DynamicResource IconElementThemeWidth}"
-            Height="{DynamicResource IconElementThemeHeight}"
+            Width="{TemplateBinding IconWidth}"
+            Height="{TemplateBinding IconHeight}"
             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
             VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
             <Path
