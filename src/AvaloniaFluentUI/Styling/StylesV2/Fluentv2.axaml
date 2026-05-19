@@ -205,7 +205,6 @@
       <SolidColorBrush x:Key="FilledBackgroundPressed" Color="{StaticResource FilledPressed}"/>
       <SolidColorBrush x:Key="FilledBorderBackgroundPointerOver" Color="{StaticResource FilledBorderPointerOver}"/>
 
-
       <!--  BEGIN CONTROL RESOURCES  -->
       <!--  FilledPushButton  -->
       <StaticResource x:Key="InformationFilledButtonBackground" ResourceKey="InformationDefaultBrush"/>
@@ -216,6 +215,12 @@
       <StaticResource x:Key="FilledButtonBackgroundPointerOver" ResourceKey="FilledBackgroundPointerOver"/>
       <StaticResource x:Key="FilledButtonBackgroundPressed" ResourceKey="FilledBackgroundPressed"/>
       <StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="FilledBorderBackgroundPointerOver"/>
+
+      <!--  MultiSelectionComboBox  -->
+      <StaticResource x:Key="MultiSelectionComboBoxBrush" ResourceKey="ControlFillColorDefaultBrush"/>
+      <StaticResource x:Key="MultiSelectionComboBoxBorderBrush" ResourceKey="ControlElevationBorderBrush"/>
+      <StaticResource x:Key="MultiSelectionViewBrush" ResourceKey="AcrylicInAppFillColorDefaultBrush"/>
+      <StaticResource x:Key="MultiSelectionViewBorderBrush" ResourceKey="ControlElevationBorderBrush"/>
 
       <!--  Normal Button  -->
       <StaticResource x:Key="AccentButtonBackground" ResourceKey="AccentFillColorDefaultBrush"/>
@@ -2035,6 +2040,12 @@
       <StaticResource x:Key="FilledButtonBackgroundPointerOver" ResourceKey="FilledBackgroundPointerOver"/>
       <StaticResource x:Key="FilledButtonBackgroundPressed" ResourceKey="FilledBackgroundPressed"/>
       <StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="FilledBorderBackgroundPointerOver"/>
+
+      <!--  MultiSelectionComboBox  -->
+      <StaticResource x:Key="MultiSelectionComboBoxBrush" ResourceKey="ControlFillColorDefaultBrush"/>
+      <StaticResource x:Key="MultiSelectionComboBoxBorderBrush" ResourceKey="ControlElevationBorderBrush"/>
+      <StaticResource x:Key="MultiSelectionViewBrush" ResourceKey="AcrylicInAppFillColorDefaultBrush"/>
+      <StaticResource x:Key="MultiSelectionViewBorderBrush" ResourceKey="ControlElevationBorderBrush"/>
 
       <!--  Normal Button  -->
       <StaticResource x:Key="AccentButtonBackground" ResourceKey="AccentFillColorDefaultBrush"/>
@@ -3985,6 +3996,12 @@
       <StaticResource x:Key="FilledButtonBackgroundPointerOver" ResourceKey="FilledBackgroundPointerOver"/>
       <StaticResource x:Key="FilledButtonBackgroundPressed" ResourceKey="FilledBackgroundPressed"/>
       <StaticResource x:Key="FilledButtonBorderBrushPointerOver" ResourceKey="FilledBorderBackgroundPointerOver"/>
+
+      <!--  MultiSelectionComboBox  -->
+      <StaticResource x:Key="MultiSelectionComboBoxBrush" ResourceKey="ControlFillColorDefaultBrush"/>
+      <StaticResource x:Key="MultiSelectionComboBoxBorderBrush" ResourceKey="ControlElevationBorderBrush"/>
+      <StaticResource x:Key="MultiSelectionViewBrush" ResourceKey="AcrylicInAppFillColorDefaultBrush"/>
+      <StaticResource x:Key="MultiSelectionViewBorderBrush" ResourceKey="ControlElevationBorderBrush"/>
 
       <!--  Normal Button  -->
       <StaticResource x:Key="AccentButtonBackground" ResourceKey="SystemControlHighlightAccentBrush"/>
