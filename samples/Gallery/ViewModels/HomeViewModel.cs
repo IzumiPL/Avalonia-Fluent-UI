@@ -68,7 +68,8 @@ public partial class HomeViewModel : ViewModelBase
         {
             new("NavigationView", "NavigationView", "Navigation panel for page switching and menu navigation"),
             new("PageTransition", "PageTransition", "Page switching control with animation"),
-            new("BreadcrumbBar", "BreadcrumbBar", "Breadcrumb navigation view")
+            new("BreadcrumbBar", "BreadcrumbBar", "Breadcrumb navigation view"),
+            new("Pivot", "Segmented", "This is the segmented navigation bar")
         };
 
         StatusAndInformationItemSource = new List<ButtonItemModel>()

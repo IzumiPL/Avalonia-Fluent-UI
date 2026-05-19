@@ -602,6 +602,36 @@
       </Grid>
     </ui:CodeCard>
 
+    <ui:CodeCard Name="ComboBoxCard" Title="下拉框">
+      <fui:FluentComboBox
+        Width="256"
+        ItemsSource="{Binding Items}"
+        SelectedIndex="0"/>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="多选下拉框">
+      <Grid ColumnDefinitions="*, Auto" ColumnSpacing="8">
+        <fui:MultiSelectionComboBox
+          VerticalAlignment="Top"
+          ItemsSource="{Binding MultiSelectionItems}"
+          SelectedItems="{Binding MultiSelectionSelectedItems}"/>
+        <ui:Card Grid.Column="1" Width="256">
+          <StackPanel Orientation="Vertical" Spacing="6">
+            <TextBlock FontWeight="Bold" Text="选项"/>
+            <Button
+              Command="{Binding SelectOddOrEventNumberItemsCommand}"
+              CommandParameter="1"
+              Content="选中奇数项目"/>
+            <Button
+              Command="{Binding SelectOddOrEventNumberItemsCommand}"
+              CommandParameter="0"
+              Content="选中偶数项目"/>
+            <Button Command="{Binding ClearMultiSelectionSelectedItemCommand}" Content="清空选定的项目"/>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
     <ui:CodeCard Name="SliderCard" Title="滑动条">
       <Grid ColumnDefinitions="*, Auto">
         <Slider
@@ -640,13 +670,6 @@
         Width="328"
         HorizontalAlignment="Left"
         Color="DeepSkyBlue"/>
-    </ui:CodeCard>
-
-    <ui:CodeCard Name="ComboBoxCard" Title="下拉框">
-      <fui:FluentComboBox
-        Width="256"
-        ItemsSource="{Binding Items}"
-        SelectedIndex="0"/>
     </ui:CodeCard>
 
     <!-- <ui:CodeCard Title="可编辑的下拉框"> -->

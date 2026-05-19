@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
+using Avalonia.VisualTree;
 using AvaloniaFluentUI.UI.Controls;
 using CommunityToolkit.Mvvm.Messaging;
 using Gallery.Helpers;
@@ -71,12 +74,22 @@ public class ViewBase : ContentControl
         ThemeService.ToggleTheme();
     }
     
-    protected void ScrollTo(string name)
+    protected async Task ScrollTo(string name)
     {
         if (CodeCards.TryGetValue(name, out var codeCard))
         {
             // await ScrollViewer?.Presenter?.ScrollTo(SmoothScrollDirection.Y, GetVector(codeCard).Y);
-            ScrollViewer?.Offset = GetVector(codeCard);
+            if (codeCard.IsAttachedToVisualTree())
+            {
+                ScrollViewer?.Offset = GetVector(codeCard);
+            }
+            else
+            {
+                await Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    ScrollViewer?.Offset = GetVector(codeCard);
+                }, DispatcherPriority.Loaded);
+            }
 #if DEBUG
             Debug.WriteLine($"Scroll to: {GetVector(codeCard).Y}");
 #endif
@@ -87,7 +100,7 @@ public class ViewBase : ContentControl
     {
         if (message.Page == this.Page && message.Name != null)
         {
-            ScrollTo(message.Name);
+            _=ScrollTo(message.Name);
 #if DEBUG
             Debug.WriteLine($"Scroll of name: {message.Name}");
 #endif

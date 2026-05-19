@@ -57,22 +57,22 @@ public partial class NavigationViewModel : ViewModelBase
 
     public NavigationViewModel()
     {
-        for (int i = 1; i <= tabCount; i++)
-        {
-            TabItemSource.Add( new TabViewItem
-            {
-                Header = $"和泉妃爱世界第一可爱x{i}!🥰",
-                Content = 
-                    new TextBlock 
-                    {
-                        Text = $"和泉妃爱世界第一可爱x{i}!🥰",
-                        FontSize = 24,
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        Height = 328 
-                    }
-            });
-        }
+        // for (int i = 1; i <= tabCount; i++)
+        // {
+        //     TabItemSource.Add( new TabViewItem
+        //     {
+        //         Header = $"和泉妃爱世界第一可爱x{i}!🥰",
+        //         Content = 
+        //             new TextBlock 
+        //             {
+        //                 Text = $"和泉妃爱世界第一可爱x{i}!🥰",
+        //                 FontSize = 24,
+        //                 HorizontalAlignment = HorizontalAlignment.Center,
+        //                 VerticalAlignment = VerticalAlignment.Center,
+        //                 Height = 328 
+        //             }
+        //     });
+        // }
     }
 
     [RelayCommand]
@@ -96,4 +96,18 @@ public partial class NavigationViewModel : ViewModelBase
     }
 
     public string[] BreadcrumbBarItemSource => @"C:\Users\Administrator\OneDrive\Pictures\Camera Roll".Split("\\");
+
+    [ObservableProperty]
+    private object _segmentedSelectedItem;
+
+    [ObservableProperty]
+    private string _selectedItemFormat = "Null";
+
+    partial void OnSegmentedSelectedItemChanged(object value)
+    {
+        if (value is SegmentedItem item)
+        {
+            SelectedItemFormat = "当前选中页面: " + item.Content;
+        }
+    }
 }

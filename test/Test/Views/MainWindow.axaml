@@ -5,11 +5,13 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:page="clr-namespace:Test.Pages"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.UI.Controls;assembly=AvaloniaFluentUI"
   xmlns:vm="using:Test.ViewModels"
   Title="Test"
   d:DesignHeight="450"
   d:DesignWidth="800"
   x:DataType="vm:MainWindowViewModel"
+  ExtendClientAreaToDecorationsHint="True"
   Icon="/Assets/avalonia-logo.ico"
   mc:Ignorable="d">
 
@@ -20,29 +22,60 @@
     -->
     <vm:MainWindowViewModel/>
   </Design.DataContext>
-  <ScrollViewer>
-    <Grid RowDefinitions="*, Auto">
-      <Grid Name="Grid">
-        <!-- <page:FlipViewPage/> -->
-      </Grid>
-      <StackPanel Grid.Row="1">
-        <Button Click="Toggle" Content="切换 content"/>
-        <Button Click="ChangeImage" Content="切换 image"/>
-        <Button Click="ChangeOr" Content="改变方向"/>
-        <TextBox
-          Name="DW"
-          Text="0"
-          Watermark="W"/>
-        <TextBox
-          Name="DH"
-          Text="0"
-          Watermark="H"/>
-        <Button Click="OnClick" Content="确定"/>
-        <TextBox Name="itb"/>
-        <Button Click="CITB" Content="inter"/>
-        <CheckBox Click="CBC" Content="AutoPlay"/>
-      </StackPanel>
+  <Grid RowDefinitions="30, *">
+    <Grid Grid.Row="0" Margin="0,0,140,0">
+      <ui:ToolButton
+        Width="45"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Center"
+        Click="OnToggleTheme"
+        IconData="{StaticResource Constract}"
+        Theme="{StaticResource TransparentToolButton}"/>
     </Grid>
-  </ScrollViewer>
+    <ScrollViewer Grid.Row="1" Padding="35,25,25,10">
+      <StackPanel>
+        <Button Command="{Binding ChangedSelectionTo1Command}" Content="To 1"/>
+        <Button Command="{Binding ChangedSelectionTo2Command}" Content="To 2"/>
 
+        <ui:MultiSelectionComboBox ItemsSource="{Binding SegmentedItemSource}" SelectedItems="{Binding MultiSelectedItems}"/>
+        <ui:SegmentedView
+          IsVisible="False"
+          SelectedIndex="{Binding Sind}"
+          SelectedItem="{Binding SITM}">
+          <ui:SegmentedItem Content="Segmented Item 1" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Segmented Item 2" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Segmented Item 3" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Segmented Item 4" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Segmented Item 5" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Segmented Item 6" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Segmented Item 7" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Segmented Item 8" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Segmented Item 9" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Segmented Item 10" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Segmented Item 11" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Segmented Item 12" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Item 13" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Item 14" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Item 15" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Item 16" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Item 17" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Item 18" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Item 19" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Item 20" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Item 21" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Item 22" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Item 23" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedItem Content="Item 24" Tag="{Binding $self.Content}"/>
+          <ui:SegmentedView.Content>
+            <TextBlock
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              FontSize="24"
+              Text="{Binding ST}"
+              TextAlignment="Center"/>
+          </ui:SegmentedView.Content>
+        </ui:SegmentedView>
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
 </Window>

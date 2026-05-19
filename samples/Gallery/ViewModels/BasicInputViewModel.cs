@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace Gallery.ViewModels;
 
@@ -114,6 +118,15 @@ public partial class BasicInputViewModel : ViewModelBase
     
     public string? OutlineToolButtonGroupName => OutlineToolButtonIsMC ? null : "OutlineToolButtonGroup1";
 
+    private string[] _multiSelectionItems = new string[32];
+    public string[] MultiSelectionItems => _multiSelectionItems;
+
+    [RelayCommand]
+    private void ClearMultiSelectionSelectedItem() => MultiSelectionSelectedItems.Clear();
+
+    [ObservableProperty]
+    private ObservableCollection<object> _multiSelectionSelectedItems = new ObservableCollection<object>();
+
     [ObservableProperty]
     private bool _outlineToolButtonIsDisabled;
 
@@ -134,10 +147,37 @@ public partial class BasicInputViewModel : ViewModelBase
 
     public BasicInputViewModel()
     {
-        for (int i = 1; i <= 64; i++)
+        for (int i = 1; i <= 32; i++)
         {
             Items.Add($"Item {i}");
+            _multiSelectionItems[i - 1] = $"Multi Selection Item {i}";
+
+            // MultiSelectionSelectedItems.CollectionChanged += OnMultiSelectionSelectedItemsChanged;
         }
     }
 
+    [RelayCommand]
+    private void SelectOddOrEventNumberItems(object value)
+    {
+        if (int.TryParse(value.ToString(), out int number))
+        {
+            Console.WriteLine("是 Int");
+            MultiSelectionSelectedItems.Clear();
+            foreach (var item in MultiSelectionItems)
+            {
+                if (int.TryParse(item.Split(" ")[^1], out int iv))
+                {
+                    if (iv % 2 == number)
+                    {
+                        MultiSelectionSelectedItems.Add(item);
+                    }
+                }
+            }
+        }
+    }
+
+    private void OnMultiSelectionSelectedItemsChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        
+    }
 }

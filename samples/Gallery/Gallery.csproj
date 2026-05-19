@@ -12,7 +12,6 @@
 
 <!--    <PropertyGroup Condition="'$(Configuration)' == 'Release'">-->
   <PropertyGroup>
-    
         <PublishAot>true</PublishAot>              <!-- AOT 编译：将 IL 预编译为机器码，加快启动速度 -->
         <PublishTrimmed>true</PublishTrimmed>      <!-- 裁剪未使用的程序集，减小发布体积 -->
         <TrimMode>full</TrimMode>                  <!-- 裁剪模式：full 为最激进，移除所有未使用的代码 -->

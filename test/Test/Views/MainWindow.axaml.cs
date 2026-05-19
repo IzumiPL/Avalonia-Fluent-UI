@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
+using Avalonia.Styling;
 using AvaloniaFluentUI.UI.Controls;
 
 namespace Test.Views;
@@ -26,7 +28,9 @@ public partial class MainWindow : Window
                 "avares://Test/Assets/6.jpg",
                 "avares://Test/Assets/7.jpg"
             };
-        Grid.Children.Add(_page);
+        // Grid.Children.Add(_page);
+        
+        Application.Current?.RequestedThemeVariant = ThemeVariant.Light;
     }
 
     private void ChangeImage(object? sender, RoutedEventArgs e)
@@ -112,46 +116,10 @@ public partial class MainWindow : Window
         }
     }
 
-    private void Toggle(object? sender, RoutedEventArgs e)
+    private void OnToggleTheme(object? sender, RoutedEventArgs e)
     {
-        if (Grid.Children[0] == _block)
-        {
-            Grid.Children.Remove(_block);
-            Grid.Children.Add(_page);
-        }
-        else
-        {
-            Grid.Children.Remove(_page);
-            Grid.Children.Add(_block);
-        }
-    }
-
-    private void ChangeOr(object? sender, RoutedEventArgs e)
-    {
-        _page.Orientation = _page.Orientation == PageSlide.SlideAxis.Horizontal ?
-            PageSlide.SlideAxis.Vertical :
-            PageSlide.SlideAxis.Horizontal;
-    }
-
-    private void OnClick(object? sender, RoutedEventArgs e)
-    {
-        _page.DecodeToWidth = int.Parse(DW.Text);
-        _page.DecodeToHeight = int.Parse(DH.Text);
-    }
-
-    private void CBC(object? sender, RoutedEventArgs e)
-    {
-        if (sender is CheckBox cb)
-        {
-            _page.IsAutoPlay = cb.IsChecked ?? false;
-        }
-    }
-
-    private void CITB(object? sender, RoutedEventArgs e)
-    {
-        if (int.TryParse(itb.Text, out var time))
-        {
-            _page.Interval = time;
-        }
+        Application.Current?.RequestedThemeVariant = Application.Current?.RequestedThemeVariant == ThemeVariant.Light ?
+            ThemeVariant.Dark :
+            ThemeVariant.Light;
     }
 }

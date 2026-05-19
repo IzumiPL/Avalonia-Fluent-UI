@@ -22,8 +22,11 @@ public partial class NavigationView : ViewBase
             {"NavigationView", NavigationViewCard},
             {"PageTransition", PageTransitionCard},
             // {"TabView", TabViewCard},
-            {"BreadcrumbBar", BreadcrumbBarCard}
+            {"BreadcrumbBar", BreadcrumbBarCard},
+            {"Segmented", SegmentedCard}
         };
+
+        AddHandler(Frame.RequestBringIntoViewEvent, (_, e) => { e.Handled = true; });
     }
 
     private void OnListSelectionChanged(object? sender, SelectionChangedEventArgs e)
