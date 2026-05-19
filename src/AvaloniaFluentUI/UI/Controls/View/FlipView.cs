@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Animation;
@@ -35,6 +36,8 @@ public class FlipView : TemplatedControl
     private readonly DispatcherTimer _autoPlayTimer;
     private readonly TranslateTransform _currentTransform = new();
     private readonly TranslateTransform _nextTransform = new();
+
+    private CancellationTokenSource? _disposeCts;
 
     public static readonly StyledProperty<IEnumerable<string>?> ImageSourceProperty =
         AvaloniaProperty.Register<FlipView, IEnumerable<string>?>(nameof(ImageSource));
@@ -215,14 +218,11 @@ public class FlipView : TemplatedControl
 
     private void HandleIntervalChanged()
     {
-        if (IsAutoPlay)
-        {
-            Stop();
-        }
+        if (IsAutoPlay) { Stop(); }
 
-        Stop();
         _autoPlayTimer.Interval = TimeSpan.FromMilliseconds(Interval);
-        Start();
+        
+        if (IsAutoPlay) { Start(); }
     }
 
     private void UpdateButtonVisibility()
@@ -239,7 +239,7 @@ public class FlipView : TemplatedControl
 
     public void Start()
     {
-        if (ItemCount < 2) { return; }
+        if (ItemCount < 2 || !this.IsAttachedToVisualTree()) { return; }
 
         IsAutoPlay = true;
         _autoPlayTimer.Start();
@@ -262,6 +262,7 @@ public class FlipView : TemplatedControl
         if (_items.Count <= 0 && ItemCount > 0)
         {
             ReloadImages();
+            _disposeCts?.Cancel();
         }
     }
 
@@ -270,32 +271,34 @@ public class FlipView : TemplatedControl
         base.OnDetachedFromVisualTree(e);
 
         Stop();
+        
+        _disposeCts?.Cancel();
+        _disposeCts = new CancellationTokenSource();
+        var token = _disposeCts.Token;
+        
         Dispatcher.UIThread.Post(() =>
         {
+            if (token.IsCancellationRequested) { return;}
+            
             DisposeImage();
         },
         DispatcherPriority.Background);
-        // await Task.Yield();
-        // DisposeImage();
     }
 
     private void DisposeImage()
-    {
-        if (_items.Count > 0)
-        {
-            _currentImage?.Source = null;
-            _nextImage?.Source = null;
-            SelectedIndex = -1;
+    { 
+        _currentImage?.Source = null; 
+        _nextImage?.Source = null; 
+        SelectedIndex = -1;
 #if DEBUG
-            Debug.WriteLine("Dispose Image");
+        Debug.WriteLine("Dispose Image");
 #endif
-            foreach (var bitmap in _items)
-            {
-                bitmap.Dispose();
-            }
-
-            _items.Clear();
-        }
+        foreach (var bitmap in _items) 
+        { 
+            bitmap.Dispose();
+        } 
+        
+        _items.Clear();
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -385,7 +388,7 @@ public class FlipView : TemplatedControl
             }
         }
         
-        if (IsAutoPlay) { Start(); }
+        Stop();
     }
 
     private async IAsyncEnumerable<Bitmap> LoadImagesAsync(IEnumerable<string> imagePaths)
