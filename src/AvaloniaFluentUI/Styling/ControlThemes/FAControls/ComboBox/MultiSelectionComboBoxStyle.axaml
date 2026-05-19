@@ -1,0 +1,239 @@
+<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.UI.Controls">
+
+  <ControlTheme x:Key="{x:Type ui:MultiSelectionComboBox}" TargetType="ui:MultiSelectionComboBox">
+    <Setter Property="Height" Value="42"/>
+    <Setter Property="Padding" Value="0 0 5 0"/>
+    <Setter Property="Background" Value="{DynamicResource MultiSelectionComboBoxBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource MultiSelectionComboBoxBorderBrush}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Padding="{TemplateBinding Padding}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="1"
+          CornerRadius="8">
+          <Grid ColumnDefinitions="*, Auto">
+            <ui:SingleDirectionScrollViewer
+              Padding="0,5"
+              HorizontalScrollBarVisibility="Hidden"
+              Orientation="Horizontal"
+              VerticalScrollBarVisibility="Disabled">
+              <ItemsControl ItemsSource="{TemplateBinding SelectedItems}">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <ui:MultiSelectionDisplayItem Content="{Binding}"/>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </ui:SingleDirectionScrollViewer>
+
+            <Button
+              Name="PART_DropDownButton"
+              Grid.Column="1"
+              Width="28"
+              Margin="0,1"
+              Opacity="0.7"
+              Theme="{StaticResource TransparentButton}">
+              <PathIcon
+                Name="PART_Icon"
+                Width="14"
+                Height="14"
+                Data="{StaticResource ChevronDownMed}"/>
+            </Button>
+
+            <ui:FluentPopup
+              Name="PART_MultiSelectionPopup"
+              Height="328"
+              Margin="0,6,0,0"
+              Placement="Bottom">
+              <ui:MultiSelectionView Name="PART_MultiSelectionView"/>
+            </ui:FluentPopup>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^ /template/ Button#PART_DropDownButton PathIcon#PART_Icon">
+      <Setter Property="RenderTransformOrigin" Value="50%, 100%"/>
+      <Setter Property="Transitions">
+        <Transitions>
+          <TransformOperationsTransition
+            Easing="CubicEaseOut"
+            Property="RenderTransform"
+            Duration="0:0:0.15"/>
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="^ /template/ Button#PART_DropDownButton:pressed PathIcon#PART_Icon">
+      <Setter Property="RenderTransform" Value="scale(1, 0.75)"/>
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type ui:MultiSelectionView}" TargetType="ui:MultiSelectionView">
+    <Setter Property="BorderBrush" Value="{DynamicResource MultiSelectionViewBorderBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource MultiSelectionViewBrush}"/>
+    <Setter Property="BorderThickness" Value="2"/>
+    <Setter Property="CornerRadius" Value="8"/>
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <ui:SingleDirectionScrollViewer
+            HorizontalScrollBarVisibility="Disabled"
+            Orientation="Vertical"
+            VerticalScrollBarVisibility="Auto">
+            <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}"/>
+          </ui:SingleDirectionScrollViewer>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+    <Style Selector="^">
+      <Setter Property="ItemsPanel">
+        <ItemsPanelTemplate>
+          <VirtualizingStackPanel Orientation="Vertical"/>
+        </ItemsPanelTemplate>
+      </Setter>
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type ui:MultiSelectionDisplayItem}" TargetType="ui:MultiSelectionDisplayItem">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Name="PART_LayoutRoot"
+          Margin="4,0"
+          Padding="3,0,5,0"
+          Background="{DynamicResource SubtleFillColorSecondaryBrush}"
+          CornerRadius="4">
+          <Grid ColumnDefinitions="*, Auto" ColumnSpacing="5">
+            <ContentPresenter
+              Margin="8,0,4,0"
+              VerticalAlignment="Center"
+              Content="{TemplateBinding Content}"/>
+            <ui:ToolButton
+              Name="PART_RemoveButton"
+              Grid.Column="1"
+              Width="16"
+              Height="16"
+              Padding="0"
+              Cursor="Hand"
+              IconData="{StaticResource Close}"
+              IconHeight="10"
+              IconWidth="10"
+              Theme="{StaticResource TransparentToolButton}"/>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type ui:MultiSelectionComboBoxItem}" TargetType="ui:MultiSelectionComboBoxItem">
+    <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+    <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
+    <Setter Property="Background" Value="{DynamicResource ListViewItemBackground}"/>
+    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
+    <Setter Property="Foreground" Value="{DynamicResource ListViewItemForeground}"/>
+    <Setter Property="Padding" Value="12,0,12,0"/>
+    <Setter Property="Height" Value="38"/>
+    <Setter Property="Margin" Value="10 4 2 4"/>
+    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Name="PART_Border"
+          Padding="{TemplateBinding Padding}"
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <Grid ColumnDefinitions="Auto, *">
+            <CheckBox
+              Grid.Column="0"
+              Margin="0"
+              Padding="0"
+              IsChecked="{TemplateBinding IsSelected,
+                                          Mode=TwoWay}"/>
+            <ContentPresenter
+              Name="PART_ContentPresenter"
+              Grid.Column="1"
+              Margin="12,0,0,2"
+              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+              Content="{TemplateBinding Content}"
+              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:disabled">
+      <Setter Property="Opacity" Value="0.5"/>
+    </Style>
+
+    <Style Selector="^:pointerover">
+      <Style Selector="^ /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource ListViewItemBackgroundPointerOver}"/>
+      </Style>
+      <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource ListViewItemForegroundPointerOver}"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:pressed">
+      <Style Selector="^ /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource ListViewItemBackgroundPressed}"/>
+      </Style>
+      <Style Selector="^ /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource ListViewItemForegroundPressed}"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:selected">
+      <Style Selector="^ /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource ListViewItemBackgroundSelected}"/>
+      </Style>
+      <Style Selector="^ /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource ListViewItemForegroundSelected}"/>
+      </Style>
+
+      <Style Selector="^:not(:focus) /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource ListViewItemBackgroundSelected}"/>
+      </Style>
+      <Style Selector="^:not(:focus) /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource ListViewItemForegroundSelected}"/>
+      </Style>
+
+      <Style Selector="^:pointerover">
+        <Style Selector="^ /template/ Border#PART_Border">
+          <Setter Property="Background" Value="{DynamicResource ListViewItemBackgroundSelectedPointerOver}"/>
+        </Style>
+        <Style Selector="^ /template/ ContentPresenter">
+          <Setter Property="Foreground" Value="{DynamicResource ListViewItemForegroundSelectedPointerOver}"/>
+        </Style>
+      </Style>
+
+      <Style Selector="^:pressed">
+        <Style Selector="^ /template/ Border#PART_Border">
+          <Setter Property="Background" Value="{DynamicResource ListViewItemBackgroundSelectedPressed}"/>
+        </Style>
+        <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+          <Setter Property="Foreground" Value="{DynamicResource ListViewItemForegroundSelectedPressed}"/>
+        </Style>
+      </Style>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>
