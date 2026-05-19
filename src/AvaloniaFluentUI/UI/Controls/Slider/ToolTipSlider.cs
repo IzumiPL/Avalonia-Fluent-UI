@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
@@ -8,7 +8,7 @@ using Avalonia.Threading;
 
 namespace AvaloniaFluentUI.UI.Controls;
 
-[TemplatePart(Name = "Thumb", Type = typeof(Thumb))]
+[TemplatePart(Name = "PART_Thumb", Type = typeof(Thumb))]
 [TemplatePart(Name = "PART_Popup", Type = typeof(Popup))]
 [TemplatePart(Name = "PART_ToolTipText", Type = typeof(TextBlock))]
 public class ToolTipSlider : Slider
@@ -16,13 +16,14 @@ public class ToolTipSlider : Slider
     private Popup? _popup;
     private TextBlock? _toolTipText;
     private Thumb? _thumb;
-    
-    private readonly DispatcherTimer _timer = new DispatcherTimer();
+
+    private bool _isDrag;
+    private readonly DispatcherTimer _closeToolTipTimer = new DispatcherTimer();
 
     public ToolTipSlider()
     {
-        _timer.Interval = TimeSpan.FromMilliseconds(200);
-        _timer.Tick += ClosePopup;
+        _closeToolTipTimer.Interval = TimeSpan.FromMilliseconds(200);
+        _closeToolTipTimer.Tick += ClosePopup;
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -31,16 +32,19 @@ public class ToolTipSlider : Slider
         if (_thumb != null)
         {
             _thumb.DragDelta -= OnDragDelta;
+            _thumb.DragStarted -= OnThumbDragStarted;
+            _thumb.DragCompleted -= OnThumbDragCompleted;
         }
-        
-        
-        _thumb = e.NameScope.Find<Thumb>("Thumb");
+
+        _thumb = e.NameScope.Find<Thumb>("PART_Thumb");
         _popup = e.NameScope.Find<Popup>("PART_Popup");
         _toolTipText = e.NameScope.Find<TextBlock>("PART_ToolTipText");
 
         if (_thumb != null)
         {
             _thumb.DragDelta += OnDragDelta;
+            _thumb.DragStarted += OnThumbDragStarted;
+            _thumb.DragCompleted += OnThumbDragCompleted;
         }
     }
 
@@ -48,16 +52,16 @@ public class ToolTipSlider : Slider
     {
         UpdateToolTipText();
         ShowPopup();
-        _timer.Stop();
-        _timer.Start();
+        _closeToolTipTimer.Stop();
+        _closeToolTipTimer.Start();
     }
-    
+
     private void ShowPopup()
     {
         if (_popup == null) return;
 
         UpdateToolTipText();
-        
+
         if (Orientation == Orientation.Horizontal)
         {
             _popup.Placement = PlacementMode.Top;
@@ -70,11 +74,12 @@ public class ToolTipSlider : Slider
         }
         _popup.IsOpen = true;
     }
-    
-    private void ClosePopup(object? sender,  EventArgs e)
+
+    private void ClosePopup(object? sender, EventArgs e)
     {
-        if (_popup == null) return;
+        if (_popup == null || _isDrag) { return; }
         _popup.IsOpen = false;
+        _closeToolTipTimer.Stop();
     }
 
     private void UpdateToolTipText()
@@ -83,5 +88,17 @@ public class ToolTipSlider : Slider
         {
             _toolTipText.Text = Value.ToString("0");
         }
+    }
+
+    private void OnThumbDragCompleted(object? sender, VectorEventArgs e)
+    {
+        Console.WriteLine("DragCompleted");
+        _isDrag = false;
+    }
+
+    private void OnThumbDragStarted(object? sender, VectorEventArgs e)
+    {
+        Console.WriteLine("DragStarted");
+        _isDrag = true;
     }
 }
