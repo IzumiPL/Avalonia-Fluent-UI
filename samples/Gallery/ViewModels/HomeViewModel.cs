@@ -91,9 +91,9 @@ public partial class HomeViewModel : ViewModelBase
 
         ViewItemSource = new List<ButtonItemModel>()
         {
+            new("FlipView", "FlipView", "Carousel view, a control suitable for displaying multiple pictures"),
             new("ListBox", "ListBox", "List box, can display multiple items"),
             new("TreeView", "TreeView", "A tree view"),
-            new("ScrollViewer", "FlipView", "Carousel view, a control suitable for displaying multiple pictures")
         };
     }
 
