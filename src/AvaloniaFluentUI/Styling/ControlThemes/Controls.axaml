@@ -128,6 +128,7 @@
 
         <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/FluentMenu/FluentContextMenuStyle.axaml"/>
         <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/ComboBox/FluentComboBoxStyle.axaml"/>
+        <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/ComboBox/MultiSelectionComboBoxStyle.axaml"/>
         <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/Flyout/FluentFlyoutPresenter.axaml"/>
 
         <MergeResourceInclude Source="/Styling/ControlThemes/FAControls/Button/PushButtonStyle.axaml"/>
