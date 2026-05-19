@@ -6,6 +6,8 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using AvaloniaFluentUI.Styling;
+using AvaloniaFluentUI.UI.Controls;
+using Gallery.Pages;
 using Gallery.ViewModels;
 using Gallery.Views;
 
@@ -31,6 +33,11 @@ public class App : Application
             };
         }
         
+        Frame.RegisterPage<FramePage1>();
+        Frame.RegisterPage<FramePage2>();
+        Frame.RegisterPage<FramePage3>();
+        Frame.RegisterPage<FramePage4>();
+
         // SetLanguage("zh-CN");
         base.OnFrameworkInitializationCompleted();
     }
