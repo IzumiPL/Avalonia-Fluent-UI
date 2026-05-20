@@ -144,7 +144,7 @@
       <Label
         Grid.Column="1"
         VerticalAlignment="Top"
-        Content="Avalonia"/>
+        Content="{Binding $parent[Window].Title}"/>
     </Grid>
 
     <fui:NavigationView

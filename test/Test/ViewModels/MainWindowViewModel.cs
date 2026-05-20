@@ -1,22 +1,30 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using AvaloniaFluentUI.UI.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Test.Pages;
 
 namespace Test.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    public string Greeting { get; } = "Welcome to Avalonia!";
+    [ObservableProperty]
+    private Type _currentPageType = typeof(PageA);
+
+    [RelayCommand]
+    private void NavigateTo(Type pageType)
+    {
+        CurrentPageType = pageType;
+    }
 
     [RelayCommand]
     private void ChangedSelectionTo1()
     {
         MultiSelectedItems.Clear();
         foreach (var item in SegmentedItemSource)
-        { 
+        {
             if (item is String value)
             {
                 if (int.TryParse(value.Split(" ")[^1], out int iv))
@@ -32,7 +40,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [RelayCommand]
     private void ChangedSelectionTo2()
-    { 
+    {
         MultiSelectedItems.Clear();
         foreach (var item in SegmentedItemSource)
         {
@@ -47,7 +55,7 @@ public partial class MainWindowViewModel : ViewModelBase
                 }
             }
         }
-    } 
+    }
 
     [ObservableProperty]
     private ObservableCollection<object> _multiSelectedItems = new ObservableCollection<object>();
@@ -58,13 +66,11 @@ public partial class MainWindowViewModel : ViewModelBase
     public MainWindowViewModel()
     {
         SegmentedItemSource = new ObservableCollection<string>();
-        
+
         for (int i = 1; i <= 32; i++)
         {
             SegmentedItemSource.Add($"Segmented Item {i}");
         }
-
-        // MultiSelectedItems.CollectionChanged += OnMultiSelectedItemsChanged;
     }
 
     partial void OnMultiSelectedItemsChanged(ObservableCollection<object> value)
@@ -90,15 +96,15 @@ public partial class MainWindowViewModel : ViewModelBase
     private void UpdateSegmentedItemSource()
     {
         string[] value = new string[128];
-        
+
         for (int i = 1; i <= 128; i++)
         {
             value[i - 1] = $"Segmented Item {i}";
         }
-        
+
         SegmentedItemSource =  new ObservableCollection<string>(value);
     }
-    
+
     [ObservableProperty]
     private string _sT;
 
@@ -125,6 +131,5 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             ST = $"Switch To => {item.Tag}";
         }
-        // ST = value + "我是 change 文字 hahahaha";
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Collections;
@@ -9,7 +10,6 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Logging;
 using Avalonia.Threading;
-using AvaloniaFluentUI.UI.Controls.Experimental;
 using System.Collections.Specialized;
 using System.IO;
 using System.Text;
@@ -585,7 +585,7 @@ public partial class Frame : ContentControl
         if (CacheSize == 0)
         {
             return NavigationPageFactory?.GetPage(srcPageType) ??
-                Activator.CreateInstance(srcPageType) as Control;
+                CreatePageFromFactory(srcPageType);
         }
 
         // This is triggered via Navigate(Type) - we only need to check the page type here
@@ -598,7 +598,7 @@ public partial class Frame : ContentControl
         }
 
         var newPage = NavigationPageFactory?.GetPage(srcPageType) ??
-            Activator.CreateInstance(srcPageType) as Control;
+            CreatePageFromFactory(srcPageType);
 
         _pageCache.Add(new NavigationCacheItem(srcPageType, null, newPage));
 
@@ -608,6 +608,16 @@ public partial class Frame : ContentControl
         }
 
         return newPage;
+    }
+
+    private static Control CreatePageFromFactory(Type pageType)
+    {
+        if (_registeredPages.TryGetValue(pageType, out var factory))
+        {
+            return factory();
+        }
+
+        return Activator.CreateInstance(pageType) as Control;
     }
 
     private Control CheckCacheAndGetPage(Type srcPageType = null, object target = null)
@@ -697,6 +707,18 @@ public partial class Frame : ContentControl
             GoBack();
             e.Handled = true;
         }
+    }
+
+    private static readonly ConcurrentDictionary<Type, Func<Control>> _registeredPages = new();
+
+    /// <summary>
+    /// Registers a page type with a factory function, enabling AOT-compatible page creation.
+    /// Must be called before navigation (e.g., in App startup).
+    /// </summary>
+    /// <typeparam name="T">The page type to register (must be a Control with a parameterless constructor).</typeparam>
+    public static void RegisterPage<T>() where T : Control, new()
+    {
+        _registeredPages[typeof(T)] = () => new T();
     }
 
     private CancellationTokenSource _cts;

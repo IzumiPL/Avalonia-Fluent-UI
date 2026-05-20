@@ -32,50 +32,63 @@
         IconData="{StaticResource Constract}"
         Theme="{StaticResource TransparentToolButton}"/>
     </Grid>
-    <ScrollViewer Grid.Row="1" Padding="35,25,25,10">
-      <StackPanel>
-        <Button Command="{Binding ChangedSelectionTo1Command}" Content="To 1"/>
-        <Button Command="{Binding ChangedSelectionTo2Command}" Content="To 2"/>
-
-        <ui:MultiSelectionComboBox ItemsSource="{Binding SegmentedItemSource}" SelectedItems="{Binding MultiSelectedItems}"/>
-        <ui:SegmentedView
-          IsVisible="False"
-          SelectedIndex="{Binding Sind}"
-          SelectedItem="{Binding SITM}">
-          <ui:SegmentedItem Content="Segmented Item 1" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Segmented Item 2" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Segmented Item 3" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Segmented Item 4" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Segmented Item 5" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Segmented Item 6" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Segmented Item 7" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Segmented Item 8" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Segmented Item 9" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Segmented Item 10" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Segmented Item 11" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Segmented Item 12" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Item 13" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Item 14" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Item 15" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Item 16" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Item 17" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Item 18" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Item 19" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Item 20" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Item 21" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Item 22" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Item 23" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedItem Content="Item 24" Tag="{Binding $self.Content}"/>
-          <ui:SegmentedView.Content>
+    <Grid Grid.Row="1">
+      <Grid Margin="35,25,25,10" RowDefinitions="Auto, *">
+        <!--  Frame MVVM 导航示例  -->
+        <Border
+          Grid.Row="0"
+          Margin="0,0,0,10"
+          Padding="10"
+          Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}"
+          CornerRadius="8">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <Button
+              Padding="12,6"
+              Command="{Binding NavigateToCommand}"
+              CommandParameter="{x:Type page:PageA}"
+              Content="Page A"
+              FontSize="14"/>
+            <Button
+              Padding="12,6"
+              Command="{Binding NavigateToCommand}"
+              CommandParameter="{x:Type page:PageB}"
+              Content="Page B"
+              FontSize="14"/>
+            <Button Command="{Binding #Frame.GoBack}" Content="返回"/>
+            <Button Command="{Binding #Frame.GoForward}" Content="前进"/>
             <TextBlock
-              HorizontalAlignment="Center"
+              Margin="20,0,0,0"
               VerticalAlignment="Center"
-              FontSize="24"
-              Text="{Binding ST}"
-              TextAlignment="Center"/>
-          </ui:SegmentedView.Content>
-        </ui:SegmentedView>
-      </StackPanel>
-    </ScrollViewer>
+              FontSize="13"
+              Foreground="{DynamicResource TextFillColorSecondaryBrush}">
+              当前:<Run FontWeight="Bold" Text="{Binding CurrentPageType.Name}"/>
+            </TextBlock>
+          </StackPanel>
+        </Border>
+
+        <!--  Frame 通过 SourcePageType 绑定实现 MVVM 导航  -->
+        <ui:Frame
+          Name="Frame"
+          Grid.Row="1"
+          Focusable="False"
+          SourcePageType="{Binding CurrentPageType}"/>
+
+        <!--  切换动画说明  -->
+        <Border
+          Grid.Row="1"
+          Margin="0,0,10,10"
+          Padding="8,4"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Bottom"
+          Background="#AA000000"
+          CornerRadius="4"
+          IsHitTestVisible="False">
+          <TextBlock
+            FontSize="11"
+            Foreground="White"
+            Text="默认 EntranceNavigationTransitionInfo 动画"/>
+        </Border>
+      </Grid>
+    </Grid>
   </Grid>
 </Window>

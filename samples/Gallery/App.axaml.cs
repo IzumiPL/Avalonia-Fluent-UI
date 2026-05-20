@@ -22,23 +22,42 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        try
         {
-            // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
-            // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
-            DisableAvaloniaDataAnnotationValidation();
-            desktop.MainWindow = new MainWindow
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                DataContext = new MainWindowViewModel()
-            };
-        }
-        
-        Frame.RegisterPage<FramePage1>();
-        Frame.RegisterPage<FramePage2>();
-        Frame.RegisterPage<FramePage3>();
-        Frame.RegisterPage<FramePage4>();
+                // Avoid duplicate validations from both Avalonia and the CommunityToolkit.
+                // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
+                DisableAvaloniaDataAnnotationValidation();
+                desktop.MainWindow = new MainWindow
+                {
+                    DataContext = new MainWindowViewModel()
+                };
+            }
+            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleView)
+            {
+                singleView.MainView = new MainView
+                {
+                    DataContext = new MainWindowViewModel()
+                };
+            }
+            else
+            {
+                Console.Error.WriteLine($"Unhandled ApplicationLifetime type: {ApplicationLifetime?.GetType()}");
+            }
 
-        // SetLanguage("zh-CN");
+            Frame.RegisterPage<FramePage1>();
+            Frame.RegisterPage<FramePage2>();
+            Frame.RegisterPage<FramePage3>();
+            Frame.RegisterPage<FramePage4>();
+
+            // SetLanguage("zh-CN");
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"FATAL: App initialization failed: {ex}");
+        }
+
         base.OnFrameworkInitializationCompleted();
     }
 
