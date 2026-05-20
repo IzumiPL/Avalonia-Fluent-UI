@@ -1,0 +1,14 @@
+<UserControl
+  x:Class="Test.Pages.PageA"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Border Background="#FF6B35" CornerRadius="8">
+    <TextBlock
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center"
+      FontSize="32"
+      FontWeight="Bold"
+      Foreground="White"
+      Text="Page A"/>
+  </Border>
+</UserControl>
