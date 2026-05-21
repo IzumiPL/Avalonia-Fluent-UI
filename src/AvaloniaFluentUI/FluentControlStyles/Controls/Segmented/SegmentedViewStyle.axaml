@@ -1,0 +1,127 @@
+<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
+
+  <ControlTheme x:Key="{x:Type ui:SegmentedView}" TargetType="ui:SegmentedView">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="CornerRadius" Value="3"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Padding="{TemplateBinding Padding}"
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <Grid RowDefinitions="Auto,*">
+            <Border
+              BorderBrush="{DynamicResource ExpanderHeaderBorderBrush}"
+              BorderThickness="1"
+              CornerRadius="5">
+              <ui:SingleDirectionScrollViewer
+                Margin="0"
+                Padding="0"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                BorderThickness="0"
+                HorizontalScrollBarVisibility="Hidden"
+                VerticalScrollBarVisibility="Disabled">
+                <Grid Name="PART_HeadersArea">
+                  <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}"/>
+                  <Rectangle
+                    Name="PART_SelectedIndicator"
+                    Height="3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    Fill="{DynamicResource PivotHeaderItemSelectedPipeFill}"
+                    IsVisible="False"
+                    RadiusX="2"
+                    RadiusY="2"/>
+                </Grid>
+              </ui:SingleDirectionScrollViewer>
+            </Border>
+            <ContentPresenter
+              Name="PART_ContentPresenter"
+              Grid.Row="1"
+              Margin="{TemplateBinding Padding}"
+              Content="{TemplateBinding Content}"/>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^">
+      <Setter Property="ItemsPanel">
+        <ItemsPanelTemplate>
+          <VirtualizingStackPanel Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="^ /template/ Rectangle#PART_SelectedIndicator">
+      <Setter Property="RenderTransformOrigin" Value="50%, 50%"/>
+      <Setter Property="Transitions">
+        <Transitions>
+          <ThicknessTransition Property="Margin" Duration="0:0:0.15"/>
+          <DoubleTransition Property="Width" Duration="0:0:0.20"/>
+        </Transitions>
+      </Setter>
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type ui:SegmentedItem}" TargetType="ui:SegmentedItem">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="Padding" Value="12,8"/>
+    <Setter Property="Cursor" Value="Hand"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="CornerRadius" Value="4"/>
+    <Setter Property="Margin" Value="2,0"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Name="PART_LayoutRoot"
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <ContentPresenter
+            Name="PART_HeaderContentPresenter"
+            Margin="{TemplateBinding Padding}"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Content="{TemplateBinding Content}"
+            ContentTemplate="{TemplateBinding ContentTemplate}"/>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^">
+      <Setter Property="Transitions">
+        <Transitions>
+          <BrushTransition Property="Foreground" Duration="0:0:0.18"/>
+          <BrushTransition Property="Background" Duration="0:0:0.18"/>
+          <BrushTransition Property="BorderBrush" Duration="0:0:0.18"/>
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="^:pointerover">
+      <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="^:selected">
+      <Setter Property="Background" Value="{DynamicResource ExpanderHeaderBackground}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    </Style>
+
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

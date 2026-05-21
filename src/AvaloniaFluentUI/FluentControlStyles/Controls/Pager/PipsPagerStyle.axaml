@@ -1,0 +1,139 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
+  <ControlTheme x:Key="{x:Type ui:PipsPager}" TargetType="ui:PipsPager">
+    <Setter Property="Foreground" Value="Transparent"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="MinWidth" Value="128"/>
+    <Setter Property="MinHeight" Value="12"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+    <Setter Property="ScrollViewer.IsScrollChainingEnabled" Value="True"/>
+    <Setter Property="ScrollViewer.IsScrollInertiaEnabled" Value="True"/>
+    <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="False"/>
+    <Setter Property="SelectionMode" Value="Single"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+          <Grid ColumnDefinitions="Auto, *, Auto">
+            <ui:ToolButton
+              Name="PART_PreviousButton"
+              Grid.Column="0"
+              Width="16"
+              Height="16"
+              Margin="0,0,5,0"
+              Padding="0"
+              VerticalAlignment="Center"
+              Background="Transparent"
+              BorderBrush="Transparent"
+              BorderThickness="0"
+              Focusable="False"
+              IconData="{StaticResource Previous}"
+              IconHeight="8"
+              IconWidth="8"
+              IsTabStop="False"/>
+            <ui:SingleDirectionScrollViewer
+              Name="PART_ScrollViewer"
+              Grid.Column="1"
+              Padding="0,0,0,0"
+              AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}"
+              Background="{TemplateBinding Background}"
+              BringIntoViewOnFocusChange="{TemplateBinding (ScrollViewer.BringIntoViewOnFocusChange)}"
+              HorizontalScrollBarVisibility="Hidden"
+              HorizontalSnapPointsType="{TemplateBinding (ScrollViewer.HorizontalSnapPointsType)}"
+              IsDeferredScrollingEnabled="{TemplateBinding (ScrollViewer.IsDeferredScrollingEnabled)}"
+              IsScrollChainingEnabled="{TemplateBinding (ScrollViewer.IsScrollChainingEnabled)}"
+              IsScrollInertiaEnabled="{TemplateBinding (ScrollViewer.IsScrollInertiaEnabled)}"
+              Orientation="Horizontal"
+              VerticalScrollBarVisibility="Disabled"
+              VerticalSnapPointsType="{TemplateBinding (ScrollViewer.VerticalSnapPointsType)}">
+              <ItemsPresenter
+                Name="PART_ItemsPresenter"
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="Center"
+                ItemsPanel="{TemplateBinding ItemsPanel}"/>
+            </ui:SingleDirectionScrollViewer>
+            <ui:ToolButton
+              Name="PART_NextButton"
+              Grid.Column="2"
+              Width="16"
+              Height="16"
+              Margin="5,0,0,0"
+              Padding="0"
+              VerticalAlignment="Center"
+              Background="Transparent"
+              BorderBrush="Transparent"
+              BorderThickness="0"
+              Focusable="False"
+              IconData="{StaticResource Next}"
+              IconHeight="8"
+              IconWidth="8"
+              IsTabStop="False"/>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^">
+      <Setter Property="ItemsPanel">
+        <ItemsPanelTemplate>
+          <StackPanel Orientation="Horizontal" Spacing="6"/>
+        </ItemsPanelTemplate>
+      </Setter>
+    </Style>
+  </ControlTheme>
+
+  <!--
+  -->
+  <ControlTheme x:Key="{x:Type ui:PipsPagerItem}" TargetType="ui:PipsPagerItem">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Foreground" Value="{DynamicResource ListViewItemForeground}"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Width" Value="5"/>
+    <Setter Property="Height" Value="5"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Ellipse
+          Name="Pips"
+          Width="{TemplateBinding Width}"
+          Height="{TemplateBinding Height}"
+          Fill="{TemplateBinding Foreground}"
+          Opacity="0.4"/>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^ /template/ ui|ToolButton#PART_PreviousButton:pointerover">
+      <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+    </Style>
+    <Style Selector="^ /template/ ui|ToolButton#PART_NextButton:pointerover">
+      <Setter Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+    </Style>
+
+    <Style Selector="^:disabled">
+      <!--  There's no Disabled brush for LVI, so just dim opacity  -->
+      <Setter Property="Opacity" Value="0.25"/>
+    </Style>
+
+    <Style Selector="^:selected">
+      <Setter Property="Width" Value="8"/>
+      <Setter Property="Height" Value="8"/>
+
+      <Style Selector="^ /template/ Ellipse#Pips">
+        <Setter Property="Opacity" Value="0.7"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:pointerover">
+      <Setter Property="Width" Value="8"/>
+      <Setter Property="Height" Value="8"/>
+      <Style Selector="^ /template/ Ellipse#Pips">
+        <Setter Property="Opacity" Value="0.6"/>
+      </Style>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>
+

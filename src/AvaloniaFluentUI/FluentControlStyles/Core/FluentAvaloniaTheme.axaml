@@ -1,0 +1,18 @@
+﻿<Styles
+  x:Class="AvaloniaFluentUI.Styling.FluentAvaloniaTheme"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Styles.Resources>
+    <ResourceDictionary>
+      <FontFamily x:Key="SymbolThemeFontFamily">/Assets/Fonts/#Symbols</FontFamily>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceInclude Source="/FluentControlStyles/Themes/Fluentv2Colors.axaml"/>
+        <ResourceInclude Source="/FluentControlStyles/Themes/Fluentv2.axaml"/>
+
+        <ResourceInclude Source="/FluentControlStyles/Themes/Icon/FluentIcon.axaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Styles.Resources>
+
+  <StyleInclude Source="/FluentControlStyles/Controls.axaml"/>
+</Styles>

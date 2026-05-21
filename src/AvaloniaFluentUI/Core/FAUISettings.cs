@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-using AvaloniaFluentUI.Interop;
+using AvaloniaFluentUI.Controls.Interop;
 
 namespace AvaloniaFluentUI.Core;
 
