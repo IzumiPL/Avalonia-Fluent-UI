@@ -67,7 +67,7 @@
 
     <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}"/>
-    <Setter Property="MinHeight" Value="55"/>
+    <Setter Property="MinHeight" Value="45"/>
     <Setter Property="ClipToBounds" Value="True"/>
     <Setter Property="CornerRadius" Value="8"/>
     <Setter Property="BorderThickness" Value="1"/>

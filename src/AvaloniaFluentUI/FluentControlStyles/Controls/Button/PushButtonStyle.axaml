@@ -117,9 +117,12 @@
       </Style>
     </Style>
 
+    <Style Selector="^.Round">
+      <Setter Property="CornerRadius" Value="100"/>
+    </Style>
 
     <!--  Accent Button  -->
-    <Style Selector="^.accent">
+    <Style Selector="^.Accent">
       <Style Selector="^ /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}"/>
@@ -172,6 +175,71 @@
         <Style Selector="^ /template/ Path#PART_Icon">
           <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
         </Style>
+      </Style>
+
+      <Style Selector="^.Round">
+        <Setter Property="CornerRadius" Value="100"/>
+      </Style>
+    </Style>
+
+
+    <!--  Outlined Button  -->
+    <Style Selector="^.Outlined">
+      <Style Selector="^ /template/ Border#PART_Border">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Path#PART_Icon">
+        <Setter Property="Fill" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+      </Style>
+
+      <Style Selector="^:pointerover">
+        <Style Selector="^ /template/ Border#PART_Border">
+          <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+        </Style>
+
+        <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+          <Setter Property="Foreground" Value="{DynamicResource TextFillColorInverseBrush}"/>
+        </Style>
+        <Style Selector="^ /template/ Path#PART_Icon">
+          <Setter Property="Fill" Value="{DynamicResource TextFillColorInverseBrush}"/>
+        </Style>
+      </Style>
+
+      <Style Selector="^:pressed">
+        <Style Selector="^ /template/ Border#PART_Border">
+          <Setter Property="Background" Value="{DynamicResource AccentFillColorTertiaryBrush}"/>
+          <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+        </Style>
+
+        <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+          <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
+        </Style>
+        <Style Selector="^ /template/ Path#PART_Icon">
+          <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
+        </Style>
+      </Style>
+
+      <Style Selector="^:disabled">
+        <Style Selector="^ /template/ Border#PART_Border">
+          <Setter Property="Background" Value="{DynamicResource AccentFillColorDisabledBrush}"/>
+          <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+        </Style>
+
+        <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+          <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
+        </Style>
+        <Style Selector="^ /template/ Path#PART_Icon">
+          <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
+        </Style>
+      </Style>
+
+      <Style Selector="^.Round">
+        <Setter Property="CornerRadius" Value="100"/>
       </Style>
     </Style>
   </ControlTheme>

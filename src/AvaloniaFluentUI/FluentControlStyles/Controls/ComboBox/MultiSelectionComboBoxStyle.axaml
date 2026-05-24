@@ -4,7 +4,7 @@
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
 
   <ControlTheme x:Key="{x:Type ui:MultiSelectionComboBox}" TargetType="ui:MultiSelectionComboBox">
-    <Setter Property="Height" Value="42"/>
+    <Setter Property="Height" Value="35"/>
     <Setter Property="Padding" Value="0 0 5 0"/>
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}"/>
@@ -17,6 +17,7 @@
           CornerRadius="8">
           <Grid ColumnDefinitions="*, Auto">
             <ui:SingleDirectionScrollViewer
+              Margin="0,0,10,0"
               Padding="0,5"
               HorizontalScrollBarVisibility="Hidden"
               Orientation="Horizontal"
@@ -38,14 +39,14 @@
             <Button
               Name="PART_DropDownButton"
               Grid.Column="1"
-              Width="28"
+              Width="20"
               Margin="0,1"
               Opacity="0.7"
               Theme="{StaticResource TransparentButton}">
               <PathIcon
                 Name="PART_Icon"
-                Width="14"
-                Height="14"
+                Width="10"
+                Height="10"
                 Data="{StaticResource ChevronDownMed}"/>
             </Button>
 
@@ -83,6 +84,7 @@
     <Setter Property="Background" Value="{DynamicResource AcrylicInAppFillColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="2"/>
     <Setter Property="CornerRadius" Value="8"/>
+    <Setter Property="MinWidth" Value="64"/>
 
     <Setter Property="Template">
       <ControlTemplate>
@@ -131,8 +133,8 @@
               Padding="0"
               Cursor="Hand"
               IconData="{StaticResource Close}"
-              IconHeight="10"
-              IconWidth="10"
+              IconHeight="8"
+              IconWidth="8"
               Theme="{StaticResource TransparentToolButton}"/>
           </Grid>
         </Border>

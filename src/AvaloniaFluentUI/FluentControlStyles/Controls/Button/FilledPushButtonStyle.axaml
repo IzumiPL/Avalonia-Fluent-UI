@@ -96,7 +96,7 @@
     </Style>
 
     <!--  Success  -->
-    <Style Selector="^.success">
+    <Style Selector="^.Success">
       <Style Selector="^ /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource SuccessDefaultBrush}"/>
       </Style>
@@ -130,7 +130,7 @@
     </Style>
 
     <!--  Attention  -->
-    <Style Selector="^.attention">
+    <Style Selector="^.Attention">
       <Style Selector="^ /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AttentionDefaultBrush}"/>
       </Style>
@@ -164,7 +164,7 @@
     </Style>
 
     <!--  Warning  -->
-    <Style Selector="^.warning">
+    <Style Selector="^.Warning">
       <Style Selector="^ /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource WarningDefaultBrush}"/>
       </Style>
@@ -198,7 +198,7 @@
     </Style>
 
     <!--  Error  -->
-    <Style Selector="^.error">
+    <Style Selector="^.Error">
       <Style Selector="^ /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource ErrorDefaultBrush}"/>
       </Style>

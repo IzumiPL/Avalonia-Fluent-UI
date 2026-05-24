@@ -18,11 +18,12 @@
   <!--  Not forced as of v2, but available if still wanted  -->
   <x:Double x:Key="ToggleSwitchThemeMinWidth">154</x:Double>
 
-  
-  <!-- Control-specific resources -->
+
+  <!--  Control-specific resources  -->
   <Thickness x:Key="ToggleSwitchOnStrokeThickness">0</Thickness>
   <Thickness x:Key="ToggleSwitchOuterBorderStrokeThickness">1</Thickness>
-<ControlTheme x:Key="{x:Type ToggleSwitch}" TargetType="ToggleSwitch">
+
+  <ControlTheme x:Key="{x:Type ToggleSwitch}" TargetType="ToggleSwitch">
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
     <Setter Property="HorizontalAlignment" Value="Left"/>
     <Setter Property="VerticalAlignment" Value="Center"/>

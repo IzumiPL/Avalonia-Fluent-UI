@@ -10,9 +10,9 @@
         <TextBox Text="Hello Down there"/>
         <TextBox Watermark="Watermark"/>
         <TextBox IsEnabled="False" Text="Test"/>
-        <TextBox Classes="clearButton" Text="Test Clear"/>
+        <TextBox Classes="Clear" Text="Test Clear"/>
         <TextBox
-          Classes="revealPasswordButton"
+          Classes="Password"
           PasswordChar="&#x25CF;"
           Text="Test Password"/>
       </StackPanel>
@@ -23,7 +23,6 @@
   <Thickness x:Key="TextBoxInnerButtonMargin">0,4,4,4</Thickness>
   <x:Double x:Key="TextBoxIconFontSize">12</x:Double>
   <ui:TextCommandBarFlyout x:Key="DefaultTextBoxContextFlyout"/>
-
 
   <!--  TextBox-specific resources  -->
   <LinearGradientBrush x:Key="TextControlElevationBorderBrush" TransformOrigin="50%,50%" StartPoint="0,0" EndPoint="0,2">
@@ -129,16 +128,20 @@
           BorderBrush="{TemplateBinding BorderBrush}"
           BorderThickness="{TemplateBinding BorderThickness}"
           CornerRadius="{TemplateBinding CornerRadius}">
-          <ui:FontIcon
-            Name="Glyph"
+          <PathIcon
+            Name="Icon"
+            Width="12"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            FontFamily="{StaticResource SymbolThemeFontFamily}"
-            FontSize="{StaticResource TextBoxIconFontSize}"
-            Glyph="&#xE18B;"/>
+            Data="{StaticResource View}"
+            Foreground="{TemplateBinding Foreground}"/>
         </Border>
       </ControlTemplate>
     </Setter>
+
+    <Style Selector="^[IsChecked=True] /template/ PathIcon#Icon">
+      <Setter Property="Data" Value="{StaticResource Hide}"/>
+    </Style>
 
     <Style Selector="^:pointerover">
       <Style Selector="^ /template/ Border#ButtonLayoutGrid">
@@ -155,10 +158,6 @@
       <Style Selector="^ /template/ Border#ButtonLayoutGrid">
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
-      </Style>
-
-      <Style Selector="^ /template/ ui|FontIcon#Glyph">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/>
       </Style>
     </Style>
 

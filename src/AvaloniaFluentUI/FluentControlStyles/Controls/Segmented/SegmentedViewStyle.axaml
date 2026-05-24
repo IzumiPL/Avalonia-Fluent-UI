@@ -4,6 +4,7 @@
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
 
   <ControlTheme x:Key="{x:Type ui:SegmentedView}" TargetType="ui:SegmentedView">
+    <Setter Property="HorizontalAlignment" Value="Left"/>
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderThickness" Value="1"/>
     <Setter Property="CornerRadius" Value="3"/>
@@ -11,6 +12,8 @@
       <ControlTemplate>
         <Border
           Padding="{TemplateBinding Padding}"
+          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+          VerticalAlignment="{TemplateBinding VerticalAlignment}"
           Background="{TemplateBinding Background}"
           BorderBrush="{TemplateBinding BorderBrush}"
           BorderThickness="{TemplateBinding BorderThickness}"
@@ -77,10 +80,12 @@
     <Setter Property="FontSize" Value="14"/>
     <Setter Property="Padding" Value="12,8"/>
     <Setter Property="Cursor" Value="Hand"/>
-    <Setter Property="BorderThickness" Value="1"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
     <Setter Property="CornerRadius" Value="4"/>
-    <Setter Property="Margin" Value="2,0"/>
+    <Setter Property="Margin" Value="2 0"/>
+
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border
@@ -92,8 +97,8 @@
           <ContentPresenter
             Name="PART_HeaderContentPresenter"
             Margin="{TemplateBinding Padding}"
-            HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
             Content="{TemplateBinding Content}"
             ContentTemplate="{TemplateBinding ContentTemplate}"/>
         </Border>
@@ -101,6 +106,8 @@
     </Setter>
 
     <Style Selector="^">
+      <Setter Property="BorderThickness" Value="1"/>
+
       <Setter Property="Transitions">
         <Transitions>
           <BrushTransition Property="Foreground" Duration="0:0:0.18"/>
@@ -108,20 +115,40 @@
           <BrushTransition Property="BorderBrush" Duration="0:0:0.18"/>
         </Transitions>
       </Setter>
+
+      <Style Selector="^:pointerover">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+      </Style>
+
+      <Style Selector="^:selected">
+        <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+      </Style>
+
+      <Style Selector="^:disabled">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      </Style>
     </Style>
 
-    <Style Selector="^:pointerover">
-      <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-    </Style>
+    <Style Selector="^.Toggle">
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="Margin" Value="2"/>
 
-    <Style Selector="^:selected">
-      <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}"/>
-      <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
-      <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-    </Style>
+      <Style Selector="^:pointerover">
+        <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+      </Style>
 
-    <Style Selector="^:disabled">
-      <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      <Style Selector="^:selected">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+      </Style>
+
+      <Style Selector="^:disabled">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      </Style>
     </Style>
   </ControlTheme>
 </ResourceDictionary>

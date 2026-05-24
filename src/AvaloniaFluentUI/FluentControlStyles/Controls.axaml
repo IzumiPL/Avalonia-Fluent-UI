@@ -143,6 +143,9 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FlipViewStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/ListBox/RoundListBoxStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Segmented/SegmentedViewStyle.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Segmented/SegmentedToggleViewStyle.axaml"/>
+
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/TextBox/SearchTextBox.axaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Styles.Resources>

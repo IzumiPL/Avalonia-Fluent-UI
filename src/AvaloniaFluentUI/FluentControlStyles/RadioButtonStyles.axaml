@@ -1,203 +1,295 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    x:CompileBindings="True">
+<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  x:CompileBindings="True">
 
-    <Design.PreviewWith>
-        <Border Padding="50">
-            <StackPanel Spacing="5">
-                <RadioButton Content="Radio" />
-                <RadioButton Content="Radio" IsChecked="True" />
-                <RadioButton Content="Radio" IsEnabled="False" />
-            </StackPanel>
-        </Border>
-    </Design.PreviewWith>
+  <Design.PreviewWith>
+    <Border Padding="50">
+      <StackPanel Spacing="5">
+        <RadioButton Content="Radio"/>
+        <RadioButton Content="Radio" IsChecked="True"/>
+        <RadioButton Content="Radio" IsEnabled="False"/>
+      </StackPanel>
+    </Border>
+  </Design.PreviewWith>
 
-    <!-- NOTE: this value is not forced as of v2, but this maintained here if you
-               want to keep the min width from WinUI
-    -->
-    <x:Double x:Key="RadioButtonMinWidth">120</x:Double>
+  <!--
+    NOTE: this value is not forced as of v2, but this maintained here if you
+    want to keep the min width from WinUI
+  -->
+  <x:Double x:Key="RadioButtonMinWidth">120</x:Double>
 
-    
-  <!-- Control-specific resources -->
+  <!--  Control-specific resources  -->
   <x:Double x:Key="RadioButtonBorderThemeThickness">1</x:Double>
-<ControlTheme x:Key="{x:Type RadioButton}" TargetType="RadioButton">
-        <Setter Property="Background" Value="{DynamicResource ControlFillColorTransparentBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}" />
-        <!-- Amended padding to add 8px right, to account for no forced MinWidth any more -->
-        <Setter Property="Padding" Value="8,6,8,0" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="VerticalContentAlignment" Value="Top" />
-        <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
-        <Setter Property="Template">
-            <ControlTemplate>
-                <Border Name="Root"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}">
 
-                    <Grid ColumnDefinitions="20,*">
+  <ControlTheme x:Key="{x:Type RadioButton}" TargetType="RadioButton">
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+    <!--  Amended padding to add 8px right, to account for no forced MinWidth any more  -->
+    <Setter Property="Padding" Value="8,6,8,0"/>
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    <Setter Property="VerticalContentAlignment" Value="Top"/>
+    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Name="Root"
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}">
 
-                        <Grid Grid.Column="0" VerticalAlignment="Top" Height="32">
+          <Grid ColumnDefinitions="20,*">
 
-                            <Ellipse Name="OuterEllipse" Width="20"
-                                     Height="20" UseLayoutRounding="False"
-                                     Stroke="{DynamicResource ControlStrongStrokeColorDefaultBrush}"
-                                     Fill="{DynamicResource ControlAltFillColorSecondaryBrush}"
-                                     StrokeThickness="{DynamicResource RadioButtonBorderThemeThickness}"/>
+            <Grid
+              Grid.Column="0"
+              Height="32"
+              VerticalAlignment="Top">
 
-                            <!-- A seperate element is added since the two orthogonal state groups that cannot touch the same property -->
-                            <Ellipse Name="CheckOuterEllipse" Width="20" Height="20"
-                                     UseLayoutRounding="False"
-                                     Stroke="{DynamicResource AccentFillColorDefaultBrush}"
-                                     Fill="{DynamicResource AccentFillColorDefaultBrush}"
-                                     StrokeThickness="{DynamicResource RadioButtonBorderThemeThickness}"
-                                     Opacity="0" />
+              <Ellipse
+                Name="OuterEllipse"
+                Width="20"
+                Height="20"
+                Fill="{DynamicResource ControlAltFillColorSecondaryBrush}"
+                Stroke="{DynamicResource ControlStrongStrokeColorDefaultBrush}"
+                StrokeThickness="{DynamicResource RadioButtonBorderThemeThickness}"
+                UseLayoutRounding="False"/>
 
-                            <Ellipse Name="CheckGlyph" Width="12" Height="12"
-                                     UseLayoutRounding="False"
-                                     Stroke="{DynamicResource CircleElevationBorderBrush}"
-                                     Fill="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
-                                     Opacity="0"
-                                     RenderTransform="scaleX(0.86) scaleY(0.86)">
-                                <Ellipse.Transitions>
-                                    <Transitions>
-                                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.167" Easing="0.0,0.0 0.0,1.0" />
-                                    </Transitions>
-                                </Ellipse.Transitions>
-                            </Ellipse>
+              <!--  A seperate element is added since the two orthogonal state groups that cannot touch the same property  -->
+              <Ellipse
+                Name="CheckOuterEllipse"
+                Width="20"
+                Height="20"
+                Fill="{DynamicResource AccentFillColorDefaultBrush}"
+                Opacity="0"
+                Stroke="{DynamicResource AccentFillColorDefaultBrush}"
+                StrokeThickness="{DynamicResource RadioButtonBorderThemeThickness}"
+                UseLayoutRounding="False"/>
 
-                            <!-- A seperate element is added since the two orthogonal state groups that cannot touch the same property -->
-                            <Border Name="PressedCheckGlyph" Width="4" Height="4" CornerRadius="6"
-                                    UseLayoutRounding="False"
-                                    BorderBrush="{DynamicResource CircleElevationBorderBrush}"
-                                    Background="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
-                                    Opacity="0"
-                                    RenderTransform="scaleX(0.86) scaleY(0.86)">
-                                <Border.Transitions>
-                                    <Transitions>
-                                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.167" Easing="0,0 0,1" />
-                                    </Transitions>
-                                </Border.Transitions>
-                            </Border>
-                        </Grid>
+              <Ellipse
+                Name="CheckGlyph"
+                Width="12"
+                Height="12"
+                Fill="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
+                Opacity="0"
+                RenderTransform="scaleX(0.86) scaleY(0.86)"
+                Stroke="{DynamicResource CircleElevationBorderBrush}"
+                UseLayoutRounding="False">
+                <Ellipse.Transitions>
+                  <Transitions>
+                    <TransformOperationsTransition
+                      Easing="0.0,0.0 0.0,1.0"
+                      Property="RenderTransform"
+                      Duration="0:0:0.167"/>
+                  </Transitions>
+                </Ellipse.Transitions>
+              </Ellipse>
 
-                        <ContentPresenter Name="ContentPresenter"
-                                          Grid.Column="1"
-                                          ContentTemplate="{TemplateBinding ContentTemplate}"
-                                          Content="{TemplateBinding Content}"
-                                          Margin="{TemplateBinding Padding}"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+              <!--  A seperate element is added since the two orthogonal state groups that cannot touch the same property  -->
+              <Border
+                Name="PressedCheckGlyph"
+                Width="4"
+                Height="4"
+                Background="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
+                BorderBrush="{DynamicResource CircleElevationBorderBrush}"
+                CornerRadius="6"
+                Opacity="0"
+                RenderTransform="scaleX(0.86) scaleY(0.86)"
+                UseLayoutRounding="False">
+                <Border.Transitions>
+                  <Transitions>
+                    <TransformOperationsTransition
+                      Easing="0,0 0,1"
+                      Property="RenderTransform"
+                      Duration="0:0:0.167"/>
+                  </Transitions>
+                </Border.Transitions>
+              </Border>
+            </Grid>
 
-                    </Grid>
+            <ContentPresenter
+              Name="ContentPresenter"
+              Grid.Column="1"
+              Margin="{TemplateBinding Padding}"
+              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+              Content="{TemplateBinding Content}"
+              ContentTemplate="{TemplateBinding ContentTemplate}"/>
 
-                </Border>
-            </ControlTemplate>
+          </Grid>
+
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:pointerover">
+      <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Border#Root">
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Ellipse#OuterEllipse">
+        <Setter Property="Stroke" Value="{DynamicResource ControlStrongStrokeColorDefaultBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource ControlAltFillColorTertiaryBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Ellipse#CheckOuterEllipse">
+        <Setter Property="Stroke" Value="{DynamicResource AccentFillColorSecondaryBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource AccentFillColorSecondaryBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Ellipse#CheckGlyph">
+        <Setter Property="Stroke" Value="{DynamicResource CircleElevationBorderBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="RenderTransform" Value="scaleX(1.167) scaleY(1.167)"/>
+        <Setter Property="Transitions">
+          <Transitions>
+            <TransformOperationsTransition
+              Easing="0,0 0,1"
+              Property="RenderTransform"
+              Duration="0:0:0.25"/>
+          </Transitions>
         </Setter>
+      </Style>
+    </Style>
 
-        <Style Selector="^:pointerover">
-            <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-                <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-            </Style>
-            <Style Selector="^ /template/ Border#Root">
-                <Setter Property="Background" Value="{DynamicResource ControlFillColorTransparentBrush}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}" />
-            </Style>
-            <Style Selector="^ /template/ Ellipse#OuterEllipse">
-                <Setter Property="Stroke" Value="{DynamicResource ControlStrongStrokeColorDefaultBrush}" />
-                <Setter Property="Fill" Value="{DynamicResource ControlAltFillColorTertiaryBrush}" />
-            </Style>
-            <Style Selector="^ /template/ Ellipse#CheckOuterEllipse">
-                <Setter Property="Stroke" Value="{DynamicResource AccentFillColorSecondaryBrush}" />
-                <Setter Property="Fill" Value="{DynamicResource AccentFillColorSecondaryBrush}" />
-            </Style>
-            <Style Selector="^ /template/ Ellipse#CheckGlyph">
-                <Setter Property="Stroke" Value="{DynamicResource CircleElevationBorderBrush}" />
-                <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
-                <Setter Property="Opacity" Value="0" />
-                <Setter Property="RenderTransform" Value="scaleX(1.167) scaleY(1.167)" />
-                <Setter Property="Transitions">
-                    <Transitions>
-                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="0,0 0,1" />
-                    </Transitions>
-                </Setter>
-            </Style>
-        </Style>
+    <Style Selector="^:pressed">
+      <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Border#Root">
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Ellipse#OuterEllipse">
+        <Setter Property="Stroke" Value="{DynamicResource ControlStrongStrokeColorDisabledBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource ControlAltFillColorQuarternaryBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Ellipse#CheckOuterEllipse">
+        <Setter Property="Stroke" Value="{DynamicResource AccentFillColorTertiaryBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource AccentFillColorTertiaryBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Ellipse#CheckGlyph">
+        <Setter Property="Stroke" Value="{DynamicResource CircleElevationBorderBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="RenderTransform" Value="scaleX(0.71) scaleY(0.71)"/>
+        <Setter Property="Transitions">
+          <Transitions>
+            <TransformOperationsTransition
+              Easing="0,0 0,1"
+              Property="RenderTransform"
+              Duration="0:0:0.25"/>
+          </Transitions>
+        </Setter>
+      </Style>
+      <Style Selector="^ /template/ Border#PressedCheckGlyph">
+        <Setter Property="Opacity" Value="1"/>
+        <Setter Property="RenderTransform" Value="scaleX(2.5) scaleY(2.5)"/>
+      </Style>
+    </Style>
 
-        <Style Selector="^:pressed">
-            <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-                <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-            </Style>
-            <Style Selector="^ /template/ Border#Root">
-                <Setter Property="Background" Value="{DynamicResource ControlFillColorTransparentBrush}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}" />
-            </Style>
-            <Style Selector="^ /template/ Ellipse#OuterEllipse">
-                <Setter Property="Stroke" Value="{DynamicResource ControlStrongStrokeColorDisabledBrush}" />
-                <Setter Property="Fill" Value="{DynamicResource ControlAltFillColorQuarternaryBrush}" />
-            </Style>
-            <Style Selector="^ /template/ Ellipse#CheckOuterEllipse">
-                <Setter Property="Stroke" Value="{DynamicResource AccentFillColorTertiaryBrush}" />
-                <Setter Property="Fill" Value="{DynamicResource AccentFillColorTertiaryBrush}" />
-            </Style>
-            <Style Selector="^ /template/ Ellipse#CheckGlyph">
-                <Setter Property="Stroke" Value="{DynamicResource CircleElevationBorderBrush}" />
-                <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
-                <Setter Property="Opacity" Value="0" />
-                <Setter Property="RenderTransform" Value="scaleX(0.71) scaleY(0.71)" />
-                <Setter Property="Transitions">
-                    <Transitions>
-                        <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25" Easing="0,0 0,1" />
-                    </Transitions>
-                </Setter>
-            </Style>
-            <Style Selector="^ /template/ Border#PressedCheckGlyph">
-                <Setter Property="Opacity" Value="1" />
-                <Setter Property="RenderTransform" Value="scaleX(2.5) scaleY(2.5)" />
-            </Style>
-        </Style>
+    <Style Selector="^:disabled">
+      <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Border#Root">
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Ellipse#OuterEllipse">
+        <Setter Property="Stroke" Value="{DynamicResource ControlStrongStrokeColorDisabledBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource ControlAltFillColorDisabledBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Ellipse#CheckOuterEllipse">
+        <Setter Property="Stroke" Value="{DynamicResource AccentFillColorDisabledBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource AccentFillColorDisabledBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Ellipse#CheckGlyph">
+        <Setter Property="Stroke" Value="{DynamicResource CircleElevationBorderBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="RenderTransform" Value="scaleX(1.167) scaleY(1.167)"/>
+      </Style>
+    </Style>
 
-        <Style Selector="^:disabled">
-            <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-                <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
-            </Style>
-            <Style Selector="^ /template/ Border#Root">
-                <Setter Property="Background" Value="{DynamicResource ControlFillColorTransparentBrush}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}" />
-            </Style>
-            <Style Selector="^ /template/ Ellipse#OuterEllipse">
-                <Setter Property="Stroke" Value="{DynamicResource ControlStrongStrokeColorDisabledBrush}" />
-                <Setter Property="Fill" Value="{DynamicResource ControlAltFillColorDisabledBrush}" />
-            </Style>
-            <Style Selector="^ /template/ Ellipse#CheckOuterEllipse">
-                <Setter Property="Stroke" Value="{DynamicResource AccentFillColorDisabledBrush}" />
-                <Setter Property="Fill" Value="{DynamicResource AccentFillColorDisabledBrush}" />
-            </Style>
-            <Style Selector="^ /template/ Ellipse#CheckGlyph">
-                <Setter Property="Stroke" Value="{DynamicResource CircleElevationBorderBrush}" />
-                <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
-                <Setter Property="Opacity" Value="0" />
-                <Setter Property="RenderTransform" Value="scaleX(1.167) scaleY(1.167)" />
-            </Style>
-        </Style>
+    <Style Selector="^:checked">
+      <Style Selector="^ /template/ Ellipse#CheckGlyph">
+        <Setter Property="Opacity" Value="1"/>
+        <Setter Property="Stroke" Value="{DynamicResource AccentControlElevationBorderBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ Ellipse#OuterEllipse">
+        <Setter Property="Opacity" Value="0"/>
+      </Style>
+      <Style Selector="^ /template/ Ellipse#CheckOuterEllipse">
+        <Setter Property="Opacity" Value="1"/>
+      </Style>
+      <Style Selector="^ /template/ Border#PressedCheckGlyph">
+        <Setter Property="Opacity" Value="0"/>
+      </Style>
+    </Style>
+  </ControlTheme>
 
-        <Style Selector="^:checked">
-            <Style Selector="^ /template/ Ellipse#CheckGlyph">
-                <Setter Property="Opacity" Value="1" />
-                <Setter Property="Stroke" Value="{DynamicResource AccentControlElevationBorderBrush}" />
-            </Style>
-            <Style Selector="^ /template/ Ellipse#OuterEllipse">
-                <Setter Property="Opacity" Value="0" />
-            </Style>
-            <Style Selector="^ /template/ Ellipse#CheckOuterEllipse">
-                <Setter Property="Opacity" Value="1" />
-            </Style>
-            <Style Selector="^ /template/ Border#PressedCheckGlyph">
-                <Setter Property="Opacity" Value="0" />
-            </Style>
-        </Style>
-    </ControlTheme>
+  <ControlTheme x:Key="ChipsRadioButton" TargetType="RadioButton">
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="CornerRadius" Value="50"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource CircleElevationBorderBrush}"/>
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Name="RootBorder"
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <Border.Transitions>
+            <Transitions>
+              <BrushTransition Property="Background" Duration="0:0:0.138"/>
+            </Transitions>
+          </Border.Transitions>
+          <ContentPresenter
+            Name="PART_ContentPresenter"
+            Margin="15,5"
+            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+            Content="{TemplateBinding Content}"
+            ContentTemplate="{TemplateBinding ContentTemplate}"/>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:pointerover">
+      <Style Selector="^ /template/ Border#RootBorder">
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:disabled">
+      <Style Selector="^ /template/ Border#RootBorder">
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:checked[IsEnabled=True]">
+      <Style Selector="^ /template/ Border#RootBorder">
+        <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+      </Style>
+    </Style>
+  </ControlTheme>
 </ResourceDictionary>
