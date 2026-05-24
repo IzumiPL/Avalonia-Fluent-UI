@@ -22,7 +22,7 @@ dotnet add package AvaloniaFluentUI
 ```
 
 ## 运行示例▶️
-克隆仓库后就可以运行 samples 目录下的示例程序, 也可以通过`Release`页面下载
+克隆仓库后就可以运行 samples 目录下的示例程序, 也可以通过[Release](https://github.com/HiyorinI/AvaloniaFluentUI/releases)页面下载
 ```shell
 cd samples/Gallery.Desktop
 dotnet run -c Release
