@@ -123,6 +123,28 @@ public partial class AppWindow : Window
         AllowInteractionInTitleBarProperty.Changed.AddClassHandler<Control>(OnAllowInteractionInTitleBarChanged);
     }
 
+    public void EnableWindowEffect(bool enable)
+    {
+        if (IsWindows && enable)
+        {
+            if (IsWindows11)
+            {
+                Background = Brushes.Transparent;
+                TransparencyLevelHint = [WindowTransparencyLevel.Mica];
+            }
+            else
+            {
+                Background = Brush.Parse(Application.Current?.RequestedThemeVariant == ThemeVariant.Dark ? "#A1000000" : "#C1FFFFFF");
+                TransparencyLevelHint = [WindowTransparencyLevel.AcrylicBlur];
+            }
+        }
+        else
+        { 
+            Background = Brush.Parse(Application.Current?.RequestedThemeVariant == ThemeVariant.Dark ? "#202020" : "#F0F4F9");
+            TransparencyLevelHint = [WindowTransparencyLevel.None];
+        }
+    }
+
     protected override Size MeasureOverride(Size availableSize)
     {
         var sz = base.MeasureOverride(availableSize);
