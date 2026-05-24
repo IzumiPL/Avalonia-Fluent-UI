@@ -229,7 +229,7 @@ internal class LiveReorderHelper
 
             return closestIndex;
         }
-        else if (panel is StackPanel sp)
+        else if (panel is Avalonia.Controls.StackPanel sp)
         {
             //var children = sp.Children;
             //var orientation = sp.Orientation;
@@ -429,7 +429,7 @@ internal class LiveReorderHelper
                 _cachedContainerBounds.Add(cont.Bounds);
             }
         }
-        else if (panel is StackPanel sp)
+        else if (panel is Avalonia.Controls.StackPanel sp)
         {
             _firstCachedContainerIndex = 0;
             var itemCount = _owner.ItemCount;

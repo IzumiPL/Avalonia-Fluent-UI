@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Shapes;
 using Avalonia.Controls.Templates;
-using Avalonia.Logging;
 
 namespace AvaloniaFluentUI.Controls;
 

@@ -2,16 +2,16 @@
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Input;
-using AvaloniaFluentUI.Controls.Enums;
+using Avalonia.Layout;
 
 namespace AvaloniaFluentUI.Controls;
 
 public class SingleDirectionScrollContentPresenter : Avalonia.Controls.Presenters.ScrollContentPresenter
 {
-    public static readonly StyledProperty<SmoothScrollOrientation> OrientationProperty =
-        AvaloniaProperty.Register<SingleDirectionScrollContentPresenter, SmoothScrollOrientation>(nameof(Orientation));
+    public static readonly StyledProperty<Orientation> OrientationProperty =
+        AvaloniaProperty.Register<SingleDirectionScrollContentPresenter, Orientation>(nameof(Orientation));
 
-    public SmoothScrollOrientation Orientation
+    public Orientation Orientation
     {
         get => GetValue(OrientationProperty);
         set => SetValue(OrientationProperty, value);
@@ -29,7 +29,7 @@ public class SingleDirectionScrollContentPresenter : Avalonia.Controls.Presenter
             double delta = _remainDelta * 0.25;
             _remainDelta -= delta;
             Vector vector;
-            if (Orientation == SmoothScrollOrientation.Horizontal)
+            if (Orientation == Orientation.Horizontal)
             {
                 double target = Offset.X + delta;
                 double max = Math.Max(0, Extent.Width - Viewport.Width);

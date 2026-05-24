@@ -6,7 +6,6 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Metadata;
 using Avalonia.Styling;
-using AvaloniaFluentUI.Core;
 using System.Collections;
 using System.Collections.Specialized;
 

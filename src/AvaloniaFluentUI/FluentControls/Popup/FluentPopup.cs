@@ -2,7 +2,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
-using AvaloniaFluentUI.Animations;
+using AvaloniaFluentUI.Media.Animation;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -45,11 +45,17 @@ public class FluentPopup : Avalonia.Controls.Primitives.Popup
                 PlacementMode.RightEdgeAlignedBottom or 
                 PlacementMode.RightEdgeAlignedTop 
                 => TranslateTransform.XProperty,
-            
+            PlacementMode.Center => null,
             _ => TranslateTransform.YProperty
         };
-
-        await FluentAnimation.SlideInAsync(child, OffSet, property);
+        if (property != null)
+        {
+            await FluentAnimation.SlideInAsync(child, OffSet, property);
+        }
+        else
+        {
+            await FluentAnimation.CenterScaleAsync(child, OffSet);
+        }
     }
 }
 

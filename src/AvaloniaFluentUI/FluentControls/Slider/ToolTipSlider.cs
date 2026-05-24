@@ -1,4 +1,5 @@
 using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
@@ -13,6 +14,15 @@ namespace AvaloniaFluentUI.Controls;
 [TemplatePart(Name = "PART_ToolTipText", Type = typeof(TextBlock))]
 public class ToolTipSlider : Slider
 {
+    public static readonly StyledProperty<string> FormatProperty =
+        AvaloniaProperty.Register<ToolTipSlider, string>(nameof(Format), defaultValue: "0");
+
+    public string Format
+    {
+        get => GetValue(FormatProperty);
+        set => SetValue(FormatProperty, value);
+    }
+    
     private Popup? _popup;
     private TextBlock? _toolTipText;
     private Thumb? _thumb;
@@ -65,12 +75,12 @@ public class ToolTipSlider : Slider
         if (Orientation == Orientation.Horizontal)
         {
             _popup.Placement = PlacementMode.Top;
-            _popup.VerticalOffset = -Bounds.Height / 2;
+            _popup.VerticalOffset = -12;
         }
         else
         {
             _popup.Placement = PlacementMode.Left;
-            _popup.HorizontalOffset = -Bounds.Height / 2.5;
+            _popup.HorizontalOffset = -12;
         }
         _popup.IsOpen = true;
     }
@@ -86,7 +96,7 @@ public class ToolTipSlider : Slider
     {
         if (_toolTipText != null)
         {
-            _toolTipText.Text = Value.ToString("0");
+            _toolTipText.Text = Value.ToString(Format);
         }
     }
 

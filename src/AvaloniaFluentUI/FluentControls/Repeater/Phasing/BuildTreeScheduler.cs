@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using Avalonia.Threading;
 
 namespace AvaloniaFluentUI.Controls;

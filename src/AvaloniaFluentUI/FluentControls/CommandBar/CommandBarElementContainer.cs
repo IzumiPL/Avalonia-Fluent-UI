@@ -3,7 +3,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Presenters;
-using Avalonia.Styling;
 using AvaloniaFluentUI.Core;
 
 namespace AvaloniaFluentUI.Controls;

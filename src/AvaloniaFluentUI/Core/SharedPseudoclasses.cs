@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AvaloniaFluentUI.Core;
+﻿namespace AvaloniaFluentUI.Core;
 
 // These are pseudoclass names that are used in multiple controls. Share them so we don't have
 // a bunch of duplicate strings everywhere
@@ -40,5 +36,5 @@ internal class SharedPseudoclasses
     public const string s_pcChevronClosed = ":chevronclosed";
     public const string s_pcChevronHidden = ":chevronhidden";
 
-    public const string s_cAccent = "accent";
+    public const string s_cAccent = "Accent";
 }

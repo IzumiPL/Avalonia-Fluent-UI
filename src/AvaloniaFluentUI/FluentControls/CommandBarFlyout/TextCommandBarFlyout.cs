@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Input.Platform;
 using Avalonia.Media;
-using AvaloniaFluentUI.Animations;
+using AvaloniaFluentUI.Media.Animation;
 using AvaloniaFluentUI.Controls.Input;
 
 namespace AvaloniaFluentUI.Controls;

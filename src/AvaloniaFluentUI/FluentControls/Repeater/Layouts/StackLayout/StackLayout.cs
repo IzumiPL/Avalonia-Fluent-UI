@@ -24,13 +24,13 @@ public class StackLayout : VirtualizingLayout, IFlowLayoutAlgorithmDelegates, IO
     /// Defines the <see cref="Spacing"/> property
     /// </summary>
     public static readonly StyledProperty<double> SpacingProperty =
-        StackPanel.SpacingProperty.AddOwner<StackLayout>();
+        Avalonia.Controls.StackPanel.SpacingProperty.AddOwner<StackLayout>();
 
     /// <summary>
     /// Defines the <see cref="Orientation"/> property
     /// </summary>
     public static readonly StyledProperty<Orientation> OrientationProperty = 
-        StackPanel.OrientationProperty.AddOwner<StackLayout>(
+        Avalonia.Controls.StackPanel.OrientationProperty.AddOwner<StackLayout>(
             new StyledPropertyMetadata<Orientation>(
                 defaultValue: Orientation.Vertical));
 

@@ -1,5 +1,4 @@
-﻿using System.Xml.Linq;
-using Avalonia;
+﻿using Avalonia;
 
 namespace AvaloniaFluentUI.Controls;
 

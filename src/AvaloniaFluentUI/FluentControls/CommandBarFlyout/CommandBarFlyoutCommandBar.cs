@@ -335,7 +335,7 @@ public class CommandBarFlyoutCommandBar : CommandBar
     {
         _owningFlyout = f;
     }
-
+    
     private List<Control> _horizontallyAccessibleControls;
     private List<Control> _verticallyAccessibleControls;
 

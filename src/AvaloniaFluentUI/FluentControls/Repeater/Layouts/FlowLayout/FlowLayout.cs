@@ -42,7 +42,7 @@ public class FlowLayout : VirtualizingLayout, IOrientationBasedMeasures, IFlowLa
         AvaloniaProperty.Register<FlowLayout, double>(nameof(MinRowSpacing));
 
     public static readonly StyledProperty<Orientation> OrientationProperty =
-        StackPanel.OrientationProperty.AddOwner<FlowLayout>();
+        Avalonia.Controls.StackPanel.OrientationProperty.AddOwner<FlowLayout>();
 
     public FlowLayoutLineAlignment LineAlignment
     {

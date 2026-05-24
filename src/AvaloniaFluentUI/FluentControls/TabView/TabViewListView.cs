@@ -748,7 +748,7 @@ public sealed class TabViewListView : ListBox
         var panel = ItemsPanelRoot;
         if (panel is VirtualizingStackPanel vsp)
             return vsp.Orientation;
-        else if (panel is StackPanel sp)
+        else if (panel is Avalonia.Controls.StackPanel sp)
             return sp.Orientation;
 
         return null;
@@ -796,7 +796,7 @@ public sealed class TabViewListView : ListBox
                     vsp.Orientation = Orientation.Vertical;
                 }
             }
-            else if (panel is StackPanel sp)
+            else if (panel is Avalonia.Controls.StackPanel sp)
             {
                 if (sp.Orientation == Orientation.Vertical &&
                     (newLocation == TabViewTabStripLocation.Top || newLocation == TabViewTabStripLocation.Bottom))

@@ -1,15 +1,11 @@
-﻿using System;
-using System.ComponentModel;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using Avalonia;
-using Avalonia.Animation;
-using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Avalonia.Media;
 using Avalonia.Metadata;
 using Avalonia.Styling;
-using AvaloniaFluentUI.Animations;
+using AvaloniaFluentUI.Media.Animation;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -81,18 +77,24 @@ public class FluentFlyout : Avalonia.Controls.Primitives.PopupFlyoutBase
         {
             if (Popup.Child is { } presenter)
             {
-                double offset = Placement switch
+                var value = Placement switch
                 {
-                    PlacementMode.Top => 32d,
-                    PlacementMode.Left => 32d,
-                    PlacementMode.Right => -32d,
-                    PlacementMode.Bottom => -32d,
-                    _ => 24d
+                    PlacementMode.Center or PlacementMode.Pointer => 0.75D,
+                    PlacementMode.Left or PlacementMode.LeftEdgeAlignedBottom
+                        or PlacementMode.LeftEdgeAlignedTop or PlacementMode.Top 
+                        or PlacementMode.TopEdgeAlignedLeft or PlacementMode.TopEdgeAlignedRight => 32D,
+                    _ => -32D
                 };
                 
-                var property = ((Placement == PlacementMode.Top) || (Placement == PlacementMode.Bottom)) ? TranslateTransform.YProperty : TranslateTransform.XProperty;
-                _ = FluentAnimation.SlideInAsync(presenter, offset, property);
-                // _ = FlyoutAnimation.RunOpenAnimationAsync(presenter, offset, property);
+                if (value < 1 && value > 0)
+                {
+                    _ = FluentAnimation.CenterScaleAsync(presenter, value);
+                }
+                else
+                {
+                    var property = ((Placement == PlacementMode.Top) || (Placement == PlacementMode.Bottom)) ? TranslateTransform.YProperty : TranslateTransform.XProperty;
+                    _ = FluentAnimation.SlideInAsync(presenter, value, property);
+                }
             }
             base.OnOpened();
         }

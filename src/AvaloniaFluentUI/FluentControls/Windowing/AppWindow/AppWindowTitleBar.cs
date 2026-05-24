@@ -236,18 +236,18 @@ public class AppWindowTitleBar
     /// <summary>
     /// Gets or sets whether the window content should display in the title bar area of the window
     /// </summary>
-    public bool ExtendsContentIntoTitleBar
-    {
-        get => _extendsContentIntoTitleBar;
-        set
-        {
-            if (_extendsContentIntoTitleBar != value)
-            {
-                _extendsContentIntoTitleBar = value;
-                _parent.OnExtendsContentIntoTitleBarChanged(value);
-            }
-        }
-    }
+    // public bool ExtendsContentIntoTitleBar
+    // {
+    //     get => _extendsContentIntoTitleBar;
+    //     set
+    //     {
+    //         if (_extendsContentIntoTitleBar != value)
+    //         {
+    //             _extendsContentIntoTitleBar = value;
+    //             _parent.OnExtendsContentIntoTitleBarChanged(value);
+    //         }
+    //     }
+    // }
 
     /// <summary>
     /// Gets or sets how the hit test logic should handle hit testing controls that are placed
@@ -349,7 +349,7 @@ public class AppWindowTitleBar
     private Color? _buttonInactiveForegroundColor;
     private Color? _buttonPressedBackgroundColor;
     private Color? _buttonPressedForegroundColor;
-    private bool _extendsContentIntoTitleBar;
+    // private bool _extendsContentIntoTitleBar;
     private Color? _foregroundColor;
     private double _height = 32;
     private Color? _inactiveBackgroundColor;

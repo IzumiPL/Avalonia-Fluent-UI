@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Numerics;
 using Avalonia;
 using Avalonia.Animation.Easings;

@@ -17,7 +17,13 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Windows.Input;
+using Avalonia.Controls.Metadata;
+using Avalonia.Controls.Templates;
+using Avalonia.VisualTree;
 using AvaloniaFluentUI.Core;
+using AvaloniaFluentUI.Media.Animation;
+using AvaloniaFluentUI.Locale;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -25,8 +31,1411 @@ namespace AvaloniaFluentUI.Controls;
 /// Represents a container that enables navigation of app content. It has a header, 
 /// a view for the main content, and a menu pane for navigation commands.
 /// </summary>
+[PseudoClasses(s_pcSeparator)]
+[PseudoClasses(s_pcListSizeCompact, s_pcClosedCompact)]
+[PseudoClasses(s_pcBackButtonCollapsed, s_pcPaneCollapsed, s_pcHeaderCollapsed)]
+[PseudoClasses(s_pcMinimalWithBack, s_pcMinimal, s_pcTopNavMinimal, s_pcCompact, s_pcExpanded)]
+[PseudoClasses(s_pcAutoSuggestCollapsed, s_pcSettingsCollapsed, s_pcPaneToggleCollapsed, s_pcPaneNotOverlaying)]
+[TemplatePart(s_tpTogglePaneButton, typeof(Button))]
+[TemplatePart(s_tpPaneHeaderContentBorder, typeof(ContentControl))]
+[TemplatePart(s_tpPaneCustomContentBorder, typeof(ContentControl))]
+[TemplatePart(s_tpFooterContentBorder, typeof(ContentControl))]
+[TemplatePart(s_tpPaneHeaderOnTopPane, typeof(ContentControl))]
+[TemplatePart(s_tpPaneTitleOnTopPane, typeof(ContentControl))]
+[TemplatePart(s_tpPaneCustomContentOnTopPane, typeof(ContentControl))]
+[TemplatePart(s_tpPaneFooterOnTopPane, typeof(ContentControl))]
+[TemplatePart(s_tpRootSplitView, typeof(SplitView))]
+[TemplatePart(s_tpTopNavGrid, typeof(Grid))]
+[TemplatePart(s_tpMenuItemsHost, typeof(ItemsRepeater))]
+[TemplatePart(s_tpTopNavMenuItemsHost, typeof(ItemsRepeater))]
+[TemplatePart(s_tpTopNavMenuItemsOverflowHost, typeof(ItemsRepeater))]
+[TemplatePart(s_tpTopNavOverflowButton, typeof(Button))]
+[TemplatePart(s_tpFooterMenuItemsHost, typeof(ItemsRepeater))]
+[TemplatePart(s_tpTopFooterMenuItemsHost, typeof(ItemsRepeater))]
+[TemplatePart(s_tpTopNavContentOverlayAreaGrid, typeof(Border))]
+[TemplatePart(s_tpPaneAutoSuggestBoxPresenter, typeof(ContentControl))]
+[TemplatePart(s_tpTopPaneAutoSuggestBoxPresenter, typeof(ContentControl))]
+[TemplatePart(s_tpPaneContentGrid, typeof(Grid))]
+[TemplatePart(s_tpContentLeftPadding, typeof(Rectangle))]
+[TemplatePart(s_tpPlaceholderGrid, typeof(Grid))]
+[TemplatePart(s_tpPaneTitleTextBlock, typeof(Control))]
+[TemplatePart(s_tpPaneTitlePresenter, typeof(ContentControl))]
+[TemplatePart(s_tpPaneTitleHolder, typeof(Control))]
+[TemplatePart(s_tpPaneAutoSuggestButton, typeof(Button))]
+[TemplatePart(s_tpNavigationViewBackButton, typeof(Button))]
+[TemplatePart(s_tpNavigationViewCloseButton, typeof(Button))]
+[TemplatePart(s_tpMenuItemsScrollViewer, typeof(ScrollViewer))]
+[TemplatePart(s_tpFooterItemsScrollViewer, typeof(ScrollViewer))]
+[TemplatePart(s_tpItemsContainerGrid, typeof(Control))]
 public partial class NavigationView : HeaderedContentControl
 {
+    /// <summary>
+    /// Defines the <see cref="AlwaysShowHeader"/> property
+    /// </summary>
+    public static readonly StyledProperty<bool> AlwaysShowHeaderProperty =
+        AvaloniaProperty.Register<NavigationView, bool>(nameof(AlwaysShowHeader), true);
+
+    /// <summary>
+    /// Defines the <see cref="AutoCompleteBox"/> property
+    /// </summary>
+    public static readonly StyledProperty<Control> AutoCompleteBoxProperty =
+        AvaloniaProperty.Register<NavigationView, Control>(nameof(AutoCompleteBox));
+
+    /// <summary>
+    /// Defines the <see cref="CompactModeThresholdWidth"/> property
+    /// </summary>
+    public static readonly StyledProperty<double> CompactModeThresholdWidthProperty =
+        AvaloniaProperty.Register<NavigationView, double>(nameof(CompactModeThresholdWidth),
+            641.0, coerce: CoercePropertyValueToGreaterThanZero);
+
+    /// <summary>
+    /// Defines the <see cref="CompactPaneLength"/> property
+    /// </summary>
+    public static readonly StyledProperty<double> CompactPaneLengthProperty =
+        AvaloniaProperty.Register<NavigationView, double>(nameof(CompactPaneLength),
+            48.0, coerce: CoercePropertyValueToGreaterThanZero);
+
+    /// <summary>
+    /// Defines the <see cref="ContentOverlay"/> property
+    /// </summary>
+    public static readonly StyledProperty<Control> ContentOverlayProperty =
+        AvaloniaProperty.Register<NavigationView, Control>(nameof(ContentOverlay));
+
+    /// <summary>
+    /// Defines the <see cref="DisplayMode"/> property
+    /// </summary>
+    public static readonly DirectProperty<NavigationView, NavigationViewDisplayMode> DisplayModeProperty =
+        AvaloniaProperty.RegisterDirect<NavigationView, NavigationViewDisplayMode>(nameof(DisplayMode),
+            x => x.DisplayMode);
+
+    /// <summary>
+    /// Defines the <see cref="ExpandedModeThresholdWidth"/> property
+    /// </summary>
+    public static readonly StyledProperty<double> ExpandedModeThresholdWidthProperty =
+        AvaloniaProperty.Register<NavigationView, double>(nameof(ExpandedModeThresholdWidth), 1008.0,
+            coerce: CoercePropertyValueToGreaterThanZero);
+
+    /// <summary>
+    /// Defines the <see cref="FooterMenuItemsProperty"/>
+    /// </summary>
+    public static readonly DirectProperty<NavigationView, IList<object>> FooterMenuItemsProperty =
+        AvaloniaProperty.RegisterDirect<NavigationView, IList<object>>(nameof(FooterMenuItems),
+            x => x.FooterMenuItems);
+
+    /// <summary>
+    /// Defines the <see cref="FooterMenuItems"/> property
+    /// </summary>
+    public static readonly StyledProperty<IEnumerable> FooterMenuItemsSourceProperty =
+        AvaloniaProperty.Register<NavigationView, IEnumerable>(nameof(FooterMenuItemsSource));
+        
+    /// <summary>
+    /// Defines the <see cref="IsBackButtonVisible"/> property
+    /// </summary>
+    /// <remarks>
+    /// In WinUI, this is an enum NavigationViewBackButtonVisible with values
+    /// Visible, Collapsed, and Auto (depends on form factor). For our purposes,
+    /// bool works just fine for now
+    /// </remarks>
+    public static readonly StyledProperty<bool> IsBackButtonVisibleProperty =
+        AvaloniaProperty.Register<NavigationView, bool>(nameof(IsBackButtonVisible));
+
+    /// <summary>
+    /// Defines the <see cref="IsBackEnabled"/> property
+    /// </summary>
+    public static readonly StyledProperty<bool> IsBackEnabledProperty =
+        AvaloniaProperty.Register<NavigationView, bool>(nameof(IsBackEnabled), false);
+
+    /// <summary>
+    /// Defines the <see cref="IsPaneOpen"/> property
+    /// </summary>
+    public static readonly StyledProperty<bool> IsPaneOpenProperty =
+        SplitView.IsPaneOpenProperty.AddOwner<NavigationView>(
+            new StyledPropertyMetadata<bool>(defaultValue: true));
+
+    /// <summary>
+    /// Defines the <see cref="IsPaneToggleButtonVisible"/> property
+    /// </summary>
+    public static readonly StyledProperty<bool> IsPaneToggleButtonVisibleProperty =
+        AvaloniaProperty.Register<NavigationView, bool>(nameof(IsPaneToggleButtonVisible), true);
+
+    /// <summary>
+    /// Defines the <see cref="IsPaneVisible"/> property
+    /// </summary>
+    public static readonly StyledProperty<bool> IsPaneVisibleProperty =
+        AvaloniaProperty.Register<NavigationView, bool>(nameof(IsPaneVisible), true);
+
+    /// <summary>
+    /// Defines the <see cref="IsSettingsVisible"/> property
+    /// </summary>
+    public static readonly StyledProperty<bool> IsSettingsVisibleProperty =
+        AvaloniaProperty.Register<NavigationView, bool>(nameof(IsSettingsVisible), true);
+
+    //SKIP for now, IsTitleBarAutoPaddingEnabled...
+
+    /// <summary>
+    /// Defines the <see cref="MenuItems"/> property
+    /// </summary>
+    public static readonly DirectProperty<NavigationView, IList<object>> MenuItemsProperty =
+        AvaloniaProperty.RegisterDirect<NavigationView, IList<object>>(nameof(MenuItems),
+            o => o.MenuItems);
+
+    /// <summary>
+    /// Defines the <see cref="MenuItemsSource"/> property
+    /// </summary>
+    public static readonly StyledProperty<IEnumerable> MenuItemsSourceProperty =
+        AvaloniaProperty.Register<NavigationView, IEnumerable>(nameof(MenuItemsSource));
+
+    /// <summary>
+    /// Defines the <see cref="MenuItemTemplate"/> property
+    /// </summary>
+    public static readonly StyledProperty<IDataTemplate> MenuItemTemplateProperty =
+        AvaloniaProperty.Register<NavigationView, IDataTemplate>(nameof(MenuItemTemplate));
+
+    /// <summary>
+    /// Defines the <see cref="MenuItemTemplate"/> property
+    /// </summary>
+    public static readonly StyledProperty<DataTemplateSelector> MenuItemTemplateSelectorProperty =
+    AvaloniaProperty.Register<NavigationView, DataTemplateSelector>(nameof(MenuItemTemplateSelector));
+
+    /// <summary>
+    /// Defines the <see cref="OpenPaneLength"/> property
+    /// </summary>
+    public static readonly StyledProperty<double> OpenPaneLengthProperty =
+        AvaloniaProperty.Register<NavigationView, double>(nameof(OpenPaneLength),
+            320.0, coerce: CoercePropertyValueToGreaterThanZero);
+
+    //OverflowLabelModeProperty removed, as it was deprecated
+
+    /// <summary>
+    /// Defines the <see cref="PaneCustomContent"/> property
+    /// </summary>
+    public static readonly StyledProperty<Control> PaneCustomContentProperty =
+        AvaloniaProperty.Register<NavigationView, Control>(nameof(PaneCustomContent));
+
+    /// <summary>
+    /// Defines the <see cref="PaneDisplayMode"/> property
+    /// </summary>
+    public static readonly StyledProperty<NavigationViewPaneDisplayMode> PaneDisplayModeProperty =
+        AvaloniaProperty.Register<NavigationView, NavigationViewPaneDisplayMode>(nameof(PaneDisplayMode),
+            NavigationViewPaneDisplayMode.Auto);
+
+    /// <summary>
+    /// Defines the <see cref="PaneFooter"/> property
+    /// </summary>
+    public static readonly StyledProperty<Control> PaneFooterProperty =
+        AvaloniaProperty.Register<NavigationView, Control>(nameof(PaneFooter));
+
+    /// <summary>
+    /// Defines the <see cref="PaneHeader"/> property
+    /// </summary>
+    public static readonly StyledProperty<Control> PaneHeaderProperty =
+        AvaloniaProperty.Register<NavigationView, Control>(nameof(PaneHeader));
+
+    /// <summary>
+    /// Defines the <see cref="PaneTitle"/> property
+    /// </summary>
+    public static readonly StyledProperty<string> PaneTitleProperty =
+        AvaloniaProperty.Register<NavigationView, string>(nameof(PaneTitle));
+
+    /// <summary>
+    /// Defines the <see cref="SelectedItem"/> property
+    /// </summary>
+    public static readonly DirectProperty<NavigationView, object> SelectedItemProperty =
+        SelectingItemsControl.SelectedItemProperty.AddOwner<NavigationView>(x => x.SelectedItem, 
+            (x, v) => x.SelectedItem = v, 
+            defaultBindingMode: Avalonia.Data.BindingMode.TwoWay);
+
+    /// <summary>
+    /// Defines the <see cref="SelectionFollowsFocus"/> property
+    /// </summary>
+    /// <remarks>
+    /// WinUI uses an enum here, but only has Disabled/Enabled, so just use bool
+    /// </remarks>
+    public static readonly StyledProperty<bool> SelectionFollowsFocusProperty =
+        AvaloniaProperty.Register<NavigationView, bool>(nameof(SelectionFollowsFocus));
+
+    /// <summary>
+    /// Defines the <see cref="SettingsItem"/> property
+    /// </summary>
+    public static readonly DirectProperty<NavigationView, NavigationViewItem> SettingsItemProperty =
+        AvaloniaProperty.RegisterDirect<NavigationView, NavigationViewItem>(nameof(SettingsItem),
+            x => x.SettingsItem);
+
+    //Ignore Shoulder Navigation (xbox)
+
+    /// <summary>
+    /// Defines the <see cref="TemplateSettings"/> property
+    /// </summary>
+    public static readonly StyledProperty<NavigationViewTemplateSettings> TemplateSettingsProperty =
+        AvaloniaProperty.Register<NavigationView, NavigationViewTemplateSettings>(nameof(TemplateSettings));
+
+    public static readonly StyledProperty<ICommand?> BackCommandProperty =
+        AvaloniaProperty.Register<NavigationView, ICommand?>(nameof(BackCommand));
+
+    public ICommand? BackCommand
+    {
+        get => GetValue(BackCommandProperty);
+        set => SetValue(BackCommandProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value that indicates whether the header is always visible.
+    /// </summary>
+    public bool AlwaysShowHeader
+    {
+        get => GetValue(AlwaysShowHeaderProperty);
+        set => SetValue(AlwaysShowHeaderProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a <see cref="Control"/> to be displayed in the NavigationView.
+    /// </summary>
+    public Control AutoCompleteBox
+    {
+        get => GetValue(AutoCompleteBoxProperty);
+        set => SetValue(AutoCompleteBoxProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the minimum window width at which the NavigationView enters Compact display mode.
+    /// </summary>
+    public double CompactModeThresholdWidth
+    {
+        get => GetValue(CompactModeThresholdWidthProperty);
+        set => SetValue(CompactModeThresholdWidthProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the width of the NavigationView pane in its compact display mode.
+    /// </summary>
+    public double CompactPaneLength
+    {
+        get => GetValue(CompactPaneLengthProperty);
+        set => SetValue(CompactPaneLengthProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a UI element that is shown at the top of the control, below the pane 
+    /// if PaneDisplayMode is Top.
+    /// </summary>
+    public Control ContentOverlay
+    {
+        get => GetValue(ContentOverlayProperty);
+        set => SetValue(ContentOverlayProperty, value);
+    }
+
+    /// <summary>
+    /// Gets a value that specifies how the pane and content areas of a NavigationView are being shown.
+    /// </summary>
+    public NavigationViewDisplayMode DisplayMode
+    {
+        get => _displayMode;
+        private set => SetAndRaise(DisplayModeProperty, ref _displayMode, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the minimum window width at which the NavigationView enters Expanded display mode.
+    /// </summary>
+    public double ExpandedModeThresholdWidth
+    {
+        get => GetValue(ExpandedModeThresholdWidthProperty);
+        set => SetValue(ExpandedModeThresholdWidthProperty, value);
+    }
+
+    /// <summary>
+    /// Gets the list of objects to be used as navigation items in the footer menu.
+    /// </summary>
+    public IList<object> FooterMenuItems
+    {
+        get => _footerMenuItems;
+        private set => SetAndRaise(FooterMenuItemsProperty, ref _footerMenuItems, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the object that represents the navigation items to be used in the footer menu.
+    /// </summary>
+    public IEnumerable FooterMenuItemsSource
+    {
+        get => GetValue(FooterMenuItemsSourceProperty);
+        set => SetValue(FooterMenuItemsSourceProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value that indicates whether the back button is visible or not.
+    /// </summary>
+    public bool IsBackButtonVisible
+    {
+        get => GetValue(IsBackButtonVisibleProperty);
+        set => SetValue(IsBackButtonVisibleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value that indicates whether the back button is enabled or disabled.
+    /// </summary>
+    public bool IsBackEnabled
+    {
+        get => GetValue(IsBackEnabledProperty);
+        set => SetValue(IsBackEnabledProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value that specifies whether the NavigationView pane is expanded to its full width.
+    /// </summary>
+    public bool IsPaneOpen
+    {
+        get => GetValue(IsPaneOpenProperty);
+        set => SetValue(IsPaneOpenProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value that indicates whether the menu toggle button is shown.
+    /// </summary>
+    public bool IsPaneToggleButtonVisible
+    {
+        get => GetValue(IsPaneToggleButtonVisibleProperty);
+        set => SetValue(IsPaneToggleButtonVisibleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value that determines whether the pane is shown.
+    /// </summary>
+    public bool IsPaneVisible
+    {
+        get => GetValue(IsPaneVisibleProperty);
+        set => SetValue(IsPaneVisibleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value that indicates whether the settings button is shown.
+    /// </summary>
+    public bool IsSettingsVisible
+    {
+        get => GetValue(IsSettingsVisibleProperty);
+        set => SetValue(IsSettingsVisibleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the DataTemplate used to display each menu item.
+    /// </summary>
+    public IDataTemplate MenuItemTemplate
+    {
+        get => GetValue(MenuItemTemplateProperty);
+        set => SetValue(MenuItemTemplateProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a reference to a custom DataTemplateSelector logic class. The DataTemplateSelector 
+    /// referenced by this property returns a template to apply to items.
+    /// </summary>
+    /// <remarks>
+    /// This property should generally not be used but was added to support different containers for different
+    /// data types. Should a more "Avalonia-like" solution arise, this property will be removed
+    /// </remarks>
+    public DataTemplateSelector MenuItemTemplateSelector
+    {
+        get => GetValue(MenuItemTemplateSelectorProperty);
+        set => SetValue(MenuItemTemplateSelectorProperty, value);
+    }
+
+    /// <summary>
+    /// Gets the collection of menu items displayed in the NavigationView.
+    /// </summary>
+    public IList<object> MenuItems
+    {
+        get => _menuItems;
+        set => SetAndRaise(MenuItemsProperty, ref _menuItems, value);
+    }
+
+    /// <summary>
+    /// Gets or sets an object source used to generate the content of the NavigationView menu.
+    /// </summary>
+    public IEnumerable MenuItemsSource
+    {
+        get => GetValue(MenuItemsSourceProperty);
+        set => SetValue(MenuItemsSourceProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the width of the NavigationView pane when it's fully expanded.
+    /// </summary>
+    public double OpenPaneLength
+    {
+        get => GetValue(OpenPaneLengthProperty);
+        set => SetValue(OpenPaneLengthProperty, value);
+    }
+
+    //OverflowLabelMode removed, deprecated in WinUI
+
+    /// <summary>
+    /// Gets or sets a UI element that is shown in the NavigationView pane.
+    /// </summary>
+    public Control PaneCustomContent
+    {
+        get => GetValue(PaneCustomContentProperty);
+        set => SetValue(PaneCustomContentProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value that indicates how and where the NavigationView pane is shown.
+    /// </summary>
+    public NavigationViewPaneDisplayMode PaneDisplayMode
+    {
+        get => GetValue(PaneDisplayModeProperty);
+        set => SetValue(PaneDisplayModeProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the content for the pane footer.
+    /// </summary>
+    public Control PaneFooter
+    {
+        get => GetValue(PaneFooterProperty);
+        set => SetValue(PaneFooterProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the content for the pane header.
+    /// </summary>
+    public Control PaneHeader
+    {
+        get => GetValue(PaneHeaderProperty);
+        set => SetValue(PaneHeaderProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the label adjacent to the menu icon when the NavigationView pane is open.
+    /// </summary>
+    public string PaneTitle
+    {
+        get => GetValue(PaneTitleProperty);
+        set => SetValue(PaneTitleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the selected item.
+    /// </summary>
+    public object SelectedItem
+    {
+        get => _selectedItem;
+        set
+        {
+            SetAndRaise(SelectedItemProperty, ref _selectedItem, value);
+        }
+    }
+
+    //WinUI uses an enum here, but only has Disabled/Enabled, so just use bool
+    /// <summary>
+    /// Gets or sets a value that indicates whether item selection changes when keyboard focus changes.
+    /// </summary>
+    /// <remarks>
+    /// Do not set this property to true if you have hierarchical navigation as things get weird. This
+    /// behavior also occurs in WinUI
+    /// </remarks>
+    public bool SelectionFollowsFocus
+    {
+        get => GetValue(SelectionFollowsFocusProperty);
+        set => SetValue(SelectionFollowsFocusProperty, value);
+    }
+
+    /// <summary>
+    /// Gets the navigation item that represents the entry point to app settings.
+    /// </summary>
+    public NavigationViewItem SettingsItem
+    {
+        get => _settingsItem;
+        internal set => SetAndRaise(SettingsItemProperty, ref _settingsItem, value);
+    }
+
+    /// <summary>
+    /// Gets an object that provides calculated values that can be referenced as TemplateBinding sources 
+    /// when defining templates for a NavigationView control.
+    /// </summary>
+    public NavigationViewTemplateSettings TemplateSettings
+    {
+        get => GetValue(TemplateSettingsProperty);
+        protected set => SetValue(TemplateSettingsProperty, value);
+    }
+
+    /// <summary>
+    /// Coerces a double to ensure its valid for use, i.e. >= 0 and not NaN or infinity
+    /// Used for: CompactModeThresholdWidthProperty, CompactPaneLengthProperty, 
+    /// ExpandedModeThresholdWidthProperty, and OpenPaneLengthProperty
+    /// </summary>
+    /// <returns></returns>
+    private static double CoercePropertyValueToGreaterThanZero(AvaloniaObject arg1, double arg2)
+    {
+        if (double.IsNaN(arg2) || double.IsInfinity(arg2))
+            return 0;
+        return Math.Max(arg2, 0.0);
+    }
+
+    /// <summary>
+    /// Occurs when the NavigationView pane is closing.
+    /// </summary>
+    public event TypedEventHandler<NavigationView, NavigationViewPaneClosingEventArgs> PaneClosing;
+
+    /// <summary>
+    /// Occurs when the NavigationView pane is closed.
+    /// </summary>
+    public event TypedEventHandler<NavigationView, EventArgs> PaneClosed;
+
+    /// <summary>
+    /// Occurs when the NavigationView pane is opening.
+    /// </summary>
+    public event TypedEventHandler<NavigationView, EventArgs> PaneOpening;
+
+    /// <summary>
+    /// Occurs when the NavigationView pane is opened.
+    /// </summary>
+    public event TypedEventHandler<NavigationView, EventArgs> PaneOpened;
+
+    /// <summary>
+    /// Occurs when the back button receives an interaction such as a click or tap.
+    /// </summary>
+    public event EventHandler<NavigationViewBackRequestedEventArgs> BackRequested;
+
+    /// <summary>
+    /// Occurs when the currently selected item changes.
+    /// </summary>
+    public event EventHandler<NavigationViewSelectionChangedEventArgs> SelectionChanged;
+
+    /// <summary>
+    /// Occurs when an item in the menu receives an interaction such a a click or tap.
+    /// </summary>
+    public event EventHandler<NavigationViewItemInvokedEventArgs> ItemInvoked;
+
+    /// <summary>
+    /// Occurs when the DisplayMode property changes.
+    /// </summary>
+    public event EventHandler<NavigationViewDisplayModeChangedEventArgs> DisplayModeChanged;
+
+    /// <summary>
+    /// Occurs when a node in the tree starts to expand.
+    /// </summary>
+    public event EventHandler<NavigationViewItemExpandingEventArgs> ItemExpanding;
+
+    /// <summary>
+    /// Occurs when a node in the tree is collapsed.
+    /// </summary>
+    public event EventHandler<NavigationViewItemCollapsedEventArgs> ItemCollapsed;
+
+    /// <summary>
+    /// Property that stores disposables to each NavigationViewItem when their created in the ItemsRepeater,
+    /// so they can be disposed when the item is removed
+    /// </summary>
+    internal static readonly AttachedProperty<FACompositeDisposable> NavigationViewItemRevokersProperty =
+        AvaloniaProperty.RegisterAttached<NavigationView, NavigationViewItem, FACompositeDisposable>("NavigationViewItemRevokers");
+
+    private object _selectedItem;
+    private IList<object> _menuItems;
+    private IList<object> _footerMenuItems;
+    private NavigationViewDisplayMode _displayMode = NavigationViewDisplayMode.Minimal;
+    private NavigationViewItem _settingsItem;
+
+    private const string s_tpTogglePaneButton = "TogglePaneButton";
+    private const string s_tpPaneHeaderContentBorder = "PaneHeaderContentBorder";
+    private const string s_tpPaneCustomContentBorder = "PaneCustomContentBorder";
+    private const string s_tpFooterContentBorder = "FooterContentBorder";
+    private const string s_tpPaneHeaderOnTopPane = "PaneHeaderOnTopPane";
+    private const string s_tpPaneTitleOnTopPane = "PaneTitleOnTopPane";
+    private const string s_tpPaneCustomContentOnTopPane = "PaneCustomContentOnTopPane";
+    private const string s_tpPaneFooterOnTopPane = "PaneFooterOnTopPane";
+    private const string s_tpRootSplitView = "RootSplitView";
+    private const string s_tpTopNavGrid = "TopNavGrid";
+    private const string s_tpMenuItemsHost = "MenuItemsHost";
+    private const string s_tpTopNavMenuItemsHost = "TopNavMenuItemsHost";
+    private const string s_tpTopNavMenuItemsOverflowHost = "TopNavMenuItemsOverflowHost";
+    private const string s_tpTopNavOverflowButton = "TopNavOverflowButton";
+    private const string s_tpFooterMenuItemsHost = "FooterMenuItemsHost";
+    private const string s_tpTopFooterMenuItemsHost = "TopFooterMenuItemsHost";
+    private const string s_tpTopNavContentOverlayAreaGrid = "TopNavContentOverlayAreaGrid";
+    private const string s_tpPaneAutoSuggestBoxPresenter = "PaneAutoSuggestBoxPresenter";
+    private const string s_tpTopPaneAutoSuggestBoxPresenter = "TopPaneAutoSuggestBoxPresenter";
+    private const string s_tpPaneContentGrid = "PaneContentGrid";
+    private const string s_tpContentLeftPadding = "ContentLeftPadding";
+    private const string s_tpPlaceholderGrid = "PlaceholderGrid";
+    private const string s_tpPaneTitleTextBlock = "PaneTitleTextBlock";
+    private const string s_tpPaneTitlePresenter = "PaneTitlePresenter";
+    private const string s_tpPaneTitleHolder = "PaneTitleHolder";
+    private const string s_tpPaneAutoSuggestButton = "PaneAutoSuggestButton";
+    private const string s_tpNavigationViewBackButton = "NavigationViewBackButton";
+    private const string s_tpNavigationViewCloseButton = "NavigationViewCloseButton";
+    private const string s_tpMenuItemsScrollViewer = "MenuItemsScrollViewer";
+    private const string s_tpFooterItemsScrollViewer = "FooterItemsScrollViewer";
+    private const string s_tpItemsContainerGrid = "ItemsContainerGrid";
+
+    private const string s_pcSeparator = ":separator";
+    private const string s_pcListSizeCompact = ":listsizecompact";
+    private const string s_pcBackButtonCollapsed = ":backbuttoncollapsed";
+    private const string s_pcMinimalWithBack = ":minimalwithback";
+    private const string s_pcMinimal = ":minimal";
+    private const string s_pcTopNavMinimal = ":topnavminimal";
+    private const string s_pcCompact = ":compact";
+    private const string s_pcExpanded = ":expanded";
+    private const string s_pcAutoSuggestCollapsed = ":autosuggestcollapsed";
+    private const string s_pcSettingsCollapsed = ":settingscollapsed";
+    private const string s_pcPaneToggleCollapsed = ":panetogglecollapsed";
+    private const string s_pcPaneNotOverlaying = ":panenotoverlaying";
+    private const string s_pcClosedCompact = ":closedcompact";
+    private const string s_pcPaneCollapsed = ":panecollapsed";
+    private const string s_pcHeaderCollapsed = ":headercollapsed";
+
+    private const string s_resPaneToggleButtonWidth = "PaneToggleButtonWidth";
+    private const string s_resPaneToggleButtonHeight = "PaneToggleButtonHeight";
+    
+     //Con't logic for pane arrow key navigation
+    private bool VerifyInPane(Visual focus, Visual parent)
+    {
+        if (parent == null)
+            return false;
+
+        //First test the back button, close button, and panetogglebutton
+        //since they don't reside in the content grids
+        if (_backButton != null && focus == _backButton)
+            return true;
+
+        if (_closeButton != null && focus == _closeButton)
+            return true;
+
+        if (_paneToggleButton != null && focus == _paneToggleButton)
+            return true;
+
+        while (focus != null)
+        {
+            if (focus == parent)
+                return true;
+
+            focus = focus.GetVisualParent();
+        }
+        return false;
+    }
+
+    private Control SearchTreeForLowestFocusItem(NavigationViewItem start)
+    {
+        if (DoesNavigationViewItemHaveChildren(start) && start.IsExpanded)
+        {
+            var ct = start.GetRepeater.ItemsSourceView.Count;
+            for (int j = ct - 1; j >= 0; j--)
+            {
+                if (start.GetRepeater.TryGetElement(j) is NavigationViewItem nvi)
+                {
+                    return SearchTreeForLowestFocusItem(nvi);
+                }
+            }
+        }
+
+        return start;
+    }
+
+    //Helpers
+
+    private int SelectedItemIndex => _topDataProvider.IndexOf(SelectedItem);
+
+    internal bool IsTopNavigationView => PaneDisplayMode == NavigationViewPaneDisplayMode.Top;
+
+    private bool IsTopPrimaryListVisible => _topNavRepeater != null && TemplateSettings.TopPaneVisibility;
+
+    private double GetPaneToggleButtonWidth() =>
+        this.TryFindResource(s_resPaneToggleButtonWidth, out object value) ? (double)value : 40;
+
+    private double GetPaneToggleButtonHeight() =>
+        this.TryFindResource(s_resPaneToggleButtonHeight, out object value) ? (double)value : 40;
+
+    internal bool IsOverlay => _splitView != null && _splitView.DisplayMode == SplitViewDisplayMode.Overlay;
+
+    private bool IsLightDismissable => _splitView != null && (
+        _splitView.DisplayMode != SplitViewDisplayMode.Inline &&
+        _splitView.DisplayMode != SplitViewDisplayMode.CompactInline);
+
+    internal bool ShouldShowBackButton
+    {
+        get
+        {
+            if (DisplayMode == NavigationViewDisplayMode.Minimal && IsPaneOpen)
+                return false;
+
+            return ShouldShowBackOrCloseButton;
+        }
+    }
+
+    internal bool ShouldShowCloseButton
+    {
+        get
+        {
+            if (_backButton != null && _closeButton != null)
+            {
+                if (!IsPaneOpen)
+                {
+                    return false;
+                }
+
+                var pdm = PaneDisplayMode;
+
+                if (pdm != NavigationViewPaneDisplayMode.LeftMinimal &&
+                    (pdm != NavigationViewPaneDisplayMode.Auto ||
+                    DisplayMode != NavigationViewDisplayMode.Minimal))
+                {
+                    return false;
+                }
+
+                return ShouldShowBackOrCloseButton;
+            }
+
+            return false;
+        }
+    }
+
+    internal bool ShouldShowBackOrCloseButton
+    {
+        get
+        {
+            bool vis = IsBackButtonVisible;
+            return vis;
+        }
+    }
+
+    private bool IsTopLevelItem(NavigationViewItemBase nvib)
+    {
+        return IsRootItemsRepeater(GetParentItemsRepeaterForContainer(nvib));
+    }
+
+
+    private bool DoesNavigationViewItemHaveChildren(NavigationViewItem nvi)
+    {
+        var miSource = nvi?.MenuItemsSource;
+        if (miSource != null)
+        {
+            return miSource.Count() > 0;
+        }
+        return nvi != null &&
+            ((nvi.MenuItems != null && nvi.MenuItems.Count() > 0) || nvi.HasUnrealizedChildren);
+    }
+
+    private bool IsSelectionSuppressed(object item)
+    {
+        if (item != null)
+        {
+            return !NavigationViewItemOrSettingsContentFromData(item)?.SelectsOnInvoked ?? false;
+        }
+
+        return false;
+    }
+
+    private bool IsRootItemsRepeater(object ir)
+    {
+        return ir != null &&
+            (ir == _topNavRepeater ||
+            ir == _leftNavRepeater ||
+            ir == _topNavRepeaterOverflowView ||
+            ir == _leftNavFooterMenuRepeater ||
+            ir == _topNavFooterMenuRepeater);
+    }
+
+    private bool IsRootGridOfFlyout(object item)
+    {
+        //TODO: Why do we need the root grid of the flyout?
+        return item is Panel p && p.Name == "FlyoutRootGrid";
+    }
+
+    private ItemsRepeater GetParentRootItemsRepeaterForContainer(NavigationViewItemBase nvib)
+    {
+        var parentIR = GetParentItemsRepeaterForContainer(nvib);
+
+        while (!IsRootItemsRepeater(parentIR))
+        {
+            nvib = GetParentNavigationViewItemForContainer(nvib);
+            if (nvib == null)
+            {
+                return null;
+            }
+
+            parentIR = GetParentItemsRepeaterForContainer(nvib);
+        }
+
+        return parentIR;
+    }
+
+    private ItemsRepeater GetParentItemsRepeaterForContainer(NavigationViewItemBase nvib)
+    {
+        return nvib?.FindAncestorOfType<ItemsRepeater>();
+    }
+
+    private NavigationViewItem GetParentNavigationViewItemForContainer(NavigationViewItemBase nvib)
+    {
+        // (WinUI) TODO: This scenario does not find parent items when in a flyout, which causes problems
+        // if item if first loaded straight in the flyout. Fix.This logic can be merged with the
+        // 'GetIndexPathForContainer' logic below.
+        var parent = GetParentItemsRepeaterForContainer(nvib);
+        if (!IsRootItemsRepeater(parent))
+        {
+            return parent.FindAncestorOfType<NavigationViewItem>();
+        }
+
+        return null;
+    }
+
+    private IndexPath GetIndexPathForContainer(NavigationViewItemBase nvib)
+    {
+        var path = new List<int>(4);
+        bool isInFooterMenu = false;
+
+        Control child = nvib;
+        var parent = nvib.GetVisualParent();
+        if (parent == null)
+        {
+            return IndexPath.CreateFromIndices(path);
+        }
+
+        // Search through VisualTree for a root ItemsRepeater
+        while (parent != null && !IsRootItemsRepeater(parent) && !IsRootGridOfFlyout(parent))
+        {
+            if (parent is ItemsRepeater ir)
+            {
+                path.Insert(0, ir.GetElementIndex(child));
+            }
+            child = (Control)parent;
+            parent = parent.GetVisualParent();
+        }
+
+        // If the item is in a flyout, then we need to final index of its parent
+        if (IsRootGridOfFlyout(parent))
+        {
+            if (_lastItemExpandedIntoFlyout != null)
+            {
+                child = _lastItemExpandedIntoFlyout;
+                parent = IsTopNavigationView ? _topNavRepeater : _leftNavRepeater;
+            }
+        }
+
+        // If item is in one of the disconnected ItemRepeaters, account for that in IndexPath calculations
+        if (parent == _topNavRepeaterOverflowView)
+        {
+            // Convert index of selected item in overflow to index in datasource
+            var contIndex = _topNavRepeaterOverflowView.GetElementIndex(child);
+            var item = _topDataProvider.GetOverflowItems()[contIndex];
+            var indexAtRoot = _topDataProvider.IndexOf(item);
+            path.Insert(0, indexAtRoot);
+        }
+        else if (parent == _topNavRepeater)
+        {
+            // Convert index of selected item in overflow to index in datasource
+            var contIndex = _topNavRepeater.GetElementIndex(child);
+            var item = _topDataProvider.GetPrimaryItems()[contIndex];
+            var indexAtRoot = _topDataProvider.IndexOf(item);
+            path.Insert(0, indexAtRoot);
+        }
+        else if (parent is ItemsRepeater parentIR)
+        {
+            path.Insert(0, parentIR.GetElementIndex(child));
+        }
+
+        isInFooterMenu = parent == _leftNavFooterMenuRepeater || parent == _topNavFooterMenuRepeater;
+
+        path.Insert(0, isInFooterMenu ? _footerMenuBlockIndex : _mainMenuBlockIndex);
+
+        return IndexPath.CreateFromIndices(path);
+    }
+
+
+    private NavigationViewItemBase NavigationViewItemBaseOrSettingsContentFromData(object data)
+        => GetContainerForData<NavigationViewItemBase>(data);
+
+    private NavigationViewItem NavigationViewItemOrSettingsContentFromData(object data)
+        => GetContainerForData<NavigationViewItem>(data);
+
+
+    internal object MenuItemFromContainer(object container)
+    {
+        if (container is NavigationViewItemBase nvib)
+        {
+            var parentIR = GetParentItemsRepeaterForContainer(nvib);
+            if (parentIR != null)
+            {
+                var contIndex = parentIR.GetElementIndex(nvib);
+                if (contIndex >= 0)
+                    return GetItemFromIndex(parentIR, contIndex);
+            }
+        }
+
+        return null;
+    }
+
+    private Control ContainerFromMenuItem(object item)
+    {
+        return NavigationViewItemBaseOrSettingsContentFromData(item);
+    }
+
+    private int GetNavigationViewItemCountInPrimaryList =>
+        _topDataProvider?.NavigationViewItemCountInPrimaryList ?? 0;
+
+    private int GetNavigationViewItemCountInTopNav =>
+        _topDataProvider?.NavigationViewItemCountInTopNav ?? 0;
+
+    private bool IsSettingsItem(object item)
+    {
+        if (item != null && _settingsItem != null)
+        {
+            return (item == _settingsItem) || (_settingsItem.Content == item);
+        }
+
+        return false;
+    }
+
+    private double MeasureTopNavigationViewDesiredWidth(Size availableSize) =>
+        LayoutHelper.MeasureChild(_topNavGrid, availableSize, new Thickness()).Width;
+
+    private double MeasureTopNavMenuItemsHostDesiredWidth(Size availableSize) =>
+        LayoutHelper.MeasureChild(_topNavRepeater, availableSize, new Thickness()).Width;
+
+    private double GetTopNavigationViewActualWidth => _topNavGrid.Bounds.Width;
+
+    private bool HasTopNavigationViewItemNotInPrimaryList() =>
+        _topDataProvider.PrimaryListSize != _topDataProvider.Size;
+
+    private void SetOverflowButtonVisibility(bool vis)
+    {
+        TemplateSettings.OverflowButtonVisibility = vis;
+    }
+
+    private bool NeedTopPadding() => false;//TitleBar stuff
+
+    private int GetContainerCountInRepeater(ItemsRepeater ir)
+    {
+        if (ir != null && ir.ItemsSourceView != null)
+        {
+            return ir.ItemsSourceView.Count;
+        }
+
+        return -1;
+    }
+
+    private bool DoesRepeaterHaveRealizedContainers(ItemsRepeater ir)
+    {
+        return ir != null && ir.TryGetElement(0) != null;
+    }
+
+    private int GetIndexFromItem(ItemsRepeater ir, object data)
+    {
+        if (ir != null && ir.ItemsSourceView != null)
+        {
+            return ir.ItemsSourceView.IndexOf(data);
+        }
+
+        return -1;
+    }
+
+    private object GetItemFromIndex(ItemsRepeater ir, int index)
+    {
+        if (ir != null && ir.ItemsSourceView != null)
+        {
+            return ir.ItemsSourceView.GetAt(index);
+        }
+
+        return null;
+    }
+
+    private IndexPath GetIndexPathOfItem(object item)
+    {
+        if (item is NavigationViewItemBase nvib)
+        {
+            return GetIndexPathForContainer(nvib);
+        }
+
+        // In the databinding scenario, we need to conduct a search where we go through every item,
+        // realizing it if necessary.
+        if (IsTopNavigationView)
+        {
+            // First search through primary list
+            var ip = SearchEntireTreeForIndexPath(_topNavRepeater, item, false);
+            if (ip != IndexPath.Unselected)
+            {
+                return ip;
+            }
+
+            // If item was not located in primary list, search through overflow
+            ip = SearchEntireTreeForIndexPath(_topNavRepeaterOverflowView, item, false);
+            if (ip != IndexPath.Unselected)
+            {
+                return ip;
+            }
+
+            // If item was not located in primary list and overflow, search through footer
+            ip = SearchEntireTreeForIndexPath(_topNavFooterMenuRepeater, item, true);
+            if (ip != IndexPath.Unselected)
+            {
+                return ip;
+            }
+        }
+        else
+        {
+            var ip = SearchEntireTreeForIndexPath(_leftNavFooterMenuRepeater, item, true);
+            if (ip != IndexPath.Unselected)
+            {
+                return ip;
+            }
+
+            ip = SearchEntireTreeForIndexPath(_leftNavFooterMenuRepeater, item, true);
+            if (ip != IndexPath.Unselected)
+            {
+                return ip;
+            }
+        }
+
+        return IndexPath.Unselected;
+    }
+
+    private bool IsContainerTheSelectedItemInTheSelectionModel(NavigationViewItemBase nvib)
+    {
+        var selItem = _selectionModel.SelectedItem;
+
+        if (selItem == null)
+            return false;
+
+        var selItemCont = selItem as NavigationViewItemBase;
+        if (selItemCont == null)
+        {
+            selItemCont = GetContainerForIndexPath(_selectionModel.SelectedIndex);
+        }
+
+        return selItemCont == nvib;
+    }
+
+    private NavigationViewItem GetSelectedContainer()
+    {
+        if (SelectedItem == null)
+            return null;
+
+        if (SelectedItem is NavigationViewItem nvi)
+        {
+            return nvi;
+        }
+        else
+        {
+            return NavigationViewItemOrSettingsContentFromData(SelectedItem);
+        }
+    }
+
+    private IEnumerable GetChildren(NavigationViewItem nvi)
+    {
+        return nvi.MenuItems.Count > 0 ? nvi.MenuItems : nvi.MenuItemsSource;
+    }
+
+    private ItemsRepeater GetChildRepeaterForIndexPath(IndexPath ip)
+    {
+        if (GetContainerForIndexPath(ip) is NavigationViewItem nvi)
+        {
+            return nvi.GetRepeater;
+        }
+
+        return null;
+    }
+
+    private NavigationRecommendedTransitionDirection GetRecommendedTransitionDirection(Control prev, Control next)
+    {
+        var recTransDir = NavigationRecommendedTransitionDirection.Default;
+        var ir = _topNavRepeater;
+
+        if (prev != null && next != null && ir != null)
+        {
+            var prevIndexPath = GetIndexPathForContainer(prev as NavigationViewItemBase);
+            var nextIndexPath = GetIndexPathForContainer(next as NavigationViewItemBase);
+
+            var compare = prevIndexPath.CompareTo(nextIndexPath);
+
+            switch (compare)
+            {
+                case -1:
+                    recTransDir = NavigationRecommendedTransitionDirection.FromRight;
+                    break;
+                case 1:
+                    recTransDir = NavigationRecommendedTransitionDirection.FromLeft;
+                    break;
+                default:
+                    recTransDir = NavigationRecommendedTransitionDirection.Default;
+                    break;
+            }
+        }
+
+        return recTransDir;
+    }
+
+    private NavigationTransitionInfo CreateNavigationTransitionInfo(NavigationRecommendedTransitionDirection recDir)
+    {
+        // In current implementation, if click is from overflow item, just recommend FromRight Slide animation.
+        if (recDir == NavigationRecommendedTransitionDirection.FromOverflow)
+        {
+            recDir = NavigationRecommendedTransitionDirection.FromRight;
+        }
+
+        if ((recDir == NavigationRecommendedTransitionDirection.FromLeft ||
+            recDir == NavigationRecommendedTransitionDirection.FromRight))
+        {
+            return new SlideNavigationTransitionInfo
+            {
+                Effect = recDir == NavigationRecommendedTransitionDirection.FromRight ?
+                 SlideNavigationTransitionEffect.FromRight : SlideNavigationTransitionEffect.FromLeft
+            };
+        }
+        else
+        {
+            return new EntranceNavigationTransitionInfo();
+        }
+    }
+
+    internal NavigationViewItemsFactory ItemsFactory => _itemsFactory;
+
+    private void UnhookEventsAndClearFields()
+    {
+        if (_paneToggleButton != null)
+        {
+            _paneToggleButton.Click -= OnPaneToggleButtonClick;
+            _paneToggleButton = null;
+        }
+
+        if (_splitView != null)
+        {
+            _splitViewRevokers?.Dispose();
+            _splitView.PaneClosed -= OnSplitViewPaneClosed;
+            _splitView.PaneClosing -= OnSplitViewPaneClosing;
+            _splitView.PaneOpened -= OnSplitViewPaneOpened;
+            _splitView.PaneOpening -= OnSplitViewPaneOpening;
+            _splitView = null;
+        }
+
+        if (_leftNavRepeater != null)
+        {
+            _leftNavRepeater.ElementClearing -= OnRepeaterElementClearing;
+            _leftNavRepeater.ElementPrepared -= OnRepeaterElementPrepared;
+
+            _leftNavRepeater.Loaded -= OnRepeaterLoaded;
+            _leftNavRepeater.GotFocus -= OnRepeaterGettingFocus;
+            _leftNavRepeater = null;
+        }
+
+        if (_topNavRepeater != null)
+        {
+            _topNavRepeater.ElementClearing -= OnRepeaterElementClearing;
+            _topNavRepeater.ElementPrepared -= OnRepeaterElementPrepared;
+
+            _topNavRepeater.Loaded -= OnRepeaterLoaded;
+            _topNavRepeater.GotFocus -= OnRepeaterGettingFocus;
+            _topNavRepeater = null;
+        }
+
+        if (_topNavRepeaterOverflowView != null)
+        {
+            _topNavRepeaterOverflowView.ElementClearing -= OnRepeaterElementClearing;
+            _topNavRepeaterOverflowView.ElementPrepared -= OnRepeaterElementPrepared;
+
+            _topNavRepeaterOverflowView = null;
+        }
+
+        if (_topNavOverflowButton != null)
+        {
+            var flyout = _topNavOverflowButton.Flyout as PopupFlyoutBase;
+            if (flyout != null)
+            {
+                flyout.Closing -= OnFlyoutClosing;
+            }
+        }
+
+        if (_leftNavFooterMenuRepeater != null)
+        {
+            _leftNavFooterMenuRepeater.ElementClearing -= OnRepeaterElementClearing;
+            _leftNavFooterMenuRepeater.ElementPrepared -= OnRepeaterElementPrepared;
+
+            _leftNavFooterMenuRepeater.Loaded -= OnRepeaterLoaded;
+            _leftNavFooterMenuRepeater.GotFocus -= OnRepeaterGettingFocus;
+            _leftNavFooterMenuRepeater = null;
+        }
+
+        if (_topNavFooterMenuRepeater != null)
+        {
+            _topNavFooterMenuRepeater.ElementClearing -= OnRepeaterElementClearing;
+            _topNavFooterMenuRepeater.ElementPrepared -= OnRepeaterElementPrepared;
+
+            _topNavFooterMenuRepeater.Loaded -= OnRepeaterLoaded;
+            _topNavFooterMenuRepeater.GotFocus -= OnRepeaterGettingFocus;
+            _topNavFooterMenuRepeater = null;
+        }
+
+        _paneTitleHolderRevoker?.Dispose();
+        _paneTitleHolderRevoker = null;
+
+        if (_paneSearchButton != null)
+        {
+            _paneSearchButton.Click -= OnPaneSearchButtonClick;
+        }
+
+        if (_backButton != null)
+        {
+            _backButton.Click -= OnBackButtonClicked;
+        }
+
+        //titlebar?
+
+        if (_closeButton != null)
+        {
+            _closeButton.Click -= OnPaneToggleButtonClick;
+        }
+
+        _itemsContainerSizeRevoker?.Dispose();
+        _itemsContainerSizeRevoker = null;
+
+        _itemsContainerSizeRevoker?.Dispose();
+    }
+
+    private NavigationViewItemsFactory _itemsFactory;
+    internal SplitView GetSplitView => _splitView;
+
+    //Template Items
+    private Button _paneToggleButton;
+    private SplitView _splitView;
+    private RowDefinition _itemsContainerRow;
+    private ScrollViewer _menuItemsScrollViewer;
+    private ScrollViewer _footerItemsScrollViewer;
+    private Grid _paneContentGrid;
+    //private ColumnDefinition _paneToggleButtonIconGridColumn;
+    private Control _paneTitleHolderFrameworkElement;
+    private Control _paneTitleFrameworkElement;
+    //private IControl _visualItemsSeparator;
+    private Button _paneSearchButton;
+    private Button _backButton;
+    private Button _closeButton;
+    private ItemsRepeater _leftNavRepeater;
+    private ItemsRepeater _topNavRepeater;
+    private ItemsRepeater _leftNavFooterMenuRepeater;
+    private ItemsRepeater _topNavFooterMenuRepeater;
+    private Button _topNavOverflowButton;
+    private ItemsRepeater _topNavRepeaterOverflowView;
+    private Grid _topNavGrid;
+    private Border _topNavContentOverlayAreaGrid;
+    private Control _itemsContainer;
+
+    //Indicator animations
+    private Control _prevIndicator;
+    private Control _nextIndicator;
+    private Control _activeIndicator;
+    private object _lastSelectedItemPendingAnimationInTopNav;
+
+    //private IControl _togglePaneTopPadding;
+    //private IControl _contentPaneTopPadding;
+    private Control _contentLeftPadding;
+
+    //Titlebar
+
+    private ContentControl _leftNavAutoSuggestBoxPresenter;
+    private ContentControl _topNavAutoSuggestBoxPresenter;
+
+    private ContentControl _leftNavPaneHeaderContentBorder;
+    private ContentControl _leftNavPaneCustomContentBorder;
+    private ContentControl _leftNavFooterContentBorder;
+
+    private ContentControl _paneHeaderOnTopPane;
+    private ContentControl _paneTitleOnTopPane;
+    private ContentControl _paneCustomContentOnTopPane;
+    private ContentControl _paneFooterOnTopPane;
+    private ContentControl _paneTitlePresenter;
+
+    private ColumnDefinition _paneHeaderCloseButtonColumn;
+    private ColumnDefinition _paneHeaderToggleButtonColumn;
+    private RowDefinition _paneHeaderContentBorderRow;
+
+    private NavigationViewItem _lastItemExpandedIntoFlyout;
+
+    private IDisposable _splitViewRevokers;
+    private IDisposable _sizeChangedRevoker;
+    private IDisposable _paneTitleHolderRevoker;
+    private IDisposable _itemsContainerSizeRevoker;
+
+    bool _wasForceClosed;
+    bool _isClosedCompact;
+    bool _blockNextClosingEvent;
+    //bool _initialListSizeStateSet;
+    bool _isLeftPaneTitleEmpty;
+
+    private TopNavigationViewDataProvider _topDataProvider;
+
+    private SelectionModel _selectionModel;
+    private AvaloniaList<IEnumerable> _selectionModelSource;
+    private ItemsSourceView _menuItemsSource;
+    private ItemsSourceView _footerItemsSource;
+
+    //private ItemsSourceView _menuItemsSource;
+    //private ItemsSourceView _footerItemsSource;
+
+    private bool _appliedTemplate;
+
+    // Identifies whenever a call is the result of OnApplyTemplate
+    private bool _fromOnApplyTemplate;
+
+    // Used to defer updating the SplitView displaymode property
+    private bool _updateVisualStateForDisplayModeFromOnLoaded;
+
+
+    // flag is used to stop recursive call. eg:
+    // Customer select an item from SelectedItem property->ChangeSelection update ListView->LIstView raise OnSelectChange(we want stop here)->change property do do animation again.
+    // Customer clicked listview->listview raised OnSelectChange->SelectedItem property changed->ChangeSelection->Undo the selection by SelectedItem(prevItem) (we want it stop here)->ChangeSelection again ->...
+    private bool _shouldIgnoreNextSelectionChange;
+
+    // A flag to track that the selectionchange is caused by selection a item in topnav overflow menu
+    private bool _selectionChangeFromOverflowMenu;
+
+    // Flag indicating whether selection change should raise item invoked. This is needed to be able to raise ItemInvoked before SelectionChanged while SelectedItem should point to the clicked item
+    private bool _shouldRaiseItemInvokedAfterSelection;
+
+    private TopNavigationViewLayoutState _topNavigationMode = TopNavigationViewLayoutState.Uninitialized;
+
+    // A threshold to stop recovery from overflow to normal happens immediately on resize.
+    private readonly float _topNavigationRecoveryGracePeriodWidth = 5f;
+
+    // There are three ways to change IsPaneOpen:
+    // 1, customer call IsPaneOpen=true/false directly or nav.IsPaneOpen is binding with a variable and the value is changed.
+    // 2, customer click ToggleButton or splitView.IsPaneOpen->nav.IsPaneOpen changed because of window resize
+    // 3, customer changed PaneDisplayMode.
+    // 2 and 3 are internal implementation and will call by ClosePane/OpenPane. the flag is to indicate 1 if it's false
+    private bool _isOpenPaneForInteraction;
+
+    private bool _moveTopNavOverflowItemOnFlyoutClose;
+
+    //private bool _shouldIgnoreUIASelectionRaiseAsExpandCollapseWillRaise;
+
+    private bool _orientationChangedPendingAnimation;
+
+    private bool _tabKeyPrecedesFocusChange;
+
+    private bool _initialNonForcedModeUpdate = true;
+
+    private static readonly SymbolIconSource _settingsIconSource = new SymbolIconSource { Symbol = Symbol.Settings };
+
+
+    private const int _backButtonHeight = 40;
+    private const int _backButtonWidth = 40;
+    private const int _paneToggleButtonHeight = 40;
+    private const int _paneToggleButtonWidth = 40;
+    private const int _backButtonRowDefinition = 1;
+    private const float paneElevationTranslationZ = 32;
+
+    private const int _mainMenuBlockIndex = 0;
+    private const int _footerMenuBlockIndex = 1;
+
+    private const int _itemNotFound = -1;
+
+    private double _openPaneWidth = 320; //WinUI #5800
+
+    // Added in WinUI1.5
+    private bool _isSelectionChangedPending;
+    private object _pendingSelectionChangedItem;
+    private NavigationRecommendedTransitionDirection _pendingSelectionChangedDirection;
+
+    // Localization String Resources
+    private static readonly string SR_SettingsButtonName = "SettingsButtonName";
+    private static readonly string SR_NavigationOverflowButtonToolTip = "NavigationOverflowButtonToolTip";
+    private static readonly string SR_NavigationViewSearchButtonName = "NavigationViewSearchButtonName";
+    private static readonly string SR_NavigationBackButtonToolTip = "NavigationBackButtonToolTip";
+    private static readonly string SR_NavigationButtonOpenName = "NavigationButtonOpenName";
+    private static readonly string SR_NavigationButtonClosedName = "NavigationButtonClosedName";
+    
     public NavigationView()
     {
         //PseudoClasses.Add(":autosuggestcollapsed");
@@ -174,7 +1583,7 @@ public partial class NavigationView : HeaderedContentControl
                 var tip = ToolTip.GetTip(_topNavOverflowButton);
                 if (tip != null)
                 {
-                    ToolTip.SetTip(_topNavOverflowButton, FALocalizationHelper.Instance.GetLocalizedStringResource(SR_NavigationOverflowButtonToolTip));
+                    ToolTip.SetTip(_topNavOverflowButton, LocalizationService.Instance.GetString(SR_NavigationOverflowButtonToolTip));
                 }
             }
 
@@ -240,7 +1649,7 @@ public partial class NavigationView : HeaderedContentControl
             {
                 _paneSearchButton.Click += OnPaneSearchButtonClick;
 
-                var searchButtonName = FALocalizationHelper.Instance.GetLocalizedStringResource(SR_NavigationViewSearchButtonName);
+                var searchButtonName = LocalizationService.Instance.GetString(SR_NavigationViewSearchButtonName);
                 AutomationProperties.SetName(_paneSearchButton, searchButtonName);
                 ToolTip.SetTip(_paneSearchButton, searchButtonName);
             }
@@ -249,7 +1658,7 @@ public partial class NavigationView : HeaderedContentControl
             if (_backButton != null)
             {
                 _backButton.Click += OnBackButtonClicked;
-                var navigationName = FALocalizationHelper.Instance.GetLocalizedStringResource(SR_NavigationBackButtonToolTip);
+                var navigationName = LocalizationService.Instance.GetString(SR_NavigationBackButtonToolTip);
                 ToolTip.SetTip(_backButton, navigationName);
                 AutomationProperties.SetName(_backButton, navigationName);
             }
@@ -261,7 +1670,7 @@ public partial class NavigationView : HeaderedContentControl
             {
                 _closeButton.Click += OnPaneToggleButtonClick;
 
-                ToolTip.SetTip(_closeButton, FALocalizationHelper.Instance.GetLocalizedStringResource(SR_NavigationButtonOpenName));
+                ToolTip.SetTip(_closeButton, LocalizationService.Instance.GetString(SR_NavigationButtonOpenName));
             }
 
             if (_paneContentGrid != null)
@@ -306,7 +1715,6 @@ public partial class NavigationView : HeaderedContentControl
         {
             _fromOnApplyTemplate = false;
         }
-
     }
 
     protected override Size MeasureOverride(Size availableSize)
@@ -392,7 +1800,7 @@ public partial class NavigationView : HeaderedContentControl
         {
             InvalidateTopNavPrimaryLayout();
 
-            if (change.NewValue is AutoCompleteBox acb)
+            if (change.NewValue != null)
             {
                 //TODO: WinUI has SuggestionChosen event handler here, find compatible event...
             }
@@ -3605,7 +5013,7 @@ public partial class NavigationView : HeaderedContentControl
 
         _settingsItem.IconSource = _settingsIconSource;
 
-        var localizedSettingsName = FALocalizationHelper.Instance.GetLocalizedStringResource(SR_SettingsButtonName);
+        var localizedSettingsName = LocalizationService.Instance.GetString(SR_SettingsButtonName);
 
         _settingsItem.Tag = localizedSettingsName;
         UpdateSettingsItemToolTip();
@@ -3658,7 +5066,7 @@ public partial class NavigationView : HeaderedContentControl
             }
             else
             {
-                ToolTip.SetTip(_settingsItem, FALocalizationHelper.Instance.GetLocalizedStringResource(SR_SettingsButtonName));
+                ToolTip.SetTip(_settingsItem, LocalizationService.Instance.GetString(SR_SettingsButtonName));
             }
         }
     }
@@ -4355,11 +5763,11 @@ public partial class NavigationView : HeaderedContentControl
         string navigationName;
         if (IsPaneOpen)
         {
-            navigationName = FALocalizationHelper.Instance.GetLocalizedStringResource(SR_NavigationButtonOpenName);
+            navigationName = LocalizationService.Instance.GetString(SR_NavigationButtonOpenName);
         }
         else
         {
-            navigationName = FALocalizationHelper.Instance.GetLocalizedStringResource(SR_NavigationButtonClosedName);
+            navigationName = LocalizationService.Instance.GetString(SR_NavigationButtonClosedName);
         }
 
 

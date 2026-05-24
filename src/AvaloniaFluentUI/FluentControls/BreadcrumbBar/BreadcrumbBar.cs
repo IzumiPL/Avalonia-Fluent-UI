@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using Avalonia;
 using Avalonia.Automation;
-using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
@@ -12,6 +10,7 @@ using Avalonia.Controls.Templates;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
+using AvaloniaFluentUI.Locale;
 using AvaloniaFluentUI.Collections;
 using AvaloniaFluentUI.Core;
 
@@ -240,8 +239,7 @@ public class BreadcrumbBar : TemplatedControl
                 _ellipsisBreadcrumBarItem = item;
                 UpdateEllipsisBreadcrumbBarItemDropDownItemTemplate();
 
-                var str = FALocalizationHelper.Instance
-                    .GetLocalizedStringResource("AutomationNameEllipsisBreadcrumbBarItem");
+                var str = LocalizationService.Instance.GetString("AutomationNameEllipsisBreadcrumbBarItem");
                 AutomationProperties.SetName(item, str);
             }
             else

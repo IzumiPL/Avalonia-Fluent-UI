@@ -2,8 +2,7 @@
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Input;
-using AvaloniaFluentUI.Styling;
-using AvaloniaFluentUI.Controls.Enums;
+using Avalonia.Layout;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -13,7 +12,7 @@ public class SmoothScrollContentPresenter : Avalonia.Controls.Presenters.ScrollC
     private double _remainDelta;
     private bool _isRunning;
 
-    private async Task Scroll(SmoothScrollOrientation orientation)
+    private async Task Scroll(Orientation orientation)
     {
         _isRunning = true;
     
@@ -22,7 +21,7 @@ public class SmoothScrollContentPresenter : Avalonia.Controls.Presenters.ScrollC
             double delta = _remainDelta * 0.25;
             _remainDelta -= delta;
             Vector vector;
-            if (orientation == SmoothScrollOrientation.Horizontal)
+            if (orientation == Orientation.Horizontal)
             {
                 double target = Offset.X + delta;
                 double max = Math.Max(0, Extent.Width - Viewport.Width);
@@ -47,7 +46,7 @@ public class SmoothScrollContentPresenter : Avalonia.Controls.Presenters.ScrollC
     protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
     {
         _remainDelta += -e.Delta.Y * 60;
-        var direction = e.KeyModifiers.HasFlag(KeyModifiers.Alt) ? SmoothScrollOrientation.Horizontal : SmoothScrollOrientation.Vertical;
+        var direction = e.KeyModifiers.HasFlag(KeyModifiers.Alt) ? Orientation.Horizontal : Orientation.Vertical;
         if (!_isRunning) { _=Scroll(direction);}
 
         e.Handled = true;

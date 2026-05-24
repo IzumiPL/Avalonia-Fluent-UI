@@ -20,8 +20,8 @@ public class SegmentedView : SelectingItemsControl
         set => SetValue(ContentProperty, value);
     }
 
-    private Rectangle? _selectedIndicator;
-    private Control? _headersArea;
+    protected Rectangle? _selectedIndicator;
+    protected Control? _headersArea;
     private bool _isTemplateApplied;
 
     protected override bool NeedsContainerOverride(object item, int index, out object recycleKey)
@@ -42,6 +42,7 @@ public class SegmentedView : SelectingItemsControl
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
+        
         _selectedIndicator = e.NameScope.Find<Rectangle>("PART_SelectedIndicator");
         _headersArea = e.NameScope.Find<Control>("PART_HeadersArea");
         _isTemplateApplied = true;
@@ -82,7 +83,7 @@ public class SegmentedView : SelectingItemsControl
         }
     }
 
-    private void UpdateSelectedIndicatorPosition()
+    protected virtual void UpdateSelectedIndicatorPosition()
     {
         if (_selectedIndicator == null || _headersArea == null)
             return;
@@ -100,7 +101,7 @@ public class SegmentedView : SelectingItemsControl
             _selectedIndicator.IsVisible = false;
             return;
         }
-        container.BringIntoView();
+        // container.BringIntoView();
         _selectedIndicator.IsVisible = true;
 
         var transform = container.TransformToVisual(_headersArea);

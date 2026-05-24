@@ -46,7 +46,7 @@ public class SegmentedToggleView : SegmentedView
             _selectedIndicator.IsVisible = false;
             return;
         }
-        container.BringIntoView();
+        // container.BringIntoView();
         _selectedIndicator.IsVisible = true;
 
         var transform = container.TransformToVisual(_headersArea);

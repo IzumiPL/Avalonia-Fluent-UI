@@ -1,6 +1,7 @@
 ﻿using Avalonia.Automation.Peers;
 using Avalonia.Automation.Provider;
 using Avalonia.Controls;
+using AvaloniaFluentUI.Locale;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -16,8 +17,7 @@ public class BreadcrumbBarItemAutomationPeer : ControlAutomationPeer, IInvokePro
 
     protected override string GetLocalizedControlTypeCore()
     {
-        return FALocalizationHelper.Instance
-            .GetLocalizedStringResource("BreadcrumbBarItemLocalizedControlType");
+        return LocalizationService.Instance.GetString("BreadcrumbBarItemLocalizedControlType");
     }
 
     protected override string GetClassNameCore()

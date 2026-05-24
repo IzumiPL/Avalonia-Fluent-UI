@@ -7,6 +7,7 @@ using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Templates;
 using Avalonia.Input;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
@@ -24,9 +25,91 @@ namespace AvaloniaFluentUI.Controls.Windowing;
 /// </summary>
 public partial class AppWindow : Window
 {
+    /// <summary>
+    /// Defines the <see cref="TitleBarHeight"/> property
+    /// </summary>
+    public static readonly StyledProperty<double> TitleBarHeightProperty =
+        AvaloniaProperty.Register<AppWindowTemplateSettings, double>(nameof(TitleBarHeight), 40d);
+
+    /// <summary>
+    /// Defines the <see cref="ContentMargin"/> property
+    /// </summary>
+    public static readonly StyledProperty<Thickness> ContentMarginProperty =
+        AvaloniaProperty.Register<AppWindowTemplateSettings, Thickness>(nameof(ContentMargin));
+
+    /// <summary>
+    /// Defines the <see cref="IsTitleBarContentVisible"/> property
+    /// </summary>
+    public static readonly StyledProperty<bool> IsTitleBarContentVisibleProperty =
+        AvaloniaProperty.Register<AppWindowTemplateSettings, bool>(nameof(IsTitleBarContentVisible), defaultValue: true);
+
+    /// <summary>
+    /// Defines the <see cref="WindowIcon"/> property
+    /// </summary>
+    public static readonly StyledProperty<IImage> WindowIconProperty =
+        AvaloniaProperty.Register<AppWindowTemplateSettings, IImage>(nameof(WindowIcon));
+
+    public static readonly StyledProperty<object?> TitleBarContentProperty =
+        AvaloniaProperty.Register<AppWindowTemplateSettings, object?>(nameof(TitleBarContent));
+    
+    public static readonly StyledProperty<IDataTemplate?> TitleBarContentTemplateProperty =
+        AvaloniaProperty.Register<AppWindowTemplateSettings, IDataTemplate?>(nameof(TitleBarContentTemplate));
+    
+    public IDataTemplate? TitleBarContentTemplate
+    {
+        get => GetValue(TitleBarContentTemplateProperty);
+        set => SetValue(TitleBarContentTemplateProperty, value);
+    }
+    
+    public object? TitleBarContent
+    {
+        get => GetValue(TitleBarContentProperty);
+        set => SetValue(TitleBarContentProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the height of the managed titlebar for AppWindow
+    /// </summary>
+    public double TitleBarHeight
+    {
+        get => GetValue(TitleBarHeightProperty);
+        set => SetValue(TitleBarHeightProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the window content margin for AppWindow
+    /// </summary>
+    /// <remarks>
+    /// This value is calculated based on WindowState, title bar height and whether
+    /// the content is extended into the titlebar area
+    /// </remarks>
+    public Thickness ContentMargin
+    {
+        get => GetValue(ContentMarginProperty);
+        set => SetValue(ContentMarginProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets whether the titlebar content is visible (Icon and App name text)
+    /// </summary>
+    public bool IsTitleBarContentVisible
+    {
+        get => GetValue(IsTitleBarContentVisibleProperty);
+        set => SetValue(IsTitleBarContentVisibleProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the icon used in the managed titlebar of AppWindow
+    /// </summary>
+    public IImage WindowIcon
+    {
+        get => GetValue(WindowIconProperty);
+        set => SetValue(WindowIconProperty, value);
+    }
+    
     public AppWindow()
     {
-        TemplateSettings = new AppWindowTemplateSettings();
+        // TemplateSettings = new AppWindowTemplateSettings();
         _titleBar = new AppWindowTitleBar(this);
 
         if (OperatingSystem.IsWindows() && !Design.IsDesignMode)
@@ -78,7 +161,7 @@ public partial class AppWindow : Window
             _defaultTitleBar = e.NameScope.Find<Panel>("DefaultTitleBar");
 
             // This will set all our TemplateSettings properties
-            OnTitleBarHeightChanged(_titleBar.Height);
+            // OnTitleBarHeightChanged(_titleBar.Height);
 
             SetTitleBarColors();
         }
@@ -110,12 +193,18 @@ public partial class AppWindow : Window
             SetTitleBarColors();
         }
 
+        // if (change.Property == ExtendClientAreaToDecorationsHintProperty)
+        // {
+            // Console.WriteLine($"Pro Ext Chd: {change.GetNewValue<bool>()}");
+            // OnExtendsContentIntoTitleBarChanged(change.GetNewValue<bool>());
+        // }
+
         if (IsWindows)
         {
             if (change.Property == WindowStateProperty)
             {
                 HandleFullScreenTransition(change.GetNewValue<WindowState>());
-                OnExtendsContentIntoTitleBarChanged(TitleBar.ExtendsContentIntoTitleBar);
+                // OnExtendsContentIntoTitleBarChanged(TitleBar.ExtendsContentIntoTitleBar);
                 base.OnPropertyChanged(change);  // Enable window size modifications before Avalonia's own logic
             }
 
@@ -193,24 +282,26 @@ public partial class AppWindow : Window
 
     internal void OnExtendsContentIntoTitleBarChanged(bool isExtended)
     {
+
+        Console.WriteLine($"Ext Chd: {isExtended}");
         if (isExtended)
         {
-            TemplateSettings.IsTitleBarContentVisible = false;
-            TemplateSettings.ContentMargin = new Thickness();
+            IsTitleBarContentVisible = false;
+            ContentMargin = new Thickness();
         }
         else
         {
-            TemplateSettings.IsTitleBarContentVisible = true;
+            IsTitleBarContentVisible = true;
             
             if (WindowState != WindowState.FullScreen)
-                TemplateSettings.ContentMargin = new Thickness(0, _titleBar.Height, 0, 0);
+                ContentMargin = new Thickness(0, _titleBar.Height, 0, 0);
         }
     }
-
+    
     internal void OnTitleBarHeightChanged(double height)
     {
-        TemplateSettings.TitleBarHeight = height;
-        OnExtendsContentIntoTitleBarChanged(_titleBar.ExtendsContentIntoTitleBar);
+        TitleBarHeight = height;
+        // OnExtendsContentIntoTitleBarChanged(ExtendClientAreaToDecorationsHint);
     }
 
     internal void TitleBarColorsChanged()
@@ -331,29 +422,29 @@ public partial class AppWindow : Window
             _templateRoot.Margin = t;
     }
 
-    internal void UpdateFullScreenState(bool isFullScreen)
-    {
-        if (isFullScreen)
-        {
-            TemplateSettings.ContentMargin = new Thickness();
-        }
-        else
-        {
-            OnExtendsContentIntoTitleBarChanged(_titleBar.ExtendsContentIntoTitleBar);
-        }
-    }
-
-    internal void OnWin32WindowStateChanged(WindowState state)
-    {
-        if (state == WindowState.FullScreen)
-        {
-            TemplateSettings.ContentMargin = new Thickness();
-        }
-        else
-        {
-            OnExtendsContentIntoTitleBarChanged(_titleBar.ExtendsContentIntoTitleBar);
-        }
-    }
+    // internal void UpdateFullScreenState(bool isFullScreen)
+    // {
+    //     if (isFullScreen)
+    //     {
+    //         ContentMargin = new Thickness();
+    //     }
+    //     else
+    //     {
+    //         OnExtendsContentIntoTitleBarChanged(_titleBar.ExtendsContentIntoTitleBar);
+    //     }
+    // }
+    //
+    // internal void OnWin32WindowStateChanged(WindowState state)
+    // {
+    //     if (state == WindowState.FullScreen)
+    //     {
+    //         ContentMargin = new Thickness();
+    //     }
+    //     else
+    //     {
+    //         OnExtendsContentIntoTitleBarChanged(_titleBar.ExtendsContentIntoTitleBar);
+    //     }
+    // }
     
     private void SetTitleBarColors()
     {

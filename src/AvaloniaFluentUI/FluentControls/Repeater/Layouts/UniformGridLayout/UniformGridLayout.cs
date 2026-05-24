@@ -23,7 +23,7 @@ public class UniformGridLayout : VirtualizingLayout, IOrientationBasedMeasures, 
     /// Defines the <see cref="Orientation"/> property
     /// </summary>
     public static readonly StyledProperty<Orientation> OrientationProperty =
-        StackPanel.OrientationProperty.AddOwner<UniformGridLayout>(
+        Avalonia.Controls.StackPanel.OrientationProperty.AddOwner<UniformGridLayout>(
             new StyledPropertyMetadata<Orientation>(
                 defaultValue: Orientation.Horizontal));
 

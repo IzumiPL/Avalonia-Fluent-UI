@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Avalonia.Controls;
-using Avalonia.Styling;
 using Avalonia;
 using Avalonia.Data;
 using Avalonia.Controls.Metadata;

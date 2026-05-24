@@ -1,16 +1,15 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls.Primitives;
-using AvaloniaFluentUI.Controls.Enums;
+using Avalonia.Layout;
 
 namespace AvaloniaFluentUI.Controls;
 
 public class SingleDirectionScrollViewer : SmoothScrollViewer
 {
-    public static readonly StyledProperty<SmoothScrollOrientation> OrientationProperty =
-        AvaloniaProperty.Register<SingleDirectionScrollViewer, SmoothScrollOrientation>(nameof(Orientation));
+    public static readonly StyledProperty<Orientation> OrientationProperty =
+        AvaloniaProperty.Register<SingleDirectionScrollViewer, Orientation>(nameof(Orientation));
 
-    public SmoothScrollOrientation Orientation
+    public Orientation Orientation
     {
         get => GetValue(OrientationProperty);
         set => SetValue(OrientationProperty, value);
@@ -21,7 +20,7 @@ public class SingleDirectionScrollViewer : SmoothScrollViewer
         base.OnPropertyChanged(change);
         if (change.Property == OrientationProperty)
         {
-            if (Orientation == SmoothScrollOrientation.Vertical)
+            if (Orientation == Orientation.Vertical)
             {
                 SetCurrentValue(HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Disabled);
                 SetCurrentValue(VerticalScrollBarVisibilityProperty, ScrollBarVisibility.Visible);
@@ -31,9 +30,6 @@ public class SingleDirectionScrollViewer : SmoothScrollViewer
                 SetCurrentValue(VerticalScrollBarVisibilityProperty, ScrollBarVisibility.Disabled);
                 SetCurrentValue(HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Visible);
             }
-
-            Console.WriteLine("Orientation Changed");
-            Console.WriteLine(Orientation);
         }
     }
 }

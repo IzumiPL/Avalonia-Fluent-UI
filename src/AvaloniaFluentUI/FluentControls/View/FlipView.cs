@@ -18,6 +18,7 @@ using Avalonia.Platform;
 using Avalonia.Styling;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
+using AvaloniaFluentUI.Controls.Enums;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -65,6 +66,15 @@ public class FlipView : TemplatedControl
     
     public static readonly StyledProperty<int> ItemCountProperty =
         AvaloniaProperty.Register<FlipView, int>(nameof(ItemCount));
+
+    public static readonly StyledProperty<FlipOrientation> OrientationProperty =
+        AvaloniaProperty.Register<FlipView, FlipOrientation>(nameof(Orientation), defaultValue: FlipOrientation.Horizontal);
+
+    public FlipOrientation Orientation
+    {
+        get => GetValue(OrientationProperty);
+        set => SetValue(OrientationProperty, value);
+    }
     
     public double Interval
     {
@@ -121,15 +131,9 @@ public class FlipView : TemplatedControl
     }
 
     private List<Bitmap> _items = new List<Bitmap>();
-
     public List<Bitmap> Items => _items;
-    
     public TimeSpan Duration { get; set; }
-
-    public PageSlide.SlideAxis Orientation { get; set; } = PageSlide.SlideAxis.Horizontal;
-
     public Easing SlideInEasing { get; set; } = new CubicEaseOut();
-
     public Easing SlideOutEasing { get; set; } = new LinearEasing();
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -392,46 +396,46 @@ public class FlipView : TemplatedControl
     }
 
     private async IAsyncEnumerable<Bitmap> LoadImagesAsync(IEnumerable<string> imagePaths)
-{
-    int decodeHeight = DecodeToHeight;
-    int decodeWidth = DecodeToWidth;
-
-    foreach (var path in imagePaths)
     {
-        Bitmap? bitmap = null;
-        try
-        {
-            bitmap = await Task.Run(() =>
-            {
-                if (path.StartsWith("avares://"))
-                {
-                    using var stream = AssetLoader.Open(new Uri(path));
-                    if (decodeHeight > 0) { return Bitmap.DecodeToHeight(stream, decodeHeight); }
-                    if (decodeWidth > 0) { return Bitmap.DecodeToWidth(stream, decodeWidth); }
-                    return new Bitmap(stream);
-                }
-                else
-                {
-                    using var stream = new System.IO.FileStream(path, System.IO.FileMode.Open, System.IO.FileAccess.Read);
-                    if (decodeHeight > 0) { return Bitmap.DecodeToHeight(stream, decodeHeight); }
-                    if (decodeWidth > 0) { return Bitmap.DecodeToWidth(stream, decodeWidth); }
-                    return new Bitmap(stream);
-                }
-            });
-        }
-        catch (Exception ex)
-        {
-#if DEBUG
-            Debug.WriteLine($"Failed to load image '{path}': {ex.Message}");
-#endif
-        }
+        int decodeHeight = DecodeToHeight;
+        int decodeWidth = DecodeToWidth;
 
-        if (bitmap != null)
+        foreach (var path in imagePaths)
         {
-            yield return bitmap;
+            Bitmap? bitmap = null;
+            try
+            {
+                bitmap = await Task.Run(() =>
+                {
+                    if (path.StartsWith("avares://"))
+                    {
+                        using var stream = AssetLoader.Open(new Uri(path));
+                        if (decodeHeight > 0) { return Bitmap.DecodeToHeight(stream, decodeHeight); }
+                        if (decodeWidth > 0) { return Bitmap.DecodeToWidth(stream, decodeWidth); }
+                        return new Bitmap(stream);
+                    }
+                    else
+                    {
+                        using var stream = new System.IO.FileStream(path, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+                        if (decodeHeight > 0) { return Bitmap.DecodeToHeight(stream, decodeHeight); }
+                        if (decodeWidth > 0) { return Bitmap.DecodeToWidth(stream, decodeWidth); }
+                        return new Bitmap(stream);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+    #if DEBUG
+                Debug.WriteLine($"Failed to load image '{path}': {ex.Message}");
+    #endif
+            }
+
+            if (bitmap != null)
+            {
+                yield return bitmap;
+            }
         }
     }
-}
 
     protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
     {
@@ -452,8 +456,18 @@ public class FlipView : TemplatedControl
 
     private async Task RunSliderAnimationAsync(IImage image, int targetIndex, bool forward)
     {
-        double distance = Orientation == PageSlide.SlideAxis.Horizontal ? Bounds.Width : Bounds.Height;
-        var property = Orientation == PageSlide.SlideAxis.Horizontal ? TranslateTransform.XProperty : TranslateTransform.YProperty;
+        double distance;
+        StyledProperty<double> property;
+        if (Orientation == FlipOrientation.Horizontal)
+        { 
+            distance = Bounds.Width; 
+            property = TranslateTransform.XProperty;
+        }
+        else
+        {
+            distance = Bounds.Height;
+            property = TranslateTransform.YProperty;
+        }
         
         if (_currentImage == null || _nextImage == null) { return; }
         _isRunning = true;
