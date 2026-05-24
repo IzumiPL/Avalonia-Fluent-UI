@@ -1,8 +1,6 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
-  <!-- Color definitions (Light theme) -->
+  <!--  Color definitions (Light theme)  -->
 
   <Color x:Key="TextFillColorPrimary">#E4000000</Color>
   <Color x:Key="TextFillColorSecondary">#9E000000</Color>
@@ -190,45 +188,47 @@
   <SolidColorBrush x:Key="SystemColorHighlightTextColorBrush" Color="#FF00FF"/>
   <SolidColorBrush x:Key="SystemColorHotlightColorBrush" Color="#FF00FF"/>
   <SolidColorBrush x:Key="SystemColorGrayTextColorBrush" Color="#FF00FF"/>
+
   <LinearGradientBrush x:Key="ControlElevationBorderBrush" TransformOrigin="50%,50%" StartPoint="0,0" EndPoint="0,3">
-        <LinearGradientBrush.Transform>
-          <ScaleTransform ScaleY="-1"/>
-        </LinearGradientBrush.Transform>
-        <LinearGradientBrush.GradientStops>
-          <GradientStop Offset="0.33" Color="{StaticResource ControlStrokeColorSecondary}"/>
-          <GradientStop Offset="1" Color="{StaticResource ControlStrokeColorDefault}"/>
-        </LinearGradientBrush.GradientStops>
-      </LinearGradientBrush>
+    <LinearGradientBrush.Transform>
+      <ScaleTransform ScaleY="-1"/>
+    </LinearGradientBrush.Transform>
+    <LinearGradientBrush.GradientStops>
+      <GradientStop Offset="0.33" Color="{StaticResource ControlStrokeColorSecondary}"/>
+      <GradientStop Offset="1" Color="{StaticResource ControlStrokeColorDefault}"/>
+    </LinearGradientBrush.GradientStops>
+  </LinearGradientBrush>
 
-      <!--  This one does not have a transform applied, so this one should be ok  -->
+  <!--  This one does not have a transform applied, so this one should be ok  -->
 
-      <LinearGradientBrush x:Key="CircleElevationBorderBrush" StartPoint="0,0" EndPoint="0,1">
-        <LinearGradientBrush.GradientStops>
-          <GradientStop Offset="0.50" Color="{StaticResource ControlStrokeColorDefault}"/>
-          <GradientStop Offset="0.70" Color="{StaticResource ControlStrokeColorSecondary}"/>
-        </LinearGradientBrush.GradientStops>
-      </LinearGradientBrush>
-      <LinearGradientBrush x:Key="AccentControlElevationBorderBrush" TransformOrigin="50%,50%" StartPoint="0,0" EndPoint="0,3">
-        <LinearGradientBrush.Transform>
-          <ScaleTransform ScaleY="-1"/>
-        </LinearGradientBrush.Transform>
-        <LinearGradientBrush.GradientStops>
-          <GradientStop Offset="0.33" Color="{StaticResource ControlStrokeColorOnAccentSecondary}"/>
-          <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorOnAccentDefault}"/>
-        </LinearGradientBrush.GradientStops>
-      </LinearGradientBrush>
-      <SolidColorBrush x:Key="SystemControlTransparentBrush" Color="Transparent"/>
-      <SolidColorBrush
-        x:Key="SystemControlHighlightListAccentVeryHighBrush"
-        Opacity="0.9"
-        Color="{DynamicResource SystemAccentColor}"/>
-      <SolidColorBrush
-        x:Key="SystemControlHighlightListAccentMediumLowBrush"
-        Opacity="0.75"
-        Color="{DynamicResource SystemAccentColor}"/>
-      <x:Boolean x:Key="UseSystemFocusVisuals">True</x:Boolean>
-                  <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="{StaticResource SolidBackgroundFillColorBase}"/>
-      <StaticResource x:Key="DefaultTextForegroundThemeBrush" ResourceKey="TextFillColorPrimaryBrush"/>
+  <LinearGradientBrush x:Key="CircleElevationBorderBrush" StartPoint="0,0" EndPoint="0,1">
+    <LinearGradientBrush.GradientStops>
+      <GradientStop Offset="0.50" Color="{StaticResource ControlStrokeColorDefault}"/>
+      <GradientStop Offset="0.70" Color="{StaticResource ControlStrokeColorSecondary}"/>
+    </LinearGradientBrush.GradientStops>
+  </LinearGradientBrush>
+  <LinearGradientBrush x:Key="AccentControlElevationBorderBrush" TransformOrigin="50%,50%" StartPoint="0,0" EndPoint="0,3">
+    <LinearGradientBrush.Transform>
+      <ScaleTransform ScaleY="-1"/>
+    </LinearGradientBrush.Transform>
+    <LinearGradientBrush.GradientStops>
+      <GradientStop Offset="0.33" Color="{StaticResource ControlStrokeColorOnAccentSecondary}"/>
+      <GradientStop Offset="1.0" Color="{StaticResource ControlStrokeColorOnAccentDefault}"/>
+    </LinearGradientBrush.GradientStops>
+  </LinearGradientBrush>
+  <SolidColorBrush x:Key="SystemControlTransparentBrush" Color="Transparent"/>
+  <SolidColorBrush
+    x:Key="SystemControlHighlightListAccentVeryHighBrush"
+    Opacity="0.9"
+    Color="{DynamicResource SystemAccentColor}"/>
+  <SolidColorBrush
+    x:Key="SystemControlHighlightListAccentMediumLowBrush"
+    Opacity="0.75"
+    Color="{DynamicResource SystemAccentColor}"/>
+  <x:Boolean x:Key="UseSystemFocusVisuals">True</x:Boolean>
+
+  <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush" Color="{StaticResource SolidBackgroundFillColorBase}"/>
+  <StaticResource x:Key="DefaultTextForegroundThemeBrush" ResourceKey="TextFillColorPrimaryBrush"/>
   <StaticResource x:Key="SystemControlFocusVisualPrimaryBrush" ResourceKey="FocusStrokeColorOuterBrush"/>
   <StaticResource x:Key="SystemControlFocusVisualSecondaryBrush" ResourceKey="FocusStrokeColorInnerBrush"/>
   <SolidColorBrush x:Key="AcrylicBackgroundFillColorDefaultBrush" Color="#F9F9F9"/>
@@ -258,6 +258,9 @@
 
   <SolidColorBrush x:Key="SystemControlForegroundTransparentBrush" Color="Transparent"/>
   <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="{DynamicResource SystemAccentColor}"/>
-  <SolidColorBrush x:Key="SystemControlHighlightListAccentLowBrush" Opacity="0.6" Color="{DynamicResource SystemAccentColor}"/>
+  <SolidColorBrush
+    x:Key="SystemControlHighlightListAccentLowBrush"
+    Opacity="0.6"
+    Color="{DynamicResource SystemAccentColor}"/>
   <SolidColorBrush x:Key="SystemControlDescriptionTextForegroundBrush" Color="{StaticResource TextFillColorSecondary}"/>
 </ResourceDictionary>
