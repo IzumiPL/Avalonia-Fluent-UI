@@ -1,63 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+﻿<root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
-    <value>2.0</value>
+    <value>1.3</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AutomationNameEllipsisBreadcrumbBarItem" xml:space="preserve">
+    <value>更多</value>
+  </data>
+  <data name="BreadcrumbBarItemLocalizedControlType" xml:space="preserve">
+    <value>面包屑栏项目</value>
+  </data>
+  <data name="InfoBarCloseButtonTooltip" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="NavigationBackButtonToolTip" xml:space="preserve">
+    <value>返回</value>
+  </data>
+  <data name="NavigationButtonClosedName" xml:space="preserve">
+    <value>打开导航</value>
+  </data>
+  <data name="NavigationButtonOpenName" xml:space="preserve">
+    <value>关闭导航</value>
+  </data>
   <data name="NavigationOverflowButtonName" xml:space="preserve">
     <value>更多</value>
   </data>
@@ -65,28 +36,16 @@
     <value>更多</value>
   </data>
   <data name="NavigationViewSearchButtonName" xml:space="preserve">
-    <value>单击搜索</value>
-  </data>
-  <data name="NavigationBackButtonToolTip" xml:space="preserve">
-    <value>返回</value>
-  </data>
-  <data name="NavigationButtonOpenName" xml:space="preserve">
-    <value>关闭导航</value>
-  </data>
-  <data name="NavigationButtonClosedName" xml:space="preserve">
-    <value>打开导航</value>
+    <value>点击搜索</value>
   </data>
   <data name="SettingsButtonName" xml:space="preserve">
     <value>设置</value>
   </data>
-  <data name="InfoBarCloseButtonTooltip" xml:space="preserve">
-    <value>关闭</value>
+  <data name="TabViewAddButtonTooltip" xml:space="preserve">
+    <value>添加新标签</value>
   </data>
   <data name="TabViewCloseButtonTooltipWithKA" xml:space="preserve">
-    <value>关闭选项卡(Ctrl+F4)</value>
-  </data>
-  <data name="TabViewAddButtonTooltip" xml:space="preserve">
-    <value>添加新标签页</value>
+    <value>关闭选项卡 (Ctrl+F4)</value>
   </data>
   <data name="TabViewScrollDecreaseButtonTooltip" xml:space="preserve">
     <value>向后滚动选项卡列表</value>
@@ -100,10 +59,85 @@
   <data name="TeachingTipAlternateCloseButtonTooltip" xml:space="preserve">
     <value>关闭</value>
   </data>
-  <data name="AutomationNameEllipsisBreadcrumbBarItem" xml:space="preserve">
-    <value>更多</value>
+  <data name="Backward" xml:space="preserve">
+    <value>返回</value>
   </data>
-  <data name="BreadcrumbBarItemLocalizedControlType" xml:space="preserve">
-    <value>痕迹导航栏项</value>
+  <data name="BackwardDescription" xml:space="preserve">
+    <value>返回到上一个项目</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="CopyDescription" xml:space="preserve">
+    <value>将选定的内容复制到剪贴板上</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>剪切</value>
+  </data>
+  <data name="CutDescription" xml:space="preserve">
+    <value>删除选定的内容并放到剪贴板上</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="DeleteDescription" xml:space="preserve">
+    <value>删除选中的内容</value>
+  </data>
+  <data name="Forward" xml:space="preserve">
+    <value>前进</value>
+  </data>
+  <data name="ForwardDescription" xml:space="preserve">
+    <value>进入下一个项目</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>粘贴</value>
+  </data>
+  <data name="PasteDescription" xml:space="preserve">
+    <value>将剪贴板内容插入当前位置</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>暂停</value>
+  </data>
+  <data name="Play" xml:space="preserve">
+    <value>播放</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>重来</value>
+  </data>
+  <data name="RedoDescription" xml:space="preserve">
+    <value>重复最近一次撤销的动作</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="SaveDescription" xml:space="preserve">
+    <value>保存你的更改</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>全部选择</value>
+  </data>
+  <data name="SelectAllDescription" xml:space="preserve">
+    <value>选择所有内容</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>共享</value>
+  </data>
+  <data name="ShareDescription" xml:space="preserve">
+    <value>分享精选内容</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>撤销</value>
+  </data>
+  <data name="UndoDescription" xml:space="preserve">
+    <value>撤销最近的行动</value>
   </data>
 </root>

@@ -58,6 +58,57 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AutomationNameEllipsisBreadcrumbBarItem" xml:space="preserve">
+    <value>詳細</value>
+  </data>
+  <data name="Backward" xml:space="preserve">
+    <value>戻る</value>
+  </data>
+  <data name="BackwardDescription" xml:space="preserve">
+    <value>前の項目に戻る</value>
+  </data>
+  <data name="BreadcrumbBarItemLocalizedControlType" xml:space="preserve">
+    <value>階層リンク バー アイテム</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>コピー</value>
+  </data>
+  <data name="CopyDescription" xml:space="preserve">
+    <value>選択した内容をクリップボードにコピーする</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>切り取り</value>
+  </data>
+  <data name="CutDescription" xml:space="preserve">
+    <value>選択した内容を削除してクリップボードに配置する</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="DeleteDescription" xml:space="preserve">
+    <value>選択した内容を削除する</value>
+  </data>
+  <data name="Forward" xml:space="preserve">
+    <value>進む</value>
+  </data>
+  <data name="ForwardDescription" xml:space="preserve">
+    <value>次の項目に移動する</value>
+  </data>
+  <data name="InfoBarCloseButtonTooltip" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="NavigationBackButtonToolTip" xml:space="preserve">
+    <value>戻る</value>
+  </data>
+  <data name="NavigationButtonClosedName" xml:space="preserve">
+    <value>ナビゲーションを開く</value>
+  </data>
+  <data name="NavigationButtonOpenName" xml:space="preserve">
+    <value>ナビゲーションを閉じる</value>
+  </data>
   <data name="NavigationOverflowButtonName" xml:space="preserve">
     <value>その他</value>
   </data>
@@ -67,26 +118,56 @@
   <data name="NavigationViewSearchButtonName" xml:space="preserve">
     <value>クリックして検索</value>
   </data>
-  <data name="NavigationBackButtonToolTip" xml:space="preserve">
-    <value>戻る</value>
+  <data name="Open" xml:space="preserve">
+    <value>開く</value>
   </data>
-  <data name="NavigationButtonOpenName" xml:space="preserve">
-    <value>ナビゲーションを閉じる</value>
+  <data name="Paste" xml:space="preserve">
+    <value>貼り付け</value>
   </data>
-  <data name="NavigationButtonClosedName" xml:space="preserve">
-    <value>ナビゲーションを開く</value>
+  <data name="PasteDescription" xml:space="preserve">
+    <value>クリップボードの内容を現在の位置に挿入する</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>一時停止</value>
+  </data>
+  <data name="Play" xml:space="preserve">
+    <value>再生</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>やり直し</value>
+  </data>
+  <data name="RedoDescription" xml:space="preserve">
+    <value>最後に元に戻した操作を繰り返す</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="SaveDescription" xml:space="preserve">
+    <value>変更内容を保存する</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>すべて選択</value>
+  </data>
+  <data name="SelectAllDescription" xml:space="preserve">
+    <value>すべての内容を選択する</value>
   </data>
   <data name="SettingsButtonName" xml:space="preserve">
     <value>設定</value>
   </data>
-  <data name="InfoBarCloseButtonTooltip" xml:space="preserve">
-    <value>閉じる</value>
+  <data name="Share" xml:space="preserve">
+    <value>共有</value>
   </data>
-  <data name="TabViewCloseButtonTooltipWithKA" xml:space="preserve">
-    <value>タブを閉じる (Ctrl+F4)</value>
+  <data name="ShareDescription" xml:space="preserve">
+    <value>厳選されたコンテンツを共有する</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>停止</value>
   </data>
   <data name="TabViewAddButtonTooltip" xml:space="preserve">
     <value>新しいタブの追加</value>
+  </data>
+  <data name="TabViewCloseButtonTooltipWithKA" xml:space="preserve">
+    <value>タブを閉じる (Ctrl+F4)</value>
   </data>
   <data name="TabViewScrollDecreaseButtonTooltip" xml:space="preserve">
     <value>タブ一覧を後ろへスクロール</value>
@@ -100,10 +181,10 @@
   <data name="TeachingTipAlternateCloseButtonTooltip" xml:space="preserve">
     <value>閉じる</value>
   </data>
-  <data name="AutomationNameEllipsisBreadcrumbBarItem" xml:space="preserve">
-    <value>詳細</value>
+  <data name="Undo" xml:space="preserve">
+    <value>元に戻す</value>
   </data>
-  <data name="BreadcrumbBarItemLocalizedControlType" xml:space="preserve">
-    <value>階層リンク バー アイテム</value>
+  <data name="UndoDescription" xml:space="preserve">
+    <value>最後の操作を元に戻す</value>
   </data>
 </root>

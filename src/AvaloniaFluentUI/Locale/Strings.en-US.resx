@@ -58,6 +58,57 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AutomationNameEllipsisBreadcrumbBarItem" xml:space="preserve">
+    <value>More</value>
+  </data>
+  <data name="Backward" xml:space="preserve">
+    <value>Backward</value>
+  </data>
+  <data name="BackwardDescription" xml:space="preserve">
+    <value>Go back to previous item</value>
+  </data>
+  <data name="BreadcrumbBarItemLocalizedControlType" xml:space="preserve">
+    <value>breadcrumb bar item</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="CopyDescription" xml:space="preserve">
+    <value>Copy the selected content to the clipboard</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="CutDescription" xml:space="preserve">
+    <value>Remove the selected content and put it on the clipboard</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteDescription" xml:space="preserve">
+    <value>Delete the selected content</value>
+  </data>
+  <data name="Forward" xml:space="preserve">
+    <value>Forward</value>
+  </data>
+  <data name="ForwardDescription" xml:space="preserve">
+    <value>Go to the next item</value>
+  </data>
+  <data name="InfoBarCloseButtonTooltip" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="NavigationBackButtonToolTip" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="NavigationButtonClosedName" xml:space="preserve">
+    <value>Open Navigation</value>
+  </data>
+  <data name="NavigationButtonOpenName" xml:space="preserve">
+    <value>Close Navigation</value>
+  </data>
   <data name="NavigationOverflowButtonName" xml:space="preserve">
     <value>More</value>
   </data>
@@ -67,26 +118,56 @@
   <data name="NavigationViewSearchButtonName" xml:space="preserve">
     <value>Click to search</value>
   </data>
-  <data name="NavigationBackButtonToolTip" xml:space="preserve">
-    <value>Back</value>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
   </data>
-  <data name="NavigationButtonOpenName" xml:space="preserve">
-    <value>Close Navigation</value>
+  <data name="Paste" xml:space="preserve">
+    <value>Paste</value>
   </data>
-  <data name="NavigationButtonClosedName" xml:space="preserve">
-    <value>Open Navigation</value>
+  <data name="PasteDescription" xml:space="preserve">
+    <value>Insert clipboard content at the current position</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="Play" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="RedoDescription" xml:space="preserve">
+    <value>Repeat the last undone action</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveDescription" xml:space="preserve">
+    <value>Save your changes</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="SelectAllDescription" xml:space="preserve">
+    <value>Select all content</value>
   </data>
   <data name="SettingsButtonName" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="InfoBarCloseButtonTooltip" xml:space="preserve">
-    <value>Close</value>
+  <data name="Share" xml:space="preserve">
+    <value>Share</value>
   </data>
-  <data name="TabViewCloseButtonTooltipWithKA" xml:space="preserve">
-    <value>Close tab (Ctrl+F4)</value>
+  <data name="ShareDescription" xml:space="preserve">
+    <value>Share curated content</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
   </data>
   <data name="TabViewAddButtonTooltip" xml:space="preserve">
     <value>Add new tab</value>
+  </data>
+  <data name="TabViewCloseButtonTooltipWithKA" xml:space="preserve">
+    <value>Close tab (Ctrl+F4)</value>
   </data>
   <data name="TabViewScrollDecreaseButtonTooltip" xml:space="preserve">
     <value>Scroll tab list backward</value>
@@ -100,10 +181,10 @@
   <data name="TeachingTipAlternateCloseButtonTooltip" xml:space="preserve">
     <value>Close</value>
   </data>
-  <data name="AutomationNameEllipsisBreadcrumbBarItem" xml:space="preserve">
-    <value>More</value>
+  <data name="Undo" xml:space="preserve">
+    <value>Undo</value>
   </data>
-  <data name="BreadcrumbBarItemLocalizedControlType" xml:space="preserve">
-    <value>breadcrumb bar item</value>
+  <data name="UndoDescription" xml:space="preserve">
+    <value>Undo the last action</value>
   </data>
 </root>
