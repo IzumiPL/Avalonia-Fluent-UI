@@ -7,8 +7,8 @@ using Avalonia.Input;
 
 namespace AvaloniaFluentUI.Controls;
 
-[TemplatePart(Name = "PART_SelectedIndicator", Type = typeof(Rectangle))]
-[TemplatePart(Name = "PART_HeadersArea", Type = typeof(Control))]
+[TemplatePart(Name = PART_SELECTED_INDICATOR, Type = typeof(Rectangle))]
+[TemplatePart(Name = PART_HEADERS_ARES, Type = typeof(Control))]
 public class SegmentedView : SelectingItemsControl
 {
     public static readonly StyledProperty<object> ContentProperty =
@@ -23,6 +23,9 @@ public class SegmentedView : SelectingItemsControl
     protected Rectangle? _selectedIndicator;
     protected Control? _headersArea;
     private bool _isTemplateApplied;
+    
+    private const string PART_SELECTED_INDICATOR = "PART_SelectedIndicator";
+    private const string PART_HEADERS_ARES = "PART_HeadersArea";
 
     protected override bool NeedsContainerOverride(object item, int index, out object recycleKey)
         => NeedsContainer<SegmentedItem>(item, out recycleKey);
@@ -43,8 +46,8 @@ public class SegmentedView : SelectingItemsControl
     {
         base.OnApplyTemplate(e);
         
-        _selectedIndicator = e.NameScope.Find<Rectangle>("PART_SelectedIndicator");
-        _headersArea = e.NameScope.Find<Control>("PART_HeadersArea");
+        _selectedIndicator = e.NameScope.Find<Rectangle>(PART_SELECTED_INDICATOR);
+        _headersArea = e.NameScope.Find<Control>(PART_HEADERS_ARES);
         _isTemplateApplied = true;
         UpdateSelectedIndicatorPosition();
     }

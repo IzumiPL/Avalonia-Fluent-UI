@@ -9,22 +9,24 @@ using AvaloniaFluentUI.Media.Animation;
 
 namespace AvaloniaFluentUI.Controls;
 
-[TemplatePart(s_tpContentPresenter, typeof(ContentPresenter))]
-public class StackPanel : ContentControl
+[TemplatePart(PART_CONTENT_PRESENTER, typeof(ContentPresenter))]
+public class StackContent : ContentControl
 {
-    private CancellationTokenSource _cts;
-    private ContentPresenter _presenter;
-
     public static readonly StyledProperty<NavigationTransitionInfo> TransitionInfoProperty =
-        AvaloniaProperty.Register<StackPanel, NavigationTransitionInfo>(nameof(TransitionInfo));
+        AvaloniaProperty.Register<StackContent, NavigationTransitionInfo>(nameof(TransitionInfo));
 
     public NavigationTransitionInfo TransitionInfo
     {
         get => GetValue(TransitionInfoProperty);
         set => SetValue(TransitionInfoProperty, value);
     }
+    
+    private CancellationTokenSource _cts;
+    private ContentPresenter _presenter;
 
-    public StackPanel()
+    private const string PART_CONTENT_PRESENTER = "PART_ContentPresenter";
+    
+    public StackContent()
     {
         TransitionInfo = new EntranceNavigationTransitionInfo();
     }
@@ -32,7 +34,7 @@ public class StackPanel : ContentControl
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-        _presenter = e.NameScope.Find<ContentPresenter>(s_tpContentPresenter);
+        _presenter = e.NameScope.Find<ContentPresenter>(PART_CONTENT_PRESENTER);
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -58,6 +60,4 @@ public class StackPanel : ContentControl
 
         Dispatcher.UIThread.Post(() => { TransitionInfo?.RunAnimation(_presenter, token); }, DispatcherPriority.Render);
     }
-
-    private const string s_tpContentPresenter = "PART_ContentPresenter";
 }

@@ -9,9 +9,9 @@ using Avalonia.Threading;
 
 namespace AvaloniaFluentUI.Controls;
 
-[TemplatePart(Name = "PART_Thumb", Type = typeof(Thumb))]
-[TemplatePart(Name = "PART_Popup", Type = typeof(Popup))]
-[TemplatePart(Name = "PART_ToolTipText", Type = typeof(TextBlock))]
+[TemplatePart(Name = PART_THUMB, Type = typeof(Thumb))]
+[TemplatePart(Name = PART_POPUP, Type = typeof(Popup))]
+[TemplatePart(Name = PART_TOOL_TIP_TEXT, Type = typeof(TextBlock))]
 public class ToolTipSlider : Slider
 {
     public static readonly StyledProperty<string> FormatProperty =
@@ -29,6 +29,10 @@ public class ToolTipSlider : Slider
 
     private bool _isDrag;
     private readonly DispatcherTimer _closeToolTipTimer = new DispatcherTimer();
+    
+    private const string PART_THUMB = "PART_Thumb";
+    private const string PART_POPUP = "PART_Popup";
+    private const string PART_TOOL_TIP_TEXT = "PART_ToolTipText";
 
     public ToolTipSlider()
     {
@@ -46,9 +50,9 @@ public class ToolTipSlider : Slider
             _thumb.DragCompleted -= OnThumbDragCompleted;
         }
 
-        _thumb = e.NameScope.Find<Thumb>("PART_Thumb");
-        _popup = e.NameScope.Find<Popup>("PART_Popup");
-        _toolTipText = e.NameScope.Find<TextBlock>("PART_ToolTipText");
+        _thumb = e.NameScope.Find<Thumb>(PART_THUMB);
+        _popup = e.NameScope.Find<Popup>(PART_POPUP);
+        _toolTipText = e.NameScope.Find<TextBlock>(PART_TOOL_TIP_TEXT);
 
         if (_thumb != null)
         {
@@ -100,15 +104,7 @@ public class ToolTipSlider : Slider
         }
     }
 
-    private void OnThumbDragCompleted(object? sender, VectorEventArgs e)
-    {
-        Console.WriteLine("DragCompleted");
-        _isDrag = false;
-    }
+    private void OnThumbDragCompleted(object? sender, VectorEventArgs e) => _isDrag = false;
 
-    private void OnThumbDragStarted(object? sender, VectorEventArgs e)
-    {
-        Console.WriteLine("DragStarted");
-        _isDrag = true;
-    }
+    private void OnThumbDragStarted(object? sender, VectorEventArgs e) => _isDrag = true;
 }

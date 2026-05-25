@@ -6,13 +6,15 @@ using Avalonia.Interactivity;
 
 namespace AvaloniaFluentUI.Controls;
 
-[TemplatePart("PART_ScrollViewer", typeof(IScrollable))]
-[TemplatePart("PART_PreviousButton", typeof(ToolButton))]
-[TemplatePart("PART_NextButton", typeof(ToolButton))]
+[TemplatePart(PART_PREVIOUS_BUTTON, typeof(ToolButton))]
+[TemplatePart(PART_NEXT_BUTTON, typeof(ToolButton))]
 public class PipsPager : ListBox
 {
     private ToolButton _previousButton;
     private ToolButton _nextButton;
+    
+    private const string PART_PREVIOUS_BUTTON = "PART_PreviousButton";
+    private const string PART_NEXT_BUTTON = "PART_NextButton";
     
     public PipsPager()
     {
@@ -56,8 +58,8 @@ public class PipsPager : ListBox
             _previousButton.Click -= OnPreviousClicked;
         }
         
-        _previousButton = e.NameScope.Find<ToolButton>("PART_PreviousButton");
-        _nextButton = e.NameScope.Find<ToolButton>("PART_NextButton");
+        _previousButton = e.NameScope.Find<ToolButton>(PART_PREVIOUS_BUTTON);
+        _nextButton = e.NameScope.Find<ToolButton>(PART_NEXT_BUTTON);
         
         if (_nextButton != null)
         {

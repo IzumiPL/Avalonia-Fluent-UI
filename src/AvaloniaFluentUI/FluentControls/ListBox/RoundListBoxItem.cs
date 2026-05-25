@@ -8,11 +8,15 @@ using Avalonia.Input;
 
 namespace AvaloniaFluentUI.Controls;
 
-[TemplatePart(Name = "PART_EditTextBox", Type = typeof(TextBox))]
+[TemplatePart(Name = PART_EDIT_TEXT_BOX, Type = typeof(TextBox))]
+[TemplatePart(Name = PART_CONTENT_PRESENTER, Type = typeof(ContentPresenter))]
 public class RoundListBoxItem : ListBoxItem
 {
     private TextBox _editTextBox;
     private ContentPresenter _presenter;
+    
+    private const string PART_EDIT_TEXT_BOX = "PART_EditTextBox";
+    private const string PART_CONTENT_PRESENTER = "PART_ContentPresenter";
 
     public RoundListBoxItem()
     {
@@ -60,8 +64,8 @@ public class RoundListBoxItem : ListBoxItem
             // _editTextBox.LostFocus -= OnTextBoxLostFocus;
         }
         
-        _editTextBox = e.NameScope.Find<TextBox>("PART_EditTextBox");
-        _presenter = e.NameScope.Find<ContentPresenter>("PART_ContentPresenter");
+        _editTextBox = e.NameScope.Find<TextBox>(PART_EDIT_TEXT_BOX);
+        _presenter = e.NameScope.Find<ContentPresenter>(PART_CONTENT_PRESENTER);
 
         if (_editTextBox != null)
         {
@@ -86,13 +90,11 @@ public class RoundListBoxItem : ListBoxItem
     {
         if (Content is String)
         {
-            Console.WriteLine($"Key Down, Content: {Content.ToString()}");
             if (e.Key == Key.Enter)
             {
-                Console.WriteLine($"Enter, Content: {_editTextBox.Text}");
-                    _editTextBox.IsVisible = false;
-                    Content = _editTextBox.Text;
-                    _presenter?.IsVisible = true;
+                _editTextBox.IsVisible = false;
+                Content = _editTextBox.Text;
+                _presenter?.IsVisible = true;
             }
         }
     }

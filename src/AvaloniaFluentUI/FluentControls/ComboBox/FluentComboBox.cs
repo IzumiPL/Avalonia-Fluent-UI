@@ -3,27 +3,39 @@ using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Animation.Easings;
 using Avalonia.Controls;
+using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using Avalonia.Styling;
 
 namespace AvaloniaFluentUI.Controls;
 
+[TemplatePart(Name = PART_POPUP, Type = typeof(Popup))]
 public class FluentComboBox : ComboBox
 {
     private Animation? _animation;
     private Border? _border;
     private Popup? _popup;
+    
+    private const string PART_POPUP = "PART_Popup";
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
 
-        if (_popup != null) _popup.Opened -= OnPopup;
+        if (_popup != null)
+        {
+            _popup.Opened -= OnPopup;
+        }
 
-        _popup = e.NameScope.Get<Popup>("PART_Popup");
-        _popup.Opened += OnPopup;
-        _border = _popup.Child as Border;
+        _popup = e.NameScope.Get<Popup>(PART_POPUP);
+
+        if (_popup != null)
+        {
+            _popup.Opened += OnPopup; 
+            _border = _popup.Child as Border;
+        }
+        
         InitTransform();
 
     }
