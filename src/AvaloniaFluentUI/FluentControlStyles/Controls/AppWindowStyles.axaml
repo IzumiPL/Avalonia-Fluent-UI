@@ -10,11 +10,12 @@
   <FontWeight x:Key="SplashScreenTextFontWeight">SemiBold</FontWeight>
 
   <ControlTheme x:Key="SystemCaptionButton" TargetType="Button">
-    <Setter Property="Background" Value="{DynamicResource FATitle_SysCaptionBackground}"/>
+    <!-- <Setter Property="Background" Value="{DynamicResource FluentTitleBarBackground}"/> -->
+    <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="{x:Null}"/>
     <Setter Property="BorderThickness" Value="0"/>
     <Setter Property="Width" Value="46"/>
-    <Setter Property="Foreground" Value="{DynamicResource FATitle_SysCaptionForeground}"/>
+    <Setter Property="Foreground" Value="{DynamicResource FluentSysCaptionForeground}"/>
     <Setter Property="VerticalAlignment" Value="Stretch"/>
     <Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}"/>
     <Setter Property="FontSize" Value="14"/>
@@ -33,30 +34,32 @@
       </ControlTemplate>
     </Setter>
 
-    <Style Selector="^:inactive">
-      <Style Selector="^ /template/ Border">
-        <Setter Property="Background" Value="{DynamicResource FATitle_SysCaptionBackgroundInactive}"/>
-      </Style>
-      <Style Selector="^ /template/ ui|FontIcon">
-        <Setter Property="Foreground" Value="{DynamicResource FATitle_SysCaptionForegroundInactive}"/>
-      </Style>
-    </Style>
+    <!-- <Style Selector="^:inactive"> -->
+    <!-- <Style Selector="^ /template/ Border"> -->
+    <!-- <Setter Property="Background" Value="{DynamicResource FluentSysCaptionBackgroundInactive}"/> -->
+    <!-- </Style> -->
+    <!-- <Style Selector="^ /template/ ui|FontIcon"> -->
+    <!-- <Setter Property="Foreground" Value="{DynamicResource FluentSysCaptionForegroundInactive}"/> -->
+    <!-- </Style> -->
+    <!-- </Style> -->
 
     <Style Selector="^:pointerover">
       <Style Selector="^ /template/ Border">
-        <Setter Property="Background" Value="{DynamicResource FATitle_SysCaptionBackgroundHover}"/>
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+        <!-- <Setter Property="Background" Value="{DynamicResource FluentSysCaptionBackgroundHover}"/> -->
       </Style>
       <Style Selector="^ /template/ ui|FontIcon">
-        <Setter Property="Foreground" Value="{DynamicResource FATitle_SysCaptionForegroundHover}"/>
+        <Setter Property="Foreground" Value="{DynamicResource FluentSysCaptionForegroundHover}"/>
       </Style>
     </Style>
 
     <Style Selector="^:pressed">
       <Style Selector="^ /template/ Border">
-        <Setter Property="Background" Value="{DynamicResource FATitle_SysCaptionBackgroundPressed}"/>
+        <!-- <Setter Property="Background" Value="{DynamicResource FluentSysCaptionBackgroundPressed}"/> -->
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ ui|FontIcon">
-        <Setter Property="Foreground" Value="{DynamicResource FATitle_SysCaptionForegroundPressed}"/>
+        <Setter Property="Foreground" Value="{DynamicResource FluentSysCaptionForegroundPressed}"/>
       </Style>
     </Style>
 
@@ -157,8 +160,9 @@
             Name="DefaultTitleBar"
             Height="{TemplateBinding TitleBarHeight}"
             VerticalAlignment="Top"
+            Background="{DynamicResource FluentTitleBarBackground}"
             ColumnDefinitions="Auto, Auto, *"
-            TextElement.Foreground="{DynamicResource FATitle_TitleBarForeground}">
+            TextElement.Foreground="{DynamicResource FluentTitleBarForeground}">
 
 
             <Image
@@ -272,8 +276,8 @@
 
       <Style Selector="^[IsActive=False]">
         <Style Selector="^ /template/ Grid#DefaultTitleBar">
-          <Setter Property="Background" Value="{DynamicResource FATitle_TitleBarBackgroundInactive}"/>
-          <Setter Property="TextElement.Foreground" Value="{DynamicResource FATitle_TitleBarForegroundInactive}"/>
+          <Setter Property="Background" Value="{DynamicResource FluentTitleBarBackgroundInactive}"/>
+          <Setter Property="TextElement.Foreground" Value="{DynamicResource FluentTitleBarForegroundInactive}"/>
         </Style>
       </Style>
     </Style>
