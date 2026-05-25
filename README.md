@@ -28,6 +28,8 @@ dotnet add package AvaloniaFluentUI
 cd samples/Gallery.Desktop
 dotnet run -c Release
 ```
+## 文档
+想了解更多关于 Avalonia-Fluent-UI 的信息？请阅读以下内容。[帮助文档]（https://docs.mikuas.top）👈
 
 ## 许可证📄
 #### AvaloniaFluentUI 使用 [MIT](LICENSE) 许可证授权非商用项目。
