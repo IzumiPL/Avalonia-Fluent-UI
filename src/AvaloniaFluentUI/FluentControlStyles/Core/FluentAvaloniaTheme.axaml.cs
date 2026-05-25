@@ -30,12 +30,6 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
     }
 
     /// <summary>
-    /// High Contrast Theme
-    /// </summary>
-    public static readonly ThemeVariant HighContrastTheme = new ThemeVariant(HighContrastModeString,
-        ThemeVariant.Light);
-
-    /// <summary>
     /// Gets or sets whether the system font should be used on Windows. Value only applies at startup
     /// </summary>
     /// <remarks>
@@ -476,7 +470,7 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
 
     private void LoadDefaultAccentColor()
     {
-        UpdateAccentColors(Colors.SlateBlue,
+        UpdateAccentColors(Colors.DeepSkyBlue,
             Color.Parse("#7F69FF"),
             Color.Parse("#9B8AFF"),
             Color.Parse("#B9ADFF"),
@@ -544,7 +538,6 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
     private ResourceDictionary _accentColorsDictionary;
     private IPlatformSettings _platformSettings;
 
-    public const string LightModeString = "Light";
-    public const string DarkModeString = "Dark";
-    public const string HighContrastModeString = "HighContrast";
+    public const string Light = "Light";
+    public const string Dark = "Dark";
 }
