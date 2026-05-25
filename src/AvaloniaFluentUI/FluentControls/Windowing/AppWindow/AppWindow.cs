@@ -26,34 +26,179 @@ namespace AvaloniaFluentUI.Controls.Windowing;
 public partial class AppWindow : Window
 {
     /// <summary>
+    /// Defines the <see cref="TemplateSettings"/> property
+    /// </summary>
+    // public static readonly StyledProperty<AppWindow> TemplateSettingsProperty =
+        // AvaloniaProperty.Register<AppWindow, AppWindow>(nameof(TemplateSettings));
+
+    /// <summary>
+    /// Defines the <see cref="Icon"/> property
+    /// </summary>
+    public static readonly new StyledProperty<IImage> IconProperty =
+        AvaloniaProperty.Register<AppWindow, IImage>(nameof(Icon));
+
+    /// <summary>
+    /// Defines the AllowInteractionInTitleBar attached property
+    /// </summary>
+    public static readonly AttachedProperty<bool> AllowInteractionInTitleBarProperty =
+        AvaloniaProperty.RegisterAttached<AppWindow, Control, bool>("AllowInteractionInTitleBar");
+
+    /// <summary>
+    /// Gets the value of the <see cref="AllowInteractionInTitleBarProperty"/> attached property for the given control
+    /// </summary>
+    public static bool GetAllowInteractionInTitleBar(Control c) => c.GetValue(AllowInteractionInTitleBarProperty);
+
+    /// <summary>
+    /// Sets the value of the <see cref="AllowInteractionInTitleBarProperty"/> attached property for the given control
+    /// </summary>
+    /// <param name="c"></param>
+    /// <param name="b"></param>
+    public static void SetAllowInteractionInTitleBar(Control c, bool b) => c.SetValue(AllowInteractionInTitleBarProperty, b);
+
+    /// <summary>
+    /// Provides calculated data for items within the Template of AppWindow
+    /// </summary>
+    // public AppWindow TemplateSettings
+    // {
+        // get => GetValue(TemplateSettingsProperty);
+        // private set => SetValue(TemplateSettingsProperty, value);
+    // }
+
+    /// <summary>
+    /// Gets or sets the icon for the window
+    /// </summary>
+    /// <remarks>
+    /// Note that this type is <see cref="IImage"/> and not <see cref="WindowIcon"/>, like on Window
+    /// This is done to allow using a window icon in managed titlebar. Provided the
+    /// image is an <see cref="IBitmap"/>, it should convert to a WindowIcon without 
+    /// issue and you'll still get the icon in the taskbar, on other OS's, etc.
+    /// </remarks>
+    public new IImage Icon
+    {
+        get => GetValue(IconProperty);
+        set => SetValue(IconProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value whether the AppWindow should hide its minimize/maximize buttons like 
+    /// a dialog window. This property is only respected on Windows.
+    /// </summary>
+    public bool ShowAsDialog
+    {
+        get => _hideSizeButtons;
+        set
+        {
+            _hideSizeButtons = value;
+            PseudoClasses.Set(":dialog", value);
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the splash screen that should show when the window first loads
+    /// </summary>
+    public IApplicationSplashScreen SplashScreen
+    {
+        get => _splashContext?.SplashScreen;
+        set
+        {
+            if (value == null)
+            {
+                if (_splashContext != null)
+                {
+                    _splashContext.Host.SplashScreen = null;
+                }
+
+                _splashContext = null;
+                PseudoClasses.Set(":splashScreen", false);
+            }
+            else
+            {
+                _splashContext = new SplashScreenContext(value);
+                PseudoClasses.Set(":splashScreen", true);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Gets the Titlebar description information for the AppWindow
+    /// </summary>
+    /// <remarks>
+    /// Use this property to customize the colors, height, and whether the window contents should
+    /// display in the titlebar area
+    /// </remarks>
+    public AppWindowTitleBar TitleBar => _titleBar;
+
+    /// <summary>
+    /// Gets the interface for custom platform-specific features through the AppWindow class
+    /// NOTE: Only implemented on Windows right now
+    /// </summary>
+    public IAppWindowPlatformFeatures PlatformFeatures { get; private set; }
+
+    protected internal bool IsWindows11 { get; internal set; }
+
+    protected internal bool IsWindows { get; internal set; }
+
+    protected override Type StyleKeyOverride => typeof(AppWindow);
+
+    internal MinMaxCloseControl SystemCaptionControl => _captionButtons;
+
+
+    private SplashScreenContext _splashContext;
+    private Border _templateRoot;
+    private MinMaxCloseControl _captionButtons;
+    private Panel _defaultTitleBar;
+    private AppWindowTitleBar _titleBar;
+    private List<WeakReference<Control>> _excludeHitTestList;
+    private bool _hideSizeButtons;
+
+    // Resource names used in SetTitleBarColors
+    private const string SYSTEM_ACCENT_COLOR = "SystemAccentColor";
+    private const string SYSTEM_ACCENT_COLOR_LIGHT_1 = "SystemAccentColorLight1";
+    private const string SYSTEM_ACCENT_COLOR_DARK_1 = "SystemAccentColorDark1";
+    private const string TEXT_FILL_COLOR_PRIMARY = "TextFillColorPrimary";
+
+    private const string TITLE_BAR_BACKGROUND = "FluentTitleBarBackground";
+    private const string TITLE_BAR_FOREGROUND = "FluentTitleBarForeground";
+    private const string TITLE_BAR_INACTIVE_BACKGROUND = "FluentTitleBarBackgroundInactive";
+    private const string TITLE_BAR_INACTIVE_FOREGROUND = "FluentTitleBarForegroundInactive";
+    private const string SYSTEM_CAPTION_BACKGROUND = "FATitle_SysCaptionBackground";
+    private const string SYSTEM_CAPTION_FOREGROUND = "FluentSysCaptionForeground";
+    private const string SYSTEM_CAPTION_BACKGROUND_HOVER = "FluentSysCaptionBackgroundHover";
+    private const string SYSTEM_CAPTION_FOREGROUND_HOVER = "FluentSysCaptionForegroundHover";
+    private const string SYSTEM_CAPTION_BACKGROUND_PRESSED = "FluentSysCaptionBackgroundPressed";
+    private const string SYSTEM_CAPTION_FOREGROUND_PRESSED = "FluentSysCaptionForegroundPressed";
+    private const string SYSTEM_CAPTION_BACKGROUND_INACTIVE = "FluentSysCaptionBackgroundInactive";
+    private const string SYSTEM_CAPTION_FOREGROUND_INACTIVE = "FluentSysCaptionForegroundInactive";
+    
+    /// <summary>
     /// Defines the <see cref="TitleBarHeight"/> property
     /// </summary>
     public static readonly StyledProperty<double> TitleBarHeightProperty =
-        AvaloniaProperty.Register<AppWindowTemplateSettings, double>(nameof(TitleBarHeight), 40d);
+        AvaloniaProperty.Register<AppWindow, double>(nameof(TitleBarHeight), 40d);
 
     /// <summary>
     /// Defines the <see cref="ContentMargin"/> property
     /// </summary>
     public static readonly StyledProperty<Thickness> ContentMarginProperty =
-        AvaloniaProperty.Register<AppWindowTemplateSettings, Thickness>(nameof(ContentMargin));
+        AvaloniaProperty.Register<AppWindow, Thickness>(nameof(ContentMargin));
 
     /// <summary>
     /// Defines the <see cref="IsTitleBarContentVisible"/> property
     /// </summary>
     public static readonly StyledProperty<bool> IsTitleBarContentVisibleProperty =
-        AvaloniaProperty.Register<AppWindowTemplateSettings, bool>(nameof(IsTitleBarContentVisible), defaultValue: true);
+        AvaloniaProperty.Register<AppWindow, bool>(nameof(IsTitleBarContentVisible), defaultValue: true);
 
     /// <summary>
     /// Defines the <see cref="WindowIcon"/> property
     /// </summary>
     public static readonly StyledProperty<IImage> WindowIconProperty =
-        AvaloniaProperty.Register<AppWindowTemplateSettings, IImage>(nameof(WindowIcon));
+        AvaloniaProperty.Register<AppWindow, IImage>(nameof(WindowIcon));
 
     public static readonly StyledProperty<object?> TitleBarContentProperty =
-        AvaloniaProperty.Register<AppWindowTemplateSettings, object?>(nameof(TitleBarContent));
+        AvaloniaProperty.Register<AppWindow, object?>(nameof(TitleBarContent));
     
     public static readonly StyledProperty<IDataTemplate?> TitleBarContentTemplateProperty =
-        AvaloniaProperty.Register<AppWindowTemplateSettings, IDataTemplate?>(nameof(TitleBarContentTemplate));
+        AvaloniaProperty.Register<AppWindow, IDataTemplate?>(nameof(TitleBarContentTemplate));
     
     public IDataTemplate? TitleBarContentTemplate
     {
@@ -473,27 +618,27 @@ public partial class AppWindow : Window
         if (_templateRoot == null)
             return;
 
-        bool foundAccent = _templateRoot.TryFindResource(s_SystemAccentColor, out var sysColor);
+        bool foundAccent = _templateRoot.TryFindResource(SYSTEM_ACCENT_COLOR, out var sysColor);
         Color? accentVariant = null;
         var themeVar = ActualThemeVariant;
 
         if (themeVar == ThemeVariant.Light)
         {
-            if (_templateRoot.TryFindResource(s_SystemAccentColorDark1, out var v))
+            if (_templateRoot.TryFindResource(SYSTEM_ACCENT_COLOR_DARK_1, out var v))
             {
                 accentVariant = Unsafe.Unbox<Color>(v);
             }
         }
         else
         {
-            if (_templateRoot.TryFindResource(s_SystemAccentColorLight1, out var v))
+            if (_templateRoot.TryFindResource(SYSTEM_ACCENT_COLOR_LIGHT_1, out var v))
             {
                 accentVariant = Unsafe.Unbox<Color>(v);
             }
         }
 
         Color textColor;
-        if (_templateRoot.TryFindResource(s_TextFillColorPrimary, themeVar, out var value))
+        if (_templateRoot.TryFindResource(TEXT_FILL_COLOR_PRIMARY, themeVar, out var value))
         {
             textColor = Unsafe.Unbox<Color>(value);
         }
@@ -509,26 +654,23 @@ public partial class AppWindow : Window
             }
         }
 
-        SetResource(s_TitleBarBackground, _titleBar.BackgroundColor ?? Colors.Transparent);
-        SetResource(s_TitleBarForeground, _titleBar.ForegroundColor ?? textColor);
+        SetResource(TITLE_BAR_BACKGROUND, _titleBar.BackgroundColor ?? Colors.Transparent);
+        SetResource(TITLE_BAR_FOREGROUND, _titleBar.ForegroundColor ?? textColor);
 
-        SetResource(s_TitleBarInactiveBackground, _titleBar.InactiveBackgroundColor ?? Colors.Transparent);
-        SetResource(s_TitleBarInactiveForeground, _titleBar.InactiveForegroundColor ?? Colors.Gray);
+        SetResource(TITLE_BAR_INACTIVE_BACKGROUND, _titleBar.InactiveBackgroundColor ?? Colors.Transparent);
+        SetResource(TITLE_BAR_INACTIVE_FOREGROUND, _titleBar.InactiveForegroundColor ?? Colors.Gray);
 
-        SetResource(s_SysCaptionBackground, _titleBar.ButtonBackgroundColor ?? Colors.Transparent);
-        SetResource(s_SysCaptionForeground, _titleBar.ButtonForegroundColor ?? textColor);
+        SetResource(SYSTEM_CAPTION_BACKGROUND, _titleBar.ButtonBackgroundColor ?? Colors.Transparent);
+        SetResource(SYSTEM_CAPTION_FOREGROUND, _titleBar.ButtonForegroundColor ?? textColor);
 
-        SetResource(s_SysCaptionBackgroundHover, _titleBar.ButtonHoverBackgroundColor ??
-            (foundAccent ? Unsafe.Unbox<Color>(sysColor) : Color.FromArgb(23, 0, 0, 0)));
-        SetResource(s_SysCaptionForegroundHover, _titleBar.ButtonHoverForegroundColor ?? textColor);
+        // SetResource(SYSTEM_CAPTION_BACKGROUND_HOVER, _titleBar.ButtonHoverBackgroundColor ?? (foundAccent ? Unsafe.Unbox<Color>(sysColor) : Color.FromArgb(23, 0, 0, 0)));
+        SetResource(SYSTEM_CAPTION_FOREGROUND_HOVER, _titleBar.ButtonHoverForegroundColor ?? textColor);
 
-        SetResource(s_SysCaptionBackgroundPressed, _titleBar.ButtonPressedBackgroundColor ??
-            (foundAccent ? Unsafe.Unbox<Color>(sysColor) : Color.FromArgb(52, 0, 0, 0)));
-        SetResource(s_SysCaptionForegroundPressed, _titleBar.ButtonPressedForegroundColor ?? GetPressedColor(textColor));
+        SetResource(SYSTEM_CAPTION_BACKGROUND_PRESSED, _titleBar.ButtonPressedBackgroundColor ?? (foundAccent ? Unsafe.Unbox<Color>(sysColor) : Color.FromArgb(52, 0, 0, 0)));
+        SetResource(SYSTEM_CAPTION_FOREGROUND_PRESSED, _titleBar.ButtonPressedForegroundColor ?? GetPressedColor(textColor));
 
-        SetResource(s_SysCaptionBackgroundInactive, _titleBar.ButtonInactiveBackgroundColor ?? Colors.Transparent);
-        SetResource(s_SysCaptionForegroundInactive, _titleBar.ButtonInactiveForegroundColor ??
-            (accentVariant ?? Colors.Gray));
+        SetResource(SYSTEM_CAPTION_BACKGROUND_INACTIVE, _titleBar.ButtonInactiveBackgroundColor ?? Colors.Transparent);
+        SetResource(SYSTEM_CAPTION_FOREGROUND_INACTIVE, _titleBar.ButtonInactiveForegroundColor ?? (accentVariant ?? Colors.Gray));
 
 
         void SetResource(string name, Color color)
