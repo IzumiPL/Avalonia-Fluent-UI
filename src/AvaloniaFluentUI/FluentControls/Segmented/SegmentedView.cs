@@ -11,18 +11,8 @@ namespace AvaloniaFluentUI.Controls;
 [TemplatePart(Name = PART_HEADERS_ARES, Type = typeof(Control))]
 public class SegmentedView : SelectingItemsControl
 {
-    public static readonly StyledProperty<object> ContentProperty =
-        AvaloniaProperty.Register<SegmentedView, object>(nameof(Content));
-
-    public object Content
-    {
-        get => GetValue(ContentProperty);
-        set => SetValue(ContentProperty, value);
-    }
-
     protected Rectangle? _selectedIndicator;
     protected Control? _headersArea;
-    private bool _isTemplateApplied;
     
     private const string PART_SELECTED_INDICATOR = "PART_SelectedIndicator";
     private const string PART_HEADERS_ARES = "PART_HeadersArea";
@@ -48,7 +38,6 @@ public class SegmentedView : SelectingItemsControl
         
         _selectedIndicator = e.NameScope.Find<Rectangle>(PART_SELECTED_INDICATOR);
         _headersArea = e.NameScope.Find<Control>(PART_HEADERS_ARES);
-        _isTemplateApplied = true;
         UpdateSelectedIndicatorPosition();
     }
 
@@ -58,21 +47,8 @@ public class SegmentedView : SelectingItemsControl
         if (change.Property == SelectedItemProperty)
         {
             SyncContainerSelection(change.NewValue);
-            if (_isTemplateApplied)
-            {
-                UpdateSelectedIndicatorPosition();
-            }
-        }
-    }
-
-    protected override Size ArrangeOverride(Size finalSize)
-    {
-        var size = base.ArrangeOverride(finalSize);
-        if (_isTemplateApplied)
-        {
             UpdateSelectedIndicatorPosition();
         }
-        return size;
     }
 
     private void SyncContainerSelection(object selectedItem)

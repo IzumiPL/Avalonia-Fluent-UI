@@ -27,7 +27,25 @@ public class SegmentedToggleView : SegmentedView
             }
         }
     }
-    
+
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    {
+        base.OnPropertyChanged(change);
+
+        if (change.Property == OrientationProperty)
+        {
+            InvalidateMeasure();
+            UpdateSelectedIndicatorPosition();
+        }
+    }
+
+     protected override Size ArrangeOverride(Size finalSize)
+    {
+        var size = base.ArrangeOverride(finalSize);
+        UpdateSelectedIndicatorPosition();
+        return size;
+    }
+
     protected override void UpdateSelectedIndicatorPosition()
     {
         if (_selectedIndicator == null || _headersArea == null)
@@ -46,7 +64,7 @@ public class SegmentedToggleView : SegmentedView
             _selectedIndicator.IsVisible = false;
             return;
         }
-        // container.BringIntoView();
+
         _selectedIndicator.IsVisible = true;
 
         var transform = container.TransformToVisual(_headersArea);
@@ -55,9 +73,10 @@ public class SegmentedToggleView : SegmentedView
             double width = container.Bounds.Width;
             double height = container.Bounds.Height;
             var position = transform.Value.Transform(new Point(0, 0));
-            var value = Orientation == Orientation.Horizontal ? new Thickness(position.X, 0, 0, 0) : new Thickness(Margin.Left, position.Y, 0, 0);
 
-            _selectedIndicator.Margin = value;
+            _selectedIndicator.Margin = Orientation == Orientation.Horizontal
+                ? new Thickness(position.X, 0, 0, 0)
+                : new Thickness(0, position.Y, 0, 0);
             _selectedIndicator.Width = width;
             _selectedIndicator.Height = height;
         }
