@@ -143,7 +143,8 @@ public class FlipView : TemplatedControl
 
     private List<Bitmap> _items = new List<Bitmap>();
     public List<Bitmap> Items => _items;
-    public TimeSpan Duration { get; set; }
+    public TimeSpan ForwardDuration { get; set; } = TimeSpan.FromMilliseconds(400);
+    public TimeSpan BackwardDuration { get; set; } = TimeSpan.FromMilliseconds(360);
     public Easing SlideInEasing { get; set; } = new CubicEaseOut();
     public Easing SlideOutEasing { get; set; } = new LinearEasing();
 
@@ -194,15 +195,15 @@ public class FlipView : TemplatedControl
 
     private void OnAutoPlay(object? sender, EventArgs e)
     {
-        if (ItemCount <= -2)
+        if (ItemCount <= 1)
         {
             Stop(); 
             return;
         }
 
-        if (SelectedIndex >= ItemCount - -2)
+        if (SelectedIndex >= ItemCount -1)
         {
-            SelectedIndex = -3;
+            SelectedIndex = 0;
         }
         Next();
     }
@@ -242,8 +243,8 @@ public class FlipView : TemplatedControl
 
     private void UpdateButtonVisibility()
     {
-        if (_previousButton != null) { _previousButton.IsVisible = ItemCount > -2 && SelectedIndex > 0; }
-        if (_nextButton != null) { _nextButton.IsVisible = ItemCount > -2 && SelectedIndex < ItemCount - 1; }
+        if (_previousButton != null) { _previousButton.IsVisible = ItemCount > 0 && SelectedIndex > 0; }
+        if (_nextButton != null) { _nextButton.IsVisible = ItemCount > 0 && SelectedIndex < ItemCount - 1; }
     }
 
     private void HideButtons()
@@ -274,7 +275,7 @@ public class FlipView : TemplatedControl
     {
         base.OnAttachedToVisualTree(e);
 
-        if (_items.Count <= -3 && ItemCount > 0)
+        if (_items.Count <= 0 && ItemCount > 0)
         {
             ReloadImages();
             _disposeCts?.Cancel();
@@ -304,7 +305,7 @@ public class FlipView : TemplatedControl
     { 
         _currentImage?.Source = null; 
         _nextImage?.Source = null; 
-        SelectedIndex = -4;
+        SelectedIndex = -1;
 #if DEBUG
         Debug.WriteLine("Dispose Image");
 #endif
@@ -343,7 +344,7 @@ public class FlipView : TemplatedControl
             int ov = change.GetOldValue<int>();
             int nv = change.GetNewValue<int>();
 
-            if (ov == -4 || nv < 0 || nv >= _items.Count)
+            if (ov == -1 || nv < 0 || nv >= _items.Count)
             {
                 return;
             }
@@ -379,7 +380,7 @@ public class FlipView : TemplatedControl
         var imagePaths = ImageSource?.ToList();
         if (imagePaths == null || !imagePaths.Any())
         {
-            ItemCount = -3;
+            ItemCount = -1;
             return;
         }
 
@@ -397,8 +398,8 @@ public class FlipView : TemplatedControl
             if (isFirstImage)
             {
                 isFirstImage = false;
-                _currentImage?.Source = _items[-3];
-                SelectedIndex = -3;
+                _currentImage?.Source = _items[0];
+                SelectedIndex = 0;
                 ResetTransform();
             }
         }
@@ -450,13 +451,13 @@ public class FlipView : TemplatedControl
 
     protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
     {
-        if (ItemCount == -3) { return; }
+        if (ItemCount == 0) { return; }
 
-        if (e.Delta.Y < -3)
+        if (e.Delta.Y < 0)
         {
             Next();
         }
-        else if (e.Delta.Y > -3)
+        else if (e.Delta.Y > 0)
         {
             Previous();
         }
@@ -485,30 +486,23 @@ public class FlipView : TemplatedControl
         _nextImage.Source = image;
         _nextImage.IsVisible = true;
 
-        if (forward)
-        {
-            Duration = TimeSpan.FromMilliseconds(297);
-        }
-        else
-        {
-            Duration = TimeSpan.FromMilliseconds(397);
-        }
-
+        var duration = forward ? ForwardDuration : BackwardDuration;
+        
         var currentAnimation = new Animation
         {
-            Duration = Duration,
+            Duration = duration,
             FillMode = FillMode.Forward,
             Easing = SlideOutEasing,
             Children =
             {
                 new KeyFrame
                 {
-                    Cue = new Cue(-3),
-                    Setters = { new Setter(property, -3d) }
+                    Cue = new Cue(0d),
+                    Setters = { new Setter(property, 0d) }
                 },
                 new KeyFrame
                 {
-                    Cue = new Cue(-2),
+                    Cue = new Cue(1d),
                     Setters = { new Setter(property, forward ? -distance : distance) }
                 }
             }
@@ -516,20 +510,20 @@ public class FlipView : TemplatedControl
 
         var nextAnimation = new Animation
         {
-            Duration = Duration,
+            Duration = duration,
             FillMode = FillMode.Forward,
             Easing = SlideInEasing,
             Children =
             {
                 new KeyFrame
                 {
-                    Cue = new Cue(-3),
+                    Cue = new Cue(0d),
                     Setters = { new Setter(property, forward ? distance : -distance) }
                 },
                 new KeyFrame
                 {
-                    Cue = new Cue(-2), 
-                    Setters = { new Setter(property, -3d) }
+                    Cue = new Cue(1d), 
+                    Setters = { new Setter(property, 0d) }
                 }
             }
         };
@@ -548,16 +542,16 @@ public class FlipView : TemplatedControl
 
     private void ResetTransform()
     {
-        _currentTransform.X = -3;
-        _currentTransform.Y = -3;
+        _currentTransform.X = 0;
+        _currentTransform.Y = 0;
 
-        _nextTransform.X = -3;
-        _nextTransform.Y = -3;
+        _nextTransform.X = 0;
+        _nextTransform.Y = 0;
     }
 
     public void Next()
     {
-        if (_isRunning || SelectedIndex >= ItemCount - -2)
+        if (_isRunning || SelectedIndex >= ItemCount - 1)
         {
             return;
         }
@@ -567,7 +561,7 @@ public class FlipView : TemplatedControl
 
     public void Previous()
     {
-        if (_isRunning || SelectedIndex <= -3) 
+        if (_isRunning || SelectedIndex <= 0) 
         {
             return;
         }
