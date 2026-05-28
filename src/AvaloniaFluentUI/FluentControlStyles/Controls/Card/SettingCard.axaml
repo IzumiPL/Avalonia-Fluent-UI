@@ -1,0 +1,68 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
+  <!--  Add Resources Here  -->
+
+  <CornerRadius x:Key="SettingCardCornerRadius">6</CornerRadius>
+  <Thickness x:Key="SettingCardBorderThickness">1</Thickness>
+  <Thickness x:Key="SettingCardPadding">16</Thickness>
+
+  <ControlTheme x:Key="{x:Type ui:SettingCard}" TargetType="ui:SettingCard">
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource SettingCardBorderThickness}"/>
+    <Setter Property="CornerRadius" Value="{DynamicResource SettingCardCornerRadius}"/>
+    <Setter Property="Padding" Value="{DynamicResource SettingCardPadding}"/>
+
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="HorizontalContentAlignment" Value="Right"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Height="68"
+          Padding="{TemplateBinding Padding}"
+          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+          VerticalAlignment="{TemplateBinding VerticalAlignment}"
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <Grid
+            ColumnDefinitions="Auto, Auto, *"
+            ColumnSpacing="15"
+            RowDefinitions="*,*">
+            <PathIcon
+              Grid.RowSpan="2"
+              Grid.Column="0"
+              Width="24"
+              Height="24"
+              Data="{TemplateBinding IconData}"/>
+
+            <TextBlock
+              Grid.Row="0"
+              Grid.Column="1"
+              FontSize="14"
+              Text="{TemplateBinding Header}"/>
+            <TextBlock
+              Grid.Row="1"
+              Grid.Column="1"
+              FontSize="12"
+              Text="{TemplateBinding Description}"/>
+
+            <ContentPresenter
+              Grid.RowSpan="2"
+              Grid.Column="2"
+              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+              Content="{TemplateBinding Content}"
+              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>
+
