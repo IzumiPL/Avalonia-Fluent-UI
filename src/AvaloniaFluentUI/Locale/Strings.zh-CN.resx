@@ -140,4 +140,10 @@
   <data name="UndoDescription" xml:space="preserve">
     <value>撤销最近的行动</value>
   </data>
+  <data name="Off" xml:space="preserve">
+    <value>关</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>开</value>
+  </data>
 </root>

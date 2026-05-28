@@ -187,4 +187,10 @@
   <data name="UndoDescription" xml:space="preserve">
     <value>最後の操作を元に戻す</value>
   </data>
+  <data name="On" xml:space="preserve">
+    <value>オン</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>オフ</value>
+  </data>
 </root>
