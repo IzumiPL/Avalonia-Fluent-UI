@@ -6,7 +6,7 @@
   <ControlTheme x:Key="{x:Type ui:OutlinePushButton}" TargetType="ui:OutlinePushButton">
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
     <Setter Property="BorderThickness" Value="1"/>
     <Setter Property="IconWidth" Value="16"/>
     <Setter Property="IconHeight" Value="16"/>
@@ -70,7 +70,6 @@
     <Style Selector="^:pointerover">
       <Style Selector="^ /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}"/>
       </Style>
 
       <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
@@ -84,7 +83,6 @@
     <Style Selector="^:pressed">
       <Style Selector="^ /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
       </Style>
 
       <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">

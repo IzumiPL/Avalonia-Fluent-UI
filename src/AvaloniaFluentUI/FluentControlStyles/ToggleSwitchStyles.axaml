@@ -1,6 +1,7 @@
 <ResourceDictionary
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale"
   x:CompileBindings="True">
 
   <Design.PreviewWith>
@@ -30,6 +31,9 @@
     <Setter Property="HorizontalContentAlignment" Value="Left"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
+
+    <Setter Property="OffContent" Value="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Off]}"/>
+    <Setter Property="OnContent" Value="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[On]}"/>
     <Setter Property="KnobTransitions">
       <Transitions>
         <DoubleTransition

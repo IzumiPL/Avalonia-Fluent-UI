@@ -185,7 +185,7 @@
   </ControlTemplate>
 
   <ControlTheme x:Key="{x:Type ui:SettingsExpander}" TargetType="ui:SettingsExpander">
-    <Setter Property="Background" Value="{DynamicResource ExpanderBackground}"/>
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ExpanderHeaderBorderThickness}"/>
     <Setter Property="Padding" Value="{DynamicResource SettingsExpanderPadding}"/>
@@ -208,7 +208,7 @@
   </ControlTheme>
 
   <ControlTheme x:Key="SettingsExpanderNoAnimationStyle" TargetType="ui:SettingsExpander">
-    <Setter Property="Background" Value="{DynamicResource ExpanderBackground}"/>
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ExpanderHeaderBorderThickness}"/>
     <Setter Property="Padding" Value="{DynamicResource SettingsExpanderPadding}"/>

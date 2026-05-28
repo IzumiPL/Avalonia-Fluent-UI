@@ -125,7 +125,7 @@
     <Style Selector="^.Accent">
       <Style Selector="^ /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
       </Style>
 
       <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
@@ -138,7 +138,6 @@
       <Style Selector="^:pointerover">
         <Style Selector="^ /template/ Border#PART_Border">
           <Setter Property="Background" Value="{DynamicResource AccentFillColorSecondaryBrush}"/>
-          <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}"/>
         </Style>
 
         <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">

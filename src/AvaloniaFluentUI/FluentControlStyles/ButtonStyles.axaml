@@ -92,13 +92,12 @@
     <Style Selector="^.Accent">
       <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
       </Style>
 
       <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource AccentFillColorSecondaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
       </Style>
 

@@ -66,7 +66,7 @@
     <Setter Property="MinWidth" Value="{DynamicResource ListViewItemMinWidth}"/>
 
     <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
     <Setter Property="MinHeight" Value="45"/>
     <Setter Property="ClipToBounds" Value="True"/>
     <Setter Property="CornerRadius" Value="8"/>
