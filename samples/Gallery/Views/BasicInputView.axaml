@@ -747,7 +747,7 @@
           <StackPanel Orientation="Vertical" Spacing="3">
             <TextBlock Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
             <StackPanel Orientation="Horizontal" Spacing="3">
-              <TextBlock Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Direction]}"/>
+              <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Direction]}"/>
               <fui:FluentComboBox ItemsSource="{Binding Orientations}" SelectedItem="{Binding ToolTipSliderOrientation}"/>
             </StackPanel>
             <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}" IsChecked="{Binding ToolTipSliderIsDisabled}"/>

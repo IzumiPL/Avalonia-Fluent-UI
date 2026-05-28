@@ -211,6 +211,7 @@
           <Grid
             VerticalAlignment="Center"
             ColumnDefinitions="*, Auto"
+            IsEnabled="False"
             RowDefinitions="*, *">
             <TextBlock
               Grid.Row="0"

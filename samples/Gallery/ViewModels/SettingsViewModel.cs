@@ -98,12 +98,12 @@ public partial class SettingsViewModel : ViewModelBase
     {
         if (value)
         {
-            ThemeService.SetAccentColor(Colors.DeepPink);
+            ThemeService.SetAccentColor(Colors.DeepSkyBlue);
         }
     }
 
     [ObservableProperty]
-    private Color _selectedAccentColor = Colors.DeepPink;
+    private Color _selectedAccentColor = Colors.Transparent;
 
     partial void OnSelectedAccentColorChanged(Color value)
     {

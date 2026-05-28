@@ -467,4 +467,7 @@
   <data name="MT_CommandText" xml:space="preserve"><value>执行的命令:</value></data>
   <data name="MT_LoginName" xml:space="preserve"><value>妃爱亲</value></data>
   <data name="OnlineDocument" xml:space="preserve"><value>在线文档</value></data>
+    <data name="ToggleTheme" xml:space="preserve"><value>切换主题</value></data>
+  <data name="Pin" xml:space="preserve"><value>置顶</value></data>
+    <data name="UnPin" xml:space="preserve"><value>取消置顶</value></data>
 </root>

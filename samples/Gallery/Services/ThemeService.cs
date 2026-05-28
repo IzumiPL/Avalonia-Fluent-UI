@@ -100,14 +100,14 @@ public class ThemeService
                 AccentColor = "#FFFF1493",
                 IsWindowEffectEnabled = true,
                 IsEnabledBackgroundImage = false,
-                Language = "zn-CN"
+                Language = "zh-CN"
             };
 
             var json = JsonSerializer.Serialize(config, ConfigJsonContext.Default.AppConfig);
             File.WriteAllText(AppConfigPath, json, Encoding.UTF8);
 
             Application.Current?.RequestedThemeVariant = ThemeVariant.Default;
-            FluentTheme?.CustomAccentColor = Colors.DeepPink;
+            FluentTheme?.CustomAccentColor = Colors.DeepSkyBlue;
             
             return config;
         }

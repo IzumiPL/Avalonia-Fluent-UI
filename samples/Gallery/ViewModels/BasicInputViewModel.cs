@@ -101,7 +101,7 @@ public partial class BasicInputViewModel : ViewModelBase
     private void ClearMultiSelectionSelectedItem() => MultiSelectionSelectedItems.Clear();
 
     [ObservableProperty]
-    private ObservableCollection<object> _multiSelectionSelectedItems = new ObservableCollection<object>();
+    private ObservableCollection<object> _multiSelectionSelectedItems = new ObservableCollection<object>(["Multi Selection Item 1"]);
 
     [ObservableProperty]
     private bool _outlineToolButtonIsDisabled;

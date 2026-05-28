@@ -38,7 +38,7 @@
               <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Interval]}"/>
               <fui:FluentComboBox
                 Width="150"
-                HorizontalAlignment="Stretch"
+                HorizontalAlignment="Right"
                 ItemsSource="{Binding Intervals}"
                 SelectedItem="{Binding FlipViewAutoPlayInterval}"/>
             </StackPanel>
@@ -47,7 +47,7 @@
               <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Direction]}"/>
               <fui:FluentComboBox
                 Width="150"
-                HorizontalAlignment="Stretch"
+                HorizontalAlignment="Right"
                 ItemsSource="{Binding FlipOrientations}"
                 SelectedItem="{Binding CurrentFlipOrientation}"/>
             </StackPanel>

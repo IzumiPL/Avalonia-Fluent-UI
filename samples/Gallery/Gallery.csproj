@@ -9,8 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AvaloniaResource Include="Assets\**" Exclude="Assets\Locale\**" />
-    <Content Include="Assets\Locale\**" CopyToOutputDirectory="PreserveNewest" />
+<!--    <AvaloniaResource Include="Assets\**" Exclude="Assets\Locale\**" />-->
+    <AvaloniaResource Include="Assets\**"/>
+<!--    <Content Include="Assets\Locale\**" CopyToOutputDirectory="PreserveNewest" />-->
   </ItemGroup>
 
   <ItemGroup>
@@ -21,7 +22,6 @@
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" />
   </ItemGroup>
-  
   
   <!--    <PropertyGroup Condition="'$(Configuration)' == 'Release'">-->
   <PropertyGroup>
@@ -39,7 +39,7 @@
     <ProjectReference Include="../../src/AvaloniaFluentUI/AvaloniaFluentUI.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Assets\Locale\" />
-  </ItemGroup>
+<!--  <ItemGroup>-->
+<!--    <Folder Inclu/de="Assets\Locale\" />-->
+<!--  </ItemGroup>-->
 </Project>

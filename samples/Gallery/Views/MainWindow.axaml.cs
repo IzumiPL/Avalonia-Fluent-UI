@@ -19,6 +19,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Gallery.Messages;
 using Gallery.Models;
 using Gallery.Services;
+using Gallery.Themes;
 using Gallery.ViewModels;
 
 namespace Gallery.Views;
@@ -67,7 +68,21 @@ public partial class MainWindow : AppWindow
             await Task.Delay(3000);
             // Background = Brushes.DeepPink;
         }, DispatcherPriority.Background);
-        
+
+
+        ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("Pin"));
+
+        LocalizationService.Instance.PropertyChanged += (_, __) =>
+        {
+            if (PinButton.Tag.ToString() == "isTopmost")
+            {
+                ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("UnPin"));
+            }
+            else
+            {
+                ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("Pin"));
+            }
+        };
     }
 
     private void OnJumpToControl(object recipient, JumpToControlMessage message)
@@ -188,14 +203,14 @@ public partial class MainWindow : AppWindow
             Topmost = false;
             Topmost = true;
 
-            if (change.GetNewValue<WindowState>() == WindowState.Maximized)
-            {
-                NavigationView.Margin = new Thickness(12, 8, 8, 6);
-            }
-            else
-            {
-                NavigationView.Margin = new Thickness(6, 0, 0, 0);
-            }
+            // if (change.GetNewValue<WindowState>() == WindowState.Maximized)
+            // {
+            //     NavigationView.Margin = new Thickness(12, 55, 8, 6);
+            // }
+            // else
+            // {
+            //     NavigationView.Margin = new Thickness(6, 55, 0, 0);
+            // }
         }
     }
 
@@ -237,5 +252,26 @@ public partial class MainWindow : AppWindow
     private void OnClicked(object? sender, RoutedEventArgs e)
     {
         LocalizationService.Instance.SetCulture("en-US");
+    }
+
+    private void OnToggleTopmost(object? sender, RoutedEventArgs e)
+    {
+        if (sender is ToolButton btn)
+        {
+            if (btn.Tag.ToString() == "isTopmost")
+            {
+                btn.Tag = "noTopmost";
+                btn.IconData = Geometry.Parse(FluentIcon.Pin);
+                this.Topmost = false;
+                ToolTip.SetTip(btn, LocalizationService.Instance.GetString("Pin"));
+            }
+            else
+            {
+                btn.Tag = "isTopmost";
+                btn.IconData = Geometry.Parse(FluentIcon.Unpin);
+                this.Topmost = true;
+                ToolTip.SetTip(btn, LocalizationService.Instance.GetString("UnPin"));
+            }
+        }
     }
 }

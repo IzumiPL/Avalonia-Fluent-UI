@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:controls="using:Gallery.Controls">
+  xmlns:controls="using:Gallery.Controls"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI">
 
   <ControlTheme x:Key="{x:Type controls:CodeCard}" TargetType="controls:CodeCard">
     <Setter Property="ClipToBounds" Value="True"/>
@@ -57,7 +58,7 @@
                   <TextBlock
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Text="源代码"/>
+                    Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SourceCode]}"/>
 
                   <ContentPresenter
                     Name="PART_CodePresenter"

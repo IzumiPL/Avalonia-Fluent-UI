@@ -10,7 +10,7 @@ namespace Gallery.Services;
 public class MainWindowMessageHandler :
     IRecipient<PageAnimationStatusChangedMessage>, 
     IRecipient<PageAnimationTypeChangedMessage>,
-    IRecipient<WindowTopmostStatusMessage>,
+    // IRecipient<WindowTopmostStatusMessage>,
     // IRecipient<NavigationGoBackMessage>,
     IRecipient<EnabledWindowEffectMessage>,
     IRecipient<EnabledBackgroundImageMessage>

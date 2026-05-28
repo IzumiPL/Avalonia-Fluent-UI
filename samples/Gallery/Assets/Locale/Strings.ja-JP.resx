@@ -467,4 +467,7 @@
   <data name="MT_CommandText" xml:space="preserve"><value>実行されたコマンド:</value></data>
   <data name="MT_LoginName" xml:space="preserve"><value>側室の愛</value></data>
   <data name="OnlineDocument" xml:space="preserve"><value>オンラインドキュメント</value></data>
+        <data name="ToggleTheme" xml:space="preserve"><value>スイッチテーマ</value></data>
+  <data name="Pin" xml:space="preserve"><value>ピントトップ</value></data>
+    <data name="UnPin" xml:space="preserve"><value>ピンを外せ</value></data>
 </root>
