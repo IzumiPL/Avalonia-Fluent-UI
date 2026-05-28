@@ -7,58 +7,45 @@
     <Setter Property="HorizontalAlignment" Value="Left"/>
     <Setter Property="Orientation" Value="Horizontal"/>
     <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="1"/>
-    <Setter Property="CornerRadius" Value="3"/>
-    <Setter Property="Padding" Value="2 2 2 0"/>
+    <Setter Property="CornerRadius" Value="5"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border
+          Name="Border"
+          Padding="{TemplateBinding Padding}"
           HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
           VerticalAlignment="{TemplateBinding VerticalAlignment}"
           Background="{TemplateBinding Background}"
           BorderBrush="{TemplateBinding BorderBrush}"
           BorderThickness="{TemplateBinding BorderThickness}"
           CornerRadius="{TemplateBinding CornerRadius}">
-          <Grid
-            Name="PART_Panel"
-            ColumnDefinitions="Auto,*"
-            RowDefinitions="Auto,*">
-            <Border
-              Name="PART_HeaderBorder"
-              Padding="{TemplateBinding Padding}"
-              BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
-              BorderThickness="1"
-              CornerRadius="5">
-              <ui:SingleDirectionScrollViewer
-                Name="PART_ScrollViewer"
-                Margin="0"
-                Padding="0"
-                Background="Transparent"
-                BorderBrush="Transparent"
-                BorderThickness="0"
-                Orientation="{TemplateBinding Orientation}">
-                <Grid Name="PART_HeadersArea">
-                  <ItemsPresenter
-                    Name="PART_ItemsPresenter"
-                    ItemsPanel="{TemplateBinding ItemsPanel}"
-                    ZIndex="10"/>
-                  <Rectangle
-                    Name="PART_SelectedIndicator"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Fill="{DynamicResource AccentFillColorDefaultBrush}"
-                    IsVisible="False"
-                    RadiusX="6"
-                    RadiusY="6"
-                    ZIndex="0"/>
-                </Grid>
-              </ui:SingleDirectionScrollViewer>
-            </Border>
-            <ContentPresenter
-              Name="PART_ContentPresenter"
-              Margin="{TemplateBinding Padding}"
-              Content="{TemplateBinding Content}"/>
-          </Grid>
+          <ui:SingleDirectionScrollViewer
+            Name="PART_ScrollViewer"
+            Margin="0"
+            Padding="0"
+            VerticalAlignment="Stretch"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            BorderThickness="0"
+            Orientation="{TemplateBinding Orientation}">
+            <Grid Name="PART_HeadersArea">
+              <ItemsPresenter
+                Name="PART_ItemsPresenter"
+                ItemsPanel="{TemplateBinding ItemsPanel}"
+                ZIndex="10"/>
+              <Rectangle
+                Name="PART_SelectedIndicator"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Fill="{DynamicResource AccentFillColorDefaultBrush}"
+                IsVisible="False"
+                RadiusX="6"
+                RadiusY="6"
+                ZIndex="0"/>
+            </Grid>
+          </ui:SingleDirectionScrollViewer>
         </Border>
       </ControlTemplate>
     </Setter>
@@ -71,13 +58,13 @@
       </Setter>
     </Style>
 
-    <Style Selector="^ /template/ Border#PART_HeaderBorder">
-      <Setter Property="Grid.ColumnSpan" Value="2"/>
-    </Style>
-    <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Grid.Row" Value="1"/>
-      <Setter Property="Grid.ColumnSpan" Value="2"/>
-    </Style>
+    <!-- <Style Selector="^ /template/ Border#PART_HeaderBorder"> -->
+    <!--   <Setter Property="Grid.ColumnSpan" Value="2"/> -->
+    <!-- </Style> -->
+    <!-- <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter"> -->
+    <!--   <Setter Property="Grid.Row" Value="1"/> -->
+    <!--   <Setter Property="Grid.ColumnSpan" Value="2"/> -->
+    <!-- </Style> -->
 
     <Style Selector="^[Orientation=Horizontal]">
       <Style Selector="^ /template/ ui|SingleDirectionScrollViewer#PART_ScrollViewer">
@@ -85,34 +72,46 @@
         <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
       </Style>
 
+      <Setter Property="Padding" Value="2 4 2 0"/>
+
+      <Style Selector="^ /template/ Rectangle#PART_SelectedIndicator">
+        <Setter Property="RenderTransformOrigin" Value="50%, 50%"/>
+        <Setter Property="Transitions">
+          <Transitions>
+            <ThicknessTransition Property="Margin" Duration="0:0:0.15"/>
+            <DoubleTransition Property="Width" Duration="0:0:0.168"/>
+          </Transitions>
+        </Setter>
+      </Style>
     </Style>
 
     <Style Selector="^[Orientation=Vertical]">
-      <Setter Property="Padding" Value="8"/>
+      <Setter Property="Padding" Value="4 4 0 4"/>
 
       <Style Selector="^ /template/ ui|SingleDirectionScrollViewer#PART_ScrollViewer">
         <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
         <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
       </Style>
 
-      <Style Selector="^ /template/ Border#PART_HeaderBorder">
-        <Setter Property="Grid.ColumnSpan" Value="1"/>
-      </Style>
-      <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="Grid.Row" Value="0"/>
-        <Setter Property="Grid.Column" Value="1"/>
-        <Setter Property="Grid.ColumnSpan" Value="1"/>
+      <Style Selector="^ /template/ Rectangle#PART_SelectedIndicator">
+        <Setter Property="RenderTransformOrigin" Value="50%, 50%"/>
+        <Setter Property="Transitions">
+          <Transitions>
+            <ThicknessTransition Property="Margin" Duration="0:0:0.15"/>
+          </Transitions>
+        </Setter>
       </Style>
     </Style>
 
-    <Style Selector="^ /template/ Rectangle#PART_SelectedIndicator">
-      <Setter Property="RenderTransformOrigin" Value="50%, 50%"/>
-      <Setter Property="Transitions">
-        <Transitions>
-          <ThicknessTransition Property="Margin" Duration="0:0:0.15"/>
-          <DoubleTransition Property="Width" Duration="0:0:0.168"/>
-        </Transitions>
-      </Setter>
-    </Style>
+    <!-- <Style Selector="^ /template/ Rectangle#PART_SelectedIndicator"> -->
+    <!-- <Setter Property="RenderTransformOrigin" Value="50%, 50%"/> -->
+    <!-- <Setter Property="Transitions"> -->
+    <!-- <Transitions> -->
+    <!-- <ThicknessTransition Property="Margin" Duration="0:0:0.15"/> -->
+    <!-- <DoubleTransition Property="Width" Duration="0:0:0.168"/> -->
+    <!-- </Transitions> -->
+    <!-- </Setter> -->
+    <!-- </Style> -->
+
   </ControlTheme>
 </ResourceDictionary>

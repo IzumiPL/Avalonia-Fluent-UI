@@ -6,8 +6,9 @@
   <ControlTheme x:Key="{x:Type ui:SegmentedView}" TargetType="ui:SegmentedView">
     <Setter Property="HorizontalAlignment" Value="Left"/>
     <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="1"/>
-    <Setter Property="CornerRadius" Value="3"/>
+    <Setter Property="CornerRadius" Value="5"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border
@@ -18,39 +19,27 @@
           BorderBrush="{TemplateBinding BorderBrush}"
           BorderThickness="{TemplateBinding BorderThickness}"
           CornerRadius="{TemplateBinding CornerRadius}">
-          <Grid RowDefinitions="Auto,*">
-            <Border
-              BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
-              BorderThickness="1"
-              CornerRadius="5">
-              <ui:SingleDirectionScrollViewer
-                Margin="0"
-                Padding="0"
-                Background="Transparent"
-                BorderBrush="Transparent"
-                BorderThickness="0"
-                HorizontalScrollBarVisibility="Hidden"
-                VerticalScrollBarVisibility="Disabled">
-                <Grid Name="PART_HeadersArea">
-                  <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}"/>
-                  <Rectangle
-                    Name="PART_SelectedIndicator"
-                    Height="3"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Bottom"
-                    Fill="{DynamicResource AccentFillColorDefaultBrush}"
-                    IsVisible="False"
-                    RadiusX="2"
-                    RadiusY="2"/>
-                </Grid>
-              </ui:SingleDirectionScrollViewer>
-            </Border>
-            <ContentPresenter
-              Name="PART_ContentPresenter"
-              Grid.Row="1"
-              Margin="{TemplateBinding Padding}"
-              Content="{TemplateBinding Content}"/>
-          </Grid>
+          <ui:SingleDirectionScrollViewer
+            Margin="0"
+            Padding="0"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            BorderThickness="0"
+            HorizontalScrollBarVisibility="Hidden"
+            VerticalScrollBarVisibility="Disabled">
+            <Grid Name="PART_HeadersArea">
+              <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}"/>
+              <Rectangle
+                Name="PART_SelectedIndicator"
+                Height="3"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Fill="{DynamicResource AccentFillColorDefaultBrush}"
+                IsVisible="False"
+                RadiusX="2"
+                RadiusY="2"/>
+            </Grid>
+          </ui:SingleDirectionScrollViewer>
         </Border>
       </ControlTemplate>
     </Setter>
