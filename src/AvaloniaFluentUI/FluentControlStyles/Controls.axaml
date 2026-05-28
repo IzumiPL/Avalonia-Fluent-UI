@@ -65,7 +65,6 @@
         <!--  FluentAvalonia Controls  -->
         <MergeResourceInclude Source="/FluentControlStyles/Controls/FrameStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/ContentDialogStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/PickerFlyoutPresenterStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/InfoBadgeStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/InfoBarStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/NumberBoxStyles.axaml"/>
@@ -146,6 +145,8 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Segmented/SegmentedToggleViewStyle.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/TextBox/SearchTextBox.axaml"/>
+
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/SettingCard.axaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Styles.Resources>
