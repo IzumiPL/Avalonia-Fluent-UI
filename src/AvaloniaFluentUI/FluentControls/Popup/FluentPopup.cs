@@ -26,12 +26,12 @@ public class FluentPopup : Avalonia.Controls.Primitives.Popup
             var isOpen = change.GetNewValue<bool>();
             if (isOpen)
             {
-                _ = PlayOpenAnimationAsync();
+                RunOpenAnimationAsync();
             }
         }
     }
     
-    protected virtual async Task PlayOpenAnimationAsync()
+    protected virtual void RunOpenAnimationAsync()
     {
         var child = Child as Visual;
         if (child == null) return;
@@ -50,11 +50,11 @@ public class FluentPopup : Avalonia.Controls.Primitives.Popup
         };
         if (property != null)
         {
-            await FluentAnimation.SlideInAsync(child, OffSet, property);
+            FluentAnimation.SlideInAsync(child, OffSet, property);
         }
         else
         {
-            await FluentAnimation.CenterScaleAsync(child, OffSet);
+            FluentAnimation.CenterScaleAsync(child, OffSet);
         }
     }
 }
@@ -66,11 +66,11 @@ public class ScaleFluentPopup : FluentPopup
         OffSet = 0.75;
     }
     
-    protected override async Task PlayOpenAnimationAsync()
+    protected override void RunOpenAnimationAsync()
     {
         var child = Child as Visual;
         if (child == null) return;
 
-        await FluentAnimation.CenterScaleAsync(child, OffSet);
+        FluentAnimation.CenterScaleAsync(child, OffSet);
     }
 }

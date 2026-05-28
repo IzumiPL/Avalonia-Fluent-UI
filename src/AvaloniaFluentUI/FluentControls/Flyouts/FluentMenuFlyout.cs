@@ -20,7 +20,7 @@ public class FluentMenuFlyout : MenuFlyout
         
         if (Popup.Child is {} presenter)
         {
-            _=FluentAnimation.SlideInAsync(presenter, -24d, TranslateTransform.YProperty);
+            FluentAnimation.SlideInAsync(presenter, -24d, TranslateTransform.YProperty);
         }
     }
 }

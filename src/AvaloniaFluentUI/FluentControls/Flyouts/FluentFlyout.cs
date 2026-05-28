@@ -85,15 +85,15 @@ public class FluentFlyout : Avalonia.Controls.Primitives.PopupFlyoutBase
                         or PlacementMode.TopEdgeAlignedLeft or PlacementMode.TopEdgeAlignedRight => 32D,
                     _ => -32D
                 };
-                
+
                 if (value < 1 && value > 0)
                 {
-                    _ = FluentAnimation.CenterScaleAsync(presenter, value);
+                    FluentAnimation.CenterScaleAsync(presenter, value);
                 }
                 else
                 {
                     var property = ((Placement == PlacementMode.Top) || (Placement == PlacementMode.Bottom)) ? TranslateTransform.YProperty : TranslateTransform.XProperty;
-                    _ = FluentAnimation.SlideInAsync(presenter, value, property);
+                    FluentAnimation.SlideInAsync(presenter, value, property);
                 }
             }
             base.OnOpened();

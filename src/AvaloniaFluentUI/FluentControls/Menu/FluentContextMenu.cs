@@ -10,8 +10,5 @@ public class FluentContextMenu : Avalonia.Controls.ContextMenu
         Opened += OnMenuOpened;
     }
 
-    private void OnMenuOpened(object sender, EventArgs e)
-    {
-        _=FluentAnimation.ScaleAndSliderInAsync(this, -Bounds.Height);
-    }
+    private void OnMenuOpened(object sender, EventArgs e) => FluentAnimation.ScaleAndSliderInAsync(this, -Bounds.Height);
 }

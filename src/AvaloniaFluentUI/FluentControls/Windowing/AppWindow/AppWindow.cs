@@ -43,6 +43,15 @@ public partial class AppWindow : Window
     public static readonly AttachedProperty<bool> AllowInteractionInTitleBarProperty =
         AvaloniaProperty.RegisterAttached<AppWindow, Control, bool>("AllowInteractionInTitleBar");
 
+    public static readonly StyledProperty<double> IconSizeProperty =
+        AvaloniaProperty.Register<AppWindow, double>(nameof(IconSize), defaultValue: 16);
+
+    public double IconSize
+    {
+        get => GetValue(IconSizeProperty);
+        set => SetValue(IconSizeProperty, value);
+    }
+
     /// <summary>
     /// Gets the value of the <see cref="AllowInteractionInTitleBarProperty"/> attached property for the given control
     /// </summary>
@@ -177,12 +186,6 @@ public partial class AppWindow : Window
         AvaloniaProperty.Register<AppWindow, double>(nameof(TitleBarHeight), 40d);
 
     /// <summary>
-    /// Defines the <see cref="ContentMargin"/> property
-    /// </summary>
-    public static readonly StyledProperty<Thickness> ContentMarginProperty =
-        AvaloniaProperty.Register<AppWindow, Thickness>(nameof(ContentMargin));
-
-    /// <summary>
     /// Defines the <see cref="IsTitleBarContentVisible"/> property
     /// </summary>
     public static readonly StyledProperty<bool> IsTitleBarContentVisibleProperty =
@@ -222,19 +225,6 @@ public partial class AppWindow : Window
     }
 
     /// <summary>
-    /// Gets or sets the window content margin for AppWindow
-    /// </summary>
-    /// <remarks>
-    /// This value is calculated based on WindowState, title bar height and whether
-    /// the content is extended into the titlebar area
-    /// </remarks>
-    public Thickness ContentMargin
-    {
-        get => GetValue(ContentMarginProperty);
-        set => SetValue(ContentMarginProperty, value);
-    }
-
-    /// <summary>
     /// Gets or sets whether the titlebar content is visible (Icon and App name text)
     /// </summary>
     public bool IsTitleBarContentVisible
@@ -270,7 +260,9 @@ public partial class AppWindow : Window
 
     public void EnableWindowEffect(bool enable)
     {
-        if (IsWindows && enable)
+        if (!IsWindows) { return; }
+        
+        if (enable)
         {
             if (IsWindows11)
             {
@@ -360,6 +352,11 @@ public partial class AppWindow : Window
             SetTitleBarColors();
         }
 
+        // if (change.Property == TitleBarHeightProperty)
+        // {
+            // OnExtendsContentIntoTitleBarChanged(IsExtendedIntoWindowDecorations);
+        // }
+
         // if (change.Property == ExtendClientAreaToDecorationsHintProperty)
         // {
             // Console.WriteLine($"Pro Ext Chd: {change.GetNewValue<bool>()}");
@@ -446,29 +443,10 @@ public partial class AppWindow : Window
 
         base.OnClosed(e);     
     }
-
-    internal void OnExtendsContentIntoTitleBarChanged(bool isExtended)
-    {
-
-        Console.WriteLine($"Ext Chd: {isExtended}");
-        if (isExtended)
-        {
-            IsTitleBarContentVisible = false;
-            ContentMargin = new Thickness();
-        }
-        else
-        {
-            IsTitleBarContentVisible = true;
-            
-            if (WindowState != WindowState.FullScreen)
-                ContentMargin = new Thickness(0, _titleBar.Height, 0, 0);
-        }
-    }
     
     internal void OnTitleBarHeightChanged(double height)
     {
         TitleBarHeight = height;
-        // OnExtendsContentIntoTitleBarChanged(ExtendClientAreaToDecorationsHint);
     }
 
     internal void TitleBarColorsChanged()
@@ -766,8 +744,6 @@ public partial class AppWindow : Window
             }
         }
     }
-
-    
 
     private async void LoadApp()
     {

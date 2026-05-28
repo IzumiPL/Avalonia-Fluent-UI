@@ -21,7 +21,7 @@ public class FluentAnimation
     /// <param name="fromValue">起始值</param>
     /// <param name="toValue">结束值</param>
     /// <param name="duration">持续时间（毫秒）</param>
-    public static async Task AnimateAsync(Animatable target, AvaloniaProperty property, object fromValue, object toValue, double duration = 250D)
+    public static async void RunAnimateAsync(Animatable target, AvaloniaProperty property, object fromValue, object toValue, double duration = 250D)
     {
         var animation = new Avalonia.Animation.Animation
         {
@@ -48,22 +48,22 @@ public class FluentAnimation
     /// <summary>
     /// 淡入效果
     /// </summary>
-    public static async Task FadeInAsync(Visual target, double duration = 250D)
+    public static void FadeInAsync(Visual target, double duration = 250D)
     {
         target.Opacity = 0;
-        await AnimateAsync(target, Visual.OpacityProperty, 0D, 1D, duration);
+        RunAnimateAsync(target, Visual.OpacityProperty, 0D, 1D, duration);
     }
 
     /// <summary>
     /// 淡出效果
     /// </summary>
-    public static async Task FadeOutAsync(Visual target, double duration = 250D)
+    public static void FadeOutAsync(Visual target, double duration = 250D)
     {
-        await AnimateAsync(target, Visual.OpacityProperty, target.Opacity, 0D, duration);
+        RunAnimateAsync(target, Visual.OpacityProperty, target.Opacity, 0D, duration);
         target.Opacity = 0;
     }
 
-    public static async Task ScaleAndSliderInAsync(Visual target, double sliderOffset, double scaleOffset = 0.4D, double duration = 300D)
+    public static async void ScaleAndSliderInAsync(Visual target, double sliderOffset, double scaleOffset = 0.4D, double duration = 300D)
     {
         _cancellationTokenSource?.Cancel();
         _cancellationTokenSource = new CancellationTokenSource();
@@ -110,7 +110,7 @@ public class FluentAnimation
         await animation.RunAsync(target, cancellationToken: _cancellationTokenSource.Token);
     }
 
-    public static async Task CenterScaleAsync(Visual target, double offset, AvaloniaProperty? property = null, double duration = 200D)
+    public static async void CenterScaleAsync(Visual target, double offset, AvaloniaProperty? property = null, double duration = 200D)
     {
         _cancellationTokenSource?.Cancel();
         _cancellationTokenSource = new CancellationTokenSource();
@@ -153,7 +153,7 @@ public class FluentAnimation
     /// <summary>
     /// 从下方滑入
     /// </summary>
-    public static async Task SlideInAsync(Visual target, double offset, AvaloniaProperty? property = null, double duration = 250D)
+    public static async void SlideInAsync(Visual target, double offset, AvaloniaProperty? property = null, double duration = 250D)
     {
         _cancellationTokenSource?.Cancel();
         _cancellationTokenSource = new CancellationTokenSource();
