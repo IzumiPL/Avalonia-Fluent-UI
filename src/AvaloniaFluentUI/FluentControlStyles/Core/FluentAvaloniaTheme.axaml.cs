@@ -20,13 +20,29 @@ namespace AvaloniaFluentUI.Styling;
 public partial class FluentAvaloniaTheme : Styles, IResourceProvider
 {
     /// <summary>
+    /// Gets the current <see cref="FluentAvaloniaTheme"/> instance.
+    /// </summary>
+    public static FluentAvaloniaTheme Instance { get; private set; }
+
+    /// <summary>
     /// Create new instance of <see cref="FluentAvaloniaTheme"/>.
     /// </summary>
     public FluentAvaloniaTheme()
     {
+        Instance = this;
         MergedDictionaries = new AvaloniaList<IResourceDictionary>();
         MergedDictionaries.CollectionChanged += MergedDictionariesCollectionChanged;
         Init();
+
+        Application.Current.PropertyChanged += OnCurrentThemePropertyChanged;
+    }
+
+    private void OnCurrentThemePropertyChanged(object sender, AvaloniaPropertyChangedEventArgs e)
+    {
+        if (e.Property.Name == nameof(Application.ActualThemeVariant))
+        {
+            ThemeChanged?.Invoke(sender, (ThemeVariant)e.NewValue);
+        }
     }
 
     /// <summary>
@@ -129,6 +145,33 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
     public TextVerticalAlignmentOverride TextVerticalAlignmentOverrideBehavior { get; set; } =
         TextVerticalAlignmentOverride.EnabledNonWindows;
 
+    /// <summary>
+    /// Raised when the theme variant (Light/Dark) changes.
+    /// </summary>
+    public event EventHandler<ThemeVariant> ThemeChanged;
+
+    /// <summary>
+    /// Raised when the accent color changes.
+    /// </summary>
+    public event EventHandler<Color> ThemeColorChanged;
+    
+    /// <summary>
+    /// Gets whether the current theme is dark.
+    /// </summary>
+    public bool IsDarkTheme => Application.Current?.ActualThemeVariant == ThemeVariant.Dark;
+    
+    /// <summary>
+    /// Gets or sets the current primary accent color.
+    /// </summary>
+    public Color CurrentAccentColor
+    {
+        get => _accentColorsDictionary != null
+               && _accentColorsDictionary.TryGetValue("SystemAccentColor", out var value)
+            ? (Color)value
+            : Colors.DeepSkyBlue;
+        set => CustomAccentColor = value;
+    }
+
     public AvaloniaList<IResourceDictionary> MergedDictionaries { get; }
       
     bool IResourceNode.HasResources => true;
@@ -166,7 +209,7 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
         ResolveThemeAndInitializeSystemResources();
 
         SetTextAlignmentOverrides();
-
+        
         _hasLoaded = true;
     }
 
@@ -212,7 +255,8 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
         if (theme != null)
         {
             Application.Current.RequestedThemeVariant = theme;
-        }     
+            ThemeChanged?.Invoke(this, theme);
+        }
     }
 
     private void OnPlatformColorValuesChanged(object sender, PlatformColorValues e)
@@ -232,6 +276,7 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
             }
 
             Application.Current.RequestedThemeVariant = theme;
+            ThemeChanged?.Invoke(this, theme);
         }
 
         if (!CustomAccentColor.HasValue && PreferUserAccentColor)
@@ -411,13 +456,13 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
 
         Color2 col = _customAccentColor.Value;
 
-        UpdateAccentColors((Color)_customAccentColor.Value,
+        UpdateAccentColors((Color)col,
+            (Color)col.LightenPercent(0.05f),
+            (Color)col.LightenPercent(0.10f),
             (Color)col.LightenPercent(0.15f),
-            (Color)col.LightenPercent(0.30f),
-            (Color)col.LightenPercent(0.45f),
-            (Color)col.LightenPercent(-0.15f),
-            (Color)col.LightenPercent(-0.30f),
-            (Color)col.LightenPercent(-0.45f));
+            (Color)col.LightenPercent(-0.05f),
+            (Color)col.LightenPercent(-0.10f),
+            (Color)col.LightenPercent(-0.15f));
     }
         
     private void TryLoadMacOSAccentColor(IPlatformSettings platformSettings)
@@ -428,12 +473,12 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
             Color2 aColor = platformSettings.GetColorValues().AccentColor1;
 
             UpdateAccentColors((Color)aColor,
+                (Color)aColor.LightenPercent(0.05f),
+                (Color)aColor.LightenPercent(0.10f),
                 (Color)aColor.LightenPercent(0.15f),
-                (Color)aColor.LightenPercent(0.30f),
-                (Color)aColor.LightenPercent(0.45f),
-                (Color)aColor.LightenPercent(-0.15f),
-                (Color)aColor.LightenPercent(-0.30f),
-                (Color)aColor.LightenPercent(-0.45f));
+                (Color)aColor.LightenPercent(-0.05f),
+                (Color)aColor.LightenPercent(-0.10f),
+                (Color)aColor.LightenPercent(-0.15f));
         }
         catch
         {
@@ -455,12 +500,12 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
             Color2 col = aColor.Value;
 
             UpdateAccentColors((Color)col,
+                (Color)col.LightenPercent(0.05f),
+                (Color)col.LightenPercent(0.10f),
                 (Color)col.LightenPercent(0.15f),
-                (Color)col.LightenPercent(0.30f),
-                (Color)col.LightenPercent(0.45f),
-                (Color)col.LightenPercent(-0.15f),
-                (Color)col.LightenPercent(-0.30f),
-                (Color)col.LightenPercent(-0.45f));
+                (Color)col.LightenPercent(-0.05f),
+                (Color)col.LightenPercent(-0.10f),
+                (Color)col.LightenPercent(-0.15f));
         }
         else
         {
@@ -471,12 +516,12 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
     private void LoadDefaultAccentColor()
     {
         UpdateAccentColors(Colors.DeepSkyBlue,
-            Color.Parse("#7F69FF"),
-            Color.Parse("#9B8AFF"),
-            Color.Parse("#B9ADFF"),
-            Color.Parse("#43339C"),
-            Color.Parse("#33238C"),
-            Color.Parse("#1D115C"));
+            Color.Parse("#0DC2FF"),
+            Color.Parse("#1AC5FF"),
+            Color.Parse("#26C9FF"),
+            Color.Parse("#00B4F2"),
+            Color.Parse("#00A9E5"),
+            Color.Parse("#009ED8"));
     }
 
     private void AddOrUpdateSystemResource(object key, object value)
@@ -510,6 +555,7 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
         };
 
         Resources.MergedDictionaries.Add(_accentColorsDictionary);
+        ThemeColorChanged?.Invoke(this, accent);
     }
 
     private void MergedDictionariesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
