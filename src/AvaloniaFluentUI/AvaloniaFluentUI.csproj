@@ -44,10 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="FluentAvaloniaTests" />
-  </ItemGroup>
-
-  <ItemGroup>
     <AdditionalFiles Include="FluentControlStyles\Themes\Icon\FluentIcon.axaml" />
   </ItemGroup>
 
