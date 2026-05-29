@@ -30,7 +30,6 @@ public class SearchTextBox : TextBox
         set => SetValue(SearchCommandProperty, value);
     }
     
-    
     private Button _searchButton;
     public event Action<string> OnSearchTriggered;
     

@@ -416,9 +416,9 @@
           Padding="{DynamicResource CalendarViewWeekDayPadding}"
           HorizontalAlignment="Center"
           VerticalAlignment="Center"
+          Classes="Caption"
           FontWeight="{DynamicResource CalendarViewWeekDayFontWeight}"
-          Text="{Binding}"
-          Theme="{StaticResource CaptionTextBlockStyle}"/>
+          Text="{Binding}"/>
       </Template>
     </Setter>
     <Setter Property="Template">
