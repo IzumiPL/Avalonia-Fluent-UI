@@ -172,7 +172,11 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
         set => CustomAccentColor = value;
     }
 
-    public ThemeVariant CurrentTheme => Application.Current.RequestedThemeVariant;
+    public ThemeVariant CurrentTheme
+    {
+        get => Application.Current.RequestedThemeVariant;
+        set => Application.Current.RequestedThemeVariant = value;
+    }
 
     public void ToggleTheme()
     {
