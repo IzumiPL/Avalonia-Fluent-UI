@@ -34,12 +34,14 @@
   <Thickness x:Key="SettingsExpanderPadding">16</Thickness>
   <x:Double x:Key="SettingsExpanderMinHeight">68</x:Double>
   <Thickness x:Key="SettingsExpanderExpandCollapseChevronMargin">8 0 16 0</Thickness>
+  <Thickness x:Key="SettingsExpanderHeaderBorderThickness">1</Thickness>
+  <Thickness x:Key="SettingsExpanderContentDownBorderThickness">1 0 1 1</Thickness>
 
   <!--  ToggleButton for the Expander  -->
   <ControlTheme x:Key="SettingsExpanderToggleButtonStyle" TargetType="ToggleButton">
     <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}"/>
-    <Setter Property="BorderThickness" Value="{DynamicResource ExpanderHeaderBorderThickness}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource SettingsExpanderHeaderBorderThickness}"/>
     <Setter Property="Padding" Value="0"/>
     <Setter Property="HorizontalContentAlignment" Value="Left"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -145,6 +147,7 @@
                 Margin="{TemplateBinding Padding}"
                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                ClipToBounds="True"
                 Content="{TemplateBinding Content}"
                 ContentTemplate="{TemplateBinding ContentTemplate}"
                 IsVisible="{TemplateBinding IsExpanded}"/>
