@@ -388,7 +388,11 @@ public partial class TeachingTip : ContentControl
     /// Occurs just before the tip begins to close.
     /// </summary>
     public event TypedEventHandler<TeachingTip, TeachingTipClosedEventArgs> Closed;
-
+    
+    /// <summary>
+    /// Occurs after the tip is opened
+    /// </summary>
+    public event TypedEventHandler<TeachingTip, TeachingTipOpenedEventArgs> Opened;
 
     private const string s_tpContainer = "Container";
     private const string s_tpTailOcclusionGrid = "TailOcclusionGrid";
@@ -444,7 +448,7 @@ public partial class TeachingTip : ContentControl
         _acceleratorKeyActivatedRevoker?.Dispose();
         //m_previewKeyDownForF6Revoker
         //_effectiveViewportChangedRevoker?.Revoke();
-        _contentSizeChangedRevoker?.Dispose();
+        // _contentSizeChangedRevoker?.Dispose();
         if (_closeButton != null)
             _closeButton.Click -= OnCloseButtonClicked;
 
@@ -480,7 +484,7 @@ public partial class TeachingTip : ContentControl
         // right place and order. 
         _container.Child = null;
 
-        _contentSizeChangedRevoker = _tailOcclusionGrid.GetObservable(BoundsProperty).Subscribe(OnContentSizeChanged);
+        _tailOcclusionGrid.SizeChanged += OnContentSizeChanged;
 
         // We don't have LocalizedLandmarkType property, so skip this...
         //AutomationProperties.SetLocalizedLandmarkType(_contentRootGrid, ...)
@@ -504,8 +508,6 @@ public partial class TeachingTip : ContentControl
 
         UpdateButtonAutomationProperties(_actionButton, ActionButtonContent);
         UpdateButtonAutomationProperties(_closeButton, CloseButtonContent);
-
-        EstablishShadows();
 
         _isTemplateApplied = true;
     }
@@ -647,7 +649,7 @@ public partial class TeachingTip : ContentControl
             },
             WindowManagerAddShadowHint = false,
             IsLightDismissEnabled = true,
-            PlacementTarget = (Control)VisualRoot
+            PlacementTarget = TopLevel.GetTopLevel(this)
         };
 
         _lightDismissIndicatorPopup = popup;
@@ -1454,7 +1456,7 @@ public partial class TeachingTip : ContentControl
         {
             SetViewportChangedEvent(_target);
             _currentTargetBoundsInCoreWindowSpace = new Rect(_target.Bounds.Size)
-                .TransformToAABB(_target.TransformToVisual(_target.GetVisualRoot() as Visual) ?? Matrix.Identity);
+                .TransformToAABB(_target.TransformToVisual(TopLevel.GetTopLevel(_target)) ?? Matrix.Identity);
         }
         else
         {
@@ -1465,6 +1467,7 @@ public partial class TeachingTip : ContentControl
         {
             CreateLightDismissIndiatorPopup();
         }
+
         OnIsLightDismissEnabledChanged();
 
         if (_contractAnimation == null)
@@ -1502,10 +1505,15 @@ public partial class TeachingTip : ContentControl
         {
             if (_popup != null)
             {
-                // We have to do this so styles inherit
-                ((ISetLogicalParent)_popup).SetParent(_target ?? (Control)VisualRoot);
+                // We have to do this so styles inherit 
+                ((ISetLogicalParent)_popup).SetParent(_target ?? TopLevel.GetTopLevel(this));
 
-                PositionPopup();
+                // HACK
+                // if (_repositionOnNextOpen)
+                // {
+                    // _repositionOnNextOpen = false;
+                    PositionPopup();
+                // }
 
                 if (!_popup.IsOpen)
                 {
@@ -1514,12 +1522,19 @@ public partial class TeachingTip : ContentControl
                     // UpdatePopupRequestedTheme(); // TODO:??
                     _popup.Child = _rootElement;
 
-                    if (_lightDismissIndicatorPopup != null)
-                    {
-                        _lightDismissIndicatorPopup.IsOpen = true;
-                    }
-
+                    _lightDismissIndicatorPopup?.IsOpen = true;
                     _popup.IsOpen = true;
+
+                    if (FAUISettings.AreAnimationsEnabled())
+                    {
+                        StartExpandToOpen();
+                    }
+                    else
+                    {
+                        // We won't be playing an animation so we're immediately idle.
+                        SetIsIdle(true);
+                        Opened?.Invoke(this, new TeachingTipOpenedEventArgs());
+                    }
                 }
                 else
                 {
@@ -1534,7 +1549,7 @@ public partial class TeachingTip : ContentControl
 
         if (VisualRoot != null)
         {
-            _acceleratorKeyActivatedRevoker = (VisualRoot as Interactive).AddDisposableHandler(KeyDownEvent, OnF6PreviewKeyDownClicked, RoutingStrategies.Tunnel);
+            _acceleratorKeyActivatedRevoker = (TopLevel.GetTopLevel(this) as Interactive).AddDisposableHandler(KeyDownEvent, OnF6PreviewKeyDownClicked, RoutingStrategies.Tunnel);
         }
 
         // Make sure we are in the correct VSM state after ApplyTemplate and moving the template content from the Control to the Popup:
@@ -1579,7 +1594,7 @@ public partial class TeachingTip : ContentControl
         {
             WindowManagerAddShadowHint = false,
             IsLightDismissEnabled = false,
-            PlacementTarget = (Control)VisualRoot,
+            PlacementTarget = TopLevel.GetTopLevel(this),
             // Raw Popups in WinUI don't have placement methods like we have and always positioned at <0,0> in the Window
             // so we mimic that here so that the remaining positioning logic elsewhere in this code still works
             Placement = PlacementMode.AnchorAndGravity,
@@ -1652,17 +1667,14 @@ public partial class TeachingTip : ContentControl
 
     private void OnShouldConstrainToRootBoundsChanged()
     {
-        // FA: This kind of requires support from the underlying Popup API rather than try to hack this together
-        // here. So this property is unsupported for now.
-
-        throw new NotSupportedException("ShouldConstrainToRootBounds property is not supported at this time");
-
         // ShouldConstrainToRootBounds is a property that can only be set on a popup before it is opened.
         // If we have opened the tip's popup and then this property changes we will need to discard the old popup
         // and replace it with a new popup.  This variable indicates this state.
 
-        //The underlying popup api is only available on 19h1 plus, if we aren't on that no opt.
-        // ...
+        if (_popup != null)
+        {
+            _createNewPopupOnOpen = true;
+        }
     }
 
     private void OnHeroContentPlacementChanged()
@@ -1691,7 +1703,7 @@ public partial class TeachingTip : ContentControl
         }
     }
 
-    private void OnContentSizeChanged(Rect rc)
+    private void OnContentSizeChanged(object sender, SizeChangedEventArgs args)
     {
         UpdateSizeBasedTemplateSettings();
         // Reset the currentEffectivePlacementMode so that the tail will be updated for the new size as well.
@@ -1702,15 +1714,17 @@ public partial class TeachingTip : ContentControl
             PositionPopup();
         }
 
+        var width = (float)args.NewSize.Width;
+        var height = (float)args.NewSize.Height;
         if (_expandAnimation != null)
         {
-            _expandAnimation.SetScalarParameter("Width", (float)rc.Width);
-            _expandAnimation.SetScalarParameter("Height", (float)rc.Height);
+            _expandAnimation.SetScalarParameter("Width", (float)width);
+            _expandAnimation.SetScalarParameter("Height", (float)height);
         }
         if (_contractAnimation != null)
         {
-            _contractAnimation.SetScalarParameter("Width", (float)rc.Width);
-            _contractAnimation.SetScalarParameter("Height", (float)rc.Height);
+            _contractAnimation.SetScalarParameter("Width", (float)width);
+            _contractAnimation.SetScalarParameter("Height", (float)height);
         }
     }
 
@@ -1806,18 +1820,42 @@ public partial class TeachingTip : ContentControl
 
     private void OnPopupOpened(object sender, EventArgs args)
     {
-        _currentXamlRootSize = VisualRoot.ClientSize;
-        if (VisualRoot is Control c)
+        var xamlRoot = TopLevel.GetTopLevel(this);
+        if (xamlRoot != null)
         {
-            _xamlRootChangedRevoker = c.GetObservable(BoundsProperty).Subscribe(XamlRootChanged);
+            _currentXamlRootSize = xamlRoot.ClientSize;
+            // In WinUI, they listen for XamlRoot changed, which would be changing the TopLevel in Avalonia
+            // which is more than I want to do for a scenario that probably doesn't happen. However my old 
+            // code listened for bounds change, so I'm going to keep that as is
+            _xamlRootChangedRevoker = xamlRoot.GetObservable(BoundsProperty).Subscribe(XamlRootChanged);
+
+            if (ControlAutomationPeer.FromElement(this) is TeachingTipAutomationPeer p)
+            {
+                //var notificationString = Application.Current.Name;
+                //var local = FALocalizationHelper.Instance;
+
+                //if (!string.IsNullOrEmpty(notificationString))
+                //{
+                //    notificationString =
+                //        $"{local.GetLocalizedStringResource(SR_TeachingTipNotification)} {notificationString} " +
+                //        $"{AutomationProperties.GetName(_popup)}";
+                //}
+                //else
+                //{
+                //    notificationString =
+                //        $"{local.GetLocalizedStringResource(SR_TeachingTipNotificationWithoutAppName)} " +
+                //        $"{AutomationProperties.GetName(_popup)}";
+                //}
+
+                p.RaiseWindowOpenedEvent(/*notificationString*/);
+            }
         }
 
-        if (FAUISettings.AreAnimationsEnabled())
-            StartExpandToOpen();
-        else
-            SetIsIdle(true);
-
-        // TODO: Automation stuff...
+        if (IsLightDismissEnabled)
+        {
+            var focusable = FocusManager.FindFirstFocusableElement(_rootElement);
+            focusable?.Focus(NavigationMethod.Unspecified);
+        }
     }
 
     private void OnPopupClosed(object sender, EventArgs args)
@@ -1843,7 +1881,10 @@ public partial class TeachingTip : ContentControl
         }
         _previouslyFocusedElement = null;
 
-        // TODO: AutomationPeer stuff
+        if (ControlAutomationPeer.FromElement(this) is TeachingTipAutomationPeer p)
+        {
+            p.RaiseWindowClosedEvent();
+        }
     }
 
     private void ClosePopupOnUnloadEvent(object sender, RoutedEventArgs e)
@@ -1896,7 +1937,7 @@ public partial class TeachingTip : ContentControl
 
     private void ClosePopupWithAnimationIfAvailable()
     {
-        if (_popup?.IsOpen == true)
+        if (_popup != null && _popup.IsOpen)
         {
             if (FAUISettings.AreAnimationsEnabled())
                 StartContractToClose();
@@ -1991,24 +2032,39 @@ public partial class TeachingTip : ContentControl
 
         _target = Target;
 
+        bool isTargetLoaded = false;
         if (_target != null)
         {
-            _target.Loaded += OnTargetLoaded;
+            // We need to check if the target is loaded before registering for its 
+            // loaded event. This is because the act of registering for the loaded event
+            // will cause the target to report that it is not loaded.
+            isTargetLoaded = _target.IsLoaded;
+            _target?.Loaded += OnTargetLoaded;
         }
 
         if (IsOpen)
         {
-            if (_target != null)
+            if (_target != null && isTargetLoaded)
             {
                 _currentTargetBoundsInCoreWindowSpace = new Rect(_target.Bounds.Size)
-                    .TransformToAABB(_target.TransformToVisual(VisualRoot as Visual).Value);
+                    .TransformToAABB(_target.TransformToVisual(TopLevel.GetTopLevel(this) as Visual).Value);
 
                 SetViewportChangedEvent(_target);
             }
             PositionPopup();
+
+            // if we have a target that is not yet loaded, skip positioning the flayout for now, that will happen once the target loads.
+            if (_target == null || (_target != null && isTargetLoaded))
+            {
+                PositionPopup();
+            }
         }
         else
         {
+            // HACK: if the target is changed when the teaching tip is closed, it won't open at the new target
+            //       Not sure how WinUI handles this, or if its a bug in general, so I'm just tacking this
+            //       hack fix in here to get around this until I can look into this more
+            _repositionOnNextOpen = true;
             _currentTargetBoundsInCoreWindowSpace = default;
         }
     }
@@ -2039,7 +2095,7 @@ public partial class TeachingTip : ContentControl
     {
         Dispatcher.UIThread.Post(() =>
         {
-            _currentXamlRootSize = VisualRoot.ClientSize;
+            _currentXamlRootSize = TopLevel.GetTopLevel(this).ClientSize;
             RepositionPopup();
         }, DispatcherPriority.Render);
     }
@@ -2049,9 +2105,9 @@ public partial class TeachingTip : ContentControl
         if (IsOpen)
         {
             var newTargetBounds = _target != null ?
-                new Rect(_target.Bounds.Size).TransformToAABB(_target.TransformToVisual(VisualRoot as Visual).Value) : default;
+                new Rect(_target.Bounds.Size).TransformToAABB(_target.TransformToVisual(TopLevel.GetTopLevel(this) as Visual).Value) : default;
 
-            var newCurrentBounds = new Rect(Bounds.Size).TransformToAABB(this.TransformToVisual(VisualRoot as Visual).Value);
+            var newCurrentBounds = new Rect(Bounds.Size).TransformToAABB(this.TransformToVisual(TopLevel.GetTopLevel(this) as Visual).Value);
 
             if (newTargetBounds != _currentTargetBoundsInCoreWindowSpace ||
                 newCurrentBounds != _currentBoundsInCoreWindowSpace)
@@ -2075,7 +2131,6 @@ public partial class TeachingTip : ContentControl
 
     private void CreateExpandAnimation()
     {
-        // WinUI uses winrt::Window::Current().Compositor()
         var compositor = ElementComposition.GetElementVisual(this)?.Compositor;
 
         if (compositor == null)
@@ -2578,7 +2633,7 @@ public partial class TeachingTip : ContentControl
         {
             // For Avalonia, screen only matters for windowed systems. Since WinUI doesn't have this concept
             // we'll return a normal rect like GetEffectiveWindowBoundsInCoreWindowSpace does
-            if (VisualRoot is Window w)
+            if (TopLevel.GetTopLevel(this) is Window w)
             {
                 var displayInfo = w.Screens.ScreenFromWindow(w);
                 var scaleFactor = displayInfo.Scaling;
@@ -2594,7 +2649,7 @@ public partial class TeachingTip : ContentControl
 
     private Rect GetWindowBounds()
     {
-        return new Rect((VisualRoot as Visual)?.Bounds.Size ?? default);
+        return new Rect((TopLevel.GetTopLevel(this) as Visual)?.Bounds.Size ?? default);
     }
 
     private void GetPlacementFallbackOrder(TeachingTipPlacementMode preferredPlacement,
@@ -2665,74 +2720,17 @@ public partial class TeachingTip : ContentControl
         priorityList[0] = (byte)preferredPlacement;
     }
 
-    private void EstablishShadows()
-    {
-        // TODO: Don't really have a nice way to do shadows right now
-    }
+    // Skip EstablishShadows
 
     private void TrySetCenterPoint(Control element, double x, double y)
     {
         if (element == null)
             return;
 
-        // TODO:
         var visual = ElementComposition.GetElementVisual(element);
-        if (visual != null)
-            visual.CenterPoint = new Vector3((float)x, (float)y, 1);
+        visual?.CenterPoint = new Vector3((float)x, (float)y, 1);
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private double TailLongSideActualLength() =>
-        _tailPolygon != null ? Math.Max(_tailPolygon.Bounds.Height, _tailPolygon.Bounds.Width) : 0;
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private double TailLongSideLength() =>
-        TailLongSideActualLength() - (2 * s_tailOcclusionAmount);
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private double TailShortSideLength() =>
-        _tailPolygon != null ? Math.Min(_tailPolygon.Bounds.Height, _tailPolygon.Bounds.Width) : 0;
-
-    private double MinimumTipEdgeToTailEdgeMargin()
-    {
-        if (_tailOcclusionGrid != null)
-        {
-            return _tailOcclusionGrid.ColumnDefinitions.Count > 1 ?
-                _tailOcclusionGrid.ColumnDefinitions[1].ActualWidth + s_tailOcclusionAmount
-                : 0;
-        }
-
-        return 0;
-    }
-
-    private double MinimumTipEdgeToTailCenter()
-    {
-        if (_tailOcclusionGrid != null && _tailPolygon != null)
-        {
-            if (_tailOcclusionGrid.ColumnDefinitions.Count > 1)
-            {
-                return _tailOcclusionGrid.ColumnDefinitions[0].ActualWidth +
-                    _tailOcclusionGrid.ColumnDefinitions[1].ActualWidth +
-                    (Math.Max(_tailPolygon.Bounds.Height, _tailPolygon.Bounds.Width) / 2);
-            }
-        }
-
-        return 0;
-    }
-
-
-    private CornerRadius GetTeachingTipCornerRadius() => CornerRadius;
-
-    private void SetIsIdle(bool idle) => _isIdle = idle;
-
-
-    double TopLeftCornerRadius() => GetTeachingTipCornerRadius().TopLeft;
-
-    double TopRightCornerRadius() => GetTeachingTipCornerRadius().TopRight;
-
-
-
-    private IDisposable _contentSizeChangedRevoker;
     private IDisposable _acceleratorKeyActivatedRevoker;
     // This doesn't appear to be needed anymore?
     //private EffectiveViewportRevoker _effectiveViewportChangedRevoker;
@@ -2779,6 +2777,9 @@ public partial class TeachingTip : ContentControl
     private bool _isTemplateApplied;
     private bool _createNewPopupOnOpen;
 
+    // HACK
+    private bool _repositionOnNextOpen;
+
     private bool _isExpandAnimationPlaying;
     private bool _isContractAnimationPlaying;
 
@@ -2806,80 +2807,129 @@ public partial class TeachingTip : ContentControl
     private bool _isIdle = true;
     private Control _target;
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private double TailLongSideActualLength() =>
+        _tailPolygon != null ? Math.Max(_tailPolygon.Bounds.Height, _tailPolygon.Bounds.Width) : 0;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private double TailLongSideLength() =>
+        TailLongSideActualLength() - (2 * s_tailOcclusionAmount);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private double TailShortSideLength() =>
+        _tailPolygon != null ? Math.Min(_tailPolygon.Bounds.Height, _tailPolygon.Bounds.Width) : 0;
+
+    private double MinimumTipEdgeToTailEdgeMargin()
+    {
+        if (_tailOcclusionGrid != null)
+        {
+            return _tailOcclusionGrid.ColumnDefinitions.Count > 1 ?
+                _tailOcclusionGrid.ColumnDefinitions[1].ActualWidth + s_tailOcclusionAmount
+                : 0;
+        }
+
+        return 0;
+    }
+
+    private double MinimumTipEdgeToTailCenter()
+    {
+        if (_tailOcclusionGrid != null && _tailPolygon != null)
+        {
+            if (_tailOcclusionGrid.ColumnDefinitions.Count > 1)
+            {
+                return _tailOcclusionGrid.ColumnDefinitions[0].ActualWidth +
+                    _tailOcclusionGrid.ColumnDefinitions[1].ActualWidth +
+                    (Math.Max(_tailPolygon.Bounds.Height, _tailPolygon.Bounds.Width) / 2);
+            }
+        }
+
+        return 0;
+    }
+
+
+    private CornerRadius GetTeachingTipCornerRadius() => CornerRadius;
+
+    private void SetIsIdle(bool idle) => _isIdle = idle;
+
+
+    private double TopLeftCornerRadius() => GetTeachingTipCornerRadius().TopLeft;
+
+    private double TopRightCornerRadius() => GetTeachingTipCornerRadius().TopRight;
+
     // Helper functions
-    static bool IsPlacementTop(TeachingTipPlacementMode p) =>
+    private static bool IsPlacementTop(TeachingTipPlacementMode p) =>
         p == TeachingTipPlacementMode.Top ||
         p == TeachingTipPlacementMode.TopLeft ||
         p == TeachingTipPlacementMode.TopRight;
 
-    static bool IsPlacementBottom(TeachingTipPlacementMode p) =>
+    private static bool IsPlacementBottom(TeachingTipPlacementMode p) =>
         p == TeachingTipPlacementMode.Bottom ||
         p == TeachingTipPlacementMode.BottomLeft ||
         p == TeachingTipPlacementMode.BottomRight;
 
-    static bool IsPlacementLeft(TeachingTipPlacementMode p) =>
+    private static bool IsPlacementLeft(TeachingTipPlacementMode p) =>
         p == TeachingTipPlacementMode.Left ||
         p == TeachingTipPlacementMode.TopLeft ||
         p == TeachingTipPlacementMode.TopRight;
 
-    static bool IsPlacementRight(TeachingTipPlacementMode p) =>
+    private static bool IsPlacementRight(TeachingTipPlacementMode p) =>
         p == TeachingTipPlacementMode.Right ||
         p == TeachingTipPlacementMode.RightTop ||
         p == TeachingTipPlacementMode.RightBottom;
 
     // These values are shifted by one because this is the 1px highlight that sits adjacent to the tip border.
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    Thickness BottomPlacementTopRightHighlightMargin(double width, double height) =>
+    private Thickness BottomPlacementTopRightHighlightMargin(double width, double height) =>
         new Thickness(width / 2 + (TailShortSideLength() - 1f), 0, TopRightCornerRadius() - 1f, 0);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    Thickness BottomRightPlacementTopRightHighlightMargin(double width, double height) =>
+    private Thickness BottomRightPlacementTopRightHighlightMargin(double width, double height) =>
         new Thickness(MinimumTipEdgeToTailEdgeMargin() + (TailLongSideLength() - 1f), 0, TopRightCornerRadius() - 1f, 0);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    Thickness BottomLeftPlacementTopRightHighlightMargin(double width, double height) =>
+    private Thickness BottomLeftPlacementTopRightHighlightMargin(double width, double height) =>
         new Thickness(width - (MinimumTipEdgeToTailEdgeMargin() + 1f), 0, TopRightCornerRadius() - 1f, 0);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    Thickness OtherPlacementTopRightHighlightMargin(double width, double height) => new Thickness();
+    private Thickness OtherPlacementTopRightHighlightMargin(double width, double height) => new Thickness();
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    Thickness BottomPlacementTopLeftHighlightMargin(double width, double height) =>
+    private Thickness BottomPlacementTopLeftHighlightMargin(double width, double height) =>
         new Thickness(TopLeftCornerRadius() - 1, 0, (width / 2) + (TailShortSideLength() - 1f), 0);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    Thickness BottomRightPlacementTopLeftHighlightMargin(double width, double height) =>
+    private Thickness BottomRightPlacementTopLeftHighlightMargin(double width, double height) =>
         new Thickness(TopLeftCornerRadius() - 1f, 0, width - (MinimumTipEdgeToTailEdgeMargin() + 1f), 0);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    Thickness BottomLeftPlacementTopLeftHighlightMargin(double width, double height) =>
+    private Thickness BottomLeftPlacementTopLeftHighlightMargin(double width, double height) =>
         new Thickness(TopLeftCornerRadius() - 1f, 0, MinimumTipEdgeToTailEdgeMargin() + TailLongSideLength() - 1f, 0);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    Thickness TopEdgePlacementTopLeftHighlightMargin(double width, double height) =>
+    private Thickness TopEdgePlacementTopLeftHighlightMargin(double width, double height) =>
         new Thickness(TopLeftCornerRadius() - 1f, 1, TopRightCornerRadius() - 1f, 0);
 
     // Shifted by one since the tail edge's border is not accounted for automatically.
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    Thickness LeftEdgePlacementTopLeftHighlightMargin(double width, double height) =>
+    private Thickness LeftEdgePlacementTopLeftHighlightMargin(double width, double height) =>
         new Thickness(TopLeftCornerRadius() - 1f, 1, TopRightCornerRadius() - 2f, 0);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    Thickness RightEdgePlacementTopLeftHighlightMargin(double width, double height) =>
+    private Thickness RightEdgePlacementTopLeftHighlightMargin(double width, double height) =>
         new Thickness(TopLeftCornerRadius() - 2f, 1, TopRightCornerRadius() - 1f, 0);
 
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    static double UntargetedTipFarPlacementOffset(double farWindowCoordinateInCoreWindowSpace, double tipSize, double offset) =>
+    private static double UntargetedTipFarPlacementOffset(double farWindowCoordinateInCoreWindowSpace, double tipSize, double offset) =>
         farWindowCoordinateInCoreWindowSpace - (tipSize + s_untargetedTipWindowEdgeMargin + offset);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    static double UntargetedTipCenterPlacementOffset(double nearWindowCoordinateInCoreWindowSpace, double farWindowCoordinateInCoreWindowSpace,
+    private static double UntargetedTipCenterPlacementOffset(double nearWindowCoordinateInCoreWindowSpace, double farWindowCoordinateInCoreWindowSpace,
         double tipSize, double nearOffset, double farOffset) =>
         ((nearWindowCoordinateInCoreWindowSpace + farWindowCoordinateInCoreWindowSpace) / 2) - (tipSize / 2) + nearOffset - farOffset;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    static double UntargetedTipNearPlacementOffset(double nearWindowCoordinateInCoreWindowSpace, double offset) =>
+    private static double UntargetedTipNearPlacementOffset(double nearWindowCoordinateInCoreWindowSpace, double offset) =>
         s_untargetedTipWindowEdgeMargin + nearWindowCoordinateInCoreWindowSpace + offset;
 
 
