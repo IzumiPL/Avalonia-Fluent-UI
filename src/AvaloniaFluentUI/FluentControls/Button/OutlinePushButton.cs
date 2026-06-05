@@ -8,7 +8,7 @@ namespace AvaloniaFluentUI.Controls;
 
 public class OutlinePushButton : ToggleButton
 {
-   public static readonly StyledProperty<Geometry> IconDataProperty =
+   public static readonly StyledProperty<Geometry?> IconDataProperty =
         AvaloniaProperty.Register<OutlinePushButton, Geometry?>(nameof(IconData));
 
     public Geometry? IconData

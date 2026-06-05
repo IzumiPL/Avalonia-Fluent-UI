@@ -5,7 +5,7 @@ namespace AvaloniaFluentUI.Controls;
 
 public class PushButton : Avalonia.Controls.Button
 {
-    public static readonly StyledProperty<Geometry> IconDataProperty =
+    public static readonly StyledProperty<Geometry?> IconDataProperty =
         AvaloniaProperty.Register<PushButton, Geometry?>(nameof(IconData));
 
     public Geometry? IconData
