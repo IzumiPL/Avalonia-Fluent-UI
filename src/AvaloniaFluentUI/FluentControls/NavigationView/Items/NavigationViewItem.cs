@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Collections;
@@ -204,7 +205,23 @@ public partial class NavigationViewItem : NavigationViewItemBase
     private bool IsOnLeftNav => Position == NavigationViewRepeaterPosition.LeftNav ||
         Position == NavigationViewRepeaterPosition.LeftFooter;
 
-    private bool IsOnTopPrimary => Position == NavigationViewRepeaterPosition.TopPrimary;
+    private bool IsOnTopPrimary
+    {
+        get
+        {
+            bool isPaneDisplayModeTop = true;
+            if (GetNavigationView is NavigationView nv)
+            {
+                // There is a delay between the NavigationViewPaneDisplayMode update and the 
+                // position property of NavigationViewItem being updated. This function gets called
+                // in that delay period, so we need to check the PaneDisplayMode as further verification
+                // of whether we are in Top mode or switching away from it.
+                isPaneDisplayModeTop = nv.PaneDisplayMode == NavigationViewPaneDisplayMode.Top;
+            }
+
+            return Position == NavigationViewRepeaterPosition.TopPrimary && isPaneDisplayModeTop;
+        }
+    }
 
     internal bool ShouldRepeaterShowInFlyout => (_isClosedCompact && IsTopLevelItem) || IsOnTopPrimary;
 
@@ -269,9 +286,10 @@ public partial class NavigationViewItem : NavigationViewItemBase
     }
 
     /// <inheritdoc />
-    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+   protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         _appliedTemplate = false;
+        _restoreToExpandedState = false;
 
         UnhookEventsAndClearFields();
 
@@ -283,10 +301,7 @@ public partial class NavigationViewItem : NavigationViewItemBase
         if (_rootGrid != null)
         {
             var flyout = FlyoutBase.GetAttachedFlyout(_rootGrid) as PopupFlyoutBase;
-            if (flyout != null)
-            {
-                flyout.Closing += OnFlyoutClosing;
-            }
+            flyout?.Closing += OnFlyoutClosing;
         }
 
         var navView = GetNavigationView;
@@ -305,13 +320,11 @@ public partial class NavigationViewItem : NavigationViewItemBase
         var splitView = GetSplitView;
         if (splitView != null)
         {
-            _splitViewRevokers = new FACompositeDisposable(
-                splitView.GetPropertyChangedObservable(SplitView.IsPaneOpenProperty).Subscribe(OnSplitViewPropertyChanged),
-                splitView.GetPropertyChangedObservable(SplitView.DisplayModeProperty).Subscribe(OnSplitViewPropertyChanged),
-                splitView.GetPropertyChangedObservable(SplitView.CompactPaneLengthProperty).Subscribe(OnSplitViewPropertyChanged));
-
-            UpdateCompactPaneLength();
-            UpdateIsClosedCompact();
+            PrepNavigationViewItem(splitView);
+        }
+        else
+        {
+            Loaded += HandleLoaded;
         }
 
         //var navView = GetNavigationView;
@@ -488,7 +501,7 @@ public partial class NavigationViewItem : NavigationViewItemBase
 
     protected virtual void OnIsExpandedPropertyChanged()
     {
-        //Added this...
+        _restoreToExpandedState = false;
         UpdateVisualStateForChevron();
     }
 
@@ -577,6 +590,7 @@ public partial class NavigationViewItem : NavigationViewItemBase
 
             case NavigationViewRepeaterPosition.TopPrimary:
             case NavigationViewRepeaterPosition.TopFooter:
+                _restoreToExpandedState = false;
                 PseudoClasses.Set(SharedPseudoclasses.s_pcLeftNav, false);
                 PseudoClasses.Set(SharedPseudoclasses.s_pcTopNav, true);
                 PseudoClasses.Set(SharedPseudoclasses.s_pcTopOverflow, false);
@@ -590,6 +604,7 @@ public partial class NavigationViewItem : NavigationViewItemBase
                 break;
 
             case NavigationViewRepeaterPosition.TopOverflow:
+                _restoreToExpandedState = false;
                 PseudoClasses.Set(SharedPseudoclasses.s_pcLeftNav, false);
                 PseudoClasses.Set(SharedPseudoclasses.s_pcTopNav, false);
                 PseudoClasses.Set(SharedPseudoclasses.s_pcTopOverflow, true);
@@ -812,6 +827,67 @@ public partial class NavigationViewItem : NavigationViewItemBase
         return Content?.ToString() ?? "NavigationViewItem";
     }
 
+    private void PrepNavigationViewItem(SplitView splitView)
+    {
+        _splitViewRevokers = new FACompositeDisposable(
+            splitView.GetPropertyChangedObservable(SplitView.IsPaneOpenProperty).Subscribe(OnSplitViewPropertyChanged),
+            splitView.GetPropertyChangedObservable(SplitView.DisplayModeProperty).Subscribe(OnSplitViewPropertyChanged),
+            splitView.GetPropertyChangedObservable(SplitView.CompactPaneLengthProperty).Subscribe(OnSplitViewPropertyChanged));
+
+        UpdateCompactPaneLength();
+        UpdateIsClosedCompact();
+    }
+
+    private void HandleLoaded(object sender, RoutedEventArgs args)
+    {
+        if (GetSplitView is SplitView sv)
+        {
+            PrepNavigationViewItem(sv);
+        }
+
+        UpdateVisualStateForChevron();
+        Loaded -= HandleLoaded;
+    }
+
+    // NavigationView needs to force collapse top level items when the pane closes.
+    // This is done to avoid a compact state with children showing.
+    // This is done in a way that allows the control to restore the expanded
+    // state when the pane is opened again.
+    private void HandleExpansionStateMemory()
+    {
+        if (IsTopLevelItem)
+        {
+            if (GetSplitView is SplitView sv)
+            {
+                if (sv.IsPaneOpen)
+                {
+                    RestoreExpandedState();
+                }
+                else
+                {
+                    ForceCollapse();
+                }
+            }
+        }
+    }
+
+    private void ForceCollapse()
+    {
+        if (IsExpanded)
+        {
+            IsExpanded = false;
+            _restoreToExpandedState = true;
+        }
+    }
+
+    private void RestoreExpandedState()
+    {
+        if (_restoreToExpandedState)
+        {
+            IsExpanded = true;
+            _restoreToExpandedState = false;
+        }
+    }
 
     private FACompositeDisposable _splitViewRevokers;
     private NavigationViewItemPresenter _presenter;
@@ -824,4 +900,5 @@ public partial class NavigationViewItem : NavigationViewItemBase
     private bool _appliedTemplate;
     //private bool _hasKeyboardFocus;//TODO: needed?
     private bool _isRepeaterParentedToFlyout;
+    private bool _restoreToExpandedState;
 }

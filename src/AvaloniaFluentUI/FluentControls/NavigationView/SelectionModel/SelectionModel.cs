@@ -458,7 +458,7 @@ internal class SelectionModel : INotifyPropertyChanged, IDisposable
             // auto-resolve that as the child. If not, then we consider the value as a leaf. This is to 
             // avoid having to provide the event handler for the most common scenarios. If the app dev does
             // not want this default behavior, they can provide the handler to override.
-            if (data is ItemsSourceView || data is IEnumerable)
+            if (data is Avalonia.Controls.ItemsSourceView || data is IEnumerable)
             {
                 resolved = data;
             }

@@ -44,10 +44,10 @@ internal class SelectionNode : IDisposable
                 _source = value;
 
                 // Setup ItemsSourceView
-                var newDataSource = value as ItemsSourceView;
+                var newDataSource = value as Avalonia.Controls.ItemsSourceView;
                 if (value != null && newDataSource == null)
                 {
-                    newDataSource = ItemsSourceView.GetOrCreate(value as IEnumerable);
+                    newDataSource = Avalonia.Controls.ItemsSourceView.GetOrCreate(value as IEnumerable);
                 }
 
                 _dataSource = newDataSource;
@@ -58,7 +58,7 @@ internal class SelectionNode : IDisposable
         }
     }
 
-    public ItemsSourceView ItemsSourceView => _dataSource;
+    public Avalonia.Controls.ItemsSourceView ItemsSourceView => _dataSource;
 
     public int DataCount => _dataSource != null ? _dataSource.Count : 0;
 
@@ -782,7 +782,7 @@ internal class SelectionNode : IDisposable
     private readonly SelectionNode _parent;
     private readonly List<IndexRange> _selected = new List<IndexRange>();
     private object _source;
-    private ItemsSourceView _dataSource;
+    private Avalonia.Controls.ItemsSourceView _dataSource;
     private int _selectedCount;
     private readonly List<int> _selectedIndicesCached = new List<int>();
     private bool _selectedIndicesCacheIsValid;

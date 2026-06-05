@@ -1,6 +1,8 @@
 ﻿using System;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
+using Avalonia.VisualTree;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -9,6 +11,11 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class NavigationViewItemBase : ListBoxItem
 {
+    public NavigationViewItemBase()
+    {
+        Loaded += OnNavItemBaseLoaded;
+    }
+
     internal NavigationViewRepeaterPosition Position
     {
         get => _position;
@@ -65,6 +72,8 @@ public class NavigationViewItemBase : ListBoxItem
     // This is required in order to achieve proper recycling
     internal bool CreatedByNavigationViewItemsFactory { get; set; }
 
+    internal bool IsInNavigationViewOwnedRepeater { get; set; }
+
     internal void SetNavigationViewParent(NavigationView navView)
     {
         _navView = new WeakReference<NavigationView>(navView);
@@ -85,6 +94,13 @@ public class NavigationViewItemBase : ListBoxItem
 
     protected virtual void OnNavigationViewItemBaseIsSelectedChanged() { }
 
+    private void OnNavItemBaseLoaded(object sender, RoutedEventArgs e)
+    {
+        if (_navView == null)
+        {
+            SetNavigationViewParent(this.FindAncestorOfType<NavigationView>());
+        }
+    }
 
     // (WinUI) TODO: Constant is a temporary measure. Potentially expose using TemplateSettings.
     protected readonly int _itemIndentation = 31;

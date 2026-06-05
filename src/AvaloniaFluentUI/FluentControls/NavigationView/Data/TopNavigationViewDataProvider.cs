@@ -47,11 +47,11 @@ internal class TopNavigationViewDataProvider : SplitDataSourceBase<object, Navig
     {
         if (ShouldChangeDataSource(rawData)) // avoid to create multiple of datasource for the same raw data
         {
-            ItemsSourceView dataSource = null;
+            Avalonia.Controls.ItemsSourceView dataSource = null;
             if (rawData != null)
             {
                 //Avalonia ItemsSourceView only accepts IEnumerable types
-                dataSource = ItemsSourceView.GetOrCreate(rawData);
+                dataSource = Avalonia.Controls.ItemsSourceView.GetOrCreate(rawData);
             }
             ChangeDataSource(dataSource);
             _rawDataSource = rawData;
@@ -311,7 +311,7 @@ internal class TopNavigationViewDataProvider : SplitDataSourceBase<object, Navig
         }
     }
 
-    public void ChangeDataSource(ItemsSourceView newValue)
+    public void ChangeDataSource(Avalonia.Controls.ItemsSourceView newValue)
     {
         var oldValue = _dataSource;
         if (oldValue != newValue)
@@ -375,6 +375,6 @@ internal class TopNavigationViewDataProvider : SplitDataSourceBase<object, Navig
 
     private Action<NotifyCollectionChangedEventArgs> _dataChangedCallback;
     private IEnumerable _rawDataSource;
-    private ItemsSourceView _dataSource;
+    private Avalonia.Controls.ItemsSourceView _dataSource;
     private double _overflowButtonCachedWidth;
 }
