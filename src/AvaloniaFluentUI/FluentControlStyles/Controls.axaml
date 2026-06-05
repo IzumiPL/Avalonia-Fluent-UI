@@ -23,7 +23,7 @@
         <MergeResourceInclude Source="/FluentControlStyles/WindowNotificationManagerStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/CarouselStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/ContentControlStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/NativeMenuBarStyles.axaml"/>
+        <!-- <MergeResourceInclude Source="/FluentControlStyles/NativeMenuBarStyles.axaml"/> -->
         <MergeResourceInclude Source="/FluentControlStyles/ButtonSpinnerStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/RepeatButtonStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/GridSplitterStyles.axaml"/>
@@ -31,7 +31,7 @@
         <MergeResourceInclude Source="/FluentControlStyles/DropDownButtonStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/CalendarStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/CalendarDatePickerStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/CaptionButtonStyles.axaml"/>
+        <!-- <MergeResourceInclude Source="/FluentControlStyles/CaptionButtonStyles.axaml"/> -->
         <MergeResourceInclude Source="/FluentControlStyles/CheckBoxStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/ListBoxStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/MenuStyles.axaml"/>
@@ -52,7 +52,7 @@
         <MergeResourceInclude Source="/FluentControlStyles/FlyoutPresenterStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/DatePickerStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/TimePickerStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/TitleBarStyles.axaml"/>
+        <!-- <MergeResourceInclude Source="/FluentControlStyles/TitleBarStyles.axaml"/> -->
         <MergeResourceInclude Source="/FluentControlStyles/TransitioningContentControlStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/ColorPicker/ColorPickerStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/DataGrid/DataGridStyles.axaml"/>
@@ -60,6 +60,17 @@
         <MergeResourceInclude Source="/FluentControlStyles/PathIcon.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/HyperlinkButtonStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/FocusAdornerStyles.axaml"/>
+
+        <MergeResourceInclude Source="/FluentControlStyles/PipsPagerStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/GroupBoxStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/ContentPageStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/CarouselPageStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/DrawerPageStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/NavigationPageStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/TabbedPageStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/TextSelectionHandleStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/CommandBarStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/WindowDrawnDecorationsStyles.axaml"/>
 
 
         <!--  FluentAvalonia Controls  -->
@@ -146,12 +157,29 @@
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/TextBox/SearchTextBox.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/SettingCard.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/SettingCardStyles.axaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Styles.Resources>
 
   <StyleInclude Source="/FluentControlStyles/UserControlStyles.axaml"/>
+
+
+  <!-- <Style Selector="wnd|AppWindow:dialog"> -->
+  <!--     <Style Selector="^ WindowDrawnDecorations /template/ Button#PART_MinimizeButton"> -->
+  <!--  ~1~Don't set IsVisible = false, it causes issues, see #3 on GH740@1@  -->
+  <!--         <Setter Property="Opacity" Value="0" /> -->
+  <!--         <Setter Property="IsHitTestVisible" Value="False" /> -->
+  <!--         <Setter Property="Width" Value="0" /> -->
+  <!--     </Style> -->
+  <!--     <Style Selector="^ WindowDrawnDecorations /template/ Button#PART_MaximizeButton"> -->
+  <!--  ~1~Don't set IsVisible = false, it causes issues, see #3 on GH740@1@  -->
+  <!--         <Setter Property="Opacity" Value="0" /> -->
+  <!--         <Setter Property="IsHitTestVisible" Value="False" /> -->
+  <!--         <Setter Property="Width" Value="0" /> -->
+  <!--     </Style> -->
+  <!-- </Style> -->
+
 
   <!--
     Amendments to CommandBar buttons which before ControlThemes used these styles to control their
