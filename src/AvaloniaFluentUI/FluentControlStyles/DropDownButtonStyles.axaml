@@ -5,7 +5,7 @@
   x:CompileBindings="True">
 
   <x:Double x:Key="DropDownButtonMinHeight">32</x:Double>
-  <StreamGeometry x:Key="ChevronDownMed">M0 9.046q0-0.422 0.164-0.785t0.433-0.633 0.632-0.433 0.785-0.164q0.445 0 0.773 0.152t0.632 0.457l12.58 12.58 12.58-12.58q0.609-0.609 1.405-0.609 0.422 0 0.785 0.164t0.633 0.433 0.433 0.633 0.164 0.785q0 0.82-0.586 1.405l-14.009 14.009q-0.586 0.586-1.406 0.586t-1.406-0.586l-14.009-14.009q-0.586-0.586-0.586-1.405z"</StreamGeometry>
+  <StreamGeometry x:Key="ChevronDownMed">M0 9.046q0-0.422 0.164-0.785t0.433-0.633 0.632-0.433 0.785-0.164q0.445 0 0.773 0.152t0.632 0.457l12.58 12.58 12.58-12.58q0.609-0.609 1.405-0.609 0.422 0 0.785 0.164t0.633 0.433 0.433 0.633 0.164 0.785q0 0.82-0.586 1.405l-14.009 14.009q-0.586 0.586-1.406 0.586t-1.406-0.586l-14.009-14.009q-0.586-0.586-0.586-1.405z</StreamGeometry>
 
   <ControlTheme x:Key="{x:Type DropDownButton}" TargetType="DropDownButton">
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
