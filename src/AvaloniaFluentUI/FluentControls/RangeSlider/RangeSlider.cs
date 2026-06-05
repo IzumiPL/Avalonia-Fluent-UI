@@ -9,6 +9,7 @@ using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Threading;
 using Avalonia.Utilities;
+using AvaloniaFluentUI.Core;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -618,7 +619,7 @@ public partial class RangeSlider : TemplatedControl
             
             if (delta > 0)
             {
-                if (MathUtilities.AreClose(re, max))
+                if (MathHelpers.IsClose(re, max))
                     return;
 
                 // Drag delta is too large, constrain it back
@@ -627,7 +628,7 @@ public partial class RangeSlider : TemplatedControl
             }
             else if (delta < 0)
             {
-                if (MathUtilities.AreClose(rs, min))
+                if (MathHelpers.IsClose(rs, min))
                     return;
 
                 if (rs + delta < min)
@@ -659,7 +660,7 @@ public partial class RangeSlider : TemplatedControl
     {
         var position = e.GetCurrentPoint(_containerCanvas).Position.X;
 
-        var mods = TopLevel.GetTopLevel(this).PlatformSettings.HotkeyConfiguration.CommandModifiers;
+        var mods = Application.Current.PlatformSettings.HotkeyConfiguration.CommandModifiers;
         if (mods == KeyModifiers.None)
             mods = KeyModifiers.Control;
 
