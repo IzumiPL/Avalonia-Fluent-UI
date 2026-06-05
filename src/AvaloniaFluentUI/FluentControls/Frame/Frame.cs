@@ -212,16 +212,16 @@ public partial class Frame : ContentControl
     /// Indiates to a page that it has been navigated away from. Takes the place of
     /// Microsoft.UI.Xaml.Controls.Page.OnNavigatedFrom() method
     /// </summary>
-    public static readonly RoutedEvent<NavigationEventArgs> NavigatedFromEvent =
-        RoutedEvent.Register<Control, NavigationEventArgs>("NavigatedFrom",
+    public static readonly RoutedEvent<Navigation.NavigationEventArgs> NavigatedFromEvent =
+        RoutedEvent.Register<Control, Navigation.NavigationEventArgs>("NavigatedFrom",
             RoutingStrategies.Direct);
 
     /// <summary>
     /// Indiates to a page that it is being navigated to. Takes the place of
     /// Microsoft.UI.Xaml.Controls.Page.OnNavigatedTo() method
     /// </summary>
-    public static readonly RoutedEvent<NavigationEventArgs> NavigatedToEvent =
-        RoutedEvent.Register<Control, NavigationEventArgs>("NavigatedTo",
+    public static readonly RoutedEvent<Navigation.NavigationEventArgs> NavigatedToEvent =
+        RoutedEvent.Register<Control, Navigation.NavigationEventArgs>("NavigatedTo",
             RoutingStrategies.Direct);
 
     private IList<PageStackEntry> _backStack;
@@ -289,7 +289,7 @@ public partial class Frame : ContentControl
     {
         base.OnAttachedToVisualTree(e);
 
-        if (e.Root is TopLevel tl)
+        if (TopLevel.GetTopLevel(this) is TopLevel tl)
         {
             tl.BackRequested += OnTopLevelBackRequested;
         }
@@ -299,7 +299,7 @@ public partial class Frame : ContentControl
     {
         base.OnDetachedFromVisualTree(e);
 
-        if (e.Root is TopLevel tl)
+        if (TopLevel.GetTopLevel(this) is TopLevel tl)
         {
             tl.BackRequested -= OnTopLevelBackRequested;
         }
@@ -548,7 +548,7 @@ public partial class Frame : ContentControl
 
                     SetContentAndAnimate(CurrentEntry);
                     // We only raise the NavigatedEvent 
-                    page.RaiseEvent(new NavigationEventArgs(page, NavigationMode.New, null, param, pageType) { RoutedEvent = NavigatedToEvent });
+                    page.RaiseEvent(new Navigation.NavigationEventArgs(page, NavigationMode.New, null, param, pageType) { RoutedEvent = NavigatedToEvent });
                 }
                 else
                 {
@@ -671,7 +671,7 @@ public partial class Frame : ContentControl
             var oldEntry = CurrentEntry;
             CurrentEntry = entry;
 
-            var navEA = new NavigationEventArgs(
+            var navEA = new Navigation.NavigationEventArgs(
                 CurrentEntry.Instance,
                 mode, entry.NavigationTransitionInfo,
                 entry.Parameter,
@@ -759,7 +759,7 @@ public partial class Frame : ContentControl
 
     private void OnNavigationStopped(PageStackEntry entry, NavigationMode mode)
     {
-        NavigationStopped?.Invoke(this, new NavigationEventArgs(entry.Instance,
+        NavigationStopped?.Invoke(this, new Navigation.NavigationEventArgs(entry.Instance,
             mode, entry.NavigationTransitionInfo, entry.Parameter, entry.SourcePageType));
     }
 
