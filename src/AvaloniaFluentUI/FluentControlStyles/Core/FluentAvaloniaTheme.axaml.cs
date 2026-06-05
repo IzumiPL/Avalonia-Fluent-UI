@@ -159,7 +159,7 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
     /// Gets whether the current theme is dark.
     /// </summary>
     public bool IsDarkTheme => Application.Current?.ActualThemeVariant == ThemeVariant.Dark;
-    
+
     /// <summary>
     /// Gets or sets the current primary accent color.
     /// </summary>
@@ -170,6 +170,13 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
             ? (Color)value
             : Colors.DeepSkyBlue;
         set => CustomAccentColor = value;
+    }
+
+    public ThemeVariant CurrentTheme => Application.Current.RequestedThemeVariant;
+
+    public void ToggleTheme()
+    {
+        Application.Current.RequestedThemeVariant = IsDarkTheme ? ThemeVariant.Light : ThemeVariant.Dark;
     }
 
     public AvaloniaList<IResourceDictionary> MergedDictionaries { get; }
