@@ -34,7 +34,7 @@ internal class BreadcrumbLayout : NonVirtualizingLayout
     public int GetItemCount(NonVirtualizingLayoutContext context) =>
         context.Children.Count;
 
-    Control GetElementAt(NonVirtualizingLayoutContext context, int index) =>
+    public Control GetElementAt(NonVirtualizingLayoutContext context, int index) =>
         context.Children[index];
 
     // Measuring is performed in a single step, every element is measured, including the ellipsis
@@ -199,8 +199,6 @@ internal class BreadcrumbLayout : NonVirtualizingLayout
 
         return maxHeight;
     }
-
-
 
     private Size _availableSize;
     private BreadcrumbBarItem _ellipsisButton;

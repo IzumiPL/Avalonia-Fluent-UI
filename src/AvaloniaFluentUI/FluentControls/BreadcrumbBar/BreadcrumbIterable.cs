@@ -24,7 +24,7 @@ internal class BreadcrumbIterable : IEnumerable
             //_currentIndex = 0;
             if (itemsSource != null)
             {
-                _itemsSource = new FAItemsSourceView(itemsSource);
+                _itemsSource = new ItemsSourceView(itemsSource);
                 // Add 1 to account for the leading null/ellipsis element
                 _size = _itemsSource.Count + 1;
             }
@@ -39,7 +39,9 @@ internal class BreadcrumbIterable : IEnumerable
             get
             {
                 if (_currentIndex == 0)
+                {
                     return null;
+                }
                 else if (HasCurrent())
                 {
                     return _itemsSource.GetAt(_currentIndex - 1);
@@ -71,7 +73,7 @@ internal class BreadcrumbIterable : IEnumerable
 
         private bool HasCurrent() => _currentIndex < _size;
 
-        private readonly FAItemsSourceView _itemsSource;
+        private readonly ItemsSourceView _itemsSource;
         private int _currentIndex = -1;
         private readonly int _size;
     }

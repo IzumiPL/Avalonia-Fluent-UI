@@ -10,6 +10,7 @@ using Avalonia.Controls.Templates;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
+using Avalonia.VisualTree;
 using AvaloniaFluentUI.Locale;
 using AvaloniaFluentUI.Collections;
 using AvaloniaFluentUI.Core;
@@ -30,7 +31,7 @@ public class BreadcrumbBar : TemplatedControl
         
         AddHandler(KeyDownEvent, OnChildPreviewKeyDown, RoutingStrategies.Tunnel);
         //AccessKeyInvoked
-        GotFocus += OnGettingFocus;
+        GettingFocus += OnGettingFocus;
         // Ignore FlowDirection
     }
 
@@ -154,7 +155,7 @@ public class BreadcrumbBar : TemplatedControl
         var src = ItemsSource;
         if (src != null)
         {
-            _breadcrumbItemsSourceView = new FAItemsSourceView(src);
+            _breadcrumbItemsSourceView = new ItemsSourceView(src);
             if (_itemsRepeater != null)
             {
                 _itemsIterable = new BreadcrumbIterable(src);
@@ -244,7 +245,7 @@ public class BreadcrumbBar : TemplatedControl
             }
             else
             {
-                if (_breadcrumbItemsSourceView is FAItemsSourceView isv)
+                if (_breadcrumbItemsSourceView is ItemsSourceView isv)
                 {
                     var itemCount = isv.Count;
                     if (itemIndex == itemCount)
@@ -349,11 +350,49 @@ public class BreadcrumbBar : TemplatedControl
         }
     }
 
-    private void OnGettingFocus(object sender, GotFocusEventArgs args)
+    private void OnGettingFocus(object sender, FocusChangingEventArgs args)
     {
         if (_itemsRepeater is ItemsRepeater repeater)
         {
-            //
+            // WinUI checks args InputDevice for Keyboard
+            if (args.NavigationMethod == NavigationMethod.Directional || args.NavigationMethod == NavigationMethod.Tab)
+            {
+                var ctrl = Application.Current.PlatformSettings.HotkeyConfiguration.CommandModifiers;
+                var oldFocusedElement = args.OldFocusedElement;
+                if (oldFocusedElement == null || repeater != (oldFocusedElement as Visual)?.GetVisualParent())
+                {
+                    if (_itemsRepeaterLayout != null)
+                    {
+                        if (_itemsRepeaterLayout.EllipsisIsRendered)
+                        {
+                            _focusedIndex = 0;
+                        }
+                        else
+                        {
+                            _focusedIndex = 1;
+                        }
+
+                        FocusElementAt(_focusedIndex);
+                    }
+
+                    if (repeater.TryGetElement(_focusedIndex) is Control selectedItem)
+                    {
+                        if (args.TrySetNewFocusedElement(selectedItem))
+                        {
+                            args.Handled = true;
+                        }
+                    }
+                }
+                // Focus was already in the repeater: in RS3+ Selection follows focus unless control is held down.
+                else if ((ctrl & args.KeyModifiers) != KeyModifiers.Control)
+                {
+                    if (args.NewFocusedElement is Control newFocus)
+                    {
+                        FocusElementAt(repeater.GetElementIndex(newFocus));
+                        args.Handled = true;
+                    }
+                }
+            }
         }
     }
 
@@ -440,7 +479,14 @@ public class BreadcrumbBar : TemplatedControl
         return MoveFocus(movementNext);
     }
 
-    // GetFindNextElementOptions
+    private FindNextElementOptions GetFindNextElementOptions()
+    {
+        var options = new FindNextElementOptions
+        {
+            SearchRoot = this
+        };
+        return options;
+    }
 
     private void OnChildPreviewKeyDown(object sender, KeyEventArgs args)
     {
@@ -469,9 +515,7 @@ public class BreadcrumbBar : TemplatedControl
         }
     }
 
-    // AccessKeyInvoked
-
-
+    // AccessKeyInvoked - skipping because I'm not sure how to translate WinUI -> Avalonia here
 
     private void RevokeListeners()
     {
@@ -483,13 +527,10 @@ public class BreadcrumbBar : TemplatedControl
             _itemsRepeater.ElementClearing -= OnElementClearingEvent;
         }
 
-        if (_breadcrumbItemsSourceView != null)
-        {
-            _breadcrumbItemsSourceView.CollectionChanged -= OnBreadcrumbBarItemsSourceCollectionChanged;
-        }
+        _breadcrumbItemsSourceView?.CollectionChanged -= OnBreadcrumbBarItemsSourceCollectionChanged;
     }
 
-    private FAItemsSourceView _breadcrumbItemsSourceView;
+    private ItemsSourceView _breadcrumbItemsSourceView;
     private BreadcrumbIterable _itemsIterable;
 
     private ItemsRepeater _itemsRepeater;
@@ -501,4 +542,6 @@ public class BreadcrumbBar : TemplatedControl
     private int _focusedIndex;
 
     private const string s_tpItemsRepeater = "PART_ItemsRepeater";
+
+    private const string SR_AutomationNameEllipsisBreadcrumbBarItem = "AutomationNameEllipsisBreadcrumbBarItem";
 }
