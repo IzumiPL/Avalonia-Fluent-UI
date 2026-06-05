@@ -265,6 +265,22 @@
       </ControlTemplate>
     </Setter>
 
+    <Style Selector="^">
+      <Setter Property="RenderTransformOrigin" Value="50%,50%"/>
+      <Setter Property="Transitions">
+        <Transitions>
+          <TransformOperationsTransition
+            Easing="CubicEaseOut"
+            Property="RenderTransform"
+            Duration="0:0:0.114"/>
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="^:pressed">
+      <Setter Property="RenderTransform" Value="scale(0.98, 0.98)"/>
+    </Style>
+
     <Style Selector="^:pointerover">
       <Style Selector="^ /template/ Border#RootBorder">
         <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
