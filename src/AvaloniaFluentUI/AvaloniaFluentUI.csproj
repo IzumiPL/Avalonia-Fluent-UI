@@ -43,13 +43,5 @@
     <MicroComIdl Include="$(MSBuildThisFileDirectory)\FluentControls\Interop\WinRT\WinRT.idl" CSharpInteropPath="$(MSBuildThisFileDirectory)\FluentControls\Interop\WinRT\WinRT.Generated.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <AdditionalFiles Include="FluentControlStyles\Themes\Icon\FluentIcon.axaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="FluentControls\Toast\" />
-  </ItemGroup>
-
 
 </Project>
