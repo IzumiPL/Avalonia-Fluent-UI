@@ -6,7 +6,7 @@ namespace AvaloniaFluentUI.Core;
 /// <summary>
 /// <see cref="IEnumerable"/> extensions methods
 /// </summary>
-public static class IEnumerableExtensions
+internal static class IEnumerableExtensions
 {
     /// <summary>
     /// Gets the item count of the IEnumerable
