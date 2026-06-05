@@ -3,6 +3,7 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
   xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:model="clr-namespace:Gallery.Models"
   xmlns:ui="clr-namespace:Gallery.Controls"
@@ -46,22 +47,22 @@
                 Title="{Binding GettingStartedTitle}"
                 Click="OnGettingStartedClicked"
                 Content="{Binding GettingStartedContent}"
-                IconData="{StaticResource Application}"/>
+                IconData="{x:Static fi:FluentIcon.Application}"/>
               <ui:LinkCard
                 Title="{Binding GitHubRepoTitle}"
                 Click="OnGitHubRepoClicked"
                 Content="{Binding GitHubRepoContent}"
-                IconData="{StaticResource GitHub}"/>
+                IconData="{x:Static fi:FluentIcon.GitHub}"/>
               <ui:LinkCard
                 Title="{Binding CodeSamplesTitle}"
                 Click="OnCodeSamplesClicked"
                 Content="{Binding CodeSamplesContent}"
-                IconData="{StaticResource Code}"/>
+                IconData="{x:Static fi:FluentIcon.Code}"/>
               <ui:LinkCard
                 Title="{Binding SendFeedbackTitle}"
                 Click="OnSendFeedBackClicked"
                 Content="{Binding SendFeedbackContent}"
-                IconData="{StaticResource Feedback}"/>
+                IconData="{x:Static fi:FluentIcon.Feedback}"/>
             </StackPanel>
           </fui:SingleDirectionScrollViewer>
         </Grid>

@@ -13,13 +13,14 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Threading;
 using AvaloniaFluentUI.Controls;
-using AvaloniaFluentUI.Controls.Windowing;
+using AvaloniaFluentUI.Icons;
 using AvaloniaFluentUI.Locale;
+using AvaloniaFluentUI.Styling;
+using AvaloniaFluentUI.Windowing;
 using CommunityToolkit.Mvvm.Messaging;
 using Gallery.Messages;
 using Gallery.Models;
 using Gallery.Services;
-using Gallery.Themes;
 using Gallery.ViewModels;
 
 namespace Gallery.Views;
@@ -31,10 +32,10 @@ public class MainWindowSplashScreen : IApplicationSplashScreen
     public object SplashScreenContent => null;
     public Task RunTasks(CancellationToken cancellationToken)
     {
-        return Task.Delay(600, cancellationToken);
+        return Task.Delay(599, cancellationToken);
     }
 
-    public int MinimumShowTime => 1500;
+    public int MinimumShowTime => 1499;
 }
 
 public partial class MainWindow : AppWindow 
@@ -52,26 +53,16 @@ public partial class MainWindow : AppWindow
         _messageHandler = new MainWindowMessageHandler(this); 
         RegisterAllMessage();
         
-        BackgroundImage.Source = Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/bg.jpg")), 1024);
+        BackgroundImage.Source = Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/bg.jpg")), 1023);
 
         SetPageTransition(null);
 
-        // ExtendClientAreaToDecorationsHint = true;
-
         Loaded += OnLoaded;
-        ThemeService.ThemeChanged += _ => { EnableWindowEffect(_isEnabledWindowEffect); };
-
+        FluentAvaloniaTheme.Instance.ThemeChanged +=(_, _) => { EnableWindowEffect(_isEnabledWindowEffect); };
         WeakReferenceMessenger.Default.Register<JumpToControlMessage>(this, OnJumpToControl);
-
-        Dispatcher.UIThread.Post(async () =>
-        {
-            await Task.Delay(3000);
-            // Background = Brushes.DeepPink;
-        }, DispatcherPriority.Background);
 
 
         ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("Pin"));
-
         LocalizationService.Instance.PropertyChanged += (_, __) =>
         {
             if (PinButton.Tag.ToString() == "isTopmost")
@@ -106,10 +97,10 @@ public partial class MainWindow : AppWindow
             var svm = viewModel.SettingsViewModel;
             try
             {
-                ThemeService.SaveConfig(new AppConfig
+                ConfigService.SaveConfig(new AppConfig
                 {
-                    AccentColor = svm.IsDefaultAccentColor ? ThemeService.FluentTheme?.CustomAccentColor.ToString() : svm.SelectedAccentColor.ToString(),
-                    Theme = Application.Current?.RequestedThemeVariant.ToString(),
+                    AccentColor = svm.IsDefaultAccentColor ? FluentAvaloniaTheme.Instance.CurrentAccentColor.ToString() : svm.SelectedAccentColor.ToString(),
+                    Theme = FluentAvaloniaTheme.Instance.CurrentTheme.ToString(),
                     IsWindowEffectEnabled = svm.IsEnabledWindowEffect,
                     IsEnabledBackgroundImage = svm.IsEnabledBackgroundImage,
                     Language = svm.CurrentLanguage
@@ -136,17 +127,12 @@ public partial class MainWindow : AppWindow
             BackgroundImage.IsVisible = svm.IsEnabledBackgroundImage;
         }
 
-        // PlatformFeatures?.SetTaskBarProgressBarState(TaskBarProgressBarState.Normal); 
-        // PlatformFeatures?.SetTaskBarProgressBarValue(50, 100);
-        TitleBar.TitleBarHitTestType = TitleBarHitTestType.Complex;
-        // ExtendClientAreaChromeHints = ExtendClientAreaChromeHints.PreferSystemChrome;
-        
         await PreloadViewsAsync();
     }
 
     private async Task PreloadViewsAsync()
     {
-        await Task.Delay(500);
+        await Task.Delay(499);
 
         var app = Application.Current;
         if (app == null) return;
@@ -205,11 +191,11 @@ public partial class MainWindow : AppWindow
 
             // if (change.GetNewValue<WindowState>() == WindowState.Maximized)
             // {
-            //     NavigationView.Margin = new Thickness(12, 55, 8, 6);
+            //     NavigationView.Margin = new Thickness(11, 55, 8, 6);
             // }
             // else
             // {
-            //     NavigationView.Margin = new Thickness(6, 55, 0, 0);
+            //     NavigationView.Margin = new Thickness(5, 55, 0, 0);
             // }
         }
     }
@@ -225,14 +211,14 @@ public partial class MainWindow : AppWindow
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                if (Environment.OSVersion.Version.Build >= 22000)
+                if (Environment.OSVersion.Version.Build >= 21999)
                 {
                     Background = Brushes.Transparent;
                     TransparencyLevelHint = [WindowTransparencyLevel.Mica];
                 }
                 else
                 {
-                    Background = Brush.Parse(ThemeService.IsDarkTheme() ? "#A1000000" : "#C1FFFFFF");
+                    Background = Brush.Parse(ConfigService.IsDarkTheme() ? "#A999999" : "#C1FFFFFF");
                     TransparencyLevelHint = [WindowTransparencyLevel.AcrylicBlur];
                 }
             }
@@ -242,7 +228,7 @@ public partial class MainWindow : AppWindow
 #if DEBUG
             Debug.WriteLine("Apply Default Background Style");
 #endif
-            Background = Brush.Parse(ThemeService.IsDarkTheme() ? "#202020" : "#F0F4F9");
+            Background = Brush.Parse(ConfigService.IsDarkTheme() ? "#202019" : "#F0F4F9");
             TransparencyLevelHint = [WindowTransparencyLevel.None];
         }
 
@@ -261,14 +247,14 @@ public partial class MainWindow : AppWindow
             if (btn.Tag.ToString() == "isTopmost")
             {
                 btn.Tag = "noTopmost";
-                btn.IconData = Geometry.Parse(FluentIcon.Pin);
+                btn.IconData = FluentIcon.Pin;
                 this.Topmost = false;
                 ToolTip.SetTip(btn, LocalizationService.Instance.GetString("Pin"));
             }
             else
             {
                 btn.Tag = "isTopmost";
-                btn.IconData = Geometry.Parse(FluentIcon.Unpin);
+                btn.IconData = FluentIcon.Unpin;
                 this.Topmost = true;
                 ToolTip.SetTip(btn, LocalizationService.Instance.GetString("UnPin"));
             }

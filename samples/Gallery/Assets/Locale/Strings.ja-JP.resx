@@ -1,5 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -7,467 +112,1371 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
-      PublicKeyToken=b77a5c561934e089
-    </value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
-      PublicKeyToken=b77a5c561934e089
-    </value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BI_AboutUs" xml:space="preserve"><value>私たちについて</value></data>
-  <data name="BI_Bluetooth" xml:space="preserve"><value>Bluetooth</value></data>
-  <data name="BI_CheckBox" xml:space="preserve"><value>チェックボックス</value></data>
-  <data name="BI_ChipsRadioButton" xml:space="preserve"><value>チップスラジオボタン</value></data>
-  <data name="BI_ColorSlider" xml:space="preserve"><value>カラースライダー</value></data>
-  <data name="BI_ComboBox" xml:space="preserve"><value>コンボボックス</value></data>
-  <data name="BI_ContentAlignment" xml:space="preserve"><value>コンテンツ配置</value></data>
-  <data name="BI_Controller" xml:space="preserve"><value>コントローラー</value></data>
-  <data name="BI_Copy" xml:space="preserve"><value>コピー</value></data>
-  <data name="BI_Cut" xml:space="preserve"><value>切り取り</value></data>
-  <data name="BI_DropDownButton" xml:space="preserve"><value>ドロップダウンボタン</value></data>
-  <data name="BI_FilledButton" xml:space="preserve"><value>塗りつぶしボタン</value></data>
-  <data name="BI_Game" xml:space="preserve"><value>ゲーム</value></data>
-  <data name="BI_Headphones" xml:space="preserve"><value>ヘッドホン</value></data>
-  <data name="BI_HyperlinkButton" xml:space="preserve"><value>ハイパーリンクボタン</value></data>
-  <data name="BI_IsDisabled" xml:space="preserve"><value>無効</value></data>
-  <data name="BI_IsMultiSelect" xml:space="preserve"><value>複数選択可</value></data>
-  <data name="BI_MovieAndTV" xml:space="preserve"><value>映画とテレビ</value></data>
-  <data name="BI_MultiSelectionComboBox" xml:space="preserve"><value>複数選択コンボボックス</value></data>
-  <data name="BI_Music" xml:space="preserve"><value>音楽</value></data>
-  <data name="BI_Options" xml:space="preserve"><value>オプション</value></data>
-  <data name="BI_OutlineButton" xml:space="preserve"><value>アウトラインボタン</value></data>
-  <data name="BI_Paste" xml:space="preserve"><value>貼り付け</value></data>
-  <data name="BI_RadioButton" xml:space="preserve"><value>ラジオボタン</value></data>
-  <data name="BI_RangeSlider" xml:space="preserve"><value>レンジスライダー</value></data>
-  <data name="BI_RoundButton" xml:space="preserve"><value>丸ボタン</value></data>
-  <data name="BI_Save" xml:space="preserve"><value>保存</value></data>
-  <data name="BI_Send" xml:space="preserve"><value>送信</value></data>
-  <data name="BI_Slider" xml:space="preserve"><value>スライダー</value></data>
-  <data name="BI_Speakers" xml:space="preserve"><value>スピーカー</value></data>
-  <data name="BI_SplitButton" xml:space="preserve"><value>分割ボタン</value></data>
-  <data name="BI_StandardButton" xml:space="preserve"><value>標準ボタン</value></data>
-  <data name="BI_StrokeButton" xml:space="preserve"><value>ストロークボタン</value></data>
-  <data name="BI_ToggleSwitch" xml:space="preserve"><value>トグルスイッチ</value></data>
-  <data name="BI_ToolButton" xml:space="preserve"><value>ツールボタン</value></data>
-  <data name="BI_Undo" xml:space="preserve"><value>元に戻す</value></data>
-  <data name="BasicInput" xml:space="preserve"><value>基本入力</value></data>
-  <data name="COM_Error" xml:space="preserve"><value>エラー</value></data>
-  <data name="COM_Information" xml:space="preserve"><value>情報</value></data>
-  <data name="COM_Success" xml:space="preserve"><value>成功</value></data>
-  <data name="COM_Warning" xml:space="preserve"><value>警告</value></data>
-  <data name="CodeSamples" xml:space="preserve"><value>コードサンプル</value></data>
-  <data name="Control_Border" xml:space="preserve"><value>Border</value></data>
-  <data name="Control_BreadcrumbBar" xml:space="preserve"><value>BreadcrumbBar</value></data>
-  <data name="Control_Button" xml:space="preserve"><value>Button</value></data>
-  <data name="Control_ButtonDesc" xml:space="preserve"><value>ユーザー入力に応答するコントロール。</value></data>
-  <data name="Control_CalendarDatePicker" xml:space="preserve"><value>CalendarDatePicker</value></data>
-  <data name="Control_Canvas" xml:space="preserve"><value>Canvas</value></data>
-  <data name="Control_CheckBox" xml:space="preserve"><value>CheckBox</value></data>
-  <data name="Control_CheckBoxDesc" xml:space="preserve"><value>選択/クリアできるコントロール。</value></data>
-  <data name="Control_ComboBox" xml:space="preserve"><value>ComboBox</value></data>
-  <data name="Control_ComboBoxDesc" xml:space="preserve"><value>ドロップダウンリスト。</value></data>
-  <data name="Control_CommandBar" xml:space="preserve"><value>CommandBar</value></data>
-  <data name="Control_CommandBarFlyout" xml:space="preserve"><value>CommandBarFlyout</value></data>
-  <data name="Control_ContentDialog" xml:space="preserve"><value>ContentDialog</value></data>
-  <data name="Control_DatePicker" xml:space="preserve"><value>DatePicker</value></data>
-  <data name="Control_DropDownButton" xml:space="preserve"><value>DropDownButton</value></data>
-  <data name="Control_DropDownButtonDesc" xml:space="preserve"><value>クリックで選択肢を表示するボタン。</value></data>
-  <data name="Control_Expander" xml:space="preserve"><value>Expander</value></data>
-  <data name="Control_FlipView" xml:space="preserve"><value>FlipView</value></data>
-  <data name="Control_Flyout" xml:space="preserve"><value>Flyout</value></data>
-  <data name="Control_Grid" xml:space="preserve"><value>Grid</value></data>
-  <data name="Control_HyperlinkButton" xml:space="preserve"><value>HyperlinkButton</value></data>
-  <data name="Control_InfoBadge" xml:space="preserve"><value>InfoBadge</value></data>
-  <data name="Control_InfoBar" xml:space="preserve"><value>InfoBar</value></data>
-  <data name="Control_ListBox" xml:space="preserve"><value>ListBox</value></data>
-  <data name="Control_MenuBar" xml:space="preserve"><value>MenuBar</value></data>
-  <data name="Control_MenuFlyout" xml:space="preserve"><value>Menu</value></data>
-  <data name="Control_NavigationView" xml:space="preserve"><value>NavigationView</value></data>
-  <data name="Control_NumberBox" xml:space="preserve"><value>NumberBox</value></data>
-  <data name="Control_PageTransition" xml:space="preserve"><value>PageTransition</value></data>
-  <data name="Control_PasswordBox" xml:space="preserve"><value>PasswordBox</value></data>
-  <data name="Control_Pivot" xml:space="preserve"><value>Segmented</value></data>
-  <data name="Control_ProgressBar" xml:space="preserve"><value>ProgressBar</value></data>
-  <data name="Control_ProgressRing" xml:space="preserve"><value>ProgressRing</value></data>
-  <data name="Control_RadioButton" xml:space="preserve"><value>RadioButton</value></data>
-  <data name="Control_RelativePanel" xml:space="preserve"><value>RelativePanel</value></data>
-  <data name="Control_Slider" xml:space="preserve"><value>Slider</value></data>
-  <data name="Control_SliderDesc" xml:space="preserve"><value>値の範囲から選択。</value></data>
-  <data name="Control_SplitButton" xml:space="preserve"><value>SplitButton</value></data>
-  <data name="Control_SplitView" xml:space="preserve"><value>SplitView</value></data>
-  <data name="Control_StackPanel" xml:space="preserve"><value>StackPanel</value></data>
-  <data name="Control_TeachingTip" xml:space="preserve"><value>TeachingTip</value></data>
-  <data name="Control_TextBlock" xml:space="preserve"><value>TextBlock</value></data>
-  <data name="Control_TextBox" xml:space="preserve"><value>TextBox</value></data>
-  <data name="Control_TimePicker" xml:space="preserve"><value>TimePicker</value></data>
-  <data name="Control_ToggleButton" xml:space="preserve"><value>ToggleButton</value></data>
-  <data name="Control_ToggleButtonDesc" xml:space="preserve"><value>2状態切替ボタン。</value></data>
-  <data name="Control_ToggleSwitch" xml:space="preserve"><value>SwitchButton</value></data>
-  <data name="Control_ToggleSwitchDesc" xml:space="preserve"><value>2状態切替スイッチ。</value></data>
-  <data name="Control_ToolTip" xml:space="preserve"><value>ToolTip</value></data>
-  <data name="Control_TreeView" xml:space="preserve"><value>TreeView</value></data>
-  <data name="DP_Action" xml:space="preserve"><value>アクション</value></data>
-  <data name="DP_Close" xml:space="preserve"><value>閉じる</value></data>
-  <data name="DP_Confirm" xml:space="preserve"><value>確認</value></data>
-  <data name="DP_DialogWithMask" xml:space="preserve"><value>マスク付きダイアログ</value></data>
-  <data name="DP_Open" xml:space="preserve"><value>開く</value></data>
-  <data name="DP_Position" xml:space="preserve"><value>位置</value></data>
-  <data name="DT_CalendarPicker" xml:space="preserve"><value>カレンダーピッカー</value></data>
-  <data name="DT_ColorPicker" xml:space="preserve"><value>カラーピッカー</value></data>
-  <data name="DT_DatePicker" xml:space="preserve"><value>日付ピッカー</value></data>
-  <data name="DT_DisplayMode" xml:space="preserve"><value>表示モード:</value></data>
-  <data name="DT_SelectMode" xml:space="preserve"><value>選択モード:</value></data>
-  <data name="DT_SelectedColor" xml:space="preserve"><value>選択色:</value></data>
-  <data name="DT_SelectedDate" xml:space="preserve"><value>選択日:</value></data>
-  <data name="DT_SelectedTime" xml:space="preserve"><value>選択時刻:</value></data>
-  <data name="DT_ShowDay" xml:space="preserve"><value>日を表示:</value></data>
-  <data name="DT_ShowMonth" xml:space="preserve"><value>月を表示:</value></data>
-  <data name="DT_ShowYear" xml:space="preserve"><value>年を表示:</value></data>
-  <data name="DT_TimeFormat" xml:space="preserve"><value>時刻形式:</value></data>
-  <data name="DT_TimePicker" xml:space="preserve"><value>時刻ピッカー</value></data>
-  <data name="DateTime" xml:space="preserve"><value>日付と時刻</value></data>
-  <data name="DialogAndPopup" xml:space="preserve"><value>ダイアログとポップアップ</value></data>
-  <data name="FP_Page1" xml:space="preserve"><value>ページ1(デフォルト)</value></data>
-  <data name="FP_Page2" xml:space="preserve"><value>ページ2(スライダー)</value></data>
-  <data name="FP_Page3" xml:space="preserve"><value>ページ3(ドリルイン)</value></data>
-  <data name="FP_Page4" xml:space="preserve"><value>ページ4(なし)</value></data>
-  <data name="FluentGallery" xml:space="preserve"><value>Fluent Gallery</value></data>
-  <data name="GettingStarted" xml:space="preserve"><value>はじめに</value></data>
-  <data name="GitHubRepo" xml:space="preserve"><value>GitHub リポジトリ</value></data>
-  <data name="Home" xml:space="preserve"><value>ホーム</value></data>
-  <data name="IV_EnumMember" xml:space="preserve"><value>列挙メンバー</value></data>
-  <data name="IV_IconName" xml:space="preserve"><value>アイコン名</value></data>
-  <data name="IV_SearchIcon" xml:space="preserve"><value>アイコン検索</value></data>
-  <data name="Icon" xml:space="preserve"><value>アイコン</value></data>
-  <data name="LV_Add" xml:space="preserve"><value>追加</value></data>
-  <data name="LV_AppTheme" xml:space="preserve"><value>アプリテーマ</value></data>
-  <data name="LV_Apply" xml:space="preserve"><value>適用</value></data>
-  <data name="LV_Border" xml:space="preserve"><value>ボーダー</value></data>
-  <data name="LV_Canvas" xml:space="preserve"><value>キャンバス</value></data>
-  <data name="LV_Dark" xml:space="preserve"><value>ダーク</value></data>
-  <data name="LV_EnableShadow" xml:space="preserve"><value>影を有効</value></data>
-  <data name="LV_Expander" xml:space="preserve"><value>エキスパンダー</value></data>
-  <data name="LV_FollowSystem" xml:space="preserve"><value>システムに従う</value></data>
-  <data name="LV_GridLayout" xml:space="preserve"><value>グリッドレイアウト</value></data>
-  <data name="LV_Light" xml:space="preserve"><value>ライト</value></data>
-  <data name="LV_Opacity" xml:space="preserve"><value>不透明度</value></data>
-  <data name="LV_Reset" xml:space="preserve"><value>リセット</value></data>
-  <data name="LV_SplitView" xml:space="preserve"><value>分割ビュー</value></data>
-  <data name="LV_StackPanel" xml:space="preserve"><value>スタックパネル</value></data>
-  <data name="Layout" xml:space="preserve"><value>レイアウト</value></data>
-  <data name="MT_Add" xml:space="preserve"><value>追加</value></data>
-  <data name="MT_Ascending" xml:space="preserve"><value>昇順</value></data>
-  <data name="MT_Back" xml:space="preserve"><value>戻る</value></data>
-  <data name="MT_CommandBar" xml:space="preserve"><value>コマンドバー</value></data>
-  <data name="MT_CommandBarFlyout" xml:space="preserve"><value>コマンドバーフライアウト</value></data>
-  <data name="MT_ContextMenu" xml:space="preserve"><value>コンテキストメニュー</value></data>
-  <data name="MT_Debug" xml:space="preserve"><value>デバッグ</value></data>
-  <data name="MT_Delete" xml:space="preserve"><value>削除</value></data>
-  <data name="MT_Descending" xml:space="preserve"><value>降順</value></data>
-  <data name="MT_Edit" xml:space="preserve"><value>編集</value></data>
-  <data name="MT_Exit" xml:space="preserve"><value>終了</value></data>
-  <data name="MT_Find" xml:space="preserve"><value>検索</value></data>
-  <data name="MT_Forward" xml:space="preserve"><value>進む</value></data>
-  <data name="MT_Info" xml:space="preserve"><value>情報</value></data>
-  <data name="MT_Logout" xml:space="preserve"><value>ログアウト</value></data>
-  <data name="MT_Menu" xml:space="preserve"><value>メニュー</value></data>
-  <data name="MT_Name" xml:space="preserve"><value>名前</value></data>
-  <data name="MT_Open" xml:space="preserve"><value>開く</value></data>
-  <data name="MT_Redo" xml:space="preserve"><value>やり直し</value></data>
-  <data name="MT_Rename" xml:space="preserve"><value>名前変更</value></data>
-  <data name="MT_Replace" xml:space="preserve"><value>置換</value></data>
-  <data name="MT_Run2" xml:space="preserve"><value>実行</value></data>
-  <data name="MT_Save" xml:space="preserve"><value>保存</value></data>
-  <data name="MT_Share" xml:space="preserve"><value>共有</value></data>
-  <data name="MT_Sort" xml:space="preserve"><value>並び替え</value></data>
-  <data name="MenuAndToolBar" xml:space="preserve"><value>メニューとツールバー</value></data>
-  <data name="NV_About" xml:space="preserve"><value>概要</value></data>
-  <data name="NV_Apps" xml:space="preserve"><value>アプリ</value></data>
-  <data name="NV_DisplayMode" xml:space="preserve"><value>表示モード:</value></data>
-  <data name="NV_Downloads" xml:space="preserve"><value>ダウンロード</value></data>
-  <data name="NV_Files" xml:space="preserve"><value>ファイル</value></data>
-  <data name="NV_Friends" xml:space="preserve"><value>フレンド</value></data>
-  <data name="NV_Games" xml:space="preserve"><value>ゲーム</value></data>
-  <data name="NV_Help" xml:space="preserve"><value>ヘルプ</value></data>
-  <data name="NV_History" xml:space="preserve"><value>履歴</value></data>
-  <data name="NV_Home" xml:space="preserve"><value>ホーム</value></data>
-  <data name="NV_Mail" xml:space="preserve"><value>メール</value></data>
-  <data name="NV_Phone" xml:space="preserve"><value>電話</value></data>
-  <data name="NV_SegmentedBar" xml:space="preserve"><value>セグメントバー</value></data>
-  <data name="NV_SegmentedToggleBar" xml:space="preserve"><value>セグメントトグルバー</value></data>
-  <data name="NV_ShowBackButton" xml:space="preserve"><value>戻るボタン表示</value></data>
-  <data name="NV_Subscriptions" xml:space="preserve"><value>サブスクリプション</value></data>
-  <data name="NV_Tabs" xml:space="preserve"><value>タブ</value></data>
-  <data name="NV_TopNavigation" xml:space="preserve"><value>トップナビゲーションバー</value></data>
-  <data name="Navigation" xml:space="preserve"><value>ナビゲーション</value></data>
-  <data name="SC_Bidirectional" xml:space="preserve"><value>双方向スクロール</value></data>
-  <data name="SC_SingleDirection" xml:space="preserve"><value>単方向スクロール</value></data>
-  <data name="SC_SmoothScrollArea" xml:space="preserve"><value>スムーズスクロールエリア</value></data>
-  <data name="SI_BgColor" xml:space="preserve"><value>背景色:</value></data>
-  <data name="SI_IsIndeterminate" xml:space="preserve"><value>不確定</value></data>
-  <data name="SI_Progress" xml:space="preserve"><value>進捗:</value></data>
-  <data name="SI_ProgressBar" xml:space="preserve"><value>プログレスバー</value></data>
-  <data name="SI_ProgressRing" xml:space="preserve"><value>プログレスリング</value></data>
-  <data name="SI_Restore" xml:space="preserve"><value>リセット</value></data>
-  <data name="SI_Style" xml:space="preserve"><value>スタイル:</value></data>
-  <data name="SV_BackgroundImage" xml:space="preserve"><value>背景画像</value></data>
-  <data name="SV_CustomColor" xml:space="preserve"><value>カスタム色</value></data>
-  <data name="SV_DefaultColor" xml:space="preserve"><value>デフォルト色</value></data>
-  <data name="SV_Language" xml:space="preserve"><value>言語</value></data>
-  <data name="SV_PinToTop" xml:space="preserve"><value>最前面固定</value></data>
-  <data name="SV_SelectColor" xml:space="preserve"><value>色を選択</value></data>
-  <data name="SV_ThemeColor" xml:space="preserve"><value>テーマ色</value></data>
-  <data name="SV_WindowEffect" xml:space="preserve"><value>ウィンドウ効果</value></data>
-  <data name="Scroll" xml:space="preserve"><value>スクロール</value></data>
-  <data name="Section_BasicInput" xml:space="preserve"><value>基本入力</value></data>
-  <data name="Section_DateTime" xml:space="preserve"><value>日付と時刻</value></data>
-  <data name="Section_Dialog" xml:space="preserve"><value>ダイアログ</value></data>
-  <data name="Section_Layout" xml:space="preserve"><value>レイアウト</value></data>
-  <data name="Section_MenuAndToolBar" xml:space="preserve"><value>メニューとツールバー</value></data>
-  <data name="Section_NavigationView" xml:space="preserve"><value>ナビゲーションビュー</value></data>
-  <data name="Section_StatusAndInformation" xml:space="preserve"><value>ステータスと情報</value></data>
-  <data name="Section_Text" xml:space="preserve"><value>テキスト</value></data>
-  <data name="Section_View" xml:space="preserve"><value>ビュー</value></data>
-  <data name="SendFeedback" xml:space="preserve"><value>フィードバック</value></data>
-  <data name="Settings" xml:space="preserve"><value>設定</value></data>
-  <data name="SourceCode" xml:space="preserve"><value>ソースコード</value></data>
-  <data name="StatusAndInformation" xml:space="preserve"><value>ステータスと情報</value></data>
-  <data name="TV_AcceptReturn" xml:space="preserve"><value>改行許可</value></data>
-  <data name="TV_AcceptTab" xml:space="preserve"><value>タブ許可</value></data>
-  <data name="TV_DisplayText" xml:space="preserve"><value>テキスト表示</value></data>
-  <data name="TV_EnterPassword" xml:space="preserve"><value>パスワードを入力</value></data>
-  <data name="TV_FontSize" xml:space="preserve"><value>フォントサイズ:</value></data>
-  <data name="TV_FontStyle" xml:space="preserve"><value>フォントスタイル:</value></data>
-  <data name="TV_FontWeight" xml:space="preserve"><value>フォントの太さ:</value></data>
-  <data name="TV_NumberBox" xml:space="preserve"><value>数値ボックス</value></data>
-  <data name="TV_PasswordBox" xml:space="preserve"><value>パスワードボックス</value></data>
-  <data name="TV_PhoneNumber" xml:space="preserve"><value>電話番号を入力:</value></data>
-  <data name="TV_SearchBox" xml:space="preserve"><value>検索ボックス</value></data>
-  <data name="TV_TextBox" xml:space="preserve"><value>テキストボックス</value></data>
-  <data name="TV_TextDecoration" xml:space="preserve"><value>テキスト装飾:</value></data>
-  <data name="Text" xml:space="preserve"><value>テキスト</value></data>
-  <data name="VP_AddPage" xml:space="preserve"><value>ページ追加</value></data>
-  <data name="VP_AutoPlay" xml:space="preserve"><value>自動再生</value></data>
-  <data name="VP_Carousel" xml:space="preserve"><value>カルーセル</value></data>
-  <data name="VP_DataGrid" xml:space="preserve"><value>データグリッド</value></data>
-  <data name="VP_Direction" xml:space="preserve"><value>方向:</value></data>
-  <data name="VP_Interval" xml:space="preserve"><value>間隔:</value></data>
-  <data name="VP_ListControl" xml:space="preserve"><value>リストコントロール</value></data>
-  <data name="VP_Next" xml:space="preserve"><value>次へ</value></data>
-  <data name="VP_Previous" xml:space="preserve"><value>前へ</value></data>
-  <data name="VP_SelectMode" xml:space="preserve"><value>選択モード:</value></data>
-  <data name="VP_TreeView" xml:space="preserve"><value>ツリービュー</value></data>
-  <data name="View" xml:space="preserve"><value>ビュー</value></data>
-  <data name="MV_Title" xml:space="preserve"><value>Avalonia Fluent UI Gallery</value></data>
-  <data name="MV_SearchWatermark" xml:space="preserve"><value>検索内容を入力してください</value></data>
-  <data name="SV_WindowEffectDescription" xml:space="preserve"><value>ウィンドウ効果を有効にする (Mica | AcrylicBlur)</value></data>
-  <data name="SV_Appearance" xml:space="preserve"><value>アプリの外観を調整</value></data>
-  <data name="SV_ThemeColorDescription" xml:space="preserve"><value>アプリのテーマ色を調整</value></data>
-  <data name="SV_PinToTopDescription" xml:space="preserve"><value>ウィンドウを最前面に固定</value></data>
-  <data name="SV_LanguageDescription" xml:space="preserve"><value>アプリの言語を設定 (再起動が必要)</value></data>
-  <data name="SV_EnableBackgroundImage" xml:space="preserve"><value>背景画像を有効にする</value></data>
-  <data name="SV_AppTheme" xml:space="preserve"><value>アプリテーマ</value></data>
-  <data name="GettingStartedContent" xml:space="preserve"><value>アプリ開発のオプションとサンプルの概要。</value></data>
-  <data name="GitHubRepoContent" xml:space="preserve"><value>最新のFluentデザインコントロールとスタイル。</value></data>
-  <data name="CodeSamplesContent" xml:space="preserve"><value>特定のタスク、機能、APIを示すサンプルを探す。</value></data>
-  <data name="SendFeedbackContent" xml:space="preserve"><value>フィードバックを提供しての改善にご協力ください。</value></data>
-  <data name="SI_ToolTipButton" xml:space="preserve"><value>ツールチップボタン</value></data>
-  <data name="SI_ToolTipText" xml:space="preserve"><value>私はツールチップです</value></data>
-  <data name="SI_InfoBadge" xml:space="preserve"><value>情報バッジ</value></data>
-  <data name="SI_InfoBar" xml:space="preserve"><value>インフォバー</value></data>
-  <data name="SI_SaveSuccess" xml:space="preserve"><value>保存成功</value></data>
-  <data name="SI_FileSaved" xml:space="preserve"><value>ファイルはサーバーに正常に保存されました</value></data>
-  <data name="SI_Action" xml:space="preserve"><value>アクション</value></data>
-  <data name="SI_Options" xml:space="preserve"><value>オプション</value></data>
-  <data name="SI_IsClosable" xml:space="preserve"><value>閉じられる</value></data>
-  <data name="VP_Options" xml:space="preserve"><value>オプション</value></data>
-  <data name="VP_RoundListBox" xml:space="preserve"><value>ラウンドリストボックス</value></data>
-  <data name="VP_IsReadOnly" xml:space="preserve"><value>読み取り専用</value></data>
-  <data name="VP_BorderDisplayMode" xml:space="preserve"><value>枠線表示モード</value></data>
-  <data name="VP_SimpleSettingsCard" xml:space="preserve"><value>シンプル設定カード</value></data>
-  <data name="VP_ClickableSettingsCard" xml:space="preserve"><value>クリック可能設定カード</value></data>
-  <data name="VP_ExpandableSettingsCard" xml:space="preserve"><value>展開可能設定カード</value></data>
-  <data name="VP_Volume" xml:space="preserve"><value>音量</value></data>
-  <data name="VP_Sound" xml:space="preserve"><value>サウンド</value></data>
-  <data name="VP_SoundDescription" xml:space="preserve"><value>音量レベル、出力、入力、サウンドデバイス</value></data>
-  <data name="VP_AppsSettingsDescription" xml:space="preserve"><value>アプリには独自の設定がある場合があります</value></data>
-  <data name="VP_ChooseDevice" xml:space="preserve"><value>通話または録音デバイスを選択</value></data>
-  <data name="VP_Headset" xml:space="preserve"><value>ヘッドセット</value></data>
-  <data name="VP_HasFooterContent" xml:space="preserve"><value>これにはフッターコンテンツがあります</value></data>
-  <data name="VP_DeviceName" xml:space="preserve"><value>デバイス名</value></data>
-  <data name="VP_IsClickable" xml:space="preserve"><value>これはクリック可能です</value></data>
-  <data name="VP_AddDevice" xml:space="preserve"><value>デバイス追加</value></data>
-  <data name="DT_CalendarDatePicker" xml:space="preserve"><value>カレンダー日付ピッカー</value></data>
-  <data name="DT_DefaultIncrement" xml:space="preserve"><value>デフォルト時間間隔:</value></data>
-  <data name="NV_NavigationView" xml:space="preserve"><value>ナビゲーションビュー</value></data>
-  <data name="NV_PaneDisplayMode" xml:space="preserve"><value>ペイン表示モード</value></data>
-  <data name="NV_Unplayed" xml:space="preserve"><value>未再生</value></data>
-  <data name="NV_NowPlaying" xml:space="preserve"><value>再生中</value></data>
-  <data name="NV_VideoHistory" xml:space="preserve"><value>動画履歴</value></data>
-  <data name="NV_AudioHistory" xml:space="preserve"><value>オーディオ履歴</value></data>
-  <data name="NV_BrowsingHistory" xml:space="preserve"><value>ブラウジング履歴</value></data>
-  <data name="NV_Folders" xml:space="preserve"><value>フォルダ</value></data>
-  <data name="NV_Window" xml:space="preserve"><value>ウィンドウ</value></data>
-  <data name="NV_BreadcrumbBar" xml:space="preserve"><value>パンくずナビバー</value></data>
-  <data name="DP_OptimisticContent" xml:space="preserve"><value>楽観的な気持ちを保てば、この世の中には数え切れないほどの楽しみがあることに気づくでしょう！</value></data>
-  <data name="DP_OpenURL" xml:space="preserve"><value>URLを開く</value></data>
-  <data name="DP_URLWatermark" xml:space="preserve"><value>ファイル、ストリーム、プレイリストのURLを入力</value></data>
-  <data name="DP_CustomDialog" xml:space="preserve"><value>カスタムダイアログ</value></data>
-  <data name="DP_TaskDialog" xml:space="preserve"><value>タスクダイアログ</value></data>
-  <data name="DP_ShowTaskDialog" xml:space="preserve"><value>タスクダイアログを表示</value></data>
-  <data name="DP_FluentFlyout" xml:space="preserve"><value>Fluentフライアウト</value></data>
-  <data name="DP_ShowPopup" xml:space="preserve"><value>ポップアップ表示</value></data>
-  <data name="DP_NoName" xml:space="preserve"><value>名無し</value></data>
-  <data name="DP_EyeQuote" xml:space="preserve"><value>左目であなたを忘れ、右目であなたを覚える。</value></data>
-  <data name="DP_FlyoutPositionLabel" xml:space="preserve"><value>フライアウト位置:</value></data>
-  <data name="DP_ImageButtonFlyout" xml:space="preserve"><value>画像とボタン付きフライアウト</value></data>
-  <data name="DP_ShowFlyout" xml:space="preserve"><value>フライアウトを表示</value></data>
-  <data name="DP_Minecraft" xml:space="preserve"><value>Minecraft</value></data>
-  <data name="DP_ForgeDesc" xml:space="preserve"><value>Forge (Minecraft Forge) は Minecraft Java Edition 向けのオープンソースのModローダーで、開発者に標準的な開発インターフェースを提供します。</value></data>
-  <data name="DP_TeachingTip" xml:space="preserve"><value>ティーチングチップ</value></data>
-  <data name="DP_TeachingTipButton" xml:space="preserve"><value>ティーチングチップを表示</value></data>
-  <data name="DP_TeachingTipSubtitle" xml:space="preserve"><value>最短の近道は回り道をすることであり、回り道こそが私の最短の近道である。</value></data>
-  <data name="DP_ColorPicker" xml:space="preserve"><value>カラーピッカー</value></data>
-  <data name="DP_TipTitle" xml:space="preserve"><value>ヒント</value></data>
-  <data name="DP_ThisIsDialogWithMask" xml:space="preserve"><value>マスク付きダイアログ</value></data>
-  <data name="LV_DockPanel" xml:space="preserve"><value>ドックパネル</value></data>
-  <data name="LV_GridSplitter" xml:space="preserve"><value>グリッドスプリッター</value></data>
-  <data name="LV_Panel" xml:space="preserve"><value>パネルレイアウト</value></data>
-  <data name="LV_RelativePanel" xml:space="preserve"><value>リレイティブパネル</value></data>
-  <data name="LV_UniformGrid" xml:space="preserve"><value>ユニフォームグリッド</value></data>
-  <data name="LV_WrapPanel" xml:space="preserve"><value>ラップパネル</value></data>
-  <data name="LV_VirtualizingStackPanel" xml:space="preserve"><value>仮想化スタックパネル</value></data>
-  <data name="LV_Alignment" xml:space="preserve"><value>配置</value></data>
-  <data name="LV_SelectLayout" xml:space="preserve"><value>レイアウト方向を選択</value></data>
-  <data name="LV_AddControl" xml:space="preserve"><value>コントロール追加</value></data>
-  <data name="LV_RemoveControl" xml:space="preserve"><value>コントロール削除</value></data>
-  <data name="LV_SetGridRow" xml:space="preserve"><value>グリッド行を設定</value></data>
-  <data name="LV_SetGridColumn" xml:space="preserve"><value>グリッド列を設定</value></data>
-  <data name="LV_BorderColorHex" xml:space="preserve"><value>枠線の色(16進数)</value></data>
-  <data name="LV_BgColorHex" xml:space="preserve"><value>背景色(16進数)</value></data>
-  <data name="LV_AddItemsCount" xml:space="preserve"><value>項目追加(数)</value></data>
-  <data name="TV_AutoCompleteBox" xml:space="preserve"><value>オートコンプリートボックス</value></data>
-  <data name="TV_AddMatchElement" xml:space="preserve"><value>一致する要素を追加:</value></data>
-  <data name="TV_SelectMatchMode" xml:space="preserve"><value>一致モードを選択:</value></data>
-  <data name="TV_AddMatchElementButton" xml:space="preserve"><value>一致要素を追加</value></data>
-  <data name="TV_SetDisplayText" xml:space="preserve"><value>表示テキストを設定:</value></data>
-  <data name="TV_SetLetterSpacing" xml:space="preserve"><value>文字間隔を設定:</value></data>
-  <data name="TV_WatermarkLabel" xml:space="preserve"><value>ウォーターマーク</value></data>
-  <data name="TV_ClearTextBox" xml:space="preserve"><value>クリアテキストボックス</value></data>
-  <data name="TV_ClearWatermark" xml:space="preserve"><value>クリアテキストボックス</value></data>
-  <data name="TV_SearchWatermark" xml:space="preserve"><value>検索内容を入力してください</value></data>
-  <data name="TV_EnterToSearch" xml:space="preserve"><value>Enterで検索</value></data>
-  <data name="TV_SpinButtonMode" xml:space="preserve"><value>スピンボタン表示モード:</value></data>
-  <data name="TV_ButtonSpinner" xml:space="preserve"><value>ボタンスピナー</value></data>
-  <data name="TV_SpinnerLocation" xml:space="preserve"><value>スピナーボタン位置:</value></data>
-  <data name="TV_EnableSpin" xml:space="preserve"><value>回転有効</value></data>
-  <data name="TV_EnterName" xml:space="preserve"><value>名前を入力(A-Z)(a-z)</value></data>
-  <data name="BI_StrokeToolButton" xml:space="preserve"><value>ストロークツールボタン</value></data>
-  <data name="BI_TransparentDropDownButton" xml:space="preserve"><value>透明ドロップダウンボタン</value></data>
-  <data name="BI_ToggleButton" xml:space="preserve"><value>トグルボタン</value></data>
-  <data name="BI_ToggleSplitButton" xml:space="preserve"><value>分割トグルボタン</value></data>
-  <data name="BI_TransparentToggleButton" xml:space="preserve"><value>透明トグルボタン</value></data>
-  <data name="BI_SubTitleRadioButton" xml:space="preserve"><value>サブタイトルラジオボタン</value></data>
-  <data name="BI_ToolTipSlider" xml:space="preserve"><value>ツールチップスライダー</value></data>
-  <data name="BI_Mail" xml:space="preserve"><value>メール</value></data>
-  <data name="BI_SendToLocal" xml:space="preserve"><value>ローカルに送信</value></data>
-  <data name="BI_SendToNetwork" xml:space="preserve"><value>ネットワークに送信</value></data>
-  <data name="BI_Resend" xml:space="preserve"><value>再送信</value></data>
-  <data name="BI_SaveToLocal" xml:space="preserve"><value>ローカルに保存</value></data>
-  <data name="BI_EnableBluetooth" xml:space="preserve"><value>Bluetooth有効</value></data>
-  <data name="BI_IAmHyperlink" xml:space="preserve"><value>ハイパーリンクボタンです</value></data>
-  <data name="BI_EnableThreeState" xml:space="preserve"><value>三状態有効</value></data>
-  <data name="BI_SelectOddItems" xml:space="preserve"><value>奇数項目を選択</value></data>
-  <data name="BI_SelectEvenItems" xml:space="preserve"><value>偶数項目を選択</value></data>
-  <data name="BI_ClearSelectedItems" xml:space="preserve"><value>選択をクリア</value></data>
-  <data name="BI_Direction" xml:space="preserve"><value>方向</value></data>
-  <data name="BI_StandardButtonWithIcon" xml:space="preserve"><value>アイコン付き標準ボタン</value></data>
-  <data name="BI_AccentStandardButton" xml:space="preserve"><value>アクセント標準ボタン</value></data>
-  <data name="BI_TransparentStandardButton" xml:space="preserve"><value>透明標準ボタン</value></data>
-  <data name="BI_TransparentStandardButtonWithIcon" xml:space="preserve"><value>アイコン付き透明標準ボタン</value></data>
-  <data name="BI_AccentRoundButton" xml:space="preserve"><value>アクセント丸ボタン</value></data>
-  <data name="BI_RoundOutlineButton" xml:space="preserve"><value>丸アウトラインボタン</value></data>
-  <data name="MT_FileMenu" xml:space="preserve"><value>ファイル(_F)</value></data>
-  <data name="MT_NewSolution" xml:space="preserve"><value>新規ソリューション</value></data>
-  <data name="MT_GetFromVersionControl" xml:space="preserve"><value>バージョン管理から取得...</value></data>
-  <data name="MT_CloseSolution" xml:space="preserve"><value>ソリューションを閉じる</value></data>
-  <data name="MT_RemoteDevelopment" xml:space="preserve"><value>リモート開発...</value></data>
-  <data name="MT_SaveAll" xml:space="preserve"><value>すべて保存</value></data>
-  <data name="MT_ReloadAllFromDisk" xml:space="preserve"><value>ディスクからすべて再読み込み</value></data>
-  <data name="MT_Export" xml:space="preserve"><value>エクスポート</value></data>
-  <data name="MT_Print" xml:space="preserve"><value>印刷</value></data>
-  <data name="MT_FileEncoding" xml:space="preserve"><value>ファイルエンコーディング</value></data>
-  <data name="MT_LineEndings" xml:space="preserve"><value>改行コード</value></data>
-  <data name="MT_SetReadOnly" xml:space="preserve"><value>ファイルを読み取り専用に設定</value></data>
-  <data name="MT_NewProjectSettings" xml:space="preserve"><value>新規プロジェクト設定</value></data>
-  <data name="MT_ManageIDESettings" xml:space="preserve"><value>IDE設定を管理</value></data>
-  <data name="MT_PowerSaveMode" xml:space="preserve"><value>省電力モード</value></data>
-  <data name="MT_InvalidateCache" xml:space="preserve"><value>キャッシュを無効化</value></data>
-  <data name="MT_EditMenu" xml:space="preserve"><value>編集(_E)</value></data>
-  <data name="MT_CopyPlainText" xml:space="preserve"><value>プレーンテキストとしてコピー</value></data>
-  <data name="MT_SearchSelection" xml:space="preserve"><value>選択範囲内を検索</value></data>
-  <data name="MT_FindNext" xml:space="preserve"><value>次を検索</value></data>
-  <data name="MT_FindPrevious" xml:space="preserve"><value>前を検索</value></data>
-  <data name="MT_SelectAllMatches" xml:space="preserve"><value>すべての一致を選択</value></data>
-  <data name="MT_AddNextMatch" xml:space="preserve"><value>次の一致を選択に追加</value></data>
-  <data name="MT_CancelSelectedMatch" xml:space="preserve"><value>選択した一致をキャンセル</value></data>
-  <data name="MT_FindUsages" xml:space="preserve"><value>使用箇所を検索</value></data>
-  <data name="MT_NextHighlightedUsage" xml:space="preserve"><value>次のハイライト使用箇所</value></data>
-  <data name="MT_PreviousHighlightedUsage" xml:space="preserve"><value>前のハイライト使用箇所</value></data>
-  <data name="MT_RecentFindUsages" xml:space="preserve"><value>最近の使用箇所検索</value></data>
-  <data name="MT_SelectAll" xml:space="preserve"><value>すべて選択</value></data>
-  <data name="MT_ViewMenu" xml:space="preserve"><value>表示(_V)</value></data>
-  <data name="MT_ToolWindow" xml:space="preserve"><value>ツールウィンドウ</value></data>
-  <data name="MT_Appearance" xml:space="preserve"><value>外観</value></data>
-  <data name="MT_QuickDefinition" xml:space="preserve"><value>クイック定義</value></data>
-  <data name="MT_QuickDefinitionType" xml:space="preserve"><value>クイック定義タイプ</value></data>
-  <data name="MT_RecentLocations" xml:space="preserve"><value>最近の場所</value></data>
-  <data name="MT_RecentFiles" xml:space="preserve"><value>最近のファイル</value></data>
-  <data name="MT_RecentlyChangedFiles" xml:space="preserve"><value>最近変更したファイル</value></data>
-  <data name="MT_RecentChanges" xml:space="preserve"><value>最近の変更</value></data>
-  <data name="MT_NavigationMenu" xml:space="preserve"><value>ナビゲーション(_N)</value></data>
-  <data name="MT_SearchEverywhere" xml:space="preserve"><value>どこでも検索</value></data>
-  <data name="MT_Class" xml:space="preserve"><value>クラス</value></data>
-  <data name="MT_Symbol" xml:space="preserve"><value>シンボル</value></data>
-  <data name="MT_CodeMenu" xml:space="preserve"><value>コード(_C)</value></data>
-  <data name="MT_CodeCompletion" xml:space="preserve"><value>コード補完</value></data>
-  <data name="MT_InspectCode" xml:space="preserve"><value>コード検査</value></data>
-  <data name="MT_AnalyzeCode" xml:space="preserve"><value>コード分析</value></data>
-  <data name="MT_InsertLiveTemplate" xml:space="preserve"><value>ライブテンプレート挿入</value></data>
-  <data name="MT_SaveAsLiveTemplate" xml:space="preserve"><value>ライブテンプレートとして保存</value></data>
-  <data name="MT_SurroundWithTemplate" xml:space="preserve"><value>テンプレートで囲む</value></data>
-  <data name="MT_UnwrapRemove" xml:space="preserve"><value>アンラップ/削除</value></data>
-  <data name="MT_Collapse" xml:space="preserve"><value>折り畳み</value></data>
-  <data name="MT_RefactorMenu" xml:space="preserve"><value>リファクタリング(_R)</value></data>
-  <data name="MT_BuildMenu" xml:space="preserve"><value>ビルド(_B)</value></data>
-  <data name="MT_BuildSolution" xml:space="preserve"><value>ソリューションをビルド</value></data>
-  <data name="MT_RebuildSolution" xml:space="preserve"><value>ソリューションをリビルド</value></data>
-  <data name="MT_CleanSolution" xml:space="preserve"><value>ソリューションをクリーン</value></data>
-  <data name="MT_BuildCurrentProject" xml:space="preserve"><value>現在のプロジェクトをビルド</value></data>
-  <data name="MT_BuildStartupProject" xml:space="preserve"><value>スタートアッププロジェクトをビルド: Gallery</value></data>
-  <data name="MT_AdvancedBuild" xml:space="preserve"><value>詳細ビルド操作</value></data>
-  <data name="MT_ChangeSolutionConfig" xml:space="preserve"><value>ソリューション構成の変更</value></data>
-  <data name="MT_RunMenu" xml:space="preserve"><value>実行(_U)</value></data>
-  <data name="MT_RerunProject" xml:space="preserve"><value>'.NETプロジェクト: Gallery'を再実行</value></data>
-  <data name="MT_DebugGallery" xml:space="preserve"><value>'Gallery'をデバッグ</value></data>
-  <data name="MT_RunWithProfiler" xml:space="preserve"><value>プロファイラーで実行</value></data>
-  <data name="MT_AnalyzeGallery" xml:space="preserve"><value>'Gallery'を分析(タイムライン)</value></data>
-  <data name="MT_AttachToProcess" xml:space="preserve"><value>プロセスにアタッチ</value></data>
-  <data name="MT_ManageAccounts" xml:space="preserve"><value>アカウントと設定を管理</value></data>
-  <data name="MT_PaymentMethods" xml:space="preserve"><value>支払い方法</value></data>
-  <data name="MT_RedeemCode" xml:space="preserve"><value>コードとギフトカードを交換</value></data>
-  <data name="MT_CreationDate" xml:space="preserve"><value>作成日</value></data>
-  <data name="MT_TakeDate" xml:space="preserve"><value>撮影日</value></data>
-  <data name="MT_ModificationDate" xml:space="preserve"><value>変更日</value></data>
-  <data name="MT_Rotate" xml:space="preserve"><value>回転</value></data>
-  <data name="MT_ZoomIn" xml:space="preserve"><value>拡大</value></data>
-  <data name="MT_ZoomOut" xml:space="preserve"><value>縮小</value></data>
-  <data name="MT_CommandText" xml:space="preserve"><value>実行されたコマンド:</value></data>
-  <data name="MT_LoginName" xml:space="preserve"><value>側室の愛</value></data>
-  <data name="OnlineDocument" xml:space="preserve"><value>オンラインドキュメント</value></data>
-        <data name="ToggleTheme" xml:space="preserve"><value>スイッチテーマ</value></data>
-  <data name="Pin" xml:space="preserve"><value>ピントトップ</value></data>
-    <data name="UnPin" xml:space="preserve"><value>ピンを外せ</value></data>
+  <data name="BI_AboutUs" xml:space="preserve">
+    <value>私たちについて</value>
+  </data>
+  <data name="BI_Bluetooth" xml:space="preserve">
+    <value>Bluetooth</value>
+  </data>
+  <data name="BI_CheckBox" xml:space="preserve">
+    <value>チェックボックス</value>
+  </data>
+  <data name="BI_ChipsRadioButton" xml:space="preserve">
+    <value>チップスラジオボタン</value>
+  </data>
+  <data name="BI_ColorSlider" xml:space="preserve">
+    <value>カラースライダー</value>
+  </data>
+  <data name="BI_ComboBox" xml:space="preserve">
+    <value>コンボボックス</value>
+  </data>
+  <data name="BI_ContentAlignment" xml:space="preserve">
+    <value>コンテンツ配置</value>
+  </data>
+  <data name="BI_Controller" xml:space="preserve">
+    <value>コントローラー</value>
+  </data>
+  <data name="BI_Copy" xml:space="preserve">
+    <value>コピー</value>
+  </data>
+  <data name="BI_Cut" xml:space="preserve">
+    <value>切り取り</value>
+  </data>
+  <data name="BI_DropDownButton" xml:space="preserve">
+    <value>ドロップダウンボタン</value>
+  </data>
+  <data name="BI_FilledButton" xml:space="preserve">
+    <value>塗りつぶしボタン</value>
+  </data>
+  <data name="BI_Game" xml:space="preserve">
+    <value>ゲーム</value>
+  </data>
+  <data name="BI_Headphones" xml:space="preserve">
+    <value>ヘッドホン</value>
+  </data>
+  <data name="BI_HyperlinkButton" xml:space="preserve">
+    <value>ハイパーリンクボタン</value>
+  </data>
+  <data name="BI_IsDisabled" xml:space="preserve">
+    <value>無効</value>
+  </data>
+  <data name="BI_IsMultiSelect" xml:space="preserve">
+    <value>複数選択可</value>
+  </data>
+  <data name="BI_MovieAndTV" xml:space="preserve">
+    <value>映画とテレビ</value>
+  </data>
+  <data name="BI_MultiSelectionComboBox" xml:space="preserve">
+    <value>複数選択コンボボックス</value>
+  </data>
+  <data name="BI_Music" xml:space="preserve">
+    <value>音楽</value>
+  </data>
+  <data name="BI_Options" xml:space="preserve">
+    <value>オプション</value>
+  </data>
+  <data name="BI_OutlineButton" xml:space="preserve">
+    <value>アウトラインボタン</value>
+  </data>
+  <data name="BI_Paste" xml:space="preserve">
+    <value>貼り付け</value>
+  </data>
+  <data name="BI_RadioButton" xml:space="preserve">
+    <value>ラジオボタン</value>
+  </data>
+  <data name="BI_RangeSlider" xml:space="preserve">
+    <value>レンジスライダー</value>
+  </data>
+  <data name="BI_RoundButton" xml:space="preserve">
+    <value>丸ボタン</value>
+  </data>
+  <data name="BI_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="BI_Send" xml:space="preserve">
+    <value>送信</value>
+  </data>
+  <data name="BI_Slider" xml:space="preserve">
+    <value>スライダー</value>
+  </data>
+  <data name="BI_Speakers" xml:space="preserve">
+    <value>スピーカー</value>
+  </data>
+  <data name="BI_SplitButton" xml:space="preserve">
+    <value>分割ボタン</value>
+  </data>
+  <data name="BI_StandardButton" xml:space="preserve">
+    <value>標準ボタン</value>
+  </data>
+  <data name="BI_StrokeButton" xml:space="preserve">
+    <value>ストロークボタン</value>
+  </data>
+  <data name="BI_ToggleSwitch" xml:space="preserve">
+    <value>トグルスイッチ</value>
+  </data>
+  <data name="BI_ToolButton" xml:space="preserve">
+    <value>ツールボタン</value>
+  </data>
+  <data name="BI_Undo" xml:space="preserve">
+    <value>元に戻す</value>
+  </data>
+  <data name="BasicInput" xml:space="preserve">
+    <value>基本入力</value>
+  </data>
+  <data name="COM_Error" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="COM_Information" xml:space="preserve">
+    <value>情報</value>
+  </data>
+  <data name="COM_Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="COM_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="CodeSamples" xml:space="preserve">
+    <value>コードサンプル</value>
+  </data>
+  <data name="Control_Border" xml:space="preserve">
+    <value>Border</value>
+  </data>
+  <data name="Control_BreadcrumbBar" xml:space="preserve">
+    <value>BreadcrumbBar</value>
+  </data>
+  <data name="Control_Button" xml:space="preserve">
+    <value>Button</value>
+  </data>
+  <data name="Control_ButtonDesc" xml:space="preserve">
+    <value>ユーザー入力に応答するコントロール。</value>
+  </data>
+  <data name="Control_CalendarDatePicker" xml:space="preserve">
+    <value>CalendarDatePicker</value>
+  </data>
+  <data name="Control_Canvas" xml:space="preserve">
+    <value>Canvas</value>
+  </data>
+  <data name="Control_CheckBox" xml:space="preserve">
+    <value>CheckBox</value>
+  </data>
+  <data name="Control_CheckBoxDesc" xml:space="preserve">
+    <value>選択/クリアできるコントロール。</value>
+  </data>
+  <data name="Control_ComboBox" xml:space="preserve">
+    <value>ComboBox</value>
+  </data>
+  <data name="Control_ComboBoxDesc" xml:space="preserve">
+    <value>ドロップダウンリスト。</value>
+  </data>
+  <data name="Control_CommandBar" xml:space="preserve">
+    <value>CommandBar</value>
+  </data>
+  <data name="Control_CommandBarFlyout" xml:space="preserve">
+    <value>CommandBarFlyout</value>
+  </data>
+  <data name="Control_ContentDialog" xml:space="preserve">
+    <value>ContentDialog</value>
+  </data>
+  <data name="Control_DatePicker" xml:space="preserve">
+    <value>DatePicker</value>
+  </data>
+  <data name="Control_DropDownButton" xml:space="preserve">
+    <value>DropDownButton</value>
+  </data>
+  <data name="Control_DropDownButtonDesc" xml:space="preserve">
+    <value>クリックで選択肢を表示するボタン。</value>
+  </data>
+  <data name="Control_Expander" xml:space="preserve">
+    <value>Expander</value>
+  </data>
+  <data name="Control_FlipView" xml:space="preserve">
+    <value>FlipView</value>
+  </data>
+  <data name="Control_Flyout" xml:space="preserve">
+    <value>Flyout</value>
+  </data>
+  <data name="Control_Grid" xml:space="preserve">
+    <value>Grid</value>
+  </data>
+  <data name="Control_HyperlinkButton" xml:space="preserve">
+    <value>HyperlinkButton</value>
+  </data>
+  <data name="Control_InfoBadge" xml:space="preserve">
+    <value>InfoBadge</value>
+  </data>
+  <data name="Control_InfoBar" xml:space="preserve">
+    <value>InfoBar</value>
+  </data>
+  <data name="Control_ListBox" xml:space="preserve">
+    <value>ListBox</value>
+  </data>
+  <data name="Control_MenuBar" xml:space="preserve">
+    <value>MenuBar</value>
+  </data>
+  <data name="Control_MenuFlyout" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="Control_NavigationView" xml:space="preserve">
+    <value>NavigationView</value>
+  </data>
+  <data name="Control_NumberBox" xml:space="preserve">
+    <value>NumberBox</value>
+  </data>
+  <data name="Control_PageTransition" xml:space="preserve">
+    <value>PageTransition</value>
+  </data>
+  <data name="Control_PasswordBox" xml:space="preserve">
+    <value>PasswordBox</value>
+  </data>
+  <data name="Control_Pivot" xml:space="preserve">
+    <value>Segmented</value>
+  </data>
+  <data name="Control_ProgressBar" xml:space="preserve">
+    <value>ProgressBar</value>
+  </data>
+  <data name="Control_ProgressRing" xml:space="preserve">
+    <value>ProgressRing</value>
+  </data>
+  <data name="Control_RadioButton" xml:space="preserve">
+    <value>RadioButton</value>
+  </data>
+  <data name="Control_RelativePanel" xml:space="preserve">
+    <value>RelativePanel</value>
+  </data>
+  <data name="Control_Slider" xml:space="preserve">
+    <value>Slider</value>
+  </data>
+  <data name="Control_SliderDesc" xml:space="preserve">
+    <value>値の範囲から選択。</value>
+  </data>
+  <data name="Control_SplitButton" xml:space="preserve">
+    <value>SplitButton</value>
+  </data>
+  <data name="Control_SplitView" xml:space="preserve">
+    <value>SplitView</value>
+  </data>
+  <data name="Control_StackPanel" xml:space="preserve">
+    <value>StackPanel</value>
+  </data>
+  <data name="Control_TeachingTip" xml:space="preserve">
+    <value>TeachingTip</value>
+  </data>
+  <data name="Control_TextBlock" xml:space="preserve">
+    <value>TextBlock</value>
+  </data>
+  <data name="Control_TextBox" xml:space="preserve">
+    <value>TextBox</value>
+  </data>
+  <data name="Control_TimePicker" xml:space="preserve">
+    <value>TimePicker</value>
+  </data>
+  <data name="Control_ToggleButton" xml:space="preserve">
+    <value>ToggleButton</value>
+  </data>
+  <data name="Control_ToggleButtonDesc" xml:space="preserve">
+    <value>2状態切替ボタン。</value>
+  </data>
+  <data name="Control_ToggleSwitch" xml:space="preserve">
+    <value>SwitchButton</value>
+  </data>
+  <data name="Control_ToggleSwitchDesc" xml:space="preserve">
+    <value>2状態切替スイッチ。</value>
+  </data>
+  <data name="Control_ToolTip" xml:space="preserve">
+    <value>ToolTip</value>
+  </data>
+  <data name="Control_TreeView" xml:space="preserve">
+    <value>TreeView</value>
+  </data>
+  <data name="DP_Action" xml:space="preserve">
+    <value>アクション</value>
+  </data>
+  <data name="DP_Close" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="DP_Confirm" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="DP_DialogWithMask" xml:space="preserve">
+    <value>マスク付きダイアログ</value>
+  </data>
+  <data name="DP_Open" xml:space="preserve">
+    <value>開く</value>
+  </data>
+  <data name="DP_Position" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="DT_CalendarPicker" xml:space="preserve">
+    <value>カレンダーピッカー</value>
+  </data>
+  <data name="DT_ColorPicker" xml:space="preserve">
+    <value>カラーピッカー</value>
+  </data>
+  <data name="DT_DatePicker" xml:space="preserve">
+    <value>日付ピッカー</value>
+  </data>
+  <data name="DT_DisplayMode" xml:space="preserve">
+    <value>表示モード:</value>
+  </data>
+  <data name="DT_SelectMode" xml:space="preserve">
+    <value>選択モード:</value>
+  </data>
+  <data name="DT_SelectedColor" xml:space="preserve">
+    <value>選択色:</value>
+  </data>
+  <data name="DT_SelectedDate" xml:space="preserve">
+    <value>選択日:</value>
+  </data>
+  <data name="DT_SelectedTime" xml:space="preserve">
+    <value>選択時刻:</value>
+  </data>
+  <data name="DT_ShowDay" xml:space="preserve">
+    <value>日を表示:</value>
+  </data>
+  <data name="DT_ShowMonth" xml:space="preserve">
+    <value>月を表示:</value>
+  </data>
+  <data name="DT_ShowYear" xml:space="preserve">
+    <value>年を表示:</value>
+  </data>
+  <data name="DT_TimeFormat" xml:space="preserve">
+    <value>時刻形式:</value>
+  </data>
+  <data name="DT_TimePicker" xml:space="preserve">
+    <value>時刻ピッカー</value>
+  </data>
+  <data name="DateTime" xml:space="preserve">
+    <value>日付と時刻</value>
+  </data>
+  <data name="DialogAndPopup" xml:space="preserve">
+    <value>ダイアログとポップアップ</value>
+  </data>
+  <data name="FP_Page1" xml:space="preserve">
+    <value>ページ1(デフォルト)</value>
+  </data>
+  <data name="FP_Page2" xml:space="preserve">
+    <value>ページ2(スライダー)</value>
+  </data>
+  <data name="FP_Page3" xml:space="preserve">
+    <value>ページ3(ドリルイン)</value>
+  </data>
+  <data name="FP_Page4" xml:space="preserve">
+    <value>ページ4(なし)</value>
+  </data>
+  <data name="FluentGallery" xml:space="preserve">
+    <value>Fluent Gallery</value>
+  </data>
+  <data name="GettingStarted" xml:space="preserve">
+    <value>はじめに</value>
+  </data>
+  <data name="GitHubRepo" xml:space="preserve">
+    <value>GitHub リポジトリ</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>ホーム</value>
+  </data>
+  <data name="IV_EnumMember" xml:space="preserve">
+    <value>列挙メンバー</value>
+  </data>
+  <data name="IV_IconName" xml:space="preserve">
+    <value>アイコン名</value>
+  </data>
+  <data name="IV_SearchIcon" xml:space="preserve">
+    <value>アイコン検索</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>アイコン</value>
+  </data>
+  <data name="LV_Add" xml:space="preserve">
+    <value>追加</value>
+  </data>
+  <data name="LV_AppTheme" xml:space="preserve">
+    <value>アプリテーマ</value>
+  </data>
+  <data name="LV_Apply" xml:space="preserve">
+    <value>適用</value>
+  </data>
+  <data name="LV_Border" xml:space="preserve">
+    <value>ボーダー</value>
+  </data>
+  <data name="LV_Canvas" xml:space="preserve">
+    <value>キャンバス</value>
+  </data>
+  <data name="LV_Dark" xml:space="preserve">
+    <value>ダーク</value>
+  </data>
+  <data name="LV_EnableShadow" xml:space="preserve">
+    <value>影を有効</value>
+  </data>
+  <data name="LV_Expander" xml:space="preserve">
+    <value>エキスパンダー</value>
+  </data>
+  <data name="LV_FollowSystem" xml:space="preserve">
+    <value>システムに従う</value>
+  </data>
+  <data name="LV_GridLayout" xml:space="preserve">
+    <value>グリッドレイアウト</value>
+  </data>
+  <data name="LV_Light" xml:space="preserve">
+    <value>ライト</value>
+  </data>
+  <data name="LV_Opacity" xml:space="preserve">
+    <value>不透明度</value>
+  </data>
+  <data name="LV_Reset" xml:space="preserve">
+    <value>リセット</value>
+  </data>
+  <data name="LV_SplitView" xml:space="preserve">
+    <value>分割ビュー</value>
+  </data>
+  <data name="LV_StackPanel" xml:space="preserve">
+    <value>スタックパネル</value>
+  </data>
+  <data name="Layout" xml:space="preserve">
+    <value>レイアウト</value>
+  </data>
+  <data name="MT_Add" xml:space="preserve">
+    <value>追加</value>
+  </data>
+  <data name="MT_Ascending" xml:space="preserve">
+    <value>昇順</value>
+  </data>
+  <data name="MT_Back" xml:space="preserve">
+    <value>戻る</value>
+  </data>
+  <data name="MT_CommandBar" xml:space="preserve">
+    <value>コマンドバー</value>
+  </data>
+  <data name="MT_CommandBarFlyout" xml:space="preserve">
+    <value>コマンドバーフライアウト</value>
+  </data>
+  <data name="MT_ContextMenu" xml:space="preserve">
+    <value>コンテキストメニュー</value>
+  </data>
+  <data name="MT_Debug" xml:space="preserve">
+    <value>デバッグ</value>
+  </data>
+  <data name="MT_Delete" xml:space="preserve">
+    <value>削除</value>
+  </data>
+  <data name="MT_Descending" xml:space="preserve">
+    <value>降順</value>
+  </data>
+  <data name="MT_Edit" xml:space="preserve">
+    <value>編集</value>
+  </data>
+  <data name="MT_Exit" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="MT_Find" xml:space="preserve">
+    <value>検索</value>
+  </data>
+  <data name="MT_Forward" xml:space="preserve">
+    <value>進む</value>
+  </data>
+  <data name="MT_Info" xml:space="preserve">
+    <value>情報</value>
+  </data>
+  <data name="MT_Logout" xml:space="preserve">
+    <value>ログアウト</value>
+  </data>
+  <data name="MT_Menu" xml:space="preserve">
+    <value>メニュー</value>
+  </data>
+  <data name="MT_Name" xml:space="preserve">
+    <value>名前</value>
+  </data>
+  <data name="MT_Open" xml:space="preserve">
+    <value>開く</value>
+  </data>
+  <data name="MT_Redo" xml:space="preserve">
+    <value>やり直し</value>
+  </data>
+  <data name="MT_Rename" xml:space="preserve">
+    <value>名前変更</value>
+  </data>
+  <data name="MT_Replace" xml:space="preserve">
+    <value>置換</value>
+  </data>
+  <data name="MT_Run2" xml:space="preserve">
+    <value>実行</value>
+  </data>
+  <data name="MT_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="MT_Share" xml:space="preserve">
+    <value>共有</value>
+  </data>
+  <data name="MT_Sort" xml:space="preserve">
+    <value>並び替え</value>
+  </data>
+  <data name="MenuAndToolBar" xml:space="preserve">
+    <value>メニューとツールバー</value>
+  </data>
+  <data name="NV_About" xml:space="preserve">
+    <value>概要</value>
+  </data>
+  <data name="NV_Apps" xml:space="preserve">
+    <value>アプリ</value>
+  </data>
+  <data name="NV_DisplayMode" xml:space="preserve">
+    <value>表示モード:</value>
+  </data>
+  <data name="NV_Downloads" xml:space="preserve">
+    <value>ダウンロード</value>
+  </data>
+  <data name="NV_Files" xml:space="preserve">
+    <value>ファイル</value>
+  </data>
+  <data name="NV_Friends" xml:space="preserve">
+    <value>フレンド</value>
+  </data>
+  <data name="NV_Games" xml:space="preserve">
+    <value>ゲーム</value>
+  </data>
+  <data name="NV_Help" xml:space="preserve">
+    <value>ヘルプ</value>
+  </data>
+  <data name="NV_History" xml:space="preserve">
+    <value>履歴</value>
+  </data>
+  <data name="NV_Home" xml:space="preserve">
+    <value>ホーム</value>
+  </data>
+  <data name="NV_Mail" xml:space="preserve">
+    <value>メール</value>
+  </data>
+  <data name="NV_Phone" xml:space="preserve">
+    <value>電話</value>
+  </data>
+  <data name="NV_SegmentedBar" xml:space="preserve">
+    <value>セグメントバー</value>
+  </data>
+  <data name="NV_SegmentedToggleBar" xml:space="preserve">
+    <value>セグメントトグルバー</value>
+  </data>
+  <data name="NV_ShowBackButton" xml:space="preserve">
+    <value>戻るボタン表示</value>
+  </data>
+  <data name="NV_Subscriptions" xml:space="preserve">
+    <value>サブスクリプション</value>
+  </data>
+  <data name="NV_Tabs" xml:space="preserve">
+    <value>タブ</value>
+  </data>
+  <data name="NV_TopNavigation" xml:space="preserve">
+    <value>トップナビゲーションバー</value>
+  </data>
+  <data name="Navigation" xml:space="preserve">
+    <value>ナビゲーション</value>
+  </data>
+  <data name="SC_Bidirectional" xml:space="preserve">
+    <value>双方向スクロール</value>
+  </data>
+  <data name="SC_SingleDirection" xml:space="preserve">
+    <value>単方向スクロール</value>
+  </data>
+  <data name="SC_SmoothScrollArea" xml:space="preserve">
+    <value>スムーズスクロールエリア</value>
+  </data>
+  <data name="SI_BgColor" xml:space="preserve">
+    <value>背景色:</value>
+  </data>
+  <data name="SI_IsIndeterminate" xml:space="preserve">
+    <value>不確定</value>
+  </data>
+  <data name="SI_Progress" xml:space="preserve">
+    <value>進捗:</value>
+  </data>
+  <data name="SI_ProgressBar" xml:space="preserve">
+    <value>プログレスバー</value>
+  </data>
+  <data name="SI_ProgressRing" xml:space="preserve">
+    <value>プログレスリング</value>
+  </data>
+  <data name="SI_Restore" xml:space="preserve">
+    <value>リセット</value>
+  </data>
+  <data name="SI_Style" xml:space="preserve">
+    <value>スタイル:</value>
+  </data>
+  <data name="SV_BackgroundImage" xml:space="preserve">
+    <value>背景画像</value>
+  </data>
+  <data name="SV_CustomColor" xml:space="preserve">
+    <value>カスタム色</value>
+  </data>
+  <data name="SV_DefaultColor" xml:space="preserve">
+    <value>デフォルト色</value>
+  </data>
+  <data name="SV_Language" xml:space="preserve">
+    <value>言語</value>
+  </data>
+  <data name="SV_PinToTop" xml:space="preserve">
+    <value>最前面固定</value>
+  </data>
+  <data name="SV_SelectColor" xml:space="preserve">
+    <value>色を選択</value>
+  </data>
+  <data name="SV_ThemeColor" xml:space="preserve">
+    <value>テーマ色</value>
+  </data>
+  <data name="SV_WindowEffect" xml:space="preserve">
+    <value>ウィンドウ効果</value>
+  </data>
+  <data name="Scroll" xml:space="preserve">
+    <value>スクロール</value>
+  </data>
+  <data name="Section_BasicInput" xml:space="preserve">
+    <value>基本入力</value>
+  </data>
+  <data name="Section_DateTime" xml:space="preserve">
+    <value>日付と時刻</value>
+  </data>
+  <data name="Section_Dialog" xml:space="preserve">
+    <value>ダイアログ</value>
+  </data>
+  <data name="Section_Layout" xml:space="preserve">
+    <value>レイアウト</value>
+  </data>
+  <data name="Section_MenuAndToolBar" xml:space="preserve">
+    <value>メニューとツールバー</value>
+  </data>
+  <data name="Section_NavigationView" xml:space="preserve">
+    <value>ナビゲーションビュー</value>
+  </data>
+  <data name="Section_StatusAndInformation" xml:space="preserve">
+    <value>ステータスと情報</value>
+  </data>
+  <data name="Section_Text" xml:space="preserve">
+    <value>テキスト</value>
+  </data>
+  <data name="Section_View" xml:space="preserve">
+    <value>ビュー</value>
+  </data>
+  <data name="SendFeedback" xml:space="preserve">
+    <value>フィードバック</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="SourceCode" xml:space="preserve">
+    <value>ソースコード</value>
+  </data>
+  <data name="StatusAndInformation" xml:space="preserve">
+    <value>ステータスと情報</value>
+  </data>
+  <data name="TV_AcceptReturn" xml:space="preserve">
+    <value>改行許可</value>
+  </data>
+  <data name="TV_AcceptTab" xml:space="preserve">
+    <value>タブ許可</value>
+  </data>
+  <data name="TV_DisplayText" xml:space="preserve">
+    <value>テキスト表示</value>
+  </data>
+  <data name="TV_EnterPassword" xml:space="preserve">
+    <value>パスワードを入力</value>
+  </data>
+  <data name="TV_FontSize" xml:space="preserve">
+    <value>フォントサイズ:</value>
+  </data>
+  <data name="TV_FontStyle" xml:space="preserve">
+    <value>フォントスタイル:</value>
+  </data>
+  <data name="TV_FontWeight" xml:space="preserve">
+    <value>フォントの太さ:</value>
+  </data>
+  <data name="TV_NumberBox" xml:space="preserve">
+    <value>数値ボックス</value>
+  </data>
+  <data name="TV_PasswordBox" xml:space="preserve">
+    <value>パスワードボックス</value>
+  </data>
+  <data name="TV_PhoneNumber" xml:space="preserve">
+    <value>電話番号を入力:</value>
+  </data>
+  <data name="TV_SearchBox" xml:space="preserve">
+    <value>検索ボックス</value>
+  </data>
+  <data name="TV_TextBox" xml:space="preserve">
+    <value>テキストボックス</value>
+  </data>
+  <data name="TV_TextDecoration" xml:space="preserve">
+    <value>テキスト装飾:</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>テキスト</value>
+  </data>
+  <data name="VP_AddPage" xml:space="preserve">
+    <value>ページ追加</value>
+  </data>
+  <data name="VP_AutoPlay" xml:space="preserve">
+    <value>自動再生</value>
+  </data>
+  <data name="VP_Carousel" xml:space="preserve">
+    <value>カルーセル</value>
+  </data>
+  <data name="VP_DataGrid" xml:space="preserve">
+    <value>データグリッド</value>
+  </data>
+  <data name="VP_Direction" xml:space="preserve">
+    <value>方向:</value>
+  </data>
+  <data name="VP_Interval" xml:space="preserve">
+    <value>間隔:</value>
+  </data>
+  <data name="VP_ListControl" xml:space="preserve">
+    <value>リストコントロール</value>
+  </data>
+  <data name="VP_Next" xml:space="preserve">
+    <value>次へ</value>
+  </data>
+  <data name="VP_Previous" xml:space="preserve">
+    <value>前へ</value>
+  </data>
+  <data name="VP_SelectMode" xml:space="preserve">
+    <value>選択モード:</value>
+  </data>
+  <data name="VP_TreeView" xml:space="preserve">
+    <value>ツリービュー</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>ビュー</value>
+  </data>
+  <data name="MV_Title" xml:space="preserve">
+    <value>Avalonia Fluent UI Gallery</value>
+  </data>
+  <data name="MV_SearchWatermark" xml:space="preserve">
+    <value>検索内容を入力してください</value>
+  </data>
+  <data name="SV_WindowEffectDescription" xml:space="preserve">
+    <value>ウィンドウ効果を有効にする (Mica | AcrylicBlur)</value>
+  </data>
+  <data name="SV_Appearance" xml:space="preserve">
+    <value>アプリの外観を調整</value>
+  </data>
+  <data name="SV_ThemeColorDescription" xml:space="preserve">
+    <value>アプリのテーマ色を調整</value>
+  </data>
+  <data name="SV_PinToTopDescription" xml:space="preserve">
+    <value>ウィンドウを最前面に固定</value>
+  </data>
+  <data name="SV_LanguageDescription" xml:space="preserve">
+    <value>アプリの言語を設定 (再起動が必要)</value>
+  </data>
+  <data name="SV_EnableBackgroundImage" xml:space="preserve">
+    <value>背景画像を有効にする</value>
+  </data>
+  <data name="SV_AppTheme" xml:space="preserve">
+    <value>アプリテーマ</value>
+  </data>
+  <data name="GettingStartedContent" xml:space="preserve">
+    <value>アプリ開発のオプションとサンプルの概要。</value>
+  </data>
+  <data name="GitHubRepoContent" xml:space="preserve">
+    <value>最新のFluentデザインコントロールとスタイル。</value>
+  </data>
+  <data name="CodeSamplesContent" xml:space="preserve">
+    <value>特定のタスク、機能、APIを示すサンプルを探す。</value>
+  </data>
+  <data name="SendFeedbackContent" xml:space="preserve">
+    <value>フィードバックを提供しての改善にご協力ください。</value>
+  </data>
+  <data name="SI_ToolTipButton" xml:space="preserve">
+    <value>ツールチップボタン</value>
+  </data>
+  <data name="SI_ToolTipText" xml:space="preserve">
+    <value>私はツールチップです</value>
+  </data>
+  <data name="SI_InfoBadge" xml:space="preserve">
+    <value>情報バッジ</value>
+  </data>
+  <data name="SI_InfoBar" xml:space="preserve">
+    <value>インフォバー</value>
+  </data>
+  <data name="SI_SaveSuccess" xml:space="preserve">
+    <value>保存成功</value>
+  </data>
+  <data name="SI_FileSaved" xml:space="preserve">
+    <value>ファイルはサーバーに正常に保存されました</value>
+  </data>
+  <data name="SI_Action" xml:space="preserve">
+    <value>アクション</value>
+  </data>
+  <data name="SI_Options" xml:space="preserve">
+    <value>オプション</value>
+  </data>
+  <data name="SI_IsClosable" xml:space="preserve">
+    <value>閉じられる</value>
+  </data>
+  <data name="VP_Options" xml:space="preserve">
+    <value>オプション</value>
+  </data>
+  <data name="VP_RoundListBox" xml:space="preserve">
+    <value>ラウンドリストボックス</value>
+  </data>
+  <data name="VP_IsReadOnly" xml:space="preserve">
+    <value>読み取り専用</value>
+  </data>
+  <data name="VP_BorderDisplayMode" xml:space="preserve">
+    <value>枠線表示モード</value>
+  </data>
+  <data name="VP_SimpleSettingsCard" xml:space="preserve">
+    <value>シンプル設定カード</value>
+  </data>
+  <data name="VP_ClickableSettingsCard" xml:space="preserve">
+    <value>クリック可能設定カード</value>
+  </data>
+  <data name="VP_ExpandableSettingsCard" xml:space="preserve">
+    <value>展開可能設定カード</value>
+  </data>
+  <data name="VP_Volume" xml:space="preserve">
+    <value>音量</value>
+  </data>
+  <data name="VP_Sound" xml:space="preserve">
+    <value>サウンド</value>
+  </data>
+  <data name="VP_SoundDescription" xml:space="preserve">
+    <value>音量レベル、出力、入力、サウンドデバイス</value>
+  </data>
+  <data name="VP_AppsSettingsDescription" xml:space="preserve">
+    <value>アプリには独自の設定がある場合があります</value>
+  </data>
+  <data name="VP_ChooseDevice" xml:space="preserve">
+    <value>通話または録音デバイスを選択</value>
+  </data>
+  <data name="VP_Headset" xml:space="preserve">
+    <value>ヘッドセット</value>
+  </data>
+  <data name="VP_HasFooterContent" xml:space="preserve">
+    <value>これにはフッターコンテンツがあります</value>
+  </data>
+  <data name="VP_DeviceName" xml:space="preserve">
+    <value>デバイス名</value>
+  </data>
+  <data name="VP_IsClickable" xml:space="preserve">
+    <value>これはクリック可能です</value>
+  </data>
+  <data name="VP_AddDevice" xml:space="preserve">
+    <value>デバイス追加</value>
+  </data>
+  <data name="DT_CalendarDatePicker" xml:space="preserve">
+    <value>カレンダー日付ピッカー</value>
+  </data>
+  <data name="DT_DefaultIncrement" xml:space="preserve">
+    <value>デフォルト時間間隔:</value>
+  </data>
+  <data name="NV_NavigationView" xml:space="preserve">
+    <value>ナビゲーションビュー</value>
+  </data>
+  <data name="NV_PaneDisplayMode" xml:space="preserve">
+    <value>ペイン表示モード</value>
+  </data>
+  <data name="NV_Unplayed" xml:space="preserve">
+    <value>未再生</value>
+  </data>
+  <data name="NV_NowPlaying" xml:space="preserve">
+    <value>再生中</value>
+  </data>
+  <data name="NV_VideoHistory" xml:space="preserve">
+    <value>動画履歴</value>
+  </data>
+  <data name="NV_AudioHistory" xml:space="preserve">
+    <value>オーディオ履歴</value>
+  </data>
+  <data name="NV_BrowsingHistory" xml:space="preserve">
+    <value>ブラウジング履歴</value>
+  </data>
+  <data name="NV_Folders" xml:space="preserve">
+    <value>フォルダ</value>
+  </data>
+  <data name="NV_Window" xml:space="preserve">
+    <value>ウィンドウ</value>
+  </data>
+  <data name="NV_BreadcrumbBar" xml:space="preserve">
+    <value>パンくずナビバー</value>
+  </data>
+  <data name="DP_OptimisticContent" xml:space="preserve">
+    <value>楽観的な気持ちを保てば、この世の中には数え切れないほどの楽しみがあることに気づくでしょう！</value>
+  </data>
+  <data name="DP_OpenURL" xml:space="preserve">
+    <value>URLを開く</value>
+  </data>
+  <data name="DP_URLWatermark" xml:space="preserve">
+    <value>ファイル、ストリーム、プレイリストのURLを入力</value>
+  </data>
+  <data name="DP_CustomDialog" xml:space="preserve">
+    <value>カスタムダイアログ</value>
+  </data>
+  <data name="DP_TaskDialog" xml:space="preserve">
+    <value>タスクダイアログ</value>
+  </data>
+  <data name="DP_ShowTaskDialog" xml:space="preserve">
+    <value>タスクダイアログを表示</value>
+  </data>
+  <data name="DP_FluentFlyout" xml:space="preserve">
+    <value>Fluentフライアウト</value>
+  </data>
+  <data name="DP_ShowPopup" xml:space="preserve">
+    <value>ポップアップ表示</value>
+  </data>
+  <data name="DP_NoName" xml:space="preserve">
+    <value>名無し</value>
+  </data>
+  <data name="DP_EyeQuote" xml:space="preserve">
+    <value>左目であなたを忘れ、右目であなたを覚える。</value>
+  </data>
+  <data name="DP_FlyoutPositionLabel" xml:space="preserve">
+    <value>フライアウト位置:</value>
+  </data>
+  <data name="DP_ImageButtonFlyout" xml:space="preserve">
+    <value>画像とボタン付きフライアウト</value>
+  </data>
+  <data name="DP_ShowFlyout" xml:space="preserve">
+    <value>フライアウトを表示</value>
+  </data>
+  <data name="DP_Minecraft" xml:space="preserve">
+    <value>Minecraft</value>
+  </data>
+  <data name="DP_ForgeDesc" xml:space="preserve">
+    <value>Forge (Minecraft Forge) は Minecraft Java Edition 向けのオープンソースのModローダーで、開発者に標準的な開発インターフェースを提供します。</value>
+  </data>
+  <data name="DP_TeachingTip" xml:space="preserve">
+    <value>ティーチングチップ</value>
+  </data>
+  <data name="DP_TeachingTipButton" xml:space="preserve">
+    <value>ティーチングチップを表示</value>
+  </data>
+  <data name="DP_TeachingTipSubtitle" xml:space="preserve">
+    <value>最短の近道は回り道をすることであり、回り道こそが私の最短の近道である。</value>
+  </data>
+  <data name="DP_ColorPicker" xml:space="preserve">
+    <value>カラーピッカー</value>
+  </data>
+  <data name="DP_TipTitle" xml:space="preserve">
+    <value>ヒント</value>
+  </data>
+  <data name="DP_ThisIsDialogWithMask" xml:space="preserve">
+    <value>マスク付きダイアログ</value>
+  </data>
+  <data name="LV_DockPanel" xml:space="preserve">
+    <value>ドックパネル</value>
+  </data>
+  <data name="LV_GridSplitter" xml:space="preserve">
+    <value>グリッドスプリッター</value>
+  </data>
+  <data name="LV_Panel" xml:space="preserve">
+    <value>パネルレイアウト</value>
+  </data>
+  <data name="LV_RelativePanel" xml:space="preserve">
+    <value>リレイティブパネル</value>
+  </data>
+  <data name="LV_UniformGrid" xml:space="preserve">
+    <value>ユニフォームグリッド</value>
+  </data>
+  <data name="LV_WrapPanel" xml:space="preserve">
+    <value>ラップパネル</value>
+  </data>
+  <data name="LV_VirtualizingStackPanel" xml:space="preserve">
+    <value>仮想化スタックパネル</value>
+  </data>
+  <data name="LV_Alignment" xml:space="preserve">
+    <value>配置</value>
+  </data>
+  <data name="LV_SelectLayout" xml:space="preserve">
+    <value>レイアウト方向を選択</value>
+  </data>
+  <data name="LV_AddControl" xml:space="preserve">
+    <value>コントロール追加</value>
+  </data>
+  <data name="LV_RemoveControl" xml:space="preserve">
+    <value>コントロール削除</value>
+  </data>
+  <data name="LV_SetGridRow" xml:space="preserve">
+    <value>グリッド行を設定</value>
+  </data>
+  <data name="LV_SetGridColumn" xml:space="preserve">
+    <value>グリッド列を設定</value>
+  </data>
+  <data name="LV_BorderColorHex" xml:space="preserve">
+    <value>枠線の色(16進数)</value>
+  </data>
+  <data name="LV_BgColorHex" xml:space="preserve">
+    <value>背景色(16進数)</value>
+  </data>
+  <data name="LV_AddItemsCount" xml:space="preserve">
+    <value>項目追加(数)</value>
+  </data>
+  <data name="TV_AutoCompleteBox" xml:space="preserve">
+    <value>オートコンプリートボックス</value>
+  </data>
+  <data name="TV_AddMatchElement" xml:space="preserve">
+    <value>一致する要素を追加:</value>
+  </data>
+  <data name="TV_SelectMatchMode" xml:space="preserve">
+    <value>一致モードを選択:</value>
+  </data>
+  <data name="TV_AddMatchElementButton" xml:space="preserve">
+    <value>一致要素を追加</value>
+  </data>
+  <data name="TV_SetDisplayText" xml:space="preserve">
+    <value>表示テキストを設定:</value>
+  </data>
+  <data name="TV_SetLetterSpacing" xml:space="preserve">
+    <value>文字間隔を設定:</value>
+  </data>
+  <data name="TV_WatermarkLabel" xml:space="preserve">
+    <value>ウォーターマーク</value>
+  </data>
+  <data name="TV_ClearTextBox" xml:space="preserve">
+    <value>クリアテキストボックス</value>
+  </data>
+  <data name="TV_ClearWatermark" xml:space="preserve">
+    <value>クリアテキストボックス</value>
+  </data>
+  <data name="TV_SearchWatermark" xml:space="preserve">
+    <value>検索内容を入力してください</value>
+  </data>
+  <data name="TV_EnterToSearch" xml:space="preserve">
+    <value>Enterで検索</value>
+  </data>
+  <data name="TV_SpinButtonMode" xml:space="preserve">
+    <value>スピンボタン表示モード:</value>
+  </data>
+  <data name="TV_ButtonSpinner" xml:space="preserve">
+    <value>ボタンスピナー</value>
+  </data>
+  <data name="TV_SpinnerLocation" xml:space="preserve">
+    <value>スピナーボタン位置:</value>
+  </data>
+  <data name="TV_EnableSpin" xml:space="preserve">
+    <value>回転有効</value>
+  </data>
+  <data name="TV_EnterName" xml:space="preserve">
+    <value>名前を入力(A-Z)(a-z)</value>
+  </data>
+  <data name="BI_StrokeToolButton" xml:space="preserve">
+    <value>ストロークツールボタン</value>
+  </data>
+  <data name="BI_TransparentDropDownButton" xml:space="preserve">
+    <value>透明ドロップダウンボタン</value>
+  </data>
+  <data name="BI_ToggleButton" xml:space="preserve">
+    <value>トグルボタン</value>
+  </data>
+  <data name="BI_ToggleSplitButton" xml:space="preserve">
+    <value>分割トグルボタン</value>
+  </data>
+  <data name="BI_TransparentToggleButton" xml:space="preserve">
+    <value>透明トグルボタン</value>
+  </data>
+  <data name="BI_SubTitleRadioButton" xml:space="preserve">
+    <value>サブタイトルラジオボタン</value>
+  </data>
+  <data name="BI_ToolTipSlider" xml:space="preserve">
+    <value>ツールチップスライダー</value>
+  </data>
+  <data name="BI_Mail" xml:space="preserve">
+    <value>メール</value>
+  </data>
+  <data name="BI_SendToLocal" xml:space="preserve">
+    <value>ローカルに送信</value>
+  </data>
+  <data name="BI_SendToNetwork" xml:space="preserve">
+    <value>ネットワークに送信</value>
+  </data>
+  <data name="BI_Resend" xml:space="preserve">
+    <value>再送信</value>
+  </data>
+  <data name="BI_SaveToLocal" xml:space="preserve">
+    <value>ローカルに保存</value>
+  </data>
+  <data name="BI_EnableBluetooth" xml:space="preserve">
+    <value>Bluetooth有効</value>
+  </data>
+  <data name="BI_IAmHyperlink" xml:space="preserve">
+    <value>ハイパーリンクボタンです</value>
+  </data>
+  <data name="BI_EnableThreeState" xml:space="preserve">
+    <value>三状態有効</value>
+  </data>
+  <data name="BI_SelectOddItems" xml:space="preserve">
+    <value>奇数項目を選択</value>
+  </data>
+  <data name="BI_SelectEvenItems" xml:space="preserve">
+    <value>偶数項目を選択</value>
+  </data>
+  <data name="BI_ClearSelectedItems" xml:space="preserve">
+    <value>選択をクリア</value>
+  </data>
+  <data name="BI_Direction" xml:space="preserve">
+    <value>方向</value>
+  </data>
+  <data name="BI_StandardButtonWithIcon" xml:space="preserve">
+    <value>アイコン付き標準ボタン</value>
+  </data>
+  <data name="BI_AccentStandardButton" xml:space="preserve">
+    <value>アクセント標準ボタン</value>
+  </data>
+  <data name="BI_TransparentStandardButton" xml:space="preserve">
+    <value>透明標準ボタン</value>
+  </data>
+  <data name="BI_TransparentStandardButtonWithIcon" xml:space="preserve">
+    <value>アイコン付き透明標準ボタン</value>
+  </data>
+  <data name="BI_AccentRoundButton" xml:space="preserve">
+    <value>アクセント丸ボタン</value>
+  </data>
+  <data name="BI_RoundOutlineButton" xml:space="preserve">
+    <value>丸アウトラインボタン</value>
+  </data>
+  <data name="MT_FileMenu" xml:space="preserve">
+    <value>ファイル(_F)</value>
+  </data>
+  <data name="MT_NewSolution" xml:space="preserve">
+    <value>新規ソリューション</value>
+  </data>
+  <data name="MT_GetFromVersionControl" xml:space="preserve">
+    <value>バージョン管理から取得...</value>
+  </data>
+  <data name="MT_CloseSolution" xml:space="preserve">
+    <value>ソリューションを閉じる</value>
+  </data>
+  <data name="MT_RemoteDevelopment" xml:space="preserve">
+    <value>リモート開発...</value>
+  </data>
+  <data name="MT_SaveAll" xml:space="preserve">
+    <value>すべて保存</value>
+  </data>
+  <data name="MT_ReloadAllFromDisk" xml:space="preserve">
+    <value>ディスクからすべて再読み込み</value>
+  </data>
+  <data name="MT_Export" xml:space="preserve">
+    <value>エクスポート</value>
+  </data>
+  <data name="MT_Print" xml:space="preserve">
+    <value>印刷</value>
+  </data>
+  <data name="MT_FileEncoding" xml:space="preserve">
+    <value>ファイルエンコーディング</value>
+  </data>
+  <data name="MT_LineEndings" xml:space="preserve">
+    <value>改行コード</value>
+  </data>
+  <data name="MT_SetReadOnly" xml:space="preserve">
+    <value>ファイルを読み取り専用に設定</value>
+  </data>
+  <data name="MT_NewProjectSettings" xml:space="preserve">
+    <value>新規プロジェクト設定</value>
+  </data>
+  <data name="MT_ManageIDESettings" xml:space="preserve">
+    <value>IDE設定を管理</value>
+  </data>
+  <data name="MT_PowerSaveMode" xml:space="preserve">
+    <value>省電力モード</value>
+  </data>
+  <data name="MT_InvalidateCache" xml:space="preserve">
+    <value>キャッシュを無効化</value>
+  </data>
+  <data name="MT_EditMenu" xml:space="preserve">
+    <value>編集(_E)</value>
+  </data>
+  <data name="MT_CopyPlainText" xml:space="preserve">
+    <value>プレーンテキストとしてコピー</value>
+  </data>
+  <data name="MT_SearchSelection" xml:space="preserve">
+    <value>選択範囲内を検索</value>
+  </data>
+  <data name="MT_FindNext" xml:space="preserve">
+    <value>次を検索</value>
+  </data>
+  <data name="MT_FindPrevious" xml:space="preserve">
+    <value>前を検索</value>
+  </data>
+  <data name="MT_SelectAllMatches" xml:space="preserve">
+    <value>すべての一致を選択</value>
+  </data>
+  <data name="MT_AddNextMatch" xml:space="preserve">
+    <value>次の一致を選択に追加</value>
+  </data>
+  <data name="MT_CancelSelectedMatch" xml:space="preserve">
+    <value>選択した一致をキャンセル</value>
+  </data>
+  <data name="MT_FindUsages" xml:space="preserve">
+    <value>使用箇所を検索</value>
+  </data>
+  <data name="MT_NextHighlightedUsage" xml:space="preserve">
+    <value>次のハイライト使用箇所</value>
+  </data>
+  <data name="MT_PreviousHighlightedUsage" xml:space="preserve">
+    <value>前のハイライト使用箇所</value>
+  </data>
+  <data name="MT_RecentFindUsages" xml:space="preserve">
+    <value>最近の使用箇所検索</value>
+  </data>
+  <data name="MT_SelectAll" xml:space="preserve">
+    <value>すべて選択</value>
+  </data>
+  <data name="MT_ViewMenu" xml:space="preserve">
+    <value>表示(_V)</value>
+  </data>
+  <data name="MT_ToolWindow" xml:space="preserve">
+    <value>ツールウィンドウ</value>
+  </data>
+  <data name="MT_Appearance" xml:space="preserve">
+    <value>外観</value>
+  </data>
+  <data name="MT_QuickDefinition" xml:space="preserve">
+    <value>クイック定義</value>
+  </data>
+  <data name="MT_QuickDefinitionType" xml:space="preserve">
+    <value>クイック定義タイプ</value>
+  </data>
+  <data name="MT_RecentLocations" xml:space="preserve">
+    <value>最近の場所</value>
+  </data>
+  <data name="MT_RecentFiles" xml:space="preserve">
+    <value>最近のファイル</value>
+  </data>
+  <data name="MT_RecentlyChangedFiles" xml:space="preserve">
+    <value>最近変更したファイル</value>
+  </data>
+  <data name="MT_RecentChanges" xml:space="preserve">
+    <value>最近の変更</value>
+  </data>
+  <data name="MT_NavigationMenu" xml:space="preserve">
+    <value>ナビゲーション(_N)</value>
+  </data>
+  <data name="MT_SearchEverywhere" xml:space="preserve">
+    <value>どこでも検索</value>
+  </data>
+  <data name="MT_Class" xml:space="preserve">
+    <value>クラス</value>
+  </data>
+  <data name="MT_Symbol" xml:space="preserve">
+    <value>シンボル</value>
+  </data>
+  <data name="MT_CodeMenu" xml:space="preserve">
+    <value>コード(_C)</value>
+  </data>
+  <data name="MT_CodeCompletion" xml:space="preserve">
+    <value>コード補完</value>
+  </data>
+  <data name="MT_InspectCode" xml:space="preserve">
+    <value>コード検査</value>
+  </data>
+  <data name="MT_AnalyzeCode" xml:space="preserve">
+    <value>コード分析</value>
+  </data>
+  <data name="MT_InsertLiveTemplate" xml:space="preserve">
+    <value>ライブテンプレート挿入</value>
+  </data>
+  <data name="MT_SaveAsLiveTemplate" xml:space="preserve">
+    <value>ライブテンプレートとして保存</value>
+  </data>
+  <data name="MT_SurroundWithTemplate" xml:space="preserve">
+    <value>テンプレートで囲む</value>
+  </data>
+  <data name="MT_UnwrapRemove" xml:space="preserve">
+    <value>アンラップ/削除</value>
+  </data>
+  <data name="MT_Collapse" xml:space="preserve">
+    <value>折り畳み</value>
+  </data>
+  <data name="MT_RefactorMenu" xml:space="preserve">
+    <value>リファクタリング(_R)</value>
+  </data>
+  <data name="MT_BuildMenu" xml:space="preserve">
+    <value>ビルド(_B)</value>
+  </data>
+  <data name="MT_BuildSolution" xml:space="preserve">
+    <value>ソリューションをビルド</value>
+  </data>
+  <data name="MT_RebuildSolution" xml:space="preserve">
+    <value>ソリューションをリビルド</value>
+  </data>
+  <data name="MT_CleanSolution" xml:space="preserve">
+    <value>ソリューションをクリーン</value>
+  </data>
+  <data name="MT_BuildCurrentProject" xml:space="preserve">
+    <value>現在のプロジェクトをビルド</value>
+  </data>
+  <data name="MT_BuildStartupProject" xml:space="preserve">
+    <value>スタートアッププロジェクトをビルド: Gallery</value>
+  </data>
+  <data name="MT_AdvancedBuild" xml:space="preserve">
+    <value>詳細ビルド操作</value>
+  </data>
+  <data name="MT_ChangeSolutionConfig" xml:space="preserve">
+    <value>ソリューション構成の変更</value>
+  </data>
+  <data name="MT_RunMenu" xml:space="preserve">
+    <value>実行(_U)</value>
+  </data>
+  <data name="MT_RerunProject" xml:space="preserve">
+    <value>'.NETプロジェクト: Gallery'を再実行</value>
+  </data>
+  <data name="MT_DebugGallery" xml:space="preserve">
+    <value>'Gallery'をデバッグ</value>
+  </data>
+  <data name="MT_RunWithProfiler" xml:space="preserve">
+    <value>プロファイラーで実行</value>
+  </data>
+  <data name="MT_AnalyzeGallery" xml:space="preserve">
+    <value>'Gallery'を分析(タイムライン)</value>
+  </data>
+  <data name="MT_AttachToProcess" xml:space="preserve">
+    <value>プロセスにアタッチ</value>
+  </data>
+  <data name="MT_ManageAccounts" xml:space="preserve">
+    <value>アカウントと設定を管理</value>
+  </data>
+  <data name="MT_PaymentMethods" xml:space="preserve">
+    <value>支払い方法</value>
+  </data>
+  <data name="MT_RedeemCode" xml:space="preserve">
+    <value>コードとギフトカードを交換</value>
+  </data>
+  <data name="MT_CreationDate" xml:space="preserve">
+    <value>作成日</value>
+  </data>
+  <data name="MT_TakeDate" xml:space="preserve">
+    <value>撮影日</value>
+  </data>
+  <data name="MT_ModificationDate" xml:space="preserve">
+    <value>変更日</value>
+  </data>
+  <data name="MT_Rotate" xml:space="preserve">
+    <value>回転</value>
+  </data>
+  <data name="MT_ZoomIn" xml:space="preserve">
+    <value>拡大</value>
+  </data>
+  <data name="MT_ZoomOut" xml:space="preserve">
+    <value>縮小</value>
+  </data>
+  <data name="MT_CommandText" xml:space="preserve">
+    <value>実行されたコマンド:</value>
+  </data>
+  <data name="MT_LoginName" xml:space="preserve">
+    <value>側室の愛</value>
+  </data>
+  <data name="OnlineDocument" xml:space="preserve">
+    <value>オンラインドキュメント</value>
+  </data>
+  <data name="ToggleTheme" xml:space="preserve">
+    <value>スイッチテーマ</value>
+  </data>
+  <data name="Pin" xml:space="preserve">
+    <value>ピントトップ</value>
+  </data>
+  <data name="UnPin" xml:space="preserve">
+    <value>ピンを外せ</value>
+  </data>
 </root>

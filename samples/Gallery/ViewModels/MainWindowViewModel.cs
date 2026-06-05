@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using AvaloniaFluentUI.Locale;
+using AvaloniaFluentUI.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Gallery.Messages;
 using Gallery.Models;
-using Gallery.Services;
 
 namespace Gallery.ViewModels;
 
@@ -141,7 +141,7 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void ToggleTheme() => ThemeService.ToggleTheme();
+    private void ToggleTheme() => FluentAvaloniaTheme.Instance.ToggleTheme(); 
 
     [RelayCommand]
     private void TogglePage(string page)

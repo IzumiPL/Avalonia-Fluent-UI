@@ -3,6 +3,7 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
   xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -542,23 +543,23 @@
             <Separator HorizontalAlignment="Stretch"/>
             <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_ManageAccounts]}">
               <MenuItem.Icon>
-                <PathIcon Data="{StaticResource People}"/>
+                <PathIcon Data="{x:Static fi:FluentIcon.People}"/>
               </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_PaymentMethods]}">
               <MenuItem.Icon>
-                <PathIcon Data="{StaticResource ShoppingCart}"/>
+                <PathIcon Data="{x:Static fi:FluentIcon.ShoppingCart}"/>
               </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_RedeemCode]}">
               <MenuItem.Icon>
-                <PathIcon Data="{StaticResource Code}"/>
+                <PathIcon Data="{x:Static fi:FluentIcon.Code}"/>
               </MenuItem.Icon>
             </MenuItem>
             <Separator HorizontalAlignment="Stretch"/>
             <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Settings]}">
               <MenuItem.Icon>
-                <PathIcon Data="{StaticResource Setting}"/>
+                <PathIcon Data="{x:Static fi:FluentIcon.Setting}"/>
               </MenuItem.Icon>
             </MenuItem>
           </fui:FluentContextMenu>
@@ -628,22 +629,22 @@
         CornerRadius="10">
         <Border.ContextMenu>
           <fui:FluentContextMenu Name="ContextMenu">
-            <MenuItem Header="Copy" InputGesture="Ctrl+C">
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Copy]}" InputGesture="Ctrl+C">
               <MenuItem.Icon>
-                <PathIcon Data="{StaticResource Copy}"/>
+                <PathIcon Data="{x:Static fi:FluentIcon.Copy}"/>
               </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Cut" InputGesture="Ctrl+X">
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Cut]}" InputGesture="Ctrl+X">
               <MenuItem.Icon>
-                <PathIcon Data="{StaticResource Cut}"/>
+                <PathIcon Data="{x:Static fi:FluentIcon.Cut}"/>
               </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Paste" InputGesture="Ctrl+V">
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Past]}" InputGesture="Ctrl+V">
               <MenuItem.Icon>
-                <PathIcon Data="{StaticResource Paste}"/>
+                <PathIcon Data="{x:Static fi:FluentIcon.Paste}"/>
               </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Selected All" InputGesture="Ctrl+A"/>
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SelectAll]}" InputGesture="Ctrl+A"/>
           </fui:FluentContextMenu>
         </Border.ContextMenu>
         <TextBlock
@@ -674,7 +675,7 @@
           <fui:CommandBarElementContainer>
             <DropDownButton Theme="{StaticResource TransparentDropDownButton}">
               <Grid ColumnDefinitions="Auto, *" ColumnSpacing="8">
-                <PathIcon Data="{StaticResource Scroll}"/>
+                <PathIcon Data="{x:Static fi:FluentIcon.Scroll}"/>
                 <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Sort]}"/>
               </Grid>
               <DropDownButton.Flyout>

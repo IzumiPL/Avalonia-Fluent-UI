@@ -1,5 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -7,467 +112,1371 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
-      PublicKeyToken=b77a5c561934e089
-    </value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
-      PublicKeyToken=b77a5c561934e089
-    </value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BI_AboutUs" xml:space="preserve"><value>About Us</value></data>
-  <data name="BI_Bluetooth" xml:space="preserve"><value>Bluetooth</value></data>
-  <data name="BI_CheckBox" xml:space="preserve"><value>CheckBox</value></data>
-  <data name="BI_ChipsRadioButton" xml:space="preserve"><value>Chips Radio Button</value></data>
-  <data name="BI_ColorSlider" xml:space="preserve"><value>Color Slider</value></data>
-  <data name="BI_ComboBox" xml:space="preserve"><value>ComboBox</value></data>
-  <data name="BI_ContentAlignment" xml:space="preserve"><value>Content Alignment</value></data>
-  <data name="BI_Controller" xml:space="preserve"><value>Controller</value></data>
-  <data name="BI_Copy" xml:space="preserve"><value>Copy</value></data>
-  <data name="BI_Cut" xml:space="preserve"><value>Cut</value></data>
-  <data name="BI_DropDownButton" xml:space="preserve"><value>Drop-Down Button</value></data>
-  <data name="BI_FilledButton" xml:space="preserve"><value>Filled Button</value></data>
-  <data name="BI_Game" xml:space="preserve"><value>Game</value></data>
-  <data name="BI_Headphones" xml:space="preserve"><value>Headphones</value></data>
-  <data name="BI_HyperlinkButton" xml:space="preserve"><value>Hyperlink Button</value></data>
-  <data name="BI_IsDisabled" xml:space="preserve"><value>Is Disabled</value></data>
-  <data name="BI_IsMultiSelect" xml:space="preserve"><value>Multi-Select</value></data>
-  <data name="BI_MovieAndTV" xml:space="preserve"><value>Movie and TV</value></data>
-  <data name="BI_MultiSelectionComboBox" xml:space="preserve"><value>Multi-Selection ComboBox</value></data>
-  <data name="BI_Music" xml:space="preserve"><value>Music</value></data>
-  <data name="BI_Options" xml:space="preserve"><value>Options</value></data>
-  <data name="BI_OutlineButton" xml:space="preserve"><value>Outline Button</value></data>
-  <data name="BI_Paste" xml:space="preserve"><value>Paste</value></data>
-  <data name="BI_RadioButton" xml:space="preserve"><value>Radio Button</value></data>
-  <data name="BI_RangeSlider" xml:space="preserve"><value>Range Slider</value></data>
-  <data name="BI_RoundButton" xml:space="preserve"><value>Round Button</value></data>
-  <data name="BI_Save" xml:space="preserve"><value>Save</value></data>
-  <data name="BI_Send" xml:space="preserve"><value>Send</value></data>
-  <data name="BI_Slider" xml:space="preserve"><value>Slider</value></data>
-  <data name="BI_Speakers" xml:space="preserve"><value>Speakers</value></data>
-  <data name="BI_SplitButton" xml:space="preserve"><value>Split Button</value></data>
-  <data name="BI_StandardButton" xml:space="preserve"><value>Standard Button</value></data>
-  <data name="BI_StrokeButton" xml:space="preserve"><value>Stroke Button</value></data>
-  <data name="BI_ToggleSwitch" xml:space="preserve"><value>Toggle Switch</value></data>
-  <data name="BI_ToolButton" xml:space="preserve"><value>Tool Button</value></data>
-  <data name="BI_Undo" xml:space="preserve"><value>Undo</value></data>
-  <data name="BasicInput" xml:space="preserve"><value>Basic Input</value></data>
-  <data name="COM_Error" xml:space="preserve"><value>Error</value></data>
-  <data name="COM_Information" xml:space="preserve"><value>Information</value></data>
-  <data name="COM_Success" xml:space="preserve"><value>Success</value></data>
-  <data name="COM_Warning" xml:space="preserve"><value>Warning</value></data>
-  <data name="CodeSamples" xml:space="preserve"><value>Code samples</value></data>
-  <data name="Control_Border" xml:space="preserve"><value>Border</value></data>
-  <data name="Control_BreadcrumbBar" xml:space="preserve"><value>BreadcrumbBar</value></data>
-  <data name="Control_Button" xml:space="preserve"><value>Button</value></data>
-  <data name="Control_ButtonDesc" xml:space="preserve"><value>A control that responds to user input.</value></data>
-  <data name="Control_CalendarDatePicker" xml:space="preserve"><value>CalendarDatePicker</value></data>
-  <data name="Control_Canvas" xml:space="preserve"><value>Canvas</value></data>
-  <data name="Control_CheckBox" xml:space="preserve"><value>CheckBox</value></data>
-  <data name="Control_CheckBoxDesc" xml:space="preserve"><value>A control that a user can select or clear.</value></data>
-  <data name="Control_ComboBox" xml:space="preserve"><value>ComboBox</value></data>
-  <data name="Control_ComboBoxDesc" xml:space="preserve"><value>A drop-down list of items.</value></data>
-  <data name="Control_CommandBar" xml:space="preserve"><value>CommandBar</value></data>
-  <data name="Control_CommandBarFlyout" xml:space="preserve"><value>CommandBarFlyout</value></data>
-  <data name="Control_ContentDialog" xml:space="preserve"><value>ContentDialog</value></data>
-  <data name="Control_DatePicker" xml:space="preserve"><value>DatePicker</value></data>
-  <data name="Control_DropDownButton" xml:space="preserve"><value>DropDownButton</value></data>
-  <data name="Control_DropDownButtonDesc" xml:space="preserve"><value>A button that display a flyout of choices when clicked.</value></data>
-  <data name="Control_Expander" xml:space="preserve"><value>Expander</value></data>
-  <data name="Control_FlipView" xml:space="preserve"><value>FlipView</value></data>
-  <data name="Control_Flyout" xml:space="preserve"><value>Flyout</value></data>
-  <data name="Control_Grid" xml:space="preserve"><value>Grid</value></data>
-  <data name="Control_HyperlinkButton" xml:space="preserve"><value>HyperlinkButton</value></data>
-  <data name="Control_InfoBadge" xml:space="preserve"><value>InfoBadge</value></data>
-  <data name="Control_InfoBar" xml:space="preserve"><value>InfoBar</value></data>
-  <data name="Control_ListBox" xml:space="preserve"><value>ListBox</value></data>
-  <data name="Control_MenuBar" xml:space="preserve"><value>MenuBar</value></data>
-  <data name="Control_MenuFlyout" xml:space="preserve"><value>Menu</value></data>
-  <data name="Control_NavigationView" xml:space="preserve"><value>NavigationView</value></data>
-  <data name="Control_NumberBox" xml:space="preserve"><value>NumberBox</value></data>
-  <data name="Control_PageTransition" xml:space="preserve"><value>PageTransition</value></data>
-  <data name="Control_PasswordBox" xml:space="preserve"><value>PasswordBox</value></data>
-  <data name="Control_Pivot" xml:space="preserve"><value>Segmented</value></data>
-  <data name="Control_ProgressBar" xml:space="preserve"><value>ProgressBar</value></data>
-  <data name="Control_ProgressRing" xml:space="preserve"><value>ProgressRing</value></data>
-  <data name="Control_RadioButton" xml:space="preserve"><value>RadioButton</value></data>
-  <data name="Control_RelativePanel" xml:space="preserve"><value>RelativePanel</value></data>
-  <data name="Control_Slider" xml:space="preserve"><value>Slider</value></data>
-  <data name="Control_SliderDesc" xml:space="preserve"><value>Lets the user select from a range of values.</value></data>
-  <data name="Control_SplitButton" xml:space="preserve"><value>SplitButton</value></data>
-  <data name="Control_SplitView" xml:space="preserve"><value>SplitView</value></data>
-  <data name="Control_StackPanel" xml:space="preserve"><value>StackPanel</value></data>
-  <data name="Control_TeachingTip" xml:space="preserve"><value>TeachingTip</value></data>
-  <data name="Control_TextBlock" xml:space="preserve"><value>TextBlock</value></data>
-  <data name="Control_TextBox" xml:space="preserve"><value>TextBox</value></data>
-  <data name="Control_TimePicker" xml:space="preserve"><value>TimePicker</value></data>
-  <data name="Control_ToggleButton" xml:space="preserve"><value>ToggleButton</value></data>
-  <data name="Control_ToggleButtonDesc" xml:space="preserve"><value>A button switchable between two states.</value></data>
-  <data name="Control_ToggleSwitch" xml:space="preserve"><value>SwitchButton</value></data>
-  <data name="Control_ToggleSwitchDesc" xml:space="preserve"><value>A switch that can be toggled between 2 states.</value></data>
-  <data name="Control_ToolTip" xml:space="preserve"><value>ToolTip</value></data>
-  <data name="Control_TreeView" xml:space="preserve"><value>TreeView</value></data>
-  <data name="DP_Action" xml:space="preserve"><value>Action</value></data>
-  <data name="DP_Close" xml:space="preserve"><value>Close</value></data>
-  <data name="DP_Confirm" xml:space="preserve"><value>Confirm</value></data>
-  <data name="DP_DialogWithMask" xml:space="preserve"><value>Dialog with Mask</value></data>
-  <data name="DP_Open" xml:space="preserve"><value>Open</value></data>
-  <data name="DP_Position" xml:space="preserve"><value>Position</value></data>
-  <data name="DT_CalendarPicker" xml:space="preserve"><value>Calendar Picker</value></data>
-  <data name="DT_ColorPicker" xml:space="preserve"><value>Color Picker</value></data>
-  <data name="DT_DatePicker" xml:space="preserve"><value>Date Picker</value></data>
-  <data name="DT_DisplayMode" xml:space="preserve"><value>Display Mode:</value></data>
-  <data name="DT_SelectMode" xml:space="preserve"><value>Select Mode:</value></data>
-  <data name="DT_SelectedColor" xml:space="preserve"><value>Selected Color:</value></data>
-  <data name="DT_SelectedDate" xml:space="preserve"><value>Selected Date:</value></data>
-  <data name="DT_SelectedTime" xml:space="preserve"><value>Selected Time:</value></data>
-  <data name="DT_ShowDay" xml:space="preserve"><value>Show Day:</value></data>
-  <data name="DT_ShowMonth" xml:space="preserve"><value>Show Month:</value></data>
-  <data name="DT_ShowYear" xml:space="preserve"><value>Show Year:</value></data>
-  <data name="DT_TimeFormat" xml:space="preserve"><value>Time Format:</value></data>
-  <data name="DT_TimePicker" xml:space="preserve"><value>Time Picker</value></data>
-  <data name="DateTime" xml:space="preserve"><value>Date and Time</value></data>
-  <data name="DialogAndPopup" xml:space="preserve"><value>Dialog and Popup</value></data>
-  <data name="FP_Page1" xml:space="preserve"><value>Frame Page 1 (Default)</value></data>
-  <data name="FP_Page2" xml:space="preserve"><value>Frame Page 2 (Slider)</value></data>
-  <data name="FP_Page3" xml:space="preserve"><value>Frame Page 3 (DrillIn)</value></data>
-  <data name="FP_Page4" xml:space="preserve"><value>Frame Page 4 (None)</value></data>
-  <data name="FluentGallery" xml:space="preserve"><value>Fluent Gallery</value></data>
-  <data name="GettingStarted" xml:space="preserve"><value>Getting started</value></data>
-  <data name="GitHubRepo" xml:space="preserve"><value>GitHub repo</value></data>
-  <data name="Home" xml:space="preserve"><value>Home</value></data>
-  <data name="IV_EnumMember" xml:space="preserve"><value>Enum Member</value></data>
-  <data name="IV_IconName" xml:space="preserve"><value>Icon Name</value></data>
-  <data name="IV_SearchIcon" xml:space="preserve"><value>Search Icon</value></data>
-  <data name="Icon" xml:space="preserve"><value>Icon</value></data>
-  <data name="LV_Add" xml:space="preserve"><value>Add</value></data>
-  <data name="LV_AppTheme" xml:space="preserve"><value>App Theme</value></data>
-  <data name="LV_Apply" xml:space="preserve"><value>Apply</value></data>
-  <data name="LV_Border" xml:space="preserve"><value>Border</value></data>
-  <data name="LV_Canvas" xml:space="preserve"><value>Canvas</value></data>
-  <data name="LV_Dark" xml:space="preserve"><value>Dark</value></data>
-  <data name="LV_EnableShadow" xml:space="preserve"><value>Enable Shadow</value></data>
-  <data name="LV_Expander" xml:space="preserve"><value>Expander</value></data>
-  <data name="LV_FollowSystem" xml:space="preserve"><value>Follow System</value></data>
-  <data name="LV_GridLayout" xml:space="preserve"><value>Grid Layout</value></data>
-  <data name="LV_Light" xml:space="preserve"><value>Light</value></data>
-  <data name="LV_Opacity" xml:space="preserve"><value>Opacity</value></data>
-  <data name="LV_Reset" xml:space="preserve"><value>Reset</value></data>
-  <data name="LV_SplitView" xml:space="preserve"><value>Split View</value></data>
-  <data name="LV_StackPanel" xml:space="preserve"><value>Stack Panel</value></data>
-  <data name="Layout" xml:space="preserve"><value>Layout</value></data>
-  <data name="MT_Add" xml:space="preserve"><value>Add</value></data>
-  <data name="MT_Ascending" xml:space="preserve"><value>Ascending</value></data>
-  <data name="MT_Back" xml:space="preserve"><value>Back</value></data>
-  <data name="MT_CommandBar" xml:space="preserve"><value>Command Bar</value></data>
-  <data name="MT_CommandBarFlyout" xml:space="preserve"><value>Command Bar Flyout</value></data>
-  <data name="MT_ContextMenu" xml:space="preserve"><value>Context Menu</value></data>
-  <data name="MT_Debug" xml:space="preserve"><value>Debug</value></data>
-  <data name="MT_Delete" xml:space="preserve"><value>Delete</value></data>
-  <data name="MT_Descending" xml:space="preserve"><value>Descending</value></data>
-  <data name="MT_Edit" xml:space="preserve"><value>Edit</value></data>
-  <data name="MT_Exit" xml:space="preserve"><value>Exit</value></data>
-  <data name="MT_Find" xml:space="preserve"><value>Find</value></data>
-  <data name="MT_Forward" xml:space="preserve"><value>Forward</value></data>
-  <data name="MT_Info" xml:space="preserve"><value>Info</value></data>
-  <data name="MT_Logout" xml:space="preserve"><value>Logout</value></data>
-  <data name="MT_Menu" xml:space="preserve"><value>Menu</value></data>
-  <data name="MT_Name" xml:space="preserve"><value>Name</value></data>
-  <data name="MT_Open" xml:space="preserve"><value>Open</value></data>
-  <data name="MT_Redo" xml:space="preserve"><value>Redo</value></data>
-  <data name="MT_Rename" xml:space="preserve"><value>Rename</value></data>
-  <data name="MT_Replace" xml:space="preserve"><value>Replace</value></data>
-  <data name="MT_Run2" xml:space="preserve"><value>Run</value></data>
-  <data name="MT_Save" xml:space="preserve"><value>Save</value></data>
-  <data name="MT_Share" xml:space="preserve"><value>Share</value></data>
-  <data name="MT_Sort" xml:space="preserve"><value>Sort</value></data>
-  <data name="MenuAndToolBar" xml:space="preserve"><value>Menu and ToolBar</value></data>
-  <data name="NV_About" xml:space="preserve"><value>About</value></data>
-  <data name="NV_Apps" xml:space="preserve"><value>Apps</value></data>
-  <data name="NV_DisplayMode" xml:space="preserve"><value>Display Mode:</value></data>
-  <data name="NV_Downloads" xml:space="preserve"><value>Downloads</value></data>
-  <data name="NV_Files" xml:space="preserve"><value>Files</value></data>
-  <data name="NV_Friends" xml:space="preserve"><value>Friends</value></data>
-  <data name="NV_Games" xml:space="preserve"><value>Games</value></data>
-  <data name="NV_Help" xml:space="preserve"><value>Help</value></data>
-  <data name="NV_History" xml:space="preserve"><value>History</value></data>
-  <data name="NV_Home" xml:space="preserve"><value>Home</value></data>
-  <data name="NV_Mail" xml:space="preserve"><value>Mail</value></data>
-  <data name="NV_Phone" xml:space="preserve"><value>Phone</value></data>
-  <data name="NV_SegmentedBar" xml:space="preserve"><value>Segmented Bar</value></data>
-  <data name="NV_SegmentedToggleBar" xml:space="preserve"><value>Segmented Toggle Bar</value></data>
-  <data name="NV_ShowBackButton" xml:space="preserve"><value>Show Back Button</value></data>
-  <data name="NV_Subscriptions" xml:space="preserve"><value>Subscriptions</value></data>
-  <data name="NV_Tabs" xml:space="preserve"><value>Tabs</value></data>
-  <data name="NV_TopNavigation" xml:space="preserve"><value>Top Navigation Bar</value></data>
-  <data name="Navigation" xml:space="preserve"><value>Navigation</value></data>
-  <data name="SC_Bidirectional" xml:space="preserve"><value>Bidirectional Scroll</value></data>
-  <data name="SC_SingleDirection" xml:space="preserve"><value>Single Direction Scroll</value></data>
-  <data name="SC_SmoothScrollArea" xml:space="preserve"><value>Smooth Scroll Area</value></data>
-  <data name="SI_BgColor" xml:space="preserve"><value>Background Color:</value></data>
-  <data name="SI_IsIndeterminate" xml:space="preserve"><value>Is Indeterminate</value></data>
-  <data name="SI_Progress" xml:space="preserve"><value>Progress:</value></data>
-  <data name="SI_ProgressBar" xml:space="preserve"><value>Progress Bar</value></data>
-  <data name="SI_ProgressRing" xml:space="preserve"><value>Progress Ring</value></data>
-  <data name="SI_Restore" xml:space="preserve"><value>Restore</value></data>
-  <data name="SI_Style" xml:space="preserve"><value>Style:</value></data>
-  <data name="SV_BackgroundImage" xml:space="preserve"><value>Background Image</value></data>
-  <data name="SV_CustomColor" xml:space="preserve"><value>Custom Color</value></data>
-  <data name="SV_DefaultColor" xml:space="preserve"><value>Default Color</value></data>
-  <data name="SV_Language" xml:space="preserve"><value>Language</value></data>
-  <data name="SV_PinToTop" xml:space="preserve"><value>Pin to Top</value></data>
-  <data name="SV_SelectColor" xml:space="preserve"><value>Select Color</value></data>
-  <data name="SV_ThemeColor" xml:space="preserve"><value>Theme Color</value></data>
-  <data name="SV_WindowEffect" xml:space="preserve"><value>Window Effect</value></data>
-  <data name="Scroll" xml:space="preserve"><value>Scroll</value></data>
-  <data name="Section_BasicInput" xml:space="preserve"><value>Basic Input</value></data>
-  <data name="Section_DateTime" xml:space="preserve"><value>Date and Time</value></data>
-  <data name="Section_Dialog" xml:space="preserve"><value>Dialog</value></data>
-  <data name="Section_Layout" xml:space="preserve"><value>Layout</value></data>
-  <data name="Section_MenuAndToolBar" xml:space="preserve"><value>Menu and ToolBar</value></data>
-  <data name="Section_NavigationView" xml:space="preserve"><value>Navigation View</value></data>
-  <data name="Section_StatusAndInformation" xml:space="preserve"><value>Status and Information</value></data>
-  <data name="Section_Text" xml:space="preserve"><value>Text</value></data>
-  <data name="Section_View" xml:space="preserve"><value>View</value></data>
-  <data name="SendFeedback" xml:space="preserve"><value>Send feedback</value></data>
-  <data name="Settings" xml:space="preserve"><value>Settings</value></data>
-  <data name="SourceCode" xml:space="preserve"><value>Source Code</value></data>
-  <data name="StatusAndInformation" xml:space="preserve"><value>Status and Information</value></data>
-  <data name="TV_AcceptReturn" xml:space="preserve"><value>Accept Return</value></data>
-  <data name="TV_AcceptTab" xml:space="preserve"><value>Accept Tab</value></data>
-  <data name="TV_DisplayText" xml:space="preserve"><value>Display Text</value></data>
-  <data name="TV_EnterPassword" xml:space="preserve"><value>Please enter password</value></data>
-  <data name="TV_FontSize" xml:space="preserve"><value>Font Size:</value></data>
-  <data name="TV_FontStyle" xml:space="preserve"><value>Font Style:</value></data>
-  <data name="TV_FontWeight" xml:space="preserve"><value>Font Weight:</value></data>
-  <data name="TV_NumberBox" xml:space="preserve"><value>Number Box</value></data>
-  <data name="TV_PasswordBox" xml:space="preserve"><value>Password Box</value></data>
-  <data name="TV_PhoneNumber" xml:space="preserve"><value>Please enter an 11-digit phone number:</value></data>
-  <data name="TV_SearchBox" xml:space="preserve"><value>Search Box</value></data>
-  <data name="TV_TextBox" xml:space="preserve"><value>Text Box</value></data>
-  <data name="TV_TextDecoration" xml:space="preserve"><value>Text Decoration:</value></data>
-  <data name="Text" xml:space="preserve"><value>Text</value></data>
-  <data name="VP_AddPage" xml:space="preserve"><value>Add Page</value></data>
-  <data name="VP_AutoPlay" xml:space="preserve"><value>Auto Play</value></data>
-  <data name="VP_Carousel" xml:space="preserve"><value>Carousel</value></data>
-  <data name="VP_DataGrid" xml:space="preserve"><value>DataGrid</value></data>
-  <data name="VP_Direction" xml:space="preserve"><value>Direction:</value></data>
-  <data name="VP_Interval" xml:space="preserve"><value>Interval:</value></data>
-  <data name="VP_ListControl" xml:space="preserve"><value>List Control</value></data>
-  <data name="VP_Next" xml:space="preserve"><value>Next</value></data>
-  <data name="VP_Previous" xml:space="preserve"><value>Previous</value></data>
-  <data name="VP_SelectMode" xml:space="preserve"><value>Select Mode:</value></data>
-  <data name="VP_TreeView" xml:space="preserve"><value>TreeView</value></data>
-  <data name="View" xml:space="preserve"><value>View</value></data>
-  <data name="MV_Title" xml:space="preserve"><value>Avalonia Fluent UI Gallery</value></data>
-  <data name="MV_SearchWatermark" xml:space="preserve"><value>Please enter search content</value></data>
-  <data name="SV_WindowEffectDescription" xml:space="preserve"><value>Enable window effects (Mica | AcrylicBlur)</value></data>
-  <data name="SV_Appearance" xml:space="preserve"><value>Adjust your app appearance</value></data>
-  <data name="SV_ThemeColorDescription" xml:space="preserve"><value>Adjust your app theme color</value></data>
-  <data name="SV_PinToTopDescription" xml:space="preserve"><value>Enable window topmost</value></data>
-  <data name="SV_LanguageDescription" xml:space="preserve"><value>Set app language (requires restart)</value></data>
-  <data name="SV_EnableBackgroundImage" xml:space="preserve"><value>Enable background image</value></data>
-  <data name="SV_AppTheme" xml:space="preserve"><value>App Theme</value></data>
-  <data name="GettingStartedContent" xml:space="preserve"><value>An overview of app development options and samples.</value></data>
-  <data name="GitHubRepoContent" xml:space="preserve"><value>The latest fluent design controls and styles for your applications.</value></data>
-  <data name="CodeSamplesContent" xml:space="preserve"><value>Find samples that demonstrate specific tasks, features and APIs.</value></data>
-  <data name="SendFeedbackContent" xml:space="preserve"><value>Help us improve providing feedback.</value></data>
-  <data name="SI_ToolTipButton" xml:space="preserve"><value>ToolTip Button</value></data>
-  <data name="SI_ToolTipText" xml:space="preserve"><value>I am a ToolTip</value></data>
-  <data name="SI_InfoBadge" xml:space="preserve"><value>Info Badge</value></data>
-  <data name="SI_InfoBar" xml:space="preserve"><value>Info Bar</value></data>
-  <data name="SI_SaveSuccess" xml:space="preserve"><value>Save Successful</value></data>
-  <data name="SI_FileSaved" xml:space="preserve"><value>File saved successfully to server</value></data>
-  <data name="SI_Action" xml:space="preserve"><value>Action</value></data>
-  <data name="SI_Options" xml:space="preserve"><value>Options</value></data>
-  <data name="SI_IsClosable" xml:space="preserve"><value>Is Closable</value></data>
-  <data name="VP_Options" xml:space="preserve"><value>Options</value></data>
-  <data name="VP_RoundListBox" xml:space="preserve"><value>Round ListBox</value></data>
-  <data name="VP_IsReadOnly" xml:space="preserve"><value>Is Read Only</value></data>
-  <data name="VP_BorderDisplayMode" xml:space="preserve"><value>Border Display Mode</value></data>
-  <data name="VP_SimpleSettingsCard" xml:space="preserve"><value>Simple Settings Card</value></data>
-  <data name="VP_ClickableSettingsCard" xml:space="preserve"><value>Clickable Settings Card</value></data>
-  <data name="VP_ExpandableSettingsCard" xml:space="preserve"><value>Expandable Settings Card</value></data>
-  <data name="VP_Volume" xml:space="preserve"><value>Volume</value></data>
-  <data name="VP_Sound" xml:space="preserve"><value>Sound</value></data>
-  <data name="VP_SoundDescription" xml:space="preserve"><value>Volume levels, output, input, sound devices</value></data>
-  <data name="VP_AppsSettingsDescription" xml:space="preserve"><value>Apps might have their own settings</value></data>
-  <data name="VP_ChooseDevice" xml:space="preserve"><value>Choose a device for speaking or recording</value></data>
-  <data name="VP_Headset" xml:space="preserve"><value>Headset</value></data>
-  <data name="VP_HasFooterContent" xml:space="preserve"><value>This one has footer content</value></data>
-  <data name="VP_DeviceName" xml:space="preserve"><value>Device Name</value></data>
-  <data name="VP_IsClickable" xml:space="preserve"><value>This one is clickable</value></data>
-  <data name="VP_AddDevice" xml:space="preserve"><value>Add Device</value></data>
-  <data name="DT_CalendarDatePicker" xml:space="preserve"><value>Calendar Date Picker</value></data>
-  <data name="DT_DefaultIncrement" xml:space="preserve"><value>Default Time Increment:</value></data>
-  <data name="NV_NavigationView" xml:space="preserve"><value>Navigation View</value></data>
-  <data name="NV_PaneDisplayMode" xml:space="preserve"><value>Pane Display Mode</value></data>
-  <data name="NV_Unplayed" xml:space="preserve"><value>Unplayed</value></data>
-  <data name="NV_NowPlaying" xml:space="preserve"><value>Now Playing</value></data>
-  <data name="NV_VideoHistory" xml:space="preserve"><value>Video History</value></data>
-  <data name="NV_AudioHistory" xml:space="preserve"><value>Audio History</value></data>
-  <data name="NV_BrowsingHistory" xml:space="preserve"><value>Browsing History</value></data>
-  <data name="NV_Folders" xml:space="preserve"><value>Folders</value></data>
-  <data name="NV_Window" xml:space="preserve"><value>Window</value></data>
-  <data name="NV_BreadcrumbBar" xml:space="preserve"><value>Breadcrumb Bar</value></data>
-  <data name="DP_OptimisticContent" xml:space="preserve"><value>As long as you stay optimistic, you will find countless joys in this world!</value></data>
-  <data name="DP_OpenURL" xml:space="preserve"><value>Open URL</value></data>
-  <data name="DP_URLWatermark" xml:space="preserve"><value>Enter file, stream or playlist URL</value></data>
-  <data name="DP_CustomDialog" xml:space="preserve"><value>Custom Dialog</value></data>
-  <data name="DP_TaskDialog" xml:space="preserve"><value>Task Dialog</value></data>
-  <data name="DP_ShowTaskDialog" xml:space="preserve"><value>Show Task Dialog</value></data>
-  <data name="DP_FluentFlyout" xml:space="preserve"><value>Fluent Flyout</value></data>
-  <data name="DP_ShowPopup" xml:space="preserve"><value>Show Popup View</value></data>
-  <data name="DP_NoName" xml:space="preserve"><value>No Name</value></data>
-  <data name="DP_EyeQuote" xml:space="preserve"><value>One eye to forget you, the other to remember you.</value></data>
-  <data name="DP_FlyoutPositionLabel" xml:space="preserve"><value>Flyout Position:</value></data>
-  <data name="DP_ImageButtonFlyout" xml:space="preserve"><value>Flyout with Image and Button</value></data>
-  <data name="DP_ShowFlyout" xml:space="preserve"><value>Show Flyout</value></data>
-  <data name="DP_Minecraft" xml:space="preserve"><value>Minecraft</value></data>
-  <data name="DP_ForgeDesc" xml:space="preserve"><value>Forge (Minecraft Forge) is an open-source mod loader for Minecraft Java Edition, providing developers with a standard API for compatible mods.</value></data>
-  <data name="DP_TeachingTip" xml:space="preserve"><value>Teaching Tip</value></data>
-  <data name="DP_TeachingTipButton" xml:space="preserve"><value>Show Teaching Tip</value></data>
-  <data name="DP_TeachingTipSubtitle" xml:space="preserve"><value>The shortest shortcut is to take the detour, and taking the detour is my shortest shortcut.</value></data>
-  <data name="DP_ColorPicker" xml:space="preserve"><value>Color Picker</value></data>
-  <data name="DP_TipTitle" xml:space="preserve"><value>Tip</value></data>
-  <data name="DP_ThisIsDialogWithMask" xml:space="preserve"><value>This is a dialog with mask</value></data>
-  <data name="LV_DockPanel" xml:space="preserve"><value>Dock Panel</value></data>
-  <data name="LV_GridSplitter" xml:space="preserve"><value>Grid Splitter</value></data>
-  <data name="LV_Panel" xml:space="preserve"><value>Panel Layout</value></data>
-  <data name="LV_RelativePanel" xml:space="preserve"><value>Relative Panel</value></data>
-  <data name="LV_UniformGrid" xml:space="preserve"><value>Uniform Grid Layout</value></data>
-  <data name="LV_WrapPanel" xml:space="preserve"><value>Wrap Panel Layout</value></data>
-  <data name="LV_VirtualizingStackPanel" xml:space="preserve"><value>Virtualizing Stack Panel</value></data>
-  <data name="LV_Alignment" xml:space="preserve"><value>Alignment</value></data>
-  <data name="LV_SelectLayout" xml:space="preserve"><value>Select Layout Direction</value></data>
-  <data name="LV_AddControl" xml:space="preserve"><value>Add Control</value></data>
-  <data name="LV_RemoveControl" xml:space="preserve"><value>Remove Control</value></data>
-  <data name="LV_SetGridRow" xml:space="preserve"><value>Set Grid Rows</value></data>
-  <data name="LV_SetGridColumn" xml:space="preserve"><value>Set Grid Columns</value></data>
-  <data name="LV_BorderColorHex" xml:space="preserve"><value>Border Color (Hex)</value></data>
-  <data name="LV_BgColorHex" xml:space="preserve"><value>Background Color (Hex)</value></data>
-  <data name="LV_AddItemsCount" xml:space="preserve"><value>Add Items (Count)</value></data>
-  <data name="TV_AutoCompleteBox" xml:space="preserve"><value>AutoComplete Box</value></data>
-  <data name="TV_AddMatchElement" xml:space="preserve"><value>Add Element to Match:</value></data>
-  <data name="TV_SelectMatchMode" xml:space="preserve"><value>Select Match Mode:</value></data>
-  <data name="TV_AddMatchElementButton" xml:space="preserve"><value>Add Match Element</value></data>
-  <data name="TV_SetDisplayText" xml:space="preserve"><value>Set Display Text:</value></data>
-  <data name="TV_SetLetterSpacing" xml:space="preserve"><value>Set Letter Spacing:</value></data>
-  <data name="TV_WatermarkLabel" xml:space="preserve"><value>Watermark Text</value></data>
-  <data name="TV_ClearTextBox" xml:space="preserve"><value>Clear Text Box</value></data>
-  <data name="TV_ClearWatermark" xml:space="preserve"><value>Clear Text Box</value></data>
-  <data name="TV_SearchWatermark" xml:space="preserve"><value>Please enter search content</value></data>
-  <data name="TV_EnterToSearch" xml:space="preserve"><value>Enter to Search</value></data>
-  <data name="TV_SpinButtonMode" xml:space="preserve"><value>Spin Button Display Mode:</value></data>
-  <data name="TV_ButtonSpinner" xml:space="preserve"><value>Button Spinner</value></data>
-  <data name="TV_SpinnerLocation" xml:space="preserve"><value>Spinner Button Location:</value></data>
-  <data name="TV_EnableSpin" xml:space="preserve"><value>Enable Spin</value></data>
-  <data name="TV_EnterName" xml:space="preserve"><value>Please enter name (A-Z)(a-z)</value></data>
-  <data name="BI_StrokeToolButton" xml:space="preserve"><value>Stroke Tool Button</value></data>
-  <data name="BI_TransparentDropDownButton" xml:space="preserve"><value>Transparent Drop-Down Button</value></data>
-  <data name="BI_ToggleButton" xml:space="preserve"><value>Toggle Button</value></data>
-  <data name="BI_ToggleSplitButton" xml:space="preserve"><value>Toggle Split Button</value></data>
-  <data name="BI_TransparentToggleButton" xml:space="preserve"><value>Transparent Toggle Button</value></data>
-  <data name="BI_SubTitleRadioButton" xml:space="preserve"><value>Subtitle Radio Button</value></data>
-  <data name="BI_ToolTipSlider" xml:space="preserve"><value>ToolTip Slider</value></data>
-  <data name="BI_Mail" xml:space="preserve"><value>Mail</value></data>
-  <data name="BI_SendToLocal" xml:space="preserve"><value>Send to Local</value></data>
-  <data name="BI_SendToNetwork" xml:space="preserve"><value>Send to Network</value></data>
-  <data name="BI_Resend" xml:space="preserve"><value>Resend</value></data>
-  <data name="BI_SaveToLocal" xml:space="preserve"><value>Save to Local</value></data>
-  <data name="BI_EnableBluetooth" xml:space="preserve"><value>Enable Bluetooth</value></data>
-  <data name="BI_IAmHyperlink" xml:space="preserve"><value>I am a Hyperlink Button</value></data>
-  <data name="BI_EnableThreeState" xml:space="preserve"><value>Enable Three-State</value></data>
-  <data name="BI_SelectOddItems" xml:space="preserve"><value>Select Odd Items</value></data>
-  <data name="BI_SelectEvenItems" xml:space="preserve"><value>Select Even Items</value></data>
-  <data name="BI_ClearSelectedItems" xml:space="preserve"><value>Clear Selected Items</value></data>
-  <data name="BI_Direction" xml:space="preserve"><value>Direction</value></data>
-  <data name="BI_StandardButtonWithIcon" xml:space="preserve"><value>Standard Button with Icon</value></data>
-  <data name="BI_AccentStandardButton" xml:space="preserve"><value>Accent Standard Button</value></data>
-  <data name="BI_TransparentStandardButton" xml:space="preserve"><value>Transparent Standard Button</value></data>
-  <data name="BI_TransparentStandardButtonWithIcon" xml:space="preserve"><value>Transparent Standard Button with Icon</value></data>
-  <data name="BI_AccentRoundButton" xml:space="preserve"><value>Accent Round Button</value></data>
-  <data name="BI_RoundOutlineButton" xml:space="preserve"><value>Round Outline Button</value></data>
-  <data name="MT_FileMenu" xml:space="preserve"><value>File(_F)</value></data>
-  <data name="MT_NewSolution" xml:space="preserve"><value>New Solution</value></data>
-  <data name="MT_GetFromVersionControl" xml:space="preserve"><value>Get from Version Control...</value></data>
-  <data name="MT_CloseSolution" xml:space="preserve"><value>Close Solution</value></data>
-  <data name="MT_RemoteDevelopment" xml:space="preserve"><value>Remote Development...</value></data>
-  <data name="MT_SaveAll" xml:space="preserve"><value>Save All</value></data>
-  <data name="MT_ReloadAllFromDisk" xml:space="preserve"><value>Reload All from Disk</value></data>
-  <data name="MT_Export" xml:space="preserve"><value>Export</value></data>
-  <data name="MT_Print" xml:space="preserve"><value>Print</value></data>
-  <data name="MT_FileEncoding" xml:space="preserve"><value>File Encoding</value></data>
-  <data name="MT_LineEndings" xml:space="preserve"><value>Line Endings</value></data>
-  <data name="MT_SetReadOnly" xml:space="preserve"><value>Set File to Read-Only</value></data>
-  <data name="MT_NewProjectSettings" xml:space="preserve"><value>New Project Settings</value></data>
-  <data name="MT_ManageIDESettings" xml:space="preserve"><value>Manage IDE Settings</value></data>
-  <data name="MT_PowerSaveMode" xml:space="preserve"><value>Power Save Mode</value></data>
-  <data name="MT_InvalidateCache" xml:space="preserve"><value>Invalidate Cache</value></data>
-  <data name="MT_EditMenu" xml:space="preserve"><value>Edit(_E)</value></data>
-  <data name="MT_CopyPlainText" xml:space="preserve"><value>Copy as Plain Text</value></data>
-  <data name="MT_SearchSelection" xml:space="preserve"><value>Search in Selection</value></data>
-  <data name="MT_FindNext" xml:space="preserve"><value>Find Next</value></data>
-  <data name="MT_FindPrevious" xml:space="preserve"><value>Find Previous</value></data>
-  <data name="MT_SelectAllMatches" xml:space="preserve"><value>Select All Matches</value></data>
-  <data name="MT_AddNextMatch" xml:space="preserve"><value>Add Next Match to Selection</value></data>
-  <data name="MT_CancelSelectedMatch" xml:space="preserve"><value>Cancel Selected Match</value></data>
-  <data name="MT_FindUsages" xml:space="preserve"><value>Find Usages</value></data>
-  <data name="MT_NextHighlightedUsage" xml:space="preserve"><value>Next Highlighted Usage</value></data>
-  <data name="MT_PreviousHighlightedUsage" xml:space="preserve"><value>Previous Highlighted Usage</value></data>
-  <data name="MT_RecentFindUsages" xml:space="preserve"><value>Recent Find Usages</value></data>
-  <data name="MT_SelectAll" xml:space="preserve"><value>Select All</value></data>
-  <data name="MT_ViewMenu" xml:space="preserve"><value>View(_V)</value></data>
-  <data name="MT_ToolWindow" xml:space="preserve"><value>Tool Window</value></data>
-  <data name="MT_Appearance" xml:space="preserve"><value>Appearance</value></data>
-  <data name="MT_QuickDefinition" xml:space="preserve"><value>Quick Definition</value></data>
-  <data name="MT_QuickDefinitionType" xml:space="preserve"><value>Quick Definition Type</value></data>
-  <data name="MT_RecentLocations" xml:space="preserve"><value>Recent Locations</value></data>
-  <data name="MT_RecentFiles" xml:space="preserve"><value>Recent Files</value></data>
-  <data name="MT_RecentlyChangedFiles" xml:space="preserve"><value>Recently Changed Files</value></data>
-  <data name="MT_RecentChanges" xml:space="preserve"><value>Recent Changes</value></data>
-  <data name="MT_NavigationMenu" xml:space="preserve"><value>Navigation(_N)</value></data>
-  <data name="MT_SearchEverywhere" xml:space="preserve"><value>Search Everywhere</value></data>
-  <data name="MT_Class" xml:space="preserve"><value>Class</value></data>
-  <data name="MT_Symbol" xml:space="preserve"><value>Symbol</value></data>
-  <data name="MT_CodeMenu" xml:space="preserve"><value>Code(_C)</value></data>
-  <data name="MT_CodeCompletion" xml:space="preserve"><value>Code Completion</value></data>
-  <data name="MT_InspectCode" xml:space="preserve"><value>Inspect Code</value></data>
-  <data name="MT_AnalyzeCode" xml:space="preserve"><value>Analyze Code</value></data>
-  <data name="MT_InsertLiveTemplate" xml:space="preserve"><value>Insert Live Template</value></data>
-  <data name="MT_SaveAsLiveTemplate" xml:space="preserve"><value>Save as Live Template</value></data>
-  <data name="MT_SurroundWithTemplate" xml:space="preserve"><value>Surround with Template</value></data>
-  <data name="MT_UnwrapRemove" xml:space="preserve"><value>Unwrap/Remove</value></data>
-  <data name="MT_Collapse" xml:space="preserve"><value>Collapse</value></data>
-  <data name="MT_RefactorMenu" xml:space="preserve"><value>Refactor(_R)</value></data>
-  <data name="MT_BuildMenu" xml:space="preserve"><value>Build(_B)</value></data>
-  <data name="MT_BuildSolution" xml:space="preserve"><value>Build Solution</value></data>
-  <data name="MT_RebuildSolution" xml:space="preserve"><value>Rebuild Solution</value></data>
-  <data name="MT_CleanSolution" xml:space="preserve"><value>Clean Solution</value></data>
-  <data name="MT_BuildCurrentProject" xml:space="preserve"><value>Build Current Project</value></data>
-  <data name="MT_BuildStartupProject" xml:space="preserve"><value>Build Startup Project: Gallery</value></data>
-  <data name="MT_AdvancedBuild" xml:space="preserve"><value>Advanced Build Operations</value></data>
-  <data name="MT_ChangeSolutionConfig" xml:space="preserve"><value>Change Solution Configuration</value></data>
-  <data name="MT_RunMenu" xml:space="preserve"><value>Run(_U)</value></data>
-  <data name="MT_RerunProject" xml:space="preserve"><value>Rerun '.NET Project: Gallery'</value></data>
-  <data name="MT_DebugGallery" xml:space="preserve"><value>Debug 'Gallery'</value></data>
-  <data name="MT_RunWithProfiler" xml:space="preserve"><value>Run with Profiler</value></data>
-  <data name="MT_AnalyzeGallery" xml:space="preserve"><value>Analyze 'Gallery' (Timeline)</value></data>
-  <data name="MT_AttachToProcess" xml:space="preserve"><value>Attach to Process</value></data>
-  <data name="MT_ManageAccounts" xml:space="preserve"><value>Manage Accounts and Settings</value></data>
-  <data name="MT_PaymentMethods" xml:space="preserve"><value>Payment Methods</value></data>
-  <data name="MT_RedeemCode" xml:space="preserve"><value>Redeem Code and Gift Card</value></data>
-  <data name="MT_CreationDate" xml:space="preserve"><value>Creation Date</value></data>
-  <data name="MT_TakeDate" xml:space="preserve"><value>Take Date</value></data>
-  <data name="MT_ModificationDate" xml:space="preserve"><value>Modification Date</value></data>
-  <data name="MT_Rotate" xml:space="preserve"><value>Rotate</value></data>
-  <data name="MT_ZoomIn" xml:space="preserve"><value>Zoom In</value></data>
-  <data name="MT_ZoomOut" xml:space="preserve"><value>Zoom Out</value></data>
-  <data name="MT_CommandText" xml:space="preserve"><value>Executed Command:</value></data>
-  <data name="MT_LoginName" xml:space="preserve"><value>Concubine Love</value></data>
-  <data name="OnlineDocument" xml:space="preserve"><value>Online documentation</value></data>
-      <data name="ToggleTheme" xml:space="preserve"><value>SwitchTheme</value></data>
-  <data name="Pin" xml:space="preserve"><value>PinToTop</value></data>
-    <data name="UnPin" xml:space="preserve"><value>Unpin</value></data>
+  <data name="BI_AboutUs" xml:space="preserve">
+    <value>About Us</value>
+  </data>
+  <data name="BI_Bluetooth" xml:space="preserve">
+    <value>Bluetooth</value>
+  </data>
+  <data name="BI_CheckBox" xml:space="preserve">
+    <value>CheckBox</value>
+  </data>
+  <data name="BI_ChipsRadioButton" xml:space="preserve">
+    <value>Chips Radio Button</value>
+  </data>
+  <data name="BI_ColorSlider" xml:space="preserve">
+    <value>Color Slider</value>
+  </data>
+  <data name="BI_ComboBox" xml:space="preserve">
+    <value>ComboBox</value>
+  </data>
+  <data name="BI_ContentAlignment" xml:space="preserve">
+    <value>Content Alignment</value>
+  </data>
+  <data name="BI_Controller" xml:space="preserve">
+    <value>Controller</value>
+  </data>
+  <data name="BI_Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="BI_Cut" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="BI_DropDownButton" xml:space="preserve">
+    <value>Drop-Down Button</value>
+  </data>
+  <data name="BI_FilledButton" xml:space="preserve">
+    <value>Filled Button</value>
+  </data>
+  <data name="BI_Game" xml:space="preserve">
+    <value>Game</value>
+  </data>
+  <data name="BI_Headphones" xml:space="preserve">
+    <value>Headphones</value>
+  </data>
+  <data name="BI_HyperlinkButton" xml:space="preserve">
+    <value>Hyperlink Button</value>
+  </data>
+  <data name="BI_IsDisabled" xml:space="preserve">
+    <value>Is Disabled</value>
+  </data>
+  <data name="BI_IsMultiSelect" xml:space="preserve">
+    <value>Multi-Select</value>
+  </data>
+  <data name="BI_MovieAndTV" xml:space="preserve">
+    <value>Movie and TV</value>
+  </data>
+  <data name="BI_MultiSelectionComboBox" xml:space="preserve">
+    <value>Multi-Selection ComboBox</value>
+  </data>
+  <data name="BI_Music" xml:space="preserve">
+    <value>Music</value>
+  </data>
+  <data name="BI_Options" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="BI_OutlineButton" xml:space="preserve">
+    <value>Outline Button</value>
+  </data>
+  <data name="BI_Paste" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="BI_RadioButton" xml:space="preserve">
+    <value>Radio Button</value>
+  </data>
+  <data name="BI_RangeSlider" xml:space="preserve">
+    <value>Range Slider</value>
+  </data>
+  <data name="BI_RoundButton" xml:space="preserve">
+    <value>Round Button</value>
+  </data>
+  <data name="BI_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="BI_Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="BI_Slider" xml:space="preserve">
+    <value>Slider</value>
+  </data>
+  <data name="BI_Speakers" xml:space="preserve">
+    <value>Speakers</value>
+  </data>
+  <data name="BI_SplitButton" xml:space="preserve">
+    <value>Split Button</value>
+  </data>
+  <data name="BI_StandardButton" xml:space="preserve">
+    <value>Standard Button</value>
+  </data>
+  <data name="BI_StrokeButton" xml:space="preserve">
+    <value>Stroke Button</value>
+  </data>
+  <data name="BI_ToggleSwitch" xml:space="preserve">
+    <value>Toggle Switch</value>
+  </data>
+  <data name="BI_ToolButton" xml:space="preserve">
+    <value>Tool Button</value>
+  </data>
+  <data name="BI_Undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="BasicInput" xml:space="preserve">
+    <value>Basic Input</value>
+  </data>
+  <data name="COM_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="COM_Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="COM_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="COM_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="CodeSamples" xml:space="preserve">
+    <value>Code samples</value>
+  </data>
+  <data name="Control_Border" xml:space="preserve">
+    <value>Border</value>
+  </data>
+  <data name="Control_BreadcrumbBar" xml:space="preserve">
+    <value>BreadcrumbBar</value>
+  </data>
+  <data name="Control_Button" xml:space="preserve">
+    <value>Button</value>
+  </data>
+  <data name="Control_ButtonDesc" xml:space="preserve">
+    <value>A control that responds to user input.</value>
+  </data>
+  <data name="Control_CalendarDatePicker" xml:space="preserve">
+    <value>CalendarDatePicker</value>
+  </data>
+  <data name="Control_Canvas" xml:space="preserve">
+    <value>Canvas</value>
+  </data>
+  <data name="Control_CheckBox" xml:space="preserve">
+    <value>CheckBox</value>
+  </data>
+  <data name="Control_CheckBoxDesc" xml:space="preserve">
+    <value>A control that a user can select or clear.</value>
+  </data>
+  <data name="Control_ComboBox" xml:space="preserve">
+    <value>ComboBox</value>
+  </data>
+  <data name="Control_ComboBoxDesc" xml:space="preserve">
+    <value>A drop-down list of items.</value>
+  </data>
+  <data name="Control_CommandBar" xml:space="preserve">
+    <value>CommandBar</value>
+  </data>
+  <data name="Control_CommandBarFlyout" xml:space="preserve">
+    <value>CommandBarFlyout</value>
+  </data>
+  <data name="Control_ContentDialog" xml:space="preserve">
+    <value>ContentDialog</value>
+  </data>
+  <data name="Control_DatePicker" xml:space="preserve">
+    <value>DatePicker</value>
+  </data>
+  <data name="Control_DropDownButton" xml:space="preserve">
+    <value>DropDownButton</value>
+  </data>
+  <data name="Control_DropDownButtonDesc" xml:space="preserve">
+    <value>A button that display a flyout of choices when clicked.</value>
+  </data>
+  <data name="Control_Expander" xml:space="preserve">
+    <value>Expander</value>
+  </data>
+  <data name="Control_FlipView" xml:space="preserve">
+    <value>FlipView</value>
+  </data>
+  <data name="Control_Flyout" xml:space="preserve">
+    <value>Flyout</value>
+  </data>
+  <data name="Control_Grid" xml:space="preserve">
+    <value>Grid</value>
+  </data>
+  <data name="Control_HyperlinkButton" xml:space="preserve">
+    <value>HyperlinkButton</value>
+  </data>
+  <data name="Control_InfoBadge" xml:space="preserve">
+    <value>InfoBadge</value>
+  </data>
+  <data name="Control_InfoBar" xml:space="preserve">
+    <value>InfoBar</value>
+  </data>
+  <data name="Control_ListBox" xml:space="preserve">
+    <value>ListBox</value>
+  </data>
+  <data name="Control_MenuBar" xml:space="preserve">
+    <value>MenuBar</value>
+  </data>
+  <data name="Control_MenuFlyout" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="Control_NavigationView" xml:space="preserve">
+    <value>NavigationView</value>
+  </data>
+  <data name="Control_NumberBox" xml:space="preserve">
+    <value>NumberBox</value>
+  </data>
+  <data name="Control_PageTransition" xml:space="preserve">
+    <value>PageTransition</value>
+  </data>
+  <data name="Control_PasswordBox" xml:space="preserve">
+    <value>PasswordBox</value>
+  </data>
+  <data name="Control_Pivot" xml:space="preserve">
+    <value>Segmented</value>
+  </data>
+  <data name="Control_ProgressBar" xml:space="preserve">
+    <value>ProgressBar</value>
+  </data>
+  <data name="Control_ProgressRing" xml:space="preserve">
+    <value>ProgressRing</value>
+  </data>
+  <data name="Control_RadioButton" xml:space="preserve">
+    <value>RadioButton</value>
+  </data>
+  <data name="Control_RelativePanel" xml:space="preserve">
+    <value>RelativePanel</value>
+  </data>
+  <data name="Control_Slider" xml:space="preserve">
+    <value>Slider</value>
+  </data>
+  <data name="Control_SliderDesc" xml:space="preserve">
+    <value>Lets the user select from a range of values.</value>
+  </data>
+  <data name="Control_SplitButton" xml:space="preserve">
+    <value>SplitButton</value>
+  </data>
+  <data name="Control_SplitView" xml:space="preserve">
+    <value>SplitView</value>
+  </data>
+  <data name="Control_StackPanel" xml:space="preserve">
+    <value>StackPanel</value>
+  </data>
+  <data name="Control_TeachingTip" xml:space="preserve">
+    <value>TeachingTip</value>
+  </data>
+  <data name="Control_TextBlock" xml:space="preserve">
+    <value>TextBlock</value>
+  </data>
+  <data name="Control_TextBox" xml:space="preserve">
+    <value>TextBox</value>
+  </data>
+  <data name="Control_TimePicker" xml:space="preserve">
+    <value>TimePicker</value>
+  </data>
+  <data name="Control_ToggleButton" xml:space="preserve">
+    <value>ToggleButton</value>
+  </data>
+  <data name="Control_ToggleButtonDesc" xml:space="preserve">
+    <value>A button switchable between two states.</value>
+  </data>
+  <data name="Control_ToggleSwitch" xml:space="preserve">
+    <value>SwitchButton</value>
+  </data>
+  <data name="Control_ToggleSwitchDesc" xml:space="preserve">
+    <value>A switch that can be toggled between 2 states.</value>
+  </data>
+  <data name="Control_ToolTip" xml:space="preserve">
+    <value>ToolTip</value>
+  </data>
+  <data name="Control_TreeView" xml:space="preserve">
+    <value>TreeView</value>
+  </data>
+  <data name="DP_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="DP_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="DP_Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="DP_DialogWithMask" xml:space="preserve">
+    <value>Dialog with Mask</value>
+  </data>
+  <data name="DP_Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="DP_Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="DT_CalendarPicker" xml:space="preserve">
+    <value>Calendar Picker</value>
+  </data>
+  <data name="DT_ColorPicker" xml:space="preserve">
+    <value>Color Picker</value>
+  </data>
+  <data name="DT_DatePicker" xml:space="preserve">
+    <value>Date Picker</value>
+  </data>
+  <data name="DT_DisplayMode" xml:space="preserve">
+    <value>Display Mode:</value>
+  </data>
+  <data name="DT_SelectMode" xml:space="preserve">
+    <value>Select Mode:</value>
+  </data>
+  <data name="DT_SelectedColor" xml:space="preserve">
+    <value>Selected Color:</value>
+  </data>
+  <data name="DT_SelectedDate" xml:space="preserve">
+    <value>Selected Date:</value>
+  </data>
+  <data name="DT_SelectedTime" xml:space="preserve">
+    <value>Selected Time:</value>
+  </data>
+  <data name="DT_ShowDay" xml:space="preserve">
+    <value>Show Day:</value>
+  </data>
+  <data name="DT_ShowMonth" xml:space="preserve">
+    <value>Show Month:</value>
+  </data>
+  <data name="DT_ShowYear" xml:space="preserve">
+    <value>Show Year:</value>
+  </data>
+  <data name="DT_TimeFormat" xml:space="preserve">
+    <value>Time Format:</value>
+  </data>
+  <data name="DT_TimePicker" xml:space="preserve">
+    <value>Time Picker</value>
+  </data>
+  <data name="DateTime" xml:space="preserve">
+    <value>Date and Time</value>
+  </data>
+  <data name="DialogAndPopup" xml:space="preserve">
+    <value>Dialog and Popup</value>
+  </data>
+  <data name="FP_Page1" xml:space="preserve">
+    <value>Frame Page 1 (Default)</value>
+  </data>
+  <data name="FP_Page2" xml:space="preserve">
+    <value>Frame Page 2 (Slider)</value>
+  </data>
+  <data name="FP_Page3" xml:space="preserve">
+    <value>Frame Page 3 (DrillIn)</value>
+  </data>
+  <data name="FP_Page4" xml:space="preserve">
+    <value>Frame Page 4 (None)</value>
+  </data>
+  <data name="FluentGallery" xml:space="preserve">
+    <value>Fluent Gallery</value>
+  </data>
+  <data name="GettingStarted" xml:space="preserve">
+    <value>Getting started</value>
+  </data>
+  <data name="GitHubRepo" xml:space="preserve">
+    <value>GitHub repo</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="IV_EnumMember" xml:space="preserve">
+    <value>Enum Member</value>
+  </data>
+  <data name="IV_IconName" xml:space="preserve">
+    <value>Icon Name</value>
+  </data>
+  <data name="IV_SearchIcon" xml:space="preserve">
+    <value>Search Icon</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="LV_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="LV_AppTheme" xml:space="preserve">
+    <value>App Theme</value>
+  </data>
+  <data name="LV_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="LV_Border" xml:space="preserve">
+    <value>Border</value>
+  </data>
+  <data name="LV_Canvas" xml:space="preserve">
+    <value>Canvas</value>
+  </data>
+  <data name="LV_Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="LV_EnableShadow" xml:space="preserve">
+    <value>Enable Shadow</value>
+  </data>
+  <data name="LV_Expander" xml:space="preserve">
+    <value>Expander</value>
+  </data>
+  <data name="LV_FollowSystem" xml:space="preserve">
+    <value>Follow System</value>
+  </data>
+  <data name="LV_GridLayout" xml:space="preserve">
+    <value>Grid Layout</value>
+  </data>
+  <data name="LV_Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="LV_Opacity" xml:space="preserve">
+    <value>Opacity</value>
+  </data>
+  <data name="LV_Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="LV_SplitView" xml:space="preserve">
+    <value>Split View</value>
+  </data>
+  <data name="LV_StackPanel" xml:space="preserve">
+    <value>Stack Panel</value>
+  </data>
+  <data name="Layout" xml:space="preserve">
+    <value>Layout</value>
+  </data>
+  <data name="MT_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="MT_Ascending" xml:space="preserve">
+    <value>Ascending</value>
+  </data>
+  <data name="MT_Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="MT_CommandBar" xml:space="preserve">
+    <value>Command Bar</value>
+  </data>
+  <data name="MT_CommandBarFlyout" xml:space="preserve">
+    <value>Command Bar Flyout</value>
+  </data>
+  <data name="MT_ContextMenu" xml:space="preserve">
+    <value>Context Menu</value>
+  </data>
+  <data name="MT_Debug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="MT_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="MT_Descending" xml:space="preserve">
+    <value>Descending</value>
+  </data>
+  <data name="MT_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="MT_Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="MT_Find" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="MT_Forward" xml:space="preserve">
+    <value>Forward</value>
+  </data>
+  <data name="MT_Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="MT_Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="MT_Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="MT_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="MT_Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="MT_Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="MT_Rename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="MT_Replace" xml:space="preserve">
+    <value>Replace</value>
+  </data>
+  <data name="MT_Run2" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="MT_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="MT_Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="MT_Sort" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="MenuAndToolBar" xml:space="preserve">
+    <value>Menu and ToolBar</value>
+  </data>
+  <data name="NV_About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="NV_Apps" xml:space="preserve">
+    <value>Apps</value>
+  </data>
+  <data name="NV_DisplayMode" xml:space="preserve">
+    <value>Display Mode:</value>
+  </data>
+  <data name="NV_Downloads" xml:space="preserve">
+    <value>Downloads</value>
+  </data>
+  <data name="NV_Files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="NV_Friends" xml:space="preserve">
+    <value>Friends</value>
+  </data>
+  <data name="NV_Games" xml:space="preserve">
+    <value>Games</value>
+  </data>
+  <data name="NV_Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="NV_History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="NV_Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="NV_Mail" xml:space="preserve">
+    <value>Mail</value>
+  </data>
+  <data name="NV_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="NV_SegmentedBar" xml:space="preserve">
+    <value>Segmented Bar</value>
+  </data>
+  <data name="NV_SegmentedToggleBar" xml:space="preserve">
+    <value>Segmented Toggle Bar</value>
+  </data>
+  <data name="NV_ShowBackButton" xml:space="preserve">
+    <value>Show Back Button</value>
+  </data>
+  <data name="NV_Subscriptions" xml:space="preserve">
+    <value>Subscriptions</value>
+  </data>
+  <data name="NV_Tabs" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="NV_TopNavigation" xml:space="preserve">
+    <value>Top Navigation Bar</value>
+  </data>
+  <data name="Navigation" xml:space="preserve">
+    <value>Navigation</value>
+  </data>
+  <data name="SC_Bidirectional" xml:space="preserve">
+    <value>Bidirectional Scroll</value>
+  </data>
+  <data name="SC_SingleDirection" xml:space="preserve">
+    <value>Single Direction Scroll</value>
+  </data>
+  <data name="SC_SmoothScrollArea" xml:space="preserve">
+    <value>Smooth Scroll Area</value>
+  </data>
+  <data name="SI_BgColor" xml:space="preserve">
+    <value>Background Color:</value>
+  </data>
+  <data name="SI_IsIndeterminate" xml:space="preserve">
+    <value>Is Indeterminate</value>
+  </data>
+  <data name="SI_Progress" xml:space="preserve">
+    <value>Progress:</value>
+  </data>
+  <data name="SI_ProgressBar" xml:space="preserve">
+    <value>Progress Bar</value>
+  </data>
+  <data name="SI_ProgressRing" xml:space="preserve">
+    <value>Progress Ring</value>
+  </data>
+  <data name="SI_Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="SI_Style" xml:space="preserve">
+    <value>Style:</value>
+  </data>
+  <data name="SV_BackgroundImage" xml:space="preserve">
+    <value>Background Image</value>
+  </data>
+  <data name="SV_CustomColor" xml:space="preserve">
+    <value>Custom Color</value>
+  </data>
+  <data name="SV_DefaultColor" xml:space="preserve">
+    <value>Default Color</value>
+  </data>
+  <data name="SV_Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="SV_PinToTop" xml:space="preserve">
+    <value>Pin to Top</value>
+  </data>
+  <data name="SV_SelectColor" xml:space="preserve">
+    <value>Select Color</value>
+  </data>
+  <data name="SV_ThemeColor" xml:space="preserve">
+    <value>Theme Color</value>
+  </data>
+  <data name="SV_WindowEffect" xml:space="preserve">
+    <value>Window Effect</value>
+  </data>
+  <data name="Scroll" xml:space="preserve">
+    <value>Scroll</value>
+  </data>
+  <data name="Section_BasicInput" xml:space="preserve">
+    <value>Basic Input</value>
+  </data>
+  <data name="Section_DateTime" xml:space="preserve">
+    <value>Date and Time</value>
+  </data>
+  <data name="Section_Dialog" xml:space="preserve">
+    <value>Dialog</value>
+  </data>
+  <data name="Section_Layout" xml:space="preserve">
+    <value>Layout</value>
+  </data>
+  <data name="Section_MenuAndToolBar" xml:space="preserve">
+    <value>Menu and ToolBar</value>
+  </data>
+  <data name="Section_NavigationView" xml:space="preserve">
+    <value>Navigation View</value>
+  </data>
+  <data name="Section_StatusAndInformation" xml:space="preserve">
+    <value>Status and Information</value>
+  </data>
+  <data name="Section_Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Section_View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="SendFeedback" xml:space="preserve">
+    <value>Send feedback</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SourceCode" xml:space="preserve">
+    <value>Source Code</value>
+  </data>
+  <data name="StatusAndInformation" xml:space="preserve">
+    <value>Status and Information</value>
+  </data>
+  <data name="TV_AcceptReturn" xml:space="preserve">
+    <value>Accept Return</value>
+  </data>
+  <data name="TV_AcceptTab" xml:space="preserve">
+    <value>Accept Tab</value>
+  </data>
+  <data name="TV_DisplayText" xml:space="preserve">
+    <value>Display Text</value>
+  </data>
+  <data name="TV_EnterPassword" xml:space="preserve">
+    <value>Please enter password</value>
+  </data>
+  <data name="TV_FontSize" xml:space="preserve">
+    <value>Font Size:</value>
+  </data>
+  <data name="TV_FontStyle" xml:space="preserve">
+    <value>Font Style:</value>
+  </data>
+  <data name="TV_FontWeight" xml:space="preserve">
+    <value>Font Weight:</value>
+  </data>
+  <data name="TV_NumberBox" xml:space="preserve">
+    <value>Number Box</value>
+  </data>
+  <data name="TV_PasswordBox" xml:space="preserve">
+    <value>Password Box</value>
+  </data>
+  <data name="TV_PhoneNumber" xml:space="preserve">
+    <value>Please enter an 11-digit phone number:</value>
+  </data>
+  <data name="TV_SearchBox" xml:space="preserve">
+    <value>Search Box</value>
+  </data>
+  <data name="TV_TextBox" xml:space="preserve">
+    <value>Text Box</value>
+  </data>
+  <data name="TV_TextDecoration" xml:space="preserve">
+    <value>Text Decoration:</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="VP_AddPage" xml:space="preserve">
+    <value>Add Page</value>
+  </data>
+  <data name="VP_AutoPlay" xml:space="preserve">
+    <value>Auto Play</value>
+  </data>
+  <data name="VP_Carousel" xml:space="preserve">
+    <value>Carousel</value>
+  </data>
+  <data name="VP_DataGrid" xml:space="preserve">
+    <value>DataGrid</value>
+  </data>
+  <data name="VP_Direction" xml:space="preserve">
+    <value>Direction:</value>
+  </data>
+  <data name="VP_Interval" xml:space="preserve">
+    <value>Interval:</value>
+  </data>
+  <data name="VP_ListControl" xml:space="preserve">
+    <value>List Control</value>
+  </data>
+  <data name="VP_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="VP_Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="VP_SelectMode" xml:space="preserve">
+    <value>Select Mode:</value>
+  </data>
+  <data name="VP_TreeView" xml:space="preserve">
+    <value>TreeView</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="MV_Title" xml:space="preserve">
+    <value>Avalonia Fluent UI Gallery</value>
+  </data>
+  <data name="MV_SearchWatermark" xml:space="preserve">
+    <value>Please enter search content</value>
+  </data>
+  <data name="SV_WindowEffectDescription" xml:space="preserve">
+    <value>Enable window effects (Mica | AcrylicBlur)</value>
+  </data>
+  <data name="SV_Appearance" xml:space="preserve">
+    <value>Adjust your app appearance</value>
+  </data>
+  <data name="SV_ThemeColorDescription" xml:space="preserve">
+    <value>Adjust your app theme color</value>
+  </data>
+  <data name="SV_PinToTopDescription" xml:space="preserve">
+    <value>Enable window topmost</value>
+  </data>
+  <data name="SV_LanguageDescription" xml:space="preserve">
+    <value>Set app language (requires restart)</value>
+  </data>
+  <data name="SV_EnableBackgroundImage" xml:space="preserve">
+    <value>Enable background image</value>
+  </data>
+  <data name="SV_AppTheme" xml:space="preserve">
+    <value>App Theme</value>
+  </data>
+  <data name="GettingStartedContent" xml:space="preserve">
+    <value>An overview of app development options and samples.</value>
+  </data>
+  <data name="GitHubRepoContent" xml:space="preserve">
+    <value>The latest fluent design controls and styles for your applications.</value>
+  </data>
+  <data name="CodeSamplesContent" xml:space="preserve">
+    <value>Find samples that demonstrate specific tasks, features and APIs.</value>
+  </data>
+  <data name="SendFeedbackContent" xml:space="preserve">
+    <value>Help us improve providing feedback.</value>
+  </data>
+  <data name="SI_ToolTipButton" xml:space="preserve">
+    <value>ToolTip Button</value>
+  </data>
+  <data name="SI_ToolTipText" xml:space="preserve">
+    <value>I am a ToolTip</value>
+  </data>
+  <data name="SI_InfoBadge" xml:space="preserve">
+    <value>Info Badge</value>
+  </data>
+  <data name="SI_InfoBar" xml:space="preserve">
+    <value>Info Bar</value>
+  </data>
+  <data name="SI_SaveSuccess" xml:space="preserve">
+    <value>Save Successful</value>
+  </data>
+  <data name="SI_FileSaved" xml:space="preserve">
+    <value>File saved successfully to server</value>
+  </data>
+  <data name="SI_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="SI_Options" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="SI_IsClosable" xml:space="preserve">
+    <value>Is Closable</value>
+  </data>
+  <data name="VP_Options" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="VP_RoundListBox" xml:space="preserve">
+    <value>Round ListBox</value>
+  </data>
+  <data name="VP_IsReadOnly" xml:space="preserve">
+    <value>Is Read Only</value>
+  </data>
+  <data name="VP_BorderDisplayMode" xml:space="preserve">
+    <value>Border Display Mode</value>
+  </data>
+  <data name="VP_SimpleSettingsCard" xml:space="preserve">
+    <value>Simple Settings Card</value>
+  </data>
+  <data name="VP_ClickableSettingsCard" xml:space="preserve">
+    <value>Clickable Settings Card</value>
+  </data>
+  <data name="VP_ExpandableSettingsCard" xml:space="preserve">
+    <value>Expandable Settings Card</value>
+  </data>
+  <data name="VP_Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="VP_Sound" xml:space="preserve">
+    <value>Sound</value>
+  </data>
+  <data name="VP_SoundDescription" xml:space="preserve">
+    <value>Volume levels, output, input, sound devices</value>
+  </data>
+  <data name="VP_AppsSettingsDescription" xml:space="preserve">
+    <value>Apps might have their own settings</value>
+  </data>
+  <data name="VP_ChooseDevice" xml:space="preserve">
+    <value>Choose a device for speaking or recording</value>
+  </data>
+  <data name="VP_Headset" xml:space="preserve">
+    <value>Headset</value>
+  </data>
+  <data name="VP_HasFooterContent" xml:space="preserve">
+    <value>This one has footer content</value>
+  </data>
+  <data name="VP_DeviceName" xml:space="preserve">
+    <value>Device Name</value>
+  </data>
+  <data name="VP_IsClickable" xml:space="preserve">
+    <value>This one is clickable</value>
+  </data>
+  <data name="VP_AddDevice" xml:space="preserve">
+    <value>Add Device</value>
+  </data>
+  <data name="DT_CalendarDatePicker" xml:space="preserve">
+    <value>Calendar Date Picker</value>
+  </data>
+  <data name="DT_DefaultIncrement" xml:space="preserve">
+    <value>Default Time Increment:</value>
+  </data>
+  <data name="NV_NavigationView" xml:space="preserve">
+    <value>Navigation View</value>
+  </data>
+  <data name="NV_PaneDisplayMode" xml:space="preserve">
+    <value>Pane Display Mode</value>
+  </data>
+  <data name="NV_Unplayed" xml:space="preserve">
+    <value>Unplayed</value>
+  </data>
+  <data name="NV_NowPlaying" xml:space="preserve">
+    <value>Now Playing</value>
+  </data>
+  <data name="NV_VideoHistory" xml:space="preserve">
+    <value>Video History</value>
+  </data>
+  <data name="NV_AudioHistory" xml:space="preserve">
+    <value>Audio History</value>
+  </data>
+  <data name="NV_BrowsingHistory" xml:space="preserve">
+    <value>Browsing History</value>
+  </data>
+  <data name="NV_Folders" xml:space="preserve">
+    <value>Folders</value>
+  </data>
+  <data name="NV_Window" xml:space="preserve">
+    <value>Window</value>
+  </data>
+  <data name="NV_BreadcrumbBar" xml:space="preserve">
+    <value>Breadcrumb Bar</value>
+  </data>
+  <data name="DP_OptimisticContent" xml:space="preserve">
+    <value>As long as you stay optimistic, you will find countless joys in this world!</value>
+  </data>
+  <data name="DP_OpenURL" xml:space="preserve">
+    <value>Open URL</value>
+  </data>
+  <data name="DP_URLWatermark" xml:space="preserve">
+    <value>Enter file, stream or playlist URL</value>
+  </data>
+  <data name="DP_CustomDialog" xml:space="preserve">
+    <value>Custom Dialog</value>
+  </data>
+  <data name="DP_TaskDialog" xml:space="preserve">
+    <value>Task Dialog</value>
+  </data>
+  <data name="DP_ShowTaskDialog" xml:space="preserve">
+    <value>Show Task Dialog</value>
+  </data>
+  <data name="DP_FluentFlyout" xml:space="preserve">
+    <value>Fluent Flyout</value>
+  </data>
+  <data name="DP_ShowPopup" xml:space="preserve">
+    <value>Show Popup View</value>
+  </data>
+  <data name="DP_NoName" xml:space="preserve">
+    <value>No Name</value>
+  </data>
+  <data name="DP_EyeQuote" xml:space="preserve">
+    <value>One eye to forget you, the other to remember you.</value>
+  </data>
+  <data name="DP_FlyoutPositionLabel" xml:space="preserve">
+    <value>Flyout Position:</value>
+  </data>
+  <data name="DP_ImageButtonFlyout" xml:space="preserve">
+    <value>Flyout with Image and Button</value>
+  </data>
+  <data name="DP_ShowFlyout" xml:space="preserve">
+    <value>Show Flyout</value>
+  </data>
+  <data name="DP_Minecraft" xml:space="preserve">
+    <value>Minecraft</value>
+  </data>
+  <data name="DP_ForgeDesc" xml:space="preserve">
+    <value>Forge (Minecraft Forge) is an open-source mod loader for Minecraft Java Edition, providing developers with a standard API for compatible mods.</value>
+  </data>
+  <data name="DP_TeachingTip" xml:space="preserve">
+    <value>Teaching Tip</value>
+  </data>
+  <data name="DP_TeachingTipButton" xml:space="preserve">
+    <value>Show Teaching Tip</value>
+  </data>
+  <data name="DP_TeachingTipSubtitle" xml:space="preserve">
+    <value>The shortest shortcut is to take the detour, and taking the detour is my shortest shortcut.</value>
+  </data>
+  <data name="DP_ColorPicker" xml:space="preserve">
+    <value>Color Picker</value>
+  </data>
+  <data name="DP_TipTitle" xml:space="preserve">
+    <value>Tip</value>
+  </data>
+  <data name="DP_ThisIsDialogWithMask" xml:space="preserve">
+    <value>This is a dialog with mask</value>
+  </data>
+  <data name="LV_DockPanel" xml:space="preserve">
+    <value>Dock Panel</value>
+  </data>
+  <data name="LV_GridSplitter" xml:space="preserve">
+    <value>Grid Splitter</value>
+  </data>
+  <data name="LV_Panel" xml:space="preserve">
+    <value>Panel Layout</value>
+  </data>
+  <data name="LV_RelativePanel" xml:space="preserve">
+    <value>Relative Panel</value>
+  </data>
+  <data name="LV_UniformGrid" xml:space="preserve">
+    <value>Uniform Grid Layout</value>
+  </data>
+  <data name="LV_WrapPanel" xml:space="preserve">
+    <value>Wrap Panel Layout</value>
+  </data>
+  <data name="LV_VirtualizingStackPanel" xml:space="preserve">
+    <value>Virtualizing Stack Panel</value>
+  </data>
+  <data name="LV_Alignment" xml:space="preserve">
+    <value>Alignment</value>
+  </data>
+  <data name="LV_SelectLayout" xml:space="preserve">
+    <value>Select Layout Direction</value>
+  </data>
+  <data name="LV_AddControl" xml:space="preserve">
+    <value>Add Control</value>
+  </data>
+  <data name="LV_RemoveControl" xml:space="preserve">
+    <value>Remove Control</value>
+  </data>
+  <data name="LV_SetGridRow" xml:space="preserve">
+    <value>Set Grid Rows</value>
+  </data>
+  <data name="LV_SetGridColumn" xml:space="preserve">
+    <value>Set Grid Columns</value>
+  </data>
+  <data name="LV_BorderColorHex" xml:space="preserve">
+    <value>Border Color (Hex)</value>
+  </data>
+  <data name="LV_BgColorHex" xml:space="preserve">
+    <value>Background Color (Hex)</value>
+  </data>
+  <data name="LV_AddItemsCount" xml:space="preserve">
+    <value>Add Items (Count)</value>
+  </data>
+  <data name="TV_AutoCompleteBox" xml:space="preserve">
+    <value>AutoComplete Box</value>
+  </data>
+  <data name="TV_AddMatchElement" xml:space="preserve">
+    <value>Add Element to Match:</value>
+  </data>
+  <data name="TV_SelectMatchMode" xml:space="preserve">
+    <value>Select Match Mode:</value>
+  </data>
+  <data name="TV_AddMatchElementButton" xml:space="preserve">
+    <value>Add Match Element</value>
+  </data>
+  <data name="TV_SetDisplayText" xml:space="preserve">
+    <value>Set Display Text:</value>
+  </data>
+  <data name="TV_SetLetterSpacing" xml:space="preserve">
+    <value>Set Letter Spacing:</value>
+  </data>
+  <data name="TV_WatermarkLabel" xml:space="preserve">
+    <value>Watermark Text</value>
+  </data>
+  <data name="TV_ClearTextBox" xml:space="preserve">
+    <value>Clear Text Box</value>
+  </data>
+  <data name="TV_ClearWatermark" xml:space="preserve">
+    <value>Clear Text Box</value>
+  </data>
+  <data name="TV_SearchWatermark" xml:space="preserve">
+    <value>Please enter search content</value>
+  </data>
+  <data name="TV_EnterToSearch" xml:space="preserve">
+    <value>Enter to Search</value>
+  </data>
+  <data name="TV_SpinButtonMode" xml:space="preserve">
+    <value>Spin Button Display Mode:</value>
+  </data>
+  <data name="TV_ButtonSpinner" xml:space="preserve">
+    <value>Button Spinner</value>
+  </data>
+  <data name="TV_SpinnerLocation" xml:space="preserve">
+    <value>Spinner Button Location:</value>
+  </data>
+  <data name="TV_EnableSpin" xml:space="preserve">
+    <value>Enable Spin</value>
+  </data>
+  <data name="TV_EnterName" xml:space="preserve">
+    <value>Please enter name (A-Z)(a-z)</value>
+  </data>
+  <data name="BI_StrokeToolButton" xml:space="preserve">
+    <value>Stroke Tool Button</value>
+  </data>
+  <data name="BI_TransparentDropDownButton" xml:space="preserve">
+    <value>Transparent Drop-Down Button</value>
+  </data>
+  <data name="BI_ToggleButton" xml:space="preserve">
+    <value>Toggle Button</value>
+  </data>
+  <data name="BI_ToggleSplitButton" xml:space="preserve">
+    <value>Toggle Split Button</value>
+  </data>
+  <data name="BI_TransparentToggleButton" xml:space="preserve">
+    <value>Transparent Toggle Button</value>
+  </data>
+  <data name="BI_SubTitleRadioButton" xml:space="preserve">
+    <value>Subtitle Radio Button</value>
+  </data>
+  <data name="BI_ToolTipSlider" xml:space="preserve">
+    <value>ToolTip Slider</value>
+  </data>
+  <data name="BI_Mail" xml:space="preserve">
+    <value>Mail</value>
+  </data>
+  <data name="BI_SendToLocal" xml:space="preserve">
+    <value>Send to Local</value>
+  </data>
+  <data name="BI_SendToNetwork" xml:space="preserve">
+    <value>Send to Network</value>
+  </data>
+  <data name="BI_Resend" xml:space="preserve">
+    <value>Resend</value>
+  </data>
+  <data name="BI_SaveToLocal" xml:space="preserve">
+    <value>Save to Local</value>
+  </data>
+  <data name="BI_EnableBluetooth" xml:space="preserve">
+    <value>Enable Bluetooth</value>
+  </data>
+  <data name="BI_IAmHyperlink" xml:space="preserve">
+    <value>I am a Hyperlink Button</value>
+  </data>
+  <data name="BI_EnableThreeState" xml:space="preserve">
+    <value>Enable Three-State</value>
+  </data>
+  <data name="BI_SelectOddItems" xml:space="preserve">
+    <value>Select Odd Items</value>
+  </data>
+  <data name="BI_SelectEvenItems" xml:space="preserve">
+    <value>Select Even Items</value>
+  </data>
+  <data name="BI_ClearSelectedItems" xml:space="preserve">
+    <value>Clear Selected Items</value>
+  </data>
+  <data name="BI_Direction" xml:space="preserve">
+    <value>Direction</value>
+  </data>
+  <data name="BI_StandardButtonWithIcon" xml:space="preserve">
+    <value>Standard Button with Icon</value>
+  </data>
+  <data name="BI_AccentStandardButton" xml:space="preserve">
+    <value>Accent Standard Button</value>
+  </data>
+  <data name="BI_TransparentStandardButton" xml:space="preserve">
+    <value>Transparent Standard Button</value>
+  </data>
+  <data name="BI_TransparentStandardButtonWithIcon" xml:space="preserve">
+    <value>Transparent Standard Button with Icon</value>
+  </data>
+  <data name="BI_AccentRoundButton" xml:space="preserve">
+    <value>Accent Round Button</value>
+  </data>
+  <data name="BI_RoundOutlineButton" xml:space="preserve">
+    <value>Round Outline Button</value>
+  </data>
+  <data name="MT_FileMenu" xml:space="preserve">
+    <value>File(_F)</value>
+  </data>
+  <data name="MT_NewSolution" xml:space="preserve">
+    <value>New Solution</value>
+  </data>
+  <data name="MT_GetFromVersionControl" xml:space="preserve">
+    <value>Get from Version Control...</value>
+  </data>
+  <data name="MT_CloseSolution" xml:space="preserve">
+    <value>Close Solution</value>
+  </data>
+  <data name="MT_RemoteDevelopment" xml:space="preserve">
+    <value>Remote Development...</value>
+  </data>
+  <data name="MT_SaveAll" xml:space="preserve">
+    <value>Save All</value>
+  </data>
+  <data name="MT_ReloadAllFromDisk" xml:space="preserve">
+    <value>Reload All from Disk</value>
+  </data>
+  <data name="MT_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="MT_Print" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="MT_FileEncoding" xml:space="preserve">
+    <value>File Encoding</value>
+  </data>
+  <data name="MT_LineEndings" xml:space="preserve">
+    <value>Line Endings</value>
+  </data>
+  <data name="MT_SetReadOnly" xml:space="preserve">
+    <value>Set File to Read-Only</value>
+  </data>
+  <data name="MT_NewProjectSettings" xml:space="preserve">
+    <value>New Project Settings</value>
+  </data>
+  <data name="MT_ManageIDESettings" xml:space="preserve">
+    <value>Manage IDE Settings</value>
+  </data>
+  <data name="MT_PowerSaveMode" xml:space="preserve">
+    <value>Power Save Mode</value>
+  </data>
+  <data name="MT_InvalidateCache" xml:space="preserve">
+    <value>Invalidate Cache</value>
+  </data>
+  <data name="MT_EditMenu" xml:space="preserve">
+    <value>Edit(_E)</value>
+  </data>
+  <data name="MT_CopyPlainText" xml:space="preserve">
+    <value>Copy as Plain Text</value>
+  </data>
+  <data name="MT_SearchSelection" xml:space="preserve">
+    <value>Search in Selection</value>
+  </data>
+  <data name="MT_FindNext" xml:space="preserve">
+    <value>Find Next</value>
+  </data>
+  <data name="MT_FindPrevious" xml:space="preserve">
+    <value>Find Previous</value>
+  </data>
+  <data name="MT_SelectAllMatches" xml:space="preserve">
+    <value>Select All Matches</value>
+  </data>
+  <data name="MT_AddNextMatch" xml:space="preserve">
+    <value>Add Next Match to Selection</value>
+  </data>
+  <data name="MT_CancelSelectedMatch" xml:space="preserve">
+    <value>Cancel Selected Match</value>
+  </data>
+  <data name="MT_FindUsages" xml:space="preserve">
+    <value>Find Usages</value>
+  </data>
+  <data name="MT_NextHighlightedUsage" xml:space="preserve">
+    <value>Next Highlighted Usage</value>
+  </data>
+  <data name="MT_PreviousHighlightedUsage" xml:space="preserve">
+    <value>Previous Highlighted Usage</value>
+  </data>
+  <data name="MT_RecentFindUsages" xml:space="preserve">
+    <value>Recent Find Usages</value>
+  </data>
+  <data name="MT_SelectAll" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="MT_ViewMenu" xml:space="preserve">
+    <value>View(_V)</value>
+  </data>
+  <data name="MT_ToolWindow" xml:space="preserve">
+    <value>Tool Window</value>
+  </data>
+  <data name="MT_Appearance" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="MT_QuickDefinition" xml:space="preserve">
+    <value>Quick Definition</value>
+  </data>
+  <data name="MT_QuickDefinitionType" xml:space="preserve">
+    <value>Quick Definition Type</value>
+  </data>
+  <data name="MT_RecentLocations" xml:space="preserve">
+    <value>Recent Locations</value>
+  </data>
+  <data name="MT_RecentFiles" xml:space="preserve">
+    <value>Recent Files</value>
+  </data>
+  <data name="MT_RecentlyChangedFiles" xml:space="preserve">
+    <value>Recently Changed Files</value>
+  </data>
+  <data name="MT_RecentChanges" xml:space="preserve">
+    <value>Recent Changes</value>
+  </data>
+  <data name="MT_NavigationMenu" xml:space="preserve">
+    <value>Navigation(_N)</value>
+  </data>
+  <data name="MT_SearchEverywhere" xml:space="preserve">
+    <value>Search Everywhere</value>
+  </data>
+  <data name="MT_Class" xml:space="preserve">
+    <value>Class</value>
+  </data>
+  <data name="MT_Symbol" xml:space="preserve">
+    <value>Symbol</value>
+  </data>
+  <data name="MT_CodeMenu" xml:space="preserve">
+    <value>Code(_C)</value>
+  </data>
+  <data name="MT_CodeCompletion" xml:space="preserve">
+    <value>Code Completion</value>
+  </data>
+  <data name="MT_InspectCode" xml:space="preserve">
+    <value>Inspect Code</value>
+  </data>
+  <data name="MT_AnalyzeCode" xml:space="preserve">
+    <value>Analyze Code</value>
+  </data>
+  <data name="MT_InsertLiveTemplate" xml:space="preserve">
+    <value>Insert Live Template</value>
+  </data>
+  <data name="MT_SaveAsLiveTemplate" xml:space="preserve">
+    <value>Save as Live Template</value>
+  </data>
+  <data name="MT_SurroundWithTemplate" xml:space="preserve">
+    <value>Surround with Template</value>
+  </data>
+  <data name="MT_UnwrapRemove" xml:space="preserve">
+    <value>Unwrap/Remove</value>
+  </data>
+  <data name="MT_Collapse" xml:space="preserve">
+    <value>Collapse</value>
+  </data>
+  <data name="MT_RefactorMenu" xml:space="preserve">
+    <value>Refactor(_R)</value>
+  </data>
+  <data name="MT_BuildMenu" xml:space="preserve">
+    <value>Build(_B)</value>
+  </data>
+  <data name="MT_BuildSolution" xml:space="preserve">
+    <value>Build Solution</value>
+  </data>
+  <data name="MT_RebuildSolution" xml:space="preserve">
+    <value>Rebuild Solution</value>
+  </data>
+  <data name="MT_CleanSolution" xml:space="preserve">
+    <value>Clean Solution</value>
+  </data>
+  <data name="MT_BuildCurrentProject" xml:space="preserve">
+    <value>Build Current Project</value>
+  </data>
+  <data name="MT_BuildStartupProject" xml:space="preserve">
+    <value>Build Startup Project: Gallery</value>
+  </data>
+  <data name="MT_AdvancedBuild" xml:space="preserve">
+    <value>Advanced Build Operations</value>
+  </data>
+  <data name="MT_ChangeSolutionConfig" xml:space="preserve">
+    <value>Change Solution Configuration</value>
+  </data>
+  <data name="MT_RunMenu" xml:space="preserve">
+    <value>Run(_U)</value>
+  </data>
+  <data name="MT_RerunProject" xml:space="preserve">
+    <value>Rerun '.NET Project: Gallery'</value>
+  </data>
+  <data name="MT_DebugGallery" xml:space="preserve">
+    <value>Debug 'Gallery'</value>
+  </data>
+  <data name="MT_RunWithProfiler" xml:space="preserve">
+    <value>Run with Profiler</value>
+  </data>
+  <data name="MT_AnalyzeGallery" xml:space="preserve">
+    <value>Analyze 'Gallery' (Timeline)</value>
+  </data>
+  <data name="MT_AttachToProcess" xml:space="preserve">
+    <value>Attach to Process</value>
+  </data>
+  <data name="MT_ManageAccounts" xml:space="preserve">
+    <value>Manage Accounts and Settings</value>
+  </data>
+  <data name="MT_PaymentMethods" xml:space="preserve">
+    <value>Payment Methods</value>
+  </data>
+  <data name="MT_RedeemCode" xml:space="preserve">
+    <value>Redeem Code and Gift Card</value>
+  </data>
+  <data name="MT_CreationDate" xml:space="preserve">
+    <value>Creation Date</value>
+  </data>
+  <data name="MT_TakeDate" xml:space="preserve">
+    <value>Take Date</value>
+  </data>
+  <data name="MT_ModificationDate" xml:space="preserve">
+    <value>Modification Date</value>
+  </data>
+  <data name="MT_Rotate" xml:space="preserve">
+    <value>Rotate</value>
+  </data>
+  <data name="MT_ZoomIn" xml:space="preserve">
+    <value>Zoom In</value>
+  </data>
+  <data name="MT_ZoomOut" xml:space="preserve">
+    <value>Zoom Out</value>
+  </data>
+  <data name="MT_CommandText" xml:space="preserve">
+    <value>Executed Command:</value>
+  </data>
+  <data name="MT_LoginName" xml:space="preserve">
+    <value>Concubine Love</value>
+  </data>
+  <data name="OnlineDocument" xml:space="preserve">
+    <value>Online documentation</value>
+  </data>
+  <data name="ToggleTheme" xml:space="preserve">
+    <value>SwitchTheme</value>
+  </data>
+  <data name="Pin" xml:space="preserve">
+    <value>PinToTop</value>
+  </data>
+  <data name="UnPin" xml:space="preserve">
+    <value>Unpin</value>
+  </data>
 </root>

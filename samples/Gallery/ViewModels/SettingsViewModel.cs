@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Avalonia;
@@ -6,6 +7,7 @@ using Avalonia.Animation;
 using Avalonia.Media;
 using Avalonia.Styling;
 using AvaloniaFluentUI.Locale;
+using AvaloniaFluentUI.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -22,7 +24,7 @@ public partial class SettingsViewModel : ViewModelBase
 #if DEBUG
         Debug.WriteLine("SettingsViewModel Init");
 #endif
-        ThemeService.ThemeChanged += OnThemeChanged;
+        FluentAvaloniaTheme.Instance.ThemeChanged += OnThemeChanged;
 
         LoadSetting(config);
         LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
@@ -61,7 +63,7 @@ public partial class SettingsViewModel : ViewModelBase
         }
     }
 
-    private void OnThemeChanged(ThemeVariant variant)
+    private void OnThemeChanged(object? sender, ThemeVariant? variant)
     {
         OnPropertyChanged(nameof(IsDarkTheme));
         OnPropertyChanged(nameof(IsAutoTheme));
@@ -98,7 +100,7 @@ public partial class SettingsViewModel : ViewModelBase
     {
         if (value)
         {
-            ThemeService.SetAccentColor(Colors.DeepSkyBlue);
+            FluentAvaloniaTheme.Instance.CustomAccentColor = null;
         }
     }
 
@@ -107,28 +109,22 @@ public partial class SettingsViewModel : ViewModelBase
 
     partial void OnSelectedAccentColorChanged(Color value)
     {
-        ThemeService.SetAccentColor(value);
+        FluentAvaloniaTheme.Instance.CustomAccentColor = value;
     }
 
     [RelayCommand]
     private void ToggleTheme(string value)
     {
-        switch (value)
+        FluentAvaloniaTheme.Instance.CurrentTheme = value switch
         {
-            case "Light": 
-                ThemeService.SetTheme(ThemeVariant.Light);
-                break;
-            case "Dark": 
-                ThemeService.SetTheme(ThemeVariant.Dark);
-                break;
-            case "Auto": 
-                ThemeService.SetTheme(ThemeVariant.Default);
-                break;
-        }
+            "Light" => ThemeVariant.Light,
+            "Dark" => ThemeVariant.Dark,
+            _ => ThemeVariant.Default
+        };
     }
 
     // public bool IsLightTheme => Application.Current?.RequestedThemeVariant == ThemeVariant.Light;
-    public bool IsDarkTheme => ThemeService.IsDarkTheme();
+    public bool IsDarkTheme => ConfigService.IsDarkTheme();
     public bool IsAutoTheme => Application.Current?.RequestedThemeVariant == ThemeVariant.Default;
     
     [ObservableProperty]
@@ -177,7 +173,7 @@ public partial class SettingsViewModel : ViewModelBase
     {
         if (value)
         {
-            ThemeService.SetAccentColor(SelectedAccentColor);
+            FluentAvaloniaTheme.Instance.CustomAccentColor = SelectedAccentColor;
         }
     }
 

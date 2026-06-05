@@ -3,6 +3,7 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
   xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -162,7 +163,7 @@
           <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Edit]}"/>
           <fui:SegmentedItem>
             <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
-              <PathIcon Data="{StaticResource View}"/>
+              <PathIcon Data="{x:Static fi:FluentIcon.View}"/>
               <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[View]}"/>
             </Grid>
           </fui:SegmentedItem>
@@ -178,7 +179,7 @@
           <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_About]}"/>
           <fui:SegmentedItem>
             <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
-              <PathIcon Data="{StaticResource Send}"/>
+              <PathIcon Data="{x:Static fi:FluentIcon.Send}"/>
               <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Send]}"/>
             </Grid>
           </fui:SegmentedItem>
@@ -199,12 +200,11 @@
 
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_SegmentedToggleBar]}" Height="400">
       <Grid RowDefinitions="Auto, *">
-
         <fui:SegmentedToggleView SelectedIndex="0" SelectedItem="{Binding SegmentedToggleSelectedItem}">
           <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Home]}" IsSelected="True"/>
           <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
           <fui:SegmentedItem>
-            <PathIcon Data="{StaticResource Edit}"/>
+            <PathIcon Data="{x:Static fi:FluentIcon.Edit}"/>
           </fui:SegmentedItem>
           <fui:SegmentedItem>
             <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
@@ -221,12 +221,12 @@
           <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_BrowsingHistory]}"/>
           <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Help]}"/>
           <fui:SegmentedItem>
-            <PathIcon Data="{StaticResource Setting}"/>
+            <PathIcon Data="{x:Static fi:FluentIcon.Setting}"/>
           </fui:SegmentedItem>
           <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_About]}"/>
           <fui:SegmentedItem>
             <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
-              <PathIcon Data="{StaticResource Send}"/>
+              <PathIcon Data="{x:Static fi:FluentIcon.Send}"/>
               <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Send]}"/>
             </Grid>
           </fui:SegmentedItem>

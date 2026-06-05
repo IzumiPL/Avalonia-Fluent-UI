@@ -76,8 +76,6 @@
   </Application.DataTemplates>
 
   <Application.Styles>
-    <!-- <FluentTheme/> -->
-    <!-- <sukiUi:SukiTheme ThemeColor="Orange"></sukiUi:SukiTheme> -->
     <fluentUi:FluentAvaloniaTheme/>
   </Application.Styles>
 </Application>

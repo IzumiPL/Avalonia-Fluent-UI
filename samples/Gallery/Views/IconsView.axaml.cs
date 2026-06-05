@@ -1,24 +1,23 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input.Platform;
 using Avalonia.Interactivity;
 using Avalonia.LogicalTree;
 using Avalonia.Media;
 using Avalonia.Styling;
 using AvaloniaFluentUI.Controls;
+using AvaloniaFluentUI.Icons;
 using AvaloniaFluentUI.Locale;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Gallery.Controls;
 using Gallery.Messages.IconViewMessages;
-using Gallery.Themes;
-using StackPanel = Avalonia.Controls.StackPanel;
 
 namespace Gallery.Views;
 
@@ -33,10 +32,6 @@ public partial class IconsView : UserControl
 
     public IconsView()
     {
-#if DEBUG
-        Debug.WriteLine("IconsView Init");
-#endif
-
         InitializeComponent();
 
         TbTitle.Text = LocalizationService.Instance.GetString("Icon");
@@ -69,13 +64,13 @@ public partial class IconsView : UserControl
         }
     }
 
-    private static IEnumerable<List<KeyValuePair<string, string>>> Chunk(List<KeyValuePair<string, string>> source, int batchSize)
+    private static IEnumerable<List<KeyValuePair<string, Geometry>>> Chunk(List<KeyValuePair<string, Geometry>> source, int batchSize)
     {
         for (int i = 0; i < source.Count; i += batchSize)
             yield return source.GetRange(i, Math.Min(batchSize, source.Count - i));
     }
 
-    private CheckedBorder CreateIconCard(string name, string path)
+    private CheckedBorder CreateIconCard(string name, Geometry data)
     {
         var iconCard = new CheckedBorder
         {
@@ -86,7 +81,7 @@ public partial class IconsView : UserControl
             {
                 Children =
                 {
-                    new PathIcon { Name = "PART_PathIcon", Tag = name, Data = StreamGeometry.Parse(path) },
+                    new PathIcon { Name = "PART_PathIcon", Tag = name, Data = data },
                     new TextBlock { Name = "PART_Name", Text = name }
                 }
             },
@@ -99,7 +94,7 @@ public partial class IconsView : UserControl
                         Header = "复制Svg",
                         Command = new RelayCommand(() =>
                         {
-                            TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync(path);
+                            TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync(data.ToString());
                         })
                     }
                 }
@@ -125,12 +120,12 @@ public partial class IconsView : UserControl
         return iconCard;
     }
 
-    private Dictionary<string, string> GetAllIcons()
+    private Dictionary<string, Geometry> GetAllIcons()
     {
         return typeof(FluentIcon)
             .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
-            .Where(f => f.IsLiteral && !f.IsInitOnly && f.FieldType == typeof(string))
-            .ToDictionary(f => f.Name, f => (string)f.GetValue(null)!);
+            .Where(f => f.IsStatic && f.FieldType == typeof(Geometry))
+            .ToDictionary(f => f.Name, f => (Geometry)f.GetValue(null)!);
     }
 
     protected override void OnSizeChanged(SizeChangedEventArgs e)
@@ -145,9 +140,13 @@ public partial class IconsView : UserControl
         foreach (var card in _allCards)
         {
             if (card.FindLogicalDescendantOfType<TextBlock>() is { Name: "PART_Name" } tb)
+            {
                 card.IsVisible = tb.Text.Contains(searchText, StringComparison.OrdinalIgnoreCase);
+            }
             else
+            {
                 card.IsVisible = false;
+            }
         }
     }
 

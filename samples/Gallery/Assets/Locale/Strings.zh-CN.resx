@@ -1,5 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -7,467 +112,1371 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
-      PublicKeyToken=b77a5c561934e089
-    </value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
-      PublicKeyToken=b77a5c561934e089
-    </value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BI_AboutUs" xml:space="preserve"><value>关于我们</value></data>
-  <data name="BI_Bluetooth" xml:space="preserve"><value>蓝牙</value></data>
-  <data name="BI_CheckBox" xml:space="preserve"><value>复选框</value></data>
-  <data name="BI_ChipsRadioButton" xml:space="preserve"><value>胶囊单选按钮</value></data>
-  <data name="BI_ColorSlider" xml:space="preserve"><value>颜色滑动条</value></data>
-  <data name="BI_ComboBox" xml:space="preserve"><value>下拉框</value></data>
-  <data name="BI_ContentAlignment" xml:space="preserve"><value>内容对齐</value></data>
-  <data name="BI_Controller" xml:space="preserve"><value>控制器</value></data>
-  <data name="BI_Copy" xml:space="preserve"><value>复制</value></data>
-  <data name="BI_Cut" xml:space="preserve"><value>剪切</value></data>
-  <data name="BI_DropDownButton" xml:space="preserve"><value>下拉按钮</value></data>
-  <data name="BI_FilledButton" xml:space="preserve"><value>填充按钮</value></data>
-  <data name="BI_Game" xml:space="preserve"><value>游戏</value></data>
-  <data name="BI_Headphones" xml:space="preserve"><value>耳机</value></data>
-  <data name="BI_HyperlinkButton" xml:space="preserve"><value>超链接按钮</value></data>
-  <data name="BI_IsDisabled" xml:space="preserve"><value>禁用</value></data>
-  <data name="BI_IsMultiSelect" xml:space="preserve"><value>可多选</value></data>
-  <data name="BI_MovieAndTV" xml:space="preserve"><value>电影和电视</value></data>
-  <data name="BI_MultiSelectionComboBox" xml:space="preserve"><value>多选下拉框</value></data>
-  <data name="BI_Music" xml:space="preserve"><value>音乐</value></data>
-  <data name="BI_Options" xml:space="preserve"><value>选项</value></data>
-  <data name="BI_OutlineButton" xml:space="preserve"><value>轮廓按钮</value></data>
-  <data name="BI_Paste" xml:space="preserve"><value>粘贴</value></data>
-  <data name="BI_RadioButton" xml:space="preserve"><value>单选按钮</value></data>
-  <data name="BI_RangeSlider" xml:space="preserve"><value>范围滑动条</value></data>
-  <data name="BI_RoundButton" xml:space="preserve"><value>圆角按钮</value></data>
-  <data name="BI_Save" xml:space="preserve"><value>保存</value></data>
-  <data name="BI_Send" xml:space="preserve"><value>发送</value></data>
-  <data name="BI_Slider" xml:space="preserve"><value>滑动条</value></data>
-  <data name="BI_Speakers" xml:space="preserve"><value>扬声器</value></data>
-  <data name="BI_SplitButton" xml:space="preserve"><value>拆分按钮</value></data>
-  <data name="BI_StandardButton" xml:space="preserve"><value>标准按钮</value></data>
-  <data name="BI_StrokeButton" xml:space="preserve"><value>描边按钮</value></data>
-  <data name="BI_ToggleSwitch" xml:space="preserve"><value>开关按钮</value></data>
-  <data name="BI_ToolButton" xml:space="preserve"><value>工具按钮</value></data>
-  <data name="BI_Undo" xml:space="preserve"><value>撤销</value></data>
-  <data name="BasicInput" xml:space="preserve"><value>基本输入</value></data>
-  <data name="COM_Error" xml:space="preserve"><value>错误</value></data>
-  <data name="COM_Information" xml:space="preserve"><value>信息</value></data>
-  <data name="COM_Success" xml:space="preserve"><value>成功</value></data>
-  <data name="COM_Warning" xml:space="preserve"><value>警告</value></data>
-  <data name="CodeSamples" xml:space="preserve"><value>代码示例</value></data>
-  <data name="Control_Border" xml:space="preserve"><value>Border</value></data>
-  <data name="Control_BreadcrumbBar" xml:space="preserve"><value>BreadcrumbBar</value></data>
-  <data name="Control_Button" xml:space="preserve"><value>Button</value></data>
-  <data name="Control_ButtonDesc" xml:space="preserve"><value>响应用户输入的控件。</value></data>
-  <data name="Control_CalendarDatePicker" xml:space="preserve"><value>CalendarDatePicker</value></data>
-  <data name="Control_Canvas" xml:space="preserve"><value>Canvas</value></data>
-  <data name="Control_CheckBox" xml:space="preserve"><value>CheckBox</value></data>
-  <data name="Control_CheckBoxDesc" xml:space="preserve"><value>用户可选中或清除的控件。</value></data>
-  <data name="Control_ComboBox" xml:space="preserve"><value>ComboBox</value></data>
-  <data name="Control_ComboBoxDesc" xml:space="preserve"><value>下拉列表。</value></data>
-  <data name="Control_CommandBar" xml:space="preserve"><value>CommandBar</value></data>
-  <data name="Control_CommandBarFlyout" xml:space="preserve"><value>CommandBarFlyout</value></data>
-  <data name="Control_ContentDialog" xml:space="preserve"><value>ContentDialog</value></data>
-  <data name="Control_DatePicker" xml:space="preserve"><value>DatePicker</value></data>
-  <data name="Control_DropDownButton" xml:space="preserve"><value>DropDownButton</value></data>
-  <data name="Control_DropDownButtonDesc" xml:space="preserve"><value>点击时显示选择浮出控件的按钮。</value></data>
-  <data name="Control_Expander" xml:space="preserve"><value>Expander</value></data>
-  <data name="Control_FlipView" xml:space="preserve"><value>FlipView</value></data>
-  <data name="Control_Flyout" xml:space="preserve"><value>Flyout</value></data>
-  <data name="Control_Grid" xml:space="preserve"><value>Grid</value></data>
-  <data name="Control_HyperlinkButton" xml:space="preserve"><value>HyperlinkButton</value></data>
-  <data name="Control_InfoBadge" xml:space="preserve"><value>InfoBadge</value></data>
-  <data name="Control_InfoBar" xml:space="preserve"><value>InfoBar</value></data>
-  <data name="Control_ListBox" xml:space="preserve"><value>ListBox</value></data>
-  <data name="Control_MenuBar" xml:space="preserve"><value>MenuBar</value></data>
-  <data name="Control_MenuFlyout" xml:space="preserve"><value>Menu</value></data>
-  <data name="Control_NavigationView" xml:space="preserve"><value>NavigationView</value></data>
-  <data name="Control_NumberBox" xml:space="preserve"><value>NumberBox</value></data>
-  <data name="Control_PageTransition" xml:space="preserve"><value>PageTransition</value></data>
-  <data name="Control_PasswordBox" xml:space="preserve"><value>PasswordBox</value></data>
-  <data name="Control_Pivot" xml:space="preserve"><value>Segmented</value></data>
-  <data name="Control_ProgressBar" xml:space="preserve"><value>ProgressBar</value></data>
-  <data name="Control_ProgressRing" xml:space="preserve"><value>ProgressRing</value></data>
-  <data name="Control_RadioButton" xml:space="preserve"><value>RadioButton</value></data>
-  <data name="Control_RelativePanel" xml:space="preserve"><value>RelativePanel</value></data>
-  <data name="Control_Slider" xml:space="preserve"><value>Slider</value></data>
-  <data name="Control_SliderDesc" xml:space="preserve"><value>让用户从范围中选择值。</value></data>
-  <data name="Control_SplitButton" xml:space="preserve"><value>SplitButton</value></data>
-  <data name="Control_SplitView" xml:space="preserve"><value>SplitView</value></data>
-  <data name="Control_StackPanel" xml:space="preserve"><value>StackPanel</value></data>
-  <data name="Control_TeachingTip" xml:space="preserve"><value>TeachingTip</value></data>
-  <data name="Control_TextBlock" xml:space="preserve"><value>TextBlock</value></data>
-  <data name="Control_TextBox" xml:space="preserve"><value>TextBox</value></data>
-  <data name="Control_TimePicker" xml:space="preserve"><value>TimePicker</value></data>
-  <data name="Control_ToggleButton" xml:space="preserve"><value>ToggleButton</value></data>
-  <data name="Control_ToggleButtonDesc" xml:space="preserve"><value>可在两种状态间切换的按钮。</value></data>
-  <data name="Control_ToggleSwitch" xml:space="preserve"><value>SwitchButton</value></data>
-  <data name="Control_ToggleSwitchDesc" xml:space="preserve"><value>可在两种状态间切换的开关。</value></data>
-  <data name="Control_ToolTip" xml:space="preserve"><value>ToolTip</value></data>
-  <data name="Control_TreeView" xml:space="preserve"><value>TreeView</value></data>
-  <data name="DP_Action" xml:space="preserve"><value>Action</value></data>
-  <data name="DP_Close" xml:space="preserve"><value>关闭</value></data>
-  <data name="DP_Confirm" xml:space="preserve"><value>确认</value></data>
-  <data name="DP_DialogWithMask" xml:space="preserve"><value>带遮罩的对话框</value></data>
-  <data name="DP_Open" xml:space="preserve"><value>打开</value></data>
-  <data name="DP_Position" xml:space="preserve"><value>位置</value></data>
-  <data name="DT_CalendarPicker" xml:space="preserve"><value>日历选择器</value></data>
-  <data name="DT_ColorPicker" xml:space="preserve"><value>颜色选择器</value></data>
-  <data name="DT_DatePicker" xml:space="preserve"><value>日期选择器</value></data>
-  <data name="DT_DisplayMode" xml:space="preserve"><value>显示模式:</value></data>
-  <data name="DT_SelectMode" xml:space="preserve"><value>选择模式:</value></data>
-  <data name="DT_SelectedColor" xml:space="preserve"><value>选择的颜色:</value></data>
-  <data name="DT_SelectedDate" xml:space="preserve"><value>选择的日期:</value></data>
-  <data name="DT_SelectedTime" xml:space="preserve"><value>选择的时间:</value></data>
-  <data name="DT_ShowDay" xml:space="preserve"><value>显示日:</value></data>
-  <data name="DT_ShowMonth" xml:space="preserve"><value>显示月:</value></data>
-  <data name="DT_ShowYear" xml:space="preserve"><value>显示年:</value></data>
-  <data name="DT_TimeFormat" xml:space="preserve"><value>时间格式:</value></data>
-  <data name="DT_TimePicker" xml:space="preserve"><value>时间选择器</value></data>
-  <data name="DateTime" xml:space="preserve"><value>日期和时间</value></data>
-  <data name="DialogAndPopup" xml:space="preserve"><value>对话框和弹出窗口</value></data>
-  <data name="FP_Page1" xml:space="preserve"><value>Frame Page 1(默认)</value></data>
-  <data name="FP_Page2" xml:space="preserve"><value>Frame Page 2(滑动)</value></data>
-  <data name="FP_Page3" xml:space="preserve"><value>Frame Page 3(深入)</value></data>
-  <data name="FP_Page4" xml:space="preserve"><value>Frame Page 4(无)</value></data>
-  <data name="FluentGallery" xml:space="preserve"><value>Fluent Gallery</value></data>
-  <data name="GettingStarted" xml:space="preserve"><value>开始使用</value></data>
-  <data name="GitHubRepo" xml:space="preserve"><value>GitHub 仓库</value></data>
-  <data name="Home" xml:space="preserve"><value>主页</value></data>
-  <data name="IV_EnumMember" xml:space="preserve"><value>枚举成员</value></data>
-  <data name="IV_IconName" xml:space="preserve"><value>图标名字</value></data>
-  <data name="IV_SearchIcon" xml:space="preserve"><value>搜索图标</value></data>
-  <data name="Icon" xml:space="preserve"><value>图标</value></data>
-  <data name="LV_Add" xml:space="preserve"><value>添加</value></data>
-  <data name="LV_AppTheme" xml:space="preserve"><value>应用主题</value></data>
-  <data name="LV_Apply" xml:space="preserve"><value>应用</value></data>
-  <data name="LV_Border" xml:space="preserve"><value>边框</value></data>
-  <data name="LV_Canvas" xml:space="preserve"><value>画布</value></data>
-  <data name="LV_Dark" xml:space="preserve"><value>深色</value></data>
-  <data name="LV_EnableShadow" xml:space="preserve"><value>启用阴影</value></data>
-  <data name="LV_Expander" xml:space="preserve"><value>展开卡片</value></data>
-  <data name="LV_FollowSystem" xml:space="preserve"><value>跟随系统</value></data>
-  <data name="LV_GridLayout" xml:space="preserve"><value>网格布局</value></data>
-  <data name="LV_Light" xml:space="preserve"><value>浅色</value></data>
-  <data name="LV_Opacity" xml:space="preserve"><value>不透明度</value></data>
-  <data name="LV_Reset" xml:space="preserve"><value>重置</value></data>
-  <data name="LV_SplitView" xml:space="preserve"><value>分割视图</value></data>
-  <data name="LV_StackPanel" xml:space="preserve"><value>堆栈布局</value></data>
-  <data name="Layout" xml:space="preserve"><value>布局</value></data>
-  <data name="MT_Add" xml:space="preserve"><value>添加</value></data>
-  <data name="MT_Ascending" xml:space="preserve"><value>升序</value></data>
-  <data name="MT_Back" xml:space="preserve"><value>后退</value></data>
-  <data name="MT_CommandBar" xml:space="preserve"><value>命令栏</value></data>
-  <data name="MT_CommandBarFlyout" xml:space="preserve"><value>浮出命令栏</value></data>
-  <data name="MT_ContextMenu" xml:space="preserve"><value>上下文菜单</value></data>
-  <data name="MT_Debug" xml:space="preserve"><value>调试</value></data>
-  <data name="MT_Delete" xml:space="preserve"><value>删除</value></data>
-  <data name="MT_Descending" xml:space="preserve"><value>降序</value></data>
-  <data name="MT_Edit" xml:space="preserve"><value>编辑</value></data>
-  <data name="MT_Exit" xml:space="preserve"><value>退出</value></data>
-  <data name="MT_Find" xml:space="preserve"><value>查找</value></data>
-  <data name="MT_Forward" xml:space="preserve"><value>前进</value></data>
-  <data name="MT_Info" xml:space="preserve"><value>信息</value></data>
-  <data name="MT_Logout" xml:space="preserve"><value>注销</value></data>
-  <data name="MT_Menu" xml:space="preserve"><value>菜单</value></data>
-  <data name="MT_Name" xml:space="preserve"><value>名称</value></data>
-  <data name="MT_Open" xml:space="preserve"><value>打开</value></data>
-  <data name="MT_Redo" xml:space="preserve"><value>重做</value></data>
-  <data name="MT_Rename" xml:space="preserve"><value>重命名</value></data>
-  <data name="MT_Replace" xml:space="preserve"><value>替换</value></data>
-  <data name="MT_Run2" xml:space="preserve"><value>运行</value></data>
-  <data name="MT_Save" xml:space="preserve"><value>保存</value></data>
-  <data name="MT_Share" xml:space="preserve"><value>分享</value></data>
-  <data name="MT_Sort" xml:space="preserve"><value>排序</value></data>
-  <data name="MenuAndToolBar" xml:space="preserve"><value>菜单和工具栏</value></data>
-  <data name="NV_About" xml:space="preserve"><value>关于</value></data>
-  <data name="NV_Apps" xml:space="preserve"><value>应用</value></data>
-  <data name="NV_DisplayMode" xml:space="preserve"><value>显示模式:</value></data>
-  <data name="NV_Downloads" xml:space="preserve"><value>下载</value></data>
-  <data name="NV_Files" xml:space="preserve"><value>文件</value></data>
-  <data name="NV_Friends" xml:space="preserve"><value>好友</value></data>
-  <data name="NV_Games" xml:space="preserve"><value>游戏</value></data>
-  <data name="NV_Help" xml:space="preserve"><value>帮助</value></data>
-  <data name="NV_History" xml:space="preserve"><value>历史</value></data>
-  <data name="NV_Home" xml:space="preserve"><value>主页</value></data>
-  <data name="NV_Mail" xml:space="preserve"><value>邮件</value></data>
-  <data name="NV_Phone" xml:space="preserve"><value>电话</value></data>
-  <data name="NV_SegmentedBar" xml:space="preserve"><value>分段导航栏</value></data>
-  <data name="NV_SegmentedToggleBar" xml:space="preserve"><value>分段切换导航栏</value></data>
-  <data name="NV_ShowBackButton" xml:space="preserve"><value>显示返回按钮</value></data>
-  <data name="NV_Subscriptions" xml:space="preserve"><value>订阅</value></data>
-  <data name="NV_Tabs" xml:space="preserve"><value>选项卡</value></data>
-  <data name="NV_TopNavigation" xml:space="preserve"><value>顶部导航栏</value></data>
-  <data name="Navigation" xml:space="preserve"><value>导航</value></data>
-  <data name="SC_Bidirectional" xml:space="preserve"><value>双向滚动区域</value></data>
-  <data name="SC_SingleDirection" xml:space="preserve"><value>单向平滑滚动区域</value></data>
-  <data name="SC_SmoothScrollArea" xml:space="preserve"><value>平滑滚动区域</value></data>
-  <data name="SI_BgColor" xml:space="preserve"><value>背景色:</value></data>
-  <data name="SI_IsIndeterminate" xml:space="preserve"><value>是不确定的</value></data>
-  <data name="SI_Progress" xml:space="preserve"><value>进度:</value></data>
-  <data name="SI_ProgressBar" xml:space="preserve"><value>进度条</value></data>
-  <data name="SI_ProgressRing" xml:space="preserve"><value>进度环</value></data>
-  <data name="SI_Restore" xml:space="preserve"><value>重置</value></data>
-  <data name="SI_Style" xml:space="preserve"><value>样式:</value></data>
-  <data name="SV_BackgroundImage" xml:space="preserve"><value>背景图</value></data>
-  <data name="SV_CustomColor" xml:space="preserve"><value>自定义颜色</value></data>
-  <data name="SV_DefaultColor" xml:space="preserve"><value>默认颜色</value></data>
-  <data name="SV_Language" xml:space="preserve"><value>语言</value></data>
-  <data name="SV_PinToTop" xml:space="preserve"><value>置顶</value></data>
-  <data name="SV_SelectColor" xml:space="preserve"><value>选择颜色</value></data>
-  <data name="SV_ThemeColor" xml:space="preserve"><value>主题色</value></data>
-  <data name="SV_WindowEffect" xml:space="preserve"><value>窗口特效</value></data>
-  <data name="Scroll" xml:space="preserve"><value>滚动</value></data>
-  <data name="Section_BasicInput" xml:space="preserve"><value>基本输入</value></data>
-  <data name="Section_DateTime" xml:space="preserve"><value>日期时间</value></data>
-  <data name="Section_Dialog" xml:space="preserve"><value>对话框</value></data>
-  <data name="Section_Layout" xml:space="preserve"><value>布局</value></data>
-  <data name="Section_MenuAndToolBar" xml:space="preserve"><value>菜单和工具栏</value></data>
-  <data name="Section_NavigationView" xml:space="preserve"><value>导航视图</value></data>
-  <data name="Section_StatusAndInformation" xml:space="preserve"><value>状态和信息</value></data>
-  <data name="Section_Text" xml:space="preserve"><value>文本</value></data>
-  <data name="Section_View" xml:space="preserve"><value>视图</value></data>
-  <data name="SendFeedback" xml:space="preserve"><value>发送反馈</value></data>
-  <data name="Settings" xml:space="preserve"><value>设置</value></data>
-  <data name="SourceCode" xml:space="preserve"><value>源代码</value></data>
-  <data name="StatusAndInformation" xml:space="preserve"><value>状态和信息</value></data>
-  <data name="TV_AcceptReturn" xml:space="preserve"><value>接受回车</value></data>
-  <data name="TV_AcceptTab" xml:space="preserve"><value>接受Tab</value></data>
-  <data name="TV_DisplayText" xml:space="preserve"><value>显示文本</value></data>
-  <data name="TV_EnterPassword" xml:space="preserve"><value>请输入密码</value></data>
-  <data name="TV_FontSize" xml:space="preserve"><value>字体大小:</value></data>
-  <data name="TV_FontStyle" xml:space="preserve"><value>字体样式:</value></data>
-  <data name="TV_FontWeight" xml:space="preserve"><value>字体粗细:</value></data>
-  <data name="TV_NumberBox" xml:space="preserve"><value>数字编辑框</value></data>
-  <data name="TV_PasswordBox" xml:space="preserve"><value>密码输入框</value></data>
-  <data name="TV_PhoneNumber" xml:space="preserve"><value>请输入11位电话号码:</value></data>
-  <data name="TV_SearchBox" xml:space="preserve"><value>搜索框</value></data>
-  <data name="TV_TextBox" xml:space="preserve"><value>文本输入框</value></data>
-  <data name="TV_TextDecoration" xml:space="preserve"><value>文本装饰:</value></data>
-  <data name="Text" xml:space="preserve"><value>文本</value></data>
-  <data name="VP_AddPage" xml:space="preserve"><value>添加页面</value></data>
-  <data name="VP_AutoPlay" xml:space="preserve"><value>自动播放</value></data>
-  <data name="VP_Carousel" xml:space="preserve"><value>轮播页面</value></data>
-  <data name="VP_DataGrid" xml:space="preserve"><value>表格控件</value></data>
-  <data name="VP_Direction" xml:space="preserve"><value>方向:</value></data>
-  <data name="VP_Interval" xml:space="preserve"><value>间隔:</value></data>
-  <data name="VP_ListControl" xml:space="preserve"><value>列表控件</value></data>
-  <data name="VP_Next" xml:space="preserve"><value>下一张</value></data>
-  <data name="VP_Previous" xml:space="preserve"><value>上一张</value></data>
-  <data name="VP_SelectMode" xml:space="preserve"><value>选择模式:</value></data>
-  <data name="VP_TreeView" xml:space="preserve"><value>树状控件</value></data>
-  <data name="View" xml:space="preserve"><value>视图</value></data>
-  <data name="MV_Title" xml:space="preserve"><value>Avalonia Fluent UI Gallery</value></data>
-  <data name="MV_SearchWatermark" xml:space="preserve"><value>请输入要搜索的内容</value></data>
-  <data name="SV_WindowEffectDescription" xml:space="preserve"><value>启用窗口特效(Mica | AcrylicBlur)</value></data>
-  <data name="SV_Appearance" xml:space="preserve"><value>调整你的应用外观</value></data>
-  <data name="SV_ThemeColorDescription" xml:space="preserve"><value>调整你的应用主题色</value></data>
-  <data name="SV_PinToTopDescription" xml:space="preserve"><value>启用窗口置顶功能</value></data>
-  <data name="SV_LanguageDescription" xml:space="preserve"><value>设置应用语言(需重启)</value></data>
-  <data name="SV_EnableBackgroundImage" xml:space="preserve"><value>启用背景图</value></data>
-  <data name="SV_AppTheme" xml:space="preserve"><value>应用主题</value></data>
-  <data name="GettingStartedContent" xml:space="preserve"><value>应用程序开发选项和示例的概述。</value></data>
-  <data name="GitHubRepoContent" xml:space="preserve"><value>适用于您应用程序的最新流畅设计控件和样式。</value></data>
-  <data name="CodeSamplesContent" xml:space="preserve"><value>查找展示特定任务、功能和API的示例。</value></data>
-  <data name="SendFeedbackContent" xml:space="preserve"><value>通过提供反馈帮助我们改进</value></data>
-  <data name="SI_ToolTipButton" xml:space="preserve"><value>带工具提示的按钮</value></data>
-  <data name="SI_ToolTipText" xml:space="preserve"><value>我是工具提示</value></data>
-  <data name="SI_InfoBadge" xml:space="preserve"><value>信息徽章</value></data>
-  <data name="SI_InfoBar" xml:space="preserve"><value>消息条</value></data>
-  <data name="SI_SaveSuccess" xml:space="preserve"><value>保存成功</value></data>
-  <data name="SI_FileSaved" xml:space="preserve"><value>文件已成功保存到服务器</value></data>
-  <data name="SI_Action" xml:space="preserve"><value>Action</value></data>
-  <data name="SI_Options" xml:space="preserve"><value>选项</value></data>
-  <data name="SI_IsClosable" xml:space="preserve"><value>是可关闭的</value></data>
-  <data name="VP_Options" xml:space="preserve"><value>选项</value></data>
-  <data name="VP_RoundListBox" xml:space="preserve"><value>圆角列表控件</value></data>
-  <data name="VP_IsReadOnly" xml:space="preserve"><value>是只读的</value></data>
-  <data name="VP_BorderDisplayMode" xml:space="preserve"><value>边框显示模式</value></data>
-  <data name="VP_SimpleSettingsCard" xml:space="preserve"><value>简单设置卡</value></data>
-  <data name="VP_ClickableSettingsCard" xml:space="preserve"><value>可点击设置卡</value></data>
-  <data name="VP_ExpandableSettingsCard" xml:space="preserve"><value>可展开设置卡</value></data>
-  <data name="VP_Volume" xml:space="preserve"><value>音量</value></data>
-  <data name="VP_Sound" xml:space="preserve"><value>声音</value></data>
-  <data name="VP_SoundDescription" xml:space="preserve"><value>音量级别、输出、输入、声音设备</value></data>
-  <data name="VP_AppsSettingsDescription" xml:space="preserve"><value>应用可能有自己的设置</value></data>
-  <data name="VP_ChooseDevice" xml:space="preserve"><value>选择说话或录音设备</value></data>
-  <data name="VP_Headset" xml:space="preserve"><value>耳机</value></data>
-  <data name="VP_HasFooterContent" xml:space="preserve"><value>这个有底部内容</value></data>
-  <data name="VP_DeviceName" xml:space="preserve"><value>设备名称</value></data>
-  <data name="VP_IsClickable" xml:space="preserve"><value>这个可点击</value></data>
-  <data name="VP_AddDevice" xml:space="preserve"><value>添加设备</value></data>
-  <data name="DT_CalendarDatePicker" xml:space="preserve"><value>弹出日历选择器</value></data>
-  <data name="DT_DefaultIncrement" xml:space="preserve"><value>默认时间增量:</value></data>
-  <data name="NV_NavigationView" xml:space="preserve"><value>导航视图</value></data>
-  <data name="NV_PaneDisplayMode" xml:space="preserve"><value>面板显示模式</value></data>
-  <data name="NV_Unplayed" xml:space="preserve"><value>未播放的剧集</value></data>
-  <data name="NV_NowPlaying" xml:space="preserve"><value>正在播放</value></data>
-  <data name="NV_VideoHistory" xml:space="preserve"><value>视频历史</value></data>
-  <data name="NV_AudioHistory" xml:space="preserve"><value>音频历史</value></data>
-  <data name="NV_BrowsingHistory" xml:space="preserve"><value>浏览历史</value></data>
-  <data name="NV_Folders" xml:space="preserve"><value>文件夹</value></data>
-  <data name="NV_Window" xml:space="preserve"><value>窗口</value></data>
-  <data name="NV_BreadcrumbBar" xml:space="preserve"><value>面包屑导航栏</value></data>
-  <data name="DP_OptimisticContent" xml:space="preserve"><value>只要你保持乐观的心态, 你就会发现这个世界上有数不尽的开心事!</value></data>
-  <data name="DP_OpenURL" xml:space="preserve"><value>打开URL</value></data>
-  <data name="DP_URLWatermark" xml:space="preserve"><value>输入文件, 流或者播放列表的 URL</value></data>
-  <data name="DP_CustomDialog" xml:space="preserve"><value>自定义对话框</value></data>
-  <data name="DP_TaskDialog" xml:space="preserve"><value>任务对话框</value></data>
-  <data name="DP_ShowTaskDialog" xml:space="preserve"><value>显示任务对话框</value></data>
-  <data name="DP_FluentFlyout" xml:space="preserve"><value>Fluent浮出控件</value></data>
-  <data name="DP_ShowPopup" xml:space="preserve"><value>显示弹出视图</value></data>
-  <data name="DP_NoName" xml:space="preserve"><value>无名</value></data>
-  <data name="DP_EyeQuote" xml:space="preserve"><value>左眼用来忘记你，右眼用来记住你。</value></data>
-  <data name="DP_FlyoutPositionLabel" xml:space="preserve"><value>弹出位置:</value></data>
-  <data name="DP_ImageButtonFlyout" xml:space="preserve"><value>带图片和按钮的浮出控件</value></data>
-  <data name="DP_ShowFlyout" xml:space="preserve"><value>显示浮出控件</value></data>
-  <data name="DP_Minecraft" xml:space="preserve"><value>Minecraft</value></data>
-  <data name="DP_ForgeDesc" xml:space="preserve"><value>Forge(全称 Minecraft Forge)是一个为《我的世界》Java版设计的开源模组加载器(Mod Loader), 它为开发者提供了一套标准的开发接口, 让各种修改游戏功能的模组(Mod)能够互相兼容并在同一个游戏客户端中运行。</value></data>
-  <data name="DP_TeachingTip" xml:space="preserve"><value>气泡弹窗</value></data>
-  <data name="DP_TeachingTipButton" xml:space="preserve"><value>显示气泡弹窗</value></data>
-  <data name="DP_TeachingTipSubtitle" xml:space="preserve"><value>最短的捷径就是绕远路, 绕远路才是我的最短捷径.</value></data>
-  <data name="DP_ColorPicker" xml:space="preserve"><value>颜色选择器</value></data>
-  <data name="DP_TipTitle" xml:space="preserve"><value>提示</value></data>
-  <data name="DP_ThisIsDialogWithMask" xml:space="preserve"><value>这是一个带遮罩的对话框</value></data>
-  <data name="LV_DockPanel" xml:space="preserve"><value>停靠面板</value></data>
-  <data name="LV_GridSplitter" xml:space="preserve"><value>网格分割器</value></data>
-  <data name="LV_Panel" xml:space="preserve"><value>面板布局</value></data>
-  <data name="LV_RelativePanel" xml:space="preserve"><value>绝对面板布局</value></data>
-  <data name="LV_UniformGrid" xml:space="preserve"><value>统一网格布局</value></data>
-  <data name="LV_WrapPanel" xml:space="preserve"><value>换行面板布局</value></data>
-  <data name="LV_VirtualizingStackPanel" xml:space="preserve"><value>虚拟堆布局</value></data>
-  <data name="LV_Alignment" xml:space="preserve"><value>对齐</value></data>
-  <data name="LV_SelectLayout" xml:space="preserve"><value>选择布局方向</value></data>
-  <data name="LV_AddControl" xml:space="preserve"><value>添加控件</value></data>
-  <data name="LV_RemoveControl" xml:space="preserve"><value>删除控件</value></data>
-  <data name="LV_SetGridRow" xml:space="preserve"><value>设置当前Grid的行</value></data>
-  <data name="LV_SetGridColumn" xml:space="preserve"><value>设置当前Grid的列</value></data>
-  <data name="LV_BorderColorHex" xml:space="preserve"><value>边框颜色(16进制)</value></data>
-  <data name="LV_BgColorHex" xml:space="preserve"><value>背景颜色(16进制)</value></data>
-  <data name="LV_AddItemsCount" xml:space="preserve"><value>添加项目(个数)</value></data>
-  <data name="TV_AutoCompleteBox" xml:space="preserve"><value>自动补全输入框</value></data>
-  <data name="TV_AddMatchElement" xml:space="preserve"><value>添加要匹配的元素:</value></data>
-  <data name="TV_SelectMatchMode" xml:space="preserve"><value>选择匹配模式:</value></data>
-  <data name="TV_AddMatchElementButton" xml:space="preserve"><value>添加要匹配的元素</value></data>
-  <data name="TV_SetDisplayText" xml:space="preserve"><value>设置要显示的文本:</value></data>
-  <data name="TV_SetLetterSpacing" xml:space="preserve"><value>设置字母间隔:</value></data>
-  <data name="TV_WatermarkLabel" xml:space="preserve"><value>提示文字</value></data>
-  <data name="TV_ClearTextBox" xml:space="preserve"><value>带清空按钮的输入框</value></data>
-  <data name="TV_ClearWatermark" xml:space="preserve"><value>带清空按钮的输入框</value></data>
-  <data name="TV_SearchWatermark" xml:space="preserve"><value>请输入要搜索的内容</value></data>
-  <data name="TV_EnterToSearch" xml:space="preserve"><value>回车搜索</value></data>
-  <data name="TV_SpinButtonMode" xml:space="preserve"><value>SpinButton显示模式:</value></data>
-  <data name="TV_ButtonSpinner" xml:space="preserve"><value>按钮微调器</value></data>
-  <data name="TV_SpinnerLocation" xml:space="preserve"><value>微调按钮位置:</value></data>
-  <data name="TV_EnableSpin" xml:space="preserve"><value>启用旋转功能</value></data>
-  <data name="TV_EnterName" xml:space="preserve"><value>请输入名字(A-Z)(a-z)</value></data>
-  <data name="BI_StrokeToolButton" xml:space="preserve"><value>描边工具按钮</value></data>
-  <data name="BI_TransparentDropDownButton" xml:space="preserve"><value>带下拉菜单的透明按钮</value></data>
-  <data name="BI_ToggleButton" xml:space="preserve"><value>状态开关按钮</value></data>
-  <data name="BI_ToggleSplitButton" xml:space="preserve"><value>分割状态开关按钮</value></data>
-  <data name="BI_TransparentToggleButton" xml:space="preserve"><value>透明状态开关按钮</value></data>
-  <data name="BI_SubTitleRadioButton" xml:space="preserve"><value>带子标题的单选按钮</value></data>
-  <data name="BI_ToolTipSlider" xml:space="preserve"><value>带工具提示的滑动条</value></data>
-  <data name="BI_Mail" xml:space="preserve"><value>邮件</value></data>
-  <data name="BI_SendToLocal" xml:space="preserve"><value>发送到本地</value></data>
-  <data name="BI_SendToNetwork" xml:space="preserve"><value>发送到网络</value></data>
-  <data name="BI_Resend" xml:space="preserve"><value>重新发送</value></data>
-  <data name="BI_SaveToLocal" xml:space="preserve"><value>保存到本地</value></data>
-  <data name="BI_EnableBluetooth" xml:space="preserve"><value>开启蓝牙</value></data>
-  <data name="BI_IAmHyperlink" xml:space="preserve"><value>我是超链接按钮</value></data>
-  <data name="BI_EnableThreeState" xml:space="preserve"><value>启用三态</value></data>
-  <data name="BI_SelectOddItems" xml:space="preserve"><value>选中奇数项目</value></data>
-  <data name="BI_SelectEvenItems" xml:space="preserve"><value>选中偶数项目</value></data>
-  <data name="BI_ClearSelectedItems" xml:space="preserve"><value>清空选定的项目</value></data>
-  <data name="BI_Direction" xml:space="preserve"><value>方向</value></data>
-  <data name="BI_StandardButtonWithIcon" xml:space="preserve"><value>带有图标文本的标准按钮</value></data>
-  <data name="BI_AccentStandardButton" xml:space="preserve"><value>主题色标准按钮</value></data>
-  <data name="BI_TransparentStandardButton" xml:space="preserve"><value>带有文本的透明标准按钮</value></data>
-  <data name="BI_TransparentStandardButtonWithIcon" xml:space="preserve"><value>带有图标文本的透明标准按钮</value></data>
-  <data name="BI_AccentRoundButton" xml:space="preserve"><value>圆角主题色按钮</value></data>
-  <data name="BI_RoundOutlineButton" xml:space="preserve"><value>圆角轮廓按钮</value></data>
-  <data name="MT_FileMenu" xml:space="preserve"><value>文件(_F)</value></data>
-  <data name="MT_NewSolution" xml:space="preserve"><value>新建解决方案</value></data>
-  <data name="MT_GetFromVersionControl" xml:space="preserve"><value>从版本控制中获取...</value></data>
-  <data name="MT_CloseSolution" xml:space="preserve"><value>关闭解决方案</value></data>
-  <data name="MT_RemoteDevelopment" xml:space="preserve"><value>远程开发...</value></data>
-  <data name="MT_SaveAll" xml:space="preserve"><value>全部保存</value></data>
-  <data name="MT_ReloadAllFromDisk" xml:space="preserve"><value>从磁盘全部重新加载</value></data>
-  <data name="MT_Export" xml:space="preserve"><value>导出</value></data>
-  <data name="MT_Print" xml:space="preserve"><value>打印</value></data>
-  <data name="MT_FileEncoding" xml:space="preserve"><value>文件编码</value></data>
-  <data name="MT_LineEndings" xml:space="preserve"><value>行分隔符</value></data>
-  <data name="MT_SetReadOnly" xml:space="preserve"><value>将文件设置为只读</value></data>
-  <data name="MT_NewProjectSettings" xml:space="preserve"><value>新建项目设置</value></data>
-  <data name="MT_ManageIDESettings" xml:space="preserve"><value>管理IDE设置</value></data>
-  <data name="MT_PowerSaveMode" xml:space="preserve"><value>省电模式</value></data>
-  <data name="MT_InvalidateCache" xml:space="preserve"><value>使缓存失效</value></data>
-  <data name="MT_EditMenu" xml:space="preserve"><value>编辑(_E)</value></data>
-  <data name="MT_CopyPlainText" xml:space="preserve"><value>复制为纯文本</value></data>
-  <data name="MT_SearchSelection" xml:space="preserve"><value>在所选内容中搜索</value></data>
-  <data name="MT_FindNext" xml:space="preserve"><value>查找下一个匹配项</value></data>
-  <data name="MT_FindPrevious" xml:space="preserve"><value>查找上一个匹配项</value></data>
-  <data name="MT_SelectAllMatches" xml:space="preserve"><value>选择所有匹配项</value></data>
-  <data name="MT_AddNextMatch" xml:space="preserve"><value>将下一个匹配项添加到选择</value></data>
-  <data name="MT_CancelSelectedMatch" xml:space="preserve"><value>取消选择的匹配项</value></data>
-  <data name="MT_FindUsages" xml:space="preserve"><value>查找用法</value></data>
-  <data name="MT_NextHighlightedUsage" xml:space="preserve"><value>下一个高亮显示用例</value></data>
-  <data name="MT_PreviousHighlightedUsage" xml:space="preserve"><value>转到上一个高亮的元素用法</value></data>
-  <data name="MT_RecentFindUsages" xml:space="preserve"><value>最近的查找用法</value></data>
-  <data name="MT_SelectAll" xml:space="preserve"><value>全选</value></data>
-  <data name="MT_ViewMenu" xml:space="preserve"><value>视图(_V)</value></data>
-  <data name="MT_ToolWindow" xml:space="preserve"><value>工具窗口</value></data>
-  <data name="MT_Appearance" xml:space="preserve"><value>外观</value></data>
-  <data name="MT_QuickDefinition" xml:space="preserve"><value>快速定义</value></data>
-  <data name="MT_QuickDefinitionType" xml:space="preserve"><value>快速定义类型</value></data>
-  <data name="MT_RecentLocations" xml:space="preserve"><value>最近的位置</value></data>
-  <data name="MT_RecentFiles" xml:space="preserve"><value>最近的文件</value></data>
-  <data name="MT_RecentlyChangedFiles" xml:space="preserve"><value>最近更改的文件</value></data>
-  <data name="MT_RecentChanges" xml:space="preserve"><value>最近的更改</value></data>
-  <data name="MT_NavigationMenu" xml:space="preserve"><value>导航(_N)</value></data>
-  <data name="MT_SearchEverywhere" xml:space="preserve"><value>随处搜索</value></data>
-  <data name="MT_Class" xml:space="preserve"><value>类</value></data>
-  <data name="MT_Symbol" xml:space="preserve"><value>符号</value></data>
-  <data name="MT_CodeMenu" xml:space="preserve"><value>代码(_C)</value></data>
-  <data name="MT_CodeCompletion" xml:space="preserve"><value>代码补全</value></data>
-  <data name="MT_InspectCode" xml:space="preserve"><value>检查代码</value></data>
-  <data name="MT_AnalyzeCode" xml:space="preserve"><value>分析代码</value></data>
-  <data name="MT_InsertLiveTemplate" xml:space="preserve"><value>插入实时模板</value></data>
-  <data name="MT_SaveAsLiveTemplate" xml:space="preserve"><value>保存为实时模板</value></data>
-  <data name="MT_SurroundWithTemplate" xml:space="preserve"><value>使用模板包围</value></data>
-  <data name="MT_UnwrapRemove" xml:space="preserve"><value>解包/移除</value></data>
-  <data name="MT_Collapse" xml:space="preserve"><value>折叠</value></data>
-  <data name="MT_RefactorMenu" xml:space="preserve"><value>重构(_R)</value></data>
-  <data name="MT_BuildMenu" xml:space="preserve"><value>构建(_B)</value></data>
-  <data name="MT_BuildSolution" xml:space="preserve"><value>构建解决方案</value></data>
-  <data name="MT_RebuildSolution" xml:space="preserve"><value>重新构建解决方案</value></data>
-  <data name="MT_CleanSolution" xml:space="preserve"><value>清理解决方案</value></data>
-  <data name="MT_BuildCurrentProject" xml:space="preserve"><value>构建当前项目</value></data>
-  <data name="MT_BuildStartupProject" xml:space="preserve"><value>构建启动项目: Gallery</value></data>
-  <data name="MT_AdvancedBuild" xml:space="preserve"><value>高级构建操作</value></data>
-  <data name="MT_ChangeSolutionConfig" xml:space="preserve"><value>更改解决方案配置</value></data>
-  <data name="MT_RunMenu" xml:space="preserve"><value>运行(_U)</value></data>
-  <data name="MT_RerunProject" xml:space="preserve"><value>重新运行.'NET项目: Gallery'</value></data>
-  <data name="MT_DebugGallery" xml:space="preserve"><value>调试'Gallery'</value></data>
-  <data name="MT_RunWithProfiler" xml:space="preserve"><value>使用分析器运行</value></data>
-  <data name="MT_AnalyzeGallery" xml:space="preserve"><value>分析'Gallery'(使用 时间线)</value></data>
-  <data name="MT_AttachToProcess" xml:space="preserve"><value>附加到进程</value></data>
-  <data name="MT_ManageAccounts" xml:space="preserve"><value>管理账户和设置</value></data>
-  <data name="MT_PaymentMethods" xml:space="preserve"><value>支付方式</value></data>
-  <data name="MT_RedeemCode" xml:space="preserve"><value>兑换代码和礼品卡</value></data>
-  <data name="MT_CreationDate" xml:space="preserve"><value>创建日期</value></data>
-  <data name="MT_TakeDate" xml:space="preserve"><value>拍摄日期</value></data>
-  <data name="MT_ModificationDate" xml:space="preserve"><value>修改日期</value></data>
-  <data name="MT_Rotate" xml:space="preserve"><value>旋转</value></data>
-  <data name="MT_ZoomIn" xml:space="preserve"><value>放大</value></data>
-  <data name="MT_ZoomOut" xml:space="preserve"><value>缩小</value></data>
-  <data name="MT_CommandText" xml:space="preserve"><value>执行的命令:</value></data>
-  <data name="MT_LoginName" xml:space="preserve"><value>妃爱亲</value></data>
-  <data name="OnlineDocument" xml:space="preserve"><value>在线文档</value></data>
-    <data name="ToggleTheme" xml:space="preserve"><value>切换主题</value></data>
-  <data name="Pin" xml:space="preserve"><value>置顶</value></data>
-    <data name="UnPin" xml:space="preserve"><value>取消置顶</value></data>
+  <data name="BI_AboutUs" xml:space="preserve">
+    <value>关于我们</value>
+  </data>
+  <data name="BI_Bluetooth" xml:space="preserve">
+    <value>蓝牙</value>
+  </data>
+  <data name="BI_CheckBox" xml:space="preserve">
+    <value>复选框</value>
+  </data>
+  <data name="BI_ChipsRadioButton" xml:space="preserve">
+    <value>胶囊单选按钮</value>
+  </data>
+  <data name="BI_ColorSlider" xml:space="preserve">
+    <value>颜色滑动条</value>
+  </data>
+  <data name="BI_ComboBox" xml:space="preserve">
+    <value>下拉框</value>
+  </data>
+  <data name="BI_ContentAlignment" xml:space="preserve">
+    <value>内容对齐</value>
+  </data>
+  <data name="BI_Controller" xml:space="preserve">
+    <value>控制器</value>
+  </data>
+  <data name="BI_Copy" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="BI_Cut" xml:space="preserve">
+    <value>剪切</value>
+  </data>
+  <data name="BI_DropDownButton" xml:space="preserve">
+    <value>下拉按钮</value>
+  </data>
+  <data name="BI_FilledButton" xml:space="preserve">
+    <value>填充按钮</value>
+  </data>
+  <data name="BI_Game" xml:space="preserve">
+    <value>游戏</value>
+  </data>
+  <data name="BI_Headphones" xml:space="preserve">
+    <value>耳机</value>
+  </data>
+  <data name="BI_HyperlinkButton" xml:space="preserve">
+    <value>超链接按钮</value>
+  </data>
+  <data name="BI_IsDisabled" xml:space="preserve">
+    <value>禁用</value>
+  </data>
+  <data name="BI_IsMultiSelect" xml:space="preserve">
+    <value>可多选</value>
+  </data>
+  <data name="BI_MovieAndTV" xml:space="preserve">
+    <value>电影和电视</value>
+  </data>
+  <data name="BI_MultiSelectionComboBox" xml:space="preserve">
+    <value>多选下拉框</value>
+  </data>
+  <data name="BI_Music" xml:space="preserve">
+    <value>音乐</value>
+  </data>
+  <data name="BI_Options" xml:space="preserve">
+    <value>选项</value>
+  </data>
+  <data name="BI_OutlineButton" xml:space="preserve">
+    <value>轮廓按钮</value>
+  </data>
+  <data name="BI_Paste" xml:space="preserve">
+    <value>粘贴</value>
+  </data>
+  <data name="BI_RadioButton" xml:space="preserve">
+    <value>单选按钮</value>
+  </data>
+  <data name="BI_RangeSlider" xml:space="preserve">
+    <value>范围滑动条</value>
+  </data>
+  <data name="BI_RoundButton" xml:space="preserve">
+    <value>圆角按钮</value>
+  </data>
+  <data name="BI_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="BI_Send" xml:space="preserve">
+    <value>发送</value>
+  </data>
+  <data name="BI_Slider" xml:space="preserve">
+    <value>滑动条</value>
+  </data>
+  <data name="BI_Speakers" xml:space="preserve">
+    <value>扬声器</value>
+  </data>
+  <data name="BI_SplitButton" xml:space="preserve">
+    <value>拆分按钮</value>
+  </data>
+  <data name="BI_StandardButton" xml:space="preserve">
+    <value>标准按钮</value>
+  </data>
+  <data name="BI_StrokeButton" xml:space="preserve">
+    <value>描边按钮</value>
+  </data>
+  <data name="BI_ToggleSwitch" xml:space="preserve">
+    <value>开关按钮</value>
+  </data>
+  <data name="BI_ToolButton" xml:space="preserve">
+    <value>工具按钮</value>
+  </data>
+  <data name="BI_Undo" xml:space="preserve">
+    <value>撤销</value>
+  </data>
+  <data name="BasicInput" xml:space="preserve">
+    <value>基本输入</value>
+  </data>
+  <data name="COM_Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="COM_Information" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="COM_Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="COM_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="CodeSamples" xml:space="preserve">
+    <value>代码示例</value>
+  </data>
+  <data name="Control_Border" xml:space="preserve">
+    <value>Border</value>
+  </data>
+  <data name="Control_BreadcrumbBar" xml:space="preserve">
+    <value>BreadcrumbBar</value>
+  </data>
+  <data name="Control_Button" xml:space="preserve">
+    <value>Button</value>
+  </data>
+  <data name="Control_ButtonDesc" xml:space="preserve">
+    <value>响应用户输入的控件。</value>
+  </data>
+  <data name="Control_CalendarDatePicker" xml:space="preserve">
+    <value>CalendarDatePicker</value>
+  </data>
+  <data name="Control_Canvas" xml:space="preserve">
+    <value>Canvas</value>
+  </data>
+  <data name="Control_CheckBox" xml:space="preserve">
+    <value>CheckBox</value>
+  </data>
+  <data name="Control_CheckBoxDesc" xml:space="preserve">
+    <value>用户可选中或清除的控件。</value>
+  </data>
+  <data name="Control_ComboBox" xml:space="preserve">
+    <value>ComboBox</value>
+  </data>
+  <data name="Control_ComboBoxDesc" xml:space="preserve">
+    <value>下拉列表。</value>
+  </data>
+  <data name="Control_CommandBar" xml:space="preserve">
+    <value>CommandBar</value>
+  </data>
+  <data name="Control_CommandBarFlyout" xml:space="preserve">
+    <value>CommandBarFlyout</value>
+  </data>
+  <data name="Control_ContentDialog" xml:space="preserve">
+    <value>ContentDialog</value>
+  </data>
+  <data name="Control_DatePicker" xml:space="preserve">
+    <value>DatePicker</value>
+  </data>
+  <data name="Control_DropDownButton" xml:space="preserve">
+    <value>DropDownButton</value>
+  </data>
+  <data name="Control_DropDownButtonDesc" xml:space="preserve">
+    <value>点击时显示选择浮出控件的按钮。</value>
+  </data>
+  <data name="Control_Expander" xml:space="preserve">
+    <value>Expander</value>
+  </data>
+  <data name="Control_FlipView" xml:space="preserve">
+    <value>FlipView</value>
+  </data>
+  <data name="Control_Flyout" xml:space="preserve">
+    <value>Flyout</value>
+  </data>
+  <data name="Control_Grid" xml:space="preserve">
+    <value>Grid</value>
+  </data>
+  <data name="Control_HyperlinkButton" xml:space="preserve">
+    <value>HyperlinkButton</value>
+  </data>
+  <data name="Control_InfoBadge" xml:space="preserve">
+    <value>InfoBadge</value>
+  </data>
+  <data name="Control_InfoBar" xml:space="preserve">
+    <value>InfoBar</value>
+  </data>
+  <data name="Control_ListBox" xml:space="preserve">
+    <value>ListBox</value>
+  </data>
+  <data name="Control_MenuBar" xml:space="preserve">
+    <value>MenuBar</value>
+  </data>
+  <data name="Control_MenuFlyout" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="Control_NavigationView" xml:space="preserve">
+    <value>NavigationView</value>
+  </data>
+  <data name="Control_NumberBox" xml:space="preserve">
+    <value>NumberBox</value>
+  </data>
+  <data name="Control_PageTransition" xml:space="preserve">
+    <value>PageTransition</value>
+  </data>
+  <data name="Control_PasswordBox" xml:space="preserve">
+    <value>PasswordBox</value>
+  </data>
+  <data name="Control_Pivot" xml:space="preserve">
+    <value>Segmented</value>
+  </data>
+  <data name="Control_ProgressBar" xml:space="preserve">
+    <value>ProgressBar</value>
+  </data>
+  <data name="Control_ProgressRing" xml:space="preserve">
+    <value>ProgressRing</value>
+  </data>
+  <data name="Control_RadioButton" xml:space="preserve">
+    <value>RadioButton</value>
+  </data>
+  <data name="Control_RelativePanel" xml:space="preserve">
+    <value>RelativePanel</value>
+  </data>
+  <data name="Control_Slider" xml:space="preserve">
+    <value>Slider</value>
+  </data>
+  <data name="Control_SliderDesc" xml:space="preserve">
+    <value>让用户从范围中选择值。</value>
+  </data>
+  <data name="Control_SplitButton" xml:space="preserve">
+    <value>SplitButton</value>
+  </data>
+  <data name="Control_SplitView" xml:space="preserve">
+    <value>SplitView</value>
+  </data>
+  <data name="Control_StackPanel" xml:space="preserve">
+    <value>StackPanel</value>
+  </data>
+  <data name="Control_TeachingTip" xml:space="preserve">
+    <value>TeachingTip</value>
+  </data>
+  <data name="Control_TextBlock" xml:space="preserve">
+    <value>TextBlock</value>
+  </data>
+  <data name="Control_TextBox" xml:space="preserve">
+    <value>TextBox</value>
+  </data>
+  <data name="Control_TimePicker" xml:space="preserve">
+    <value>TimePicker</value>
+  </data>
+  <data name="Control_ToggleButton" xml:space="preserve">
+    <value>ToggleButton</value>
+  </data>
+  <data name="Control_ToggleButtonDesc" xml:space="preserve">
+    <value>可在两种状态间切换的按钮。</value>
+  </data>
+  <data name="Control_ToggleSwitch" xml:space="preserve">
+    <value>SwitchButton</value>
+  </data>
+  <data name="Control_ToggleSwitchDesc" xml:space="preserve">
+    <value>可在两种状态间切换的开关。</value>
+  </data>
+  <data name="Control_ToolTip" xml:space="preserve">
+    <value>ToolTip</value>
+  </data>
+  <data name="Control_TreeView" xml:space="preserve">
+    <value>TreeView</value>
+  </data>
+  <data name="DP_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="DP_Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="DP_Confirm" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="DP_DialogWithMask" xml:space="preserve">
+    <value>带遮罩的对话框</value>
+  </data>
+  <data name="DP_Open" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="DP_Position" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="DT_CalendarPicker" xml:space="preserve">
+    <value>日历选择器</value>
+  </data>
+  <data name="DT_ColorPicker" xml:space="preserve">
+    <value>颜色选择器</value>
+  </data>
+  <data name="DT_DatePicker" xml:space="preserve">
+    <value>日期选择器</value>
+  </data>
+  <data name="DT_DisplayMode" xml:space="preserve">
+    <value>显示模式:</value>
+  </data>
+  <data name="DT_SelectMode" xml:space="preserve">
+    <value>选择模式:</value>
+  </data>
+  <data name="DT_SelectedColor" xml:space="preserve">
+    <value>选择的颜色:</value>
+  </data>
+  <data name="DT_SelectedDate" xml:space="preserve">
+    <value>选择的日期:</value>
+  </data>
+  <data name="DT_SelectedTime" xml:space="preserve">
+    <value>选择的时间:</value>
+  </data>
+  <data name="DT_ShowDay" xml:space="preserve">
+    <value>显示日:</value>
+  </data>
+  <data name="DT_ShowMonth" xml:space="preserve">
+    <value>显示月:</value>
+  </data>
+  <data name="DT_ShowYear" xml:space="preserve">
+    <value>显示年:</value>
+  </data>
+  <data name="DT_TimeFormat" xml:space="preserve">
+    <value>时间格式:</value>
+  </data>
+  <data name="DT_TimePicker" xml:space="preserve">
+    <value>时间选择器</value>
+  </data>
+  <data name="DateTime" xml:space="preserve">
+    <value>日期和时间</value>
+  </data>
+  <data name="DialogAndPopup" xml:space="preserve">
+    <value>对话框和弹出窗口</value>
+  </data>
+  <data name="FP_Page1" xml:space="preserve">
+    <value>Frame Page 1(默认)</value>
+  </data>
+  <data name="FP_Page2" xml:space="preserve">
+    <value>Frame Page 2(滑动)</value>
+  </data>
+  <data name="FP_Page3" xml:space="preserve">
+    <value>Frame Page 3(深入)</value>
+  </data>
+  <data name="FP_Page4" xml:space="preserve">
+    <value>Frame Page 4(无)</value>
+  </data>
+  <data name="FluentGallery" xml:space="preserve">
+    <value>Fluent Gallery</value>
+  </data>
+  <data name="GettingStarted" xml:space="preserve">
+    <value>开始使用</value>
+  </data>
+  <data name="GitHubRepo" xml:space="preserve">
+    <value>GitHub 仓库</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>主页</value>
+  </data>
+  <data name="IV_EnumMember" xml:space="preserve">
+    <value>枚举成员</value>
+  </data>
+  <data name="IV_IconName" xml:space="preserve">
+    <value>图标名字</value>
+  </data>
+  <data name="IV_SearchIcon" xml:space="preserve">
+    <value>搜索图标</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>图标</value>
+  </data>
+  <data name="LV_Add" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="LV_AppTheme" xml:space="preserve">
+    <value>应用主题</value>
+  </data>
+  <data name="LV_Apply" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="LV_Border" xml:space="preserve">
+    <value>边框</value>
+  </data>
+  <data name="LV_Canvas" xml:space="preserve">
+    <value>画布</value>
+  </data>
+  <data name="LV_Dark" xml:space="preserve">
+    <value>深色</value>
+  </data>
+  <data name="LV_EnableShadow" xml:space="preserve">
+    <value>启用阴影</value>
+  </data>
+  <data name="LV_Expander" xml:space="preserve">
+    <value>展开卡片</value>
+  </data>
+  <data name="LV_FollowSystem" xml:space="preserve">
+    <value>跟随系统</value>
+  </data>
+  <data name="LV_GridLayout" xml:space="preserve">
+    <value>网格布局</value>
+  </data>
+  <data name="LV_Light" xml:space="preserve">
+    <value>浅色</value>
+  </data>
+  <data name="LV_Opacity" xml:space="preserve">
+    <value>不透明度</value>
+  </data>
+  <data name="LV_Reset" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="LV_SplitView" xml:space="preserve">
+    <value>分割视图</value>
+  </data>
+  <data name="LV_StackPanel" xml:space="preserve">
+    <value>堆栈布局</value>
+  </data>
+  <data name="Layout" xml:space="preserve">
+    <value>布局</value>
+  </data>
+  <data name="MT_Add" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="MT_Ascending" xml:space="preserve">
+    <value>升序</value>
+  </data>
+  <data name="MT_Back" xml:space="preserve">
+    <value>后退</value>
+  </data>
+  <data name="MT_CommandBar" xml:space="preserve">
+    <value>命令栏</value>
+  </data>
+  <data name="MT_CommandBarFlyout" xml:space="preserve">
+    <value>浮出命令栏</value>
+  </data>
+  <data name="MT_ContextMenu" xml:space="preserve">
+    <value>上下文菜单</value>
+  </data>
+  <data name="MT_Debug" xml:space="preserve">
+    <value>调试</value>
+  </data>
+  <data name="MT_Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="MT_Descending" xml:space="preserve">
+    <value>降序</value>
+  </data>
+  <data name="MT_Edit" xml:space="preserve">
+    <value>编辑</value>
+  </data>
+  <data name="MT_Exit" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="MT_Find" xml:space="preserve">
+    <value>查找</value>
+  </data>
+  <data name="MT_Forward" xml:space="preserve">
+    <value>前进</value>
+  </data>
+  <data name="MT_Info" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="MT_Logout" xml:space="preserve">
+    <value>注销</value>
+  </data>
+  <data name="MT_Menu" xml:space="preserve">
+    <value>菜单</value>
+  </data>
+  <data name="MT_Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="MT_Open" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="MT_Redo" xml:space="preserve">
+    <value>重做</value>
+  </data>
+  <data name="MT_Rename" xml:space="preserve">
+    <value>重命名</value>
+  </data>
+  <data name="MT_Replace" xml:space="preserve">
+    <value>替换</value>
+  </data>
+  <data name="MT_Run2" xml:space="preserve">
+    <value>运行</value>
+  </data>
+  <data name="MT_Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="MT_Share" xml:space="preserve">
+    <value>分享</value>
+  </data>
+  <data name="MT_Sort" xml:space="preserve">
+    <value>排序</value>
+  </data>
+  <data name="MenuAndToolBar" xml:space="preserve">
+    <value>菜单和工具栏</value>
+  </data>
+  <data name="NV_About" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="NV_Apps" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="NV_DisplayMode" xml:space="preserve">
+    <value>显示模式:</value>
+  </data>
+  <data name="NV_Downloads" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="NV_Files" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="NV_Friends" xml:space="preserve">
+    <value>好友</value>
+  </data>
+  <data name="NV_Games" xml:space="preserve">
+    <value>游戏</value>
+  </data>
+  <data name="NV_Help" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="NV_History" xml:space="preserve">
+    <value>历史</value>
+  </data>
+  <data name="NV_Home" xml:space="preserve">
+    <value>主页</value>
+  </data>
+  <data name="NV_Mail" xml:space="preserve">
+    <value>邮件</value>
+  </data>
+  <data name="NV_Phone" xml:space="preserve">
+    <value>电话</value>
+  </data>
+  <data name="NV_SegmentedBar" xml:space="preserve">
+    <value>分段导航栏</value>
+  </data>
+  <data name="NV_SegmentedToggleBar" xml:space="preserve">
+    <value>分段切换导航栏</value>
+  </data>
+  <data name="NV_ShowBackButton" xml:space="preserve">
+    <value>显示返回按钮</value>
+  </data>
+  <data name="NV_Subscriptions" xml:space="preserve">
+    <value>订阅</value>
+  </data>
+  <data name="NV_Tabs" xml:space="preserve">
+    <value>选项卡</value>
+  </data>
+  <data name="NV_TopNavigation" xml:space="preserve">
+    <value>顶部导航栏</value>
+  </data>
+  <data name="Navigation" xml:space="preserve">
+    <value>导航</value>
+  </data>
+  <data name="SC_Bidirectional" xml:space="preserve">
+    <value>双向滚动区域</value>
+  </data>
+  <data name="SC_SingleDirection" xml:space="preserve">
+    <value>单向平滑滚动区域</value>
+  </data>
+  <data name="SC_SmoothScrollArea" xml:space="preserve">
+    <value>平滑滚动区域</value>
+  </data>
+  <data name="SI_BgColor" xml:space="preserve">
+    <value>背景色:</value>
+  </data>
+  <data name="SI_IsIndeterminate" xml:space="preserve">
+    <value>是不确定的</value>
+  </data>
+  <data name="SI_Progress" xml:space="preserve">
+    <value>进度:</value>
+  </data>
+  <data name="SI_ProgressBar" xml:space="preserve">
+    <value>进度条</value>
+  </data>
+  <data name="SI_ProgressRing" xml:space="preserve">
+    <value>进度环</value>
+  </data>
+  <data name="SI_Restore" xml:space="preserve">
+    <value>重置</value>
+  </data>
+  <data name="SI_Style" xml:space="preserve">
+    <value>样式:</value>
+  </data>
+  <data name="SV_BackgroundImage" xml:space="preserve">
+    <value>背景图</value>
+  </data>
+  <data name="SV_CustomColor" xml:space="preserve">
+    <value>自定义颜色</value>
+  </data>
+  <data name="SV_DefaultColor" xml:space="preserve">
+    <value>默认颜色</value>
+  </data>
+  <data name="SV_Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="SV_PinToTop" xml:space="preserve">
+    <value>置顶</value>
+  </data>
+  <data name="SV_SelectColor" xml:space="preserve">
+    <value>选择颜色</value>
+  </data>
+  <data name="SV_ThemeColor" xml:space="preserve">
+    <value>主题色</value>
+  </data>
+  <data name="SV_WindowEffect" xml:space="preserve">
+    <value>窗口特效</value>
+  </data>
+  <data name="Scroll" xml:space="preserve">
+    <value>滚动</value>
+  </data>
+  <data name="Section_BasicInput" xml:space="preserve">
+    <value>基本输入</value>
+  </data>
+  <data name="Section_DateTime" xml:space="preserve">
+    <value>日期时间</value>
+  </data>
+  <data name="Section_Dialog" xml:space="preserve">
+    <value>对话框</value>
+  </data>
+  <data name="Section_Layout" xml:space="preserve">
+    <value>布局</value>
+  </data>
+  <data name="Section_MenuAndToolBar" xml:space="preserve">
+    <value>菜单和工具栏</value>
+  </data>
+  <data name="Section_NavigationView" xml:space="preserve">
+    <value>导航视图</value>
+  </data>
+  <data name="Section_StatusAndInformation" xml:space="preserve">
+    <value>状态和信息</value>
+  </data>
+  <data name="Section_Text" xml:space="preserve">
+    <value>文本</value>
+  </data>
+  <data name="Section_View" xml:space="preserve">
+    <value>视图</value>
+  </data>
+  <data name="SendFeedback" xml:space="preserve">
+    <value>发送反馈</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="SourceCode" xml:space="preserve">
+    <value>源代码</value>
+  </data>
+  <data name="StatusAndInformation" xml:space="preserve">
+    <value>状态和信息</value>
+  </data>
+  <data name="TV_AcceptReturn" xml:space="preserve">
+    <value>接受回车</value>
+  </data>
+  <data name="TV_AcceptTab" xml:space="preserve">
+    <value>接受Tab</value>
+  </data>
+  <data name="TV_DisplayText" xml:space="preserve">
+    <value>显示文本</value>
+  </data>
+  <data name="TV_EnterPassword" xml:space="preserve">
+    <value>请输入密码</value>
+  </data>
+  <data name="TV_FontSize" xml:space="preserve">
+    <value>字体大小:</value>
+  </data>
+  <data name="TV_FontStyle" xml:space="preserve">
+    <value>字体样式:</value>
+  </data>
+  <data name="TV_FontWeight" xml:space="preserve">
+    <value>字体粗细:</value>
+  </data>
+  <data name="TV_NumberBox" xml:space="preserve">
+    <value>数字编辑框</value>
+  </data>
+  <data name="TV_PasswordBox" xml:space="preserve">
+    <value>密码输入框</value>
+  </data>
+  <data name="TV_PhoneNumber" xml:space="preserve">
+    <value>请输入11位电话号码:</value>
+  </data>
+  <data name="TV_SearchBox" xml:space="preserve">
+    <value>搜索框</value>
+  </data>
+  <data name="TV_TextBox" xml:space="preserve">
+    <value>文本输入框</value>
+  </data>
+  <data name="TV_TextDecoration" xml:space="preserve">
+    <value>文本装饰:</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>文本</value>
+  </data>
+  <data name="VP_AddPage" xml:space="preserve">
+    <value>添加页面</value>
+  </data>
+  <data name="VP_AutoPlay" xml:space="preserve">
+    <value>自动播放</value>
+  </data>
+  <data name="VP_Carousel" xml:space="preserve">
+    <value>轮播页面</value>
+  </data>
+  <data name="VP_DataGrid" xml:space="preserve">
+    <value>表格控件</value>
+  </data>
+  <data name="VP_Direction" xml:space="preserve">
+    <value>方向:</value>
+  </data>
+  <data name="VP_Interval" xml:space="preserve">
+    <value>间隔:</value>
+  </data>
+  <data name="VP_ListControl" xml:space="preserve">
+    <value>列表控件</value>
+  </data>
+  <data name="VP_Next" xml:space="preserve">
+    <value>下一张</value>
+  </data>
+  <data name="VP_Previous" xml:space="preserve">
+    <value>上一张</value>
+  </data>
+  <data name="VP_SelectMode" xml:space="preserve">
+    <value>选择模式:</value>
+  </data>
+  <data name="VP_TreeView" xml:space="preserve">
+    <value>树状控件</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>视图</value>
+  </data>
+  <data name="MV_Title" xml:space="preserve">
+    <value>Avalonia Fluent UI Gallery</value>
+  </data>
+  <data name="MV_SearchWatermark" xml:space="preserve">
+    <value>请输入要搜索的内容</value>
+  </data>
+  <data name="SV_WindowEffectDescription" xml:space="preserve">
+    <value>启用窗口特效(Mica | AcrylicBlur)</value>
+  </data>
+  <data name="SV_Appearance" xml:space="preserve">
+    <value>调整你的应用外观</value>
+  </data>
+  <data name="SV_ThemeColorDescription" xml:space="preserve">
+    <value>调整你的应用主题色</value>
+  </data>
+  <data name="SV_PinToTopDescription" xml:space="preserve">
+    <value>启用窗口置顶功能</value>
+  </data>
+  <data name="SV_LanguageDescription" xml:space="preserve">
+    <value>设置应用语言(需重启)</value>
+  </data>
+  <data name="SV_EnableBackgroundImage" xml:space="preserve">
+    <value>启用背景图</value>
+  </data>
+  <data name="SV_AppTheme" xml:space="preserve">
+    <value>应用主题</value>
+  </data>
+  <data name="GettingStartedContent" xml:space="preserve">
+    <value>应用程序开发选项和示例的概述。</value>
+  </data>
+  <data name="GitHubRepoContent" xml:space="preserve">
+    <value>适用于您应用程序的最新流畅设计控件和样式。</value>
+  </data>
+  <data name="CodeSamplesContent" xml:space="preserve">
+    <value>查找展示特定任务、功能和API的示例。</value>
+  </data>
+  <data name="SendFeedbackContent" xml:space="preserve">
+    <value>通过提供反馈帮助我们改进</value>
+  </data>
+  <data name="SI_ToolTipButton" xml:space="preserve">
+    <value>带工具提示的按钮</value>
+  </data>
+  <data name="SI_ToolTipText" xml:space="preserve">
+    <value>我是工具提示</value>
+  </data>
+  <data name="SI_InfoBadge" xml:space="preserve">
+    <value>信息徽章</value>
+  </data>
+  <data name="SI_InfoBar" xml:space="preserve">
+    <value>消息条</value>
+  </data>
+  <data name="SI_SaveSuccess" xml:space="preserve">
+    <value>保存成功</value>
+  </data>
+  <data name="SI_FileSaved" xml:space="preserve">
+    <value>文件已成功保存到服务器</value>
+  </data>
+  <data name="SI_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="SI_Options" xml:space="preserve">
+    <value>选项</value>
+  </data>
+  <data name="SI_IsClosable" xml:space="preserve">
+    <value>是可关闭的</value>
+  </data>
+  <data name="VP_Options" xml:space="preserve">
+    <value>选项</value>
+  </data>
+  <data name="VP_RoundListBox" xml:space="preserve">
+    <value>圆角列表控件</value>
+  </data>
+  <data name="VP_IsReadOnly" xml:space="preserve">
+    <value>是只读的</value>
+  </data>
+  <data name="VP_BorderDisplayMode" xml:space="preserve">
+    <value>边框显示模式</value>
+  </data>
+  <data name="VP_SimpleSettingsCard" xml:space="preserve">
+    <value>简单设置卡</value>
+  </data>
+  <data name="VP_ClickableSettingsCard" xml:space="preserve">
+    <value>可点击设置卡</value>
+  </data>
+  <data name="VP_ExpandableSettingsCard" xml:space="preserve">
+    <value>可展开设置卡</value>
+  </data>
+  <data name="VP_Volume" xml:space="preserve">
+    <value>音量</value>
+  </data>
+  <data name="VP_Sound" xml:space="preserve">
+    <value>声音</value>
+  </data>
+  <data name="VP_SoundDescription" xml:space="preserve">
+    <value>音量级别、输出、输入、声音设备</value>
+  </data>
+  <data name="VP_AppsSettingsDescription" xml:space="preserve">
+    <value>应用可能有自己的设置</value>
+  </data>
+  <data name="VP_ChooseDevice" xml:space="preserve">
+    <value>选择说话或录音设备</value>
+  </data>
+  <data name="VP_Headset" xml:space="preserve">
+    <value>耳机</value>
+  </data>
+  <data name="VP_HasFooterContent" xml:space="preserve">
+    <value>这个有底部内容</value>
+  </data>
+  <data name="VP_DeviceName" xml:space="preserve">
+    <value>设备名称</value>
+  </data>
+  <data name="VP_IsClickable" xml:space="preserve">
+    <value>这个可点击</value>
+  </data>
+  <data name="VP_AddDevice" xml:space="preserve">
+    <value>添加设备</value>
+  </data>
+  <data name="DT_CalendarDatePicker" xml:space="preserve">
+    <value>弹出日历选择器</value>
+  </data>
+  <data name="DT_DefaultIncrement" xml:space="preserve">
+    <value>默认时间增量:</value>
+  </data>
+  <data name="NV_NavigationView" xml:space="preserve">
+    <value>导航视图</value>
+  </data>
+  <data name="NV_PaneDisplayMode" xml:space="preserve">
+    <value>面板显示模式</value>
+  </data>
+  <data name="NV_Unplayed" xml:space="preserve">
+    <value>未播放的剧集</value>
+  </data>
+  <data name="NV_NowPlaying" xml:space="preserve">
+    <value>正在播放</value>
+  </data>
+  <data name="NV_VideoHistory" xml:space="preserve">
+    <value>视频历史</value>
+  </data>
+  <data name="NV_AudioHistory" xml:space="preserve">
+    <value>音频历史</value>
+  </data>
+  <data name="NV_BrowsingHistory" xml:space="preserve">
+    <value>浏览历史</value>
+  </data>
+  <data name="NV_Folders" xml:space="preserve">
+    <value>文件夹</value>
+  </data>
+  <data name="NV_Window" xml:space="preserve">
+    <value>窗口</value>
+  </data>
+  <data name="NV_BreadcrumbBar" xml:space="preserve">
+    <value>面包屑导航栏</value>
+  </data>
+  <data name="DP_OptimisticContent" xml:space="preserve">
+    <value>只要你保持乐观的心态, 你就会发现这个世界上有数不尽的开心事!</value>
+  </data>
+  <data name="DP_OpenURL" xml:space="preserve">
+    <value>打开URL</value>
+  </data>
+  <data name="DP_URLWatermark" xml:space="preserve">
+    <value>输入文件, 流或者播放列表的 URL</value>
+  </data>
+  <data name="DP_CustomDialog" xml:space="preserve">
+    <value>自定义对话框</value>
+  </data>
+  <data name="DP_TaskDialog" xml:space="preserve">
+    <value>任务对话框</value>
+  </data>
+  <data name="DP_ShowTaskDialog" xml:space="preserve">
+    <value>显示任务对话框</value>
+  </data>
+  <data name="DP_FluentFlyout" xml:space="preserve">
+    <value>Fluent浮出控件</value>
+  </data>
+  <data name="DP_ShowPopup" xml:space="preserve">
+    <value>显示弹出视图</value>
+  </data>
+  <data name="DP_NoName" xml:space="preserve">
+    <value>无名</value>
+  </data>
+  <data name="DP_EyeQuote" xml:space="preserve">
+    <value>左眼用来忘记你，右眼用来记住你。</value>
+  </data>
+  <data name="DP_FlyoutPositionLabel" xml:space="preserve">
+    <value>弹出位置:</value>
+  </data>
+  <data name="DP_ImageButtonFlyout" xml:space="preserve">
+    <value>带图片和按钮的浮出控件</value>
+  </data>
+  <data name="DP_ShowFlyout" xml:space="preserve">
+    <value>显示浮出控件</value>
+  </data>
+  <data name="DP_Minecraft" xml:space="preserve">
+    <value>Minecraft</value>
+  </data>
+  <data name="DP_ForgeDesc" xml:space="preserve">
+    <value>Forge(全称 Minecraft Forge)是一个为《我的世界》Java版设计的开源模组加载器(Mod Loader), 它为开发者提供了一套标准的开发接口, 让各种修改游戏功能的模组(Mod)能够互相兼容并在同一个游戏客户端中运行。</value>
+  </data>
+  <data name="DP_TeachingTip" xml:space="preserve">
+    <value>气泡弹窗</value>
+  </data>
+  <data name="DP_TeachingTipButton" xml:space="preserve">
+    <value>显示气泡弹窗</value>
+  </data>
+  <data name="DP_TeachingTipSubtitle" xml:space="preserve">
+    <value>最短的捷径就是绕远路, 绕远路才是我的最短捷径.</value>
+  </data>
+  <data name="DP_ColorPicker" xml:space="preserve">
+    <value>颜色选择器</value>
+  </data>
+  <data name="DP_TipTitle" xml:space="preserve">
+    <value>提示</value>
+  </data>
+  <data name="DP_ThisIsDialogWithMask" xml:space="preserve">
+    <value>这是一个带遮罩的对话框</value>
+  </data>
+  <data name="LV_DockPanel" xml:space="preserve">
+    <value>停靠面板</value>
+  </data>
+  <data name="LV_GridSplitter" xml:space="preserve">
+    <value>网格分割器</value>
+  </data>
+  <data name="LV_Panel" xml:space="preserve">
+    <value>面板布局</value>
+  </data>
+  <data name="LV_RelativePanel" xml:space="preserve">
+    <value>绝对面板布局</value>
+  </data>
+  <data name="LV_UniformGrid" xml:space="preserve">
+    <value>统一网格布局</value>
+  </data>
+  <data name="LV_WrapPanel" xml:space="preserve">
+    <value>换行面板布局</value>
+  </data>
+  <data name="LV_VirtualizingStackPanel" xml:space="preserve">
+    <value>虚拟堆布局</value>
+  </data>
+  <data name="LV_Alignment" xml:space="preserve">
+    <value>对齐</value>
+  </data>
+  <data name="LV_SelectLayout" xml:space="preserve">
+    <value>选择布局方向</value>
+  </data>
+  <data name="LV_AddControl" xml:space="preserve">
+    <value>添加控件</value>
+  </data>
+  <data name="LV_RemoveControl" xml:space="preserve">
+    <value>删除控件</value>
+  </data>
+  <data name="LV_SetGridRow" xml:space="preserve">
+    <value>设置当前Grid的行</value>
+  </data>
+  <data name="LV_SetGridColumn" xml:space="preserve">
+    <value>设置当前Grid的列</value>
+  </data>
+  <data name="LV_BorderColorHex" xml:space="preserve">
+    <value>边框颜色(16进制)</value>
+  </data>
+  <data name="LV_BgColorHex" xml:space="preserve">
+    <value>背景颜色(16进制)</value>
+  </data>
+  <data name="LV_AddItemsCount" xml:space="preserve">
+    <value>添加项目(个数)</value>
+  </data>
+  <data name="TV_AutoCompleteBox" xml:space="preserve">
+    <value>自动补全输入框</value>
+  </data>
+  <data name="TV_AddMatchElement" xml:space="preserve">
+    <value>添加要匹配的元素:</value>
+  </data>
+  <data name="TV_SelectMatchMode" xml:space="preserve">
+    <value>选择匹配模式:</value>
+  </data>
+  <data name="TV_AddMatchElementButton" xml:space="preserve">
+    <value>添加要匹配的元素</value>
+  </data>
+  <data name="TV_SetDisplayText" xml:space="preserve">
+    <value>设置要显示的文本:</value>
+  </data>
+  <data name="TV_SetLetterSpacing" xml:space="preserve">
+    <value>设置字母间隔:</value>
+  </data>
+  <data name="TV_WatermarkLabel" xml:space="preserve">
+    <value>提示文字</value>
+  </data>
+  <data name="TV_ClearTextBox" xml:space="preserve">
+    <value>带清空按钮的输入框</value>
+  </data>
+  <data name="TV_ClearWatermark" xml:space="preserve">
+    <value>带清空按钮的输入框</value>
+  </data>
+  <data name="TV_SearchWatermark" xml:space="preserve">
+    <value>请输入要搜索的内容</value>
+  </data>
+  <data name="TV_EnterToSearch" xml:space="preserve">
+    <value>回车搜索</value>
+  </data>
+  <data name="TV_SpinButtonMode" xml:space="preserve">
+    <value>SpinButton显示模式:</value>
+  </data>
+  <data name="TV_ButtonSpinner" xml:space="preserve">
+    <value>按钮微调器</value>
+  </data>
+  <data name="TV_SpinnerLocation" xml:space="preserve">
+    <value>微调按钮位置:</value>
+  </data>
+  <data name="TV_EnableSpin" xml:space="preserve">
+    <value>启用旋转功能</value>
+  </data>
+  <data name="TV_EnterName" xml:space="preserve">
+    <value>请输入名字(A-Z)(a-z)</value>
+  </data>
+  <data name="BI_StrokeToolButton" xml:space="preserve">
+    <value>描边工具按钮</value>
+  </data>
+  <data name="BI_TransparentDropDownButton" xml:space="preserve">
+    <value>带下拉菜单的透明按钮</value>
+  </data>
+  <data name="BI_ToggleButton" xml:space="preserve">
+    <value>状态开关按钮</value>
+  </data>
+  <data name="BI_ToggleSplitButton" xml:space="preserve">
+    <value>分割状态开关按钮</value>
+  </data>
+  <data name="BI_TransparentToggleButton" xml:space="preserve">
+    <value>透明状态开关按钮</value>
+  </data>
+  <data name="BI_SubTitleRadioButton" xml:space="preserve">
+    <value>带子标题的单选按钮</value>
+  </data>
+  <data name="BI_ToolTipSlider" xml:space="preserve">
+    <value>带工具提示的滑动条</value>
+  </data>
+  <data name="BI_Mail" xml:space="preserve">
+    <value>邮件</value>
+  </data>
+  <data name="BI_SendToLocal" xml:space="preserve">
+    <value>发送到本地</value>
+  </data>
+  <data name="BI_SendToNetwork" xml:space="preserve">
+    <value>发送到网络</value>
+  </data>
+  <data name="BI_Resend" xml:space="preserve">
+    <value>重新发送</value>
+  </data>
+  <data name="BI_SaveToLocal" xml:space="preserve">
+    <value>保存到本地</value>
+  </data>
+  <data name="BI_EnableBluetooth" xml:space="preserve">
+    <value>开启蓝牙</value>
+  </data>
+  <data name="BI_IAmHyperlink" xml:space="preserve">
+    <value>我是超链接按钮</value>
+  </data>
+  <data name="BI_EnableThreeState" xml:space="preserve">
+    <value>启用三态</value>
+  </data>
+  <data name="BI_SelectOddItems" xml:space="preserve">
+    <value>选中奇数项目</value>
+  </data>
+  <data name="BI_SelectEvenItems" xml:space="preserve">
+    <value>选中偶数项目</value>
+  </data>
+  <data name="BI_ClearSelectedItems" xml:space="preserve">
+    <value>清空选定的项目</value>
+  </data>
+  <data name="BI_Direction" xml:space="preserve">
+    <value>方向</value>
+  </data>
+  <data name="BI_StandardButtonWithIcon" xml:space="preserve">
+    <value>带有图标文本的标准按钮</value>
+  </data>
+  <data name="BI_AccentStandardButton" xml:space="preserve">
+    <value>主题色标准按钮</value>
+  </data>
+  <data name="BI_TransparentStandardButton" xml:space="preserve">
+    <value>带有文本的透明标准按钮</value>
+  </data>
+  <data name="BI_TransparentStandardButtonWithIcon" xml:space="preserve">
+    <value>带有图标文本的透明标准按钮</value>
+  </data>
+  <data name="BI_AccentRoundButton" xml:space="preserve">
+    <value>圆角主题色按钮</value>
+  </data>
+  <data name="BI_RoundOutlineButton" xml:space="preserve">
+    <value>圆角轮廓按钮</value>
+  </data>
+  <data name="MT_FileMenu" xml:space="preserve">
+    <value>文件(_F)</value>
+  </data>
+  <data name="MT_NewSolution" xml:space="preserve">
+    <value>新建解决方案</value>
+  </data>
+  <data name="MT_GetFromVersionControl" xml:space="preserve">
+    <value>从版本控制中获取...</value>
+  </data>
+  <data name="MT_CloseSolution" xml:space="preserve">
+    <value>关闭解决方案</value>
+  </data>
+  <data name="MT_RemoteDevelopment" xml:space="preserve">
+    <value>远程开发...</value>
+  </data>
+  <data name="MT_SaveAll" xml:space="preserve">
+    <value>全部保存</value>
+  </data>
+  <data name="MT_ReloadAllFromDisk" xml:space="preserve">
+    <value>从磁盘全部重新加载</value>
+  </data>
+  <data name="MT_Export" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="MT_Print" xml:space="preserve">
+    <value>打印</value>
+  </data>
+  <data name="MT_FileEncoding" xml:space="preserve">
+    <value>文件编码</value>
+  </data>
+  <data name="MT_LineEndings" xml:space="preserve">
+    <value>行分隔符</value>
+  </data>
+  <data name="MT_SetReadOnly" xml:space="preserve">
+    <value>将文件设置为只读</value>
+  </data>
+  <data name="MT_NewProjectSettings" xml:space="preserve">
+    <value>新建项目设置</value>
+  </data>
+  <data name="MT_ManageIDESettings" xml:space="preserve">
+    <value>管理IDE设置</value>
+  </data>
+  <data name="MT_PowerSaveMode" xml:space="preserve">
+    <value>省电模式</value>
+  </data>
+  <data name="MT_InvalidateCache" xml:space="preserve">
+    <value>使缓存失效</value>
+  </data>
+  <data name="MT_EditMenu" xml:space="preserve">
+    <value>编辑(_E)</value>
+  </data>
+  <data name="MT_CopyPlainText" xml:space="preserve">
+    <value>复制为纯文本</value>
+  </data>
+  <data name="MT_SearchSelection" xml:space="preserve">
+    <value>在所选内容中搜索</value>
+  </data>
+  <data name="MT_FindNext" xml:space="preserve">
+    <value>查找下一个匹配项</value>
+  </data>
+  <data name="MT_FindPrevious" xml:space="preserve">
+    <value>查找上一个匹配项</value>
+  </data>
+  <data name="MT_SelectAllMatches" xml:space="preserve">
+    <value>选择所有匹配项</value>
+  </data>
+  <data name="MT_AddNextMatch" xml:space="preserve">
+    <value>将下一个匹配项添加到选择</value>
+  </data>
+  <data name="MT_CancelSelectedMatch" xml:space="preserve">
+    <value>取消选择的匹配项</value>
+  </data>
+  <data name="MT_FindUsages" xml:space="preserve">
+    <value>查找用法</value>
+  </data>
+  <data name="MT_NextHighlightedUsage" xml:space="preserve">
+    <value>下一个高亮显示用例</value>
+  </data>
+  <data name="MT_PreviousHighlightedUsage" xml:space="preserve">
+    <value>转到上一个高亮的元素用法</value>
+  </data>
+  <data name="MT_RecentFindUsages" xml:space="preserve">
+    <value>最近的查找用法</value>
+  </data>
+  <data name="MT_SelectAll" xml:space="preserve">
+    <value>全选</value>
+  </data>
+  <data name="MT_ViewMenu" xml:space="preserve">
+    <value>视图(_V)</value>
+  </data>
+  <data name="MT_ToolWindow" xml:space="preserve">
+    <value>工具窗口</value>
+  </data>
+  <data name="MT_Appearance" xml:space="preserve">
+    <value>外观</value>
+  </data>
+  <data name="MT_QuickDefinition" xml:space="preserve">
+    <value>快速定义</value>
+  </data>
+  <data name="MT_QuickDefinitionType" xml:space="preserve">
+    <value>快速定义类型</value>
+  </data>
+  <data name="MT_RecentLocations" xml:space="preserve">
+    <value>最近的位置</value>
+  </data>
+  <data name="MT_RecentFiles" xml:space="preserve">
+    <value>最近的文件</value>
+  </data>
+  <data name="MT_RecentlyChangedFiles" xml:space="preserve">
+    <value>最近更改的文件</value>
+  </data>
+  <data name="MT_RecentChanges" xml:space="preserve">
+    <value>最近的更改</value>
+  </data>
+  <data name="MT_NavigationMenu" xml:space="preserve">
+    <value>导航(_N)</value>
+  </data>
+  <data name="MT_SearchEverywhere" xml:space="preserve">
+    <value>随处搜索</value>
+  </data>
+  <data name="MT_Class" xml:space="preserve">
+    <value>类</value>
+  </data>
+  <data name="MT_Symbol" xml:space="preserve">
+    <value>符号</value>
+  </data>
+  <data name="MT_CodeMenu" xml:space="preserve">
+    <value>代码(_C)</value>
+  </data>
+  <data name="MT_CodeCompletion" xml:space="preserve">
+    <value>代码补全</value>
+  </data>
+  <data name="MT_InspectCode" xml:space="preserve">
+    <value>检查代码</value>
+  </data>
+  <data name="MT_AnalyzeCode" xml:space="preserve">
+    <value>分析代码</value>
+  </data>
+  <data name="MT_InsertLiveTemplate" xml:space="preserve">
+    <value>插入实时模板</value>
+  </data>
+  <data name="MT_SaveAsLiveTemplate" xml:space="preserve">
+    <value>保存为实时模板</value>
+  </data>
+  <data name="MT_SurroundWithTemplate" xml:space="preserve">
+    <value>使用模板包围</value>
+  </data>
+  <data name="MT_UnwrapRemove" xml:space="preserve">
+    <value>解包/移除</value>
+  </data>
+  <data name="MT_Collapse" xml:space="preserve">
+    <value>折叠</value>
+  </data>
+  <data name="MT_RefactorMenu" xml:space="preserve">
+    <value>重构(_R)</value>
+  </data>
+  <data name="MT_BuildMenu" xml:space="preserve">
+    <value>构建(_B)</value>
+  </data>
+  <data name="MT_BuildSolution" xml:space="preserve">
+    <value>构建解决方案</value>
+  </data>
+  <data name="MT_RebuildSolution" xml:space="preserve">
+    <value>重新构建解决方案</value>
+  </data>
+  <data name="MT_CleanSolution" xml:space="preserve">
+    <value>清理解决方案</value>
+  </data>
+  <data name="MT_BuildCurrentProject" xml:space="preserve">
+    <value>构建当前项目</value>
+  </data>
+  <data name="MT_BuildStartupProject" xml:space="preserve">
+    <value>构建启动项目: Gallery</value>
+  </data>
+  <data name="MT_AdvancedBuild" xml:space="preserve">
+    <value>高级构建操作</value>
+  </data>
+  <data name="MT_ChangeSolutionConfig" xml:space="preserve">
+    <value>更改解决方案配置</value>
+  </data>
+  <data name="MT_RunMenu" xml:space="preserve">
+    <value>运行(_U)</value>
+  </data>
+  <data name="MT_RerunProject" xml:space="preserve">
+    <value>重新运行.'NET项目: Gallery'</value>
+  </data>
+  <data name="MT_DebugGallery" xml:space="preserve">
+    <value>调试'Gallery'</value>
+  </data>
+  <data name="MT_RunWithProfiler" xml:space="preserve">
+    <value>使用分析器运行</value>
+  </data>
+  <data name="MT_AnalyzeGallery" xml:space="preserve">
+    <value>分析'Gallery'(使用 时间线)</value>
+  </data>
+  <data name="MT_AttachToProcess" xml:space="preserve">
+    <value>附加到进程</value>
+  </data>
+  <data name="MT_ManageAccounts" xml:space="preserve">
+    <value>管理账户和设置</value>
+  </data>
+  <data name="MT_PaymentMethods" xml:space="preserve">
+    <value>支付方式</value>
+  </data>
+  <data name="MT_RedeemCode" xml:space="preserve">
+    <value>兑换代码和礼品卡</value>
+  </data>
+  <data name="MT_CreationDate" xml:space="preserve">
+    <value>创建日期</value>
+  </data>
+  <data name="MT_TakeDate" xml:space="preserve">
+    <value>拍摄日期</value>
+  </data>
+  <data name="MT_ModificationDate" xml:space="preserve">
+    <value>修改日期</value>
+  </data>
+  <data name="MT_Rotate" xml:space="preserve">
+    <value>旋转</value>
+  </data>
+  <data name="MT_ZoomIn" xml:space="preserve">
+    <value>放大</value>
+  </data>
+  <data name="MT_ZoomOut" xml:space="preserve">
+    <value>缩小</value>
+  </data>
+  <data name="MT_CommandText" xml:space="preserve">
+    <value>执行的命令:</value>
+  </data>
+  <data name="MT_LoginName" xml:space="preserve">
+    <value>妃爱亲</value>
+  </data>
+  <data name="OnlineDocument" xml:space="preserve">
+    <value>在线文档</value>
+  </data>
+  <data name="ToggleTheme" xml:space="preserve">
+    <value>切换主题</value>
+  </data>
+  <data name="Pin" xml:space="preserve">
+    <value>置顶</value>
+  </data>
+  <data name="UnPin" xml:space="preserve">
+    <value>取消置顶</value>
+  </data>
 </root>

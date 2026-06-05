@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
 using AvaloniaFluentUI.Controls;
@@ -70,7 +71,7 @@ public partial class DialogBoxAndPopupView : ViewBase
             } 
         };
 
-        taskDialog.XamlRoot = VisualRoot as Visual; 
+        taskDialog.XamlRoot = TopLevel.GetTopLevel(this); 
         _=await taskDialog.ShowAsync();
     }
 }

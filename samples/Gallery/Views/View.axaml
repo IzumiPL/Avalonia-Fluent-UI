@@ -3,6 +3,7 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
   xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -186,15 +187,16 @@
     </ui:CodeCard>
 
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SimpleSettingsCard]}">
-      <fui:SettingsExpander Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Volume]}">
-        <fui:SettingsExpander.Footer>
-          <fui:ToolTipSlider
-            Width="168"
-            MinHeight="0"
-            MaxHeight="100"
-            Value="32"/>
-        </fui:SettingsExpander.Footer>
-      </fui:SettingsExpander>
+      <fui:SettingCard
+        Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SoundDescription]}"
+        Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Volume]}"
+        IconData="{x:Static fi:FluentIcon.Volume}">
+        <fui:ToolTipSlider
+          Width="168"
+          MinHeight="0"
+          MaxHeight="100"
+          Value="32"/>
+      </fui:SettingCard>
     </ui:CodeCard>
 
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_ClickableSettingsCard]}">
