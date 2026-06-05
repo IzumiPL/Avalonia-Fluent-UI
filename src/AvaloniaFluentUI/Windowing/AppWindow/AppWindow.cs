@@ -17,7 +17,7 @@ using AvaloniaFluentUI.Core;
 using AvaloniaFluentUI.Controls.Primitives;
 using AvaloniaFluentUI.Media;
 
-namespace AvaloniaFluentUI.Controls.Windowing;
+namespace AvaloniaFluentUI.Windowing;
 
 /// <summary>
 /// Custom Window that supports a modern Windows look and title bar customization,

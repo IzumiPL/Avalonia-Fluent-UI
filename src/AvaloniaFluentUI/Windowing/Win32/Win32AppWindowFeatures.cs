@@ -6,7 +6,7 @@ using AvaloniaFluentUI.Controls.Interop.Win32;
 using AvaloniaFluentUI.Controls.Interop.WinRT;
 using static AvaloniaFluentUI.Controls.Interop.Win32Interop;
 
-namespace AvaloniaFluentUI.Controls.Windowing;
+namespace AvaloniaFluentUI.Windowing;
 
 internal class Win32AppWindowFeatures : IAppWindowPlatformFeatures
 {

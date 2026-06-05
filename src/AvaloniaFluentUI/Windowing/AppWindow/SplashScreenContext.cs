@@ -4,7 +4,7 @@ using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls;
 
-namespace AvaloniaFluentUI.Controls.Windowing;
+namespace AvaloniaFluentUI.Windowing;
 
 internal class SplashScreenContext
 {

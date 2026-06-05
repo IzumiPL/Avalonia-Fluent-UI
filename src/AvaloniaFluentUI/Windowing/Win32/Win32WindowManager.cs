@@ -11,7 +11,7 @@ using Avalonia.Platform;
 using AvaloniaFluentUI.Controls.Interop;
 using AvaloniaFluentUI.Controls.Interop.Win32;
 
-namespace AvaloniaFluentUI.Controls.Windowing;
+namespace AvaloniaFluentUI.Windowing;
 
 internal unsafe class Win32WindowManager
 {

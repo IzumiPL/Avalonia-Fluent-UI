@@ -1,6 +1,6 @@
 ﻿using Avalonia.Media;
 
-namespace AvaloniaFluentUI.Controls.Windowing;
+namespace AvaloniaFluentUI.Windowing;
 
 /// <summary>
 /// Represents constants that define the TaskBarProgressBar's state

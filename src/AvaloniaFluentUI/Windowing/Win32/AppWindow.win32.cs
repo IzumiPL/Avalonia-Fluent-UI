@@ -2,7 +2,7 @@
 using Avalonia.Controls;
 using AvaloniaFluentUI.Controls.Interop;
 
-namespace AvaloniaFluentUI.Controls.Windowing;
+namespace AvaloniaFluentUI.Windowing;
 
 public partial class AppWindow
 {

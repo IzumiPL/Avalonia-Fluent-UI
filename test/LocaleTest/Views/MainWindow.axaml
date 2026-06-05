@@ -6,7 +6,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:vm="using:LocaleTest.ViewModels"
-  xmlns:w="clr-namespace:AvaloniaFluentUI.Controls.Windowing;assembly=AvaloniaFluentUI"
+  xmlns:w="clr-namespace:AvaloniaFluentUI.Windowing;assembly=AvaloniaFluentUI"
   d:DesignHeight="450"
   d:DesignWidth="800"
   x:DataType="vm:MainWindowViewModel"
@@ -41,7 +41,7 @@
   <Grid
     Margin="0,50,0,0"
     HorizontalAlignment="Stretch"
-    RowDefinitions="Auto, Auto, *"
+    RowDefinitions="Auto, Auto, Auto, *"
     RowSpacing="12">
 
     <ui:SearchTextBox
@@ -92,16 +92,15 @@
       <ui:SegmentedItem Content="{Binding Scroll}"/>
       <ui:SegmentedItem Content="{Binding Navigation}"/>
       <ui:SegmentedItem Content="{Binding Setting}"/>
-
-      <ui:SegmentedToggleView.Content>
-        <TextBlock
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          FontSize="24"
-          Text="{Binding SelectedItemFormat}"
-          TextAlignment="Center"/>
-      </ui:SegmentedToggleView.Content>
     </ui:SegmentedToggleView>
+
+    <TextBlock
+      Grid.Row="3"
+      HorizontalAlignment="Center"
+      VerticalAlignment="Center"
+      FontSize="24"
+      Text="{Binding SelectedItemFormat}"
+      TextAlignment="Center"/>
   </Grid>
 
 </w:AppWindow>

@@ -15,7 +15,7 @@ using Avalonia.Threading;
 using Avalonia.VisualTree;
 using AvaloniaFluentUI.Core;
 using AvaloniaFluentUI.Controls.Primitives;
-using AvaloniaFluentUI.Controls.Windowing;
+using AvaloniaFluentUI.Windowing;
 
 namespace AvaloniaFluentUI.Controls;
 

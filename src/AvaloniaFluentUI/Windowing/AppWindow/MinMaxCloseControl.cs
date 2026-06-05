@@ -6,7 +6,7 @@ using Avalonia.Interactivity;
 using Avalonia.Input;
 using AvaloniaFluentUI.Core;
 
-namespace AvaloniaFluentUI.Controls.Windowing;
+namespace AvaloniaFluentUI.Windowing;
 
 /// <summary>
 /// Represents the caption buttons for a <see cref="AppWindow"/>

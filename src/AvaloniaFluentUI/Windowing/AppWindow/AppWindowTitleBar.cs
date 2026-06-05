@@ -2,7 +2,7 @@
 using Avalonia.Media;
 using Avalonia.Utilities;
 
-namespace AvaloniaFluentUI.Controls.Windowing;
+namespace AvaloniaFluentUI.Windowing;
 
 /// <summary>
 /// Values describing the complexity the title bar hit test logic should use

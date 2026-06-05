@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Avalonia.Media;
 
-namespace AvaloniaFluentUI.Controls.Windowing;
+namespace AvaloniaFluentUI.Windowing;
 
 /// <summary>
 /// Defines a user specified UWP-like SplashScreen for CoreWindow
