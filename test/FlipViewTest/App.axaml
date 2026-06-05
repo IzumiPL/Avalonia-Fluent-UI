@@ -1,0 +1,17 @@
+<Application
+  x:Class="FlipViewTest.App"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:fs="clr-namespace:AvaloniaFluentUI.Styling;assembly=AvaloniaFluentUI"
+  xmlns:local="using:FlipViewTest"
+  RequestedThemeVariant="Default">
+  <!--  "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options.  -->
+
+  <Application.DataTemplates>
+    <local:ViewLocator/>
+  </Application.DataTemplates>
+
+  <Application.Styles>
+    <fs:FluentAvaloniaTheme/>
+  </Application.Styles>
+</Application>
