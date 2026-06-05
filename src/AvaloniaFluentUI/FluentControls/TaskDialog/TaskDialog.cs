@@ -15,7 +15,7 @@ using Avalonia.Threading;
 using Avalonia.VisualTree;
 using AvaloniaFluentUI.Core;
 using AvaloniaFluentUI.Controls.Primitives;
-using AvaloniaFluentUI.Controls.Windowing;
+using AvaloniaFluentUI.Windowing;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -474,7 +474,7 @@ public partial class TaskDialog : ContentControl
         }
 
         object result = null;
-        _previousFocus = TopLevel.GetTopLevel(owner).FocusManager.GetFocusedElement();
+        _previousFocus = TopLevel.GetTopLevel(owner)?.FocusManager?.GetFocusedElement();
 
         if (showHosted || !(owner is WindowBase))
         {
@@ -889,7 +889,9 @@ public partial class TaskDialog : ContentControl
         }
         else
         {
-            var next = KeyboardNavigationHandler.GetNext(this, NavigationDirection.Next);
+            var fm = TopLevel.GetTopLevel(this).FocusManager;
+            // TODO: v3 - does this work?
+            var next = FocusManager.FindFirstFocusableElement(this);
             if (next != null)
             {
                 next.Focus();
