@@ -3,6 +3,9 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
 
+  <StreamGeometry x:Key="DropDown">M0 9.046q0-0.422 0.164-0.785t0.433-0.633 0.632-0.433 0.785-0.164q0.445 0 0.773 0.152t0.632 0.457l12.58 12.58 12.58-12.58q0.609-0.609 1.405-0.609 0.422 0 0.785 0.164t0.633 0.433 0.433 0.633 0.164 0.785q0 0.82-0.586 1.405l-14.009 14.009q-0.586 0.586-1.406 0.586t-1.406-0.586l-14.009-14.009q-0.586-0.586-0.586-1.405z</StreamGeometry>
+  <StreamGeometry x:Key="Close">M3.154 1.923l0.466 0.091 0.399 0.274 11.442 11.442 11.442-11.442 0.399-0.274 0.466-0.091 0.466 0.091 0.399 0.274 0.274 0.399 0.091 0.466-0.091 0.466-0.274 0.399-11.442 11.442 11.442 11.442 0.274 0.399 0.091 0.466-0.091 0.466-0.274 0.399-0.399 0.274-0.466 0.091-0.466-0.091-0.399-0.274-11.442-11.442-11.442 11.442-0.399 0.274-0.466 0.091-0.466-0.091-0.399-0.274-0.274-0.399-0.091-0.466 0.091-0.466 0.274-0.399 11.442-11.442-11.442-11.442-0.274-0.399-0.091-0.466 0.091-0.466 0.274-0.399 0.399-0.274 0.466-0.091z</StreamGeometry>
+
   <ControlTheme x:Key="{x:Type ui:MultiSelectionComboBox}" TargetType="ui:MultiSelectionComboBox">
     <Setter Property="Height" Value="35"/>
     <Setter Property="Padding" Value="0 0 5 0"/>
@@ -47,7 +50,7 @@
                 Name="PART_Icon"
                 Width="10"
                 Height="10"
-                Data="{StaticResource ChevronDownMed}"/>
+                Data="{StaticResource DropDown}"/>
             </Button>
 
             <ui:FluentPopup
