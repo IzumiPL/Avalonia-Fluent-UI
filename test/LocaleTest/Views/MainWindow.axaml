@@ -82,7 +82,7 @@
     </StackPanel>
     <ui:SegmentedToggleView
       Grid.Row="2"
-      HorizontalAlignment="Stretch"
+      HorizontalAlignment="Center"
       SelectedItem="{Binding SelectedItem}">
       <ui:SegmentedItem Content="{Binding Home}" IsSelected="True"/>
       <ui:SegmentedItem Content="{Binding Icon}"/>

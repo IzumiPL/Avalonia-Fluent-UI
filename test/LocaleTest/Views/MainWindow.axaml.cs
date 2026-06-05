@@ -1,11 +1,6 @@
-using System;
-using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Media;
-using Avalonia.Styling;
-using AvaloniaFluentUI.Controls.Windowing;
+using AvaloniaFluentUI.Windowing;
 using AvaloniaFluentUI.Locale;
-using AvaloniaFluentUI.Styling;
 
 namespace LocaleTest.Views;
 
