@@ -16,29 +16,23 @@
 
   <!--  Caption  -->
   <x:Double x:Key="CaptionFontSize">12</x:Double>
-
   <!--  Body  -->
   <x:Double x:Key="BodyFontSize">14</x:Double>
-
   <!--  StrongBody  -->
   <x:Double x:Key="StrongBodyFontSize">14</x:Double>
-
   <!--  SubTitle  -->
   <x:Double x:Key="SubTitleFontSize">20</x:Double>
-
   <!--  Title  -->
   <x:Double x:Key="TitleFontSize">28</x:Double>
-
   <!--  LargeTitle  -->
   <x:Double x:Key="LargeTitleFontSize">40</x:Double>
-
   <!--  Display  -->
   <x:Double x:Key="DisplayFontSize">68</x:Double>
 
   <ControlTheme x:Key="{x:Type TextBlock}" TargetType="TextBlock">
     <Setter Property="FontSize" Value="{StaticResource BodyFontSize}"/>
     <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
-    <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+    <!-- <Setter Property="TextWrapping" Value="Wrap"/> -->
     <Setter Property="FontWeight" Value="Normal"/>
 
     <Style Selector="^.Caption">
