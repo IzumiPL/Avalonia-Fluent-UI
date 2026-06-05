@@ -1,7 +1,6 @@
 ﻿using System;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Utilities;
 
 namespace AvaloniaFluentUI.Core;
 
@@ -71,5 +70,4 @@ public class VisualStateHelper
                 cr.Skip(1);
         }
     }
-
 }
