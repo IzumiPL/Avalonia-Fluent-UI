@@ -5,29 +5,22 @@
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ApplicationId>com.avaloniafluentui.gallery</ApplicationId>
-    <ApplicationVersion>1</ApplicationVersion>
-    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>114</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
     <AndroidPackageFormat>apk</AndroidPackageFormat>
-    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+<!--    <RunAOTCompilation>true</RunAOTCompilation>-->
+<!--    <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>-->
     <NoWarn>CA1416;CA1422</NoWarn>
   </PropertyGroup>
 
   
-<PropertyGroup>
-    <!-- AOT 编译 IL→Native -->
-    <RunOTCompilation>true</RunOTCompilation>
-    <!-- 按 profile 优化，比全量 AOT 小很多 -->
-    <EnableProfiledot>true</EnableProfiledot>
-    <!-- AOT 后移除 IL，减小包体积 -->
-    <StripILAfterOT>true</StripILAfterOT>
-    <!-- 裁剪未用代码 -->
-    <PublishTrimmed>true</PublishTrimmed>
-    <TrimMode>full</TrimMode>
-</PropertyGroup>
-  
   <ItemGroup>
     <PackageReference Include="Avalonia.Android" />
     <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" />
+  </ItemGroup>
+  
+    <ItemGroup>
+    <Content Include="..\Gallery\Assets\Locale\**" CopyToOutputDirectory="PreserveNewest" Link="Assets\Locale\%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
 
   <ItemGroup>
