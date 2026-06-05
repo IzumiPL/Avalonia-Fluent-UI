@@ -1,24 +1,37 @@
 using System;
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 
 namespace AvaloniaFluentUI.Controls;
 
-[TemplatePart(Name = "PART_DropDownButton", Type = typeof(Button))]
-[TemplatePart(Name = "PART_MultiSelectionPopup", Type = typeof(Popup))]
-[TemplatePart(Name = "PART_MultiSelectionView", Type = typeof(MultiSelectionView))]
+[TemplatePart(Name = PART_WATERMARK, Type = typeof(TextBlock))]
+[TemplatePart(Name = PART_DROP_DOWN_BUTTON, Type = typeof(Button))]
+[TemplatePart(Name = PART_MULTI_SELECTION_POPUP, Type = typeof(Popup))]
+[TemplatePart(Name = PART_MULTI_SELECTION_VIEW, Type = typeof(MultiSelectionView))]
 public class MultiSelectionComboBox : TemplatedControl
 {
-    public static readonly StyledProperty<IEnumerable?> ItemsSourceProperty =
+    public static readonly StyledProperty<IEnumerable> ItemsSourceProperty =
         AvaloniaProperty.Register<MultiSelectionComboBox, IEnumerable?>(nameof(ItemsSource));
 
     public static readonly StyledProperty<IList?> SelectedItemsProperty =
         AvaloniaProperty.Register<MultiSelectionComboBox, IList?>(nameof(SelectedItems));
+
+    public static readonly StyledProperty<string> WatermarkProperty =
+        AvaloniaProperty.Register<MultiSelectionComboBox, string>(nameof(Watermark));
+
+    public string Watermark
+    {
+        get => GetValue(WatermarkProperty);
+        set => SetValue(WatermarkProperty, value);
+    }
 
     public IEnumerable? ItemsSource
     {
@@ -32,9 +45,15 @@ public class MultiSelectionComboBox : TemplatedControl
         set => SetValue(SelectedItemsProperty, value);
     }
 
+    private TextBlock? _watermark;
     private Popup? _multiSelectionPopup;
     private Button? _dropDownButton;
     private MultiSelectionView? _multiSelectionView;
+    
+    private const string PART_WATERMARK = "PART_Watermark";
+    private const string PART_DROP_DOWN_BUTTON = "PART_DropDownButton";
+    private const string PART_MULTI_SELECTION_POPUP = "PART_MultiSelectionPopup";
+    private const string PART_MULTI_SELECTION_VIEW = "PART_MultiSelectionView";
 
     public MultiSelectionComboBox()
     {
@@ -45,14 +64,13 @@ public class MultiSelectionComboBox : TemplatedControl
     {
         base.OnApplyTemplate(e);
 
-        if (_dropDownButton != null)
-        {
-            _dropDownButton.Click -= OnDropDownButtonClick;
-        }
+        _dropDownButton?.Click -= OnDropDownButtonClick;
+        _multiSelectionView?.SelectionChanged -= OnSelectedItemsChanged;
 
-        _dropDownButton = e.NameScope.Find<Button>("PART_DropDownButton");
-        _multiSelectionPopup = e.NameScope.Find<Popup>("PART_MultiSelectionPopup");
-        _multiSelectionView = e.NameScope.Find<MultiSelectionView>("PART_MultiSelectionView");
+        _watermark = e.NameScope.Find<TextBlock>(PART_WATERMARK);
+        _dropDownButton = e.NameScope.Find<Button>(PART_DROP_DOWN_BUTTON);
+        _multiSelectionPopup = e.NameScope.Find<Popup>(PART_MULTI_SELECTION_POPUP);
+        _multiSelectionView = e.NameScope.Find<MultiSelectionView>(PART_MULTI_SELECTION_VIEW);
 
         if (_multiSelectionPopup != null)
         {
@@ -69,12 +87,20 @@ public class MultiSelectionComboBox : TemplatedControl
         {
             if (SelectedItems == null)
             {
-                Console.WriteLine("等于 Null");
                 SetCurrentValue(SelectedItemsProperty, new ObservableCollection<object>());
             }
             _multiSelectionView.ItemsSource = ItemsSource;
             _multiSelectionView.SelectedItems = SelectedItems;
+
+            _watermark?.IsVisible = _multiSelectionView.SelectedItems?.Count == 0;
+            _multiSelectionView.SelectionChanged += OnSelectedItemsChanged;
         }
+    }
+
+    private async void OnSelectedItemsChanged(object sender, SelectionChangedEventArgs e)
+    {
+        await Task.Yield();
+        _watermark?.IsVisible = _multiSelectionView?.SelectedItems?.Count == 0;
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -96,6 +122,16 @@ public class MultiSelectionComboBox : TemplatedControl
         {
             _multiSelectionPopup.Width = Bounds.Width;
             _multiSelectionPopup.IsOpen = !_multiSelectionPopup.IsOpen;
+        }
+    }
+
+    protected override void OnPointerReleased(PointerReleasedEventArgs e)
+    {
+        base.OnPointerReleased(e);
+        if (_multiSelectionPopup != null)
+        {
+            _multiSelectionPopup.Width = Bounds.Width;
+            _multiSelectionPopup.IsOpen = true;
         }
     }
 
