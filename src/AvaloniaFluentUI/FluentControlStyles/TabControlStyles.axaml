@@ -21,7 +21,7 @@
     </Border>
   </Design.PreviewWith>
 
-  <x:Double x:Key="TabItemLineWidth">18</x:Double>
+  <x:Double x:Key="TabItemLineWidth">28</x:Double>
   <!--
     Resources moved to BaseResources.axaml to be shared with TabStrip
     
@@ -118,25 +118,9 @@
       </Setter>
     </Style>
 
-    <Style Selector="^ /template/ Rectangle#PART_SelectedPipe">
-      <Setter Property="Transitions">
-        <Transitions>
-          <DoubleTransition
-            Easing="CircularEaseOut"
-            Property="Opacity"
-            Duration="0:0:0.5"/>
-        </Transitions>
-      </Setter>
-    </Style>
-
     <Style Selector="^:selected">
       <Setter Property="Background" Value="Transparent"/>
       <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-
-      <Style Selector="^ /template/ Rectangle#PART_SelectedPipe">
-        <Setter Property="IsVisible" Value="True"/>
-        <Setter Property="Opacity" Value="1.0"/>
-      </Style>
     </Style>
 
     <Style Selector="^:pointerover">
@@ -152,6 +136,61 @@
     <Style Selector="^:disabled /template/ Border#PART_LayoutRoot">
       <Setter Property="Background" Value="Transparent"/>
       <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+    </Style>
+
+    <Style Selector="^ /template/ Rectangle#PART_SelectedPipe">
+      <Setter Property="Opacity" Value="0"/>
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Opacity" Duration="0:0:0.114"/>
+          <TransformOperationsTransition
+            Easing="CircularEaseOut"
+            Property="RenderTransform"
+            Duration="0:0:0.25"/>
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="^[TabStripPlacement=Top],     ^[TabStripPlacement=Bottom]">
+      <Style Selector="^ /template/ Rectangle#PART_SelectedPipe">
+        <Setter Property="RenderTransform" Value="scale(0.0, 1.0)"/>
+        <Setter Property="RenderTransformOrigin" Value="50%, 100%"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^[TabStripPlacement=Left],     ^[TabStripPlacement=Right]">
+      <Style Selector="^ /template/ Rectangle#PART_SelectedPipe">
+        <Setter Property="RenderTransform" Value="scale(1.0, 0.0)"/>
+        <Setter Property="RenderTransformOrigin" Value="100%, 50%"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:selected[TabStripPlacement=Top],     ^:selected[TabStripPlacement=Bottom]">
+      <Style Selector="^ /template/ Rectangle#PART_SelectedPipe">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="RenderTransform" Value="scale(0.75, 1.0)"/>
+        <Setter Property="Opacity" Value="1"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:pressed[TabStripPlacement=Top],     ^:pressed[TabStripPlacement=Bottom]">
+      <Style Selector="^ /template/ Rectangle#PART_SelectedPipe">
+        <Setter Property="RenderTransform" Value="scale(0.55, 1.0)"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:selected[TabStripPlacement=Left],     ^:selected[TabStripPlacement=Right]">
+      <Style Selector="^ /template/ Rectangle#PART_SelectedPipe">
+        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="RenderTransform" Value="scale(1.0, 0.75)"/>
+        <Setter Property="Opacity" Value="1"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:pressed[TabStripPlacement=Left],     ^:pressed[TabStripPlacement=Right]">
+      <Style Selector="^ /template/ Rectangle#PART_SelectedPipe">
+        <Setter Property="RenderTransform" Value="scale(1.0, 0.55)"/>
+      </Style>
     </Style>
 
     <Style Selector="^[TabStripPlacement=Left]">
