@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,8 +25,8 @@ namespace AvaloniaFluentUI.Controls;
 
 [TemplatePart(PART_CURRENT_IMAGE, typeof(Image))]
 [TemplatePart(PART_NEXT_IMAGE, typeof(Image))]
-[TemplatePart(PART_PREVIOUS_BUTTON, typeof(ToolButton))]
-[TemplatePart(PART_NEXT_BUTTON, typeof(ToolButton))]
+[TemplatePart(PART_PREVIOUS_BUTTON, typeof(Button))]
+[TemplatePart(PART_NEXT_BUTTON, typeof(Button))]
 public class FlipView : TemplatedControl
 {
     public static readonly StyledProperty<IEnumerable<string>?> ImageSourceProperty =
@@ -47,7 +48,7 @@ public class FlipView : TemplatedControl
         AvaloniaProperty.Register<FlipView, int>(nameof(DecodeToWidth));
     
     public static readonly StyledProperty<double> IntervalProperty =
-        AvaloniaProperty.Register<FlipView, double>(nameof(Interval), defaultValue: 1500, validate: value => value >= 400);
+        AvaloniaProperty.Register<FlipView, double>(nameof(Interval), defaultValue: 1500, validate: value => value >= 600);
 
     public static readonly StyledProperty<bool> IsAutoPlayProperty =
         AvaloniaProperty.Register<FlipView, bool>(nameof(IsAutoPlay));
@@ -136,8 +137,8 @@ public class FlipView : TemplatedControl
     private bool _isRunning;
     private Image? _currentImage;
     private Image? _nextImage;
-    private ToolButton? _previousButton;
-    private ToolButton? _nextButton;
+    private Button? _previousButton;
+    private Button? _nextButton;
 
     private readonly DispatcherTimer _autoPlayTimer;
     private readonly TranslateTransform _currentTransform = new();
@@ -160,45 +161,27 @@ public class FlipView : TemplatedControl
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
-#if DEBUG
-        Debug.WriteLine("Apply Template");
-#endif
-        
         base.OnApplyTemplate(e);
-        if (_previousButton != null)
-        {
-            _previousButton.Click -= OnPreviousButtonClick;
-        }
-        if (_nextButton != null)
-        {
-            _nextButton.Click -= OnNextButtonClick;
-        }
+        _previousButton?.Click -= OnPreviousButtonClick;
+        _nextButton?.Click -= OnNextButtonClick;
 
         _currentImage = e.NameScope.Find<Image>(PART_CURRENT_IMAGE);
         _nextImage = e.NameScope.Find<Image>(PART_NEXT_IMAGE);
-        _previousButton = e.NameScope.Find<ToolButton>(PART_PREVIOUS_BUTTON);
-        _nextButton = e.NameScope.Find<ToolButton>(PART_NEXT_BUTTON);
+        _previousButton = e.NameScope.Find<Button>(PART_PREVIOUS_BUTTON);
+        _nextButton = e.NameScope.Find<Button>(PART_NEXT_BUTTON);
 
-        if (_previousButton != null)
-        {
-            _previousButton.Click += OnPreviousButtonClick;
-        }
-        if (_nextButton != null)
-        {
-            _nextButton.Click += OnNextButtonClick;
-        }
+        _previousButton?.Click += OnPreviousButtonClick;
+        _nextButton?.Click += OnNextButtonClick;
 
         _currentImage?.RenderTransform = _currentTransform;
         _nextImage?.RenderTransform = _nextTransform;
-        
-        // if (_items.Count <= -3 && ItemCount > 0) { ReloadImages(); }
     }
 
     public FlipView()
     {
         _autoPlayTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(Interval) };
         _autoPlayTimer.Tick += OnAutoPlay;
-        this.AddHandler(RequestBringIntoViewEvent, OnRequestBringIntoView);
+        AddHandler(RequestBringIntoViewEvent, OnRequestBringIntoView);
     }
 
     private void OnRequestBringIntoView(object? sender, RequestBringIntoViewEventArgs e) => e.Handled = true;
@@ -238,13 +221,13 @@ public class FlipView : TemplatedControl
         }
         else
         {
-            Stop();
+            _autoPlayTimer.Stop();
         }
     }
 
     private void HandleIntervalChanged()
     {
-        if (IsAutoPlay) { Stop(); }
+        if (IsAutoPlay) { _autoPlayTimer.Stop(); }
 
         _autoPlayTimer.Interval = TimeSpan.FromMilliseconds(Interval);
         
@@ -296,15 +279,16 @@ public class FlipView : TemplatedControl
     {
         base.OnDetachedFromVisualTree(e);
 
-        Stop();
-        
+        _autoPlayTimer.Stop();
+
+        _cancelAnimationCts?.Cancel();
         _disposeCts?.Cancel();
         _disposeCts = new CancellationTokenSource();
         var token = _disposeCts.Token;
         
         Dispatcher.UIThread.Post(() =>
         {
-            if (token.IsCancellationRequested) { return;}
+            if (token.IsCancellationRequested) { return; }
             
             DisposeImage();
         },
@@ -315,7 +299,7 @@ public class FlipView : TemplatedControl
     { 
         _currentImage?.Source = null; 
         _nextImage?.Source = null; 
-        SelectedIndex = -1;
+        // SelectedIndex = -1;
 #if DEBUG
         Debug.WriteLine("Dispose Image");
 #endif
@@ -333,7 +317,7 @@ public class FlipView : TemplatedControl
 
         if (change.Property == ImageSourceProperty)
         {
-            Stop();
+            _autoPlayTimer.Stop();
             DisposeImage();
             
             if (this.IsAttachedToVisualTree())
@@ -359,7 +343,7 @@ public class FlipView : TemplatedControl
                 return;
             }
             if (IsPointerOver) { UpdateButtonVisibility(); }
-            _=RunSliderAnimationAsync(_items[nv], nv, nv > ov);
+            RunSliderAnimationAsync(_items[nv], nv, nv > ov);
         }
         else if (change.Property == ImageInterpolationModeProperty)
         {
@@ -399,63 +383,90 @@ public class FlipView : TemplatedControl
 #endif
 
         ItemCount = imagePaths.Count;
-        bool isFirstImage = true;
+        if (SelectedIndex >= ItemCount || SelectedIndex < 0)
+        {
+            SelectedIndex = 0;
+        }
+        
+        string path = imagePaths[SelectedIndex];
+        imagePaths.RemoveAt(SelectedIndex);
+        var cb = LoadBitMap(path, DecodeToHeight, DecodeToWidth);
 
+        Dispatcher.UIThread.Post(() =>
+        {
+            _currentImage?.Source = cb;
+            Debug.WriteLine(_currentImage);
+        }, DispatcherPriority.Render);
+        
         await foreach (var bitmap in LoadImagesAsync(imagePaths))
         {
             _items.Add(bitmap);
-
-            if (isFirstImage)
-            {
-                isFirstImage = false;
-                _currentImage?.Source = _items[0];
-                SelectedIndex = 0;
-                ResetTransform();
-            }
+#if DEBUG
+            Debug.WriteLine("Load Image: " + bitmap);
+#endif
         }
+        _items.Insert(SelectedIndex, cb);
+
+#if DEBUG
+        Debug.WriteLine("Current Index: " + SelectedIndex);
+        Debug.WriteLine("Is Auto Play: " + IsAutoPlay);
+#endif
         
-        Stop();
+        ResetTransform();
+        if (IsAutoPlay) Start();
     }
 
     private async IAsyncEnumerable<Bitmap> LoadImagesAsync(IEnumerable<string> imagePaths)
     {
-        int decodeHeight = DecodeToHeight;
-        int decodeWidth = DecodeToWidth;
-
         foreach (var path in imagePaths)
         {
+            int dh = DecodeToHeight;
+            int dw = DecodeToWidth;
             Bitmap? bitmap = null;
-            try
-            {
-                bitmap = await Task.Run(() =>
-                {
-                    if (path.StartsWith("avares://"))
-                    {
-                        using var stream = AssetLoader.Open(new Uri(path));
-                        if (decodeHeight > 0) { return Bitmap.DecodeToHeight(stream, decodeHeight); }
-                        if (decodeWidth > 0) { return Bitmap.DecodeToWidth(stream, decodeWidth); }
-                        return new Bitmap(stream);
-                    }
-                    else
-                    {
-                        using var stream = new System.IO.FileStream(path, System.IO.FileMode.Open, System.IO.FileAccess.Read);
-                        if (decodeHeight > -0) { return Bitmap.DecodeToHeight(stream, decodeHeight); }
-                        if (decodeWidth > -0) { return Bitmap.DecodeToWidth(stream, decodeWidth); }
-                        return new Bitmap(stream);
-                    }
-                });
-            }
-            catch (Exception ex)
-            {
-    #if DEBUG
-                Debug.WriteLine($"Failed to load image '{path}': {ex.Message}");
-    #endif
-            }
+            
+            await Task.Run(() => { bitmap = LoadBitMap(path, dh, dw); });
 
             if (bitmap != null)
             {
                 yield return bitmap;
             }
+        }
+    }
+
+    private Bitmap LoadBitMap(string path, int dh = 0, int dw = 0)
+    {
+        try
+        {
+            if (path.StartsWith("avares://"))
+            {
+                using var stream = AssetLoader.Open(new Uri(path));
+                if (dh > 0)
+                {
+                    return Bitmap.DecodeToHeight(stream, dh);
+                }
+                if (dw > 0)
+                {
+                    return Bitmap.DecodeToWidth(stream, dw); 
+                }
+                return new Bitmap(stream);
+            }
+            else
+            {
+                using var stream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                if (dh > 0)
+                {
+                    return Bitmap.DecodeToHeight(stream, dh);
+                }
+                if (dw > 0)
+                {
+                    return Bitmap.DecodeToWidth(stream, dw);
+                }
+                return new Bitmap(stream);
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            return null;
         }
     }
 
@@ -476,13 +487,13 @@ public class FlipView : TemplatedControl
         base.OnPointerWheelChanged(e);
     }
 
-    private async Task RunSliderAnimationAsync(IImage image, int targetIndex, bool forward)
+    private async void RunSliderAnimationAsync(IImage image, int targetIndex, bool forward)
     {
         double distance;
         StyledProperty<double> property;
         if (Orientation == FlipOrientation.Horizontal)
-        { 
-            distance = Bounds.Width; 
+        {
+            distance = Bounds.Width;
             property = TranslateTransform.XProperty;
         }
         else
@@ -490,14 +501,19 @@ public class FlipView : TemplatedControl
             distance = Bounds.Height;
             property = TranslateTransform.YProperty;
         }
-        
+
         if (_currentImage == null || _nextImage == null) { return; }
+
+        _cancelAnimationCts?.Cancel();
+        _cancelAnimationCts = new CancellationTokenSource();
+        var token = _cancelAnimationCts.Token;
+
         _isRunning = true;
         _nextImage.Source = image;
         _nextImage.IsVisible = true;
 
         var duration = forward ? ForwardDuration : BackwardDuration;
-        
+
         var currentAnimation = new Animation
         {
             Duration = duration,
@@ -532,22 +548,35 @@ public class FlipView : TemplatedControl
                 },
                 new KeyFrame
                 {
-                    Cue = new Cue(1d), 
+                    Cue = new Cue(1d),
                     Setters = { new Setter(property, 0d) }
                 }
             }
         };
-        
-        await Task.WhenAll(currentAnimation.RunAsync(_currentImage), nextAnimation.RunAsync(_nextImage));
 
-        SelectedIndex = targetIndex;
-        _currentImage.Source = image;
+        try
+        {
+            await Task.WhenAll(
+                currentAnimation.RunAsync(_currentImage, token),
+                nextAnimation.RunAsync(_nextImage, token));
+        }
+        catch (OperationCanceledException)
+        {
+            return;
+        }
+        finally
+        {
+            if (!token.IsCancellationRequested)
+            {
+                SelectedIndex = targetIndex;
+                _currentImage.Source = image;
+            }
 
-        _nextImage.Source = null;
-        _nextImage.IsVisible = false;
-        ResetTransform();
-        
-        _isRunning = false;
+            _nextImage.Source = null;
+            _nextImage.IsVisible = false;
+            ResetTransform();
+            _isRunning = false;
+        }
     }
 
     private void ResetTransform()

@@ -9,13 +9,13 @@ public class SettingCard : HeaderedContentControl
     public static readonly StyledProperty<string> DescriptionProperty =
         AvaloniaProperty.Register<SettingCard, string?>(nameof(Description));
 
-    public static readonly StyledProperty<Geometry?> IconDataProperty =
-        AvaloniaProperty.Register<SettingCard, Geometry?>(nameof(IconData));
+    public static readonly StyledProperty<object?> IconSourceProperty =
+        AvaloniaProperty.Register<SettingCard, object?>(nameof(IconSource));
 
-    public Geometry? IconData
+    public object? IconSource 
     {
-        get => GetValue(IconDataProperty);
-        set => SetValue(IconDataProperty, value);
+        get => GetValue(IconSourceProperty);
+        set => SetValue(IconSourceProperty, value);
     }
     
     public string? Description
