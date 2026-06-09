@@ -63,15 +63,21 @@
           </Border.Transitions>
 
           <Grid ColumnDefinitions="*,Auto,Auto" RowDefinitions="*,Auto">
-            <Viewbox
-              Name="IconHost"
+            <!--  <Viewbox  -->
+            <!--  Name="IconHost"  -->
+            <!--  HorizontalAlignment="Left"  -->
+            <!--  VerticalAlignment="Center"  -->
+            <!--  IsVisible="False">  -->
+            <ui:FluentIconElement
+              Name="IconPresenter"
               Width="{DynamicResource SettingsExpanderItemIconSize}"
               Height="{DynamicResource SettingsExpanderItemIconSize}"
               HorizontalAlignment="Left"
               VerticalAlignment="Center"
-              IsVisible="False">
-              <ContentPresenter Name="IconPresenter" Content="{Binding TemplateSettings.Icon, RelativeSource={RelativeSource TemplatedParent}}"/>
-            </Viewbox>
+              IsVisible="False"
+              Source="{Binding TemplateSettings.Icon, RelativeSource={RelativeSource TemplatedParent}}"/>
+            <!-- <ContentPresenter Name="IconPresenter" Content="{Binding TemplateSettings.Icon, RelativeSource={RelativeSource TemplatedParent}}"/> -->
+            <!-- </Viewbox> -->
 
             <StackPanel
               Name="HeaderRegion"
@@ -104,14 +110,18 @@
               ContentTemplate="{TemplateBinding FooterTemplate}"
               IsVisible="False"/>
 
-            <Viewbox
-              Name="ActionIconHost"
+            <!--  <Viewbox  -->
+            <!--  Name="ActionIconHost"  -->
+            <!--  IsVisible="False">  -->
+            <ui:FluentIconElement
+              Name="ExpandChevronActionIconContainer"
               Grid.Column="2"
               Width="{DynamicResource SettingsExpanderItemActionIconSize}"
               Height="{DynamicResource SettingsExpanderItemActionIconSize}"
-              IsVisible="False">
-              <ContentPresenter Name="ExpandChevronActionIconContainer" Content="{Binding TemplateSettings.ActionIcon, RelativeSource={RelativeSource TemplatedParent}}"/>
-            </Viewbox>
+              IsVisible="False"
+              Source="{Binding TemplateSettings.ActionIcon, RelativeSource={RelativeSource TemplatedParent}}"/>
+            <!-- <ContentPresenter Name="ExpandChevronActionIconContainer" Content="{Binding TemplateSettings.ActionIcon, RelativeSource={RelativeSource TemplatedParent}}"/> -->
+            <!-- </Viewbox> -->
           </Grid>
         </Border>
       </ControlTemplate>
@@ -138,7 +148,7 @@
       <Setter Property="Margin" Value="{DynamicResource SettingsExpanderItemBottomFooterMargin}"/>
     </Style>
 
-    <Style Selector="^:actionIcon /template/ Viewbox#ActionIconHost">
+    <Style Selector="^:actionIcon /template/ ui|FluentIconElement#ExpandChevronActionIconContainer">
       <Setter Property="IsVisible" Value="True"/>
     </Style>
 
@@ -149,7 +159,7 @@
       <Setter Property="IsVisible" Value="True"/>
     </Style>
     <Style Selector="^:icon">
-      <Style Selector="^ /template/ Viewbox#IconHost">
+      <Style Selector="^ /template/ ui|FluentIconElement#IconPresenter">
         <Setter Property="IsVisible" Value="True"/>
       </Style>
       <Style Selector="^ /template/ StackPanel#HeaderRegion">

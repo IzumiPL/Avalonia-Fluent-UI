@@ -7,22 +7,6 @@
       Width="700"
       Height="350"
       Padding="20">
-      <!--<ui:SettingsExpander IconSource="Globe" Header="Test Header"
-                                 Description="This is a description for the SettingsExpander"
-                                 ActionIconSource="Save" IsClickEnabled="True">
-                <ui:SettingsExpander.Footer>
-                    <Button Content="FooterButton" />
-                </ui:SettingsExpander.Footer>
-
-      -->
-      <!--<ui:SettingsExpanderItem Content="Content Here" ActionIconSource="Pin" IsClickEnabled="True"  />
-                <ui:SettingsExpanderItem Content="Content Here">
-                    <ui:SettingsExpanderItem.Footer>
-                        <Button Content="FooterButton" />
-                    </ui:SettingsExpanderItem.Footer>
-                </ui:SettingsExpanderItem>-->
-      <!--
-            </ui:SettingsExpander>-->
       <ui:SettingsExpander Header="Test">
         <ui:SettingsExpanderItem Content="Item1"/>
         <ui:SettingsExpanderItem Content="Item2"/>
@@ -39,8 +23,8 @@
 
   <!--  ToggleButton for the Expander  -->
   <ControlTheme x:Key="SettingsExpanderToggleButtonStyle" TargetType="ToggleButton">
-    <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource SettingsExpanderHeaderBorderThickness}"/>
     <Setter Property="Padding" Value="0"/>
     <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -66,28 +50,51 @@
           <Grid ColumnDefinitions="*,Auto">
             <ContentPresenter Content="{TemplateBinding Content}"/>
 
-            <ui:SymbolIcon
-              Name="ExpandCollapseChevron"
+            <Viewbox
+              Name="IconHost"
               Grid.Column="1"
-              Margin="{DynamicResource SettingsExpanderExpandCollapseChevronMargin}"
-              FontSize="18"
-              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-              IsVisible="False"
-              RenderTransform="none"
-              Symbol="ChevronDown"/>
+              Width="24"
+              Height="24"
+              Margin="0,3,10,0">
+              <Path
+                Name="ExpandCollapseChevron"
+                Width="20"
+                Height="20"
+                Margin="{DynamicResource SettingsExpanderExpandCollapseChevronMargin}"
+                Data="{StaticResource ChevronDownMed}"
+                Fill="{DynamicResource TextFillColorPrimaryBrush}"
+                IsVisible="False"
+                Stretch="Uniform"/>
+            </Viewbox>
+            <!--  <ui:SymbolIcon  -->
+            <!--  Name="ExpandCollapseChevron"  -->
+            <!--  Grid.Column="1"  -->
+            <!--  Margin="{DynamicResource SettingsExpanderExpandCollapseChevronMargin}"  -->
+            <!--  FontSize="18"  -->
+            <!--  Foreground="{DynamicResource TextFillColorPrimaryBrush}"  -->
+            <!--  IsVisible="False"  -->
+            <!--  RenderTransform="none"  -->
+            <!--  Symbol="ChevronDown"/>  -->
           </Grid>
         </Border>
       </ControlTemplate>
     </Setter>
 
+    <Style Selector="^ /template/ Path#ExpandCollapseChevron">
+      <Setter Property="RenderTransformOrigin" Value="50%, 50%"/>
+      <Setter Property="Transitions">
+        <Transitions>
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.096"/>
+        </Transitions>
+      </Setter>
+    </Style>
+
     <Style Selector="^:allowClick">
       <Style Selector="^:pointerover /template/ Border#Root">
         <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
-        <!-- <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" /> -->
       </Style>
       <Style Selector="^:pressed /template/ Border#Root">
         <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}"/>
-        <!-- <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/> -->
         <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
       </Style>
     </Style>
@@ -99,15 +106,18 @@
     </Style>
 
     <Style Selector="^:checked">
-      <Style Selector="^ /template/ ui|SymbolIcon#ExpandCollapseChevron">
+      <Style Selector="^ /template/ Path#ExpandCollapseChevron">
         <Setter Property="RenderTransform" Value="rotate(180deg)"/>
       </Style>
       <Style Selector="^:not(:empty) /template/ Border#Root">
         <Setter Property="CornerRadius" Value="{Binding Source={StaticResource ControlCornerRadius}, Converter={StaticResource TopCornerRadiusFilterConverter}}"/>
       </Style>
+      <Style Selector="^ /template/ Viewbox#IconHost">
+        <Setter Property="Margin" Value="0 0 10 1"/>
+      </Style>
     </Style>
 
-    <Style Selector="^:not(:empty) /template/ ui|SymbolIcon#ExpandCollapseChevron">
+    <Style Selector="^:not(:empty) /template/ Path#ExpandCollapseChevron">
       <Setter Property="IsVisible" Value="True"/>
     </Style>
   </ControlTheme>
@@ -117,7 +127,7 @@
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="MinWidth" Value="0"/>
     <Setter Property="MinHeight" Value="{DynamicResource SettingsExpanderMinHeight}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource SettingsExpanderContentDownBorderThickness}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
     <Setter Property="Template">
@@ -189,7 +199,7 @@
 
   <ControlTheme x:Key="{x:Type ui:SettingsExpander}" TargetType="ui:SettingsExpander">
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ExpanderHeaderBorderThickness}"/>
     <Setter Property="Padding" Value="{DynamicResource SettingsExpanderPadding}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
@@ -212,7 +222,7 @@
 
   <ControlTheme x:Key="SettingsExpanderNoAnimationStyle" TargetType="ui:SettingsExpander">
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ExpanderHeaderBorderThickness}"/>
     <Setter Property="Padding" Value="{DynamicResource SettingsExpanderPadding}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>

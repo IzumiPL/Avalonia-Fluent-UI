@@ -33,18 +33,15 @@
           BorderBrush="{TemplateBinding BorderBrush}"
           BorderThickness="{TemplateBinding BorderThickness}"
           CornerRadius="{TemplateBinding CornerRadius}">
-          <Viewbox
-            Name="IconViewBox"
+          <ui:FluentIconElement
+            Name="PART_Icon"
             Width="{TemplateBinding IconWidth}"
             Height="{TemplateBinding IconHeight}"
+            Margin="0"
             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-            VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-            <Path
-              Name="PART_Icon"
-              Data="{TemplateBinding IconData}"
-              Fill="{TemplateBinding Foreground}"
-              Stretch="Uniform"/>
-          </Viewbox>
+            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+            Foreground="{TemplateBinding Foreground}"
+            Source="{TemplateBinding Content}"/>
         </Border>
       </ControlTemplate>
     </Setter>
@@ -77,8 +74,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
       </Style>
 
-      <Style Selector="^ /template/ Path#PART_Icon">
-        <Setter Property="Fill" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
       </Style>
     </Style>
 
@@ -94,8 +91,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
       </Style>
 
-      <Style Selector="^ /template/ Path#PART_Icon">
-        <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+      <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+        <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
       </Style>
 
       <Style Selector="^:pointerover">
@@ -116,8 +113,8 @@
           <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
         </Style>
 
-        <Style Selector="^ /template/ Path#PART_Icon">
-          <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+          <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
         </Style>
       </Style>
 
@@ -135,8 +132,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
       </Style>
 
-      <Style Selector="^ /template/ Path#PART_Icon">
-        <Setter Property="Fill" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+      <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+        <Setter Property="Foreground" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
       </Style>
 
       <Style Selector="^:pointerover">
@@ -144,8 +141,8 @@
           <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
         </Style>
 
-        <Style Selector="^ /template/ Path#PART_Icon">
-          <Setter Property="Fill" Value="{DynamicResource TextFillColorInverseBrush}"/>
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+          <Setter Property="Foreground" Value="{DynamicResource TextFillColorInverseBrush}"/>
         </Style>
       </Style>
 
@@ -162,8 +159,8 @@
           <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
         </Style>
 
-        <Style Selector="^ /template/ Path#PART_Icon">
-          <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+          <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
         </Style>
       </Style>
 
@@ -203,18 +200,15 @@
           BorderBrush="{TemplateBinding BorderBrush}"
           BorderThickness="{TemplateBinding BorderThickness}"
           CornerRadius="{TemplateBinding CornerRadius}">
-          <Viewbox
-            Name="IcViewbox"
+          <ui:FluentIconElement
+            Name="PART_Icon"
             Width="{TemplateBinding IconWidth}"
             Height="{TemplateBinding IconHeight}"
+            Margin="0"
             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-            VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-            <Path
-              Name="PART_Icon"
-              Data="{TemplateBinding IconData}"
-              Fill="{TemplateBinding Foreground}"
-              Stretch="Uniform"/>
-          </Viewbox>
+            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+            Foreground="{TemplateBinding Foreground}"
+            Source="{TemplateBinding Content}"/>
         </Border>
       </ControlTemplate>
     </Setter>
@@ -244,8 +238,8 @@
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorDisabledBrush}"/>
       </Style>
 
-      <Style Selector="^ /template/ Path#PART_Icon">
-        <Setter Property="Fill" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
       </Style>
     </Style>
   </ControlTheme>

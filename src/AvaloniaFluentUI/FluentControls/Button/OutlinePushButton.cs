@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls.Primitives;
-using Avalonia.Media;
 
 namespace AvaloniaFluentUI.Controls;
 
 public class OutlinePushButton : ToggleButton
 {
-   public static readonly StyledProperty<Geometry?> IconDataProperty =
-        AvaloniaProperty.Register<OutlinePushButton, Geometry?>(nameof(IconData));
+    public static readonly StyledProperty<object?> IconSourceProperty =
+        AvaloniaProperty.Register<OutlinePushButton, object?>(nameof(IconSource));
 
-    public Geometry? IconData
+    public object? IconSource
     {
-        get => GetValue(IconDataProperty);
-        set => SetValue(IconDataProperty, value);
+        get => GetValue(IconSourceProperty);
+        set => SetValue(IconSourceProperty, value);
     }
 
     public static readonly StyledProperty<double> IconWidthProperty =

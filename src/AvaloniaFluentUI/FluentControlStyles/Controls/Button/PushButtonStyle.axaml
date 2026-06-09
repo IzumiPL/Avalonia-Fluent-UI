@@ -36,27 +36,16 @@
             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
             ColumnDefinitions="Auto, *">
-            <Viewbox
+            <ui:FluentIconElement
+              Name="PART_Icon"
               Grid.Column="0"
               Width="{TemplateBinding IconWidth}"
               Height="{TemplateBinding IconHeight}"
               Margin="0,0,8,0"
-              IsVisible="{TemplateBinding IconData,
-                                          Converter={x:Static ObjectConverters.IsNotNull}}">
-              <Path
-                Name="PART_Icon"
-                Data="{TemplateBinding IconData}"
-                Fill="{TemplateBinding Foreground}"
-                Stretch="Uniform"/>
-            </Viewbox>
-            <!--  <PathIcon  -->
-            <!--  Name="PART_Icon"  -->
-            <!--  Grid.Column="0"  -->
-            <!--  Margin="0,0,8,0"  -->
-            <!--  Data="{TemplateBinding IconData}"  -->
-            <!--  Foreground="{TemplateBinding Foreground}"  -->
-            <!--  IsVisible="{TemplateBinding IconData,  -->
-            <!--  Converter={x:Static ObjectConverters.IsNotNull}}"/>  -->
+              Foreground="{TemplateBinding Foreground}"
+              IsVisible="{TemplateBinding IconSource,
+                                          Converter={x:Static ObjectConverters.IsNotNull}}"
+              Source="{TemplateBinding IconSource}"/>
             <ContentPresenter
               x:Name="PART_ContentPresenter"
               Grid.Column="1"
@@ -84,8 +73,8 @@
       <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
-      <Style Selector="^ /template/ Path#PART_Icon">
-        <Setter Property="Fill" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+      <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
     </Style>
 
@@ -98,8 +87,8 @@
       <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
-      <Style Selector="^ /template/ Path#PART_Icon">
-        <Setter Property="Fill" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+      <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
     </Style>
 
@@ -112,8 +101,8 @@
       <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
       </Style>
-      <Style Selector="^ /template/ Path#PART_Icon">
-        <Setter Property="Fill" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
       </Style>
     </Style>
 
@@ -131,8 +120,8 @@
       <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
       </Style>
-      <Style Selector="^ /template/ Path#PART_Icon">
-        <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+      <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+        <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
       </Style>
 
       <Style Selector="^:pointerover">
@@ -143,8 +132,8 @@
         <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
           <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ Path#PART_Icon">
-          <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+          <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
         </Style>
       </Style>
 
@@ -157,8 +146,8 @@
         <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
           <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ Path#PART_Icon">
-          <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+          <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
         </Style>
       </Style>
 
@@ -171,8 +160,8 @@
         <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
           <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
         </Style>
-        <Style Selector="^ /template/ Path#PART_Icon">
-          <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+          <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
         </Style>
       </Style>
 
@@ -192,8 +181,8 @@
       <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Foreground" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
       </Style>
-      <Style Selector="^ /template/ Path#PART_Icon">
-        <Setter Property="Fill" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+      <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+        <Setter Property="Foreground" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
       </Style>
 
       <Style Selector="^:pointerover">
@@ -204,8 +193,8 @@
         <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorInverseBrush}"/>
         </Style>
-        <Style Selector="^ /template/ Path#PART_Icon">
-          <Setter Property="Fill" Value="{DynamicResource TextFillColorInverseBrush}"/>
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+          <Setter Property="Foreground" Value="{DynamicResource TextFillColorInverseBrush}"/>
         </Style>
       </Style>
 
@@ -218,8 +207,8 @@
         <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
           <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ Path#PART_Icon">
-          <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+          <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
         </Style>
       </Style>
 
@@ -232,8 +221,8 @@
         <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
           <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
         </Style>
-        <Style Selector="^ /template/ Path#PART_Icon">
-          <Setter Property="Fill" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+          <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
         </Style>
       </Style>
 
@@ -276,27 +265,29 @@
             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
             ColumnDefinitions="Auto, *">
-            <Viewbox
+            <!--  <Viewbox  -->
+            <!--  Grid.Column="0"  -->
+            <!--  Width="{TemplateBinding IconWidth}"  -->
+            <!--  Height="{TemplateBinding IconHeight}"  -->
+            <!--  Margin="0,0,8,0"  -->
+            <!--  IsVisible="{TemplateBinding IconData,  -->
+            <!--  Converter={x:Static ObjectConverters.IsNotNull}}">  -->
+            <!--  <Path  -->
+            <!--  Name="PART_Icon"  -->
+            <!--  Data="{TemplateBinding IconData}"  -->
+            <!--  Fill="{TemplateBinding Foreground}"  -->
+            <!--  Stretch="Uniform"/>  -->
+            <!-- </Viewbox> -->
+            <ui:FluentIconElement
+              Name="PART_Icon"
               Grid.Column="0"
               Width="{TemplateBinding IconWidth}"
               Height="{TemplateBinding IconHeight}"
               Margin="0,0,8,0"
-              IsVisible="{TemplateBinding IconData,
-                                          Converter={x:Static ObjectConverters.IsNotNull}}">
-              <Path
-                Name="PART_Icon"
-                Data="{TemplateBinding IconData}"
-                Fill="{TemplateBinding Foreground}"
-                Stretch="Uniform"/>
-            </Viewbox>
-            <!--  <PathIcon  -->
-            <!--  Name="PART_Icon"  -->
-            <!--  Grid.Column="0"  -->
-            <!--  Margin="0,0,8,0"  -->
-            <!--  Data="{TemplateBinding IconData}"  -->
-            <!--  Foreground="{TemplateBinding Foreground}"  -->
-            <!--  IsVisible="{TemplateBinding IconData,  -->
-            <!--  Converter={x:Static ObjectConverters.IsNotNull}}"/>  -->
+              Foreground="{TemplateBinding Foreground}"
+              IsVisible="{TemplateBinding IconSource,
+                                          Converter={x:Static ObjectConverters.IsNotNull}}"
+              Source="{TemplateBinding IconSource}"/>
             <ContentPresenter
               x:Name="PART_ContentPresenter"
               Grid.Column="1"
@@ -323,8 +314,8 @@
       <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
-      <Style Selector="^ /template/ Path#PART_Icon">
-        <Setter Property="Fill" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+      <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
     </Style>
 
@@ -336,8 +327,8 @@
       <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
       </Style>
-      <Style Selector="^ /template/ Path#PART_Icon">
-        <Setter Property="Fill" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+      <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
       </Style>
     </Style>
 
@@ -349,8 +340,8 @@
       <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
       </Style>
-      <Style Selector="^ /template/ Path#PART_Icon">
-        <Setter Property="Fill" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
       </Style>
     </Style>
   </ControlTheme>

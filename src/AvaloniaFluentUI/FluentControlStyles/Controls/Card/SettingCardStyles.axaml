@@ -4,15 +4,13 @@
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
   <!--  Add Resources Here  -->
 
-  <CornerRadius x:Key="SettingCardCornerRadius">6</CornerRadius>
-  <Thickness x:Key="SettingCardBorderThickness">1</Thickness>
-  <Thickness x:Key="SettingCardPadding">16</Thickness>
+  <Thickness x:Key="SettingCardPadding">0 16 16 16</Thickness>
 
   <ControlTheme x:Key="{x:Type ui:SettingCard}" TargetType="ui:SettingCard">
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
-    <Setter Property="BorderThickness" Value="{DynamicResource SettingCardBorderThickness}"/>
-    <Setter Property="CornerRadius" Value="{DynamicResource SettingCardCornerRadius}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource CardBorderThickness}"/>
+    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
     <Setter Property="Padding" Value="{DynamicResource SettingCardPadding}"/>
     <Setter Property="Height" Value="68"/>
 
@@ -36,12 +34,16 @@
             ColumnDefinitions="Auto, Auto, *"
             ColumnSpacing="15"
             RowDefinitions="*,*">
-            <PathIcon
+            <!--  <PathIcon  -->
+            <ui:FluentIconElement
               Grid.RowSpan="2"
               Grid.Column="0"
               Width="24"
               Height="24"
-              Data="{TemplateBinding IconData}"/>
+              Margin="16,0,0,0"
+              IsVisible="{TemplateBinding IconSource,
+                                          Converter={x:Static ObjectConverters.IsNotNull}}"
+              Source="{TemplateBinding IconSource}"/>
 
             <TextBlock
               Grid.Row="0"

@@ -30,8 +30,8 @@
               Background="Transparent"
               BorderBrush="Transparent"
               BorderThickness="0"
+              Content="{StaticResource Previous}"
               Focusable="False"
-              IconData="{StaticResource Previous}"
               IconHeight="8"
               IconWidth="8"
               IsTabStop="False"/>
@@ -67,8 +67,8 @@
               Background="Transparent"
               BorderBrush="Transparent"
               BorderThickness="0"
+              Content="{StaticResource Next}"
               Focusable="False"
-              IconData="{StaticResource Next}"
               IconHeight="8"
               IconWidth="8"
               IsTabStop="False"/>

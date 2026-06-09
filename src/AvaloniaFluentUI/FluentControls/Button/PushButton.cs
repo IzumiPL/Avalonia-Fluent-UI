@@ -1,17 +1,17 @@
 ﻿using Avalonia;
-using Avalonia.Media;
+using Avalonia.Controls;
 
 namespace AvaloniaFluentUI.Controls;
 
-public class PushButton : Avalonia.Controls.Button
+public class PushButton : Button
 {
-    public static readonly StyledProperty<Geometry?> IconDataProperty =
-        AvaloniaProperty.Register<PushButton, Geometry?>(nameof(IconData));
+    public static readonly StyledProperty<object?> IconSourceProperty =
+        AvaloniaProperty.Register<PushButton, object?>(nameof(IconSource));
 
-    public Geometry? IconData
+    public object? IconSource
     {
-        get => GetValue(IconDataProperty);
-        set => SetValue(IconDataProperty, value);
+        get => GetValue(IconSourceProperty);
+        set => SetValue(IconSourceProperty, value);
     }
 
     public static readonly StyledProperty<double> IconWidthProperty =
