@@ -10,13 +10,13 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// Represents an icon that uses a vector path as its content.
 /// </summary>
-public partial class FAPathIcon : FAIconElement
+public partial class FluentPathIcon : IconElement
 {
     /// <summary>
     /// Defines the <see cref="Data"/> property
     /// </summary>
     public static readonly StyledProperty<Geometry> DataProperty =
-        Path.DataProperty.AddOwner<FAPathIcon>();
+        Path.DataProperty.AddOwner<FluentPathIcon>();
 
     /// <summary>
     /// Gets or sets a Geometry that specifies the shape to be drawn. 
@@ -32,7 +32,7 @@ public partial class FAPathIcon : FAIconElement
     /// Defines the <see cref="Stretch"/> property.
     /// </summary>
     public static readonly StyledProperty<Stretch> StretchProperty =
-        Shape.StretchProperty.AddOwner<FAPathIcon>();
+        Shape.StretchProperty.AddOwner<FluentPathIcon>();
 
     /// <summary>
     /// Gets or sets a <see cref="Stretch"/> enumeration value that describes how the shape fills its allocated space.
@@ -47,7 +47,7 @@ public partial class FAPathIcon : FAIconElement
     /// Defines the <see cref="StretchDirection"/> property.
     /// </summary>
     public static readonly StyledProperty<StretchDirection> StretchDirectionProperty =
-        Viewbox.StretchDirectionProperty.AddOwner<FAPathIcon>();
+        Viewbox.StretchDirectionProperty.AddOwner<FluentPathIcon>();
 
     /// <summary>
     /// Gets or sets a value controlling in what direction contents will be stretched.
@@ -58,11 +58,11 @@ public partial class FAPathIcon : FAIconElement
         set => SetValue(StretchDirectionProperty, value);
     }
     
-    static FAPathIcon()
+    static FluentPathIcon()
     {
-        StretchProperty.OverrideDefaultValue<FAPathIcon>(Stretch.Uniform);
-        StretchDirectionProperty.OverrideDefaultValue<FAPathIcon>(StretchDirection.Both);
-        ClipToBoundsProperty.OverrideDefaultValue<FAPathIcon>(true);
+        StretchProperty.OverrideDefaultValue<FluentPathIcon>(Stretch.Uniform);
+        StretchDirectionProperty.OverrideDefaultValue<FluentPathIcon>(StretchDirection.Both);
+        ClipToBoundsProperty.OverrideDefaultValue<FluentPathIcon>(true);
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)

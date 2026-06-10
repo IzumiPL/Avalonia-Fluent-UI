@@ -34,13 +34,13 @@ public static class IconHelpers
         return fi;
     }
 
-    internal static FAPathIcon CreatePathIconFromPathIconSource(PathIconSource pis)
+    internal static FluentPathIcon CreatePathIconFromPathIconSource(PathIconSource pis)
     {
-        var pi = new FAPathIcon
+        var pi = new FluentPathIcon
         {
-            [!FAPathIcon.DataProperty] = pis[!PathIconSource.DataProperty],
-            [!FAPathIcon.StretchProperty] = pis[!PathIconSource.StretchProperty],
-            [!FAPathIcon.StretchDirectionProperty] = pis[!PathIconSource.StretchDirectionProperty]
+            [!FluentPathIcon.DataProperty] = pis[!PathIconSource.DataProperty],
+            [!FluentPathIcon.StretchProperty] = pis[!PathIconSource.StretchProperty],
+            [!FluentPathIcon.StretchDirectionProperty] = pis[!PathIconSource.StretchDirectionProperty]
         };
 
         if (pis.IsSet(IconSource.ForegroundProperty))
@@ -122,7 +122,7 @@ public static class IconHelpers
         return ii;
     }
 
-    internal static FAIconElement CreateFromUnknown(IconSource src)
+    internal static IconElement CreateFromUnknown(IconSource src)
     {
         if (src is BitmapIconSource bis)
         {
@@ -158,19 +158,19 @@ public static class IconHelpers
     }
 
     /// <summary>
-    /// Registers a <see cref="FAIconElement"/> creation factory for custom <see cref="IconSource"/> types
+    /// Registers a <see cref="IconElement"/> creation factory for custom <see cref="IconSource"/> types
     /// </summary>
     /// <remarks>
     /// When creating a custom IconSource, you will also need to create a matching FAIconElement type that
     /// will actually be used for display. Just as the built-in icons do, you will need to handle the mapping
     /// between the custom IconSource and related FAIconElement.
     /// </remarks>
-    public static void RegisterCustomIconSourceFactory(Type typeOfIconSource, Func<IconSource, FAIconElement> factory)
+    public static void RegisterCustomIconSourceFactory(Type typeOfIconSource, Func<IconSource, IconElement> factory)
     {
-        _customConverters ??= new Dictionary<Type, Func<IconSource, FAIconElement>>();
+        _customConverters ??= new Dictionary<Type, Func<IconSource, IconElement>>();
 
         _customConverters.Add(typeOfIconSource, factory);
     }
 
-    private static Dictionary<Type, Func<IconSource, FAIconElement>> _customConverters;
+    private static Dictionary<Type, Func<IconSource, IconElement>> _customConverters;
 }

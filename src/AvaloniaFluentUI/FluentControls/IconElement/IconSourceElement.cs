@@ -7,7 +7,7 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// Represents an icon that uses an IconSource as its content.
 /// </summary>
-public class IconSourceElement : FAIconElement
+public class IconSourceElement : IconElement
 {
     /// <summary>
     /// Defines the <see cref="IconSource"/> property

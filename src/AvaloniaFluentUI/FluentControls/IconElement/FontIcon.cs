@@ -8,7 +8,7 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// Represents an icon that uses a glyph from the specified font.
 /// </summary>
-public partial class FontIcon : FAIconElement
+public partial class FontIcon : IconElement
 {
     /// <summary>
     /// Defines the <see cref="FontFamily"/> property

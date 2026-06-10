@@ -12,13 +12,13 @@ namespace AvaloniaFluentUI.Controls;
 /// Represents the base class for an icon UI element.
 /// </summary>
 [TypeConverter(typeof(IconElementConverter))]
-public class FAIconElement : Control
+public class IconElement : Control
 {
     /// <summary>
     /// Defines the <see cref="Foreground"/> property
     /// </summary>
     public static readonly AttachedProperty<IBrush> ForegroundProperty =
-        TextElement.ForegroundProperty.AddOwner<FAIconElement>();
+        TextElement.ForegroundProperty.AddOwner<IconElement>();
 
     /// <summary>
     /// Gets or sets a brush that describes the foreground color.
@@ -47,17 +47,22 @@ public class IconElementConverter : TypeConverter
 {
     public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
     {
-        if (sourceType == typeof(string) || sourceType == typeof(Symbol) || sourceType == typeof(IconSource))
+        if (sourceType == typeof(string) || sourceType == typeof(Symbol) || sourceType == typeof(IconSource) || sourceType == typeof(Geometry))
         {
             return true;
         }
         return base.CanConvertFrom(context, sourceType);
     }
+    
     public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
     {
         if (value is Symbol symbol)
         {
             return new SymbolIcon { Symbol = symbol };
+        }
+        else if (value is Geometry geometry)
+        {
+            return new FluentPathIcon { Data = geometry };
         }
         else if (value is IconSource ico)
         {
@@ -91,9 +96,9 @@ public class IconElementConverter : TypeConverter
             }
 
             //Try a PathIcon
-            if (FAPathIcon.IsDataValid(val, out Geometry g))
+            if (FluentPathIcon.IsDataValid(val, out Geometry g))
             {
-                return new FAPathIcon() { Data = g };
+                return new FluentPathIcon() { Data = g };
             }
 
             try

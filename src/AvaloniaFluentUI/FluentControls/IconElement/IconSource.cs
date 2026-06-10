@@ -35,17 +35,22 @@ public class IconSourceConverter : TypeConverter
 {
     public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
     {
-        if (sourceType == typeof(string) || sourceType == typeof(Symbol))
+        if (sourceType == typeof(string) || sourceType == typeof(Symbol) || sourceType == typeof(Geometry))
         {
             return true;
         }
         return base.CanConvertFrom(context, sourceType);
     }
+    
     public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
     {
         if (value is Symbol symbol)
         {
             return new SymbolIconSource { Symbol = symbol };
+        }
+        else if (value is Geometry geometry)
+        {
+            return new PathIconSource { Data = geometry };
         }
         else if (value is IImage img)
         {
@@ -60,7 +65,7 @@ public class IconSourceConverter : TypeConverter
             }
 
             //Try a PathIcon
-            if (FAPathIcon.IsDataValid(val, out Geometry g))
+            if (FluentPathIcon.IsDataValid(val, out Geometry g))
             {
                 return new PathIconSource() { Data = g };
             }

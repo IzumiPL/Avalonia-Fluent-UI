@@ -8,7 +8,7 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// Represents an icon that uses a glyph from the SymbolThemeFontFamily resource as its content.
 /// </summary>
-public class SymbolIcon : FAIconElement
+public class SymbolIcon : IconElement
 {
     static SymbolIcon()
     {
