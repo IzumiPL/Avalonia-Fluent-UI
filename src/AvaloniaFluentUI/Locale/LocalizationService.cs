@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,9 +38,11 @@ public class LocalizationService : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 
     /// <summary>
-    /// Gets the current UI culture name, e.g. "en-US", "zh-CN", "ja-JP".
+    /// Gets the current culture name, e.g. "en-US", "zh-CN", "ja-JP".
     /// </summary>
-    public string CurrentCulture => CultureInfo.CurrentUICulture.Name;
+    public string CurrentLanguage => CultureInfo.CurrentCulture.Name;
+
+    public CultureInfo CurrentCultureInfo => throw new NotImplementedException();
 
     /// <summary>
     /// Custom string overrides. Keys take the form <c>"ResourceName"</c>
@@ -60,7 +63,7 @@ public class LocalizationService : INotifyPropertyChanged
     /// </summary>
     public string GetString(string key)
     {
-        return GetString(key, CultureInfo.CurrentUICulture);
+        return GetString(key, CultureInfo.CurrentCulture);
     }
 
     /// <summary>
@@ -175,14 +178,17 @@ public class LocalizationService : INotifyPropertyChanged
     /// Switches the app's UI culture at runtime. Raises
     /// <see cref="PropertyChanged"/> so that bound UI elements refresh.
     /// </summary>
-    /// <param name="cultureName">
+    /// <param name="language">
     /// A valid culture name, e.g. "en-US", "zh-CN", "ja-JP".
     /// </param>
-    public void SetCulture(string cultureName)
+    public void SetCulture(string language)
     {
-        var culture = new CultureInfo(cultureName);
+        var culture = new CultureInfo(language);
+        
         CultureInfo.CurrentCulture = culture;
         CultureInfo.CurrentUICulture = culture;
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
 
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(string.Empty));
     }
