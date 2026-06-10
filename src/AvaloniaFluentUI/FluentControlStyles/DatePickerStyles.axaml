@@ -45,18 +45,18 @@
   <x:String x:Key="DatePickerDayTextPlaceholder">day</x:String>
   <x:String x:Key="DatePickerYearTextPlaceholder">year</x:String>
 
-  
-  <!-- Control-specific resources -->
+
+  <!--  Control-specific resources  -->
   <Thickness x:Key="DatePickerBorderThemeThickness">1</Thickness>
 
-  <!-- Control-specific resources -->
+  <!--  Control-specific resources  -->
   <x:Double x:Key="DatePickerSelectorThemeMinWidth">80</x:Double>
   <x:Double x:Key="DatePickerSpacerThemeWidth">1</x:Double>
   <x:Double x:Key="DatePickerSpacingThemeWidth">20</x:Double>
   <x:Double x:Key="DatePickerSpacingThemeHeight">20</x:Double>
   <Thickness x:Key="DatePickerHeaderThemeMargin">0,0,0,4</Thickness>
   <FontWeight x:Key="DatePickerHeaderThemeFontWeight">Normal</FontWeight>
-<ControlTheme x:Key="DateTimePickerItem" TargetType="ListBoxItem">
+  <ControlTheme x:Key="DateTimePickerItem" TargetType="ListBoxItem">
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
     <Setter Property="Padding" Value="{DynamicResource DatePickerFlyoutPresenterItemPadding}"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>

@@ -31,14 +31,14 @@
     Indent="{StaticResource TreeViewItemIndent}"
     Left="True"/>
 
-  
-  <!-- Control-specific resources -->
+
+  <!--  Control-specific resources  -->
   <Thickness x:Key="TreeViewItemPresenterMargin">4,2</Thickness>
   <Thickness x:Key="TreeViewItemPresenterPadding">0,3,0,5</Thickness>
   <x:Double x:Key="TreeViewItemMinHeight">28</x:Double>
   <x:Double x:Key="TreeViewItemMultiSelectCheckBoxMinHeight">28</x:Double>
   <x:Double x:Key="TreeViewItemContentHeight">20</x:Double>
-<ControlTheme x:Key="{x:Type TreeView}" TargetType="TreeView">
+  <ControlTheme x:Key="{x:Type TreeView}" TargetType="TreeView">
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
     <Setter Property="BorderThickness" Value="0"/>

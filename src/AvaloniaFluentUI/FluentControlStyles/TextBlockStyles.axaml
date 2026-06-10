@@ -41,17 +41,17 @@
 
     <Style Selector="^.StrongBody">
       <Setter Property="FontSize" Value="{StaticResource StrongBodyFontSize}"/>
-      <Setter Property="FontWeight" Value="DemiBold"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
     <Style Selector="^.SubTitle">
       <Setter Property="FontSize" Value="{StaticResource SubTitleFontSize}"/>
-      <Setter Property="FontWeight" Value="DemiBold"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
     <Style Selector="^.Title">
       <Setter Property="FontSize" Value="{StaticResource TitleFontSize}"/>
-      <Setter Property="FontWeight" Value="DemiBold"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
     <Style Selector="^.LargeTitle">

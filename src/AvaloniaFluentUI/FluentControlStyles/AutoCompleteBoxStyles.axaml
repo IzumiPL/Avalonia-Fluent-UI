@@ -70,7 +70,7 @@
               Padding="{DynamicResource AutoSuggestListMargin}"
               Background="{DynamicResource AcrylicBackgroundFillColorDefaultBrush}"
               BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
-              BorderThickness="{DynamicResource AutoSuggestListBorderThemeThickness}"
+              BorderThickness="1"
               CornerRadius="{DynamicResource OverlayCornerRadius}">
               <ListBox
                 Name="PART_SelectingItemsControl"

@@ -29,18 +29,18 @@
   <x:String x:Key="TimePickerMinuteTextPlaceholder">minute</x:String>
   <x:String x:Key="TimePickerSecondTextPlaceholder">seconds</x:String>
 
-  
-  <!-- Control-specific resources -->
+
+  <!--  Control-specific resources  -->
   <Thickness x:Key="TimePickerBorderThemeThickness">1</Thickness>
 
-  <!-- Control-specific resources -->
+  <!--  Control-specific resources  -->
   <x:Double x:Key="TimePickerSelectorThemeMinWidth">80</x:Double>
   <x:Double x:Key="TimePickerSpacerThemeWidth">1</x:Double>
   <Thickness x:Key="TimePickerHeaderThemeMargin">0,0,0,4</Thickness>
   <Thickness x:Key="TimePickerFirstHostThemeMargin">0,0,20,0</Thickness>
   <Thickness x:Key="TimePickerThirdHostThemeMargin">20,0,0,0</Thickness>
   <FontWeight x:Key="TimePickerHeaderThemeFontWeight">Normal</FontWeight>
-<ControlTheme
+  <ControlTheme
     x:Key="TimePickerFlyoutButtonStyle"
     BasedOn="{StaticResource {x:Type Button}}"
     TargetType="Button">
