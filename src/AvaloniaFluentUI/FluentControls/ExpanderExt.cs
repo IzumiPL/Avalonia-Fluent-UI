@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Controls;
@@ -83,11 +84,11 @@ public sealed class ExpanderExt : AvaloniaObject
                 _expanderContent.SizeChanged -= HandleContentSizeChanged;
             }
 
-            var expanderContentClip = e.NameScope.Get<Border>("ExpanderContentClip");
-            var visual = ElementComposition.GetElementVisual(expanderContentClip);
+            // var expanderContentClip = e.NameScope.Get<Border>("ExpanderContentClip");
+            // var visual = ElementComposition.GetElementVisual(expanderContentClip);
             // WinUI uses an actual CompositionClip here (CreateInsetClip())
             // but we don't have that so just clip to bounds for now
-            visual.ClipToBounds = true;
+            // visual.ClipToBounds = true;
 
             var expanderContent = e.NameScope.Get<Border>("ExpanderContent");
             SetExpanderContent(expanderContent);
@@ -161,6 +162,9 @@ public sealed class ExpanderExt : AvaloniaObject
 
         private async void RunExpandDownUpAnimation(bool down)
         {
+            _cts?.Cancel();
+            _cts = new CancellationTokenSource();
+            
             _expanderContent.SetCurrentValue(Visual.IsVisibleProperty, true);
 
             if (_expander.Parent is SettingsExpander se && se.Presenter != null)
@@ -204,11 +208,14 @@ public sealed class ExpanderExt : AvaloniaObject
                 }
             };
 
-            await ani.RunAsync(_expanderContent);
+            await ani.RunAsync(_expanderContent, _cts.Token);
         }
 
         private async void RunCollapseDownUpAnimation(bool down)
         {
+            _cts?.Cancel();
+            _cts = new CancellationTokenSource();
+            
             var endY = down ? -_contentSize.Height : _contentSize.Height;
             var ani = new Animation
             {
@@ -237,13 +244,16 @@ public sealed class ExpanderExt : AvaloniaObject
                 }
             };
 
-            await ani.RunAsync(_expanderContent);
+            await ani.RunAsync(_expanderContent, _cts.Token);
 
             _expanderContent.SetValue(Visual.IsVisibleProperty, false);
         }
 
         private async void RunExpandLeftRightAnimation(bool right)
         {
+            _cts?.Cancel();
+            _cts = new CancellationTokenSource();
+            
             _expanderContent.SetCurrentValue(Visual.IsVisibleProperty, true);
             _expanderContent.Measure(Size.Infinity);
             _contentSize = _expanderContent.DesiredSize;
@@ -275,11 +285,14 @@ public sealed class ExpanderExt : AvaloniaObject
                 }
             };
 
-            await ani.RunAsync(_expanderContent);
+            await ani.RunAsync(_expanderContent, _cts.Token);
         }
 
         private async void RunCollapseLeftRightAnimation(bool right)
         {
+            _cts?.Cancel();
+            _cts = new CancellationTokenSource();
+            
             var endX = right ? -_contentSize.Width : _contentSize.Width;
             var ani = new Animation
             {
@@ -308,7 +321,7 @@ public sealed class ExpanderExt : AvaloniaObject
                 }
             };
 
-            await ani.RunAsync(_expanderContent);
+            await ani.RunAsync(_expanderContent, _cts.Token);
 
             _expanderContent.SetValue(Visual.IsVisibleProperty, false);
         }
@@ -328,5 +341,6 @@ public sealed class ExpanderExt : AvaloniaObject
         private Border _expanderContent;
         private Size _contentSize;
         private IDisposable _expandedChangedNotice;
+        private CancellationTokenSource _cts;
     }
 }
