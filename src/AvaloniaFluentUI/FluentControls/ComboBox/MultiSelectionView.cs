@@ -19,7 +19,7 @@ public class MultiSelectionView : SelectingItemsControl
 
     public MultiSelectionView()
     {
-        SelectionMode = SelectionMode.Multiple;
+        SelectionMode = SelectionMode.Multiple | SelectionMode.Toggle;
     }
 
     protected override bool NeedsContainerOverride(object item, int index, out object recycleKey)
