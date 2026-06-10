@@ -25,7 +25,7 @@ public partial class CommandBarToggleButton : ToggleButton, ICommandBarElement
     /// Defines the <see cref="IconSource"/> property
     /// </summary>
     public static readonly StyledProperty<IconSource> IconSourceProperty =
-        SettingsExpander.IconSourceProperty.AddOwner<CommandBarButton>();
+        AvaloniaProperty.Register<NavigationViewItem, IconSource>(nameof(IconSource));
 
     /// <summary>
     /// Defines the <see cref="Label"/> property

@@ -34,7 +34,7 @@ public partial class FAComboBox : HeaderedSelectingItemsControl
     /// Defines the <see cref="MaxDropDownHeight"/> property
     /// </summary>
     public static readonly StyledProperty<double> MaxDropDownHeightProperty =
-        FluentComboBox.MaxDropDownHeightProperty.AddOwner<FAComboBox>();
+        AvaloniaProperty.Register<FAComboBox, double>(nameof(MaxDropDownHeight), 504);
 
     /// <summary>
     /// Defines the <see cref="IsEditable"/> property
@@ -73,7 +73,7 @@ public partial class FAComboBox : HeaderedSelectingItemsControl
     /// Defines the <see cref="PlaceholderText"/> property
     /// </summary>
     public static readonly StyledProperty<string> PlaceholderTextProperty =
-        FluentComboBox.PlaceholderTextProperty.AddOwner<FAComboBox>();
+        AvaloniaProperty.Register<FAComboBox, string>(nameof(PlaceholderText));
 
     /// <summary>
     /// Defines the <see cref="SelectionChangedTrigger"/> property
@@ -85,7 +85,7 @@ public partial class FAComboBox : HeaderedSelectingItemsControl
     /// Defines the <see cref="PlaceholderForeground"/> property
     /// </summary>
     public static readonly StyledProperty<IBrush> PlaceholderForegroundProperty =
-        FluentComboBox.PlaceholderForegroundProperty.AddOwner<FAComboBox>();
+        AvaloniaProperty.Register<FAComboBox, IBrush>(nameof(PlaceholderForeground));
 
     /// <summary>
     /// Defines the <see cref="TextBoxTheme"/> property

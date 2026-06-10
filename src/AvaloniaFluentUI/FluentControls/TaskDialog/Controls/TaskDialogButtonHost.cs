@@ -14,7 +14,7 @@ namespace AvaloniaFluentUI.Controls.Primitives;
 public class TaskDialogButtonHost : Button
 {
     public static readonly StyledProperty<IconSource> IconSourceProperty =
-        SettingsExpander.IconSourceProperty.AddOwner<TaskDialogButtonHost>();
+        AvaloniaProperty.Register<NavigationViewItem, IconSource>(nameof(IconSource));
 
     public IconSource IconSource
     {

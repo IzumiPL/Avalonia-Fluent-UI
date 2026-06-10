@@ -10,13 +10,13 @@ public class MenuFlyoutItemTemplateSettings : AvaloniaObject
     /// <summary>
     /// Defines the <see cref="Icon"/> property
     /// </summary>
-    public static readonly StyledProperty<FAIconElement> IconProperty =
-        AvaloniaProperty.Register<MenuFlyoutItemTemplateSettings, FAIconElement>(nameof(Icon));
+    public static readonly StyledProperty<IconElement> IconProperty =
+        AvaloniaProperty.Register<MenuFlyoutItemTemplateSettings, IconElement>(nameof(Icon));
 
     /// <summary>
     /// Represents the FAIconElement for the MenuFlyoutItem
     /// </summary>
-    public FAIconElement Icon
+    public IconElement Icon
     {
         get => GetValue(IconProperty);
         internal set => SetValue(IconProperty, value);

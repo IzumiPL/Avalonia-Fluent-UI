@@ -49,7 +49,7 @@ public partial class NavigationViewItem : NavigationViewItemBase
     /// Defines the <see cref="IconSource"/> property
     /// </summary>
     public static readonly StyledProperty<IconSource> IconSourceProperty =
-        SettingsExpander.IconSourceProperty.AddOwner<NavigationViewItem>();
+        AvaloniaProperty.Register<NavigationViewItem, IconSource>(nameof(IconSource));
 
     /// <summary>
     /// Defines the <see cref="IsChildSelected"/> property

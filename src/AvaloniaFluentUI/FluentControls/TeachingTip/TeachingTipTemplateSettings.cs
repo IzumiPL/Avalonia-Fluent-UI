@@ -23,8 +23,8 @@ public class TeachingTipTemplateSettings : AvaloniaObject
     /// <summary>
     /// Defines the <see cref="IconElement"/> property
     /// </summary>
-    public static readonly StyledProperty<FAIconElement> IconElementProperty =
-        AvaloniaProperty.Register<TeachingTipTemplateSettings, FAIconElement>(nameof(IconElement));
+    public static readonly StyledProperty<IconElement> IconElementProperty =
+        AvaloniaProperty.Register<TeachingTipTemplateSettings, IconElement>(nameof(IconElement));
 
     /// <summary>
     /// Gets the thickness value of the top right highlight margin.
@@ -47,7 +47,7 @@ public class TeachingTipTemplateSettings : AvaloniaObject
     /// <summary>
     /// Gets the icon element.
     /// </summary>
-    public FAIconElement IconElement
+    public IconElement IconElement
     {
         get => GetValue(IconElementProperty);
         internal set => SetValue(IconElementProperty, value);

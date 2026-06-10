@@ -17,8 +17,8 @@ public class InfoBadgeTemplateSettings : AvaloniaObject
     /// <summary>
     /// Defines the <see cref="IconElement"/> property
     /// </summary>
-    public static readonly StyledProperty<FAIconElement> IconElementProperty =
-        AvaloniaProperty.Register<InfoBadgeTemplateSettings, FAIconElement>(nameof(IconElement));
+    public static readonly StyledProperty<IconElement> IconElementProperty =
+        AvaloniaProperty.Register<InfoBadgeTemplateSettings, IconElement>(nameof(IconElement));
 
     /// <summary>
     /// Gets or sets the corner radius for an InfoBadge.
@@ -32,7 +32,7 @@ public class InfoBadgeTemplateSettings : AvaloniaObject
     /// <summary>
     /// Gets or sets the icon element for an InfoBadge.
     /// </summary>
-    public FAIconElement IconElement
+    public IconElement IconElement
     {
         get => GetValue(IconElementProperty);
         internal set => SetValue(IconElementProperty, value);

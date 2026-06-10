@@ -24,7 +24,7 @@ public partial class InfoBadge : TemplatedControl
     /// Defines the <see cref="IconSource"/> property
     /// </summary>
     public static readonly StyledProperty<IconSource> IconSourceProperty =
-        SettingsExpander.IconSourceProperty.AddOwner<InfoBadge>();
+        AvaloniaProperty.Register<NavigationViewItem, IconSource>(nameof(IconSource));
 
     /// <summary>
     /// Defines the <see cref="TemplateSettings"/> property
@@ -67,6 +67,7 @@ public partial class InfoBadge : TemplatedControl
     public InfoBadge()
     {
         TemplateSettings = new InfoBadgeTemplateSettings();
+        SizeChanged += HandleSizeChanged;
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -101,10 +102,6 @@ public partial class InfoBadge : TemplatedControl
         {
             OnDisplayKindPropertiesChanged();
         }
-        else if (change.Property == BoundsProperty)
-        {
-            OnBoundsChanged(change);
-        }
     }
 
     private void OnDisplayKindPropertiesChanged()
@@ -138,10 +135,9 @@ public partial class InfoBadge : TemplatedControl
         }
     }
 
-    private void OnBoundsChanged(AvaloniaPropertyChangedEventArgs e)
+    private void HandleSizeChanged(object sender, SizeChangedEventArgs args)
     {
-        var rc = (Rect)e.NewValue;
-        var cornerRadiusValue = rc.Height / 2;
+        var cornerRadiusValue = args.NewSize.Height * 0.5;
         if (!IsSet(CornerRadiusProperty))
         {
             TemplateSettings.InfoBadgeCornerRadius = new CornerRadius(cornerRadiusValue);

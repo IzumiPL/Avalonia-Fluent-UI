@@ -164,7 +164,7 @@ public partial class TeachingTip : ContentControl
     /// Defines the <see cref="IconSource"/> property
     /// </summary>
     public static readonly StyledProperty<IconSource> IconSourceProperty =
-        SettingsExpander.IconSourceProperty.AddOwner<TeachingTip>();
+        AvaloniaProperty.Register<NavigationViewItem, IconSource>(nameof(IconSource));
 
     /// <summary>
     /// Defines the <see cref="TemplateSettings"/> property
@@ -1593,13 +1593,13 @@ public partial class TeachingTip : ContentControl
         var popup = new Popup
         {
             WindowManagerAddShadowHint = false,
-            IsLightDismissEnabled = false,
+            IsLightDismissEnabled = IsLightDismissEnabled,
             PlacementTarget = TopLevel.GetTopLevel(this),
             // Raw Popups in WinUI don't have placement methods like we have and always positioned at <0,0> in the Window
             // so we mimic that here so that the remaining positioning logic elsewhere in this code still works
             Placement = PlacementMode.AnchorAndGravity,
             PlacementAnchor = Avalonia.Controls.Primitives.PopupPositioning.PopupAnchor.TopLeft,
-            PlacementGravity = Avalonia.Controls.Primitives.PopupPositioning.PopupGravity.BottomRight
+            PlacementGravity = Avalonia.Controls.Primitives.PopupPositioning.PopupGravity.BottomRight,
         };
 
         popup.Opened += OnPopupOpened;
@@ -1644,6 +1644,11 @@ public partial class TeachingTip : ContentControl
     {
         bool ld = IsLightDismissEnabled;
         PseudoClasses.Set(s_pcLightDismiss, ld);
+
+        if (_popup != null)
+        {
+            _popup.IsLightDismissEnabled = ld;
+        }
 
         if (ld)
         {

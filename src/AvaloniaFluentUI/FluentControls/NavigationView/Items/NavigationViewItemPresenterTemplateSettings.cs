@@ -24,7 +24,7 @@ public class NavigationViewItemPresenterTemplateSettings : AvaloniaObject
     /// <summary>
     /// Defines the <see cref="Icon"/> property
     /// </summary>
-    public static readonly StyledProperty<FAIconElement> IconProperty =
+    public static readonly StyledProperty<IconElement> IconProperty =
         MenuFlyoutItemTemplateSettings.IconProperty.AddOwner<NavigationViewItemPresenterTemplateSettings>();
 
     /// <summary>
@@ -46,9 +46,9 @@ public class NavigationViewItemPresenterTemplateSettings : AvaloniaObject
     }
 
     /// <summary>
-    /// Gets the <see cref="FAIconElement"/> used in the NavigationViewItem
+    /// Gets the <see cref="IconElement"/> used in the NavigationViewItem
     /// </summary>
-    public FAIconElement Icon
+    public IconElement Icon
     {
         get => GetValue(IconProperty);
         internal set => SetValue(IconProperty, value);
