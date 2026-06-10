@@ -34,8 +34,8 @@ public partial class SettingsExpander : HeaderedItemsControl, ICommandSource
     /// <summary>
     /// Defines the <see cref="IconSource"/> property
     /// </summary>
-    public static readonly StyledProperty<IconSource> IconSourceProperty = 
-        AvaloniaProperty.Register<SettingsExpander, IconSource>(nameof(IconSource));
+    public static readonly StyledProperty<object?> IconSourceProperty = 
+        AvaloniaProperty.Register<SettingsExpander, object?>(nameof(IconSource));
 
     /// <summary>
     /// Defines the <see cref="Footer"/> property
@@ -58,8 +58,8 @@ public partial class SettingsExpander : HeaderedItemsControl, ICommandSource
     /// <summary>
     /// Defines the <see cref="ActionIconSource"/> property
     /// </summary>
-    public static readonly StyledProperty<IconSource> ActionIconSourceProperty = 
-        AvaloniaProperty.Register<SettingsExpander, IconSource>(nameof(ActionIconSource));
+    public static readonly StyledProperty<object?> ActionIconSourceProperty = 
+        AvaloniaProperty.Register<SettingsExpander, object?>(nameof(ActionIconSource));
 
     /// <summary>
     /// Defines the <see cref="IsClickEnabled"/> property
@@ -100,7 +100,7 @@ public partial class SettingsExpander : HeaderedItemsControl, ICommandSource
     /// <summary>
     /// Gets or sets the IconSource for the SettingsExpander
     /// </summary>
-    public IconSource IconSource
+    public object? IconSource
     {
         get => GetValue(IconSourceProperty);
         set => SetValue(IconSourceProperty, value);
@@ -136,7 +136,7 @@ public partial class SettingsExpander : HeaderedItemsControl, ICommandSource
     /// <summary>
     /// Gets or sets the Action IconSource when <see cref="IsClickEnabled"/> is true
     /// </summary>
-    public IconSource ActionIconSource
+    public object? ActionIconSource
     {
         get => GetValue(ActionIconSourceProperty);
         set => SetValue(ActionIconSourceProperty, value);

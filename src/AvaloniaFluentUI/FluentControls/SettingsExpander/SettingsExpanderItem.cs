@@ -33,7 +33,7 @@ public partial class SettingsExpanderItem : ContentControl, ICommandSource
     /// <summary>
     /// Defines the <see cref="IconSource"/> property
     /// </summary>
-    public static readonly StyledProperty<IconSource> IconSourceProperty = 
+    public static readonly StyledProperty<object?> IconSourceProperty = 
         SettingsExpander.IconSourceProperty.AddOwner<SettingsExpanderItem>();
 
     /// <summary>
@@ -51,7 +51,7 @@ public partial class SettingsExpanderItem : ContentControl, ICommandSource
     /// <summary>
     /// Defines the <see cref="ActionIconSource"/> property
     /// </summary>
-    public static readonly StyledProperty<IconSource> ActionIconSourceProperty = 
+    public static readonly StyledProperty<object?> ActionIconSourceProperty = 
         SettingsExpander.ActionIconSourceProperty.AddOwner<SettingsExpanderItem>();
 
     /// <summary>
@@ -96,7 +96,7 @@ public partial class SettingsExpanderItem : ContentControl, ICommandSource
     /// <summary>
     /// Gets or sets the IconSource for the SettingsExpander
     /// </summary>
-    public IconSource IconSource
+    public object? IconSource
     {
         get => GetValue(IconSourceProperty);
         set => SetValue(IconSourceProperty, value);
@@ -123,7 +123,7 @@ public partial class SettingsExpanderItem : ContentControl, ICommandSource
     /// <summary>
     /// Gets or sets the Action IconSource when <see cref="IsClickEnabled"/> is true
     /// </summary>
-    public IconSource ActionIconSource
+    public object? ActionIconSource
     {
         get => GetValue(ActionIconSourceProperty);
         set => SetValue(ActionIconSourceProperty, value);
@@ -397,10 +397,10 @@ public partial class SettingsExpanderItem : ContentControl, ICommandSource
 
     private void OnIconSourceChanged(AvaloniaPropertyChangedEventArgs args)
     {
-        var newIcon = args.GetNewValue<IconSource>();
-        PseudoClasses.Set(SharedPseudoclasses.s_pcIcon, newIcon != null);
+        var data = args.GetNewValue<object>();
+        PseudoClasses.Set(SharedPseudoclasses.s_pcIcon, data != null);
 
-        TemplateSettings.Icon = IconHelpers.CreateFromUnknown(newIcon);
+        TemplateSettings.Icon = data;
 
         var se = this.FindAncestorOfType<SettingsExpander>();
         if (se != null)
@@ -414,10 +414,10 @@ public partial class SettingsExpanderItem : ContentControl, ICommandSource
         if (IsClickEnabled)
         {
             // Only set the icon if IsClickEnabled
-            var newIcon = args.GetNewValue<IconSource>();
-            PseudoClasses.Set(s_pcActionIcon, newIcon != null);
+            var data = args.GetNewValue<object>();
+            PseudoClasses.Set(s_pcActionIcon, data != null);
 
-            TemplateSettings.ActionIcon = IconHelpers.CreateFromUnknown(newIcon);
+            TemplateSettings.ActionIcon = data;
         }
     }
 
@@ -436,7 +436,7 @@ public partial class SettingsExpanderItem : ContentControl, ICommandSource
         }
         else if (actionIcon != null)
         {
-            TemplateSettings.ActionIcon = IconHelpers.CreateFromUnknown(actionIcon);
+            TemplateSettings.ActionIcon = actionIcon;
             PseudoClasses.Set(s_pcActionIcon, true);
         }
     }
