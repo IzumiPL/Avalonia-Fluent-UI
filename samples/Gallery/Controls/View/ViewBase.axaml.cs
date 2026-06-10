@@ -19,14 +19,12 @@ namespace Gallery.Controls;
 
 public class ViewBase : ContentControl 
 {
-    protected SmoothScrollViewer? ScrollViewer { get; private set; }
     protected Dictionary<string, CodeCard> CodeCards { get; set; }
     private string Page { get; }
     
     public ViewBase(string page = "")
     {
         Page = page;
-        // Console.WriteLine("Init View Base");
         
         WeakReferenceMessenger.Default.Register<JumpToControlMessage>(this, OnJumpToControl);
     }
@@ -42,56 +40,54 @@ public class ViewBase : ContentControl
         set => SetValue(TitleProperty, value);
     }
 
+    private Button? _toggleThemeButton;
+    private Button? _documentButton;
+    private Button? _sourceCodeButton;
+    private SmoothScrollViewer? _scrollViewer;
+
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
-        var button = e.NameScope.Find<Button>("ToggleThemeButton");
-        if (button != null)
-        {
-            button.Click += OnToggleThemeClicked;
-        }
-
-        ScrollViewer = e.NameScope.Find<SmoothScrollViewer>("SmoothScrollViewer");
+        _toggleThemeButton?.Click -= OnToggleThemeClicked;
+        _documentButton?.Click -= OnDocumentButtonClicked;
+        _sourceCodeButton?.Click -= OnSourceCodeButtonClicked;
         
-        //////
-        var db = e.NameScope.Find<Button>("DocumentButton")!;
-        var sb = e.NameScope.Find<Button>("SourceCodeButton")!;
+        _toggleThemeButton = e.NameScope.Find<Button>("ToggleThemeButton");
+        _scrollViewer = e.NameScope.Find<SmoothScrollViewer>("SmoothScrollViewer");
+        _documentButton = e.NameScope.Find<Button>("DocumentButton")!;
+        _sourceCodeButton = e.NameScope.Find<Button>("SourceCodeButton")!;
 
-        var ol = e.NameScope.Find<TextBlock>("OlText");
-        var sc = e.NameScope.Find<TextBlock>("ScText");
-
-        ol?.Text = LocalizationService.Instance.GetString("OnlineDocument");
-        sc?.Text = LocalizationService.Instance.GetString("SourceCode");
-
-        db.Click -= OnClicked;
-        sb.Click -= OnClicked;
-        
-        db.Click += OnClicked;
-        sb.Click += OnClicked;
+        _toggleThemeButton?.Click += OnToggleThemeClicked;
+       _documentButton?.Click += OnDocumentButtonClicked;
+       _sourceCodeButton?.Click += OnSourceCodeButtonClicked;
         
         base.OnApplyTemplate(e);
     }
 
-    private void OnClicked(object? sender, RoutedEventArgs e)
+    private void OnDocumentButtonClicked(object? sender, RoutedEventArgs e)
+    {
+        UrlHelpers.OpenUrl("https://docs.mikuas.top/");
+    }
+
+    private void OnSourceCodeButtonClicked(object? sender, RoutedEventArgs e)
     {
         UrlHelpers.OpenUrl("https://github.com/HiyorinI/AvaloniaFluentUI.git");
     }
 
     private void OnToggleThemeClicked(object? sender, RoutedEventArgs e) => FluentAvaloniaTheme.Instance.ToggleTheme();
     
-    protected async Task ScrollTo(string name)
+    protected async void ScrollTo(string name)
     {
         if (CodeCards.TryGetValue(name, out var codeCard))
         {
-            // await ScrollViewer?.Presenter?.ScrollTo(SmoothScrollDirection.Y, GetVector(codeCard).Y);
             if (codeCard.IsAttachedToVisualTree())
             {
-                ScrollViewer?.Offset = GetVector(codeCard);
+                _scrollViewer?.Offset = GetVector(codeCard);
             }
             else
             {
                 await Dispatcher.UIThread.InvokeAsync(() =>
                 {
-                    ScrollViewer?.Offset = GetVector(codeCard);
+                    _scrollViewer?.Offset = GetVector(codeCard);
                 }, DispatcherPriority.Loaded);
             }
 #if DEBUG
@@ -104,7 +100,7 @@ public class ViewBase : ContentControl
     {
         if (message.Page == this.Page && message.Name != null)
         {
-            _=ScrollTo(message.Name);
+            ScrollTo(message.Name);
 #if DEBUG
             Debug.WriteLine($"Scroll of name: {message.Name}");
 #endif
@@ -113,7 +109,7 @@ public class ViewBase : ContentControl
 
     protected Vector GetVector(Control? control)
     {
-        var visual = ScrollViewer?.Content as Visual;
+        var visual = _scrollViewer?.Content as Visual;
         if (visual != null)
         {
             var point = control?.TranslatePoint(new Point(0, 0), visual);

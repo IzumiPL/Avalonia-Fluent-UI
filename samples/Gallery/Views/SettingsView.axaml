@@ -2,6 +2,7 @@
   x:Class="Gallery.Views.SettingsView"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
   xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:vm="clr-namespace:Gallery.ViewModels"
@@ -28,125 +29,48 @@
     VerticalAlignment="Stretch"
     RowDefinitions="64, *">
     <TextBlock
-      Name="TbTitle"
       Grid.Row="0"
+      Margin="15,0,0,0"
       HorizontalAlignment="Left"
       FontSize="32"
       Text="{Binding SettingsTitle}"/>
     <fui:SmoothScrollViewer Grid.Row="1" Padding="18,24,24,0">
       <StackPanel
+        Margin="0,0,0,64"
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch"
         Orientation="Vertical"
         Spacing="10">
-        <!-- <ui:Card> -->
-        <!--  <Grid  -->
-        <!--  VerticalAlignment="Center"  -->
-        <!--  ColumnDefinitions="*, Auto"  -->
-        <!--  RowDefinitions="*, *">  -->
-        <!--  <TextBlock  -->
-        <!--  Grid.Row="0"  -->
-        <!--  Grid.Column="0"  -->
-        <!--  Classes="Title"  -->
-        <!--  Text="动画"/>  -->
-        <!--  <TextBlock  -->
-        <!--  Grid.Row="1"  -->
-        <!--  Grid.Column="0"  -->
-        <!--  Classes="Content"  -->
-        <!--  Text="启用切换Interface动画"/>  -->
-        <!--  <ToggleSwitch  -->
-        <!--  Grid.RowSpan="2"  -->
-        <!--  Grid.Column="1"  -->
-        <!--  HorizontalAlignment="Right"  -->
-        <!--  IsChecked="{Binding IsEnabledTogglePageAnimation}"/>  -->
-        <!--   </Grid> -->
-        <!-- </ui:Card> -->
-        <!-- <ui:Card> -->
-        <!--  <Grid  -->
-        <!--  VerticalAlignment="Center"  -->
-        <!--  ColumnDefinitions="*, Auto, Auto"  -->
-        <!--  RowDefinitions="*, *">  -->
-        <!--  <TextBlock  -->
-        <!--  Grid.Row="0"  -->
-        <!--  Grid.Column="0"  -->
-        <!--  Classes="Title"  -->
-        <!--  Text="动画类型"/>  -->
-        <!--  <TextBlock  -->
-        <!--  Grid.Row="1"  -->
-        <!--  Grid.Column="0"  -->
-        <!--  Classes="Content"  -->
-        <!--  Text="设置切换Interface动画类型(切换为3D有BUG🥵)"/>  -->
-        <!--  <fui:FluentComboBox  -->
-        <!--  Grid.RowSpan="2"  -->
-        <!--  Grid.Column="1"  -->
-        <!--  MinWidth="168"  -->
-        <!--  HorizontalAlignment="Right"  -->
-        <!--  VerticalAlignment="Center"  -->
-        <!--  IsEnabled="{Binding IsEnabledTogglePageAnimation}"  -->
-        <!--  ItemsSource="{Binding AnimationTypes}"  -->
-        <!--  SelectedItem="{Binding AnimationType}"/>  -->
-        <!--    -->
-        <!--  <fui:FluentComboBox  -->
-        <!--  Grid.RowSpan="2"  -->
-        <!--  Grid.Column="2"  -->
-        <!--  MinWidth="128"  -->
-        <!--  Margin="5,0,0,0"  -->
-        <!--  HorizontalAlignment="Right"  -->
-        <!--  VerticalAlignment="Center"  -->
-        <!--  IsEnabled="{Binding IsEnabledTogglePageAnimation}"  -->
-        <!--  IsVisible="{Binding AnimationSlideAxisBoxIsVisible}"  -->
-        <!--  ItemsSource="{Binding AnimationSlideAxisItems}"  -->
-        <!--  SelectedItem="{Binding AnimationSlideAxis}"/>  -->
-        <!--   </Grid> -->
-        <!-- </ui:Card> -->
-        <!-- <ui:Card> -->
-        <!--  <Grid  -->
-        <!--  VerticalAlignment="Center"  -->
-        <!--  ColumnDefinitions="*, Auto"  -->
-        <!--  RowDefinitions="*, *">  -->
-        <!--  <TextBlock  -->
-        <!--  Grid.Row="0"  -->
-        <!--  Grid.Column="0"  -->
-        <!--  Classes="Title"  -->
-        <!--  Text="持续时间"/>  -->
-        <!--  <TextBlock  -->
-        <!--  Grid.Row="1"  -->
-        <!--  Grid.Column="0"  -->
-        <!--  Classes="Content"  -->
-        <!--  Text="设置动画的持续时长"/>  -->
-        <!--  <fui:FluentComboBox  -->
-        <!--  Grid.RowSpan="2"  -->
-        <!--  Grid.Column="1"  -->
-        <!--  MinWidth="168"  -->
-        <!--  HorizontalAlignment="Right"  -->
-        <!--  VerticalAlignment="Center"  -->
-        <!--  IsEnabled="{Binding IsEnabledTogglePageAnimation}"  -->
-        <!--  ItemsSource="{Binding AnimationDurations}"  -->
-        <!--  SelectedItem="{Binding AnimationDuration}"/>  -->
-        <!--   </Grid> -->
-        <!-- </ui:Card> -->
-        <ui:Card IsEnabled="{Binding WindowEffectCardIsEnabled}">
-          <Grid
-            VerticalAlignment="Center"
-            ColumnDefinitions="*, Auto"
-            RowDefinitions="*, *">
-            <TextBlock
-              Grid.Row="0"
-              Grid.Column="0"
-              Classes="Title"
-              Text="{Binding WindowEffect}"/>
-            <TextBlock
-              Grid.Row="1"
-              Grid.Column="0"
-              Classes="Content"
-              Text="{Binding WindowEffectDescription}"/>
-            <ToggleSwitch
-              Grid.RowSpan="2"
-              Grid.Column="1"
-              HorizontalAlignment="Right"
-              IsChecked="{Binding IsEnabledWindowEffect}"/>
-          </Grid>
-        </ui:Card>
+
+        <fui:SettingCard
+          Description="{Binding WindowEffectDescription}"
+          Header="{Binding WindowEffect}"
+          IconSource="{x:Static fi:FluentIcon.Transparent}"
+          IsEnabled="{Binding !IsEnabledBackgroundImage}">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <RadioButton
+              Command="{Binding EnabledWindowEffectCommand}"
+              CommandParameter="{Binding $self.Content}"
+              Content="Null"
+              IsChecked="{Binding !IsEnabledWindowEffect}"
+              Theme="{StaticResource ChipsRadioButton}"/>
+            <RadioButton
+              Command="{Binding EnabledWindowEffectCommand}"
+              CommandParameter="{Binding $self.Content}"
+              Content="Mica"
+              IsChecked="{Binding IsMicaRadioChecked}"
+              IsEnabled="{Binding IsWindows11}"
+              Theme="{StaticResource ChipsRadioButton}"/>
+            <RadioButton
+              Command="{Binding EnabledWindowEffectCommand}"
+              CommandParameter="{Binding $self.Content}"
+              Content="Acrylic"
+              IsChecked="{Binding IsAcrylicRadioChecked}"
+              IsEnabled="{Binding IsWindows}"
+              Theme="{StaticResource ChipsRadioButton}"/>
+          </StackPanel>
+          <!-- <ToggleSwitch IsChecked="{Binding IsEnabledWindowEffect}"/> -->
+        </fui:SettingCard>
 
         <fui:SettingsExpander
           Description="{Binding AppearanceDescription}"
@@ -202,83 +126,32 @@
                   Width="100"
                   Color="{Binding SelectedAccentColor}"/>
               </Grid>
-              <!-- <Button Content="选择颜色" IsEnabled="{Binding #CustomColorRadioButton.IsChecked}"/> -->
             </fui:SettingsExpanderItem.Footer>
           </fui:SettingsExpanderItem>
         </fui:SettingsExpander>
 
-        <ui:Card>
-          <Grid
-            VerticalAlignment="Center"
-            ColumnDefinitions="*, Auto"
-            IsEnabled="False"
-            RowDefinitions="*, *">
-            <TextBlock
-              Grid.Row="0"
-              Grid.Column="0"
-              Classes="Title"
-              Text="{Binding PinToTop}"/>
-            <TextBlock
-              Grid.Row="1"
-              Grid.Column="0"
-              Classes="Content"
-              Text="{Binding PinToTopDescription}"/>
-            <ToggleSwitch
-              Grid.RowSpan="2"
-              Grid.Column="1"
-              HorizontalAlignment="Right"
-              IsChecked="{Binding IsTopmost}"/>
-          </Grid>
-        </ui:Card>
+        <fui:SettingCard
+          Description="{Binding LanguageDescription}"
+          Header="{Binding Language}"
+          IconSource="{x:Static fi:FluentIcon.Language}">
+          <ComboBox
+            Width="128"
+            HorizontalAlignment="Right"
+            ItemsSource="{Binding Languages}"
+            SelectedItem="{Binding CurrentLanguage}"/>
+        </fui:SettingCard>
 
-        <ui:Card>
-          <Grid
-            VerticalAlignment="Center"
-            ColumnDefinitions="*, Auto"
-            RowDefinitions="*, *">
-            <TextBlock
-              Grid.Row="0"
-              Grid.Column="0"
-              Classes="Title"
-              Text="{Binding Language}"/>
-            <TextBlock
-              Grid.Row="1"
-              Grid.Column="0"
-              Classes="Content"
-              Text="{Binding LanguageDescription}"/>
-            <fui:FluentComboBox
-              Grid.RowSpan="2"
-              Grid.Column="1"
-              Width="128"
-              HorizontalAlignment="Right"
-              ItemsSource="{Binding Languages}"
-              SelectedItem="{Binding CurrentLanguage}"/>
-          </Grid>
+        <fui:SettingCard
+          Description="{Binding PinToTopDescription}"
+          Header="{Binding PinToTop}"
+          IsEnabled="False">
+          <ToggleSwitch IsChecked="False"/>
+        </fui:SettingCard>
 
-        </ui:Card>
+        <fui:SettingCard Description="{Binding EnableBackgroundImage}" Header="{Binding BackgroundImage}">
+          <ToggleSwitch IsChecked="{Binding IsEnabledBackgroundImage}"/>
+        </fui:SettingCard>
 
-        <ui:Card Margin="0,0,0,64">
-          <Grid
-            VerticalAlignment="Center"
-            ColumnDefinitions="*, Auto"
-            RowDefinitions="*, *">
-            <TextBlock
-              Grid.Row="0"
-              Grid.Column="0"
-              Classes="Title"
-              Text="{Binding BackgroundImage}"/>
-            <TextBlock
-              Grid.Row="1"
-              Grid.Column="0"
-              Classes="Content"
-              Text="{Binding EnableBackgroundImage}"/>
-            <ToggleSwitch
-              Grid.RowSpan="2"
-              Grid.Column="1"
-              HorizontalAlignment="Right"
-              IsChecked="{Binding IsEnabledBackgroundImage}"/>
-          </Grid>
-        </ui:Card>
       </StackPanel>
     </fui:SmoothScrollViewer>
   </Grid>

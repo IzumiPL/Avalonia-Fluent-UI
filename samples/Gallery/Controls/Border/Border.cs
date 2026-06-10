@@ -18,7 +18,6 @@ public class CheckedBorder : Avalonia.Controls.Border
     {
         base.OnPointerReleased(e);
         
-        // 只有左键点击时切换状态
         if (e.InitialPressMouseButton == MouseButton.Left)
         {
             IsChecked = !IsChecked;

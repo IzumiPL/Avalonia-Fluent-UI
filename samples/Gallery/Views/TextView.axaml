@@ -8,6 +8,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Text]}"
   d:DesignHeight="450"
   d:DesignWidth="800"
   x:DataType="viewModel:TextViewModel"
@@ -91,7 +92,7 @@
               Grid.Row="1"
               Grid.Column="0"
               Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_SelectMatchMode]}"/>
-            <fui:FluentComboBox
+            <ComboBox
               Grid.Row="1"
               Grid.Column="1"
               HorizontalAlignment="Stretch"
@@ -159,7 +160,7 @@
               Grid.Row="1"
               Grid.Column="0"
               Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_FontSize]}"/>
-            <fui:FluentComboBox
+            <ComboBox
               Grid.Row="1"
               Grid.Column="1"
               HorizontalAlignment="Stretch"
@@ -170,7 +171,7 @@
               Grid.Row="2"
               Grid.Column="0"
               Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_FontWeight]}"/>
-            <fui:FluentComboBox
+            <ComboBox
               Grid.Row="2"
               Grid.Column="1"
               HorizontalAlignment="Stretch"
@@ -181,7 +182,7 @@
               Grid.Row="3"
               Grid.Column="0"
               Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_FontStyle]}"/>
-            <fui:FluentComboBox
+            <ComboBox
               Grid.Row="3"
               Grid.Column="1"
               HorizontalAlignment="Stretch"
@@ -207,7 +208,7 @@
               Grid.Row="5"
               Grid.Column="0"
               Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_TextDecoration]}"/>
-            <fui:FluentComboBox
+            <ComboBox
               Grid.Row="5"
               Grid.Column="1"
               HorizontalAlignment="Stretch"
@@ -298,7 +299,7 @@
             <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
             <StackPanel Orientation="Horizontal" Spacing="3">
               <TextBlock Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_SpinButtonMode]}"/>
-              <fui:FluentComboBox
+              <ComboBox
                 HorizontalAlignment="Stretch"
                 ItemsSource="{Binding NumberBoxSpinButtonPlacementModes}"
                 SelectedItem="{Binding NumberBoxSpinButtonPlacementMode}"/>
@@ -324,7 +325,7 @@
             <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
             <StackPanel Orientation="Horizontal">
               <TextBlock Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_SpinnerLocation]}"/>
-              <fui:FAComboBox ItemsSource="{Binding SpinnerLocations}" SelectedItem="{Binding SpinnerLocation}"/>
+              <ComboBox ItemsSource="{Binding SpinnerLocations}" SelectedItem="{Binding SpinnerLocation}"/>
             </StackPanel>
             <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_EnableSpin]}" IsChecked="{Binding IsEnabledSpinner}"/>
           </StackPanel>
@@ -333,21 +334,21 @@
     </ui:CodeCard>
 
     <!--  MaskedTextBox  -->
-    <ui:CodeCard Title="MaskedTextBox">
-      <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto" RowSpacing="10">
-        <TextBlock
-          Grid.Row="0"
-          Classes="Title"
-          Text="{OnFormFactor Default=MaskedTextBox}"/>
-        <TextBlock Grid.Row="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_PhoneNumber]}"/>
-        <MaskedTextBox Grid.Row="2" Mask="(+86) 000 0000 0000"/>
-
-        <TextBlock Grid.Row="3" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_EnterName]}"/>
-        <MaskedTextBox
-          Grid.Row="4"
-          AsciiOnly="True"
-          Mask="*"/>
-      </Grid>
-    </ui:CodeCard>
+    <!-- <ui:CodeCard Title="MaskedTextBox"> -->
+    <!--   <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto" RowSpacing="10"> -->
+    <!--  <TextBlock  -->
+    <!--  Grid.Row="0"  -->
+    <!--  Classes="Title"  -->
+    <!--  Text="{OnFormFactor Default=MaskedTextBox}"/>  -->
+    <!--     <TextBlock Grid.Row="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_PhoneNumber]}"/> -->
+    <!--     <MaskedTextBox Grid.Row="2" Mask="(+86) 000 0000 0000"/> -->
+    <!--    -->
+    <!--     <TextBlock Grid.Row="3" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_EnterName]}"/> -->
+    <!--  <MaskedTextBox  -->
+    <!--  Grid.Row="4"  -->
+    <!--  AsciiOnly="True"  -->
+    <!--  Mask="*"/>  -->
+    <!--   </Grid> -->
+    <!-- </ui:CodeCard> -->
   </StackPanel>
 </ui:ViewBase>

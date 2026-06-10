@@ -89,9 +89,9 @@
       RowDefinitions="Auto, Auto, Auto"
       RowSpacing="8">
       <TextBlock
-        Name="TbTitle"
         Grid.Row="0"
-        FontSize="32"/>
+        FontSize="32"
+        Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Icon]}"/>
       <TextBlock
         Grid.Row="1"
         FontSize="12"
@@ -104,13 +104,13 @@
         <Button Grid.Column="0">
           <Grid ColumnDefinitions="Auto, *" ColumnSpacing="8">
             <PathIcon Grid.Column="0" Data="M28 12.25v15.75q0 0.828-0.313 1.555t-0.859 1.273-1.273 0.859-1.555 0.313h-16q-0.828 0-1.555-0.313t-1.273-0.859-0.859-1.273-0.313-1.555v-24q0-0.828 0.313-1.555t0.859-1.273 1.273-0.859 1.555-0.313h7.75q0.797 0 1.531 0.305t1.297 0.867l8.25 8.25q0.563 0.563 0.867 1.297t0.305 1.531zM26 12.25q0-0.063 0-0.125t-0.016-0.125h-5.984q-0.828 0-1.555-0.313t-1.273-0.859-0.859-1.273-0.313-1.555v-5.984q-0.063-0.016-0.125-0.016t-0.125 0h-7.75q-0.422 0-0.781 0.156t-0.633 0.43-0.43 0.633-0.156 0.781v24q0 0.422 0.156 0.789t0.422 0.633 0.633 0.422 0.789 0.156h16q0.422 0 0.781-0.156t0.633-0.43 0.43-0.633 0.156-0.781v-15.75zM24.594 10l-6.594-6.594v4.594q0 0.422 0.156 0.789t0.422 0.633 0.633 0.422 0.789 0.156h4.594z"/>
-            <TextBlock Name="OlText" Grid.Column="1"/>
+            <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[OnlineDocument]}"/>
           </Grid>
         </Button>
         <Button Grid.Column="1">
           <Grid ColumnDefinitions="Auto, *" ColumnSpacing="8">
             <PathIcon Grid.Column="0" Data="M15.952 0.327c-8.821 0-15.952 7.184-15.952 16.071 0 7.104 4.569 13.117 10.908 15.246 0.793 0.16 1.083-0.346 1.083-0.771 0-0.373-0.026-1.65-0.026-2.98-4.438 0.958-5.362-1.916-5.362-1.916-0.713-1.863-1.77-2.341-1.77-2.341-1.452-0.985 0.106-0.985 0.106-0.985 1.611 0.106 2.457 1.65 2.457 1.65 1.426 2.448 3.724 1.756 4.648 1.33 0.132-1.038 0.555-1.756 1.004-2.155-3.539-0.373-7.263-1.756-7.263-7.929 0-1.756 0.633-3.193 1.637-4.31-0.158-0.399-0.713-2.049 0.159-4.257 0 0 1.347-0.426 4.384 1.65 1.196-0.336 2.569-0.531 3.987-0.532h0.001c1.347 0 2.72 0.186 3.988 0.532 3.037-2.075 4.384-1.65 4.384-1.65 0.872 2.208 0.317 3.858 0.158 4.257 1.030 1.117 1.638 2.554 1.638 4.31 0 6.173-3.724 7.53-7.289 7.929 0.581 0.505 1.083 1.463 1.083 2.98 0 2.155-0.026 3.885-0.026 4.417 0 0.426 0.291 0.932 1.083 0.772 6.339-2.129 10.908-8.142 10.908-15.246 0.026-8.887-7.131-16.071-15.926-16.071z"/>
-            <TextBlock Name="ScText" Grid.Column="1"/>
+            <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SourceCode]}"/>
           </Grid>
         </Button>
 
@@ -132,8 +132,8 @@
       Width="256"
       Margin="0,12,0,0"
       HorizontalAlignment="Left"
-      TextChanged="OnSearchTextChanged"
-      Watermark="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[IV_SearchIcon]}"/>
+      PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[IV_SearchIcon]}"
+      TextChanged="OnSearchTextChanged"/>
 
     <fui:SmoothScrollViewer
       Grid.Row="2"

@@ -39,7 +39,7 @@
     <ProjectReference Include="../../src/AvaloniaFluentUI/AvaloniaFluentUI.csproj" />
   </ItemGroup>
 
-<!--  <ItemGroup>-->
-<!--    <Folder Inclu/de="Assets\Locale\" />-->
-<!--  </ItemGroup>-->
+  <ItemGroup>
+    <Folder Include="Controls\Button\" />
+  </ItemGroup>
 </Project>

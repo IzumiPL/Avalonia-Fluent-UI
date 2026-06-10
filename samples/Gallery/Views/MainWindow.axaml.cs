@@ -1,12 +1,9 @@
 using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
-using Avalonia.Animation;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
@@ -19,6 +16,7 @@ using AvaloniaFluentUI.Styling;
 using AvaloniaFluentUI.Windowing;
 using CommunityToolkit.Mvvm.Messaging;
 using Gallery.Messages;
+using Gallery.Messages.MainWindowMessages;
 using Gallery.Models;
 using Gallery.Services;
 using Gallery.ViewModels;
@@ -32,40 +30,29 @@ public class MainWindowSplashScreen : IApplicationSplashScreen
     public object SplashScreenContent => null;
     public Task RunTasks(CancellationToken cancellationToken)
     {
-        return Task.Delay(599, cancellationToken);
+        return Task.Delay(600, cancellationToken);
     }
 
-    public int MinimumShowTime => 1499;
+    public int MinimumShowTime => 1500;
 }
 
-public partial class MainWindow : AppWindow 
+public partial class MainWindow : AppWindow
 {
-    private IPageTransition? _currentPageTransition;
-
-    private bool _isEnabledWindowEffect;
-    private readonly MainWindowMessageHandler _messageHandler;
-
     public MainWindow()
     { 
         SplashScreen = new MainWindowSplashScreen();
         InitializeComponent();
         
-        _messageHandler = new MainWindowMessageHandler(this); 
-        RegisterAllMessage();
+        RegisterMessages();
         
-        BackgroundImage.Source = Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/bg.jpg")), 1023);
-
-        SetPageTransition(null);
+        BackgroundImage.Source = Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/bg.jpg")), 1024);
 
         Loaded += OnLoaded;
-        FluentAvaloniaTheme.Instance.ThemeChanged +=(_, _) => { EnableWindowEffect(_isEnabledWindowEffect); };
-        WeakReferenceMessenger.Default.Register<JumpToControlMessage>(this, OnJumpToControl);
-
-
+        
         ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("Pin"));
-        LocalizationService.Instance.PropertyChanged += (_, __) =>
+        LocalizationService.Instance.PropertyChanged += (_, _) =>
         {
-            if (PinButton.Tag.ToString() == "isTopmost")
+            if (PinButton.Tag!.ToString() == "isTopmost")
             {
                 ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("UnPin"));
             }
@@ -74,6 +61,42 @@ public partial class MainWindow : AppWindow
                 ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("Pin"));
             }
         };
+    }
+
+    private void RegisterMessages()
+    {
+        WeakReferenceMessenger.Default.Register<JumpToControlMessage>(this, OnJumpToControl);
+        WeakReferenceMessenger.Default.Register<EnabledWindowEffectMessage>(this, OnEnabledWindowEffect);
+        WeakReferenceMessenger.Default.Register<EnabledBackgroundImageMessage>(this, OnEnabledBackgroundImage);
+    }
+
+    private void OnEnabledBackgroundImage(object recipient, EnabledBackgroundImageMessage message)
+    {
+        BackgroundImage.IsVisible = message.IsVisible;
+        if (message.IsVisible)
+        {
+            EnabledAcrylicBlue(false);
+            EnabledMica(false);
+        }
+    }
+
+    private void OnEnabledWindowEffect(object recipient, EnabledWindowEffectMessage message)
+    {
+        if (message.IsEnabled)
+        {
+            switch (message.type)
+            {
+                case "Mica":
+                    EnabledMica(true);
+                    break;
+                case "Acrylic":
+                    EnabledAcrylicBlue(true);
+                    break;
+            }
+            return;
+        }
+        EnabledAcrylicBlue(false);
+        EnabledMica(false);
     }
 
     private void OnJumpToControl(object recipient, JumpToControlMessage message)
@@ -102,17 +125,22 @@ public partial class MainWindow : AppWindow
                     AccentColor = svm.IsDefaultAccentColor ? FluentAvaloniaTheme.Instance.CurrentAccentColor.ToString() : svm.SelectedAccentColor.ToString(),
                     Theme = FluentAvaloniaTheme.Instance.CurrentTheme.ToString(),
                     IsWindowEffectEnabled = svm.IsEnabledWindowEffect,
+                    WindowEffect = svm.CurrentEffect,
                     IsEnabledBackgroundImage = svm.IsEnabledBackgroundImage,
                     Language = svm.CurrentLanguage
                 });
-                Console.WriteLine("Save Config Success");
+#if DEBUG
+                Debug.WriteLine("Save Config Success");
+#endif
             }
             catch (Exception exception)
             {
                 Console.WriteLine(exception);
             }
         }
-        else { Console.WriteLine("Save Config Error");}
+#if DEBUG
+        else Debug.WriteLine("Save Config Error");
+#endif
         base.OnClosing(e);
     }
 
@@ -123,7 +151,6 @@ public partial class MainWindow : AppWindow
         if (DataContext is MainWindowViewModel viewModel)
         {
             var svm = viewModel.SettingsViewModel;
-            EnableWindowEffect(svm.IsEnabledWindowEffect);
             BackgroundImage.IsVisible = svm.IsEnabledBackgroundImage;
         }
 
@@ -149,38 +176,6 @@ public partial class MainWindow : AppWindow
         }
     }
 
-    private void OnViewModelChanged(string page, string name)
-    {
-        foreach (var item in NavigationView.MenuItems)
-        {
-            if (item is NavigationViewItem nvi)
-            {
-                if ((string)nvi.Tag! == page) NavigationView.SelectedItem = nvi;
-
-                WeakReferenceMessenger.Default.Send(new JumpToControlMessage(page, name));
-            }
-        }
-    }
-
-    private void RegisterAllMessage() => _messageHandler.RegisterAllMessage();
-
-    private void InitControls()
-    {
-    }
-
-    public void SetPageTransition(IPageTransition? pageTransition)
-    {
-        _currentPageTransition = pageTransition;
-    }
-
-    public IPageTransition? CurrentPageTransition => _currentPageTransition;
-
-    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
-    {
-        base.OnApplyTemplate(e);
-        InitControls();
-    }
-
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
@@ -188,15 +183,6 @@ public partial class MainWindow : AppWindow
         {
             Topmost = false;
             Topmost = true;
-
-            // if (change.GetNewValue<WindowState>() == WindowState.Maximized)
-            // {
-            //     NavigationView.Margin = new Thickness(11, 55, 8, 6);
-            // }
-            // else
-            // {
-            //     NavigationView.Margin = new Thickness(5, 55, 0, 0);
-            // }
         }
     }
 
@@ -205,56 +191,21 @@ public partial class MainWindow : AppWindow
         BackgroundImage.IsVisible = visible;
     }
 
-    public void EnableWindowEffect(bool enable = true)
-    {
-        if (enable)
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                if (Environment.OSVersion.Version.Build >= 21999)
-                {
-                    Background = Brushes.Transparent;
-                    TransparencyLevelHint = [WindowTransparencyLevel.Mica];
-                }
-                else
-                {
-                    Background = Brush.Parse(ConfigService.IsDarkTheme() ? "#A999999" : "#C1FFFFFF");
-                    TransparencyLevelHint = [WindowTransparencyLevel.AcrylicBlur];
-                }
-            }
-        }
-        else
-        {
-#if DEBUG
-            Debug.WriteLine("Apply Default Background Style");
-#endif
-            Background = Brush.Parse(ConfigService.IsDarkTheme() ? "#202019" : "#F0F4F9");
-            TransparencyLevelHint = [WindowTransparencyLevel.None];
-        }
-
-        _isEnabledWindowEffect = enable;
-    }
-
-    private void OnClicked(object? sender, RoutedEventArgs e)
-    {
-        LocalizationService.Instance.SetCulture("en-US");
-    }
-
     private void OnToggleTopmost(object? sender, RoutedEventArgs e)
     {
         if (sender is ToolButton btn)
         {
-            if (btn.Tag.ToString() == "isTopmost")
+            if (btn.Tag!.ToString() == "isTopmost")
             {
                 btn.Tag = "noTopmost";
-                btn.IconData = FluentIcon.Pin;
+                btn.Content= FluentIcon.Pin;
                 this.Topmost = false;
                 ToolTip.SetTip(btn, LocalizationService.Instance.GetString("Pin"));
             }
             else
             {
                 btn.Tag = "isTopmost";
-                btn.IconData = FluentIcon.Unpin;
+                btn.Content = FluentIcon.Unpin;
                 this.Topmost = true;
                 ToolTip.SetTip(btn, LocalizationService.Instance.GetString("UnPin"));
             }

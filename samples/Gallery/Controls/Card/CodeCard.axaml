@@ -7,7 +7,7 @@
 
   <ControlTheme x:Key="{x:Type controls:CodeCard}" TargetType="controls:CodeCard">
     <Setter Property="ClipToBounds" Value="True"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
     <Setter Property="Margin" Value="0"/>
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="Padding" Value="0"/>

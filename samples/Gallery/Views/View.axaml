@@ -10,6 +10,7 @@
   xmlns:models="clr-namespace:Gallery.Models"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[View]}"
   d:DesignHeight="450"
   d:DesignWidth="800"
   x:DataType="viewModel:ViewModel"
@@ -37,7 +38,7 @@
 
             <StackPanel Orientation="Horizontal" Spacing="3">
               <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Interval]}"/>
-              <fui:FluentComboBox
+              <ComboBox
                 Width="150"
                 HorizontalAlignment="Right"
                 ItemsSource="{Binding Intervals}"
@@ -46,7 +47,7 @@
 
             <StackPanel Orientation="Horizontal" Spacing="3">
               <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Direction]}"/>
-              <fui:FluentComboBox
+              <ComboBox
                 Width="150"
                 HorizontalAlignment="Right"
                 ItemsSource="{Binding FlipOrientations}"
@@ -71,33 +72,6 @@
         ItemsSource="{Binding ItemSource}"/>
     </ui:CodeCard>
 
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_DataGrid]}" Height="456">
-      <Grid ColumnDefinitions="*, Auto">
-        <DataGrid
-          Margin="10"
-          AutoGenerateColumns="True"
-          BorderBrush="{DynamicResource CardBorderBrush}"
-          BorderThickness="1"
-          CornerRadius="8"
-          GridLinesVisibility="{Binding DataGridLinesVisibilityMode}"
-          IsReadOnly="{Binding DataGridIsReadOnly}"
-          ItemsSource="{Binding People}"/>
-
-        <ui:Card Grid.Column="1" Width="256">
-          <StackPanel Orientation="Vertical" Spacing="3">
-            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Options]}"/>
-            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_IsReadOnly]}" IsChecked="{Binding DataGridIsReadOnly}"/>
-            <StackPanel Orientation="Horizontal" Spacing="5">
-              <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_BorderDisplayMode]}"/>
-              <fui:FluentComboBox
-                HorizontalAlignment="Stretch"
-                ItemsSource="{Binding DataGridLineVisibilityModes}"
-                SelectedItem="{Binding DataGridLinesVisibilityMode}"/>
-            </StackPanel>
-          </StackPanel>
-        </ui:Card>
-      </Grid>
-    </ui:CodeCard>
 
     <ui:CodeCard
       Name="TreeViewCard"
@@ -121,7 +95,7 @@
             <TextBlock Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Options]}"/>
             <StackPanel Orientation="Horizontal" Spacing="3">
               <TextBlock Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SelectMode]}"/>
-              <fui:FluentComboBox ItemsSource="{Binding TreeViewSelectedModes}" SelectedItem="{Binding TreeViewSelectedMode}"/>
+              <ComboBox ItemsSource="{Binding TreeViewSelectedModes}" SelectedItem="{Binding TreeViewSelectedMode}"/>
             </StackPanel>
           </StackPanel>
         </ui:Card>
@@ -186,16 +160,135 @@
       </Grid>
     </ui:CodeCard>
 
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_CardTitle]}">
+      <fui:Card>
+        <TextBlock
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_CardTitle]}"/>
+      </fui:Card>
+    </ui:CodeCard>
+
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SimpleCardTitle]}">
+      <fui:SimpleCard>
+        <TextBlock
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SimpleCardTitle]}"/>
+      </fui:SimpleCard>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_ElevatedCardTitle]}">
+      <StackPanel
+        Margin="8,10"
+        Orientation="Horizontal"
+        Spacing="16">
+        <fui:ElevatedCard Width="256" Height="256">
+          <Panel>
+            <TextBlock
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              FontSize="86"
+              Text="🥰"/>
+            <TextBlock
+              HorizontalAlignment="Center"
+              VerticalAlignment="Bottom"
+              Classes="SubTitle"
+              Text="Kiss"/>
+          </Panel>
+        </fui:ElevatedCard>
+        <fui:ElevatedCard Width="256" Height="256">
+          <Panel>
+            <TextBlock
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              FontSize="86"
+              Text="🥵"/>
+            <TextBlock
+              HorizontalAlignment="Center"
+              VerticalAlignment="Bottom"
+              Classes="SubTitle"
+              Text="Kiss"/>
+          </Panel>
+        </fui:ElevatedCard>
+        <fui:ElevatedCard Width="256" Height="256">
+          <Panel>
+            <TextBlock
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              FontSize="86"
+              Text="😭"/>
+            <TextBlock
+              HorizontalAlignment="Center"
+              VerticalAlignment="Bottom"
+              Classes="SubTitle"
+              Text="Kiss"/>
+          </Panel>
+        </fui:ElevatedCard>
+      </StackPanel>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_HeaderCardTitle]}">
+      <fui:HeaderCard Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SystemReq]}">
+        <Panel Height="52">
+          <Panel
+            Width="18"
+            Height="18"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <Ellipse
+              Name="IconBackground"
+              Width="18"
+              Height="18"
+              VerticalAlignment="Top"
+              Fill="{DynamicResource SystemFillColorSuccessBrush}"/>
+            <fui:FontIcon
+              Width="18"
+              Height="18"
+              VerticalAlignment="Top"
+              FontFamily="{StaticResource SymbolThemeFontFamily}"
+              FontSize="10"
+              Foreground="{DynamicResource TextFillColorInverseBrush}"
+              Glyph="&#xE10B;"/>
+          </Panel>
+          <SelectableTextBlock
+            Margin="24,0,0,0"
+            VerticalAlignment="Top"
+            Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SystemReqDes]}"/>
+          <HyperlinkButton
+            Margin="-11,0,0,0"
+            VerticalAlignment="Bottom"
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SystemReqDesMoreInfo]}"/>
+        </Panel>
+      </fui:HeaderCard>
+    </ui:CodeCard>
+
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SimpleSettingsCard]}">
       <fui:SettingCard
         Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SoundDescription]}"
         Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Volume]}"
-        IconData="{x:Static fi:FluentIcon.Volume}">
+        IconSource="{x:Static fi:FluentIcon.Volume}">
         <fui:ToolTipSlider
           Width="168"
           MinHeight="0"
           MaxHeight="100"
           Value="32"/>
+      </fui:SettingCard>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_NoIconCardTitle]}">
+      <fui:SettingCard Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SoundDescription]}" Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Volume]}">
+        <ToggleSwitch Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_NoIconCardTitleSwc]}"/>
+      </fui:SettingCard>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_CICardTitle]}">
+      <fui:SettingCard
+        Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SoundDescription]}"
+        Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Volume]}"
+        IconSource="avares://Gallery/Assets/Icons/Setting.png">
+        <ToggleSwitch Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_NoIconCardTitleSwc]}"/>
       </fui:SettingCard>
     </ui:CodeCard>
 
@@ -219,7 +312,7 @@
             <fui:PushButton
               Classes="Accent"
               Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_AddDevice]}"
-              IconData="{DynamicResource Add}"/>
+              IconSource="{DynamicResource Add}"/>
           </fui:SettingsExpanderItem.Footer>
         </fui:SettingsExpanderItem>
         <fui:SettingsExpanderItem
@@ -227,6 +320,34 @@
           Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_IsClickable]}"
           IsClickEnabled="True"/>
       </fui:SettingsExpander>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_DataGrid]}" Height="456">
+      <Grid ColumnDefinitions="*, Auto">
+        <DataGrid
+          Margin="10"
+          AutoGenerateColumns="True"
+          BorderBrush="{DynamicResource CardBorderBrush}"
+          BorderThickness="1"
+          CornerRadius="8"
+          GridLinesVisibility="{Binding DataGridLinesVisibilityMode}"
+          IsReadOnly="{Binding DataGridIsReadOnly}"
+          ItemsSource="{Binding People}"/>
+
+        <ui:Card Grid.Column="1" Width="256">
+          <StackPanel Orientation="Vertical" Spacing="3">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Options]}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_IsReadOnly]}" IsChecked="{Binding DataGridIsReadOnly}"/>
+            <StackPanel Orientation="Horizontal" Spacing="5">
+              <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_BorderDisplayMode]}"/>
+              <ComboBox
+                HorizontalAlignment="Stretch"
+                ItemsSource="{Binding DataGridLineVisibilityModes}"
+                SelectedItem="{Binding DataGridLinesVisibilityMode}"/>
+            </StackPanel>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
     </ui:CodeCard>
   </StackPanel>
 </ui:ViewBase>

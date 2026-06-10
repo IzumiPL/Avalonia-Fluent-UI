@@ -19,8 +19,6 @@ public partial class NavigationView : ViewBase
     {
         InitializeComponent();
         
-        Title = LocalizationService.Instance.GetString("Navigation");
-        
         CodeCards = new Dictionary<string, CodeCard>()
         {
             {"NavigationView", NavigationViewCard},

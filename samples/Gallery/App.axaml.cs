@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -30,9 +31,14 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        Console.WriteLine(LocalizationService.Instance.GetString("SV_ThemeColorDescription"));
         var config = ConfigService.LoadConfig();
-        InitializeCulture();
+        Console.WriteLine($"Loaded Language: {config?.Language}");
         LocalizationService.Instance.SetCulture(config?.Language);
+        Console.WriteLine($"Set Language: {LocalizationService.Instance.CurrentLanguage}");
+        InitializeCulture();
+
+        Console.WriteLine(LocalizationService.Instance.GetString("SV_ThemeColorDescription"));
         
         try
         {

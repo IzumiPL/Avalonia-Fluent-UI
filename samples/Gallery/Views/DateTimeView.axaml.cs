@@ -10,8 +10,6 @@ public partial class DateTimeView : ViewBase
     {
         InitializeComponent();
 
-        Title = LocalizationService.Instance.GetString("DateTime");
-
         CodeCards = new Dictionary<string, CodeCard>()
         {
             { "CalendarDatePicker", CalendarDatePickerCard },

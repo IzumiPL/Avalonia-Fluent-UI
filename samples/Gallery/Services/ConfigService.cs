@@ -61,6 +61,7 @@ public class ConfigService
                 AccentColor = "#00BFFF",
                 IsWindowEffectEnabled = true,
                 IsEnabledBackgroundImage = false,
+                WindowEffect = "Mica",
                 Language = "zh-CN"
             };
 
@@ -68,6 +69,8 @@ public class ConfigService
             File.WriteAllText(AppConfigPath, json, Encoding.UTF8);
 
             Application.Current?.RequestedThemeVariant = ThemeVariant.Default;
+
+            Console.WriteLine("Config File Not Exists, Return Of Create");
             return config;
         }
 
@@ -85,6 +88,7 @@ public class ConfigService
             FluentAvaloniaTheme.Instance.CurrentAccentColor = Color.Parse(loaded.AccentColor);
         }
 
+        Console.WriteLine("Config File Loaded");
         return loaded;
     }
 

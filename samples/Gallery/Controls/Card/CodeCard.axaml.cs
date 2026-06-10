@@ -1,8 +1,11 @@
 ﻿using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
+using Avalonia.Input;
 using Avalonia.Metadata;
+using Gallery.Helpers;
 
 namespace Gallery.Controls;
 
@@ -29,10 +32,32 @@ public class CodeCard : ContentControl
         set => SetValue(TitleProperty, value);
     }
 
-    static CodeCard()
+    public static readonly StyledProperty<string> UrlProperty =
+        AvaloniaProperty.Register<CodeCard, string>(nameof(Url), defaultValue: "https://github.com/HiyorinI/AvaloniaFluentUI.git");
+
+    public string Url
     {
-        // CodeContentProperty.Changed.AddClassHandler<Card>((x, e) => 
-        // x.OnHeaderChanged(e));
+        get => GetValue(UrlProperty);
+        set => SetValue(UrlProperty, value);
+    }
+
+    private Border? _border;
+    private const string PART_BORDER = "PART_CodeContentBorder";
+
+    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+    {
+        base.OnApplyTemplate(e);
+
+        _border?.PointerReleased -= OnSourceCodeContentPointerReleased;
+        
+        _border = e.NameScope.Get<Border>(PART_BORDER);
+        
+        _border?.PointerReleased += OnSourceCodeContentPointerReleased;
+    }
+
+    private void OnSourceCodeContentPointerReleased(object? sender, PointerReleasedEventArgs e)
+    {
+        UrlHelpers.OpenUrl(Url);
     }
 
     public double CodeContentHeight
@@ -59,16 +84,4 @@ public class CodeCard : ContentControl
         get => GetValue(CodeContentCommandProperty);
         set => SetValue(CodeContentCommandProperty, value);
     }
-
-    private void OnHeaderChanged(AvaloniaPropertyChangedEventArgs e)
-    {
-        // UpdatePseudoClasses();
-    }
-
-    // private void UpdatePseudoClasses()
-    // {
-    // var hasCodeContent = CodeContent != null;
-    // PseudoClasses.Set(":has-header", hasCodeContent);
-    // PseudoClasses.Set(":empty-header", !hasCodeContent);
-    // }
 }

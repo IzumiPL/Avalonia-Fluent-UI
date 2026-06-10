@@ -33,10 +33,6 @@ public partial class IconsView : UserControl
     public IconsView()
     {
         InitializeComponent();
-
-        TbTitle.Text = LocalizationService.Instance.GetString("Icon");
-        OlText.Text = LocalizationService.Instance.GetString("OnlineDocument");
-        ScText.Text = LocalizationService.Instance.GetString("SourceCode");
     }
 
     protected async override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -85,7 +81,7 @@ public partial class IconsView : UserControl
                     new TextBlock { Name = "PART_Name", Text = name }
                 }
             },
-            ContextFlyout = new FluentMenuFlyout
+            ContextMenu = new FluentContextMenu
             {
                 Items =
                 {
@@ -95,6 +91,7 @@ public partial class IconsView : UserControl
                         Command = new RelayCommand(() =>
                         {
                             TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync(data.ToString());
+                            Console.WriteLine(data.ToString());
                         })
                     }
                 }
@@ -122,7 +119,7 @@ public partial class IconsView : UserControl
 
     private Dictionary<string, Geometry> GetAllIcons()
     {
-        return typeof(FluentIcon)
+        return typeof(AvaloniaFluentUI.Icons.FluentIcon)
             .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
             .Where(f => f.IsStatic && f.FieldType == typeof(Geometry))
             .ToDictionary(f => f.Name, f => (Geometry)f.GetValue(null)!);

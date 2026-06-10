@@ -1,5 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Globalization;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using AvaloniaFluentUI.Locale;
 
 namespace Gallery.Views;
@@ -13,8 +16,6 @@ public partial class SettingsView : UserControl
 #endif
         InitializeComponent();
         
-        TbTitle.Text = LocalizationService.Instance.GetString("Setting");
-
         // this.AttachedToLogicalTree += (s, e) =>
         // {
         // if (this.DataContext is SettingsViewModel vm)
@@ -39,4 +40,9 @@ public partial class SettingsView : UserControl
     //     // 从视觉树移除时注销，释放资源
     //     WeakReferenceMessenger.Default.UnregisterAll(this);
     // }
+    private void OnClicked(object? sender, RoutedEventArgs e)
+    {
+        Console.WriteLine($"Locale Serivice Language: {LocalizationService.Instance.CurrentLanguage}");
+        Console.WriteLine($"Application Language: {CultureInfo.CurrentCulture.Name}");
+    }
 }

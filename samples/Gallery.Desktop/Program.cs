@@ -1,6 +1,5 @@
 using System;
 using Avalonia;
-using Gallery;
 
 namespace Gallery.Desktop;
 

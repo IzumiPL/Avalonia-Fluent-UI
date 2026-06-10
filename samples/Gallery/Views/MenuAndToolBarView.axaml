@@ -9,6 +9,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MenuAndToolBar]}"
   d:DesignHeight="450"
   d:DesignWidth="800"
   x:DataType="viewModel:MenuAndToolBarViewModel"
@@ -639,7 +640,7 @@
                 <PathIcon Data="{x:Static fi:FluentIcon.Cut}"/>
               </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Past]}" InputGesture="Ctrl+V">
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Paste]}" InputGesture="Ctrl+V">
               <MenuItem.Icon>
                 <PathIcon Data="{x:Static fi:FluentIcon.Paste}"/>
               </MenuItem.Icon>

@@ -19,8 +19,6 @@ public partial class LayoutView : ViewBase
     {
         InitializeComponent();
 
-        Title = LocalizationService.Instance.GetString("Layout");
-        
         InitUniformGridPanel();
         InitWrapPanel();
 

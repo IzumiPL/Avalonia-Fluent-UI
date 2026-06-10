@@ -1479,4 +1479,36 @@
   <data name="UnPin" xml:space="preserve">
     <value>ピンを外せ</value>
   </data>
+  <data name="MT_File" xml:space="preserve">
+    <value>ファイル</value>
+  </data><data name="VP_NoIconCardTitle" xml:space="preserve">
+    <value>アイコンのないシンプルな設定カード</value>
+  </data>
+  <data name="VP_NoIconCardTitleSwc" xml:space="preserve">
+    <value>Bluetoothを有効にする</value>
+  </data>
+  <data name="VP_CICardTitle" xml:space="preserve">
+    <value>カスタムアイコンセットアップカード</value>
+  </data>
+  <data name="VP_CardTitle" xml:space="preserve">
+    <value>カード</value>
+  </data>
+  <data name="VP_SimpleCardTitle" xml:space="preserve">
+    <value>シンプルなカード</value>
+  </data>
+  <data name="VP_ElevatedCardTitle" xml:space="preserve">
+    <value>エレベーテッドカード</value>
+  </data>
+  <data name="VP_HeaderCardTitle" xml:space="preserve">
+    <value>タイトル付きカード</value>
+  </data>
+  <data name="VP_SystemReq" xml:space="preserve">
+    <value>システム要件</value>
+  </data>
+  <data name="VP_SystemReqDes" xml:space="preserve">
+    <value>この製品はあなたのデバイスに適しています。 チェックマーク付きのプロジェクトは開発者のシステム要件を満たしています。</value>
+  </data>
+  <data name="VP_SystemReqDesMoreInfo" xml:space="preserve">
+    <value>詳細</value>
+  </data>
 </root>

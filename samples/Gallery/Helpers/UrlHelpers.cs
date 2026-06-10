@@ -9,6 +9,8 @@ public class UrlHelpers
     {
         try
         {
+            if (String.IsNullOrWhiteSpace(url)) { return; }
+            
             Process.Start(new ProcessStartInfo
             {
                 FileName = url,

@@ -9,6 +9,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Layout]}"
   d:DesignHeight="450"
   d:DesignWidth="800"
   x:DataType="viewModel:LayoutViewModel"
@@ -88,30 +89,30 @@
           </ui:Card>
         </Grid>
       </ui:CodeCard.Content>
-      <!-- <ui:CodeCard.CodeContent> -->
-      <!--   <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"> -->
-      <!--  <TextBlock  -->
-      <!--  Margin="5,0"  -->
-      <!--  FontSize="12"  -->
-      <!--  Text="{Binding CurrentBorderBrush}"/>  -->
-      <!--  <TextBlock  -->
-      <!--  Margin="5,0"  -->
-      <!--  FontSize="12"  -->
-      <!--  Text="{Binding CurrentBorderBackground}"/>  -->
-      <!--  <TextBlock  -->
-      <!--  Margin="5,0"  -->
-      <!--  FontSize="12"  -->
-      <!--  Text="{Binding CurrentBoxShadow}"/>  -->
-      <!--  <TextBlock  -->
-      <!--  Margin="5,0"  -->
-      <!--  FontSize="12"  -->
-      <!--  Text="{Binding CurrentBorderThickness}"/>  -->
-      <!--  <TextBlock  -->
-      <!--  Margin="5,0"  -->
-      <!--  FontSize="12"  -->
-      <!--  Text="{Binding CurrentBorderRadius}"/>  -->
-      <!--   </StackPanel> -->
-      <!-- </ui:CodeCard.CodeContent> -->
+      <ui:CodeCard.CodeContent>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+          <TextBlock
+            Margin="5,0"
+            FontSize="12"
+            Text="{Binding CurrentBorderBrush}"/>
+          <TextBlock
+            Margin="5,0"
+            FontSize="12"
+            Text="{Binding CurrentBorderBackground}"/>
+          <TextBlock
+            Margin="5,0"
+            FontSize="12"
+            Text="{Binding CurrentBoxShadow}"/>
+          <TextBlock
+            Margin="5,0"
+            FontSize="12"
+            Text="{Binding CurrentBorderThickness}"/>
+          <TextBlock
+            Margin="5,0"
+            FontSize="12"
+            Text="{Binding CurrentBorderRadius}"/>
+        </StackPanel>
+      </ui:CodeCard.CodeContent>
     </ui:CodeCard>
 
     <!--  Canvas  -->
@@ -190,92 +191,92 @@
     </ui:CodeCard>
 
     <!--  DockPanel  -->
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_DockPanel]}">
-      <Grid ColumnDefinitions="*, Auto">
-        <Border
-          Grid.Column="0"
-          Margin="0,0,24,0"
-          ClipToBounds="True"
-          CornerRadius="12">
-          <DockPanel Height="328">
-            <Rectangle
-              Height="{Binding DockTopHeight}"
-              DockPanel.Dock="Top"
-              Fill="#0466c8"
-              RadiusX="12"/>
-            <Rectangle
-              Height="{Binding DockBottomHeight}"
-              DockPanel.Dock="Bottom"
-              Fill="#e0aaff"
-              RadiusX="12"/>
-            <Rectangle
-              Width="{Binding DockLeftWidth}"
-              DockPanel.Dock="Left"
-              Fill="#7678ed"
-              RadiusY="12"/>
-            <Rectangle
-              Width="{Binding DockRightWidth}"
-              DockPanel.Dock="Right"
-              Fill="#ffafcc"
-              RadiusY="12"/>
-            <Rectangle Fill="#bde0fe"/>
-          </DockPanel>
-        </Border>
-        <ui:Card Grid.Column="1" Width="256">
-          <Grid
-            ColumnDefinitions="Auto, *"
-            RowDefinitions="Auto, Auto, Auto, Auto, Auto"
-            RowSpacing="8">
-            <TextBlock
-              Grid.Row="0"
-              Grid.ColumnSpan="2"
-              FontWeight="Bold"
-              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
-
-            <TextBlock
-              Grid.Row="1"
-              Grid.Column="0"
-              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_LeftWidth]}"/>
-            <TextBox
-              Grid.Row="1"
-              Grid.Column="1"
-              Text="{Binding InputDockLeftWidth}"
-              Watermark="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_LeftWidth]}"/>
-
-            <TextBlock
-              Grid.Row="2"
-              Grid.Column="0"
-              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_RightWidth]}"/>
-            <TextBox
-              Grid.Row="2"
-              Grid.Column="1"
-              Text="{Binding InputDockRightWidth}"
-              Watermark="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_RightWidth]}"/>
-
-
-            <TextBlock
-              Grid.Row="3"
-              Grid.Column="0"
-              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_TopHeight]}"/>
-            <TextBox
-              Grid.Row="3"
-              Grid.Column="1"
-              Text="{Binding InputDockTopHeight}"
-              Watermark="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_TopHeight]}"/>
-
-            <TextBlock
-              Grid.Row="4"
-              Grid.Column="0"
-              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_BottomHeight]}"/>
-            <TextBox
-              Grid.Row="4"
-              Grid.Column="1"
-              Text="{Binding InputDockBottomHeight}"
-              Watermark="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_BottomHeight]}"/>
-          </Grid>
-        </ui:Card>
-      </Grid>
-    </ui:CodeCard>
+    <!-- <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_DockPanel]}"> -->
+    <!--   <Grid ColumnDefinitions="*, Auto"> -->
+    <!--  <Border  -->
+    <!--  Grid.Column="0"  -->
+    <!--  Margin="0,0,24,0"  -->
+    <!--  ClipToBounds="True"  -->
+    <!--  CornerRadius="12">  -->
+    <!--       <DockPanel Height="328"> -->
+    <!--  <Rectangle  -->
+    <!--  Height="{Binding DockTopHeight}"  -->
+    <!--  DockPanel.Dock="Top"  -->
+    <!--  Fill="#0466c8"  -->
+    <!--  RadiusX="12"/>  -->
+    <!--  <Rectangle  -->
+    <!--  Height="{Binding DockBottomHeight}"  -->
+    <!--  DockPanel.Dock="Bottom"  -->
+    <!--  Fill="#e0aaff"  -->
+    <!--  RadiusX="12"/>  -->
+    <!--  <Rectangle  -->
+    <!--  Width="{Binding DockLeftWidth}"  -->
+    <!--  DockPanel.Dock="Left"  -->
+    <!--  Fill="#7678ed"  -->
+    <!--  RadiusY="12"/>  -->
+    <!--  <Rectangle  -->
+    <!--  Width="{Binding DockRightWidth}"  -->
+    <!--  DockPanel.Dock="Right"  -->
+    <!--  Fill="#ffafcc"  -->
+    <!--  RadiusY="12"/>  -->
+    <!--         <Rectangle Fill="#bde0fe"/> -->
+    <!--       </DockPanel> -->
+    <!--     </Border> -->
+    <!--     <ui:Card Grid.Column="1" Width="256"> -->
+    <!--  <Grid  -->
+    <!--  ColumnDefinitions="Auto, *"  -->
+    <!--  RowDefinitions="Auto, Auto, Auto, Auto, Auto"  -->
+    <!--  RowSpacing="8">  -->
+    <!--  <TextBlock  -->
+    <!--  Grid.Row="0"  -->
+    <!--  Grid.ColumnSpan="2"  -->
+    <!--  FontWeight="Bold"  -->
+    <!--  Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>  -->
+    <!--    -->
+    <!--  <TextBlock  -->
+    <!--  Grid.Row="1"  -->
+    <!--  Grid.Column="0"  -->
+    <!--  Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_LeftWidth]}"/>  -->
+    <!--  <TextBox  -->
+    <!--  Grid.Row="1"  -->
+    <!--  Grid.Column="1"  -->
+    <!--  Text="{Binding InputDockLeftWidth}"  -->
+    <!--  Watermark="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_LeftWidth]}"/>  -->
+    <!--    -->
+    <!--  <TextBlock  -->
+    <!--  Grid.Row="2"  -->
+    <!--  Grid.Column="0"  -->
+    <!--  Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_RightWidth]}"/>  -->
+    <!--  <TextBox  -->
+    <!--  Grid.Row="2"  -->
+    <!--  Grid.Column="1"  -->
+    <!--  Text="{Binding InputDockRightWidth}"  -->
+    <!--  Watermark="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_RightWidth]}"/>  -->
+    <!--    -->
+    <!--    -->
+    <!--  <TextBlock  -->
+    <!--  Grid.Row="3"  -->
+    <!--  Grid.Column="0"  -->
+    <!--  Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_TopHeight]}"/>  -->
+    <!--  <TextBox  -->
+    <!--  Grid.Row="3"  -->
+    <!--  Grid.Column="1"  -->
+    <!--  Text="{Binding InputDockTopHeight}"  -->
+    <!--  Watermark="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_TopHeight]}"/>  -->
+    <!--    -->
+    <!--  <TextBlock  -->
+    <!--  Grid.Row="4"  -->
+    <!--  Grid.Column="0"  -->
+    <!--  Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_BottomHeight]}"/>  -->
+    <!--  <TextBox  -->
+    <!--  Grid.Row="4"  -->
+    <!--  Grid.Column="1"  -->
+    <!--  Text="{Binding InputDockBottomHeight}"  -->
+    <!--  Watermark="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_BottomHeight]}"/>  -->
+    <!--       </Grid> -->
+    <!--     </ui:Card> -->
+    <!--   </Grid> -->
+    <!-- </ui:CodeCard> -->
 
     <!--  Expander  -->
     <ui:CodeCard Name="ExpanderCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Expander]}">
@@ -290,7 +291,7 @@
               Grid.Row="0"
               Grid.ColumnSpan="2"
               Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Alignment]}"/>
-            <fui:FluentComboBox
+            <ComboBox
               Grid.Row="1"
               Grid.ColumnSpan="2"
               HorizontalAlignment="Stretch"
@@ -300,7 +301,7 @@
               <ComboBoxItem HorizontalContentAlignment="Left" Content="HorizontalAlignment.Left"/>
               <ComboBoxItem HorizontalContentAlignment="Left" Content="HorizontalAlignment.Right"/>
               <ComboBoxItem HorizontalContentAlignment="Left" Content="HorizontalAlignment.Bottom"/>
-            </fui:FluentComboBox>
+            </ComboBox>
             <TextBlock
               Grid.Row="2"
               Grid.ColumnSpan="2"
@@ -322,7 +323,10 @@
               Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Reset]}"/>
           </Grid>
         </Expander>
-        <Expander Grid.Row="1" Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_AppTheme]}">
+        <Expander
+          Grid.Row="1"
+          Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_AppTheme]}"
+          Theme="{StaticResource ExpanderWinUIAnimationStyle}">
           <StackPanel
             Margin="10"
             HorizontalAlignment="Left"
@@ -411,28 +415,28 @@
     </ui:CodeCard>
 
     <!--  Panel  -->
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Panel]}">
-      <Panel Width="300" Height="300">
-        <Rectangle
-          Height="100"
-          VerticalAlignment="Top"
-          Fill="#9b5de5"/>
-        <Rectangle
-          Width="100"
-          HorizontalAlignment="Right"
-          Fill="#f15bb5"
-          Opacity="0.5"/>
-        <Rectangle
-          Height="100"
-          VerticalAlignment="Bottom"
-          Fill="#fee440"
-          Opacity="0.5"/>
-        <Rectangle
-          Width="100"
-          HorizontalAlignment="Left"
-          Fill="#00bbf9"/>
-      </Panel>
-    </ui:CodeCard>
+    <!-- <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Panel]}"> -->
+    <!--   <Panel Width="300" Height="300"> -->
+    <!--  <Rectangle  -->
+    <!--  Height="100"  -->
+    <!--  VerticalAlignment="Top"  -->
+    <!--  Fill="#9b5de5"/>  -->
+    <!--  <Rectangle  -->
+    <!--  Width="100"  -->
+    <!--  HorizontalAlignment="Right"  -->
+    <!--  Fill="#f15bb5"  -->
+    <!--  Opacity="0.5"/>  -->
+    <!--  <Rectangle  -->
+    <!--  Height="100"  -->
+    <!--  VerticalAlignment="Bottom"  -->
+    <!--  Fill="#fee440"  -->
+    <!--  Opacity="0.5"/>  -->
+    <!--  <Rectangle  -->
+    <!--  Width="100"  -->
+    <!--  HorizontalAlignment="Left"  -->
+    <!--  Fill="#00bbf9"/>  -->
+    <!--   </Panel> -->
+    <!-- </ui:CodeCard> -->
 
     <!--  RelativePanel  -->
     <ui:CodeCard Name="RelativePanelCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_RelativePanel]}">
@@ -440,7 +444,9 @@
         Width="300"
         Height="300"
         BorderBrush="DarkGray"
-        BorderThickness="1">
+        BorderThickness="1"
+        ClipToBounds="True"
+        CornerRadius="8">
         <RelativePanel>
           <Rectangle
             x:Name="RedRect"
@@ -490,7 +496,7 @@
               VerticalAlignment="Top"
               BorderThickness="0"
               Command="{Binding TogglePanelCommand}"
-              IconData="{x:Static fi:FluentIcon.Menu}"/>
+              Content="{x:Static fi:FluentIcon.Menu}"/>
             <TextBlock
               HorizontalAlignment="Center"
               VerticalAlignment="Center"
@@ -551,13 +557,13 @@
           </ui:Card>
         </StackPanel>
         <ui:Card Grid.Column="1" Width="200">
-          <fui:FluentComboBox
+          <ComboBox
             HorizontalAlignment="Stretch"
             PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_SelectLayout]}"
             SelectedIndex="{Binding SelectedOrientationIndex}">
             <ComboBoxItem Content="Vertical"/>
             <ComboBoxItem Content="Horizontal"/>
-          </fui:FluentComboBox>
+          </ComboBox>
         </ui:Card>
       </Grid>
     </ui:CodeCard>
@@ -615,7 +621,7 @@
             <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
             <TextBlock Text="{Binding ItemCountFormat}"/>
             <TextBlock Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_AddItemsCount]}"/>
-            <fui:FluentComboBox
+            <ComboBox
               HorizontalAlignment="Stretch"
               ItemsSource="{Binding AddItemCounts}"
               SelectedItem="{Binding AddCount}"/>

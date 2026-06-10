@@ -16,7 +16,6 @@ public partial class ScrollView : ViewBase
     {
         InitializeComponent();
 
-        Title = LocalizationService.Instance.GetString("Scroll");
     }
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)

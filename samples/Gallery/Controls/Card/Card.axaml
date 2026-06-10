@@ -6,8 +6,8 @@
   <ControlTheme x:Key="{x:Type controls:Card}" TargetType="controls:Card">
     <Setter Property="Padding" Value="10"/>
     <Setter Property="CornerRadius" Value="8"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrush}"/>
-    <Setter Property="Background" Value="{DynamicResource CardBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
     <Setter Property="BorderThickness" Value="1"/>
 
     <Setter Property="Template">

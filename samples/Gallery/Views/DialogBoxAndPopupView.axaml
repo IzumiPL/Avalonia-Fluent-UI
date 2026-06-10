@@ -8,6 +8,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DialogAndPopup]}"
   d:DesignHeight="450"
   d:DesignWidth="800"
   x:DataType="viewModel:DialogBoxAndPopupViewModel"
@@ -118,7 +119,7 @@
           HorizontalAlignment="Right"
           VerticalAlignment="Center"
           Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_FlyoutPositionLabel]}"/>
-        <fui:FluentComboBox
+        <ComboBox
           Grid.Column="2"
           Width="256"
           Margin="8,0,12,0"
@@ -133,10 +134,7 @@
       <Button Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ShowFlyout]}">
         <Button.Flyout>
           <fui:FluentFlyout IsOpen="{Binding FluentFlyoutIsOpen, Mode=TwoWay}" Placement="Right">
-            <Grid
-              Width="512"
-              Height="388"
-              RowDefinitions="*, Auto, Auto, Auto">
+            <Grid Height="388" RowDefinitions="*, Auto, Auto, Auto">
               <Image
                 Grid.Row="0"
                 Source="avares://Gallery/Assets/Images/mc.jpg"
@@ -190,7 +188,7 @@
           Orientation="Horizontal"
           Spacing="3">
           <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Position]}"/>
-          <fui:FluentComboBox
+          <ComboBox
             VerticalAlignment="Center"
             ItemsSource="{Binding TeachingTipPlacements}"
             SelectedItem="{Binding TeachingTipPlacement}"/>

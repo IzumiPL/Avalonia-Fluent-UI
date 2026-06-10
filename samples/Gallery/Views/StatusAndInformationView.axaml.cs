@@ -10,8 +10,6 @@ public partial class StatusAndInformationView : ViewBase
     {
         InitializeComponent();
         
-        Title = LocalizationService.Instance.GetString("StatusAndInformation");
-        
         CodeCards = new Dictionary<string, CodeCard>()
         {
             {"ToolTip", ToolTipCard},

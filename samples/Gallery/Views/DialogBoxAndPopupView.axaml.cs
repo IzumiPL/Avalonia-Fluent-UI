@@ -18,7 +18,6 @@ public partial class DialogBoxAndPopupView : ViewBase
     {
         InitializeComponent();
 
-        Title = LocalizationService.Instance.GetString("DialogAndPopup");
 
         CodeCards = new Dictionary<string, CodeCard>()
         {

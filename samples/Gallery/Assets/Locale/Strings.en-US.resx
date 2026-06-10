@@ -559,7 +559,7 @@
     <value>Context Menu</value>
   </data>
   <data name="MT_Debug" xml:space="preserve">
-    <value>Debug</value>
+    <value>SS</value>
   </data>
   <data name="MT_Delete" xml:space="preserve">
     <value>Delete</value>
@@ -1478,5 +1478,37 @@
   </data>
   <data name="UnPin" xml:space="preserve">
     <value>Unpin</value>
+  </data>
+  <data name="MT_File" xml:space="preserve">
+    <value>File</value>
+  </data><data name="VP_NoIconCardTitle" xml:space="preserve">
+    <value>Simple settings card without icons</value>
+  </data>
+  <data name="VP_NoIconCardTitleSwc" xml:space="preserve">
+    <value>Enable Bluetooth</value>
+  </data>
+  <data name="VP_CICardTitle" xml:space="preserve">
+    <value>Settings card for custom icons</value>
+  </data>
+  <data name="VP_CardTitle" xml:space="preserve">
+    <value>Card</value>
+  </data>
+  <data name="VP_SimpleCardTitle" xml:space="preserve">
+    <value>Simple Card</value>
+  </data>
+  <data name="VP_ElevatedCardTitle" xml:space="preserve">
+    <value>Elevated Card</value>
+  </data>
+  <data name="VP_HeaderCardTitle" xml:space="preserve">
+    <value>Cards with titles</value>
+  </data>
+  <data name="VP_SystemReq" xml:space="preserve">
+    <value>System requirements</value>
+  </data>
+  <data name="VP_SystemReqDes" xml:space="preserve">
+    <value>This product is available for your device. Items with a check mark meet the developer's system requirements.</value>
+  </data>
+  <data name="VP_SystemReqDesMoreInfo" xml:space="preserve">
+    <value>Details</value>
   </data>
 </root>

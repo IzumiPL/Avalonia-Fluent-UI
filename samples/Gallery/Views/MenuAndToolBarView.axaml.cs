@@ -17,8 +17,6 @@ public partial class MenuAndToolBarView : ViewBase
     {
         InitializeComponent();
         
-        Title = LocalizationService.Instance.GetString("MenuAndToolBar");
-        
         Image.Source = Bitmap.DecodeToWidth(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/0.jpg")), 512);
         Image.PointerReleased += OnImagePointerReleased;
 

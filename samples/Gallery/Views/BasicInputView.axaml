@@ -9,6 +9,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BasicInput]}"
   d:DesignHeight="450"
   d:DesignWidth="800"
   x:DataType="viewModel:BasicInputViewModel"
@@ -54,7 +55,7 @@
             VerticalAlignment="Top"
             HorizontalContentAlignment="{Binding PushButtonContentAlignment}"
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_StandardButtonWithIcon]}"
-            IconData="{x:Static fi:FluentIcon.GitHub}"
+            IconSource="{x:Static fi:FluentIcon.GitHub}"
             IsEnabled="{Binding !PushButtonIsDisable}"/>
 
           <fui:PushButton
@@ -65,7 +66,7 @@
             HorizontalContentAlignment="{Binding PushButtonContentAlignment}"
             Classes="Accent"
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_AccentStandardButton]}"
-            IconData="{x:Static fi:FluentIcon.Home}"
+            IconSource="{x:Static fi:FluentIcon.Home}"
             IsEnabled="{Binding !PushButtonIsDisable}"/>
 
           <fui:PushButton
@@ -85,7 +86,7 @@
             VerticalAlignment="Top"
             HorizontalContentAlignment="{Binding PushButtonContentAlignment}"
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_TransparentStandardButtonWithIcon]}"
-            IconData="{x:Static fi:FluentIcon.GitHub}"
+            IconSource="{x:Static fi:FluentIcon.GitHub}"
             IsEnabled="{Binding !PushButtonIsDisable}"
             Theme="{StaticResource TransparentPushButton}"/>
         </StackPanel>
@@ -100,7 +101,7 @@
               FontWeight="Bold"
               Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
             <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ContentAlignment]}"/>
-            <fui:FAComboBox
+            <ComboBox
               Margin="0,1"
               HorizontalAlignment="Stretch"
               ItemsSource="{Binding HorizontalAlignments}"
@@ -131,12 +132,12 @@
         <fui:ToolButton
           Grid.Row="2"
           Classes="Round"
-          IconData="{x:Static fi:FluentIcon.GitHub}"
+          Content="{x:Static fi:FluentIcon.GitHub}"
           IsEnabled="{Binding !RoundButtonIsDisabled}"/>
         <fui:ToolButton
           Grid.Row="3"
           Classes="Accent Round"
-          IconData="{x:Static fi:FluentIcon.Wifi}"
+          Content="{x:Static fi:FluentIcon.Wifi}"
           IsEnabled="{Binding !RoundButtonIsDisabled}"/>
 
         <CheckBox
@@ -162,7 +163,7 @@
           Width="256"
           Classes="Outlined Round"
           Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_RoundOutlineButton]}"
-          IconData="{x:Static fi:FluentIcon.Menu}"
+          IconSource="{x:Static fi:FluentIcon.Menu}"
           IsEnabled="{Binding !OutlinedClassButtonIsDisabled}"/>
 
         <fui:ToolButton
@@ -170,13 +171,13 @@
           Width="128"
           Height="38"
           Classes="Outlined"
-          IconData="{x:Static fi:FluentIcon.Send}"
+          Content="{x:Static fi:FluentIcon.Send}"
           IsEnabled="{Binding !OutlinedClassButtonIsDisabled}"/>
         <fui:ToolButton
           Grid.Row="3"
           Width="128"
           Classes="Outlined Round"
-          IconData="{x:Static fi:FluentIcon.View}"
+          Content="{x:Static fi:FluentIcon.View}"
           IsEnabled="{Binding !OutlinedClassButtonIsDisabled}"/>
 
         <CheckBox
@@ -198,14 +199,14 @@
             Width="256"
             Height="35"
             HorizontalContentAlignment="{Binding ToolButtonContentAlignment}"
-            IconData="{x:Static fi:FluentIcon.Setting}"
+            Content="{x:Static fi:FluentIcon.Setting}"
             IsEnabled="{Binding !ToolButtonIsDisable}"/>
           <fui:ToolButton
             Width="256"
             Height="35"
             HorizontalContentAlignment="{Binding ToolButtonContentAlignment}"
+            Content="{x:Static fi:FluentIcon.Save}"
             Foreground="DeepSkyBlue"
-            IconData="{x:Static fi:FluentIcon.Save}"
             IsEnabled="{Binding !ToolButtonIsDisable}"
             Theme="{StaticResource TransparentToolButton}"/>
 
@@ -214,8 +215,8 @@
             Height="35"
             HorizontalContentAlignment="{Binding ToolButtonContentAlignment}"
             Classes="Accent"
+            Content="{x:Static fi:FluentIcon.Wifi}"
             Foreground="OrangeRed"
-            IconData="{x:Static fi:FluentIcon.Wifi}"
             IsEnabled="{Binding !ToolButtonIsDisable}"/>
         </StackPanel>
         <ui:Card
@@ -226,7 +227,7 @@
             <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
 
             <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ContentAlignment]}"/>
-            <fui:FAComboBox
+            <ComboBox
               Margin="0,1"
               HorizontalAlignment="Stretch"
               ItemsSource="{Binding HorizontalAlignments}"
@@ -249,25 +250,25 @@
             Width="256"
             Classes="Success"
             Content="Success"
-            IconData="{x:Static fi:FluentIcon.Share}"
+            IconSource="{x:Static fi:FluentIcon.Share}"
             IsEnabled="{Binding !FilledButtonIsDisabled}"/>
           <fui:FilledPushButton
             Width="256"
             Classes="Attention"
             Content="Attention"
-            IconData="{x:Static fi:FluentIcon.Save}"
+            IconSource="{x:Static fi:FluentIcon.Save}"
             IsEnabled="{Binding !FilledButtonIsDisabled}"/>
           <fui:FilledPushButton
             Width="256"
             Classes="Warning"
             Content="Warning"
-            IconData="{x:Static fi:FluentIcon.SpeedHigh}"
+            IconSource="{x:Static fi:FluentIcon.SpeedHigh}"
             IsEnabled="{Binding !FilledButtonIsDisabled}"/>
           <fui:FilledPushButton
             Width="256"
             Classes="Error"
             Content="Error"
-            IconData="{x:Static fi:FluentIcon.Info}"
+            IconSource="{x:Static fi:FluentIcon.Info}"
             IsEnabled="{Binding !FilledButtonIsDisabled}"/>
         </StackPanel>
         <ui:Card Grid.Column="1" Width="128">
@@ -289,22 +290,22 @@
           <fui:OutlinePushButton
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Music]}"
             GroupName="{Binding OutlinePushButtonGroupName}"
-            IconData="{x:Static fi:FluentIcon.Music}"
+            IconSource="{x:Static fi:FluentIcon.Music}"
             IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
           <fui:OutlinePushButton
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_MovieAndTV]}"
             GroupName="{Binding OutlinePushButtonGroupName}"
-            IconData="{x:Static fi:FluentIcon.Video}"
+            IconSource="{x:Static fi:FluentIcon.Video}"
             IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
           <fui:OutlinePushButton
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Game]}"
             GroupName="{Binding OutlinePushButtonGroupName}"
-            IconData="{x:Static fi:FluentIcon.Game}"
+            IconSource="{x:Static fi:FluentIcon.Game}"
             IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
           <fui:OutlinePushButton
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[GitHubRepo]}"
             GroupName="{Binding OutlinePushButtonGroupName}"
-            IconData="{x:Static fi:FluentIcon.GitHub}"
+            IconSource="{x:Static fi:FluentIcon.GitHub}"
             IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
           <fui:OutlinePushButton
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_AboutUs]}"
@@ -330,15 +331,15 @@
           Spacing="5">
           <fui:OutlineToolButton
             GroupName="{Binding OutlineToolButtonGroupName}"
-            IconData="{x:Static fi:FluentIcon.Add}"
+            IconSource="{x:Static fi:FluentIcon.Add}"
             IsEnabled="{Binding !OutlineToolButtonIsDisabled}"/>
           <fui:OutlineToolButton
             GroupName="{Binding OutlineToolButtonGroupName}"
-            IconData="{x:Static fi:FluentIcon.Bluetooth}"
+            IconSource="{x:Static fi:FluentIcon.Bluetooth}"
             IsEnabled="{Binding !OutlineToolButtonIsDisabled}"/>
           <fui:OutlineToolButton
             GroupName="{Binding OutlineToolButtonGroupName}"
-            IconData="{x:Static fi:FluentIcon.Brush}"
+            IconSource="{x:Static fi:FluentIcon.Brush}"
             IsEnabled="{Binding !OutlineToolButtonIsDisabled}"/>
         </StackPanel>
         <ui:Card Grid.Column="1" Width="128">
@@ -436,13 +437,13 @@
     <!-- </ui:CodeCard> -->
 
     <!-- <ui:CodeCard Title="带有图标文本的标准按钮"> -->
-    <!-- <fui:PushButton Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_StandardButtonWithIcon]}" IconData="{StaticResource GitHub}"/> -->
+    <!-- <fui:PushButton Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_StandardButtonWithIcon]}" IconSource="{StaticResource GitHub}"/> -->
     <!-- </ui:CodeCard> -->
 
     <!-- <ui:CodeCard Title="带有图标文本的透明标准按钮"> -->
     <!--  <fui:PushButton  -->
     <!--  Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_TransparentStandardButtonWithIcon]}"  -->
-    <!--  IconData="{StaticResource GitHub}"  -->
+    <!--  IconSource="{StaticResource GitHub}"  -->
     <!--  Theme="{StaticResource TransparentPushButton}"/>  -->
     <!-- </ui:CodeCard> -->
 
@@ -450,17 +451,17 @@
     <!--  <fui:PushButton  -->
     <!--  Classes="accent"  -->
     <!--  Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_AccentStandardButton]}"  -->
-    <!--  IconData="{StaticResource Home}"/>  -->
+    <!--  IconSource="{StaticResource Home}"/>  -->
     <!-- </ui:CodeCard> -->
 
     <!-- <ui:CodeCard Title="透明工具按钮"> -->
     <!--  <fui:ToolButton  -->
     <!--  Foreground="DeepSkyBlue"  -->
-    <!--  IconData="{StaticResource Save}"  -->
+    <!--  IconSource="{StaticResource Save}"  -->
     <!--  Theme="{StaticResource TransparentToolButton}"/>  -->
     <!-- </ui:CodeCard> -->
     <!-- <ui:CodeCard Title="主题色工具按钮"> -->
-    <!-- <fui:ToolButton Classes="accent" IconData="{StaticResource Wifi}"/> -->
+    <!-- <fui:ToolButton Classes="accent" IconSource="{StaticResource Wifi}"/> -->
     <!-- </ui:CodeCard> -->
 
     <!--  //////////  -->
@@ -686,7 +687,7 @@
     </ui:CodeCard>
 
     <ui:CodeCard Name="ComboBoxCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ComboBox]}">
-      <fui:FluentComboBox
+      <ComboBox
         Width="256"
         ItemsSource="{Binding Items}"
         SelectedIndex="0"/>
@@ -747,7 +748,7 @@
             <TextBlock Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
             <StackPanel Orientation="Horizontal" Spacing="3">
               <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Direction]}"/>
-              <fui:FluentComboBox ItemsSource="{Binding Orientations}" SelectedItem="{Binding ToolTipSliderOrientation}"/>
+              <ComboBox ItemsSource="{Binding Orientations}" SelectedItem="{Binding ToolTipSliderOrientation}"/>
             </StackPanel>
             <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}" IsChecked="{Binding ToolTipSliderIsDisabled}"/>
           </StackPanel>

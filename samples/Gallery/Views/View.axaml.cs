@@ -12,8 +12,6 @@ public partial class View : ViewBase
     {
         InitializeComponent();
         
-        Title = LocalizationService.Instance.GetString("View");
-        
         Carousel.AddHandler(
             PointerWheelChangedEvent,
             (_, e) =>

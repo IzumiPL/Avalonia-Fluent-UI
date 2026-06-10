@@ -17,8 +17,6 @@ public partial class TextView : ViewBase
     {
         InitializeComponent();
         
-        Title = LocalizationService.Instance.GetString("Text");
-
         CodeCards = new Dictionary<string, CodeCard>()
         {
             {"TextBlock", TextBlockCard},

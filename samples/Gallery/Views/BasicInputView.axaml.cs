@@ -10,8 +10,6 @@ public partial class BasicInputView : ViewBase
     {
         InitializeComponent();
         
-        Title = LocalizationService.Instance.GetString("BasicInput");
-
         CodeCards = new Dictionary<string, CodeCard>()
         {
             {"Button", StandardButtonCard},

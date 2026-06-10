@@ -1,9 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Avalonia;
-using Avalonia.Animation;
 using Avalonia.Media;
 using Avalonia.Styling;
 using AvaloniaFluentUI.Locale;
@@ -21,13 +19,10 @@ public partial class SettingsViewModel : ViewModelBase
 {
     public SettingsViewModel(AppConfig? config)
     {
-#if DEBUG
-        Debug.WriteLine("SettingsViewModel Init");
-#endif
         FluentAvaloniaTheme.Instance.ThemeChanged += OnThemeChanged;
-
-        LoadSetting(config);
         LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
+        
+        LoadSetting(config);
     }
 
     private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
@@ -57,9 +52,27 @@ public partial class SettingsViewModel : ViewModelBase
     {
         if (config != null)
         {
-            IsEnabledWindowEffect = config.IsWindowEffectEnabled;
-            IsEnabledBackgroundImage = config.IsEnabledBackgroundImage;
             CurrentLanguage =  config.Language;
+            
+            string effect = config.WindowEffect;
+            if (effect == "Mica" && IsWindows11)
+            {
+                EnabledWindowEffect(effect);
+            }
+            else if  (effect == "Acrylic")
+            {
+                EnabledWindowEffect(effect);
+            }
+            else
+            {
+                CurrentEffect = "Null";
+                IsEnabledWindowEffect = false;
+            }
+            
+            
+            IsEnabledBackgroundImage = config.IsEnabledBackgroundImage;
+            
+            Console.WriteLine("Loaded Settings");
         }
     }
 
@@ -67,32 +80,10 @@ public partial class SettingsViewModel : ViewModelBase
     {
         OnPropertyChanged(nameof(IsDarkTheme));
         OnPropertyChanged(nameof(IsAutoTheme));
+        
+        WeakReferenceMessenger.Default.Send(new EnabledWindowEffectMessage(IsEnabledWindowEffect, CurrentEffect)); 
     }
     
-    [ObservableProperty] 
-    private string[] _animationTypes = ["Null", "Crossfade", "PageSlide", "Rotate3DTransition"];
-
-    [ObservableProperty]
-    private long[] _animationDurations = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000];
-
-    [ObservableProperty]
-    private PageSlide.SlideAxis[] _animationSlideAxisItems = [PageSlide.SlideAxis.Horizontal, PageSlide.SlideAxis.Vertical];
-
-    [ObservableProperty]
-    private bool _isEnabledTogglePageAnimation = true;
-
-    [ObservableProperty] 
-    private bool _isTopmost;
-
-    [ObservableProperty] 
-    [NotifyPropertyChangedFor(nameof(AnimationSlideAxisBoxIsVisible))]
-    private string _animationType = "PageSlide";
-
-    [ObservableProperty]
-    private long _animationDuration = 200;
-
-    public bool AnimationSlideAxisBoxIsVisible => AnimationType == "PageSlide" || AnimationType == "Rotate3DTransition";
-
     [ObservableProperty]
     private bool _isDefaultAccentColor = true;
 
@@ -128,9 +119,6 @@ public partial class SettingsViewModel : ViewModelBase
     public bool IsAutoTheme => Application.Current?.RequestedThemeVariant == ThemeVariant.Default;
     
     [ObservableProperty]
-    private PageSlide.SlideAxis _animationSlideAxis = PageSlide.SlideAxis.Horizontal;
-    
-    [ObservableProperty]
     private bool _isEnabledWindowEffect = true;
 
     public bool WindowEffectCardIsEnabled => !IsEnabledBackgroundImage && RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
@@ -158,11 +146,33 @@ public partial class SettingsViewModel : ViewModelBase
     public string Dark => LocalizationService.Instance.GetString("LV_Dark");
     public string FollowSystem => LocalizationService.Instance.GetString("LV_FollowSystem");
 
+    public bool IsWindows11 => IsWindows && Environment.OSVersion.Version.Build >= 22000;
+    public bool IsWindows => OperatingSystem.IsWindows();
+
+    public string CurrentEffect { get; set; } = "";
+
+    public bool IsMicaRadioChecked => CurrentEffect == "Mica";
+    public bool IsAcrylicRadioChecked => CurrentEffect == "Acrylic";
+
+    [RelayCommand]
+    private void EnabledWindowEffect(object value)
+    {
+        if (value is string effect && CurrentEffect != effect)
+        {
+            CurrentEffect = effect;
+            IsEnabledWindowEffect = !effect.Equals("Null");
+            WeakReferenceMessenger.Default.Send(new EnabledWindowEffectMessage(IsEnabledWindowEffect, effect));
+
+            Console.WriteLine("Effect: " + effect + $"IsEnabledWindowEffect: {IsEnabledWindowEffect}");
+        }
+    }
+
     [ObservableProperty]
     private string _currentLanguage;
 
     partial void OnCurrentLanguageChanged(string value)
     {
+        // if (value == LocalizationService.Instance.CurrentLanguage) { return; }
         LocalizationService.Instance.SetCulture(value);
     }
 
@@ -181,24 +191,13 @@ public partial class SettingsViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(WindowEffectCardIsEnabled))]
     private bool _isEnabledBackgroundImage;
 
-    partial void OnIsEnabledTogglePageAnimationChanged(bool value) => WeakReferenceMessenger.Default.Send(new PageAnimationStatusChangedMessage(value));
-
-    partial void OnIsTopmostChanged(bool value) => WeakReferenceMessenger.Default.Send(new WindowTopmostStatusMessage(value));
-
-    partial void OnAnimationTypeChanged(string value) => SendAnimationMessage();
-    partial void OnAnimationDurationChanged(long value) => SendAnimationMessage();
-    partial void OnAnimationSlideAxisChanged(PageSlide.SlideAxis value) => SendAnimationMessage();
-
-    private void SendAnimationMessage()
-    {
-        WeakReferenceMessenger.Default.Send(new PageAnimationTypeChangedMessage(AnimationType, AnimationDuration, AnimationSlideAxis));
-    }
-
-    partial void OnIsEnabledWindowEffectChanged(bool value) => WeakReferenceMessenger.Default.Send(new EnabledWindowEffectMessage(value));
-
     partial void OnIsEnabledBackgroundImageChanged(bool value)
     {
-        if (value) { IsEnabledWindowEffect = false;}
+        if (value)
+        {
+            IsEnabledWindowEffect = false;
+            CurrentEffect = "Null";
+        }
         WeakReferenceMessenger.Default.Send(new EnabledBackgroundImageMessage(value));
     }
 }

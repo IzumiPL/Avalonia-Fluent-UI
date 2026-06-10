@@ -8,6 +8,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[StatusAndInformation]}"
   d:DesignHeight="450"
   d:DesignWidth="800"
   x:DataType="viewModel:StatusAndInformationViewModel"
@@ -60,7 +61,7 @@
               Grid.Column="0"
               VerticalAlignment="Center"
               Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Style]}"/>
-            <fui:FluentComboBox
+            <ComboBox
               Grid.Row="1"
               Grid.Column="1"
               ItemsSource="{Binding InfoBarSeverityItems}"

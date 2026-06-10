@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
+using Avalonia.Threading;
 using AvaloniaFluentUI.Locale;
 using AvaloniaFluentUI.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -56,6 +58,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel(AppConfig? config)
     {
+
 #if DEBUG
         Debug.WriteLine("MainWindowViewModel Init");
 #endif
