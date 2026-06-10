@@ -44,6 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="FluentControlStyles\Controls\Flyout\" />
     <Folder Include="FluentControls\Toast\" />
   </ItemGroup>
 
