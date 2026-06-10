@@ -13,6 +13,7 @@ using Avalonia.Styling;
 using Avalonia.VisualTree;
 using AvaloniaFluentUI.Core;
 using AvaloniaFluentUI.Controls.Primitives;
+using AvaloniaFluentUI.Styling;
 
 namespace AvaloniaFluentUI.Windowing;
 
@@ -274,6 +275,34 @@ public partial class AppWindow : Window
     {
         if (OperatingSystem.IsWindows())
             ExtendClientAreaToDecorationsHintProperty.OverrideDefaultValue<AppWindow>(true);
+    }
+
+    public void EnabledAcrylicBlue(bool enable)
+    {
+        if (enable)
+        {
+            Background = Brush.Parse(FluentAvaloniaTheme.Instance.IsDarkTheme ? "#30161616" : "#30F3F3F3");  
+            TransparencyLevelHint = [WindowTransparencyLevel.AcrylicBlur];
+            return;
+        } 
+        ResetBackground();
+    }
+
+    public void EnabledMica(bool enable)
+    {
+        if (enable && IsWindows11)
+        {
+            Background = Brushes.Transparent;
+            TransparencyLevelHint = [WindowTransparencyLevel.Mica];
+            return;
+        }
+        ResetBackground();
+    }
+
+    private void ResetBackground()
+    {
+        TransparencyLevelHint = [];
+        Background = Brush.Parse(FluentAvaloniaTheme.Instance.IsDarkTheme ? "#202020" : "#F3F3F3"); 
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
