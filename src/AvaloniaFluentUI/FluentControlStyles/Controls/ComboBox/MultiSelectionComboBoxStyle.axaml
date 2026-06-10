@@ -9,6 +9,7 @@
   <ControlTheme x:Key="{x:Type ui:MultiSelectionComboBox}" TargetType="ui:MultiSelectionComboBox">
     <Setter Property="Height" Value="35"/>
     <Setter Property="Padding" Value="0 0 5 0"/>
+    <Setter Property="ViewPortMaxHeight" Value="400"/>
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}"/>
     <Setter Property="Template">
@@ -26,6 +27,7 @@
             <ui:SingleDirectionScrollViewer
               Margin="0,0,10,0"
               Padding="0,3"
+              BringIntoViewOnFocusChange="False"
               HorizontalScrollBarVisibility="Hidden"
               Orientation="Horizontal"
               VerticalScrollBarVisibility="Disabled">
@@ -49,26 +51,25 @@
               HorizontalAlignment="Left"
               VerticalAlignment="Center"
               FontSize="12"
+              IsVisible="False"
               Opacity="0.8"
               Text="{TemplateBinding PlaceholderText}"/>
 
-            <Button
-              Name="PART_DropDownButton"
+            <ui:FontIcon
+              Name="PART_DropDownIcon"
               Grid.Column="1"
-              Width="20"
-              Margin="0,1"
-              Opacity="0.7"
-              Theme="{StaticResource TransparentButton}">
-              <PathIcon
-                Name="PART_Icon"
-                Width="10"
-                Height="10"
-                Data="{StaticResource DropDown}"/>
-            </Button>
+              MinHeight="32"
+              Margin="0,0,5,0"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Center"
+              FontFamily="{DynamicResource SymbolThemeFontFamily}"
+              FontSize="15"
+              Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+              Glyph="&#xE70D;"/>
 
             <ui:FluentPopup
               Name="PART_MultiSelectionPopup"
-              MaxHeight="400"
+              MaxHeight="{TemplateBinding ViewPortMaxHeight}"
               Margin="0,7,0,0"
               Placement="Bottom">
               <ui:MultiSelectionView Name="PART_MultiSelectionView"/>
@@ -78,7 +79,11 @@
       </ControlTemplate>
     </Setter>
 
-    <Style Selector="^ /template/ Button#PART_DropDownButton PathIcon#PART_Icon">
+    <Style Selector="^:hasplaceholder /template/ TextBlock#PART_Placeholder">
+      <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <Style Selector="^ /template/ ui|FontIcon#PART_DropDownIcon">
       <Setter Property="RenderTransformOrigin" Value="50%, 100%"/>
       <Setter Property="Transitions">
         <Transitions>
@@ -90,8 +95,14 @@
       </Setter>
     </Style>
 
-    <Style Selector="^ /template/ Button#PART_DropDownButton:pressed PathIcon#PART_Icon">
-      <Setter Property="RenderTransform" Value="scale(1, 0.75)"/>
+    <Style Selector="^:pressed">
+      <Style Selector="^ /template/ Border#Background">
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ ui|FontIcon#PART_DropDownIcon">
+        <Setter Property="RenderTransform" Value="scale(1, 0.85)"/>
+      </Style>
     </Style>
 
     <Style Selector="^:pointerover">
@@ -103,8 +114,9 @@
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type ui:MultiSelectionView}" TargetType="ui:MultiSelectionView">
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource SurfaceStrokeColorFlyoutBrush}"/>
     <Setter Property="Background" Value="{DynamicResource AcrylicInAppFillColorDefaultBrush}"/>
+    <Setter Property="Padding" Value="0 6 6 6"/>
     <Setter Property="BorderThickness" Value="2"/>
     <Setter Property="CornerRadius" Value="8"/>
     <Setter Property="MinWidth" Value="64"/>
@@ -112,6 +124,7 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border
+          Padding="{TemplateBinding Padding}"
           Background="{TemplateBinding Background}"
           BorderBrush="{TemplateBinding BorderBrush}"
           BorderThickness="{TemplateBinding BorderThickness}"
