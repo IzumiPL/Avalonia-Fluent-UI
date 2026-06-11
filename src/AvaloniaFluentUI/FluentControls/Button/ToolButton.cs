@@ -21,6 +21,5 @@ public class ToolButton : Button
     {
         get => GetValue(IconHeightProperty);
         set => SetValue(IconHeightProperty, value);
-
     }
 }
