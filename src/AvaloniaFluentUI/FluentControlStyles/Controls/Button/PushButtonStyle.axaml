@@ -3,6 +3,9 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
   <!--  Add Resources Here  -->
+
+  <Thickness x:Key="PushButtonRoundPadding">15 6</Thickness>
+
   <ControlTheme x:Key="{x:Type ui:PushButton}" TargetType="ui:PushButton">
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
@@ -108,6 +111,7 @@
 
     <Style Selector="^.Round">
       <Setter Property="CornerRadius" Value="100"/>
+      <Setter Property="Padding" Value="{StaticResource PushButtonRoundPadding}"/>
     </Style>
 
     <!--  Accent Button  -->
@@ -167,6 +171,7 @@
 
       <Style Selector="^.Round">
         <Setter Property="CornerRadius" Value="100"/>
+        <Setter Property="Padding" Value="{StaticResource PushButtonRoundPadding}"/>
       </Style>
     </Style>
 
