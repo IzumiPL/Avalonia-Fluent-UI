@@ -143,6 +143,7 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/PushButtonStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/ToolButtonStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/FilledPushButtonStyle.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/FilledToolButtonStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/OutlinePushButtonStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/OutlineToolButtonStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/SubTitleRadioButtonStyle.axaml"/>
