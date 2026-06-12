@@ -1,5 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Media;
 using AvaloniaFluentUI.Media.Animation;
 
@@ -11,34 +10,42 @@ public class FluentFlyout : Flyout
     {
         if (Popup.Child is { } presenter)
         {
-            var value = Placement switch
+            var (offset, property) = Placement switch
             {
-                PlacementMode.Center or PlacementMode.Pointer => 0.75d,
-                PlacementMode.Left or PlacementMode.LeftEdgeAlignedBottom or PlacementMode.LeftEdgeAlignedTop
-                    or PlacementMode.Top or PlacementMode.TopEdgeAlignedLeft => 32d,
-                _ => -32d
+                PlacementMode.Center
+                    => (0.75, null),
+
+                PlacementMode.Left
+                    or PlacementMode.LeftEdgeAlignedBottom
+                    or PlacementMode.LeftEdgeAlignedTop
+                    or PlacementMode.Right
+                    or PlacementMode.RightEdgeAlignedBottom
+                    or PlacementMode.RightEdgeAlignedTop
+                    => (
+                        Placement is PlacementMode.Left
+                            or PlacementMode.LeftEdgeAlignedBottom
+                            or PlacementMode.LeftEdgeAlignedTop
+                            ? 32d
+                            : -32d,
+                        TranslateTransform.XProperty
+                    ),
+
+                _ => (
+                    Placement is PlacementMode.Top
+                        or PlacementMode.TopEdgeAlignedLeft
+                        ? 32d
+                        : -32d,
+                    TranslateTransform.YProperty
+                )
             };
 
-            if (value < 1 && value > 0)
+            if (property is null)
             {
-                FluentAnimation.CenterScaleAsync(presenter, value);
+                FluentAnimation.CenterScaleAsync(presenter, offset);
             }
             else
             {
-                StyledProperty<double> property;
-                switch (Placement)
-                {
-                    case PlacementMode.Left or PlacementMode.LeftEdgeAlignedTop or PlacementMode.LeftEdgeAlignedBottom
-                        or PlacementMode.Right or PlacementMode.RightEdgeAlignedBottom
-                        or PlacementMode.RightEdgeAlignedTop:
-                        property = TranslateTransform.XProperty;
-                        break;
-                    default:
-                        property = TranslateTransform.YProperty;
-                        break;
-                }
-
-                FluentAnimation.SlideInAsync(presenter, value, property);
+                FluentAnimation.SlideInAsync(presenter, offset, property);
             }
         }
 
