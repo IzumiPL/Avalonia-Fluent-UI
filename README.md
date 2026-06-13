@@ -18,8 +18,7 @@
 
 ## 安装🚀
 ```shell
-# 当前版本为Avalonia11, 如需使用最新版请下载构建的文件安装
-dotnet add package AvaloniaFluentUI --version 1.0.3
+dotnet add package AvaloniaFluentUI --version 2.0.0
 ```
 
 > [!Warning]
