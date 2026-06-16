@@ -48,11 +48,13 @@
           <Grid
             Name="DefaultTitleBar"
             Height="{TemplateBinding TitleBarHeight}"
+            Margin="{Binding $parent[wnd:AppWindow].TitleBarMargin}"
             VerticalAlignment="Top"
             Background="{DynamicResource FluentTitleBarBackground}"
             ColumnDefinitions="Auto, Auto, *"
             TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-            WindowDecorationProperties.ElementRole="DecorationsElement">
+            WindowDecorationProperties.ElementRole="DecorationsElement"
+            ZIndex="999">
 
             <Image
               Name="Icon"
@@ -62,7 +64,7 @@
               Margin="10,0,0,0"
               HorizontalAlignment="Left"
               VerticalAlignment="Center"
-              IsVisible="{TemplateBinding IsTitleBarContentVisible}"
+              IsVisible="False"
               Source="{TemplateBinding Icon}"/>
 
             <TextBlock
@@ -117,7 +119,7 @@
   </ControlTemplate>
 
   <ControlTheme x:Key="AppWindowDecorations" TargetType="WindowDrawnDecorations">
-    <Setter Property="DefaultTitleBarHeight" Value="{Binding $parent[wnd:AppWindow].TitleBarHeight}"/>
+    <Setter Property="DefaultTitleBarHeight" Value="{Binding $parent[wnd:AppWindow].TitleBar.Height}"/>
     <Setter Property="DefaultFrameThickness" Value="1"/>
     <Setter Property="DefaultShadowThickness" Value="8"/>
     <Setter Property="Template">
