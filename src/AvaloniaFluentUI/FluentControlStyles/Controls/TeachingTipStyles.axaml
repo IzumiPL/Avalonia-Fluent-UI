@@ -187,7 +187,7 @@
                 Background="{TemplateBinding Background}"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
-                BoxShadow="0 6 12 0 #24000000"
+                BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
                 CornerRadius="{TemplateBinding CornerRadius}"
                 FlowDirection="{TemplateBinding FlowDirection}">
                 <Grid Name="ContentRootGrid" RowDefinitions="Auto,*,Auto">

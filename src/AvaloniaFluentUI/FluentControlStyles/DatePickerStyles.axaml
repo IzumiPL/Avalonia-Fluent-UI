@@ -342,7 +342,13 @@
               Placement="Bottom"
               PlacementTarget="{TemplateBinding}"
               WindowManagerAddShadowHint="False">
-              <DatePickerPresenter Name="PART_PickerPresenter"/>
+              <Border
+                Margin="5"
+                Background="{DynamicResource AcrylicInAppFillColorDefaultBrush}"
+                BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
+                CornerRadius="{DynamicResource OverlayCornerRadius}">
+                <DatePickerPresenter Name="PART_PickerPresenter"/>
+              </Border>
             </ui:ScaleFluentPopup>
 
           </Grid>

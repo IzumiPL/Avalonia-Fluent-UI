@@ -26,7 +26,7 @@
       <ControlTemplate>
         <Border
           Margin="5,5,5,5"
-          BoxShadow="0 5 9 0 #24000000"
+          BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
           CornerRadius="{TemplateBinding CornerRadius}">
           <Border
             Padding="{TemplateBinding Padding}"
@@ -68,23 +68,28 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border
-          Name="LayoutRoot"
-          Padding="{TemplateBinding Padding}"
-          Background="{TemplateBinding Background}"
-          BackgroundSizing="{TemplateBinding BackgroundSizing}"
-          BorderBrush="{TemplateBinding BorderBrush}"
-          BorderThickness="{TemplateBinding BorderThickness}"
+          Margin="5,5,5,5"
+          BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
           CornerRadius="{TemplateBinding CornerRadius}">
-          <ui:SmoothScrollViewer
-            Margin="{TemplateBinding Padding}"
-            HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-            VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
-            <ItemsPresenter
-              Name="PART_ItemsPresenter"
-              Grid.IsSharedSizeScope="True"
-              ItemsPanel="{TemplateBinding ItemsPanel}"
-              KeyboardNavigation.TabNavigation="Continue"/>
-          </ui:SmoothScrollViewer>
+          <Border
+            Name="LayoutRoot"
+            Padding="{TemplateBinding Padding}"
+            Background="{TemplateBinding Background}"
+            BackgroundSizing="{TemplateBinding BackgroundSizing}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            CornerRadius="{TemplateBinding CornerRadius}">
+            <ui:SmoothScrollViewer
+              Margin="{TemplateBinding Padding}"
+              HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+              VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+              <ItemsPresenter
+                Name="PART_ItemsPresenter"
+                Grid.IsSharedSizeScope="True"
+                ItemsPanel="{TemplateBinding ItemsPanel}"
+                KeyboardNavigation.TabNavigation="Continue"/>
+            </ui:SmoothScrollViewer>
+          </Border>
         </Border>
       </ControlTemplate>
     </Setter>

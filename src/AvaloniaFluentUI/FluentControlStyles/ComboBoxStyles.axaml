@@ -203,12 +203,13 @@
               WindowManagerAddShadowHint="False">
               <Border
                 Name="PopupBorder"
+                Margin="5"
                 Padding="{DynamicResource ComboBoxDropdownBorderPadding}"
                 HorizontalAlignment="Stretch"
                 Background="{DynamicResource AcrylicInAppFillColorDefaultBrush}"
-                BackgroundSizing="InnerBorderEdge"
                 BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
                 BorderThickness="{DynamicResource ComboBoxDropdownBorderThickness}"
+                BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
                 CornerRadius="{DynamicResource OverlayCornerRadius}">
                 <ui:SmoothScrollViewer
                   HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"

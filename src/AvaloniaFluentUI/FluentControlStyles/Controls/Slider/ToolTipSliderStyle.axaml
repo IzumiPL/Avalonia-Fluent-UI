@@ -152,10 +152,12 @@
 
                     <Popup x:Name="PART_Popup" PlacementTarget="{Binding #PART_Thumb}">
                       <Border
+                        Margin="5"
                         Padding="{StaticResource PopupBorderPadding}"
                         Background="{DynamicResource AcrylicBackgroundFillColorDefaultBrush}"
                         BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
                         BorderThickness="{DynamicResource ToolTipBorderThemeThickness}"
+                        BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
                         CornerRadius="{DynamicResource OverlayCornerRadius}">
                         <TextBlock
                           Name="PART_ToolTipText"
@@ -303,10 +305,12 @@
 
                     <Popup x:Name="PART_Popup" PlacementTarget="{Binding #PART_Thumb}">
                       <Border
+                        Margin="5"
                         Padding="{StaticResource PopupBorderPadding}"
                         Background="{DynamicResource AcrylicBackgroundFillColorDefaultBrush}"
                         BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
                         BorderThickness="{DynamicResource ToolTipBorderThemeThickness}"
+                        BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
                         CornerRadius="{DynamicResource OverlayCornerRadius}">
                         <TextBlock
                           Name="PART_ToolTipText"
