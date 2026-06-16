@@ -113,59 +113,36 @@
         <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
       </Style>
     </Style>
-  </ControlTheme>
 
-  <ControlTheme x:Key="TransparentButton" TargetType="Button">
-    <Setter Property="Background" Value="Transparent"/>
-    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-    <Setter Property="BorderBrush" Value="Transparent"/>
-    <Setter Property="BorderThickness" Value="0"/>
-    <Setter Property="BackgroundSizing" Value="InnerBorderEdge"/>
-    <Setter Property="Padding" Value="{StaticResource ButtonPadding}"/>
-    <Setter Property="HorizontalAlignment" Value="Left"/>
-    <Setter Property="VerticalAlignment" Value="Center"/>
-    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-    <Setter Property="VerticalContentAlignment" Value="Center"/>
-    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
-    <Setter Property="Template">
-      <ControlTemplate>
-        <ContentPresenter
-          Name="PART_ContentPresenter"
-          Padding="{TemplateBinding Padding}"
-          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-          Background="{TemplateBinding Background}"
-          BackgroundSizing="{TemplateBinding BackgroundSizing}"
-          BorderBrush="{TemplateBinding BorderBrush}"
-          BorderThickness="{TemplateBinding BorderThickness}"
-          Content="{TemplateBinding Content}"
-          ContentTemplate="{TemplateBinding ContentTemplate}"
-          CornerRadius="{TemplateBinding CornerRadius}"
-          RecognizesAccessKey="True"/>
-      </ControlTemplate>
-    </Setter>
+    <Style Selector="^.Transparent">
+      <Style Selector="^">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+      </Style>
 
-    <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Transitions">
-        <Transitions>
-          <BrushTransition Property="Background" Duration="00:00:00.083"/>
-        </Transitions>
-      </Setter>
-    </Style>
+      <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Transitions">
+          <Transitions>
+            <BrushTransition Property="Background" Duration="00:00:00.083"/>
+          </Transitions>
+        </Setter>
+      </Style>
 
-    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
-      <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-    </Style>
+      <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+      </Style>
 
-    <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
-      <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
-    </Style>
+      <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+      </Style>
 
-    <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Background" Value="{DynamicResource SubtleFillColorDisabledBrush}"/>
-      <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorDisabledBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      </Style>
     </Style>
   </ControlTheme>
 </ResourceDictionary>

@@ -75,7 +75,7 @@
     </Style>
 
     <Style Selector="^:pressed /template/ PathIcon#PART_DropDownIcon">
-      <Setter Property="RenderTransform" Value="scale(1, 0.65)"/>
+      <Setter Property="RenderTransform" Value="scale(1, 0.75)"/>
     </Style>
 
     <!--  PointerOver State  -->
@@ -101,98 +101,49 @@
     <Style Selector="^:disabled /template/ PathIcon#PART_DropDownIcon">
       <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
     </Style>
-  </ControlTheme>
 
+    <Style Selector="^.Transparent">
+      <Style Selector="^">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+      </Style>
 
-  <ControlTheme x:Key="TransparentDropDownButton" TargetType="DropDownButton">
-    <Setter Property="Background" Value="Transparent"/>
-    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-    <Setter Property="BorderBrush" Value="Transparent"/>
-    <Setter Property="BorderThickness" Value="0"/>
-    <Setter Property="Padding" Value="{DynamicResource ButtonPadding}"/>
-    <Setter Property="MinHeight" Value="{DynamicResource DropDownButtonMinHeight}"/>
-    <Setter Property="HorizontalAlignment" Value="Left"/>
-    <Setter Property="VerticalAlignment" Value="Center"/>
-    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-    <Setter Property="VerticalContentAlignment" Value="Center"/>
-    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
-    <Setter Property="BackgroundSizing" Value="InnerBorderEdge"/>
-    <Setter Property="Template">
-      <ControlTemplate>
-        <Border
-          x:Name="RootBorder"
-          Background="{TemplateBinding Background}"
-          BackgroundSizing="{TemplateBinding BackgroundSizing}"
-          BorderBrush="{TemplateBinding BorderBrush}"
-          BorderThickness="{TemplateBinding BorderThickness}"
-          ClipToBounds="True"
-          CornerRadius="{TemplateBinding CornerRadius}">
-          <Grid x:Name="InnerGrid">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="*"/>
-              <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+      <Style Selector="^ /template/ PathIcon#PART_DropDownIcon">
+        <Setter Property="RenderTransformOrigin" Value="50%, 100%"/>
+        <Setter Property="Transitions">
+          <Transitions>
+            <TransformOperationsTransition
+              Easing="CubicEaseOut"
+              Property="RenderTransform"
+              Duration="0:0:0.15"/>
+          </Transitions>
+        </Setter>
+      </Style>
 
-            <ContentPresenter
-              x:Name="PART_ContentPresenter"
-              Grid.Column="0"
-              Padding="{TemplateBinding Padding}"
-              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-              Content="{TemplateBinding Content}"
-              ContentTemplate="{TemplateBinding ContentTemplate}"
-              RecognizesAccessKey="True"/>
+      <Style Selector="^:pressed /template/ PathIcon#PART_DropDownIcon">
+        <Setter Property="RenderTransform" Value="scale(1, 0.75)"/>
+      </Style>
 
-            <PathIcon
-              Name="PART_DropDownIcon"
-              Grid.Column="1"
-              Width="8"
-              Height="8"
-              Margin="0,0,10,0"
-              HorizontalAlignment="Right"
-              VerticalAlignment="Center"
-              Data="{StaticResource ChevronDownMed}"
-              IsHitTestVisible="False"/>
-          </Grid>
-        </Border>
-      </ControlTemplate>
-    </Setter>
+      <!--  PointerOver State  -->
+      <Style Selector="^:pointerover /template/ Border#RootBorder">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+      </Style>
 
-    <Style Selector="^ /template/ PathIcon#PART_DropDownIcon">
-      <Setter Property="RenderTransformOrigin" Value="50%, 100%"/>
-      <Setter Property="Transitions">
-        <Transitions>
-          <TransformOperationsTransition
-            Easing="CubicEaseOut"
-            Property="RenderTransform"
-            Duration="0:0:0.15"/>
-        </Transitions>
-      </Setter>
-    </Style>
+      <!--  Pressed State  -->
+      <Style Selector="^:pressed /template/ Border#RootBorder">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+      </Style>
 
-    <Style Selector="^:pressed /template/ PathIcon#PART_DropDownIcon">
-      <Setter Property="RenderTransform" Value="scale(1, 0.75)"/>
-    </Style>
-
-    <!--  PointerOver State  -->
-    <Style Selector="^:pointerover /template/ Border#RootBorder">
-      <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
-      <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-    </Style>
-
-    <!--  Pressed State  -->
-    <Style Selector="^:pressed /template/ Border#RootBorder">
-      <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
-      <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
-    </Style>
-
-    <!--  Disabled State  -->
-    <Style Selector="^:disabled /template/ Border#RootBorder">
-      <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
-    </Style>
-    <Style Selector="^:disabled /template/ PathIcon#PART_DropDownIcon">
-      <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      <!--  Disabled State  -->
+      <Style Selector="^:disabled /template/ Border#RootBorder">
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      </Style>
+      <Style Selector="^:disabled /template/ PathIcon#PART_DropDownIcon">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      </Style>
     </Style>
   </ControlTheme>
-
 </ResourceDictionary>

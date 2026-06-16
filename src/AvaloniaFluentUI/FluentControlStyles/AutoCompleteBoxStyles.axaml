@@ -56,7 +56,7 @@
             InnerLeftContent="{TemplateBinding InnerLeftContent}"
             InnerRightContent="{TemplateBinding InnerRightContent}"
             MaxLength="{TemplateBinding MaxLength}"
-            Watermark="{TemplateBinding Watermark}"/>
+            PlaceholderText="{TemplateBinding Watermark}"/>
 
           <ui:FluentPopup
             Name="PART_Popup"

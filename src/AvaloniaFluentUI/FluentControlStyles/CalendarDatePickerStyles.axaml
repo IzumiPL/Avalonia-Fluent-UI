@@ -86,7 +86,9 @@
             WindowManagerAddShadowHint="False">
             <Border
               Name="DropDownRoot"
+              Margin="5"
               Background="{DynamicResource AcrylicInAppFillColorDefaultBrush}"
+              BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
               CornerRadius="{DynamicResource OverlayCornerRadius}">
               <Calendar
                 Name="PART_Calendar"

@@ -5,6 +5,7 @@
   <ControlTheme x:Key="{x:Type PopupRoot}" TargetType="PopupRoot">
     <Setter Property="TransparencyLevelHint" Value="Transparent"/>
     <Setter Property="Background" Value="{x:Null}"/>
+    <Setter Property="ClipToBounds" Value="False"/>
     <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
     <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>

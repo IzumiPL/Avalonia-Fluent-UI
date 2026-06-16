@@ -50,10 +50,10 @@
                 HorizontalAlignment="Left"
                 AutomationProperties.Name="Toggle navigation drawer"
                 Background="Transparent"
+                Classes="Transparent"
                 DockPanel.Dock="Top"
                 IsChecked="{Binding #PART_SplitView.IsPaneOpen, Mode=TwoWay}"
                 IsVisible="False"
-                Theme="{StaticResource TransparentToggleButton}"
                 ToolTip.Tip="Toggle navigation drawer">
                 <Panel>
                   <ui:IconSourceElement
@@ -116,9 +116,9 @@
                     Name="PART_PaneButton"
                     AutomationProperties.Name="Toggle navigation drawer"
                     Background="Transparent"
+                    Classes="Transparent"
                     DockPanel.Dock="Left"
                     IsChecked="{Binding #PART_SplitView.IsPaneOpen, Mode=TwoWay}"
-                    Theme="{StaticResource TransparentToggleButton}"
                     ToolTip.Tip="Toggle navigation drawer">
                     <Panel>
                       <ui:IconSourceElement
@@ -166,9 +166,9 @@
                     Name="PART_BottomPaneButton"
                     AutomationProperties.Name="Toggle navigation drawer"
                     Background="Transparent"
+                    Classes="Transparent"
                     DockPanel.Dock="Left"
                     IsChecked="{Binding #PART_SplitView.IsPaneOpen, Mode=TwoWay}"
-                    Theme="{StaticResource TransparentToggleButton}"
                     ToolTip.Tip="Toggle navigation drawer">
                     <Panel>
                       <ui:IconSourceElement

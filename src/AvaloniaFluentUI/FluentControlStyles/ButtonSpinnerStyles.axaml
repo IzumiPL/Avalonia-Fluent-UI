@@ -23,16 +23,45 @@
 
   <ControlTheme
     x:Key="ButtonSpinnerButton"
-    BasedOn="{StaticResource TransparentRepeatButton}"
+    BasedOn="{StaticResource {x:Type RepeatButton}}"
     TargetType="RepeatButton">
     <Setter Property="MinWidth" Value="32"/>
     <Setter Property="Padding" Value="0"/>
     <Setter Property="VerticalAlignment" Value="Stretch"/>
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0"/>
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
-    <Setter Property="BorderThickness" Value="{DynamicResource NumberBoxSpinButtonBorderThickness}"/>
     <Setter Property="FontFamily" Value="{DynamicResource SymbolThemeFontFamily}"/>
+
+    <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Transitions">
+        <Transitions>
+          <BrushTransition Property="Background" Duration="00:00:00.083"/>
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="^:pointerover">
+      <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:pressed">
+      <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:disabled">
+      <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorDisabledBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      </Style>
+    </Style>
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type ButtonSpinner}" TargetType="ButtonSpinner">
@@ -75,19 +104,19 @@
                 Orientation="Horizontal">
                 <RepeatButton
                   Name="PART_IncreaseButton"
-                  Margin="4"
+                  Margin="4,3"
                   VerticalContentAlignment="Center"
                   Content="&#xE70E;"
-                  FontSize="18"
+                  FontSize="14"
                   Foreground="{TemplateBinding Foreground}"
                   Theme="{StaticResource ButtonSpinnerButton}"/>
 
                 <RepeatButton
                   Name="PART_DecreaseButton"
-                  Margin="0,4,4,4"
+                  Margin="0,3,4,3"
                   VerticalContentAlignment="Center"
                   Content="&#xE70D;"
-                  FontSize="18"
+                  FontSize="14"
                   Foreground="{TemplateBinding Foreground}"
                   Theme="{StaticResource ButtonSpinnerButton}"/>
               </StackPanel>

@@ -158,9 +158,9 @@
                 Padding="8"
                 VerticalAlignment="Center"
                 Background="Transparent"
+                Classes="Transparent"
                 Foreground="{DynamicResource NavigationBarForeground}"
                 IsVisible="{TemplateBinding IsBackButtonEffectivelyVisible}"
-                Theme="{StaticResource TransparentButton}"
                 ToolTip.Tip="{x:Null}">
                 <Panel Background="Transparent">
                   <ui:IconSourceElement

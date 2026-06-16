@@ -107,9 +107,10 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewItemStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewStyles.axaml"/>
 
-
         <MergeResourceInclude Source="/FluentControlStyles/Controls/TaskDialog/TaskDialogStyles.axaml"/>
+
         <MergeResourceInclude Source="/FluentControlStyles/Controls/TaskDialog/TaskDialogCommandStyles.axaml"/>
+
         <MergeResourceInclude Source="/FluentControlStyles/Controls/TaskDialog/TaskDialogButtonStyles.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/TeachingTipStyles.axaml"/>
@@ -138,7 +139,6 @@
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/FluentMenu/FluentContextMenuStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/ComboBox/MultiSelectionComboBoxStyle.axaml"/>
-        <!-- <MergeResourceInclude Source="/FluentControlStyles/Controls/Flyout/FluentFlyoutPresenter.axaml"/> -->
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/PushButtonStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/ToolButtonStyle.axaml"/>
@@ -151,14 +151,22 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Slider/ToolTipSliderStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Pager/PipsPagerStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FlipViewStyle.axaml"/>
+
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/View/Avatar.axaml"/>
+
         <MergeResourceInclude Source="/FluentControlStyles/Controls/ListBox/RoundListBoxStyle.axaml"/>
+
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Segmented/SegmentedViewStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Segmented/SegmentedToggleViewStyle.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/TextBox/SearchTextBox.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/TextBox/LabelTextBox.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/CardStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/SettingCardStyles.axaml"/>
+
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Label/HyperlinkLabel.axaml"/>
+
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Styles.Resources>
@@ -168,13 +176,13 @@
 
   <!-- <Style Selector="wnd|AppWindow:dialog"> -->
   <!--     <Style Selector="^ WindowDrawnDecorations /template/ Button#PART_MinimizeButton"> -->
-  <!--  ~1~Don't set IsVisible = false, it causes issues, see #3 on GH740@1@  -->
+  <!--  Don't set IsVisible = false, it causes issues, see #3 on GH740  -->
   <!--         <Setter Property="Opacity" Value="0" /> -->
   <!--         <Setter Property="IsHitTestVisible" Value="False" /> -->
   <!--         <Setter Property="Width" Value="0" /> -->
   <!--     </Style> -->
   <!--     <Style Selector="^ WindowDrawnDecorations /template/ Button#PART_MaximizeButton"> -->
-  <!--  ~1~Don't set IsVisible = false, it causes issues, see #3 on GH740@1@  -->
+  <!--  Don't set IsVisible = false, it causes issues, see #3 on GH740  -->
   <!--         <Setter Property="Opacity" Value="0" /> -->
   <!--         <Setter Property="IsHitTestVisible" Value="False" /> -->
   <!--         <Setter Property="Width" Value="0" /> -->
