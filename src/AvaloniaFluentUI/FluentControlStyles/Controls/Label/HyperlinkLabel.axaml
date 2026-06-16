@@ -1,0 +1,23 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
+
+  <ControlTheme x:Key="{x:Type ui:HyperlinkLabel}" TargetType="ui:HyperlinkLabel">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}"/>
+    <Setter Property="Cursor" Value="Hand"/>
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+
+    <Style Selector="^:pointerover">
+      <Setter Property="Foreground" Value="{DynamicResource SystemControlHighlightListAccentVeryHighBrush}"/>
+      <Setter Property="TextDecorations" Value="Underline"/>
+    </Style>
+
+    <Style Selector="^:pressed">
+      <Setter Property="Foreground" Value="{DynamicResource SystemControlHighlightListAccentLowBrush}"/>
+    </Style>
+
+  </ControlTheme>
+</ResourceDictionary>
+
