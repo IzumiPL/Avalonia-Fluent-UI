@@ -2051,8 +2051,13 @@ public partial class TeachingTip : ContentControl
         {
             if (_target != null && isTargetLoaded)
             {
-                _currentTargetBoundsInCoreWindowSpace = new Rect(_target.Bounds.Size)
-                    .TransformToAABB(_target.TransformToVisual(TopLevel.GetTopLevel(this) as Visual).Value);
+                var topLevel = TopLevel.GetTopLevel(this) as Visual;
+                var targetMatrix = topLevel != null ? _target.TransformToVisual(topLevel) : null;
+                if (targetMatrix.HasValue)
+                {
+                    _currentTargetBoundsInCoreWindowSpace = new Rect(_target.Bounds.Size)
+                        .TransformToAABB(targetMatrix.Value);
+                }
 
                 SetViewportChangedEvent(_target);
             }
@@ -2109,10 +2114,17 @@ public partial class TeachingTip : ContentControl
     {
         if (IsOpen)
         {
-            var newTargetBounds = _target != null ?
-                new Rect(_target.Bounds.Size).TransformToAABB(_target.TransformToVisual(TopLevel.GetTopLevel(this) as Visual).Value) : default;
+            var topLevel = TopLevel.GetTopLevel(this) as Visual;
+            if (topLevel == null) return;
 
-            var newCurrentBounds = new Rect(Bounds.Size).TransformToAABB(this.TransformToVisual(TopLevel.GetTopLevel(this) as Visual).Value);
+            var targetMatrix = _target?.TransformToVisual(topLevel);
+            var newTargetBounds = _target != null && targetMatrix.HasValue ?
+                new Rect(_target.Bounds.Size).TransformToAABB(targetMatrix.Value) : default;
+
+            var currentMatrix = this.TransformToVisual(topLevel);
+            if (!currentMatrix.HasValue) return;
+
+            var newCurrentBounds = new Rect(Bounds.Size).TransformToAABB(currentMatrix.Value);
 
             if (newTargetBounds != _currentTargetBoundsInCoreWindowSpace ||
                 newCurrentBounds != _currentBoundsInCoreWindowSpace)

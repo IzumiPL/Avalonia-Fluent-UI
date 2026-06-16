@@ -847,7 +847,7 @@ public partial class RangeSlider : TemplatedControl
             ToolTip.SetTip(thumb, _toolTip);
             ToolTip.SetIsOpen(thumb, true);
             ToolTip.SetPlacement(thumb, PlacementMode.Top);
-            ToolTip.SetVerticalOffset(thumb, -_containerCanvas.Bounds.Height);
+            ToolTip.SetVerticalOffset(thumb, -_containerCanvas.Bounds.Height + 10);
         }
         else if (!open)
         {
