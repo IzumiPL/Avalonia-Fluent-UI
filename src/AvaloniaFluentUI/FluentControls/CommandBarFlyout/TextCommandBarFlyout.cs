@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Input.Platform;
 using Avalonia.Media;
@@ -126,7 +127,7 @@ public class TextCommandBarFlyout : CommandBarFlyout
         
         if (Popup.Child is { } presenter)
         {
-            FluentAnimation.SlideInAsync(presenter, -32D, TranslateTransform.YProperty, 150D);
+            FluentAnimation.SlideInAsync(presenter, -presenter.Bounds.Height, TranslateTransform.YProperty, 300.0, new SplineEasing(0.1, 0.9, 0.5, 1.0));
         }
     }
 

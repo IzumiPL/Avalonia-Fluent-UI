@@ -10,7 +10,6 @@ public class FluentMenuFlyout : MenuFlyout
     protected override Control CreatePresenter()
     {
         var presenter =  base.CreatePresenter();
-        presenter.Margin = new Thickness(0, 5, 0, 0);
         return presenter;
     }
 
@@ -20,6 +19,12 @@ public class FluentMenuFlyout : MenuFlyout
         
         if (Popup.Child is {} presenter)
         {
+            Popup.VerticalOffset = -2;
+            if (Target != null)
+            {
+                presenter.MinWidth = Target.Bounds.Width + 10;
+            }
+
             FluentAnimation.SlideInAsync(presenter, -24d, TranslateTransform.YProperty);
         }
     }

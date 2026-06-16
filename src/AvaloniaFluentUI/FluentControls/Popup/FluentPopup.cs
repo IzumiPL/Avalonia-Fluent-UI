@@ -9,7 +9,7 @@ namespace AvaloniaFluentUI.Controls;
 public class FluentPopup : Avalonia.Controls.Primitives.Popup
 {
     public static readonly StyledProperty<double> OffSetProperty =
-        AvaloniaProperty.Register<FluentPopup, double>(nameof(OffSet), defaultValue: -16);
+        AvaloniaProperty.Register<FluentPopup, double>(nameof(OffSet), defaultValue: -16d);
 
     public double OffSet
     {
@@ -25,7 +25,8 @@ public class FluentPopup : Avalonia.Controls.Primitives.Popup
         {
             var isOpen = change.GetNewValue<bool>();
             if (isOpen)
-            {
+            { 
+                VerticalOffset = -2;
                 RunOpenAnimationAsync();
             }
         }

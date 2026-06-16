@@ -1,4 +1,6 @@
-﻿using Avalonia.Controls;
+﻿using System;
+using System.ComponentModel;
+using Avalonia.Controls;
 using Avalonia.Media;
 using AvaloniaFluentUI.Media.Animation;
 
@@ -6,6 +8,11 @@ namespace AvaloniaFluentUI.Controls;
 
 public class FluentFlyout : Flyout
 {
+    protected override void OnClosing(CancelEventArgs args)
+    {
+        base.OnClosing(args);
+    }
+
     protected override void OnOpened()
     {
         if (Popup.Child is { } presenter)
