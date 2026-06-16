@@ -56,9 +56,12 @@
       <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}"/>
     </Style>
 
-    <Style Selector="^.Border">
+    <Style Selector="^.Outlined">
       <Style Selector="^:pointerover">
-        <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentFillColorTertiaryBrush}"/>
+      </Style>
+      <Style Selector="^:pressed">
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentFillColorSecondaryBrush}"/>
       </Style>
     </Style>
   </ControlTheme>

@@ -124,10 +124,12 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border
+          Margin="5"
           Padding="{TemplateBinding Padding}"
           Background="{TemplateBinding Background}"
           BorderBrush="{TemplateBinding BorderBrush}"
           BorderThickness="{TemplateBinding BorderThickness}"
+          BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
           CornerRadius="{TemplateBinding CornerRadius}">
           <ui:SingleDirectionScrollViewer
             HorizontalScrollBarVisibility="Disabled"
@@ -167,11 +169,11 @@
               Width="16"
               Height="16"
               Padding="0"
+              Classes="Transparent"
               Content="{StaticResource Close}"
               Cursor="Hand"
               IconHeight="8"
-              IconWidth="8"
-              Theme="{StaticResource TransparentToolButton}"/>
+              IconWidth="8"/>
           </Grid>
         </Border>
       </ControlTemplate>

@@ -21,7 +21,7 @@
 
   <ControlTheme x:Key="ColorViewPaletteListBoxTheme" TargetType="ListBox">
     <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
     <Setter Property="ScrollViewer.IsScrollChainingEnabled" Value="True"/>
     <Setter Property="Template">
       <ControlTemplate>
