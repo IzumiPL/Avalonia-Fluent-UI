@@ -1,0 +1,207 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
+
+  <ControlTheme x:Key="{x:Type ui:LabelTextBox}" TargetType="ui:LabelTextBox">
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+    <Setter Property="CaretBrush" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource TextControlElevationBorderBrush}"/>
+    <Setter Property="SelectionBrush" Value="{DynamicResource AccentFillColorSelectedTextBackgroundBrush}"/>
+    <Setter Property="SelectionForegroundBrush" Value="{DynamicResource TextOnAccentFillColorSelectedTextBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource TextControlBorderThemeThickness}"/>
+    <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
+    <Setter Property="MinHeight" Value="{DynamicResource TextControlThemeMinHeight}"/>
+    <Setter Property="MinWidth" Value="{DynamicResource TextControlThemeMinWidth}"/>
+    <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}"/>
+    <Setter Property="FocusAdorner" Value="{x:Null}"/>
+    <Setter Property="ContextFlyout" Value="{StaticResource DefaultTextBoxContextFlyout}"/>
+    <Setter Property="ScrollViewer.IsScrollChainingEnabled" Value="True"/>
+    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DataValidationErrors>
+          <Panel>
+            <Border
+              Name="PART_BorderElement"
+              MinWidth="{TemplateBinding MinWidth}"
+              MinHeight="{TemplateBinding MinHeight}"
+              Background="{TemplateBinding Background}"
+              BorderBrush="{TemplateBinding BorderBrush}"
+              BorderThickness="{TemplateBinding BorderThickness}"
+              CornerRadius="{TemplateBinding CornerRadius}"/>
+
+            <Border Margin="{TemplateBinding BorderThickness}">
+              <Grid ColumnDefinitions="Auto,*,Auto">
+                <ContentPresenter
+                  Grid.Column="0"
+                  Grid.ColumnSpan="1"
+                  Content="{TemplateBinding InnerLeftContent}"/>
+                <DockPanel
+                  x:Name="PART_InnerDockPanel"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="1"
+                  Margin="{TemplateBinding Padding}"
+                  Cursor="IBeam">
+                  <TextBlock
+                    Name="PART_FloatingWatermark"
+                    DockPanel.Dock="Top"
+                    FontSize="{TemplateBinding FontSize}"
+                    Foreground="{DynamicResource SystemAccentColor}"
+                    IsVisible="False"
+                    Text="{TemplateBinding Watermark}"/>
+                  <fui:SmoothScrollViewer
+                    AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}"
+                    HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+                    IsScrollChainingEnabled="{TemplateBinding (ScrollViewer.IsScrollChainingEnabled)}"
+                    VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}">
+                    <Panel>
+                      <TextBlock
+                        Name="PART_Watermark"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                        Text="{TemplateBinding Watermark}"
+                        TextAlignment="{TemplateBinding TextAlignment}"
+                        TextWrapping="{TemplateBinding TextWrapping}">
+                        <TextBlock.IsVisible>
+                          <MultiBinding Converter="{x:Static BoolConverters.And}">
+                            <Binding
+                              Converter="{x:Static StringConverters.IsNullOrEmpty}"
+                              ElementName="PART_TextPresenter"
+                              Path="PreeditText"/>
+                            <Binding
+                              Converter="{x:Static StringConverters.IsNullOrEmpty}"
+                              Path="Text"
+                              RelativeSource="{RelativeSource TemplatedParent}"/>
+                          </MultiBinding>
+                        </TextBlock.IsVisible>
+                      </TextBlock>
+                      <TextPresenter
+                        Name="PART_TextPresenter"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        CaretBrush="{TemplateBinding CaretBrush}"
+                        CaretIndex="{TemplateBinding CaretIndex}"
+                        LetterSpacing="{TemplateBinding LetterSpacing}"
+                        LineHeight="{TemplateBinding LineHeight}"
+                        PasswordChar="{TemplateBinding PasswordChar}"
+                        RevealPassword="{TemplateBinding RevealPassword}"
+                        SelectionBrush="{TemplateBinding SelectionBrush}"
+                        SelectionEnd="{TemplateBinding SelectionEnd}"
+                        SelectionForegroundBrush="{TemplateBinding SelectionForegroundBrush}"
+                        SelectionStart="{TemplateBinding SelectionStart}"
+                        Text="{TemplateBinding Text,
+                                               Mode=TwoWay}"
+                        TextAlignment="{TemplateBinding TextAlignment}"
+                        TextWrapping="{TemplateBinding TextWrapping}"/>
+                    </Panel>
+                  </fui:SmoothScrollViewer>
+                </DockPanel>
+                <ContentPresenter
+                  Name="RT"
+                  Grid.Column="2"
+                  Grid.ColumnSpan="1"
+                  Content="{TemplateBinding InnerRightContent}"/>
+              </Grid>
+            </Border>
+          </Panel>
+        </DataValidationErrors>
+      </ControlTemplate>
+    </Setter>
+
+    <!--  Disabled State  -->
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource TemporaryTextFillColorDisabled}"/>
+
+      <Style Selector="^ /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ TextBlock#PART_Watermark, ^ /template/ TextBlock#PART_FloatingWatermark">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      </Style>
+    </Style>
+
+    <!--  PointerOver State  -->
+    <Style Selector="^:pointerover">
+      <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+
+      <Style Selector="^ /template/ Border#PART_BorderElement">
+        <Setter Property="BorderBrush" Value="{DynamicResource TextControlElevationBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ TextBlock#PART_Watermark">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+      </Style>
+    </Style>
+
+    <!--  Focused State  -->
+    <Style Selector="^:focus">
+      <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+
+      <Style Selector="^ /template/ TextBlock#PART_Watermark">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorInputActiveBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TextControlElevationBorderFocusedBrush}"/>
+        <Setter Property="BorderThickness" Value="{DynamicResource TextControlBorderThemeThicknessFocused}"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:error /template/ Border#PART_BorderElement">
+      <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorCriticalBrush}"/>
+    </Style>
+
+    <Style Selector="^[UseFloatingWatermark=true]:not(:empty) /template/ TextBlock#PART_FloatingWatermark">
+      <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <Style Selector="^">
+      <Setter Property="InnerLeftContent">
+        <Template>
+          <Button
+            VerticalAlignment="Stretch"
+            Content="{Binding $parent[ui:LabelTextBox].Prefix}"
+            CornerRadius="{DynamicResource ControlCornerRadius}"
+            Focusable="False"
+            IsTabStop="False"
+            TextElement.FontSize="{Binding $parent[ui:LabelTextBox].FontSize}"/>
+        </Template>
+      </Setter>
+
+      <Setter Property="InnerRightContent">
+        <Template>
+          <StackPanel Orientation="Horizontal" Spacing="3">
+            <Button
+              Name="ClearButton"
+              Width="30"
+              Padding="{StaticResource HelperButtonThemePadding}"
+              VerticalAlignment="Stretch"
+              Command="{Binding $parent[ui:LabelTextBox].Clear}"
+              CornerRadius="{DynamicResource ControlCornerRadius}"
+              Focusable="False"
+              IsTabStop="False"
+              IsVisible="{Binding $parent[ui:LabelTextBox].IsFocused}"
+              Theme="{StaticResource TextBoxDeleteButtonStyle}"/>
+            <Button
+              Margin="0,1,3,0"
+              VerticalAlignment="Stretch"
+              Content="{Binding $parent[ui:LabelTextBox].Suffix}"
+              CornerRadius="{DynamicResource ControlCornerRadius}"
+              Focusable="False"
+              IsTabStop="False"
+              TextElement.FontSize="{Binding $parent[ui:LabelTextBox].FontSize}"/>
+          </StackPanel>
+        </Template>
+      </Setter>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>
+
