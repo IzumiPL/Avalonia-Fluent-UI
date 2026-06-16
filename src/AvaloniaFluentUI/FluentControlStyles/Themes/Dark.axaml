@@ -87,6 +87,8 @@
   <Color x:Key="FilledPressed">#7B7978</Color>
   <Color x:Key="FilledBorderPointerOver">#85898B</Color>
 
+  <Color x:Key="AvatarBackgroundDefault">#363636</Color>
+
   <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="{StaticResource TextFillColorPrimary}"/>
   <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="{StaticResource TextFillColorSecondary}"/>
   <SolidColorBrush x:Key="TextFillColorTertiaryBrush" Color="{StaticResource TextFillColorTertiary}"/>
@@ -266,4 +268,8 @@
     Opacity="0.6"
     Color="{DynamicResource SystemAccentColor}"/>
   <SolidColorBrush x:Key="SystemControlDescriptionTextForegroundBrush" Color="{StaticResource TextFillColorSecondary}"/>
+
+  <!--  Shadow  -->
+  <BoxShadows x:Key="ControlDefaultBoxShadow">0 5 12 0 #80000000</BoxShadows>
+
 </ResourceDictionary>
