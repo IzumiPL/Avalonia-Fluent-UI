@@ -21,12 +21,13 @@ public class FluentAnimation
     /// <param name="fromValue">起始值</param>
     /// <param name="toValue">结束值</param>
     /// <param name="duration">持续时间（毫秒）</param>
-    public static async void RunAnimateAsync(Animatable target, AvaloniaProperty property, object fromValue, object toValue, double duration = 250D)
+    public static async Task RunAnimateAsync(Animatable target, AvaloniaProperty property, object fromValue, object toValue, double duration = 250D)
     {
         var animation = new Avalonia.Animation.Animation
         {
             Duration = TimeSpan.FromMilliseconds(duration),
             Easing = new CubicEaseOut(),
+            FillMode = FillMode.Forward,
             Children =
             {
                 new KeyFrame
@@ -48,66 +49,19 @@ public class FluentAnimation
     /// <summary>
     /// 淡入效果
     /// </summary>
-    public static void FadeInAsync(Visual target, double duration = 250D)
+    public static async void FadeInAsync(Visual target, double duration = 250D)
     {
         target.Opacity = 0;
-        RunAnimateAsync(target, Visual.OpacityProperty, 0D, 1D, duration);
+        await RunAnimateAsync(target, Visual.OpacityProperty, 0D, 1D, duration);
     }
 
     /// <summary>
     /// 淡出效果
     /// </summary>
-    public static void FadeOutAsync(Visual target, double duration = 250D)
+    public static async Task FadeOutAsync(Visual target, double duration = 250D)
     {
-        RunAnimateAsync(target, Visual.OpacityProperty, target.Opacity, 0D, duration);
+        await RunAnimateAsync(target, Visual.OpacityProperty, target.Opacity, 0D, duration);
         target.Opacity = 0;
-    }
-
-    public static async void ScaleAndSliderInAsync(Visual target, double sliderOffset, double scaleOffset = 0.4D, double duration = 300D)
-    {
-        _cancellationTokenSource?.Cancel();
-        _cancellationTokenSource = new CancellationTokenSource();
-
-        target.RenderTransformOrigin = new RelativePoint(0.5, 0, RelativeUnit.Relative);
-        target.RenderTransform = new TransformGroup
-        {
-            Children =
-            {
-                new ScaleTransform(1.0, 1.0), 
-                new TranslateTransform(0, 0)
-            }
-        };
-
-        var animation = new Avalonia.Animation.Animation
-        {
-            Duration = TimeSpan.FromMilliseconds(300),
-            Easing = new SplineEasing(0.1, 0.9, 0.5, 1.0),
-            FillMode = FillMode.Forward,
-            Children =
-            {
-                new KeyFrame
-                {
-                    Cue = new Cue(0.0),
-                    Setters =
-                    {
-                        new Setter(Visual.OpacityProperty, 0.5),
-                        new Setter(ScaleTransform.ScaleYProperty, scaleOffset),
-                        new Setter(TranslateTransform.YProperty, sliderOffset)
-                    }
-                },
-                new KeyFrame
-                {
-                    Cue = new Cue(1.0),
-                    Setters =
-                    {
-                         new Setter(Visual.OpacityProperty, 1.0),
-                        new Setter(ScaleTransform.ScaleYProperty, 1.0),
-                        new Setter(TranslateTransform.YProperty, 0.0) 
-                    }
-                }
-            }
-        };
-        await animation.RunAsync(target, cancellationToken: _cancellationTokenSource.Token);
     }
 
     public static async void CenterScaleAsync(Visual target, double offset, AvaloniaProperty? property = null, double duration = 200D)
@@ -121,8 +75,7 @@ public class FluentAnimation
 
         var animation = new Avalonia.Animation.Animation
         {
-            Duration = TimeSpan.FromMilliseconds(200),
-            // Easing = new QuarticEaseOut(),
+            Duration = TimeSpan.FromMilliseconds(duration),
             Easing = new SplineEasing(0.1, 0.9, 0.2, 1.0),
             FillMode = FillMode.Forward,
             Children =
@@ -133,7 +86,7 @@ public class FluentAnimation
                     Setters =
                     {
                         new Setter(Visual.OpacityProperty, 0d),
-                        new Setter(ScaleTransform.ScaleYProperty, offset)
+                        new Setter(property, offset)
                     }
                 },
                 new KeyFrame
@@ -142,7 +95,7 @@ public class FluentAnimation
                     Setters =
                     {
                         new Setter(Visual.OpacityProperty, 1d),
-                        new Setter(ScaleTransform.ScaleYProperty, 1d)
+                        new Setter(property, 1d)
                     }
                 }
             }
@@ -153,30 +106,36 @@ public class FluentAnimation
     /// <summary>
     /// 从下方滑入
     /// </summary>
-    public static async void SlideInAsync(Visual target, double offset, AvaloniaProperty? property = null, double duration = 250D)
+    public static async void SlideInAsync(
+        Visual target, double offset, AvaloniaProperty? property = null, 
+        double duration = 250D, Easing? easing = null 
+        )
     {
         _cancellationTokenSource?.Cancel();
         _cancellationTokenSource = new CancellationTokenSource();
         
         target.Opacity = 0;
+        target.RenderTransform = new TranslateTransform(0, 0);
+        
         property = property ?? TranslateTransform.YProperty;
+        easing = easing ?? new CubicEaseOut();
 
         var animation = new Avalonia.Animation.Animation
         {
             Duration = TimeSpan.FromMilliseconds(duration),
-            Easing = new CubicEaseOut(),
+            Easing = easing,
             FillMode = FillMode.Forward,
             Children =
             {
                 new KeyFrame
                 {
                     Cue = new Cue(0d),
-                    Setters = { new Setter(Visual.OpacityProperty, 0d), new Setter(property, offset), }
+                    Setters = { new Setter(Visual.OpacityProperty, 0.0), new Setter(property, offset), }
                 },
                 new KeyFrame
                 {
                     Cue = new Cue(1d),
-                    Setters = { new Setter(Visual.OpacityProperty, 1d), new Setter(property, 0d), }
+                    Setters = { new Setter(Visual.OpacityProperty, 1.0), new Setter(property, 0.0), }
                 }
             }
         };
