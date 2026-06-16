@@ -41,11 +41,20 @@ public partial class AppWindow : Window
     public static readonly StyledProperty<bool> FullScreenButtonIsVisibleProperty =
         AvaloniaProperty.Register<AppWindow, bool>(nameof(FullScreenButtonIsVisible));
 
+    public static readonly StyledProperty<Thickness> TitleBarMarginProperty =
+        AvaloniaProperty.Register<AppWindow, Thickness>(nameof(TitleBarMargin));
+
+    public Thickness TitleBarMargin
+    {
+        get => GetValue(TitleBarMarginProperty);
+        set => SetValue(TitleBarMarginProperty, value);
+    }
+
     public bool FullScreenButtonIsVisible
     {
         get => GetValue(FullScreenButtonIsVisibleProperty);
         set => SetValue(FullScreenButtonIsVisibleProperty, value);
-    } 
+    }
 
     public double IconSize
     {
@@ -173,12 +182,6 @@ public partial class AppWindow : Window
     public static readonly StyledProperty<bool> IsTitleBarContentVisibleProperty =
         AvaloniaProperty.Register<AppWindow, bool>(nameof(IsTitleBarContentVisible), defaultValue: true);
 
-    /// <summary>
-    /// Defines the <see cref="WindowIcon"/> property
-    /// </summary>
-    public static readonly StyledProperty<IImage> WindowIconProperty =
-        AvaloniaProperty.Register<AppWindow, IImage>(nameof(WindowIcon));
-
     public static readonly StyledProperty<object?> TitleBarContentProperty =
         AvaloniaProperty.Register<AppWindow, object?>(nameof(TitleBarContent));
     
@@ -223,15 +226,6 @@ public partial class AppWindow : Window
         get => GetValue(IsTitleBarContentVisibleProperty);
         set => SetValue(IsTitleBarContentVisibleProperty, value);
     }
-
-    /// <summary>
-    /// Gets or sets the icon used in the managed titlebar of AppWindow
-    /// </summary>
-    public IImage WindowIcon
-    {
-        get => GetValue(WindowIconProperty);
-        set => SetValue(WindowIconProperty, value);
-    }
     
     public AppWindow()
     {
@@ -256,7 +250,7 @@ public partial class AppWindow : Window
             var point = e.GetPosition(_defaultTitleBar);
             if (HitTestTitleBar(point))
             {
-                if (e.ClickCount == 2)
+                if (CanMaximize && CanResize && e.ClickCount == 2)
                 {
                     WindowState = WindowState == WindowState.Maximized
                         ? WindowState.Normal
@@ -290,7 +284,7 @@ public partial class AppWindow : Window
 
     public void EnabledMica(bool enable)
     {
-        if (enable && IsWindows11)
+        if (IsWindows11 && enable)
         {
             Background = Brushes.Transparent;
             TransparencyLevelHint = [WindowTransparencyLevel.Mica];
@@ -313,7 +307,6 @@ public partial class AppWindow : Window
         {
             _defaultTitleBar = e.NameScope.Find<Grid>("DefaultTitleBar");
 
-            // This will set all our TemplateSettings properties
             OnTitleBarHeightChanged(_titleBar.Height);
 
             SetTitleBarColors();
@@ -383,7 +376,7 @@ public partial class AppWindow : Window
     {
         _splashContext?.TryCancel();
 
-        base.OnClosed(e);     
+        base.OnClosed(e);
     }
 
     internal void OnTitleBarHeightChanged(double height)
@@ -442,6 +435,7 @@ public partial class AppWindow : Window
         if (_titleBar == null)
             return;
 
+        // TODO: 当前样式未启用
         SetResource(TITLE_BAR_BACKGROUND, _titleBar.BackgroundColor);
         SetResource(TITLE_BAR_FOREGROUND, _titleBar.ForegroundColor);
 
@@ -473,11 +467,6 @@ public partial class AppWindow : Window
         }
     }
 
-    internal void OnShowFullScreenButtonChanged(bool value)
-    {
-        PseudoClasses.Set(":noFullScreen", value);
-    }
-    
     private async void LoadApp()
     {
         if (Presenter is not ContentPresenter cp)
