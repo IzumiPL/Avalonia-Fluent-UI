@@ -86,7 +86,6 @@
                 Name="ExpandCollapseChevron"
                 Grid.Column="3"
                 Width="40"
-                Margin="{DynamicResource NavigationViewItemExpandedChevronMargin}"
                 HorizontalAlignment="Right"
                 Background="Transparent"
                 IsVisible="False">
@@ -282,7 +281,6 @@
                 Name="ExpandCollapseChevron"
                 Grid.Column="2"
                 Width="40"
-                Margin="{DynamicResource NavigationViewItemExpandedChevronMargin}"
                 HorizontalAlignment="Right"
                 Background="Transparent"
                 IsVisible="False">
