@@ -193,4 +193,22 @@
   <data name="Off" xml:space="preserve">
     <value>オフ</value>
   </data>
+  <data name="Clear" xml:space="preserve">
+    <value>クリア</value>
+  </data>
+  <data name="SelectFolder" xml:space="preserve">
+    <value>フォルダを選択</value>
+  </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>ファイルを選択</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>または</value>
+  </data>
+  <data name="DragTheFileHere" xml:space="preserve">
+    <value>ここにファイルをドラッグします</value>
+  </data>
+  <data name="DragTheFolderHere" xml:space="preserve">
+    <value>フォルダーをここにドラッグします</value>
+  </data>
 </root>

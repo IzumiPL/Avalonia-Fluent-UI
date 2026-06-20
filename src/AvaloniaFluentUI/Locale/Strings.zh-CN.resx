@@ -146,4 +146,22 @@
   <data name="On" xml:space="preserve">
     <value>开</value>
   </data>
+  <data name="Clear" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="SelectFolder" xml:space="preserve">
+    <value>选择文件夹</value>
+  </data>
+  <data name="SelectFile" xml:space="preserve">
+    <value>选择文件</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>或</value>
+  </data>
+  <data name="DragTheFileHere" xml:space="preserve">
+    <value>拖拽文件到此</value>
+  </data>
+  <data name="DragTheFolderHere" xml:space="preserve">
+    <value>拖拽文件夹到此</value>
+  </data>
 </root>
