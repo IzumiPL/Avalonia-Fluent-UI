@@ -1,0 +1,667 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.ButtonPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:ButtonPageViewModel"
+  mc:Ignorable="d">
+
+  <!--  PushButton  -->
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="StandardButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_StandardButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <StackPanel
+          Grid.Column="0"
+          Orientation="Vertical"
+          Spacing="8">
+          <fui:PushButton
+            Width="256"
+            Height="35"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="{Binding PushButtonContentAlignment}"
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_StandardButton]}"
+            IsEnabled="{Binding !PushButtonIsDisable}"/>
+
+          <fui:PushButton
+            Width="256"
+            Height="35"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="{Binding PushButtonContentAlignment}"
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_StandardButtonWithIcon]}"
+            IconSource="{x:Static fi:FluentIcon.GitHub}"
+            IsEnabled="{Binding !PushButtonIsDisable}"/>
+
+          <fui:PushButton
+            Width="256"
+            Height="35"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="{Binding PushButtonContentAlignment}"
+            Classes="Accent"
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_AccentStandardButton]}"
+            IconSource="{x:Static fi:FluentIcon.Home}"
+            IsEnabled="{Binding !PushButtonIsDisable}"/>
+
+          <fui:PushButton
+            Width="256"
+            Height="35"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="{Binding PushButtonContentAlignment}"
+            Classes="Transparent"
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_TransparentStandardButton]}"
+            IsEnabled="{Binding !PushButtonIsDisable}"/>
+
+          <fui:PushButton
+            Width="256"
+            Height="35"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            HorizontalContentAlignment="{Binding PushButtonContentAlignment}"
+            Classes="Transparent"
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_TransparentStandardButtonWithIcon]}"
+            IconSource="{x:Static fi:FluentIcon.GitHub}"
+            IsEnabled="{Binding !PushButtonIsDisable}"/>
+        </StackPanel>
+
+        <ui:Card Grid.Column="1" VerticalAlignment="Stretch">
+          <StackPanel Orientation="Vertical" Spacing="6">
+            <TextBlock
+              HorizontalAlignment="Left"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ContentAlignment]}"/>
+            <ComboBox
+              Margin="0,1"
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding HorizontalAlignments}"
+              SelectedItem="{Binding PushButtonContentAlignment}"/>
+
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}" IsChecked="{Binding PushButtonIsDisable}"/>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  RoundButton  -->
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_RoundButton]}">
+      <Grid
+        ColumnDefinitions="*, Auto"
+        RowDefinitions="Auto, Auto, Auto, Auto"
+        RowSpacing="8">
+        <fui:PushButton
+          Grid.Row="0"
+          Width="256"
+          Height="35"
+          Classes="Round"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_RoundButton]}"
+          IsEnabled="{Binding !RoundButtonIsDisabled}"/>
+        <fui:PushButton
+          Grid.Row="1"
+          Width="256"
+          Height="35"
+          Classes="Accent Round"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_AccentRoundButton]}"
+          IsEnabled="{Binding !RoundButtonIsDisabled}"/>
+
+        <fui:ToolButton
+          Grid.Row="2"
+          Width="256"
+          Height="35"
+          Classes="Round"
+          Content="{x:Static fi:FluentIcon.GitHub}"
+          IsEnabled="{Binding !RoundButtonIsDisabled}"/>
+
+        <fui:ToolButton
+          Grid.Row="3"
+          Width="256"
+          Height="35"
+          Classes="Accent Round"
+          Content="{x:Static fi:FluentIcon.Wifi}"
+          IsEnabled="{Binding !RoundButtonIsDisabled}"/>
+
+        <CheckBox
+          Grid.RowSpan="4"
+          Grid.Column="1"
+          VerticalAlignment="Top"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding RoundButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_OutlineButton]}">
+      <Grid
+        ColumnDefinitions="*, Auto"
+        RowDefinitions="Auto, Auto, Auto, Auto"
+        RowSpacing="8">
+        <fui:PushButton
+          Width="256"
+          Height="35"
+          Classes="Outlined"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_OutlineButton]}"
+          IsEnabled="{Binding !OutlinedClassButtonIsDisabled}"/>
+        <fui:PushButton
+          Grid.Row="1"
+          Width="256"
+          Height="35"
+          Classes="Outlined Round"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_RoundOutlineButton]}"
+          IconSource="{x:Static fi:FluentIcon.Menu}"
+          IsEnabled="{Binding !OutlinedClassButtonIsDisabled}"/>
+
+        <fui:ToolButton
+          Grid.Row="2"
+          Width="256"
+          Height="35"
+          Classes="Outlined"
+          Content="{x:Static fi:FluentIcon.Send}"
+          IsEnabled="{Binding !OutlinedClassButtonIsDisabled}"/>
+        <fui:ToolButton
+          Grid.Row="3"
+          Width="256"
+          Height="35"
+          Classes="Outlined Round"
+          Content="{x:Static fi:FluentIcon.View}"
+          IsEnabled="{Binding !OutlinedClassButtonIsDisabled}"/>
+
+        <CheckBox
+          Grid.RowSpan="4"
+          Grid.Column="1"
+          VerticalAlignment="Top"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding OutlinedClassButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  工具按钮  -->
+    <ui:CodeCard Name="ToolButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ToolButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <StackPanel
+          Grid.Column="0"
+          Orientation="Vertical"
+          Spacing="8">
+          <fui:ToolButton
+            Width="256"
+            Height="35"
+            HorizontalContentAlignment="{Binding ToolButtonContentAlignment}"
+            Content="{x:Static fi:FluentIcon.Setting}"
+            IsEnabled="{Binding !ToolButtonIsDisable}"/>
+          <fui:ToolButton
+            Width="256"
+            Height="35"
+            HorizontalContentAlignment="{Binding ToolButtonContentAlignment}"
+            Classes="Transparent"
+            Content="{x:Static fi:FluentIcon.Save}"
+            Foreground="DeepSkyBlue"
+            IsEnabled="{Binding !ToolButtonIsDisable}"/>
+
+          <fui:ToolButton
+            Width="256"
+            Height="35"
+            HorizontalContentAlignment="{Binding ToolButtonContentAlignment}"
+            Classes="Accent"
+            Content="{x:Static fi:FluentIcon.Wifi}"
+            Foreground="OrangeRed"
+            IsEnabled="{Binding !ToolButtonIsDisable}"/>
+        </StackPanel>
+        <ui:Card Grid.Column="1" VerticalAlignment="Stretch">
+          <StackPanel Orientation="Vertical" Spacing="6">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+
+            <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ContentAlignment]}"/>
+            <ComboBox
+              Margin="0,1"
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding HorizontalAlignments}"
+              SelectedItem="{Binding ToolButtonContentAlignment}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}" IsChecked="{Binding ToolButtonIsDisable}"/>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  填充按钮  -->
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_FilledButton]}">
+      <Grid ColumnDefinitions="Auto, Auto, *, Auto" ColumnSpacing="8">
+        <StackPanel Orientation="Vertical" Spacing="8">
+          <fui:FilledPushButton
+            Width="128"
+            Height="35"
+            Background="HotPink"
+            Content="Custom"
+            IsEnabled="{Binding !FilledButtonIsDisabled}"/>
+          <fui:FilledPushButton
+            Width="128"
+            Height="35"
+            Classes="Information"
+            Content="Information"
+            IsEnabled="{Binding !FilledButtonIsDisabled}"/>
+          <fui:FilledPushButton
+            Width="128"
+            Height="35"
+            Classes="Success"
+            Content="Success"
+            IconSource="{x:Static fi:FluentIcon.Share}"
+            IsEnabled="{Binding !FilledButtonIsDisabled}"/>
+          <fui:FilledPushButton
+            Width="128"
+            Height="35"
+            Classes="Attention"
+            Content="Attention"
+            IconSource="{x:Static fi:FluentIcon.Save}"
+            IsEnabled="{Binding !FilledButtonIsDisabled}"/>
+          <fui:FilledPushButton
+            Width="128"
+            Height="35"
+            Classes="Warning"
+            Content="Warning"
+            IconSource="{x:Static fi:FluentIcon.SpeedHigh}"
+            IsEnabled="{Binding !FilledButtonIsDisabled}"/>
+          <fui:FilledPushButton
+            Width="128"
+            Height="35"
+            Classes="Error"
+            Content="Error"
+            IconSource="{x:Static fi:FluentIcon.Info}"
+            IsEnabled="{Binding !FilledButtonIsDisabled}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Spacing="8">
+          <fui:FilledToolButton
+            Background="HotPink"
+            Content="{x:Static fi:FluentIcon.Add}"
+            IsEnabled="{Binding !FilledButtonIsDisabled}"/>
+          <fui:FilledToolButton
+            Classes="Information"
+            Content="{x:Static fi:FluentIcon.Info}"
+            IsEnabled="{Binding !FilledButtonIsDisabled}"/>
+          <fui:FilledToolButton
+            Classes="Success"
+            Content="{x:Static fi:FluentIcon.Sync}"
+            IsEnabled="{Binding !FilledButtonIsDisabled}"/>
+          <fui:FilledToolButton
+            Classes="Attention"
+            Content="{x:Static fi:FluentIcon.Send}"
+            IsEnabled="{Binding !FilledButtonIsDisabled}"/>
+          <fui:FilledToolButton
+            Classes="Warning"
+            Content="{x:Static fi:FluentIcon.PowerButton}"
+            IsEnabled="{Binding !FilledButtonIsDisabled}"/>
+          <fui:FilledToolButton
+            Classes="Error"
+            Content="{x:Static fi:FluentIcon.Delete}"
+            IsEnabled="{Binding !FilledButtonIsDisabled}"/>
+        </StackPanel>
+
+        <ui:Card Grid.Column="3">
+          <StackPanel Orientation="Vertical" Spacing="3">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}" IsChecked="{Binding FilledButtonIsDisabled}"/>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_StrokeButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <StackPanel
+          Grid.Column="0"
+          VerticalAlignment="Top"
+          Orientation="Horizontal"
+          Spacing="5">
+          <fui:OutlinePushButton
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Music]}"
+            GroupName="{Binding OutlinePushButtonGroupName}"
+            IconSource="{x:Static fi:FluentIcon.Music}"
+            IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
+          <fui:OutlinePushButton
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_MovieAndTV]}"
+            GroupName="{Binding OutlinePushButtonGroupName}"
+            IconSource="{x:Static fi:FluentIcon.Video}"
+            IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
+          <fui:OutlinePushButton
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Game]}"
+            GroupName="{Binding OutlinePushButtonGroupName}"
+            IconSource="{x:Static fi:FluentIcon.Game}"
+            IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
+          <fui:OutlinePushButton
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[GitHubRepo]}"
+            GroupName="{Binding OutlinePushButtonGroupName}"
+            IconSource="{x:Static fi:FluentIcon.GitHub}"
+            IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
+          <fui:OutlinePushButton
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_AboutUs]}"
+            GroupName="{Binding OutlinePushButtonGroupName}"
+            IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
+        </StackPanel>
+        <ui:Card Grid.Column="1">
+          <StackPanel Orientation="Vertical" Spacing="3">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsMultiSelect]}" IsChecked="{Binding OutlinePushButtonIsMC}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}" IsChecked="{Binding OutlinePushButtonIsDisabled}"/>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_StrokeToolButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <StackPanel
+          Grid.Column="0"
+          VerticalAlignment="Top"
+          Orientation="Horizontal"
+          Spacing="5">
+          <fui:OutlineToolButton
+            GroupName="{Binding OutlineToolButtonGroupName}"
+            IconSource="{x:Static fi:FluentIcon.Add}"
+            IsEnabled="{Binding !OutlineToolButtonIsDisabled}"/>
+          <fui:OutlineToolButton
+            GroupName="{Binding OutlineToolButtonGroupName}"
+            IconSource="{x:Static fi:FluentIcon.Bluetooth}"
+            IsEnabled="{Binding !OutlineToolButtonIsDisabled}"/>
+          <fui:OutlineToolButton
+            GroupName="{Binding OutlineToolButtonGroupName}"
+            IconSource="{x:Static fi:FluentIcon.Brush}"
+            IsEnabled="{Binding !OutlineToolButtonIsDisabled}"/>
+        </StackPanel>
+        <ui:Card Grid.Column="1">
+          <StackPanel Orientation="Vertical" Spacing="3">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsMultiSelect]}" IsChecked="{Binding OutlineToolButtonIsMC}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}" IsChecked="{Binding OutlineToolButtonIsDisabled}"/>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="DropDownButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_DropDownButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <DropDownButton Width="256" IsEnabled="{Binding !DropDownButtonIsDisable}">
+          <Grid ColumnDefinitions="Auto, *" ColumnSpacing="8">
+            <PathIcon Data="{x:Static fi:FluentIcon.Mail}"/>
+            <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Mail]}"/>
+          </Grid>
+          <DropDownButton.Flyout>
+            <fui:FluentMenuFlyout>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Send]}">
+                <MenuItem.Icon>
+                  <PathIcon Data="{x:Static fi:FluentIcon.Send}"/>
+                </MenuItem.Icon>
+                <MenuItem.Items>
+                  <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SendToLocal]}"/>
+                  <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SendToNetwork]}"/>
+                </MenuItem.Items>
+              </MenuItem>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Save]}">
+                <MenuItem.Icon>
+                  <PathIcon Data="{x:Static fi:FluentIcon.Save}"/>
+                </MenuItem.Icon>
+              </MenuItem>
+              <Separator HorizontalAlignment="Stretch"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Undo]}"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Resend]}"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SaveToLocal]}"/>
+            </fui:FluentMenuFlyout>
+          </DropDownButton.Flyout>
+        </DropDownButton>
+
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding DropDownButtonIsDisable}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_TransparentDropDownButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <DropDownButton
+          Name="Test"
+          Width="256"
+          Classes="Transparent"
+          IsEnabled="{Binding !TransparentDropDownButtonIsDisable}">
+          <Grid ColumnDefinitions="Auto, *" ColumnSpacing="8">
+            <PathIcon Data="{x:Static fi:FluentIcon.Mail}"/>
+            <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Mail]}"/>
+          </Grid>
+          <DropDownButton.Flyout>
+            <fui:FluentMenuFlyout>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Send]}">
+                <MenuItem.Icon>
+                  <PathIcon Data="{x:Static fi:FluentIcon.Send}"/>
+                </MenuItem.Icon>
+                <MenuItem.Items>
+                  <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SendToLocal]}"/>
+                  <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SendToNetwork]}"/>
+                </MenuItem.Items>
+              </MenuItem>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Save]}">
+                <MenuItem.Icon>
+                  <PathIcon Data="{x:Static fi:FluentIcon.Save}"/>
+                </MenuItem.Icon>
+              </MenuItem>
+              <Separator HorizontalAlignment="Stretch"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Undo]}"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Resend]}"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SaveToLocal]}"/>
+            </fui:FluentMenuFlyout>
+          </DropDownButton.Flyout>
+        </DropDownButton>
+
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding TransparentDropDownButtonIsDisable}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="ToggleButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ToggleButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <StackPanel Orientation="Vertical" Spacing="8">
+          <ToggleButton Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ToggleButton]}" IsEnabled="{Binding !StatusSwitchButtonIsDisable}"/>
+          <ToggleButton
+            Classes="Transparent"
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_TransparentToggleButton]}"
+            IsEnabled="{Binding !StatusSwitchButtonIsDisable}"/>
+          <ToggleSplitButton Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ToggleSplitButton]}" IsEnabled="{Binding !StatusSwitchButtonIsDisable}">
+            <ToggleSplitButton.Flyout>
+              <fui:FluentMenuFlyout>
+                <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Copy]}" InputGesture="Ctrl+C"/>
+                <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Cut]}" InputGesture="Ctrl+X"/>
+                <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Paste]}" InputGesture="Ctrl+V"/>
+                <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Undo]}" InputGesture="Ctrl+Z"/>
+              </fui:FluentMenuFlyout>
+            </ToggleSplitButton.Flyout>
+          </ToggleSplitButton>
+        </StackPanel>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding StatusSwitchButtonIsDisable}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="SplitButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SplitButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <SplitButton Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Copy]}" IsEnabled="{Binding !SplitButtonIsDisable}">
+          <SplitButton.Flyout>
+            <fui:FluentMenuFlyout>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Copy]}" InputGesture="Ctrl+C"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Cut]}" InputGesture="Ctrl+X"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Paste]}" InputGesture="Ctrl+V"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Undo]}" InputGesture="Ctrl+Z"/>
+            </fui:FluentMenuFlyout>
+          </SplitButton.Flyout>
+        </SplitButton>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding SplitButtonIsDisable}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="RadioButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_RadioButton]}">
+      <Grid
+        ColumnDefinitions="*, Auto"
+        ColumnSpacing="3"
+        RowDefinitions="Auto, Auto, Auto, Auto">
+        <RadioButton
+          Grid.Row="0"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Speakers]}"
+          IsEnabled="{Binding !RadioButtonIsDisabled}"/>
+        <RadioButton
+          Grid.Row="1"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Headphones]}"
+          IsEnabled="{Binding !RadioButtonIsDisabled}"/>
+        <RadioButton
+          Grid.Row="2"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Controller]}"
+          IsEnabled="{Binding !RadioButtonIsDisabled}"/>
+        <RadioButton
+          Grid.Row="3"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Bluetooth]}"
+          IsEnabled="{Binding !RadioButtonIsDisabled}"/>
+
+        <CheckBox
+          Grid.Row="0"
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding RadioButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ChipsRadioButton]}">
+      <Grid
+        Height="35"
+        VerticalAlignment="Center"
+        ColumnDefinitions="Auto, Auto, Auto, Auto, *"
+        ColumnSpacing="8">
+        <RadioButton
+          Grid.Column="0"
+          Content="Options 1"
+          IsEnabled="{Binding !ChipsRadioButtonIsEnabled}"
+          Theme="{StaticResource ChipsRadioButton}"/>
+        <RadioButton
+          Grid.Column="1"
+          Content="Options 2"
+          IsEnabled="{Binding !ChipsRadioButtonIsEnabled}"
+          Theme="{StaticResource ChipsRadioButton}"/>
+        <RadioButton
+          Grid.Column="2"
+          Content="Options 3"
+          IsEnabled="{Binding !ChipsRadioButtonIsEnabled}"
+          Theme="{StaticResource ChipsRadioButton}"/>
+        <RadioButton
+          Grid.Column="3"
+          Content="Options 4"
+          IsEnabled="{Binding !ChipsRadioButtonIsEnabled}"
+          Theme="{StaticResource ChipsRadioButton}"/>
+
+        <CheckBox
+          Grid.Column="4"
+          HorizontalAlignment="Right"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding ChipsRadioButtonIsEnabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SubTitleRadioButton]}">
+      <Grid
+        ColumnDefinitions="*, Auto"
+        ColumnSpacing="3"
+        RowDefinitions="Auto, Auto, Auto, Auto">
+        <fui:SubTitleRadioButton
+          Grid.Row="0"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Speakers]}"
+          IsEnabled="{Binding !SubTitleRadioButtonIsDisabled}"
+          SubTitle="Realted(R) Audio"/>
+        <fui:SubTitleRadioButton
+          Grid.Row="1"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Headphones]}"
+          IsEnabled="{Binding !SubTitleRadioButtonIsDisabled}"
+          SubTitle="AirPods Pro 2"/>
+        <fui:SubTitleRadioButton
+          Grid.Row="2"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Controller]}"
+          IsEnabled="{Binding !SubTitleRadioButtonIsDisabled}"
+          SubTitle="Xbox Wireless Controller"/>
+        <fui:SubTitleRadioButton
+          Grid.Row="3"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Bluetooth]}"
+          IsEnabled="{Binding !SubTitleRadioButtonIsDisabled}"
+          SubTitle="ProjectLuo M2"/>
+
+        <CheckBox
+          Grid.Row="0"
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding SubTitleRadioButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="HyperlinkButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_HyperlinkButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <HyperlinkButton
+          Grid.Column="0"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IAmHyperlink]}"
+          IsEnabled="{Binding !HyperlinkButtonIsDisable}"
+          NavigateUri="https://docs.mikuas.top"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding HyperlinkButtonIsDisable}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="ToggleSwitchButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ToggleSwitch]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <ToggleSwitch
+          Grid.Column="0"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_EnableBluetooth]}"
+          IsEnabled="{Binding !ToggleSwitchButtonIsDisable}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding ToggleSwitchButtonIsDisable}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  //////////  -->
+    <ui:CodeCard Name="CheckBoxCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_CheckBox]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <CheckBox
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_CheckBox]}"
+          IsEnabled="{Binding !CheckBoxIsDisable}"
+          IsThreeState="{Binding CheckBoxIsThreeState}"/>
+
+        <ui:Card Grid.Column="1" VerticalAlignment="Stretch">
+          <StackPanel Orientation="Vertical">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_EnableThreeState]}" IsChecked="{Binding CheckBoxIsThreeState}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}" IsChecked="{Binding CheckBoxIsDisable}"/>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

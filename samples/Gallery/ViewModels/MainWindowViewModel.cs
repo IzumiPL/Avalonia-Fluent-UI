@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Globalization;
-using Avalonia.Threading;
 using AvaloniaFluentUI.Locale;
 using AvaloniaFluentUI.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -11,11 +9,14 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Gallery.Messages;
 using Gallery.Models;
+using Gallery.Services;
 
 namespace Gallery.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
+    public override string Title => "Avalonia Fluent UI Gallery";
+    
     public string Home => LocalizationService.Instance.GetString("Home");
     public string Icon => LocalizationService.Instance.GetString("Icon");
     public string BasicInput => LocalizationService.Instance.GetString("BasicInput");
@@ -28,7 +29,6 @@ public partial class MainWindowViewModel : ViewModelBase
     public string StatusAndInformation => LocalizationService.Instance.GetString("StatusAndInformation");
     public string MenuAndToolBar => LocalizationService.Instance.GetString("MenuAndToolBar");
     public string DateTime => LocalizationService.Instance.GetString("DateTime");
-    public string Title => LocalizationService.Instance.GetString("MV_Title");
     public string SearchWatermark => LocalizationService.Instance.GetString("MV_SearchWatermark");
     
     private readonly List<string> _history = new();
@@ -48,49 +48,82 @@ public partial class MainWindowViewModel : ViewModelBase
         if (value is AvaloniaFluentUI.Controls.NavigationViewItem item)
         {
             TogglePage(item.Tag + "");
+
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine($"Navigation Item Changed, ItemName: {item.Tag}");
+            Console.WriteLine("------------------------------------------------------------");
         }
     }
 
     [ObservableProperty]
     private ViewModelBase? _currentViewModel;
     
-    private AppConfig? _config;
+    private readonly AppConfig? _config;
 
     public MainWindowViewModel(AppConfig? config)
     {
+        _viewModels["Home"] = new HomeViewModel();
 
-#if DEBUG
-        Debug.WriteLine("MainWindowViewModel Init");
-#endif
-
-        var homeVm = new HomeViewModel();
-        homeVm.GotoControlEvent += (page, name) =>
+        JumpService.OnJumpToControl += (_, model) =>
         {
-            TogglePage(page);
-            WeakReferenceMessenger.Default.Send(new JumpToControlMessage(page, name));
+            TogglePage(model.Page);
+            WeakReferenceMessenger.Default.Send(new JumpToControlMessage(model.Page, model.ControlName));
         };
-        _viewModels["Home"] = homeVm;
-        _homeViewModel = homeVm;
 
         _viewModelFactories = new Dictionary<string, Func<ViewModelBase>>
         {
             { "Icons", () => new IconsViewModel() },
+            
             { "BasicInput", () => new BasicInputViewModel() },
+            { "Button", () => new ButtonPageViewModel() },
+            { "ComboBox", () => new ComboBoxPageViewModel() },
+            { "Slider", () => new SlierPageViewModel() },
+            
             { "DialogBoxAndPopup", () => new DialogBoxAndPopupViewModel() },
+            { "Dialog", () => new DialogPageViewModel() },
+            { "Flyout", () => new FlyoutPageViewModel() },
+            { "ShortcutKeyPanel", () => new ShortcutKeyPickerPageViewModel() },
+            
             { "Layout", () => new LayoutViewModel() },
+            { "Border", () => new BorderPageViewModel() },
+            { "Panel", () => new PanelPageViewModel() },
+            
             { "Navigation", () => new NavigationViewModel() },
+            { "NavigationView", () => new NavigationViewPageViewModel() },
+            { "Tabs", () => new TabsPageViewModel() },
+            { "SegmentedView", () => new SegmentedViewPageViewModel() },
+            { "FrameView", () => new FrameViewPageViewModel() },
+            { "BreadcrumbBar", () => new BreadcrumbBarPageViewModel() },
+            
             { "Text", () => new TextViewModel() },
+            { "TextBlock", () => new TextBlockPageViewModel() },
+            { "TextBox",  () => new TextBoxPageViewModel() },
+            { "NumberBox", () => new SpinBoxPageViewModel()},
+            
             { "View", () => new ViewModel() },
+            { "List", () => new ListPageViewModel() },
+            { "TreeView", () => new TreeViewPageViewModel() },
+            { "CarouselView", () => new CarouselViewPageViewModel() },
+            { "Card", () => new CardPageViewModel() },
+            { "AvatarView", () => new AvatarViewPageViewModel() },
+            { "FileDropPicker", () => new FilesDropPickerPageViewModel() },
+            
             { "Scroll", () => new ScrollViewModel() },
+            
             { "StatusAndInformation", () => new StatusAndInformationViewModel() },
+            
             { "MenuAndToolBar", () => new MenuAndToolBarViewModel() },
+            { "Menu", () => new MenuPageViewModel() },
+            { "ContextMenu", () => new ContextMenuViewModel() },
+            { "CommandBar", () => new CommandBarViewPageViewModel() },
+            
             { "DateTime", () => new DateTimeViewModel() },
+            
             { "Settings", () => new SettingsViewModel(config) },
         };
         
         _config = config;
         CurrentViewModel = _viewModels["Home"];
-
 
         LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
     }
@@ -128,8 +161,6 @@ public partial class MainWindowViewModel : ViewModelBase
         throw new KeyNotFoundException($"ViewModel not found for key: {key}");
     }
 
-    private HomeViewModel _homeViewModel;
-
     public SettingsViewModel SettingsViewModel
     {
         get
@@ -159,8 +190,7 @@ public partial class MainWindowViewModel : ViewModelBase
             return;
         }
 
-        if (target == CurrentViewModel)
-            return;
+        if (target == CurrentViewModel) return;
 
         if (CurrentViewModel is HomeViewModel homeVm && CurrentViewModel != target)
         {
@@ -172,7 +202,10 @@ public partial class MainWindowViewModel : ViewModelBase
             var currentPageKey = GetKeyByViewModel(CurrentViewModel);
             if (currentPageKey != null)
             {
+                Console.WriteLine("------------------------------------------------------------");
                 _history.Add(currentPageKey);
+                Console.WriteLine($"Load To History: {currentPageKey}");
+                Console.WriteLine("------------------------------------------------------------");
             }
         }
 
@@ -197,7 +230,9 @@ public partial class MainWindowViewModel : ViewModelBase
 
         if (GetOrCreateViewModel(last) is { } view)
         {
-            CurrentViewModel = view;
+            CurrentViewModel = view; 
+            
+            Console.WriteLine($"Back, Tag: {last}, View: {view.Title}, Trigger Jump To ControlMessage");
         }
 
         WeakReferenceMessenger.Default.Send(new JumpToControlMessage(last, null));

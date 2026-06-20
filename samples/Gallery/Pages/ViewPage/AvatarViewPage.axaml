@@ -1,0 +1,112 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.AvatarViewPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:AvatarViewPageViewModel"
+  mc:Ignorable="d">
+
+  <ui:ViewBase.Styles>
+    <Style Selector="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+  </ui:ViewBase.Styles>
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Avatar]}">
+      <Grid ColumnDefinitions="Auto, Auto, Auto,*, Auto" ColumnSpacing="15">
+        <fui:Avatar
+          Grid.Column="0"
+          Width="{Binding AvatarWidth}"
+          Height="{Binding AvatarHeight}"
+          Margin="0,8,0,0"
+          VerticalAlignment="Top"
+          CornerRadius="{Binding AvatarRadius}"
+          IsCircular="{Binding AvatarIsCircular}"
+          Source="avares://Gallery/Assets/Images/na.jpg"/>
+        <fui:Avatar
+          Grid.Column="1"
+          Width="{Binding AvatarWidth}"
+          Height="{Binding AvatarHeight}"
+          Margin="0,8,0,0"
+          VerticalAlignment="Top"
+          CornerRadius="{Binding AvatarRadius}"
+          IsCircular="{Binding AvatarIsCircular}"
+          Text="Hanser"/>
+        <fui:Avatar
+          Grid.Column="2"
+          Width="{Binding AvatarWidth}"
+          Height="{Binding AvatarHeight}"
+          Margin="0,8,0,0"
+          VerticalAlignment="Top"
+          CornerRadius="{Binding AvatarRadius}"
+          Foreground="{DynamicResource SystemAccentColor}"
+          IsCircular="{Binding AvatarIsCircular}"
+          Text="迪亚"/>
+
+        <ui:Card Grid.Column="4">
+          <Grid
+            ColumnDefinitions="Auto, *"
+            ColumnSpacing="6"
+            RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+            RowSpacing="6">
+            <TextBlock
+              Grid.Row="0"
+              Grid.ColumnSpan="2"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+
+            <CheckBox
+              Grid.Row="1"
+              Grid.ColumnSpan="2"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[IsCircular]}"
+              IsChecked="{Binding AvatarIsCircular}"/>
+
+            <TextBlock
+              Grid.Row="2"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Width]}"/>
+            <ComboBox
+              Grid.Row="2"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding AvatarWidths}"
+              SelectedItem="{Binding AvatarWidth}"/>
+
+            <TextBlock
+              Grid.Row="3"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Height]}"/>
+            <ComboBox
+              Grid.Row="3"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding AvatarHeights}"
+              SelectedItem="{Binding AvatarHeight}"/>
+
+            <TextBlock
+              Grid.Row="4"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Radius]}"/>
+            <TextBox
+              Grid.Row="4"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              Classes="Clear"
+              IsEnabled="{Binding !AvatarIsCircular}"
+              PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Radius]}"
+              Text="{Binding AvatarRadiusText}"/>
+          </Grid>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

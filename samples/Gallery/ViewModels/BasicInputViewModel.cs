@@ -1,159 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using Avalonia.Layout;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.Generic;
+using Avalonia.Controls;
+using AvaloniaFluentUI.Locale;
 using CommunityToolkit.Mvvm.Input;
+using Gallery.Models;
+using Gallery.Services;
 
 namespace Gallery.ViewModels;
 
 public partial class BasicInputViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    private HorizontalAlignment[] _horizontalAlignments =
-    [
-        HorizontalAlignment.Left,
-        HorizontalAlignment.Right,
-        HorizontalAlignment.Stretch,
-        HorizontalAlignment.Center
-    ];
-
-    #region PushButton
-    [ObservableProperty]
-    private HorizontalAlignment _pushButtonContentAlignment = HorizontalAlignment.Center;
-
-    [ObservableProperty]
-    private bool _pushButtonIsDisable;
-    #endregion
-
-    #region ToolButton 
-    [ObservableProperty]
-    private HorizontalAlignment _toolButtonContentAlignment = HorizontalAlignment.Center;
+    public override string Title => LocalizationService.Instance.GetString("BasicInput");
     
-    [ObservableProperty]
-    private bool _toolButtonIsDisable;
-    #endregion
-
-    [ObservableProperty]
-    private bool _statusSwitchButtonIsDisable;
-
-    [ObservableProperty]
-    private bool _splitButtonIsDisable;
-
-    [ObservableProperty]
-    private bool _radioButtonIsDisabled;
-
-    [ObservableProperty]
-    private bool _hyperlinkButtonIsDisable;
-
-    [ObservableProperty]
-    private bool _toggleSwitchButtonIsDisable;
-
-    [ObservableProperty]
-    private bool _checkBoxIsDisable;
-
-    [ObservableProperty]
-    private bool _checkBoxIsThreeState;
-
-    [ObservableProperty]
-    private bool _dropDownButtonIsDisable;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(SliderCurrentValueFormat))]
-    private double _sliderCurrentValue;
-
-    public string SliderCurrentValueFormat => "当前值" +  SliderCurrentValue.ToString("F");
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(OutlinePushButtonGroupName))]
-    private bool _outlinePushButtonIsMC = true;
+    public List<ButtonItemModel> ButtonItemSource { get; private set; }
     
-    public string? OutlinePushButtonGroupName => OutlinePushButtonIsMC ? null : "OutlinePushButtonGroup1";
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(OutlineToolButtonGroupName))]
-    private bool _outlineToolButtonIsMC = true;
-    
-    public string? OutlineToolButtonGroupName => OutlineToolButtonIsMC ? null : "OutlineToolButtonGroup1";
-
-    private string[] _multiSelectionItems = new string[32];
-    public string[] MultiSelectionItems => _multiSelectionItems;
-
-    [ObservableProperty]
-    private Orientation _toolTipSliderOrientation = Orientation.Horizontal;
-
-    public Orientation[] Orientations => [Orientation.Horizontal, Orientation.Vertical];
-
-    [ObservableProperty]
-    private bool _toolTipSliderIsDisabled; 
-
-    [ObservableProperty]
-    private bool _chipsRadioButtonIsEnabled;
-
-    [ObservableProperty]
-    private bool _outlinedClassButtonIsDisabled; 
-
-    [ObservableProperty]
-    private bool _roundButtonIsDisabled; 
-
-    [RelayCommand]
-    private void ClearMultiSelectionSelectedItem() => MultiSelectionSelectedItems.Clear();
-
-    [ObservableProperty]
-    private ObservableCollection<object> _multiSelectionSelectedItems = new ObservableCollection<object>(["Multi Selection Item 1"]);
-
-    [ObservableProperty]
-    private bool _outlineToolButtonIsDisabled;
-
-    [ObservableProperty]
-    private bool _outlinePushButtonIsDisabled;
-
-    [ObservableProperty]
-    private bool _transparentDropDownButtonIsDisable;
-
-    [ObservableProperty]
-    private bool _subTitleRadioButtonIsDisabled; 
-
-    [ObservableProperty]
-    private bool _filledButtonIsDisabled;
-
-    [ObservableProperty]
-    private List<string> _items = new List<string>();
-
     public BasicInputViewModel()
     {
-        for (int i = 1; i <= 32; i++)
-        {
-            Items.Add($"Item {i}");
-            _multiSelectionItems[i - 1] = $"Multi Selection Item {i}";
-
-            // MultiSelectionSelectedItems.CollectionChanged += OnMultiSelectionSelectedItemsChanged;
-        }
-    }
-
-    [RelayCommand]
-    private void SelectOddOrEventNumberItems(object value)
-    {
-        if (int.TryParse(value.ToString(), out int number))
-        {
-            Console.WriteLine("是 Int");
-            MultiSelectionSelectedItems.Clear();
-            foreach (var item in MultiSelectionItems)
-            {
-                if (int.TryParse(item.Split(" ")[^1], out int iv))
-                {
-                    if (iv % 2 == number)
-                    {
-                        MultiSelectionSelectedItems.Add(item);
-                    }
-                }
-            }
-        }
-    }
-
-    private void OnMultiSelectionSelectedItemsChanged(object? sender, NotifyCollectionChangedEventArgs e)
-    {
-        
+        ButtonItemSource = ButtonItemModel.CreateList(
+            ("Button", "Button", "Button", "A control that responds to user input and emit clicked signal."),
+            ("Checkbox", "CheckBox", "Button", "A control that a user can select or clear."),
+            ("ComboBox", "ComboBox", "ComboBox", "A drop-down list of items a user can select from."),
+            ("DropDownButton", "DropDownButton", "Button", "A button that display a flyout of choices when clicked."),
+            ("HyperlinkButton", "HyperlinkButton", "Button", "A button that appears as hyperlink text, and can navigate to a RUL or handle a Click event."),
+            ("RadioButton", "RadioButton", "Button", "A control that allows a user to select a single option from a group of options."),
+            ("Slider", "Slider", "Slider", "A control that lets the user select from a range of values by moving a Thumb control along a track."),
+            ("SplitButton", "SplitButton", "Button", "A two-part button that displays a flyout when its secondary part is clicked."),
+            ("ToggleSwitch", "SwitchButton", "Button", "A switch that can be toggled between 2 states."),
+            ("ToggleButton", "ToggleButton", "Button", "A button that can be switched between two states like a CheckBox.")
+        );
     }
 }

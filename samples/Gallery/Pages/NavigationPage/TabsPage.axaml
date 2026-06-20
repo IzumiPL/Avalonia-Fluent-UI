@@ -1,0 +1,46 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.TabsPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:TabsPageViewModel"
+  mc:Ignorable="d">
+
+  <ui:ViewBase.Styles>
+    <Style Selector="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+  </ui:ViewBase.Styles>
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Tabs]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <TabControl Grid.Column="0" TabStripPlacement="{Binding TabStripPlacement}">
+          <TabItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Home]}"/>
+          <TabItem Header="GitHub"/>
+          <TabItem Header="Video"/>
+          <TabItem Header="Music"/>
+        </TabControl>
+        <StackPanel
+          Grid.Column="1"
+          Orientation="Horizontal"
+          Spacing="5">
+          <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Position]}"/>
+          <ComboBox
+            Width="100"
+            VerticalAlignment="Center"
+            ItemsSource="{Binding TabStripPlacements}"
+            SelectedItem="{Binding TabStripPlacement}"/>
+        </StackPanel>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

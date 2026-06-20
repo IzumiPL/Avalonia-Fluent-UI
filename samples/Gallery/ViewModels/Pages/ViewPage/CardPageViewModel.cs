@@ -1,0 +1,9 @@
+﻿using System.ComponentModel;
+using AvaloniaFluentUI.Locale;
+
+namespace Gallery.ViewModels;
+
+public partial class CardPageViewModel : ViewModelBase
+{
+    public override string Title => LocalizationService.Instance.GetString("Card");
+}

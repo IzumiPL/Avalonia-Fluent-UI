@@ -8,7 +8,7 @@
 
   <TrayIcon.Icons>
     <TrayIcons>
-      <TrayIcon Icon="/Assets/app.ico" ToolTipText="Avalonia Tray Icon ToolTip">
+      <TrayIcon Icon="/Assets/app.ico" ToolTipText="Avalonia Tray Icon">
         <TrayIcon.Menu>
           <NativeMenu>
             <NativeMenuItem Header="Settings">

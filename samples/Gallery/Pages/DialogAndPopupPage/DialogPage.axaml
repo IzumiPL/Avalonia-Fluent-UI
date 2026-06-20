@@ -1,0 +1,51 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.DialogPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:DialogPageViewModel"
+  mc:Ignorable="d">
+  <StackPanel Spacing="50">
+    <fui:ContentDialog
+      Name="ContentDialog"
+      Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ThisIsDialogWithMask]}"
+      CloseButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Close]}"
+      Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_OptimisticContent]}"
+      DefaultButton="Primary"
+      IsPrimaryButtonEnabled="True"
+      IsVisible="False"
+      PrimaryButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Confirm]}"/>
+    <ui:CodeCard Name="ContentDialogCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_DialogWithMask]}">
+      <Button Click="OnShowContentDialog" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Open]}"/>
+    </ui:CodeCard>
+
+    <fui:ContentDialog
+      Name="CustomDialog"
+      Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_OpenURL]}"
+      CloseButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Close]}"
+      DefaultButton="Primary"
+      IsPrimaryButtonEnabled="True"
+      IsVisible="False"
+      PrimaryButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Open]}">
+      <TextBox
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Center"
+        PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_URLWatermark]}"/>
+    </fui:ContentDialog>
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_CustomDialog]}">
+      <Button Click="OnShowCustomDialog" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Open]}"/>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="TaskDialogCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_TaskDialog]}">
+      <Button Click="OnShowTaskDialog" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ShowTaskDialog]}"/>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

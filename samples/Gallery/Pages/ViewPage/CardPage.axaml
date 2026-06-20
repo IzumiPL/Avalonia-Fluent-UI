@@ -1,0 +1,189 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.CardPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:models="clr-namespace:Gallery.Models"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:CardPageViewModel"
+  mc:Ignorable="d">
+
+  <ui:ViewBase.Styles>
+    <Style Selector="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+  </ui:ViewBase.Styles>
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_CardTitle]}">
+      <fui:Card>
+        <TextBlock
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_CardTitle]}"/>
+      </fui:Card>
+    </ui:CodeCard>
+
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SimpleCardTitle]}">
+      <fui:SimpleCard>
+        <TextBlock
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SimpleCardTitle]}"/>
+      </fui:SimpleCard>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_ElevatedCardTitle]}">
+      <StackPanel
+        Margin="8,10"
+        Orientation="Horizontal"
+        Spacing="16">
+        <fui:ElevatedCard Width="256" Height="256">
+          <Panel>
+            <TextBlock
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              FontSize="86"
+              Text="🥰"/>
+            <TextBlock
+              HorizontalAlignment="Center"
+              VerticalAlignment="Bottom"
+              Classes="SubTitle"
+              Text="Kiss"/>
+          </Panel>
+        </fui:ElevatedCard>
+        <fui:ElevatedCard Width="256" Height="256">
+          <Panel>
+            <TextBlock
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              FontSize="86"
+              Text="🥵"/>
+            <TextBlock
+              HorizontalAlignment="Center"
+              VerticalAlignment="Bottom"
+              Classes="SubTitle"
+              Text="Kiss"/>
+          </Panel>
+        </fui:ElevatedCard>
+        <fui:ElevatedCard Width="256" Height="256">
+          <Panel>
+            <TextBlock
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              FontSize="86"
+              Text="😭"/>
+            <TextBlock
+              HorizontalAlignment="Center"
+              VerticalAlignment="Bottom"
+              Classes="SubTitle"
+              Text="Kiss"/>
+          </Panel>
+        </fui:ElevatedCard>
+      </StackPanel>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_HeaderCardTitle]}">
+      <fui:HeaderCard Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SystemReq]}">
+        <Panel Height="52">
+          <Panel
+            Width="18"
+            Height="18"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top">
+            <Ellipse
+              Name="IconBackground"
+              Width="18"
+              Height="18"
+              VerticalAlignment="Top"
+              Fill="{DynamicResource SystemFillColorSuccessBrush}"/>
+            <fui:FontIcon
+              Width="18"
+              Height="18"
+              VerticalAlignment="Top"
+              FontFamily="{StaticResource SymbolThemeFontFamily}"
+              FontSize="10"
+              Foreground="{DynamicResource TextFillColorInverseBrush}"
+              Glyph="&#xE10B;"/>
+          </Panel>
+          <SelectableTextBlock
+            Margin="24,0,0,0"
+            VerticalAlignment="Top"
+            Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SystemReqDes]}"
+            TextWrapping="WrapWithOverflow"/>
+          <fui:HyperlinkLabel VerticalAlignment="Bottom" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SystemReqDesMoreInfo]}"/>
+          <!--  <HyperlinkButton  -->
+          <!--  Margin="-11,0,0,0"  -->
+          <!--  VerticalAlignment="Bottom"  -->
+          <!--  Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SystemReqDesMoreInfo]}"/>  -->
+        </Panel>
+      </fui:HeaderCard>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SimpleSettingsCard]}">
+      <fui:SettingCard
+        Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SoundDescription]}"
+        Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Volume]}"
+        IconSource="{x:Static fi:FluentIcon.Volume}">
+        <fui:ToolTipSlider
+          Width="168"
+          MinHeight="0"
+          MaxHeight="100"
+          Value="32"/>
+      </fui:SettingCard>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_NoIconCardTitle]}">
+      <fui:SettingCard Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SoundDescription]}" Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Volume]}">
+        <ToggleSwitch Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_NoIconCardTitleSwc]}"/>
+      </fui:SettingCard>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_CICardTitle]}">
+      <fui:SettingCard
+        Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SoundDescription]}"
+        Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Volume]}"
+        IconSource="avares://Gallery/Assets/Icons/Setting.png">
+        <ToggleSwitch Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_NoIconCardTitleSwc]}"/>
+      </fui:SettingCard>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_ClickableSettingsCard]}">
+      <fui:SettingsExpander
+        ActionIconSource="ChevronRight"
+        Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SoundDescription]}"
+        Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Sound]}"
+        IconSource="Volume"
+        IsClickEnabled="True"/>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_ExpandableSettingsCard]}">
+      <fui:SettingsExpander
+        Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_AppsSettingsDescription]}"
+        Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_ChooseDevice]}"
+        IconSource="Microphone">
+        <fui:SettingsExpanderItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Headset]}" Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_DeviceName]}"/>
+        <fui:SettingsExpanderItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_HasFooterContent]}" Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_DeviceName]}">
+          <fui:SettingsExpanderItem.Footer>
+            <fui:PushButton
+              Classes="Accent"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_AddDevice]}"
+              IconSource="{DynamicResource Add}"/>
+          </fui:SettingsExpanderItem.Footer>
+        </fui:SettingsExpanderItem>
+        <fui:SettingsExpanderItem
+          ActionIconSource="ChevronRight"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_IsClickable]}"
+          IsClickEnabled="True"/>
+      </fui:SettingsExpander>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

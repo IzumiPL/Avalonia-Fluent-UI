@@ -19,15 +19,10 @@
     </Style>
 
     <Style Selector="ui|CheckedBorder.IconCard">
-      <Setter Property="BorderBrush" Value="{DynamicResource CardBorderBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
       <Setter Property="Padding" Value="0 18 0 8"/>
       <Setter Property="CornerRadius" Value="8"/>
       <Setter Property="BorderThickness" Value="1"/>
-      <!-- <Setter Property="Transitions"> -->
-      <!-- <Transitions> -->
-      <!-- <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.25"></TransformOperationsTransition> -->
-      <!-- </Transitions> -->
-      <!-- </Setter> -->
     </Style>
 
     <Style Selector="ui|CheckedBorder.IconCard:pointerover">
@@ -91,7 +86,7 @@
       <TextBlock
         Grid.Row="0"
         FontSize="32"
-        Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Icon]}"/>
+        Text="{Binding Title}"/>
       <TextBlock
         Grid.Row="1"
         FontSize="12"

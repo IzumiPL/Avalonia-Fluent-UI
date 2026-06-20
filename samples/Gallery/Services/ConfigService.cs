@@ -58,17 +58,12 @@ public class ConfigService
             var config = new AppConfig
             {
                 Theme = "Default",
-                AccentColor = "#00BFFF",
+                IsCustomAccentColor = false,
                 IsWindowEffectEnabled = true,
                 IsEnabledBackgroundImage = false,
                 WindowEffect = "Mica",
                 Language = "zh-CN"
             };
-
-            var json = JsonSerializer.Serialize(config, ConfigJsonContext.Default.AppConfig);
-            File.WriteAllText(AppConfigPath, json, Encoding.UTF8);
-
-            Application.Current?.RequestedThemeVariant = ThemeVariant.Default;
 
             Console.WriteLine("Config File Not Exists, Return Of Create");
             return config;
@@ -85,7 +80,6 @@ public class ConfigService
                 "Dark" => ThemeVariant.Dark,
                 _ => ThemeVariant.Default
             };
-            FluentAvaloniaTheme.Instance.CurrentAccentColor = Color.Parse(loaded.AccentColor);
         }
 
         Console.WriteLine("Config File Loaded");

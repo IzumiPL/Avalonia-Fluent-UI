@@ -1,0 +1,147 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.FilesDropPickerPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:FilesDropPickerPageViewModel"
+  mc:Ignorable="d">
+
+  <ui:ViewBase.Styles>
+    <Style Selector="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+  </ui:ViewBase.Styles>
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VE_FileDropPicker]}">
+      <Grid
+        ColumnDefinitions="*, Auto"
+        ColumnSpacing="6"
+        RowDefinitions="*, Auto"
+        RowSpacing="6">
+        <fui:FileDropPicker
+          HorizontalAlignment="Left"
+          AllowMultiple="{Binding FileDropPickerAllowMultiple}"
+          Command="{Binding FileDropPickerSelectedCompleteCommand}"
+          SelectedButtonIsVisible="{Binding FileDropPickerSelectedButtonIsVisible}"
+          SuggestedStartLocation="{Binding FileDropPickerDefaultStartLocation}"/>
+
+        <ui:Card Grid.Row="0" Grid.Column="1">
+          <StackPanel Orientation="Vertical" Spacing="6">
+            <TextBlock
+              HorizontalAlignment="Left"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[AllowMultiple]}" IsChecked="{Binding FileDropPickerAllowMultiple}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SelectedButtonIsVisible]}" IsChecked="{Binding FileDropPickerSelectedButtonIsVisible}"/>
+            <TextBox
+              HorizontalAlignment="Stretch"
+              PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DefaultStartLocation]}"
+              Text="{Binding FileDropPickerDefaultStartLocation}"/>
+          </StackPanel>
+        </ui:Card>
+
+        <fui:SingleDirectionScrollViewer
+          Grid.Row="1"
+          Grid.Column="0"
+          HorizontalScrollBarVisibility="Hidden"
+          Orientation="Horizontal"
+          VerticalScrollBarVisibility="Disabled">
+          <ItemsControl ItemsSource="{Binding FileDropPickerSelectItems}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <VirtualizingStackPanel Orientation="Horizontal"/>
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Border
+                  Margin="2,0"
+                  Padding="6"
+                  Background="{DynamicResource AvatarBackgroundDefault}"
+                  CornerRadius="6">
+                  <TextBlock VerticalAlignment="Center" Text="{Binding}"/>
+                </Border>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </fui:SingleDirectionScrollViewer>
+
+        <TextBlock
+          Grid.Row="1"
+          Grid.Column="1"
+          Text="{Binding FileDropPickerSelectItemCount}"/>
+      </Grid>
+    </ui:CodeCard>
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VE_FolderDropPicker]}">
+      <Grid
+        ColumnDefinitions="*, Auto"
+        ColumnSpacing="6"
+        RowDefinitions="*, Auto"
+        RowSpacing="6">
+        <fui:FolderDropPicker
+          HorizontalAlignment="Left"
+          AllowMultiple="{Binding FolderDropPickerAllowMultiple}"
+          Command="{Binding FolderDropPickerSelectedCompleteCommand}"
+          SelectedButtonIsVisible="{Binding FolderDropPickerSelectedButtonIsVisible}"
+          SuggestedStartLocation="{Binding FolderDropPickerDefaultStartLocation}"/>
+
+        <ui:Card Grid.Row="0" Grid.Column="1">
+          <StackPanel Orientation="Vertical" Spacing="6">
+            <TextBlock
+              HorizontalAlignment="Left"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[AllowMultiple]}" IsChecked="{Binding FolderDropPickerAllowMultiple}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SelectedButtonIsVisible]}" IsChecked="{Binding FolderDropPickerSelectedButtonIsVisible}"/>
+            <TextBox
+              HorizontalAlignment="Stretch"
+              PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DefaultStartLocation]}"
+              Text="{Binding FolderDropPickerDefaultStartLocation}"/>
+          </StackPanel>
+        </ui:Card>
+
+        <fui:SingleDirectionScrollViewer
+          Grid.Row="1"
+          Grid.Column="0"
+          HorizontalScrollBarVisibility="Hidden"
+          Orientation="Horizontal"
+          VerticalScrollBarVisibility="Disabled">
+          <ItemsControl ItemsSource="{Binding FolderDropPickerSelectItems}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <VirtualizingStackPanel Orientation="Horizontal"/>
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Border
+                  Margin="2,0"
+                  Padding="6"
+                  Background="{DynamicResource AvatarBackgroundDefault}"
+                  CornerRadius="6">
+                  <TextBlock VerticalAlignment="Center" Text="{Binding}"/>
+                </Border>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </fui:SingleDirectionScrollViewer>
+
+        <TextBlock
+          Grid.Row="1"
+          Grid.Column="1"
+          Text="{Binding FolderDropPickerSelectItemCount}"/>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

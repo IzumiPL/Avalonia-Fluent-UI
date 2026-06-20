@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -9,7 +8,6 @@ using Avalonia.Interactivity;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
 using AvaloniaFluentUI.Controls;
-using AvaloniaFluentUI.Locale;
 using AvaloniaFluentUI.Styling;
 using CommunityToolkit.Mvvm.Messaging;
 using Gallery.Helpers;
@@ -19,15 +17,17 @@ namespace Gallery.Controls;
 
 public class ViewBase : ContentControl 
 {
-    protected Dictionary<string, CodeCard> CodeCards { get; set; }
+    protected  Dictionary<string, CodeCard> CodeCards { get; set; }
     private string Page { get; }
     
-    public ViewBase(string page = "")
+    public ViewBase(string page)
     {
         Page = page;
         
         WeakReferenceMessenger.Default.Register<JumpToControlMessage>(this, OnJumpToControl);
     }
+
+    public ViewBase() { }
 
     protected override Type StyleKeyOverride => typeof(ViewBase);
 

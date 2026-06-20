@@ -9,9 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-<!--    <AvaloniaResource Include="Assets\**" Exclude="Assets\Locale\**" />-->
     <AvaloniaResource Include="Assets\**"/>
-<!--    <Content Include="Assets\Locale\**" CopyToOutputDirectory="PreserveNewest" />-->
   </ItemGroup>
 
   <ItemGroup>
@@ -23,23 +21,122 @@
     <PackageReference Include="CommunityToolkit.Mvvm" />
   </ItemGroup>
   
-  <!--    <PropertyGroup Condition="'$(Configuration)' == 'Release'">-->
-  <PropertyGroup>
-
-    <PublishAot>true</PublishAot>              <!-- AOT 编译：将 IL 预编译为机器码，加快启动速度 -->
-    <PublishTrimmed>true</PublishTrimmed>      <!-- 裁剪未使用的程序集，减小发布体积 -->
-    <TrimMode>full</TrimMode>                  <!-- 裁剪模式：full 为最激进，移除所有未使用的代码 -->
-    <StripSymbols>true</StripSymbols>          <!-- 剥离调试符号文件(.pdb)，进一步减小体积 -->
-    <DebuggerSupport>false</DebuggerSupport>   <!-- 禁用调试支持，移除调试相关代码 -->
-    <PublishReadyToRun>true</PublishReadyToRun> <!-- 预编译 (R2R)：减少 JIT 编译时间，加快启动 -->
-  </PropertyGroup>
-  <!--    </PropertyGroup>-->
-
   <ItemGroup>
     <ProjectReference Include="../../src/AvaloniaFluentUI/AvaloniaFluentUI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controls\Button\" />
+    <Compile Update="Pages\FP\FramePage1.axaml.cs">
+      <DependentUpon>FramePage1.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\FP\FramePage2.axaml.cs">
+      <DependentUpon>FramePage2.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\FP\FramePage3.axaml.cs">
+      <DependentUpon>FramePage3.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\FP\FramePage4.axaml.cs">
+      <DependentUpon>FramePage4.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\BasicPage\ButtonPage.axaml.cs">
+      <DependentUpon>ButtonPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\BasicPage\SlierPage.axaml.cs">
+      <DependentUpon>SlierPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\DialogAndPopupPage\DialogPage.axaml.cs">
+      <DependentUpon>SlierPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\DialogAndPopupPage\FlyoutPage.axaml.cs">
+      <DependentUpon>FlyoutPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\LayoutPage\BorderPage.axaml.cs">
+      <DependentUpon>FlyoutPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\LayoutPage\PanelPage.axaml.cs">
+      <DependentUpon>NavigationViewPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\NavigationPage\NavigationViewPage.axaml.cs">
+      <DependentUpon>PanelPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\NavigationPage\TabsPage.axaml.cs">
+      <DependentUpon>TabsPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\NavigationPage\SegmentedViewPage.axaml.cs">
+      <DependentUpon>SegmentedViewPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\NavigationPage\FrameViewPage.axaml.cs">
+      <DependentUpon>FrameViewPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\NavigationPage\BreadcrumbBarPage.axaml.cs">
+      <DependentUpon>BreadcrumbBarPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\TextPage\TextBlockPage.axaml.cs">
+      <DependentUpon>TabsPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\TextPage\TextBoxPage.axaml.cs">
+      <DependentUpon>TextBox.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\TextPage\SpinBoxPage.axaml.cs">
+      <DependentUpon>SpinBox.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ViewPage\ListPage.axaml.cs">
+      <DependentUpon>TextBoxPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ViewPage\TreeViewPage.axaml.cs">
+      <DependentUpon>TreeViewPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ViewPage\CarouselViewPage.axaml.cs">
+      <DependentUpon>CarouselViewPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ViewPage\CardPage.axaml.cs">
+      <DependentUpon>CardPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\MenuPage\MenuPage.axaml.cs">
+      <DependentUpon>PanelPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\MenuPage\ContextMenu.axaml.cs">
+      <DependentUpon>ContextMenu.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\MenuPage\CommandBarViewPage.axaml.cs">
+      <DependentUpon>CommandBarViewPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ViewPage\AvatarViewPage.axaml.cs">
+      <DependentUpon>AvatarViewPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\DialogAndPopupPage\ShortcutKeyPickerPage.axaml.cs">
+      <DependentUpon>ShortcutKeyPickerPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ViewPage\FilesDropPickerPage.axaml.cs">
+      <DependentUpon>FilesDropPickerPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

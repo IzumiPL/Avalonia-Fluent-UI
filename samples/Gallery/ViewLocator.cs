@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using Avalonia.Threading;
+using Gallery.Pages;
 using Gallery.ViewModels;
+using Gallery.Views;
 
 namespace Gallery;
 
 public class ViewLocator : IDataTemplate
 {
     private readonly Dictionary<Type, Func<Control>> _factory = new();
-    private readonly Dictionary<Type, WeakReference<Control>> _views = new();
 
     public ViewLocator()
     {
@@ -20,60 +19,70 @@ public class ViewLocator : IDataTemplate
 
     private void Register()
     {
-        _factory[typeof(HomeViewModel)] = () => new Views.HomeView();
-        _factory[typeof(IconsViewModel)] = () => new Views.IconsView();
-        _factory[typeof(BasicInputViewModel)] = () => new Views.BasicInputView();
-        _factory[typeof(DialogBoxAndPopupViewModel)] = () => new Views.DialogBoxAndPopupView();
-        _factory[typeof(LayoutViewModel)] = () => new Views.LayoutView();
-        _factory[typeof(NavigationViewModel)] = () => new Views.NavigationView();
-        _factory[typeof(TextViewModel)] = () => new Views.TextView();
-        _factory[typeof(ViewModel)] = () => new Views.View();
-        _factory[typeof(ScrollViewModel)] = () => new Views.ScrollView();
-        _factory[typeof(StatusAndInformationViewModel)] = () => new Views.StatusAndInformationView();
-        _factory[typeof(MenuAndToolBarViewModel)] = () => new Views.MenuAndToolBarView();
-        _factory[typeof(DateTimeViewModel)] = () => new Views.DateTimeView();
-        _factory[typeof(SettingsViewModel)] = () => new Views.SettingsView();
-    }
-
-    public async Task PreloadAllAsync()
-    {
-        foreach (var (type, factory) in _factory)
-        {
-            if (_views.TryGetValue(type, out var existing) && existing.TryGetTarget(out _))
-                continue;
-
-            await Dispatcher.UIThread.InvokeAsync(() =>
-            {
-                var view = factory();
-                _views[type] = new WeakReference<Control>(view);
-            }, DispatcherPriority.Background);
-
-            await Task.Delay(15);
-        }
+        _factory[typeof(HomeViewModel)] = () => new HomeView();
+        _factory[typeof(IconsViewModel)] = () => new IconsView();
+        
+        _factory[typeof(BasicInputViewModel)] = () => new BasicInputView();
+        _factory[typeof(ButtonPageViewModel)] = () => new ButtonPage();
+        _factory[typeof(ComboBoxPageViewModel)] = () => new ComboBoxPage();
+        _factory[typeof(SlierPageViewModel)] = () => new SliderPage();
+        
+        _factory[typeof(DialogBoxAndPopupViewModel)] = () => new DialogBoxAndPopupView();
+        _factory[typeof(DialogPageViewModel)] = () => new DialogPage();
+        _factory[typeof(FlyoutPageViewModel)] = () => new FlyoutPage();
+        _factory[typeof(ShortcutKeyPickerPageViewModel)] = () => new ShortcutKeyPickerPage();
+        
+        _factory[typeof(LayoutViewModel)] = () => new LayoutView();
+        _factory[typeof(BorderPageViewModel)] = () => new BorderPage();
+        _factory[typeof(PanelPageViewModel)] = () => new PanelPage();
+        
+        _factory[typeof(NavigationViewModel)] = () => new NavigationView();
+        _factory[typeof(NavigationViewPageViewModel)] = () => new NavigationViewPage();
+        _factory[typeof(TabsPageViewModel)] = () => new TabsPage();
+        _factory[typeof(SegmentedViewPageViewModel)] = () => new SegmentedViewPage();
+        _factory[typeof(FrameViewPageViewModel)] = () => new FrameViewPage();
+        _factory[typeof(BreadcrumbBarPageViewModel)] = () => new BreadcrumbBarPage();
+        
+        _factory[typeof(TextViewModel)] = () => new TextView();
+        _factory[typeof(TextBlockPageViewModel)] = () => new TextBlockPage();
+        _factory[typeof(TextBoxPageViewModel)] = () => new TextBoxPage();
+        _factory[typeof(SpinBoxPageViewModel)] = () => new SpinBoxPage();
+        
+        _factory[typeof(ViewModel)] = () => new View();
+        _factory[typeof(ListPageViewModel)] = () => new ListPage();
+        _factory[typeof(TreeViewPageViewModel)] = () => new TreeViewPage();
+        _factory[typeof(CarouselViewPageViewModel)] = () => new CarouselViewPage();
+        _factory[typeof(CardPageViewModel)] = () => new CardPage();
+        _factory[typeof(AvatarViewPageViewModel)] = () => new AvatarViewPage();
+        _factory[typeof(FilesDropPickerPageViewModel)] = () => new FilesDropPickerPage();
+        
+        _factory[typeof(ScrollViewModel)] = () => new ScrollView();
+        
+        _factory[typeof(StatusAndInformationViewModel)] = () => new StatusAndInformationView();
+        
+        _factory[typeof(MenuAndToolBarViewModel)] = () => new MenuAndToolBarView();
+        _factory[typeof(MenuPageViewModel)] = () => new MenuPage();
+        _factory[typeof(ContextMenuViewModel)] = () => new ContextMenuPage();
+        _factory[typeof(CommandBarViewPageViewModel)] = () => new CommandBarViewPage();
+        
+        _factory[typeof(DateTimeViewModel)] = () => new DateTimeView();
+        
+        _factory[typeof(SettingsViewModel)] = () => new SettingsView();
     }
 
     public Control? Build(object? param)
     {
-        Console.WriteLine(param);
-        if (param is null) { return null; }
+        if (param is null)
+            return null;
+
         var vmType = param.GetType();
 
-        if (!_factory.TryGetValue(vmType, out var creator))
-        {
-            return new TextBlock
+        return _factory.TryGetValue(vmType, out var creator)
+            ? creator()
+            : new TextBlock
             {
                 Text = $"View not registered: {vmType.Name}"
             };
-        }
-
-        if (_views.TryGetValue(vmType, out var weakRef) && weakRef.TryGetTarget(out var view))
-        {
-            return view;
-        }
-
-        view = creator();
-        _views[vmType] = new WeakReference<Control>(view);
-        return view;
     }
 
     public bool Match(object? data)

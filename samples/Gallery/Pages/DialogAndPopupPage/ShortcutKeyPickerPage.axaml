@@ -1,0 +1,28 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.ShortcutKeyPickerPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:ShortcutKeyPickerPageViewModel"
+  mc:Ignorable="d">
+  <StackPanel Spacing="50">
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ShortcutKeyPanel]}">
+      <fui:ShortcutKeyPanel HorizontalAlignment="Left" Keys="{Binding Keys}"/>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DG_ShortcutKeyPicker]}">
+      <fui:ShortcutKeyPicker
+        HorizontalAlignment="Left"
+        DefaultKeyGesture="Ctrl+Alt+O"
+        KeyGesture="Ctrl+Alt+O"/>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

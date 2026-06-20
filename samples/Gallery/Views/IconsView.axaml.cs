@@ -11,6 +11,7 @@ using Avalonia.Interactivity;
 using Avalonia.LogicalTree;
 using Avalonia.Media;
 using Avalonia.Styling;
+using Avalonia.Threading;
 using AvaloniaFluentUI.Controls;
 using AvaloniaFluentUI.Icons;
 using AvaloniaFluentUI.Locale;
@@ -33,13 +34,12 @@ public partial class IconsView : UserControl
     public IconsView()
     {
         InitializeComponent();
-    }
 
-    protected async override void OnApplyTemplate(TemplateAppliedEventArgs e)
-    {
-        base.OnApplyTemplate(e);
-
-        await LoadIconsAsync();
+        Dispatcher.UIThread.InvokeAsync(async () =>
+        {
+            await Task.Delay(100);
+            await LoadIconsAsync();
+        }, DispatcherPriority.Background);
     }
 
     private async Task LoadIconsAsync()

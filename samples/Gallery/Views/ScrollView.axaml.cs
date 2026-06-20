@@ -15,15 +15,14 @@ public partial class ScrollView : ViewBase
     public ScrollView()
     {
         InitializeComponent();
-
     }
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);
         
-        _b1 =  Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/0.jpg")), 1600);
-        _b2 = Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/mc.jpg")), 1000);
+        _b1 =  Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/0.jpg")), 1024);
+        _b2 = Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/mc.jpg")), 600);
 
         VImage.Source = _b1;
         HImage.Source = _b2;

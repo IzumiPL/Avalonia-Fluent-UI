@@ -1,0 +1,322 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.PanelPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:PanelPageViewModel"
+  mc:Ignorable="d">
+
+  <ui:ViewBase.Styles>
+    <Style Selector="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+  </ui:ViewBase.Styles>
+
+  <StackPanel Spacing="50">
+    <!--  Expander  -->
+    <ui:CodeCard Name="ExpanderCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Expander]}">
+      <Grid RowDefinitions="*, *" RowSpacing="15">
+        <Expander Grid.Row="0" Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Alignment]}">
+          <Grid
+            ColumnDefinitions="*, *"
+            ColumnSpacing="10"
+            RowDefinitions="*, *, *, *, *"
+            RowSpacing="15">
+            <TextBlock
+              Grid.Row="0"
+              Grid.ColumnSpan="2"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Alignment]}"/>
+            <ComboBox
+              Grid.Row="1"
+              Grid.ColumnSpan="2"
+              HorizontalAlignment="Stretch"
+              HorizontalContentAlignment="Left"
+              SelectedIndex="0">
+              <ComboBoxItem HorizontalContentAlignment="Left" Content="HorizontalAlignment.Top"/>
+              <ComboBoxItem HorizontalContentAlignment="Left" Content="HorizontalAlignment.Left"/>
+              <ComboBoxItem HorizontalContentAlignment="Left" Content="HorizontalAlignment.Right"/>
+              <ComboBoxItem HorizontalContentAlignment="Left" Content="HorizontalAlignment.Bottom"/>
+            </ComboBox>
+            <TextBlock
+              Grid.Row="2"
+              Grid.ColumnSpan="2"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Opacity]}"/>
+            <fui:ToolTipSlider
+              Grid.Row="3"
+              Grid.ColumnSpan="2"
+              HorizontalAlignment="Stretch"/>
+            <Button
+              Grid.Row="4"
+              Grid.Column="0"
+              HorizontalAlignment="Stretch"
+              Classes="Accent"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Apply]}"/>
+            <Button
+              Grid.Row="4"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Reset]}"/>
+          </Grid>
+        </Expander>
+        <Expander
+          Grid.Row="1"
+          Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_AppTheme]}"
+          Theme="{StaticResource ExpanderWinUIAnimationStyle}">
+          <StackPanel
+            Margin="10"
+            HorizontalAlignment="Left"
+            Spacing="8">
+            <RadioButton Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Light]}"/>
+            <RadioButton Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Dark]}"/>
+            <RadioButton Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_FollowSystem]}"/>
+          </StackPanel>
+        </Expander>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  Grid  -->
+    <ui:CodeCard Name="GridCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_GridLayout]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <Border
+          Grid.Column="0"
+          Height="328"
+          Margin="0,0,24,0"
+          Background="#d8f3dc"
+          ClipToBounds="True"
+          CornerRadius="12">
+          <Grid
+            x:Name="Grid"
+            ColumnDefinitions="*, *, *"
+            RowDefinitions="*, *, *"
+            ShowGridLines="True"/>
+        </Border>
+        <ui:Card Grid.Column="1" Width="256">
+          <Grid
+            Margin="15,0,0,0"
+            ColumnDefinitions="64, Auto"
+            ColumnSpacing="10"
+            RowDefinitions="Auto, Auto, Auto"
+            RowSpacing="10">
+            <TextBlock
+              Grid.ColumnSpan="2"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <TextBlock
+              Grid.Row="1"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Row]}"/>
+            <TextBox
+              x:Name="RowsEdit"
+              Grid.Row="1"
+              Grid.Column="1"
+              PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_SetGridRow]}"
+              TextChanged="OnRowsChanged"/>
+
+            <TextBlock
+              Grid.Row="2"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Column]}"/>
+            <TextBox
+              x:Name="ColumnsEdit"
+              Grid.Row="2"
+              Grid.Column="1"
+              PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_SetGridColumn]}"
+              TextChanged="OnColumnsChanged"/>
+          </Grid>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  GridSplitter  -->
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_GridSplitter]}" Height="328">
+      <Grid ColumnDefinitions="*, Auto, *">
+        <Border
+          Grid.Column="0"
+          Background="#ff8fa3"
+          CornerRadius="8"/>
+        <GridSplitter
+          Grid.Column="1"
+          Height="64"
+          VerticalAlignment="Center"
+          Background="{DynamicResource GridSplitterBrush}"
+          ResizeDirection="Columns"/>
+        <Border
+          Grid.Column="2"
+          Background="#00f5d4"
+          CornerRadius="8"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  RelativePanel  -->
+    <ui:CodeCard Name="RelativePanelCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_RelativePanel]}">
+      <Border
+        Width="300"
+        Height="300"
+        BorderBrush="DarkGray"
+        BorderThickness="1"
+        ClipToBounds="True"
+        CornerRadius="8">
+        <RelativePanel>
+          <Rectangle
+            x:Name="RedRect"
+            Width="50"
+            Height="50"
+            Fill="Red"/>
+          <Rectangle
+            x:Name="BlueRect"
+            Width="150"
+            Height="50"
+            Fill="Blue"
+            Opacity="0.5"
+            RelativePanel.RightOf="RedRect"/>
+          <Rectangle
+            x:Name="GreenRect"
+            Height="100"
+            Fill="Green"
+            RelativePanel.AlignLeftWith="RedRect"
+            RelativePanel.AlignRightWith="BlueRect"
+            RelativePanel.Below="RedRect"/>
+          <Rectangle
+            Fill="Orange"
+            RelativePanel.AlignBottomWithPanel="True"
+            RelativePanel.AlignLeftWith="BlueRect"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.Below="GreenRect"/>
+        </RelativePanel>
+      </Border>
+    </ui:CodeCard>
+
+    <!--  StackPanel  -->
+    <ui:CodeCard Name="StackPanelCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_StackPanel]}">
+      <Grid Height="288" ColumnDefinitions="*, Auto">
+        <StackPanel
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          Orientation="{Binding StackPanelOrientation}"
+          Spacing="10">
+          <ui:Card Width="128" Height="40">
+            <TextBlock
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              FontSize="16"
+              Text="Item1"
+              TextAlignment="Center"/>
+          </ui:Card>
+          <ui:Card Width="128" Height="40">
+            <TextBlock
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              FontSize="16"
+              Text="Item2"
+              TextAlignment="Center"/>
+          </ui:Card>
+          <ui:Card Width="128" Height="40">
+            <TextBlock
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              FontSize="16"
+              Text="Item3"
+              TextAlignment="Center"/>
+          </ui:Card>
+          <ui:Card Width="128" Height="40">
+            <TextBlock
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              FontSize="16"
+              Text="Item4"
+              TextAlignment="Center"/>
+          </ui:Card>
+        </StackPanel>
+        <ui:Card Grid.Column="1" Width="200">
+          <ComboBox
+            HorizontalAlignment="Stretch"
+            PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_SelectLayout]}"
+            SelectedIndex="{Binding SelectedOrientationIndex}">
+            <ComboBoxItem Content="Vertical"/>
+            <ComboBoxItem Content="Horizontal"/>
+          </ComboBox>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  UniformGrid  -->
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_UniformGrid]}" Height="648">
+      <UniformGrid
+        x:Name="UniformGrid"
+        ColumnSpacing="5"
+        Columns="5"
+        RowSpacing="5"
+        Rows="5"/>
+    </ui:CodeCard>
+
+    <!--  WrapPanel  -->
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_WrapPanel]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <WrapPanel
+          x:Name="WrapPanel"
+          Grid.Column="0"
+          ItemSpacing="10"
+          LineSpacing="10"/>
+        <ui:Card Grid.Column="1" Margin="12,0,0,0">
+          <StackPanel Spacing="10">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <fui:FilledPushButton
+              HorizontalAlignment="Stretch"
+              Classes="Attention"
+              Click="OnClickedAddControlToWrapPanel"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_AddControl]}"
+              IconSource="{x:Static fi:FluentIcon.Add}"/>
+            <fui:FilledPushButton
+              HorizontalAlignment="Stretch"
+              Classes="Error"
+              Click="OnClickedRemoveControlOfWrapPanel"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_RemoveControl]}"
+              IconSource="{x:Static fi:FluentIcon.Delete}"/>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  VirtualizingStackPanel  -->
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_VirtualizingStackPanel]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <ListBox Height="256" ItemsSource="{Binding Items}">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <VirtualizingStackPanel/>
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+        </ListBox>
+
+        <ui:Card
+          Grid.Column="1"
+          Width="256"
+          VerticalAlignment="Stretch">
+          <StackPanel Orientation="Vertical" Spacing="8">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <TextBlock Text="{Binding ItemCountFormat}"/>
+            <TextBlock Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_AddItemsCount]}"/>
+            <ComboBox
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding AddItemCounts}"
+              SelectedItem="{Binding AddCount}"/>
+            <Button
+              HorizontalAlignment="Stretch"
+              Classes="Accent"
+              Command="{Binding AddItemCommand}"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Add]}"/>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

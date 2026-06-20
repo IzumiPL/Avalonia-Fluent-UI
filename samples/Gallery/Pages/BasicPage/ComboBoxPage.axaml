@@ -1,0 +1,56 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.ComboBoxPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:ComboBoxPageViewModel"
+  mc:Ignorable="d">
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="ComboBoxCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ComboBox]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <ComboBox
+          Width="256"
+          IsEditable="{Binding #Edit.IsChecked}"
+          ItemsSource="{Binding Items}"
+          SelectedIndex="0"/>
+        <CheckBox
+          Name="Edit"
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_EnabledEdit]}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_MultiSelectionComboBox]}">
+      <Grid ColumnDefinitions="*, Auto" ColumnSpacing="8">
+        <fui:MultiSelectionComboBox
+          Width="328"
+          VerticalAlignment="Top"
+          ItemsSource="{Binding MultiSelectionItems}"
+          PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[PleaseSelectYourOption]}"
+          SelectedItems="{Binding MultiSelectionSelectedItems}"/>
+        <ui:Card Grid.Column="1" Width="256">
+          <StackPanel Orientation="Vertical" Spacing="6">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <Button
+              Command="{Binding SelectOddOrEventNumberItemsCommand}"
+              CommandParameter="1"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SelectOddItems]}"/>
+            <Button
+              Command="{Binding SelectOddOrEventNumberItemsCommand}"
+              CommandParameter="0"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SelectEvenItems]}"/>
+            <Button Command="{Binding ClearMultiSelectionSelectedItemCommand}" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ClearSelectedItems]}"/>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

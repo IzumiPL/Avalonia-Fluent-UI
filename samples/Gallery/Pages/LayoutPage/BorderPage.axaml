@@ -1,0 +1,133 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.BorderPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:BorderPageViewModel"
+  mc:Ignorable="d">
+
+  <ui:ViewBase.Styles>
+    <Style Selector="Rectangle.Item">
+      <Setter Property="Width" Value="64"/>
+      <Setter Property="Height" Value="64"/>
+    </Style>
+
+    <Style Selector="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+  </ui:ViewBase.Styles>
+
+  <StackPanel Spacing="50">
+    <!--  Border  -->
+    <ui:CodeCard Name="BorderCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Border]}">
+      <ui:CodeCard.Content>
+        <Grid ColumnDefinitions="*, Auto">
+          <Border
+            Grid.Column="0"
+            Margin="24,10"
+            Background="{Binding BorderBackground}"
+            BorderBrush="{Binding BorderBrush}"
+            BorderThickness="{Binding BorderThickness}"
+            BoxShadow="{Binding BoxShadow}"
+            CornerRadius="{Binding BorderRadius}"/>
+          <ui:Card
+            Grid.Column="1"
+            Width="256"
+            VerticalAlignment="Stretch">
+            <StackPanel Spacing="10">
+              <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+              <ToggleSwitch Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_EnableShadow]}" IsChecked="{Binding IsEnableBorderShadow}"/>
+              <TextBox PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_BorderColorHex]}" Text="{Binding BorderBrushHex}"/>
+              <TextBox PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_BgColorHex]}" Text="{Binding BorderBackgroundHex}"/>
+              <TextBox PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_BorderWidth]}" Text="{Binding BorderWidth}"/>
+              <TextBox PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_BorderRadius]}" Text="{Binding Br}"/>
+            </StackPanel>
+          </ui:Card>
+        </Grid>
+      </ui:CodeCard.Content>
+    </ui:CodeCard>
+
+    <!--  Canvas  -->
+    <ui:CodeCard Name="CanvasCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Canvas]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <Border
+          Grid.Column="0"
+          Height="512"
+          Margin="0,0,24,0"
+          ClipToBounds="True"
+          CornerRadius="12">
+          <Canvas Background="AliceBlue">
+            <Rectangle
+              Canvas.Left="{Binding CanvasLeft}"
+              Canvas.Top="{Binding CanvasTop}"
+              Classes="Item"
+              Fill="DeepPink"/>
+
+            <Rectangle
+              Canvas.Left="{Binding CanvasTop}"
+              Canvas.Top="{Binding CanvasLeft}"
+              Classes="Item"
+              Fill="OrangeRed"
+              Opacity="0.5"
+              ZIndex="1"/>
+
+            <Rectangle
+              Canvas.Right="{Binding CanvasLeft}"
+              Canvas.Bottom="{Binding CanvasTop}"
+              Classes="Item"
+              Fill="DodgerBlue"/>
+
+            <Rectangle
+              Canvas.Right="{Binding CanvasTop}"
+              Canvas.Bottom="{Binding CanvasLeft}"
+              Classes="Item"
+              Fill="SlateBlue"
+              Opacity="0.5"
+              ZIndex="1"/>
+          </Canvas>
+
+        </Border>
+        <ui:Card Grid.Column="1" Width="256">
+          <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto">
+            <TextBlock
+              Grid.Row="0"
+              Grid.ColumnSpan="2"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <TextBlock
+              Grid.Row="1"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_LeftRight]}"/>
+            <fui:ToolTipSlider
+              Grid.Row="1"
+              Grid.Column="1"
+              Maximum="512"
+              Minimum="0"
+              Orientation="Horizontal"
+              Value="{Binding CanvasLeft}"/>
+
+            <TextBlock
+              Grid.Row="2"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_TopBottom]}"/>
+            <fui:ToolTipSlider
+              Grid.Row="2"
+              Grid.Column="1"
+              Maximum="512"
+              Minimum="0"
+              Orientation="Horizontal"
+              Value="{Binding CanvasTop}"/>
+          </Grid>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>
