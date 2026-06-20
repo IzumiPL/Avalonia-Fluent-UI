@@ -16,7 +16,7 @@
 
 ![gallery](README.png)
 
-> [!Information]
+> [!Note]
 > 
 > 如需使用最新的功能,克隆本仓库构建
 
