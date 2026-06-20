@@ -186,6 +186,7 @@
     <Setter Property="CaretBrush" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource TextControlElevationBorderBrush}"/>
     <Setter Property="SelectionBrush" Value="{DynamicResource AccentFillColorSelectedTextBackgroundBrush}"/>
+    <Setter Property="VerticalAlignment" Value="Top"/>
     <Setter Property="SelectionForegroundBrush" Value="{DynamicResource TextOnAccentFillColorSelectedTextBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource TextControlBorderThemeThickness}"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
