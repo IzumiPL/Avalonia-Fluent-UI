@@ -153,6 +153,10 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FlipViewStyle.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/View/Avatar.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FolderDropPicker.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FileDropPicker.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/View/ShortcutKeyPicker.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/View/ShortcutKeyPanel.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/ListBox/RoundListBoxStyle.axaml"/>
 
