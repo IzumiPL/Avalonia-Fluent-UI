@@ -1,17 +1,18 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Metadata;
 
 namespace AvaloniaFluentUI.Controls;
 
-// [TemplatePart(Name = PART_PLACEHOLDER, Type = typeof(TextBlock))]
-// [TemplatePart(Name = PART_DROP_DOWN_BUTTON, Type = typeof(Button))]
 [PseudoClasses(PC_HAS_PLACEHOLDER, PC_PRESSED)]
 [TemplatePart(Name = PART_MULTI_SELECTION_POPUP, Type = typeof(Popup))]
 [TemplatePart(Name = PART_MULTI_SELECTION_VIEW, Type = typeof(MultiSelectionView))]
@@ -28,7 +29,7 @@ public class MultiSelectionComboBox : TemplatedControl
 
     public static readonly StyledProperty<double> ViewPortMaxHeightProperty =
         AvaloniaProperty.Register<MultiSelectionComboBox, double>(nameof(ViewPortMaxHeight));
-
+    
     public double ViewPortMaxHeight
     {
         get => GetValue(ViewPortMaxHeightProperty);
@@ -52,17 +53,18 @@ public class MultiSelectionComboBox : TemplatedControl
         get => GetValue(SelectedItemsProperty);
         set => SetValue(SelectedItemsProperty, value);
     }
-
-    // private TextBlock? _watermark;
+    
     private Popup? _multiSelectionPopup;
-    // private Button? _dropDownButton;
-    private MultiSelectionView? _multiSelectionView;
+    private MultiSelectionView _multiSelectionView;
+
+    private readonly AvaloniaList<MultiSelectionComboBoxItem> _items = new ();
+    
+    [Content]
+    public AvaloniaList<MultiSelectionComboBoxItem> Items => _items;
 
     private const string PC_PRESSED = ":pressed";
     private const string PC_HAS_PLACEHOLDER = ":hasplaceholder";
     
-    // private const string PART_PLACEHOLDER = "PART_Placeholder";
-    // private const string PART_DROP_DOWN_BUTTON = "PART_DropDownButton";
     private const string PART_MULTI_SELECTION_POPUP = "PART_MultiSelectionPopup";
     private const string PART_MULTI_SELECTION_VIEW = "PART_MultiSelectionView";
 
@@ -75,67 +77,54 @@ public class MultiSelectionComboBox : TemplatedControl
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-
-        // _dropDownButton?.Click -= OnDropDownButtonClick;
-        _multiSelectionView?.SelectionChanged -= OnSelectedItemsChanged;
-
-        // _watermark = e.NameScope.Find<TextBlock>(PART_PLACEHOLDER);
-        // _dropDownButton = e.NameScope.Find<Button>(PART_DROP_DOWN_BUTTON);
+        _multiSelectionView?.SelectionChanged -= OnSelectionChanged;
+        
         _multiSelectionPopup = e.NameScope.Find<Popup>(PART_MULTI_SELECTION_POPUP);
         _multiSelectionView = e.NameScope.Find<MultiSelectionView>(PART_MULTI_SELECTION_VIEW);
-
-        if (_multiSelectionPopup != null)
+        
+        if (SelectedItems == null)
         {
-            _multiSelectionPopup.PlacementTarget = this;
-            _multiSelectionPopup.IsLightDismissEnabled = true;
+            SetCurrentValue(SelectedItemsProperty, new ObservableCollection<object>());
         }
-
-        // if (_dropDownButton != null)
-        // {
-        //     _dropDownButton.Click += OnDropDownButtonClick;
-        // }
-
-        if (_multiSelectionView != null)
+        
+        if (ItemsSource == null && _items.Count > 0)
         {
-            if (SelectedItems == null)
+            var data = new List<object>(_items.Count);
+            foreach (var item in _items)
             {
-                SetCurrentValue(SelectedItemsProperty, new ObservableCollection<object>());
+                var value = item.Content ?? item;
+                data.Add(value);
+                if (item.IsSelected && !SelectedItems.Contains(value)) 
+                {
+                    SelectedItems.Add(value);
+                }
             }
-            _multiSelectionView.ItemsSource = ItemsSource;
-            _multiSelectionView.SelectedItems = SelectedItems;
-
-            PseudoClasses.Set(PC_HAS_PLACEHOLDER, _multiSelectionView.SelectedItems?.Count == 0);
-            _multiSelectionView.SelectionChanged += OnSelectedItemsChanged;
+            ItemsSource = data;
         }
+
+        _multiSelectionView?.SelectionChanged += OnSelectionChanged;
+        UpdatePlaceholderStatus();
     }
 
-    private async void OnSelectedItemsChanged(object sender, SelectionChangedEventArgs e)
+    private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        UpdatePlaceholderStatus();
+    }
+
+    private async void UpdatePlaceholderStatus()
     {
         await Task.Yield();
-        PseudoClasses.Set(PC_HAS_PLACEHOLDER, _multiSelectionView?.SelectedItems?.Count == 0);
+        PseudoClasses.Set(PC_HAS_PLACEHOLDER, SelectedItems?.Count == 0);
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
-        if (change.Property == ItemsSourceProperty && _multiSelectionView != null)
+        if (change.Property == SelectedItemsProperty)
         {
-            _multiSelectionView.ItemsSource = ItemsSource;
-        }
-        else if (change.Property == SelectedItemsProperty && _multiSelectionView != null)
-        {
-            _multiSelectionView.SelectedItems = SelectedItems;
+            UpdatePlaceholderStatus();
         }
     }
-
-    // private void OnDropDownButtonClick(object? sender, RoutedEventArgs e)
-    // {
-    //     if (_multiSelectionPopup != null)
-    //     {
-    //         _multiSelectionPopup.Width = Bounds.Width;
-    //         _multiSelectionPopup.IsOpen = !_multiSelectionPopup.IsOpen;
-    //     }
-    // }
 
     protected override void OnPointerPressed(PointerPressedEventArgs e)
     {
@@ -159,6 +148,7 @@ public class MultiSelectionComboBox : TemplatedControl
         if (e.Source is MultiSelectionDisplayItem displayItem && SelectedItems != null)
         {
             SelectedItems.Remove(displayItem.Content);
+            UpdatePlaceholderStatus();
         }
     }
 }
