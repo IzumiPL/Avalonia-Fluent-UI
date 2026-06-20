@@ -1,28 +1,48 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:ui="using:AvaloniaFluentUI.Controls"
-                    xmlns:uip="using:AvaloniaFluentUI.Controls.Primitives">
-    
-    <ControlTheme TargetType="ui:ProgressRing"
-                  x:Key="{x:Type ui:ProgressRing}">
-        <Setter Property="Foreground" Value="{DynamicResource AccentFillColorDefaultBrush}" />
-        <Setter Property="Background" Value="{DynamicResource ControlFillColorTransparentBrush}" />
-        <Setter Property="IsHitTestVisible" Value="False" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="MinHeight" Value="16" />
-        <Setter Property="MinWidth" Value="16" />
-        <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="Width" Value="32" />
-        <Setter Property="Height" Value="32" />
-        <Setter Property="Maximum" Value="100" />
-        <Setter Property="Template">
-            <ControlTemplate>
-                <Panel Background="Transparent">
-                    <uip:ProgressRingAnimatedVisual Name="AnimatedVisual" />
-                </Panel>
-            </ControlTemplate>
-        </Setter>
-    </ControlTheme>
-    
+<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:conv="using:AvaloniaFluentUI.Converters"
+  xmlns:ui="using:AvaloniaFluentUI.Controls"
+  xmlns:uip="using:AvaloniaFluentUI.Controls.Primitives">
+
+  <ControlTheme x:Key="{x:Type ui:ProgressRing}" TargetType="ui:ProgressRing">
+    <Setter Property="Foreground" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+    <Setter Property="IsHitTestVisible" Value="False"/>
+    <Setter Property="HorizontalAlignment" Value="Center"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="MinHeight" Value="16"/>
+    <Setter Property="MinWidth" Value="16"/>
+    <Setter Property="IsTabStop" Value="False"/>
+    <Setter Property="Width" Value="32"/>
+    <Setter Property="Height" Value="32"/>
+    <Setter Property="Maximum" Value="100"/>
+    <Setter Property="FontSize" Value="16"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel Background="Transparent">
+          <uip:ProgressRingAnimatedVisual Name="AnimatedVisual"/>
+          <TextBlock
+            Name="PercentText"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="{TemplateBinding FontSize}"
+            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+            IsVisible="False">
+            <TextBlock.Text>
+              <MultiBinding Converter="{x:Static conv:ProgressPercentConverter.Instance}">
+                <Binding Path="Value" RelativeSource="{RelativeSource TemplatedParent}"/>
+                <Binding Path="Maximum" RelativeSource="{RelativeSource TemplatedParent}"/>
+              </MultiBinding>
+            </TextBlock.Text>
+          </TextBlock>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^[ShowPercent=True][IsIndeterminate=False] /template/ TextBlock#PercentText">
+      <Setter Property="IsVisible" Value="True"/>
+    </Style>
+  </ControlTheme>
+
 </ResourceDictionary>
