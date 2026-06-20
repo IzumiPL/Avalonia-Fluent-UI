@@ -1,0 +1,64 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
+  <!--  Add Resources Here  -->
+  <ControlTheme x:Key="{x:Type ui:FileDropPicker}" TargetType="ui:FileDropPicker">
+    <Setter Property="BorderBrush" Value="{DynamicResource AvatarBackgroundDefault}"/>
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+    <Setter Property="Width" Value="{StaticResource DropPickerWidth}"/>
+    <Setter Property="Height" Value="{StaticResource DropPickerHeight}"/>
+    <Setter Property="BorderThickness" Value="2"/>
+    <Setter Property="CornerRadius" Value="8"/>
+    <Setter Property="Background" Value="#01FFFFFF"/>
+    <Setter Property="Header" Value="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DragTheFileHere]}"/>
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid RowDefinitions="*, Auto, *">
+          <Rectangle
+            Grid.RowSpan="3"
+            Width="{TemplateBinding Width}"
+            Height="{TemplateBinding Height}"
+            MinWidth="{TemplateBinding MinWidth}"
+            MinHeight="{TemplateBinding MinHeight}"
+            Fill="{TemplateBinding Background}"
+            RadiusX="{Binding CornerRadius.TopLeft, RelativeSource={RelativeSource TemplatedParent}}"
+            RadiusY="{Binding CornerRadius.BottomRight, RelativeSource={RelativeSource TemplatedParent}}"
+            Stroke="{TemplateBinding BorderBrush}"
+            StrokeDashArray="6, 4"
+            StrokeThickness="{Binding BorderThickness.Left, RelativeSource={RelativeSource TemplatedParent}}"/>
+          <TextBlock
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom"
+            FontSize="{TemplateBinding FontSize}"
+            Text="{TemplateBinding Header}"
+            TextAlignment="Center"
+            TextWrapping="NoWrap"/>
+
+          <TextBlock
+            Grid.Row="1"
+            Margin="0,12"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="{TemplateBinding FontSize}"
+            Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Or]}"
+            TextAlignment="Center"
+            TextWrapping="NoWrap"/>
+
+          <Button
+            Name="PART_SelectedButton"
+            Grid.Row="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Classes="Transparent"
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SelectFile]}"
+            Foreground="{DynamicResource SystemAccentColor}"/>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>
+
