@@ -23,8 +23,8 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 
 [PseudoClasses(SharedPseudoclasses.s_pcHidden, SharedPseudoclasses.s_pcOpen)]
-[PseudoClasses(s_pcPrimary, s_pcSecondary, s_pcClose)]
-[PseudoClasses(s_pcFullSize)]
+[PseudoClasses(PC_PRMIARY, PC_SECONDARY, PC_COLSE)]
+[PseudoClasses(PC_FULL_SIZE)]
 [TemplatePart(s_tpPrimaryButton, typeof(Button))]
 [TemplatePart(s_tpSecondaryButton, typeof(Button))]
 [TemplatePart(s_tpCloseButton, typeof(Button))]
@@ -109,16 +109,28 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
         AvaloniaProperty.Register<ContentDialog, object>(nameof(Title), "");
 
     /// <summary>
-    /// Defines the <see cref="TitleTemplate"/> property
-    /// </summary>
-    public static readonly StyledProperty<IDataTemplate> TitleTemplateProperty =
-        AvaloniaProperty.Register<ContentDialog, IDataTemplate>(nameof(TitleTemplate));
-
-    /// <summary>
     /// Defines the <see cref="FullSizeDesired"/> property
     /// </summary>
     public static readonly StyledProperty<bool> FullSizeDesiredProperty =
         AvaloniaProperty.Register<ContentDialog, bool>(nameof(FullSizeDesired));
+
+    public static readonly StyledProperty<double> ContentWidthProperty =
+        AvaloniaProperty.Register<ContentDialog, double>(nameof(ContentWidth), defaultValue: Double.NaN);
+
+    public static readonly StyledProperty<double> ContentHeightProperty =
+        AvaloniaProperty.Register<ContentDialog, double>(nameof(ContentHeight), defaultValue: Double.NaN);
+
+    public double ContentHeight
+    {
+        get => GetValue(ContentHeightProperty);
+        set => SetValue(ContentHeightProperty, value);
+    }
+
+    public double ContentWidth
+    {
+        get => GetValue(ContentWidthProperty);
+        set => SetValue(ContentWidthProperty, value);
+    }
 
     /// <summary>
     /// Gets or sets the command to invoke when the close button is tapped.
@@ -238,15 +250,6 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
     }
 
     /// <summary>
-    /// Gets or sets the title template.
-    /// </summary>
-    public IDataTemplate TitleTemplate
-    {
-        get => GetValue(TitleTemplateProperty);
-        set => SetValue(TitleTemplateProperty, value);
-    }
-
-    /// <summary>
     /// Gets or sets whether the Dialog should show full screen
     /// On WinUI3, at least desktop, this just show the dialog at 
     /// the maximum size of a contentdialog.
@@ -291,16 +294,15 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
     /// Occurs after the close button has been tapped.
     /// </summary>
     public event TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> CloseButtonClick;
-
-
+    
     private const string s_tpPrimaryButton = "PrimaryButton";
     private const string s_tpSecondaryButton = "SecondaryButton";
     private const string s_tpCloseButton = "CloseButton";
 
-    private const string s_pcPrimary = ":primary";
-    private const string s_pcSecondary = ":secondary";
-    private const string s_pcClose = ":close";
-    private const string s_pcFullSize = ":fullsize";
+    private const string PC_PRMIARY = ":primary";
+    private const string PC_SECONDARY = ":secondary";
+    private const string PC_COLSE = ":close";
+    private const string PC_FULL_SIZE = ":fullsize";
     
     public ContentDialog()
     {
@@ -639,9 +641,9 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
         if (_primaryButton == null)
             throw new InvalidOperationException("Attempted to setup ContentDialog but the template has not been applied yet.");
 
-        PseudoClasses.Set(s_pcPrimary, !string.IsNullOrEmpty(PrimaryButtonText));
-        PseudoClasses.Set(s_pcSecondary, !string.IsNullOrEmpty(SecondaryButtonText));
-        PseudoClasses.Set(s_pcClose, !string.IsNullOrEmpty(CloseButtonText));
+        PseudoClasses.Set(PC_PRMIARY, !string.IsNullOrEmpty(PrimaryButtonText));
+        PseudoClasses.Set(PC_SECONDARY, !string.IsNullOrEmpty(SecondaryButtonText));
+        PseudoClasses.Set(PC_COLSE, !string.IsNullOrEmpty(CloseButtonText));
 
         var p = Presenter;
         switch (DefaultButton)
@@ -866,7 +868,7 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
     private void OnFullSizedDesiredChanged(AvaloniaPropertyChangedEventArgs e)
     {
         bool newVal = (bool)e.NewValue;
-        PseudoClasses.Set(s_pcFullSize, newVal);
+        PseudoClasses.Set(PC_FULL_SIZE, newVal);
     }
 
     public (bool handled, IInputElement next) GetNext(IInputElement element, NavigationDirection direction)
