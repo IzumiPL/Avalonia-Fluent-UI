@@ -33,7 +33,6 @@ namespace AvaloniaFluentUI.Controls;
 /// Represents a container that enables navigation of app content. It has a header, 
 /// a view for the main content, and a menu pane for navigation commands.
 /// </summary>
-[PseudoClasses(s_pcSeparator)]
 [PseudoClasses(s_pcListSizeCompact, s_pcClosedCompact)]
 [PseudoClasses(s_pcBackButtonCollapsed, s_pcPaneCollapsed, s_pcHeaderCollapsed)]
 [PseudoClasses(s_pcMinimalWithBack, s_pcMinimal, s_pcTopNavMinimal, s_pcCompact, s_pcExpanded)]
@@ -276,6 +275,15 @@ public partial class NavigationView : HeaderedContentControl
 
     public static readonly StyledProperty<ICommand> BackCommandProperty =
         AvaloniaProperty.Register<NavigationView, ICommand>(nameof(BackCommand));
+
+    public static readonly StyledProperty<bool> PaneFooterSeparatorIsVisibleProperty =
+        AvaloniaProperty.Register<NavigationView, bool>(nameof(PaneFooterSeparatorIsVisible));
+
+    public bool PaneFooterSeparatorIsVisible
+    {
+        get => GetValue(PaneFooterSeparatorIsVisibleProperty);
+        set => SetValue(PaneFooterSeparatorIsVisibleProperty, value);
+    }
 
     public ICommand BackCommand
     {
@@ -678,7 +686,6 @@ public partial class NavigationView : HeaderedContentControl
     private const string s_tpFooterItemsScrollViewer = "FooterItemsScrollViewer";
     private const string s_tpItemsContainerGrid = "ItemsContainerGrid";
 
-    private const string s_pcSeparator = ":separator";
     private const string s_pcListSizeCompact = ":listsizecompact";
     private const string s_pcBackButtonCollapsed = ":backbuttoncollapsed";
     private const string s_pcMinimalWithBack = ":minimalwithback";
@@ -2969,7 +2976,7 @@ public partial class NavigationView : HeaderedContentControl
 
         // Calculate selected overflow item size.
         var selOverflowItemIndex = _topDataProvider.IndexOf(itemBeingMoved);
-        Debug.Assert(selOverflowItemIndex != _itemNotFound);
+        if (selOverflowItemIndex == _itemNotFound) { return; }
         var selOverflowItemWidth = _topDataProvider.GetWidthForItem(selOverflowItemIndex);
 
         bool needInvalidMeasure = !_topDataProvider.IsValidWidthForItem(selOverflowItemIndex);
@@ -2978,7 +2985,8 @@ public partial class NavigationView : HeaderedContentControl
         {
             var actWid = GetTopNavigationViewActualWidth;
             var desWid = MeasureTopNavigationViewDesiredWidth(Size.Infinity);
-            Debug.Assert(desWid <= actWid);
+            
+            if (desWid > actWid) { Debug.WriteLine($"desWid={desWid}, actWid={actWid}"); }
 
             // Calculate selected item size
             var selItemIndex = _itemNotFound;
@@ -3814,41 +3822,35 @@ public partial class NavigationView : HeaderedContentControl
 
                             if (_footerItemsSource.Count == 0 && !IsSettingsVisible)
                             {
-                                PseudoClasses.Set(s_pcSeparator, false);
                                 return totalHeight;
                             }
                             else if (_menuItemsSource.Count == 0)
                             {
                                 _footerItemsScrollViewer.MaxHeight = totalHeight;
-                                PseudoClasses.Set(s_pcSeparator, false);
                                 return 0d;
                             }
                             else if (totalHeight >= menuItemsDesiredHeight + footerGroupDesiredHeight)
                             {
                                 // We have enough space for two so let everyone get as much as they need
                                 _footerItemsScrollViewer.MaxHeight = footerDesiredHeight;
-                                PseudoClasses.Set(s_pcSeparator, false);
                                 return totalHeight - footerDesiredHeight;
                             }
                             else if (menuItemsDesiredHeight <= totalHeightHalf)
                             {
                                 // Footer items exceed over the half, so let's limit them.
                                 _footerItemsScrollViewer.MaxHeight = (totalHeight - menuItemsActualHeight);
-                                PseudoClasses.Set(s_pcSeparator, true);
                                 return menuItemsActualHeight;
                             }
                             else if (footerDesiredHeight <= totalHeightHalf)
                             {
                                 // Menu items exceed over the half, so let's limit them.
                                 _footerItemsScrollViewer.MaxHeight = footerDesiredHeight;
-                                PseudoClasses.Set(s_pcSeparator, true);
                                 return totalHeight - footerDesiredHeight;
                             }
                             else
                             {
                                 // Both are more than half the height, so split evenly.
                                 _footerItemsScrollViewer.MaxHeight = totalHeightHalf;
-                                PseudoClasses.Set(s_pcSeparator, true);
                                 return totalHeightHalf;
                             }
                         }
@@ -5068,6 +5070,8 @@ public partial class NavigationView : HeaderedContentControl
                 while (nvi != null && isRepVis && !nvi.IsSelected && nvi.IsChildSelected)
                 {
                     indexIntoIndex++;
+                    if (indexIntoIndex >= selIndex.GetSize()) { break; }
+
                     isRepVis = false;
                     if (nvi.GetRepeater != null)
                     {
