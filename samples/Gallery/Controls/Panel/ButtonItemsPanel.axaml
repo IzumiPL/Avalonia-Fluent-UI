@@ -27,13 +27,7 @@
                 HorizontalContentAlignment="Left"
                 Command="{Binding $parent[controls:ButtonItemsPanel].Command}"
                 CommandParameter="{Binding $self}"
-                Tag="{Binding $parent[controls:ButtonItemsPanel].Tag}">
-                <!-- <Button.CommandParameter> -->
-                <!-- <model:JumpButtonModel Control="{x:Reference Title}" Page="{Binding $parent[controls:ButtonItemsPanel].CommandParameter}"/> -->
-                <!-- </Button.CommandParameter> -->
-                <!--  CommandParameter="{Binding $parent[controls:ButtonItemsPanel].CommandParameter}"  -->
-                <!--  CommandParameter="{Binding $self}"  -->
-                <!--  Command="{Binding Command, RelativeSource={RelativeSource TemplatedParent}}"  -->
+                Tag="{Binding Page}">
                 <Grid
                   HorizontalAlignment="Left"
                   ColumnDefinitions="Auto, *"

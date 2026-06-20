@@ -14,13 +14,4 @@ public class ButtonItemsPanel : ItemsControl
         get => GetValue(CommandProperty);
         set => SetValue(CommandProperty, value);
     }
-
-    public static readonly StyledProperty<object?> CommandParameterProperty =
-        AvaloniaProperty.Register<ButtonItemsPanel, object?>(nameof(CommandParameter));
-
-    public object? CommandParameter
-    {
-        get => GetValue(CommandParameterProperty);
-        set => SetValue(CommandParameterProperty, value);
-    }
 }

@@ -1,0 +1,128 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.CommandBarViewPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:CommandBarViewPageViewModel"
+  mc:Ignorable="d">
+
+  <ui:ViewBase.Styles>
+    <Style Selector="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+  </ui:ViewBase.Styles>
+
+  <ui:ViewBase.Resources>
+    <fui:CommandBarFlyout
+      x:Key="CommandBarFlyout"
+      Placement="Right"
+      ShowMode="Transient">
+      <fui:CommandBarFlyout.PrimaryCommands>
+        <fui:CommandBarButton IconSource="Copy" Label="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Copy]}"/>
+        <fui:CommandBarButton IconSource="Save" Label="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Save]}"/>
+        <fui:CommandBarButton IconSource="Delete" Label="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Delete]}"/>
+        <fui:CommandBarButton IconSource="Share" Label="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Share]}"/>
+      </fui:CommandBarFlyout.PrimaryCommands>
+      <fui:CommandBarFlyout.SecondaryCommands>
+        <fui:CommandBarButton
+          HotKey="Ctrl+S"
+          IconSource="Setting"
+          Label="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Settings]}"/>
+        <fui:CommandBarButton
+          HotKey="Ctrl+Z"
+          IconSource="Redo"
+          Label="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Undo]}"/>
+      </fui:CommandBarFlyout.SecondaryCommands>
+    </fui:CommandBarFlyout>
+  </ui:ViewBase.Resources>
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="CommandBarCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_CommandBar]}">
+      <fui:CommandBar DefaultLabelPosition="Right">
+        <fui:CommandBar.PrimaryCommands>
+          <fui:CommandBarButton IconSource="Add" Label="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Add]}"/>
+          <fui:CommandBarButton IconSource="RotateClockwise" Label="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Rotate]}"/>
+          <fui:CommandBarButton IconSource="ZoomIn" Label="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_ZoomIn]}"/>
+          <fui:CommandBarButton IconSource="ZoomOut" Label="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_ZoomOut]}"/>
+
+          <fui:CommandBarSeparator VerticalAlignment="Stretch"/>
+
+          <fui:CommandBarToggleButton
+            IconSource="Edit"
+            IsChecked="True"
+            Label="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Edit]}"/>
+          <fui:CommandBarButton IconSource="M16 12.8l0.209 0.020 0.195 0.059 0.18 0.099 0.166 0.139 0.139 0.166 0.099 0.18 0.059 0.195 0.020 0.209v8.533l-0.020 0.209-0.059 0.195-0.099 0.18-0.139 0.166-0.166 0.139-0.18 0.099-0.195 0.059-0.209 0.020-0.209-0.020-0.195-0.059-0.18-0.099-0.166-0.139-0.139-0.166-0.099-0.18-0.059-0.195-0.020-0.209v-8.533l0.020-0.209 0.059-0.195 0.099-0.18 0.139-0.166 0.166-0.139 0.18-0.099 0.195-0.059 0.209-0.020zM16 8l0.321 0.029 0.296 0.088 0.271 0.146 0.246 0.204 0.204 0.246 0.146 0.271 0.087 0.296 0.029 0.321-0.029 0.321-0.087 0.296-0.146 0.271-0.204 0.246-0.246 0.204-0.271 0.146-0.296 0.088-0.321 0.029-0.321-0.029-0.296-0.088-0.271-0.146-0.246-0.204-0.204-0.246-0.146-0.271-0.088-0.296-0.029-0.321 0.029-0.321 0.088-0.296 0.146-0.271 0.204-0.246 0.246-0.204 0.271-0.146 0.296-0.088 0.321-0.029zM16 2.133l-0.949 0.031-0.932 0.092-0.914 0.154-0.896 0.215-0.873 0.272-0.844 0.324-0.815 0.376-0.785 0.428-0.753 0.476-0.718 0.52-0.682 0.564-0.647 0.607-0.607 0.647-0.564 0.682-0.52 0.718-0.476 0.753-0.428 0.785-0.376 0.815-0.324 0.844-0.272 0.873-0.215 0.896-0.154 0.914-0.092 0.932-0.031 0.949 0.031 0.949 0.092 0.932 0.154 0.914 0.215 0.896 0.271 0.873 0.322 0.844 0.373 0.815 0.424 0.785 0.473 0.754 0.519 0.719 0.565 0.685 0.61 0.651 0.651 0.61 0.685 0.565 0.719 0.519 0.754 0.473 0.785 0.424 0.815 0.373 0.844 0.322 0.873 0.271 0.896 0.215 0.914 0.154 0.932 0.092 0.949 0.031 0.949-0.031 0.932-0.092 0.914-0.154 0.896-0.215 0.873-0.271 0.844-0.322 0.815-0.373 0.785-0.424 0.754-0.473 0.719-0.519 0.685-0.565 0.651-0.61 0.61-0.651 0.565-0.685 0.519-0.719 0.473-0.754 0.424-0.785 0.373-0.815 0.322-0.844 0.271-0.873 0.215-0.896 0.154-0.914 0.092-0.932 0.031-0.949-0.031-0.949-0.092-0.932-0.154-0.914-0.215-0.896-0.272-0.873-0.324-0.844-0.376-0.815-0.428-0.785-0.476-0.753-0.52-0.718-0.564-0.682-0.607-0.647-0.647-0.607-0.682-0.564-0.718-0.52-0.753-0.476-0.785-0.428-0.815-0.376-0.844-0.324-0.873-0.272-0.896-0.215-0.914-0.154-0.932-0.092-0.949-0.031zM16 0l1.097 0.035 1.076 0.106 1.054 0.177 1.032 0.248 1.005 0.313 0.972 0.372 0.94 0.432 0.908 0.491 0.871 0.547 0.831 0.599 0.79 0.651 0.749 0.703 0.703 0.749 0.651 0.79 0.599 0.831 0.547 0.871 0.491 0.908 0.432 0.94 0.372 0.972 0.313 1.005 0.248 1.032 0.177 1.054 0.106 1.076 0.035 1.097-0.036 1.097-0.108 1.076-0.18 1.054-0.252 1.032-0.317 1.004-0.375 0.971-0.433 0.938-0.492 0.904-0.547 0.868-0.599 0.828-0.651 0.789-0.703 0.749-0.749 0.703-0.789 0.651-0.828 0.599-0.868 0.547-0.905 0.492-0.939 0.433-0.973 0.375-1.008 0.317-1.034 0.252-1.053 0.18-1.072 0.108-1.091 0.036-1.098-0.035-1.077-0.106-1.056-0.177-1.035-0.248-1.008-0.313-0.973-0.372-0.939-0.432-0.905-0.491-0.868-0.547-0.828-0.599-0.789-0.651-0.749-0.703-0.703-0.749-0.651-0.789-0.599-0.828-0.547-0.868-0.491-0.905-0.432-0.939-0.372-0.973-0.313-1.008-0.248-1.035-0.177-1.056-0.106-1.077-0.035-1.098 0.035-1.097 0.106-1.076 0.177-1.054 0.248-1.032 0.313-1.005 0.372-0.972 0.432-0.94 0.491-0.908 0.547-0.871 0.599-0.831 0.651-0.79 0.703-0.749 0.749-0.703 0.79-0.651 0.831-0.599 0.871-0.547 0.908-0.491 0.94-0.432 0.972-0.372 1.005-0.313 1.032-0.248 1.054-0.177 1.076-0.106 1.097-0.035z" Label="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Info]}"/>
+          <fui:CommandBarButton IconSource="Delete" Label="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Delete]}"/>
+          <fui:CommandBarButton IconSource="Share" Label="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Share]}"/>
+          <fui:CommandBarElementContainer>
+            <DropDownButton Classes="Transparent">
+              <Grid ColumnDefinitions="Auto, *" ColumnSpacing="8">
+                <PathIcon Data="{x:Static fi:FluentIcon.Scroll}"/>
+                <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Sort]}"/>
+              </Grid>
+              <DropDownButton.Flyout>
+                <fui:FluentMenuFlyout>
+                  <MenuItem
+                    GroupName="Top"
+                    Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_CreationDate]}"
+                    IsSelected="True"
+                    ToggleType="Radio"/>
+                  <MenuItem
+                    GroupName="Top"
+                    Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_TakeDate]}"
+                    ToggleType="Radio"/>
+                  <MenuItem
+                    GroupName="Top"
+                    Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_ModificationDate]}"
+                    ToggleType="Radio"/>
+                  <MenuItem
+                    GroupName="Top"
+                    Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Name]}"
+                    ToggleType="Radio"/>
+
+                  <Separator HorizontalAlignment="Stretch"/>
+
+                  <MenuItem
+                    GroupName="Bottom"
+                    Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Ascending]}"
+                    ToggleType="Radio"/>
+                  <MenuItem
+                    GroupName="Bottom"
+                    Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Descending]}"
+                    IsChecked="True"
+                    ToggleType="Radio"/>
+                </fui:FluentMenuFlyout>
+              </DropDownButton.Flyout>
+            </DropDownButton>
+          </fui:CommandBarElementContainer>
+        </fui:CommandBar.PrimaryCommands>
+
+        <fui:CommandBar.SecondaryCommands>
+          <fui:CommandBarButton IconSource="Setting" Label="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Settings]}"/>
+        </fui:CommandBar.SecondaryCommands>
+      </fui:CommandBar>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="CommandBarFlyoutCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_CommandBarFlyout]}">
+      <Border
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        ClipToBounds="True"
+        CornerRadius="8">
+        <Image
+          Name="Image"
+          Width="512"
+          HorizontalAlignment="Left"
+          Stretch="Uniform"/>
+      </Border>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

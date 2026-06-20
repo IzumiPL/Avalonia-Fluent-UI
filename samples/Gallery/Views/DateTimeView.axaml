@@ -8,7 +8,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:viewModel="clr-namespace:Gallery.ViewModels"
-  Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DateTime]}"
+  Title="{Binding Title}"
   d:DesignHeight="450"
   d:DesignWidth="800"
   x:DataType="viewModel:DateTimeViewModel"
@@ -73,37 +73,37 @@
             SelectedItem="{Binding CalenderDisplayMode, Mode=TwoWay}"/>
         </Grid>
       </Grid>
-      <ui:CodeCard.CodeContent>
-        <TextBlock
-          Margin="10,0,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Text="{Binding CurrentSelectedDate}"/>
-      </ui:CodeCard.CodeContent>
+      <!-- <ui:CodeCard.CodeContent> -->
+      <!--  <TextBlock  -->
+      <!--  Margin="10,0,0,0"  -->
+      <!--  HorizontalAlignment="Left"  -->
+      <!--  VerticalAlignment="Center"  -->
+      <!--  Text="{Binding CurrentSelectedDate}"/>  -->
+      <!-- </ui:CodeCard.CodeContent> -->
     </ui:CodeCard>
 
     <!--  CalenderDatePicker  -->
     <ui:CodeCard Name="CalendarDatePickerCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DT_CalendarDatePicker]}">
       <CalendarDatePicker SelectedDate="{Binding CalenderDatePickerSelectedDate}"/>
-      <ui:CodeCard.CodeContent>
-        <TextBlock
-          Margin="10,0,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Text="{Binding CurrentDatePickerSelectedDate}"/>
-      </ui:CodeCard.CodeContent>
+      <!-- <ui:CodeCard.CodeContent> -->
+      <!--  <TextBlock  -->
+      <!--  Margin="10,0,0,0"  -->
+      <!--  HorizontalAlignment="Left"  -->
+      <!--  VerticalAlignment="Center"  -->
+      <!--  Text="{Binding CurrentDatePickerSelectedDate}"/>  -->
+      <!-- </ui:CodeCard.CodeContent> -->
     </ui:CodeCard>
 
     <!--  ColorPicker  -->
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DT_ColorPicker]}">
       <ColorPicker HorizontalAlignment="Left" Color="{Binding ColorPickerSelectedColor}"/>
-      <ui:CodeCard.CodeContent>
-        <TextBlock
-          Margin="10,0,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Text="{Binding CurrentColor}"/>
-      </ui:CodeCard.CodeContent>
+      <!-- <ui:CodeCard.CodeContent> -->
+      <!--  <TextBlock  -->
+      <!--  Margin="10,0,0,0"  -->
+      <!--  HorizontalAlignment="Left"  -->
+      <!--  VerticalAlignment="Center"  -->
+      <!--  Text="{Binding CurrentColor}"/>  -->
+      <!-- </ui:CodeCard.CodeContent> -->
     </ui:CodeCard>
 
     <!--  DatePicker  -->
@@ -148,13 +148,13 @@
             IsChecked="{Binding DatePickerIsDisplayYear}"/>
         </Grid>
       </Grid>
-      <ui:CodeCard.CodeContent>
-        <TextBlock
-          Margin="10,0,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Text="{Binding DatePickerCurrentDate}"/>
-      </ui:CodeCard.CodeContent>
+      <!-- <ui:CodeCard.CodeContent> -->
+      <!--  <TextBlock  -->
+      <!--  Margin="10,0,0,0"  -->
+      <!--  HorizontalAlignment="Left"  -->
+      <!--  VerticalAlignment="Center"  -->
+      <!--  Text="{Binding DatePickerCurrentDate}"/>  -->
+      <!-- </ui:CodeCard.CodeContent> -->
     </ui:CodeCard>
 
     <!--  TimePicker  -->
@@ -193,13 +193,13 @@
             SelectedItem="{Binding TimePickerCurrentMinuteIncrement}"/>
         </Grid>
       </Grid>
-      <ui:CodeCard.CodeContent>
-        <TextBlock
-          Margin="10,0,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Text="{Binding TimePickerCurrentTime}"/>
-      </ui:CodeCard.CodeContent>
+      <!--   <ui:CodeCard.CodeContent> -->
+      <!--  <TextBlock  -->
+      <!--  Margin="10,0,0,0"  -->
+      <!--  HorizontalAlignment="Left"  -->
+      <!--  VerticalAlignment="Center"  -->
+      <!--  Text="{Binding TimePickerCurrentTime}"/>  -->
+      <!--   </ui:CodeCard.CodeContent> -->
     </ui:CodeCard>
   </StackPanel>
 </ui:ViewBase>

@@ -23,7 +23,8 @@
     Margin="0,0,0,20"
     HorizontalAlignment="Stretch"
     VerticalAlignment="Stretch"
-    HorizontalScrollBarVisibility="Disabled">
+    HorizontalScrollBarVisibility="Disabled"
+    Offset="{Binding ScrollViewerOffset, Mode=TwoWay}">
     <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
       <Border Grid.Row="0" Padding="35">
         <Border.Background>
@@ -34,7 +35,7 @@
             Margin="0,0,0,45"
             HorizontalAlignment="Left"
             FontSize="48"
-            Text="{Binding FluentGalleryTitle}"/>
+            Text="{Binding Title}"/>
 
           <fui:SingleDirectionScrollViewer
             Grid.Row="1"

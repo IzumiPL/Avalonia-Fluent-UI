@@ -1,0 +1,75 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.SpinBoxPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:SpinBoxPageViewModel"
+  mc:Ignorable="d">
+
+  <ui:ViewBase.Styles>
+    <Style Selector="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style Selector="TextBox">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+  </ui:ViewBase.Styles>
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="NumberBoxCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_NumberBox]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:NumberBox
+          MinWidth="128"
+          Maximum="10000"
+          Minimum="0"
+          SpinButtonPlacementMode="{Binding NumberBoxSpinButtonPlacementMode}"/>
+
+        <ui:Card Grid.Column="1">
+          <StackPanel Orientation="Vertical" Spacing="3">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <StackPanel Orientation="Horizontal" Spacing="3">
+              <TextBlock Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_SpinButtonMode]}"/>
+              <ComboBox
+                HorizontalAlignment="Stretch"
+                ItemsSource="{Binding NumberBoxSpinButtonPlacementModes}"
+                SelectedItem="{Binding NumberBoxSpinButtonPlacementMode}"/>
+            </StackPanel>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_ButtonSpinner]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <ButtonSpinner
+          Name="ButtonSpinner"
+          Grid.Column="0"
+          Width="128"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          AllowSpin="{Binding IsEnabledSpinner}"
+          ButtonSpinnerLocation="{Binding SpinnerLocation}"
+          Spin="OnSpin"/>
+        <ui:Card Grid.Column="1">
+          <StackPanel Orientation="Vertical" Spacing="3">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <StackPanel Orientation="Horizontal">
+              <TextBlock Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_SpinnerLocation]}"/>
+              <ComboBox ItemsSource="{Binding SpinnerLocations}" SelectedItem="{Binding SpinnerLocation}"/>
+            </StackPanel>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_EnableSpin]}" IsChecked="{Binding IsEnabledSpinner}"/>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

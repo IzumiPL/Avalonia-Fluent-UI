@@ -17,6 +17,8 @@ namespace Gallery.ViewModels;
 
 public partial class SettingsViewModel : ViewModelBase
 {
+    public override string Title => LocalizationService.Instance.GetString("Settings");
+    
     public SettingsViewModel(AppConfig? config)
     {
         FluentAvaloniaTheme.Instance.ThemeChanged += OnThemeChanged;
@@ -27,7 +29,6 @@ public partial class SettingsViewModel : ViewModelBase
 
     private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
     {
-        OnPropertyChanged(nameof(SettingsTitle));
         OnPropertyChanged(nameof(WindowEffect));
         OnPropertyChanged(nameof(WindowEffectDescription));
         OnPropertyChanged(nameof(AppearanceDescription));
@@ -53,6 +54,14 @@ public partial class SettingsViewModel : ViewModelBase
         if (config != null)
         {
             CurrentLanguage =  config.Language;
+            ToggleTheme(config.Theme);
+            
+            if (config.IsCustomAccentColor)
+            {
+                IsCustomColor = true;
+                IsDefaultAccentColor = false;
+                SelectedAccentColor = Color.Parse(config.CustomAccentColor);
+            }
             
             string effect = config.WindowEffect;
             if (effect == "Mica" && IsWindows11)
@@ -126,7 +135,6 @@ public partial class SettingsViewModel : ViewModelBase
     public string[] Languages => ["en-US", "zh-CN", "ja-JP"];
 
     // Localized string properties
-    public string SettingsTitle => LocalizationService.Instance.GetString("Settings");
     public string WindowEffect => LocalizationService.Instance.GetString("SV_WindowEffect");
     public string WindowEffectDescription => LocalizationService.Instance.GetString("SV_WindowEffectDescription");
     public string AppearanceDescription => LocalizationService.Instance.GetString("SV_Appearance");

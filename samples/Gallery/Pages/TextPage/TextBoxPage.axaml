@@ -1,0 +1,182 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.TextBoxPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:TextBoxPageViewModel"
+  mc:Ignorable="d">
+
+  <ui:ViewBase.Styles>
+
+    <Style Selector="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style Selector="TextBox">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+  </ui:ViewBase.Styles>
+
+  <StackPanel Spacing="50">
+    <!--  AutoCompleteBox  -->
+    <!--  如果Text需要嵌套{}  -->
+    <!--  Text="{}{This is literal text, not a markup extension}"  -->
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_AutoCompleteBox]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <AutoCompleteBox
+          Grid.Column="0"
+          Width="256"
+          HorizontalAlignment="Left"
+          FilterMode="{Binding AutoCompleterMode}"
+          ItemsSource="{Binding AutoCompleteItems}"
+          Text="{Binding AutoCompleteBoxText}"/>
+        <ui:Card
+          Grid.Column="1"
+          Width="328"
+          VerticalAlignment="Stretch">
+          <Grid
+            Margin="10"
+            ColumnDefinitions="Auto, *"
+            ColumnSpacing="6"
+            RowDefinitions="Auto, Auto, Auto"
+            RowSpacing="10">
+            <TextBlock
+              Grid.Row="0"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_AddMatchElement]}"/>
+            <TextBox
+              Grid.Row="0"
+              Grid.Column="1"
+              Text="{Binding AutoCompleteElement}"/>
+            <TextBlock
+              Grid.Row="1"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_SelectMatchMode]}"/>
+            <ComboBox
+              Grid.Row="1"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding AutoCompleteFilterModeItems}"
+              SelectedItem="{Binding SelectedAutoCompleteMode}"/>
+            <fui:FilledPushButton
+              Grid.Row="2"
+              Grid.ColumnSpan="2"
+              HorizontalAlignment="Stretch"
+              Classes="Success"
+              Command="{Binding AddAutoCompleteItemCommand}"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_AddMatchElementButton]}"/>
+          </Grid>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+
+    <!--  TextBox  -->
+    <ui:CodeCard Name="TextBoxCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_TextBox]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <TextBox
+          Width="256"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          AcceptsReturn="{Binding IsAccentReturn}"
+          AcceptsTab="{Binding IsAcceptTab}"
+          PlaceholderText="{Binding Watermark}"/>
+        <ui:Card
+          Grid.Column="1"
+          Width="256"
+          VerticalAlignment="Stretch">
+          <StackPanel Orientation="Vertical">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_AcceptReturn]}" IsChecked="{Binding IsAccentReturn}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_AcceptTab]}" IsChecked="{Binding IsAcceptTab}"/>
+            <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_WatermarkLabel]}"/>
+            <TextBox Text="{Binding Watermark}"/>
+
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_ClearTextBox]}">
+      <TextBox
+        Width="256"
+        HorizontalAlignment="Left"
+        Classes="Clear"
+        PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_ClearWatermark]}"
+        Text="Hello World"/>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="PasswordBoxCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_PasswordBox]}">
+      <TextBox
+        Width="256"
+        HorizontalAlignment="Left"
+        Classes="Password"
+        PasswordChar="*"
+        PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_EnterPassword]}"/>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_SearchBox]}">
+      <Grid ColumnDefinitions="*, Auto, Auto">
+        <fui:SearchTextBox
+          Width="256"
+          HorizontalAlignment="Left"
+          KeyDown="OnSearchKeyDown"
+          PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_SearchWatermark]}"
+          SearchCommand="{Binding SearchCommand}"/>
+
+        <CheckBox
+          Name="StbCheBox"
+          Grid.Column="1"
+          VerticalAlignment="Center"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_EnterToSearch]}"/>
+
+        <TextBlock
+          Name="SearchResult"
+          Grid.Column="2"
+          VerticalAlignment="Center"
+          Foreground="OrangeRed"
+          Text="{Binding SearchContent}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_SearchBox]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:LabelTextBox
+          MinWidth="168"
+          VerticalContentAlignment="Center"
+          Prefix="{Binding Prefix}"
+          Suffix="{Binding Suffix}"/>
+
+        <ui:Card Grid.Column="1">
+          <Grid RowDefinitions="Auto, Auto, Auto" RowSpacing="6">
+            <TextBlock
+              Grid.ColumnSpan="2"
+              HorizontalAlignment="Left"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+
+            <TextBox
+              Grid.Row="1"
+              PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Prefix]}"
+              Text="{Binding Prefix}"/>
+
+            <TextBox
+              Grid.Row="2"
+              PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Suffix]}"
+              Text="{Binding Suffix}"/>
+          </Grid>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

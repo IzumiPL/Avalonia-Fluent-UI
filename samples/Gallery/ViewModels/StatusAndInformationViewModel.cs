@@ -1,6 +1,7 @@
 ﻿using System;
 using Avalonia.Media;
 using AvaloniaFluentUI.Controls;
+using AvaloniaFluentUI.Locale;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -8,6 +9,8 @@ namespace Gallery.ViewModels;
 
 public partial class StatusAndInformationViewModel : ViewModelBase
 {
+    public override string Title => LocalizationService.Instance.GetString("StatusAndInformation");
+
     public InfoBarSeverity[] InfoBarSeverityItems => 
     [
         InfoBarSeverity.Informational,
@@ -38,13 +41,13 @@ public partial class StatusAndInformationViewModel : ViewModelBase
     private double _progressBarCurrentValue = 24.0;
 
     [ObservableProperty]
-    private bool _progressRingIsIndeterminate = true;
-
-    [ObservableProperty]
     private double _progressRingCurrentValue = 24.0;
 
     public IBrush ProgressRingBackground => new SolidColorBrush(ProgressRingColor);
-    
+
+    [ObservableProperty]
+    private bool _showPercent = false;
+
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(ProgressRingBackground))]
     private Color _progressRingColor = Colors.Transparent;

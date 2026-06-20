@@ -1,132 +1,23 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using Avalonia.Controls;
-using Avalonia.Layout;
-using Avalonia.Media;
-using AvaloniaFluentUI.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
+using AvaloniaFluentUI.Locale;
 using CommunityToolkit.Mvvm.Input;
+using Gallery.Models;
+using Gallery.Services;
 
 namespace Gallery.ViewModels;
 
 public partial class NavigationViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(CurrentPage))]
-    private NavigationViewItem? _currentItem;
-
-    public string CurrentPage => CurrentItem?.Content?.ToString() ?? "Null";
-
-    public NavigationViewDisplayMode[] DisplayModes => 
-    [
-        NavigationViewDisplayMode.Compact, 
-        NavigationViewDisplayMode.Expanded, 
-        NavigationViewDisplayMode.Minimal
-    ];
-
-    [ObservableProperty]
-    private NavigationViewDisplayMode _currentDisplayMode = NavigationViewDisplayMode.Expanded;
-
-    public NavigationViewPaneDisplayMode[] PaneDisplayModes => 
-    [ 
-        NavigationViewPaneDisplayMode.Auto, 
-        NavigationViewPaneDisplayMode.Left, 
-        NavigationViewPaneDisplayMode.Top, 
-        NavigationViewPaneDisplayMode.LeftCompact, 
-        NavigationViewPaneDisplayMode.LeftMinimal
-    ];
-    
-    [ObservableProperty]
-    private NavigationViewPaneDisplayMode _currentPaneDisplayMode = NavigationViewPaneDisplayMode.Auto;
-
-    [ObservableProperty]
-    private bool _backButtonIsEnabled;
-
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(NavigationCurrentItemFormat))]
-    private NavigationViewItem? _navigationCurrentItem;
-
-    public string NavigationCurrentItemFormat => NavigationCurrentItem?.ToString() ?? "Null";
-
-    [ObservableProperty]
-    private ObservableCollection<TabViewItem> _tabItemSource = new ObservableCollection<TabViewItem>();
-
-    private int tabCount = 3;
-
-    [ObservableProperty]
-    private object _tabViewCurrentItem;
+    public List<ButtonItemModel> NavigationViewItemSource { get; }
+    public override string Title => LocalizationService.Instance.GetString("Navigation");
 
     public NavigationViewModel()
     {
-        // for (int i = 1; i <= tabCount; i++)
-        // {
-        //     TabItemSource.Add( new TabViewItem
-        //     {
-        //         Header = $"和泉妃爱世界第一可爱x{i}!🥰",
-        //         Content = 
-        //             new TextBlock 
-        //             {
-        //                 Text = $"和泉妃爱世界第一可爱x{i}!🥰",
-        //                 FontSize = 24,
-        //                 HorizontalAlignment = HorizontalAlignment.Center,
-        //                 VerticalAlignment = VerticalAlignment.Center,
-        //                 Height = 328 
-        //             }
-        //     });
-        // }
-    }
-
-    [RelayCommand]
-    private void AddTab()
-    {
-        tabCount++;
-        TabItemSource.Add(new TabViewItem
-        {
-            Header = $"和泉妃爱世界第一可爱x{tabCount}!🥰",
-            Content = 
-                new TextBlock 
-                {
-                    
-                    Text = $"和泉妃爱世界第一可爱x{tabCount}!🥰",
-                    FontSize = 24,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Center,
-                    Height = 328 
-                }
-        });
-    }
-
-    public string[] BreadcrumbBarItemSource => @"C:\Users\Administrator\OneDrive\Pictures\Camera Roll".Split("\\");
-
-    [ObservableProperty]
-    private Dock _tabStripPlacement = Dock.Top;
-
-    public Dock[] TabStripPlacements => [ Dock.Top, Dock.Left, Dock.Right, Dock.Bottom];
-
-    [ObservableProperty]
-    private object _segmentedToggleSelectedItem;
-    
-    [ObservableProperty]
-    private string _segmentedSelectedItemFormat = "Null";
-
-    partial void OnSegmentedToggleSelectedItemChanged(object value)
-    {
-        if (value is SegmentedItem item)
-        {
-            SegmentedSelectedItemFormat = $"当前选中页面: " + item.Content;
-        }
-    }
-
-    [ObservableProperty]
-    private object _segmentedSelectedItem;
-
-    [ObservableProperty]
-    private string _selectedItemFormat = "Null";
-
-    partial void OnSegmentedSelectedItemChanged(object value)
-    {
-        if (value is SegmentedItem item)
-        {
-            SelectedItemFormat = "当前选中页面: " + item.Content;
-        }
+        NavigationViewItemSource = ButtonItemModel.CreateList(
+            ("NavigationView", "NavigationView", "NavigationView", "Navigation panel for page switching and menu navigation"),
+            ("BreadcrumbBar", "BreadcrumbBar", "BreadcrumbBar", "Breadcrumb navigation view"),
+            ("Pivot", "Segmented", "SegmentedView", "This is the segmented navigation bar")
+        );
     }
 }

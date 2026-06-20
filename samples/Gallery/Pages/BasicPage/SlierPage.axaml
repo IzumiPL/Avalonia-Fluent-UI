@@ -1,0 +1,66 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.SliderPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModels="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModels:SlierPageViewModel"
+  mc:Ignorable="d">
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="SliderCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Slider]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <Slider
+          Grid.Column="0"
+          Width="328"
+          HorizontalAlignment="Left"
+          Maximum="100"
+          Minimum="0"
+          Value="{Binding SliderCurrentValue}"/>
+        <TextBlock
+          Grid.Column="1"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Center"
+          Text="{Binding SliderCurrentValueFormat}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="ToolTipSliderCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ToolTipSlider]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:ToolTipSlider
+          Width="328"
+          HorizontalAlignment="Left"
+          IsEnabled="{Binding !ToolTipSliderIsDisabled}"
+          Maximum="100"
+          Minimum="0"
+          Orientation="{Binding ToolTipSliderOrientation}"/>
+
+        <ui:Card Grid.Column="1">
+          <StackPanel Orientation="Vertical" Spacing="3">
+            <TextBlock Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <StackPanel Orientation="Horizontal" Spacing="3">
+              <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Direction]}"/>
+              <ComboBox ItemsSource="{Binding Orientations}" SelectedItem="{Binding ToolTipSliderOrientation}"/>
+            </StackPanel>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}" IsChecked="{Binding ToolTipSliderIsDisabled}"/>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="RangeSliderCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_RangeSlider]}">
+      <fui:RangeSlider
+        Width="328"
+        HorizontalAlignment="Left"
+        Maximum="100"
+        Minimum="0"/>
+    </ui:CodeCard>
+
+  </StackPanel>
+</ui:ViewBase>

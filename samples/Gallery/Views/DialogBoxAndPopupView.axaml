@@ -1,204 +1,31 @@
-﻿<ui:ViewBase
+﻿<UserControl
   x:Class="Gallery.Views.DialogBoxAndPopupView"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
   xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:viewModel="clr-namespace:Gallery.ViewModels"
-  Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DialogAndPopup]}"
   d:DesignHeight="450"
   d:DesignWidth="800"
   x:DataType="viewModel:DialogBoxAndPopupViewModel"
   mc:Ignorable="d">
 
-  <ui:ViewBase.Styles>
-    <Style Selector="Flyout FlyoutPresenter">
-      <Setter Property="Margin" Value="0"/>
-      <Setter Property="Padding" Value="0"/>
-    </Style>
-  </ui:ViewBase.Styles>
-
-  <StackPanel Spacing="50">
-    <fui:ContentDialog
-      Name="ContentDialog"
-      Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ThisIsDialogWithMask]}"
-      CloseButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Close]}"
-      Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_OptimisticContent]}"
-      DefaultButton="Primary"
-      IsPrimaryButtonEnabled="True"
-      IsVisible="False"
-      PrimaryButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Confirm]}"/>
-    <ui:CodeCard Name="ContentDialogCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_DialogWithMask]}">
-      <Button Click="OnShowContentDialog" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Open]}"/>
-    </ui:CodeCard>
-
-    <fui:ContentDialog
-      Name="CustomDialog"
-      Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_OpenURL]}"
-      CloseButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Close]}"
-      DefaultButton="Primary"
-      IsPrimaryButtonEnabled="True"
-      IsVisible="False"
-      PrimaryButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Open]}">
-      <TextBox
-        HorizontalAlignment="Stretch"
-        VerticalAlignment="Center"
-        Watermark="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_URLWatermark]}"/>
-    </fui:ContentDialog>
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_CustomDialog]}">
-      <Button Click="OnShowCustomDialog" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Open]}"/>
-    </ui:CodeCard>
-
-    <ui:CodeCard Name="TaskDialogCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_TaskDialog]}">
-      <Button Click="OnShowTaskDialog" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ShowTaskDialog]}"/>
-    </ui:CodeCard>
-
-    <ui:CodeCard Name="FlyoutCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_FluentFlyout]}">
-      <Grid ColumnDefinitions="*, Auto, Auto">
-
-        <Button
-          Grid.Column="0"
-          Width="128"
-          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ShowPopup]}">
-          <Button.Flyout>
-            <fui:FluentFlyout IsOpen="{Binding FluentFlyoutIsOpen, Mode=TwoWay}" Placement="{Binding FlyoutPlacement}">
-              <Border Margin="0" Padding="0">
-                <Grid
-                  Margin="0"
-                  ColumnDefinitions="*, *"
-                  RowDefinitions="Auto, Auto, Auto, Auto">
-                  <TextBlock
-                    Grid.Row="0"
-                    Grid.ColumnSpan="2"
-                    Margin="10,10,10,1"
-                    HorizontalAlignment="Left"
-                    FontSize="24"
-                    Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_NoName]}"/>
-                  <TextBlock
-                    Grid.Row="1"
-                    Grid.ColumnSpan="2"
-                    Margin="10,1,10,12"
-                    HorizontalAlignment="Left"
-                    Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_EyeQuote]}"/>
-
-                  <Separator
-                    Grid.Row="2"
-                    Grid.ColumnSpan="2"
-                    HorizontalAlignment="Stretch"/>
-
-                  <Button
-                    Grid.Row="3"
-                    Grid.Column="0"
-                    HorizontalAlignment="Stretch"
-                    BorderThickness="0"
-                    Command="{Binding CloseFlyoutCommand}"
-                    Theme="{StaticResource TransparentButton}">
-                    <fui:SymbolIcon FontSize="18" Symbol="Accept"/>
-
-                  </Button>
-                  <Button
-                    Grid.Row="3"
-                    Grid.Column="1"
-                    HorizontalAlignment="Stretch"
-                    BorderThickness="0"
-                    Command="{Binding CloseFlyoutCommand}"
-                    Theme="{StaticResource TransparentButton}">
-                    <fui:SymbolIcon FontSize="18" Symbol="Clear"/>
-                  </Button>
-                </Grid>
-              </Border>
-            </fui:FluentFlyout>
-          </Button.Flyout>
-        </Button>
-
-        <TextBlock
-          Grid.Column="1"
-          HorizontalAlignment="Right"
-          VerticalAlignment="Center"
-          Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_FlyoutPositionLabel]}"/>
-        <ComboBox
-          Grid.Column="2"
-          Width="256"
-          Margin="8,0,12,0"
-          HorizontalAlignment="Right"
-          VerticalAlignment="Center"
-          ItemsSource="{Binding FlyoutPlacements}"
-          SelectedItem="{Binding FlyoutPlacement}"/>
-      </Grid>
-    </ui:CodeCard>
-
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ImageButtonFlyout]}">
-      <Button Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ShowFlyout]}">
-        <Button.Flyout>
-          <fui:FluentFlyout IsOpen="{Binding FluentFlyoutIsOpen, Mode=TwoWay}" Placement="Right">
-            <Grid Height="388" RowDefinitions="*, Auto, Auto, Auto">
-              <Image
-                Grid.Row="0"
-                Source="avares://Gallery/Assets/Images/mc.jpg"
-                Stretch="UniformToFill"/>
-              <TextBlock
-                Grid.Row="1"
-                Margin="10,10,0,2"
-                HorizontalAlignment="Left"
-                FontFamily="Bold"
-                FontSize="20"
-                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Minecraft]}"/>
-              <SelectableTextBlock
-                Grid.Row="2"
-                Margin="10,0,10,2"
-                FontSize="12"
-                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ForgeDesc]}"
-                TextWrapping="WrapWithOverflow"/>
-              <Button
-                Grid.Row="3"
-                Width="128"
-                Margin="0,0,10,10"
-                HorizontalAlignment="Right"
-                Command="{Binding CloseFlyoutCommand}"
-                Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Action]}"/>
-            </Grid>
-          </fui:FluentFlyout>
-        </Button.Flyout>
-      </Button>
-    </ui:CodeCard>
-
-    <fui:TeachingTip
-      Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_TipTitle]}"
-      ActionButtonCommand="{Binding CloseTeachingTipCommand}"
-      ActionButtonContent="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Confirm]}"
-      IsLightDismissEnabled="True"
-      IsOpen="{Binding TeachingTipIsOpen}"
-      IsVisible="False"
-      PreferredPlacement="{Binding TeachingTipPlacement}"
-      Subtitle="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_TeachingTipSubtitle]}"
-      Target="{Binding ElementName=TeachingTipButton}"/>
-    <ui:CodeCard Name="TeachingTipCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_TeachingTip]}">
-      <Grid ColumnDefinitions="*, Auto">
-        <Button
-          Name="TeachingTipButton"
-          Command="{Binding ShowTeachingTipCommand}"
-          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_TeachingTipButton]}"/>
-
-        <StackPanel
-          Grid.Column="1"
-          Width="128"
-          Orientation="Horizontal"
-          Spacing="3">
-          <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Position]}"/>
-          <ComboBox
-            VerticalAlignment="Center"
-            ItemsSource="{Binding TeachingTipPlacements}"
-            SelectedItem="{Binding TeachingTipPlacement}"/>
-        </StackPanel>
-      </Grid>
-    </ui:CodeCard>
-
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ColorPicker]}">
-      <ColorPicker HorizontalAlignment="Left" VerticalAlignment="Center"/>
-    </ui:CodeCard>
-
-  </StackPanel>
-</ui:ViewBase>
+  <fui:SmoothScrollViewer Padding="0,0,15,0">
+    <Grid Margin="18,24,24,0" RowDefinitions="Auto, *">
+      <TextBlock
+        HorizontalAlignment="Left"
+        FontSize="32"
+        Text="{Binding Title}"/>
+      <ui:ButtonItemsPanel
+        Grid.Row="1"
+        Margin="0,24,0,0"
+        Command="{Binding GotoCommand}"
+        ItemsSource="{Binding DialogItemSource}"
+        Tag="BasicInput"/>
+    </Grid>
+  </fui:SmoothScrollViewer>
+</UserControl>

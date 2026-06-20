@@ -1,0 +1,195 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.TextBlockPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:TextBlockPageViewModel"
+  mc:Ignorable="d">
+
+  <ui:ViewBase.Styles>
+
+    <Style Selector="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style Selector="TextBox">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+  </ui:ViewBase.Styles>
+
+  <StackPanel Spacing="50">
+    <!--  TextBlock  -->
+    <ui:CodeCard Name="TextBlockCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_DisplayText]}">
+      <Grid ColumnDefinitions="*, Auto" RowDefinitions="*, *">
+        <TextBlock
+          Grid.Row="0"
+          Grid.Column="0"
+          HorizontalAlignment="Center"
+          FontSize="{Binding TextBlockFontSize}"
+          FontStyle="{Binding TextBlockFontStyle}"
+          FontWeight="{Binding TextBlockFontWeight}"
+          LetterSpacing="{Binding TextBlockLetterSpacing}"
+          Text="{Binding TextBlockText}"
+          TextDecorations="{Binding TextDecorations}"/>
+        <TextBlock
+          Grid.Row="1"
+          Grid.Column="0"
+          HorizontalAlignment="Center">
+          <Run Text="Your name is"/>
+          <Run
+            FontSize="24"
+            FontWeight="Bold"
+            Foreground="Orange"
+            Text="John Doe"/>
+          <Run Text="and your favorite activity is"/>
+          <Run
+            FontStyle="Italic"
+            Foreground="DeepPink"
+            Text="Learning Avalonia"
+            TextDecorations="Underline"/>
+        </TextBlock>
+
+        <ui:Card Grid.RowSpan="2" Grid.Column="1">
+          <Grid
+            Margin="10"
+            ColumnDefinitions="Auto, *"
+            ColumnSpacing="10"
+            RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
+            RowSpacing="6">
+            <TextBlock
+              Grid.Row="0"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_SetDisplayText]}"/>
+            <TextBox
+              Grid.Row="0"
+              Grid.Column="1"
+              Text="{Binding TextBlockText}"/>
+
+            <TextBlock
+              Grid.Row="1"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_FontSize]}"/>
+            <ComboBox
+              Grid.Row="1"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding FontSizeItems}"
+              SelectedItem="{Binding TextBlockFontSize}"/>
+
+            <TextBlock
+              Grid.Row="2"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_FontWeight]}"/>
+            <ComboBox
+              Grid.Row="2"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding FontWeightItems}"
+              SelectedItem="{Binding TextBlockFontWeight}"/>
+
+            <TextBlock
+              Grid.Row="3"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_FontStyle]}"/>
+            <ComboBox
+              Grid.Row="3"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding FontStyleItems}"
+              SelectedItem="{Binding TextBlockFontStyle}"/>
+
+            <TextBlock
+              Grid.Row="4"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_SetLetterSpacing]}"/>
+            <fui:ToolTipSlider
+              Grid.Row="4"
+              Grid.Column="1"
+              Margin="0"
+              Padding="0"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Center"
+              Maximum="32"
+              Minimum="0"
+              Value="{Binding TextBlockLetterSpacing, Mode=TwoWay}"/>
+
+            <TextBlock
+              Grid.Row="5"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_TextDecoration]}"/>
+            <ComboBox
+              Grid.Row="5"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding TextDecorationsItems}"
+              SelectedItem="{Binding TextDecorations}"/>
+          </Grid>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[HyperlinkLabel]}">
+      <StackPanel
+        Margin="8,8,0,0"
+        Orientation="Vertical"
+        Spacing="8">
+        <fui:HyperlinkLabel Text="GitHub" Uri="https://github.com/IzumiPL/Avalonia-Fluent-UI.git"/>
+        <fui:HyperlinkLabel Text="SourceCode" Uri="https://github.com/IzumiPL/Avalonia-Fluent-UI/tree/master/samples/Gallery"/>
+        <fui:HyperlinkLabel Text="NuGet" Uri="https://www.nuget.org/packages/AvaloniaFluentUI/"/>
+      </StackPanel>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Typography]}">
+      <StackPanel Margin="8,8,0,0" Orientation="Vertical">
+        <Border
+          Padding="10"
+          Background="#10000000"
+          CornerRadius="4">
+          <TextBlock Classes="Caption" Text="Caption Text Block"/>
+        </Border>
+
+        <Border Padding="10" CornerRadius="4">
+          <TextBlock Text="Body Text Block"/>
+        </Border>
+
+        <Border
+          Padding="10"
+          Background="#10000000"
+          CornerRadius="4">
+          <TextBlock Classes="StrongBody" Text="StrongBody Text Block"/>
+        </Border>
+
+        <Border Padding="10" CornerRadius="4">
+          <TextBlock Classes="SubTitle" Text="SubTitle Text Block"/>
+        </Border>
+
+        <Border
+          Padding="10"
+          Background="#10000000"
+          CornerRadius="4">
+          <TextBlock Classes="Title" Text="Title Text Block"/>
+        </Border>
+
+        <Border Padding="10" CornerRadius="4">
+          <TextBlock Classes="LargeTitle" Text="LargeTitle Text Block"/>
+        </Border>
+
+        <Border
+          Padding="10"
+          Background="#10000000"
+          CornerRadius="4">
+          <TextBlock Classes="Display" Text="Display Text Block"/>
+        </Border>
+      </StackPanel>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

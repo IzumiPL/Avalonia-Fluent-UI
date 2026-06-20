@@ -243,14 +243,11 @@
   <data name="CodeSamples" xml:space="preserve">
     <value>コードサンプル</value>
   </data>
-  <data name="Control_Border" xml:space="preserve">
-    <value>Border</value>
+  <data name="Border" xml:space="preserve">
+    <value>国境</value>
   </data>
-  <data name="Control_BreadcrumbBar" xml:space="preserve">
-    <value>BreadcrumbBar</value>
-  </data>
-  <data name="Control_Button" xml:space="preserve">
-    <value>Button</value>
+  <data name="BreadcrumbBar" xml:space="preserve">
+    <value>パンくずナビバー</value>
   </data>
   <data name="Control_ButtonDesc" xml:space="preserve">
     <value>ユーザー入力に応答するコントロール。</value>
@@ -258,140 +255,47 @@
   <data name="Control_CalendarDatePicker" xml:space="preserve">
     <value>CalendarDatePicker</value>
   </data>
-  <data name="Control_Canvas" xml:space="preserve">
-    <value>Canvas</value>
-  </data>
-  <data name="Control_CheckBox" xml:space="preserve">
-    <value>CheckBox</value>
-  </data>
   <data name="Control_CheckBoxDesc" xml:space="preserve">
     <value>選択/クリアできるコントロール。</value>
-  </data>
-  <data name="Control_ComboBox" xml:space="preserve">
-    <value>ComboBox</value>
   </data>
   <data name="Control_ComboBoxDesc" xml:space="preserve">
     <value>ドロップダウンリスト。</value>
   </data>
-  <data name="Control_CommandBar" xml:space="preserve">
-    <value>CommandBar</value>
-  </data>
-  <data name="Control_CommandBarFlyout" xml:space="preserve">
-    <value>CommandBarFlyout</value>
-  </data>
-  <data name="Control_ContentDialog" xml:space="preserve">
-    <value>ContentDialog</value>
-  </data>
-  <data name="Control_DatePicker" xml:space="preserve">
-    <value>DatePicker</value>
-  </data>
-  <data name="Control_DropDownButton" xml:space="preserve">
-    <value>DropDownButton</value>
-  </data>
   <data name="Control_DropDownButtonDesc" xml:space="preserve">
     <value>クリックで選択肢を表示するボタン。</value>
   </data>
-  <data name="Control_Expander" xml:space="preserve">
-    <value>Expander</value>
+  <data name="FlipView" xml:space="preserve">
+    <value>フリップビュー</value>
   </data>
-  <data name="Control_FlipView" xml:space="preserve">
-    <value>FlipView</value>
+  <data name="Flyout" xml:space="preserve">
+    <value>フライアウト</value>
   </data>
-  <data name="Control_Flyout" xml:space="preserve">
-    <value>Flyout</value>
+  <data name="List" xml:space="preserve">
+    <value>リスト</value>
   </data>
-  <data name="Control_Grid" xml:space="preserve">
-    <value>Grid</value>
+  <data name="NavigationView" xml:space="preserve">
+    <value>ナビゲーションビュー</value>
   </data>
-  <data name="Control_HyperlinkButton" xml:space="preserve">
-    <value>HyperlinkButton</value>
-  </data>
-  <data name="Control_InfoBadge" xml:space="preserve">
-    <value>InfoBadge</value>
-  </data>
-  <data name="Control_InfoBar" xml:space="preserve">
-    <value>InfoBar</value>
-  </data>
-  <data name="Control_ListBox" xml:space="preserve">
-    <value>ListBox</value>
-  </data>
-  <data name="Control_MenuBar" xml:space="preserve">
-    <value>MenuBar</value>
-  </data>
-  <data name="Control_MenuFlyout" xml:space="preserve">
-    <value>Menu</value>
-  </data>
-  <data name="Control_NavigationView" xml:space="preserve">
-    <value>NavigationView</value>
-  </data>
-  <data name="Control_NumberBox" xml:space="preserve">
-    <value>NumberBox</value>
-  </data>
-  <data name="Control_PageTransition" xml:space="preserve">
-    <value>PageTransition</value>
-  </data>
-  <data name="Control_PasswordBox" xml:space="preserve">
-    <value>PasswordBox</value>
-  </data>
-  <data name="Control_Pivot" xml:space="preserve">
-    <value>Segmented</value>
-  </data>
-  <data name="Control_ProgressBar" xml:space="preserve">
-    <value>ProgressBar</value>
-  </data>
-  <data name="Control_ProgressRing" xml:space="preserve">
-    <value>ProgressRing</value>
-  </data>
-  <data name="Control_RadioButton" xml:space="preserve">
-    <value>RadioButton</value>
-  </data>
-  <data name="Control_RelativePanel" xml:space="preserve">
-    <value>RelativePanel</value>
-  </data>
-  <data name="Control_Slider" xml:space="preserve">
-    <value>Slider</value>
+  <data name="NumberBox" xml:space="preserve">
+    <value>数値ボックス</value>
   </data>
   <data name="Control_SliderDesc" xml:space="preserve">
     <value>値の範囲から選択。</value>
   </data>
-  <data name="Control_SplitButton" xml:space="preserve">
-    <value>SplitButton</value>
+  <data name="TextBlock" xml:space="preserve">
+    <value>テキストブロック</value>
   </data>
-  <data name="Control_SplitView" xml:space="preserve">
-    <value>SplitView</value>
-  </data>
-  <data name="Control_StackPanel" xml:space="preserve">
-    <value>StackPanel</value>
-  </data>
-  <data name="Control_TeachingTip" xml:space="preserve">
-    <value>TeachingTip</value>
-  </data>
-  <data name="Control_TextBlock" xml:space="preserve">
-    <value>TextBlock</value>
-  </data>
-  <data name="Control_TextBox" xml:space="preserve">
-    <value>TextBox</value>
-  </data>
-  <data name="Control_TimePicker" xml:space="preserve">
-    <value>TimePicker</value>
-  </data>
-  <data name="Control_ToggleButton" xml:space="preserve">
-    <value>ToggleButton</value>
+  <data name="TextBox" xml:space="preserve">
+    <value>テキストボックス</value>
   </data>
   <data name="Control_ToggleButtonDesc" xml:space="preserve">
     <value>2状態切替ボタン。</value>
   </data>
-  <data name="Control_ToggleSwitch" xml:space="preserve">
-    <value>SwitchButton</value>
-  </data>
   <data name="Control_ToggleSwitchDesc" xml:space="preserve">
     <value>2状態切替スイッチ。</value>
   </data>
-  <data name="Control_ToolTip" xml:space="preserve">
-    <value>ToolTip</value>
-  </data>
-  <data name="Control_TreeView" xml:space="preserve">
-    <value>TreeView</value>
+  <data name="TreeView" xml:space="preserve">
+    <value>ツリービュー</value>
   </data>
   <data name="DP_Action" xml:space="preserve">
     <value>アクション</value>
@@ -467,9 +371,6 @@
   </data>
   <data name="FP_Page4" xml:space="preserve">
     <value>ページ4(なし)</value>
-  </data>
-  <data name="FluentGallery" xml:space="preserve">
-    <value>Fluent Gallery</value>
   </data>
   <data name="GettingStarted" xml:space="preserve">
     <value>はじめに</value>
@@ -555,7 +456,7 @@
   <data name="MT_CommandBarFlyout" xml:space="preserve">
     <value>コマンドバーフライアウト</value>
   </data>
-  <data name="MT_ContextMenu" xml:space="preserve">
+  <data name="ContextMenu" xml:space="preserve">
     <value>コンテキストメニュー</value>
   </data>
   <data name="MT_Debug" xml:space="preserve">
@@ -585,7 +486,7 @@
   <data name="MT_Logout" xml:space="preserve">
     <value>ログアウト</value>
   </data>
-  <data name="MT_Menu" xml:space="preserve">
+  <data name="Menu" xml:space="preserve">
     <value>メニュー</value>
   </data>
   <data name="MT_Name" xml:space="preserve">
@@ -612,8 +513,8 @@
   <data name="MT_Share" xml:space="preserve">
     <value>共有</value>
   </data>
-  <data name="MT_Sort" xml:space="preserve">
-    <value>並び替え</value>
+  <data name="MT_SelectedMenu" xml:space="preserve">
+    <value>選択可能な右クリックメニュー</value>
   </data>
   <data name="MenuAndToolBar" xml:space="preserve">
     <value>メニューとツールバー</value>
@@ -666,7 +567,7 @@
   <data name="NV_Subscriptions" xml:space="preserve">
     <value>サブスクリプション</value>
   </data>
-  <data name="NV_Tabs" xml:space="preserve">
+  <data name="Tabs" xml:space="preserve">
     <value>タブ</value>
   </data>
   <data name="NV_TopNavigation" xml:space="preserve">
@@ -848,9 +749,6 @@
   </data>
   <data name="View" xml:space="preserve">
     <value>ビュー</value>
-  </data>
-  <data name="MV_Title" xml:space="preserve">
-    <value>Avalonia Fluent UI Gallery</value>
   </data>
   <data name="MV_SearchWatermark" xml:space="preserve">
     <value>検索内容を入力してください</value>
@@ -1510,5 +1408,149 @@
   </data>
   <data name="VP_SystemReqDesMoreInfo" xml:space="preserve">
     <value>詳細</value>
+  </data>
+  <data name="BI_EnabledEdit" xml:space="preserve">
+    <value>編集を有効にする</value>
+  </data>
+  <data name="Button" xml:space="preserve">
+    <value>ボタン</value>
+  </data>
+  <data name="ComboBox" xml:space="preserve">
+    <value>ドロップダウンボックス</value>
+  </data>
+  <data name="Slider" xml:space="preserve">
+    <value>スライダー</value>
+  </data>
+  <data name="Dialog" xml:space="preserve">
+    <value>ダイアログボックス</value>
+  </data>
+  <data name="Panel" xml:space="preserve">
+    <value>パネル</value>
+  </data>
+  <data name="LV_BorderWidth" xml:space="preserve">
+    <value>境界線の幅</value>
+  </data>
+  <data name="LV_BorderRadius" xml:space="preserve">
+    <value>境界フィレット幅</value>
+  </data>
+  <data name="LV_LeftRight" xml:space="preserve">
+    <value>左 | そうだ</value>
+  </data>
+  <data name="LV_TopBottom" xml:space="preserve">
+    <value>アップ |下</value>
+  </data>
+  <data name="Row" xml:space="preserve">
+    <value>わかりました</value>
+  </data>
+  <data name="Column" xml:space="preserve">
+    <value>リスト</value>
+  </data>
+  <data name="SegmentedView" xml:space="preserve">
+    <value>セグメント化されたビューバー</value>
+  </data>
+  <data name="CurrentSelectedPage" xml:space="preserve">
+    <value>現在選択されているページ</value>
+  </data>
+  <data name="Frame" xml:space="preserve">
+    <value>フレーム</value>
+  </data>
+  <data name="WhatToSearchFor" xml:space="preserve">
+    <value>検索すべきポイント</value>
+  </data>
+  <data name="PleaseEnterText" xml:space="preserve">
+    <value>テキストを入力してください</value>
+  </data>
+  <data name="CarouselView" xml:space="preserve">
+    <value>カルーセルビュー</value>
+  </data>
+  <data name="Card" xml:space="preserve">
+    <value>カード</value>
+  </data>
+  <data name="VP_PipsCount" xml:space="preserve">
+    <value>ドット数</value>
+  </data>
+  <data name="CurrentPage" xml:space="preserve">
+    <value>現在のページ</value>
+  </data>
+  <data name="PageCount" xml:space="preserve">
+    <value>ページ数</value>
+  </data>
+  <data name="CustomItemContextMenu" xml:space="preserve">
+    <value>カスタムコンテンツのコンテキストメニュー</value>
+  </data>
+  <data name="RightClickedHere" xml:space="preserve">
+    <value>右クリックはこちら</value>
+  </data>
+  <data name="AddTo" xml:space="preserve">
+    <value>に追加</value>
+  </data>
+  <data name="Video" xml:space="preserve">
+    <value>動画</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>フィードバック</value>
+  </data>
+  <data name="CommandBar" xml:space="preserve">
+    <value>コマンドバー</value>
+  </data>
+  <data name="Typography" xml:space="preserve">
+    <value>タイポグラフィ</value>
+  </data>
+  <data name="HyperlinkLabel" xml:space="preserve">
+    <value>ハイパーリンクマーク</value>
+  </data>
+  <data name="Prefix" xml:space="preserve">
+    <value>接頭語</value>
+  </data>
+  <data name="Suffix" xml:space="preserve">
+    <value>サフィックス</value>
+  </data>
+  <data name="Avatar" xml:space="preserve">
+    <value>アバター</value>
+  </data>
+  <data name="IsCircular" xml:space="preserve">
+    <value>丸いです</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>幅</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>高い</value>
+  </data>
+  <data name="Radius" xml:space="preserve">
+    <value>フィレット幅</value>
+  </data>
+  <data name="ShortcutKeyPicker" xml:space="preserve">
+    <value>ショートカットキーセレクター</value>
+  </data>
+  <data name="ShortcutKeyPanel" xml:space="preserve">
+    <value>ショートカットパネル</value>
+  </data>
+  <data name="DG_ShortcutKeyPicker" xml:space="preserve">
+    <value>ショートカットキーセレクター</value>
+  </data>
+  <data name="VE_FileDropPicker" xml:space="preserve">
+    <value>ファイルセレクタ</value>
+  </data>
+  <data name="VE_FolderDropPicker" xml:space="preserve">
+    <value>フォルダーセレクター</value>
+  </data>
+  <data name="FileDropPicker" xml:space="preserve">
+    <value>ファイルセレクタ</value>
+  </data>
+  <data name="AllowMultiple" xml:space="preserve">
+    <value>多くの選択肢があります</value>
+  </data>
+  <data name="DefaultStartLocation" xml:space="preserve">
+    <value>デフォルトの開始位置</value>
+  </data>
+  <data name="SelectedButtonIsVisible" xml:space="preserve">
+    <value>選択ボタンが表示されます</value>
+  </data>
+  <data name="ShowPercentage" xml:space="preserve">
+    <value>パーセンテージ表示</value>
+  </data>
+  <data name="PleaseSelectYourOption" xml:space="preserve">
+    <value>オプションを選択してください</value>
   </data>
 </root>

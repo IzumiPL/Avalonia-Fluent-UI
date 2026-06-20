@@ -1,49 +1,27 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Avalonia.Controls;
 using AvaloniaFluentUI.Controls;
+using AvaloniaFluentUI.Locale;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Gallery.Models;
+using Gallery.Services;
 
 namespace Gallery.ViewModels;
 
 public partial class DialogBoxAndPopupViewModel : ViewModelBase
 {
-    [ObservableProperty]
-    private PlacementMode _flyoutPlacement = PlacementMode.Top;
-
-    [ObservableProperty]
-    private PlacementMode[] _flyoutPlacements =
-    [
-        PlacementMode.Top,
-        PlacementMode.Left,
-        PlacementMode.Right,
-        PlacementMode.Bottom,
-        PlacementMode.Center,
-        PlacementMode.Pointer,
-    ];
-
-    [ObservableProperty]
-    private bool _fluentFlyoutIsOpen;
-
-    public TeachingTipPlacementMode[] TeachingTipPlacements => [ TeachingTipPlacementMode.Auto, TeachingTipPlacementMode.Bottom, TeachingTipPlacementMode.BottomLeft, TeachingTipPlacementMode.BottomRight, TeachingTipPlacementMode.Center, TeachingTipPlacementMode.Left, TeachingTipPlacementMode.LeftBottom, TeachingTipPlacementMode.LeftTop, TeachingTipPlacementMode.Right, TeachingTipPlacementMode.RightBottom, TeachingTipPlacementMode.RightTop, TeachingTipPlacementMode.Top, TeachingTipPlacementMode.TopLeft, TeachingTipPlacementMode.TopRight]; 
+    public override string Title => LocalizationService.Instance.GetString("DialogAndPopup");
     
-    [ObservableProperty]
-    private TeachingTipPlacementMode _teachingTipPlacement = TeachingTipPlacementMode.Top;
+    public List<ButtonItemModel> DialogItemSource { get; }
 
-    [RelayCommand]
-    private void CloseFlyout() => FluentFlyoutIsOpen = false;
-
-    [ObservableProperty]
-    private bool _teachingTipIsOpen;
-
-    [RelayCommand]
-    private void CloseTeachingTip() => TeachingTipIsOpen = false;
-
-    [RelayCommand]
-    private void ShowTeachingTip()
+    public DialogBoxAndPopupViewModel()
     {
-        Console.WriteLine(TeachingTipIsOpen);
-        if (TeachingTipIsOpen) TeachingTipIsOpen = false;
-        TeachingTipIsOpen = true;
+        DialogItemSource = ButtonItemModel.CreateList(
+            ("Flyout", "TaskDialog", "Dialog", "A task dialog."),
+            ("Flyout", "Flyout", "Flyout", "Shows contextual information and enables user interaction."),
+            ("ContentDialog", "ContentDialog", "Dialog", "A content dialog with mask."),
+            ("TeachingTip", "TeachingTip", "Flyout", "A content-rich flyout for guiding users and enabling teaching moments.")
+        );
     }
 }

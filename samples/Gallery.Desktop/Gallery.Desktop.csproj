@@ -11,12 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia.Desktop" />
+    <PackageReference Include="Avalonia.Desktop"/>
   </ItemGroup>
-  
-    <PropertyGroup>
 
-<PublishAot>true</PublishAot>
+  <PropertyGroup>
+    <PublishAot>true</PublishAot>
     <PublishTrimmed>true</PublishTrimmed>      <!-- 裁剪未使用的程序集，减小发布体积 -->
     <TrimMode>full</TrimMode>                  <!-- 裁剪模式：full 为最激进，移除所有未使用的代码 -->
     <StripSymbols>true</StripSymbols>          <!-- 剥离调试符号文件(.pdb)，进一步减小体积 -->
@@ -25,10 +24,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Gallery\Gallery.csproj" />
+    <ProjectReference Include="..\Gallery\Gallery.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\Gallery\Assets\Locale\**" CopyToOutputDirectory="PreserveNewest" Link="Assets\Locale\%(RecursiveDir)%(Filename)%(Extension)" />
+    <Content Include="..\Gallery\Assets\Locale\**" CopyToOutputDirectory="PreserveNewest" Link="Assets\Locale\%(RecursiveDir)%(Filename)%(Extension)"/>
   </ItemGroup>
 </Project>

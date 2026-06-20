@@ -1,18 +1,26 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using Avalonia;
 using Avalonia.Controls;
-using Avalonia.VisualTree;
 using AvaloniaFluentUI.Locale;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Gallery.Models;
+using Gallery.Services;
 
 namespace Gallery.ViewModels;
 
 public partial class HomeViewModel : ViewModelBase
 {
+    public override string Title => "Fluent Gallery";
+    
+    [ObservableProperty]
+    private Vector _scrollViewerOffset =  new Vector();
+
+    public Vector Vector => ScrollViewerOffset;
+    
     public HomeViewModel()
     {
 #if DEBUG
@@ -20,88 +28,77 @@ public partial class HomeViewModel : ViewModelBase
 #endif
         LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
 
-        ButtonItemSource = new List<ButtonItemModel>()
-        {
-            new("Button", "Button", "A control that responds to user input and emit clicked signal."),
-            new("Checkbox", "CheckBox", "A control that a user can select or clear."),
-            new("ComboBox", "ComboBox", "A drop-down list of items a user can select from."),
-            new("DropDownButton", "DropDownButton", "A button that display a flyout of choices when clicked."),
-            new("HyperlinkButton", "HyperlinkButton", "A button that appears as hyperlink text, and can navigate to a RUL or handle a Click event."),
-            new("RadioButton", "RadioButton", "A control that allows a user to select a single option from a group of options."),
-            new("Slider", "Slider", "A control that lets the user select from a range of values by moving a Thumb control along a track."),
-            new("SplitButton", "SplitButton", "A two-part button that displays a flyout when its secondary part is clicked."),
-            new("ToggleSwitch", "SwitchButton", "A switch that can be toggled between 2 states."),
-            new("ToggleButton", "ToggleButton", "A button that can be switched between two states like a CheckBox."),
-        };
+        ButtonItemSource = ButtonItemModel.CreateList(
+            ("Button", "Button", "Button", "A control that responds to user input and emit clicked signal."),
+            ("Checkbox", "CheckBox", "Button", "A control that a user can select or clear."),
+            ("ComboBox", "ComboBox", "ComboBox", "A drop-down list of items a user can select from."),
+            ("DropDownButton", "DropDownButton", "Button", "A button that display a flyout of choices when clicked."),
+            ("HyperlinkButton", "HyperlinkButton", "Button", "A button that appears as hyperlink text, and can navigate to a RUL or handle a Click event."),
+            ("RadioButton", "RadioButton", "Button", "A control that allows a user to select a single option from a group of options."),
+            ("Slider", "Slider", "Slider", "A control that lets the user select from a range of values by moving a Thumb control along a track."),
+            ("SplitButton", "SplitButton", "Button", "A two-part button that displays a flyout when its secondary part is clicked."),
+            ("ToggleSwitch", "SwitchButton", "Button", "A switch that can be toggled between 2 states."),
+            ("ToggleButton", "ToggleButton", "Button", "A button that can be switched between two states like a CheckBox.")
+        );
 
-        DateTimeItemSource = new List<ButtonItemModel>()
-        {
-            new("CalendarDatePicker", "CalendarDatePicker", "A control that lets a user pick a date value using a calendar."),
-            new("DatePicker", "DatePicker", "A control that lets a user pick a date value."),
-            new("TimePicker", "TimePicker", "A configurable control that lets a user pick a time value."),
-        };
+        DateTimeItemSource = ButtonItemModel.CreateList(
+            ("CalendarDatePicker", "CalendarDatePicker", "DateTime", "A control that lets a user pick a date value using a calendar."),
+            ("DatePicker", "DatePicker", "DateTime", "A control that lets a user pick a date value."),
+            ("TimePicker", "TimePicker", "DateTime", "A configurable control that lets a user pick a time value.")
+        );
 
-        DialogItemSource = new List<ButtonItemModel>()
-        {
-            new("Flyout", "TaskDialog", "A task dialog."),
-            new("Flyout", "Flyout", "Shows contextual information and enables user interaction."),
-            new("ContentDialog", "ContentDialog", "A content dialog with mask."),
-            new("TeachingTip", "TeachingTip", "A content-rich flyout for guiding users and enabling teaching moments."),
-        };
+        DialogItemSource = ButtonItemModel.CreateList(
+            ("Flyout", "TaskDialog", "Dialog", "A task dialog."),
+            ("Flyout", "Flyout", "Flyout", "Shows contextual information and enables user interaction."),
+            ("ContentDialog", "ContentDialog", "Dialog", "A content dialog with mask."),
+            ("TeachingTip", "TeachingTip", "Flyout", "A content-rich flyout for guiding users and enabling teaching moments.")
+        );
 
-        LayoutItemSource = new List<ButtonItemModel>()
-        {
-            new("Border", "Border", "Simple border layout"),
-            new("Canvas", "Canvas", "Can draw any shape canvas control"),
-            new("SplitView", "SplitView", "split view layout"),
-            new("Grid", "Grid", "A grid layout"),
-            new("RelativePanel", "RelativePanel", "Relative panel, control relative layout"),
-            new("StackPanel", "StackPanel", "A stackPanel layout"),
-            new("Expander", "Expander", "A expander layout"),
-        };
+        LayoutItemSource = ButtonItemModel.CreateList(
+            ("Border", "Border", "Border", "Simple border layout"),
+            ("Canvas", "Canvas", "Border", "Can draw any shape canvas control"),
+            ("SplitView", "SplitView","", "split view layout"),
+            ("Grid", "Grid", "Panel", "A grid layout"),
+            ("RelativePanel", "RelativePanel", "Panel", "Relative panel, control relative layout"),
+            ("StackPanel", "StackPanel", "Panel", "A stackPanel layout"),
+            ("Expander", "Expander", "Panel", "A expander layout")
+        );
 
-        MenuAndToolBarItemSource = new List<ButtonItemModel>()
-        {
-            new("MenuFlyout", "Menu", "Shows a contextual list of simple commands or options."),
-            new("MenuBar", "MenuBar", "Simple top menu bar"),
-            new("CommandBar", "CommandBar", "Display the command bar"),
-            new("CommandBarFlyout", "CommandBarFlyout", "A mini-toolbar displaying proactive commands, and an optional menu of commands."),
-        };
+        MenuAndToolBarItemSource = ButtonItemModel.CreateList(
+            ("MenuFlyout", "Menu", "ContextMenu", "Shows a contextual list of simple commands or options."),
+            ("MenuBar", "MenuBar", "Menu", "Simple top menu bar"),
+            ("CommandBar", "CommandBar", "CommandBar", "Display the command bar"),
+            ("CommandBarFlyout", "CommandBarFlyout", "CommandBar", "A mini-toolbar displaying proactive commands, and an optional menu of commands.")
+        );
 
-        NavigationViewItemSource = new List<ButtonItemModel>()
-        {
-            new("NavigationView", "NavigationView", "Navigation panel for page switching and menu navigation"),
-            new("PageTransition", "PageTransition", "Page switching control with animation"),
-            new("BreadcrumbBar", "BreadcrumbBar", "Breadcrumb navigation view"),
-            new("Pivot", "Segmented", "This is the segmented navigation bar")
-        };
+        NavigationViewItemSource = ButtonItemModel.CreateList(
+            ("NavigationView", "NavigationView", "NavigationView", "Navigation panel for page switching and menu navigation"),
+            ("BreadcrumbBar", "BreadcrumbBar", "BreadcrumbBar", "Breadcrumb navigation view"),
+            ("Pivot", "Segmented", "SegmentedView", "This is the segmented navigation bar")
+        );
 
-        StatusAndInformationItemSource = new List<ButtonItemModel>()
-        {
-            new("ToolTip", "ToolTip", "A control tooltip, hover show tooltip"),
-            new("InfoBadge", "InfoBadge", "Information badges can display a variety of information"),
-            new("InfoBar", "InfoBar", "Information bar can display a variety of information and can be closed"),
-            new("ProgressBar", "ProgressBar", "The progress bar has two states: confirmed and uncertain."),
-            new("ProgressRing", "ProgressRing", "A progress ring"),
-        };
+        StatusAndInformationItemSource = ButtonItemModel.CreateList(
+            ("ToolTip", "ToolTip", "StatusAndInformation",  "A control tooltip, hover show tooltip"),
+            ("InfoBadge", "InfoBadge", "StatusAndInformation", "Information badges can display a variety of information"),
+            ("InfoBar", "InfoBar", "StatusAndInformation", "Information bar can display a variety of information and can be closed"),
+            ("ProgressBar", "ProgressBar", "StatusAndInformation", "The progress bar has two states: confirmed and uncertain."),
+            ("ProgressRing", "ProgressRing", "StatusAndInformation", "A progress ring")
+        );
 
-        TextItemSource = new List<ButtonItemModel>()
-        {
-            new("TextBlock", "TextBlock", "Text block, used to display text"),
-            new("TextBox", "TextBox", "Text input box"),
-            new("PasswordBox", "PasswordBox", "Password input box, which can be turned on and off to display the password"),
-            new("NumberBox", "NumberBox", "Numeric input box that can be fine-tuned"),
-        };
+        TextItemSource = ButtonItemModel.CreateList(
+            ("TextBlock", "TextBlock", "TextBlock", "Text block, used to display text"),
+            ("TextBox", "TextBox", "TextBox", "Text input box"),
+            ("PasswordBox", "PasswordBox", "TextBox", "Password input box, which can be turned on and off to display the password"),
+            ("NumberBox", "NumberBox", "NumberBox", "Numeric input box that can be fine-tuned")
+        );
 
-        ViewItemSource = new List<ButtonItemModel>()
-        {
-            new("FlipView", "FlipView", "Carousel view, a control suitable for displaying multiple pictures"),
-            new("ListBox", "ListBox", "List box, can display multiple items"),
-            new("TreeView", "TreeView", "A tree view"),
-        };
+        ViewItemSource = ButtonItemModel.CreateList(
+            ("FlipView", "FlipView", "CarouselView", "Carousel view, a control suitable for displaying multiple pictures"),
+            ("PageTransition", "PageTransition", "CarouselView", "Page switching control with animation"),
+            ("ListBox", "ListBox", "List", "List box, can display multiple items"),
+            ("TreeView", "TreeView", "TreeView", "A tree view")
+        );
     }
-
-    public event Action<string, string>? GotoControlEvent;
 
     public void ReleaseImages()
     {
@@ -127,20 +124,6 @@ public partial class HomeViewModel : ViewModelBase
         }
     }
 
-    [RelayCommand]
-    private void Goto(object value)
-    {
-        if (value is Button button)
-        {
-            var name = button.GetVisualDescendants().OfType<TextBlock>().FirstOrDefault(x => x.Name == "Title")?.Text;
-            GotoControlEvent?.Invoke(button.Tag?.ToString()!, name);
-
-#if DEBUG
-            Debug.WriteLine($"Goto => View: {button.Tag}, Name: {name}");
-#endif
-        }
-    }
-
     public List<ButtonItemModel> ButtonItemSource { get; }
     public List<ButtonItemModel> DateTimeItemSource { get; }
     public List<ButtonItemModel> DialogItemSource { get; }
@@ -152,7 +135,6 @@ public partial class HomeViewModel : ViewModelBase
     public List<ButtonItemModel> ViewItemSource { get; }
 
     // Localized string properties
-    public string FluentGalleryTitle => LocalizationService.Instance.GetString("FluentGallery");
     public string GettingStartedTitle => LocalizationService.Instance.GetString("GettingStarted");
     public string GettingStartedContent => LocalizationService.Instance.GetString("GettingStartedContent");
     public string GitHubRepoTitle => LocalizationService.Instance.GetString("GitHubRepo");
@@ -170,10 +152,9 @@ public partial class HomeViewModel : ViewModelBase
     public string SectionStatusAndInformation => LocalizationService.Instance.GetString("Section_StatusAndInformation");
     public string SectionText => LocalizationService.Instance.GetString("Section_Text");
     public string SectionView => LocalizationService.Instance.GetString("Section_View");
-
+    
     private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
     {
-        OnPropertyChanged(nameof(FluentGalleryTitle));
         OnPropertyChanged(nameof(GettingStartedTitle));
         OnPropertyChanged(nameof(GettingStartedContent));
         OnPropertyChanged(nameof(GitHubRepoTitle));

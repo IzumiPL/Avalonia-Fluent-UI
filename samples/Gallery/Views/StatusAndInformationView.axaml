@@ -8,7 +8,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:viewModel="clr-namespace:Gallery.ViewModels"
-  Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[StatusAndInformation]}"
+  Title="{Binding Title}"
   d:DesignHeight="450"
   d:DesignWidth="800"
   x:DataType="viewModel:StatusAndInformationViewModel"
@@ -50,7 +50,7 @@
           </fui:InfoBar.ActionButton>
         </fui:InfoBar>
         <ui:Card Grid.Column="1" Width="256">
-          <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto, Auto">
+          <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto, Auto">
             <TextBlock
               Grid.Row="0"
               Grid.Column="0"
@@ -94,20 +94,37 @@
           Minimum="0"
           Value="{Binding ProgressBarCurrentValue}"/>
         <ui:Card Grid.Column="1" Width="256">
-          <StackPanel Orientation="Vertical" Spacing="3">
-            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Options]}"/>
-            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_IsIndeterminate]}" IsChecked="{Binding ProgressBarIsIndeterminate}"/>
-            <StackPanel Orientation="Horizontal" Spacing="3">
-              <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Progress]}"/>
+          <Grid
+            ColumnDefinitions="Auto, *"
+            ColumnSpacing="6"
+            RowDefinitions="Auto, Auto, Auto"
+            RowSpacing="6">
+            <TextBlock
+              Grid.Row="0"
+              Grid.ColumnSpan="2"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Options]}"/>
+            <CheckBox
+              Grid.Row="1"
+              Grid.ColumnSpan="2"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_IsIndeterminate]}"
+              IsChecked="{Binding ProgressBarIsIndeterminate}"/>
 
-              <fui:NumberBox
-                HorizontalAlignment="Stretch"
-                Maximum="100"
-                Minimum="0"
-                SpinButtonPlacementMode="Inline"
-                Value="{Binding ProgressBarCurrentValue}"/>
-            </StackPanel>
-          </StackPanel>
+
+            <TextBlock
+              Grid.Row="2"
+              Grid.Column="0"
+              VerticalAlignment="Center"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Progress]}"/>
+            <fui:NumberBox
+              Grid.Row="2"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              Maximum="100"
+              Minimum="0"
+              SpinButtonPlacementMode="Inline"
+              Value="{Binding ProgressBarCurrentValue}"/>
+          </Grid>
         </ui:Card>
       </Grid>
     </ui:CodeCard>
@@ -119,30 +136,61 @@
           Height="128"
           HorizontalAlignment="Left"
           Background="{Binding ProgressRingBackground}"
-          IsIndeterminate="{Binding ProgressRingIsIndeterminate}"
+          IsIndeterminate="{Binding !ShowPercent}"
           Maximum="100"
           Minimum="0"
+          ShowPercent="{Binding ShowPercent}"
           Value="{Binding ProgressRingCurrentValue}"/>
 
         <ui:Card Grid.Column="1" Width="256">
-          <StackPanel Orientation="Vertical" Spacing="3">
-            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Options]}"/>
-            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_IsIndeterminate]}" IsChecked="{Binding ProgressRingIsIndeterminate}"/>
-            <StackPanel Orientation="Horizontal" Spacing="3">
-              <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Progress]}"/>
+          <Grid
+            ColumnDefinitions="Auto, *"
+            ColumnSpacing="6"
+            RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+            RowSpacing="6">
+            <TextBlock
+              Grid.Row="0"
+              Grid.ColumnSpan="2"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Options]}"/>
 
-              <fui:NumberBox
-                HorizontalAlignment="Stretch"
-                Maximum="100"
-                Minimum="0"
-                SpinButtonPlacementMode="Inline"
-                Value="{Binding ProgressRingCurrentValue}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Spacing="3">
-              <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_BgColor]}"/>
-              <ColorPicker HorizontalAlignment="Left" Color="{Binding ProgressRingColor, Mode=TwoWay}"/>
-            </StackPanel>
-          </StackPanel>
+            <CheckBox
+              Grid.Row="1"
+              Grid.ColumnSpan="2"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_IsIndeterminate]}"
+              IsChecked="{Binding !ShowPercent}"/>
+
+            <TextBlock
+              Grid.Row="2"
+              Grid.Column="0"
+              VerticalAlignment="Center"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Progress]}"/>
+            <fui:NumberBox
+              Grid.Row="2"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              Maximum="100"
+              Minimum="0"
+              SpinButtonPlacementMode="Inline"
+              Value="{Binding ProgressRingCurrentValue}"/>
+
+            <TextBlock
+              Grid.Row="3"
+              Grid.Column="0"
+              VerticalAlignment="Center"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_BgColor]}"/>
+            <ColorPicker
+              Grid.Row="3"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              Color="{Binding ProgressRingColor, Mode=TwoWay}"/>
+
+            <CheckBox
+              Grid.Row="4"
+              Grid.ColumnSpan="2"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ShowPercentage]}"
+              IsChecked="{Binding ShowPercent}"/>
+          </Grid>
         </ui:Card>
       </Grid>
     </ui:CodeCard>

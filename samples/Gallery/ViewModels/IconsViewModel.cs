@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Avalonia.Media;
+using AvaloniaFluentUI.Locale;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 
@@ -7,8 +8,10 @@ using Gallery.Messages.IconViewMessages;
 
 namespace Gallery.ViewModels;
 
-public partial class IconsViewModel : ViewModelBase 
+public partial class IconsViewModel : ViewModelBase
 {
+    public override string Title => LocalizationService.Instance.GetString("Icon");
+
     public IconsViewModel()
     {
 #if DEBUG

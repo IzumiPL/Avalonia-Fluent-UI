@@ -13,57 +13,19 @@ using Gallery.ViewModels;
 
 namespace Gallery.Views;
 
-public partial class NavigationView : ViewBase
+public partial class NavigationView : UserControl 
 {
-    public NavigationView() : base("Navigation")
+    public NavigationView()// : base("Navigation")
     {
         InitializeComponent();
         
-        CodeCards = new Dictionary<string, CodeCard>()
-        {
-            {"NavigationView", NavigationViewCard},
-            {"PageTransition", PageTransitionCard},
+        // CodeCards = new Dictionary<string, CodeCard>()
+        // {
+            // {"NavigationView", NavigationViewCard},
+            // {"PageTransition", PageTransitionCard},
             // {"TabView", TabViewCard},
-            {"BreadcrumbBar", BreadcrumbBarCard},
-            {"Segmented", SegmentedCard}
-        };
-
-        AddHandler(Frame.RequestBringIntoViewEvent, (_, e) => { e.Handled = true; });
-    }
-
-    private void OnListSelectionChanged(object? sender, SelectionChangedEventArgs e)
-    {
-        var listBox = sender as ListBox;
-        if (listBox == null) return;
-        
-        switch (listBox.SelectedIndex)
-        {
-            case 0:
-                Frame.Navigate(typeof(FramePage1));
-                break;
-
-            case 1:
-                Frame.Navigate(typeof(FramePage2), null, new SlideNavigationTransitionInfo());
-                break;
-
-            case 2:
-                Frame.Navigate(typeof(FramePage3), null, new DrillInNavigationTransitionInfo());
-                break;
-
-            case 3:
-                Frame.Navigate(typeof(FramePage4), null, new SuppressNavigationTransitionInfo());
-                break;
-        }
-    }
-
-    private void OnTabCloseRequested(TabView sender, TabViewTabCloseRequestedEventArgs args)
-    {
-        if (DataContext is NavigationViewModel viewModel)
-        {
-            if (args.Item is TabViewItem item)
-            {
-                viewModel.TabItemSource.Remove(item);
-            }
-        }
+            // {"BreadcrumbBar", BreadcrumbBarCard},
+            // {"Segmented", SegmentedCard}
+        // };
     }
 }

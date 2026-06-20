@@ -243,14 +243,11 @@
   <data name="CodeSamples" xml:space="preserve">
     <value>Code samples</value>
   </data>
-  <data name="Control_Border" xml:space="preserve">
+  <data name="Border" xml:space="preserve">
     <value>Border</value>
   </data>
-  <data name="Control_BreadcrumbBar" xml:space="preserve">
+  <data name="BreadcrumbBar" xml:space="preserve">
     <value>BreadcrumbBar</value>
-  </data>
-  <data name="Control_Button" xml:space="preserve">
-    <value>Button</value>
   </data>
   <data name="Control_ButtonDesc" xml:space="preserve">
     <value>A control that responds to user input.</value>
@@ -258,139 +255,46 @@
   <data name="Control_CalendarDatePicker" xml:space="preserve">
     <value>CalendarDatePicker</value>
   </data>
-  <data name="Control_Canvas" xml:space="preserve">
-    <value>Canvas</value>
-  </data>
-  <data name="Control_CheckBox" xml:space="preserve">
-    <value>CheckBox</value>
-  </data>
   <data name="Control_CheckBoxDesc" xml:space="preserve">
     <value>A control that a user can select or clear.</value>
-  </data>
-  <data name="Control_ComboBox" xml:space="preserve">
-    <value>ComboBox</value>
   </data>
   <data name="Control_ComboBoxDesc" xml:space="preserve">
     <value>A drop-down list of items.</value>
   </data>
-  <data name="Control_CommandBar" xml:space="preserve">
-    <value>CommandBar</value>
-  </data>
-  <data name="Control_CommandBarFlyout" xml:space="preserve">
-    <value>CommandBarFlyout</value>
-  </data>
-  <data name="Control_ContentDialog" xml:space="preserve">
-    <value>ContentDialog</value>
-  </data>
-  <data name="Control_DatePicker" xml:space="preserve">
-    <value>DatePicker</value>
-  </data>
-  <data name="Control_DropDownButton" xml:space="preserve">
-    <value>DropDownButton</value>
-  </data>
   <data name="Control_DropDownButtonDesc" xml:space="preserve">
     <value>A button that display a flyout of choices when clicked.</value>
   </data>
-  <data name="Control_Expander" xml:space="preserve">
-    <value>Expander</value>
+  <data name="FlipView" xml:space="preserve">
+    <value>Flip View</value>
   </data>
-  <data name="Control_FlipView" xml:space="preserve">
-    <value>FlipView</value>
-  </data>
-  <data name="Control_Flyout" xml:space="preserve">
+  <data name="Flyout" xml:space="preserve">
     <value>Flyout</value>
   </data>
-  <data name="Control_Grid" xml:space="preserve">
-    <value>Grid</value>
+  <data name="List" xml:space="preserve">
+    <value>List</value>
   </data>
-  <data name="Control_HyperlinkButton" xml:space="preserve">
-    <value>HyperlinkButton</value>
-  </data>
-  <data name="Control_InfoBadge" xml:space="preserve">
-    <value>InfoBadge</value>
-  </data>
-  <data name="Control_InfoBar" xml:space="preserve">
-    <value>InfoBar</value>
-  </data>
-  <data name="Control_ListBox" xml:space="preserve">
-    <value>ListBox</value>
-  </data>
-  <data name="Control_MenuBar" xml:space="preserve">
-    <value>MenuBar</value>
-  </data>
-  <data name="Control_MenuFlyout" xml:space="preserve">
-    <value>Menu</value>
-  </data>
-  <data name="Control_NavigationView" xml:space="preserve">
+  <data name="NavigationView" xml:space="preserve">
     <value>NavigationView</value>
   </data>
-  <data name="Control_NumberBox" xml:space="preserve">
+  <data name="NumberBox" xml:space="preserve">
     <value>NumberBox</value>
-  </data>
-  <data name="Control_PageTransition" xml:space="preserve">
-    <value>PageTransition</value>
-  </data>
-  <data name="Control_PasswordBox" xml:space="preserve">
-    <value>PasswordBox</value>
-  </data>
-  <data name="Control_Pivot" xml:space="preserve">
-    <value>Segmented</value>
-  </data>
-  <data name="Control_ProgressBar" xml:space="preserve">
-    <value>ProgressBar</value>
-  </data>
-  <data name="Control_ProgressRing" xml:space="preserve">
-    <value>ProgressRing</value>
-  </data>
-  <data name="Control_RadioButton" xml:space="preserve">
-    <value>RadioButton</value>
-  </data>
-  <data name="Control_RelativePanel" xml:space="preserve">
-    <value>RelativePanel</value>
-  </data>
-  <data name="Control_Slider" xml:space="preserve">
-    <value>Slider</value>
   </data>
   <data name="Control_SliderDesc" xml:space="preserve">
     <value>Lets the user select from a range of values.</value>
   </data>
-  <data name="Control_SplitButton" xml:space="preserve">
-    <value>SplitButton</value>
-  </data>
-  <data name="Control_SplitView" xml:space="preserve">
-    <value>SplitView</value>
-  </data>
-  <data name="Control_StackPanel" xml:space="preserve">
-    <value>StackPanel</value>
-  </data>
-  <data name="Control_TeachingTip" xml:space="preserve">
-    <value>TeachingTip</value>
-  </data>
-  <data name="Control_TextBlock" xml:space="preserve">
+  <data name="TextBlock" xml:space="preserve">
     <value>TextBlock</value>
   </data>
-  <data name="Control_TextBox" xml:space="preserve">
+  <data name="TextBox" xml:space="preserve">
     <value>TextBox</value>
-  </data>
-  <data name="Control_TimePicker" xml:space="preserve">
-    <value>TimePicker</value>
-  </data>
-  <data name="Control_ToggleButton" xml:space="preserve">
-    <value>ToggleButton</value>
   </data>
   <data name="Control_ToggleButtonDesc" xml:space="preserve">
     <value>A button switchable between two states.</value>
   </data>
-  <data name="Control_ToggleSwitch" xml:space="preserve">
-    <value>SwitchButton</value>
-  </data>
   <data name="Control_ToggleSwitchDesc" xml:space="preserve">
     <value>A switch that can be toggled between 2 states.</value>
   </data>
-  <data name="Control_ToolTip" xml:space="preserve">
-    <value>ToolTip</value>
-  </data>
-  <data name="Control_TreeView" xml:space="preserve">
+  <data name="TreeView" xml:space="preserve">
     <value>TreeView</value>
   </data>
   <data name="DP_Action" xml:space="preserve">
@@ -467,9 +371,6 @@
   </data>
   <data name="FP_Page4" xml:space="preserve">
     <value>Frame Page 4 (None)</value>
-  </data>
-  <data name="FluentGallery" xml:space="preserve">
-    <value>Fluent Gallery</value>
   </data>
   <data name="GettingStarted" xml:space="preserve">
     <value>Getting started</value>
@@ -555,7 +456,7 @@
   <data name="MT_CommandBarFlyout" xml:space="preserve">
     <value>Command Bar Flyout</value>
   </data>
-  <data name="MT_ContextMenu" xml:space="preserve">
+  <data name="ContextMenu" xml:space="preserve">
     <value>Context Menu</value>
   </data>
   <data name="MT_Debug" xml:space="preserve">
@@ -585,7 +486,7 @@
   <data name="MT_Logout" xml:space="preserve">
     <value>Logout</value>
   </data>
-  <data name="MT_Menu" xml:space="preserve">
+  <data name="Menu" xml:space="preserve">
     <value>Menu</value>
   </data>
   <data name="MT_Name" xml:space="preserve">
@@ -612,8 +513,8 @@
   <data name="MT_Share" xml:space="preserve">
     <value>Share</value>
   </data>
-  <data name="MT_Sort" xml:space="preserve">
-    <value>Sort</value>
+  <data name="MT_SelectedMenu" xml:space="preserve">
+    <value>Selectable right-click menu</value>
   </data>
   <data name="MenuAndToolBar" xml:space="preserve">
     <value>Menu and ToolBar</value>
@@ -666,7 +567,7 @@
   <data name="NV_Subscriptions" xml:space="preserve">
     <value>Subscriptions</value>
   </data>
-  <data name="NV_Tabs" xml:space="preserve">
+  <data name="Tabs" xml:space="preserve">
     <value>Tabs</value>
   </data>
   <data name="NV_TopNavigation" xml:space="preserve">
@@ -848,9 +749,6 @@
   </data>
   <data name="View" xml:space="preserve">
     <value>View</value>
-  </data>
-  <data name="MV_Title" xml:space="preserve">
-    <value>Avalonia Fluent UI Gallery</value>
   </data>
   <data name="MV_SearchWatermark" xml:space="preserve">
     <value>Please enter search content</value>
@@ -1510,5 +1408,149 @@
   </data>
   <data name="VP_SystemReqDesMoreInfo" xml:space="preserve">
     <value>Details</value>
+  </data>
+  <data name="BI_EnabledEdit" xml:space="preserve">
+    <value>Enable editing</value>
+  </data>
+  <data name="Button" xml:space="preserve">
+    <value>Button</value>
+  </data>
+  <data name="ComboBox" xml:space="preserve">
+    <value>ComboBox</value>
+  </data>
+  <data name="Slider" xml:space="preserve">
+    <value>Slider</value>
+  </data>
+  <data name="Dialog" xml:space="preserve">
+    <value>Dialog</value>
+  </data>
+  <data name="Panel" xml:space="preserve">
+    <value>Panel</value>
+  </data>
+  <data name="LV_BorderRadius" xml:space="preserve">
+    <value>Border Radius</value>
+  </data>
+  <data name="LV_BorderWidth" xml:space="preserve">
+    <value>Border Width</value>
+  </data>
+  <data name="LV_LeftRight" xml:space="preserve">
+    <value>Left | Right</value>
+  </data>
+  <data name="LV_TopBottom" xml:space="preserve">
+    <value>Top | Bottom</value>
+  </data>
+  <data name="Row" xml:space="preserve">
+    <value>Rows</value>
+  </data>
+  <data name="Column" xml:space="preserve">
+    <value>Columns</value>
+  </data>
+  <data name="SegmentedView" xml:space="preserve">
+    <value>SegmentedView</value>
+  </data>
+  <data name="CurrentSelectedPage" xml:space="preserve">
+    <value>Current Selected Page</value>
+  </data>
+  <data name="Frame" xml:space="preserve">
+    <value>Frame</value>
+  </data>
+  <data name="WhatToSearchFor" xml:space="preserve">
+    <value>What to search for</value>
+  </data>
+  <data name="PleaseEnterText" xml:space="preserve">
+    <value>Please enter text</value>
+  </data>
+  <data name="CarouselView" xml:space="preserve">
+    <value>CarouselView</value>
+  </data>
+  <data name="Card" xml:space="preserve">
+    <value>Card</value>
+  </data>
+  <data name="VP_PipsCount" xml:space="preserve">
+    <value>Pips Count</value>
+  </data>
+  <data name="CurrentPage" xml:space="preserve">
+    <value>Current Page</value>
+  </data>
+  <data name="PageCount" xml:space="preserve">
+    <value>Page Count</value>
+  </data>
+  <data name="CustomItemContextMenu" xml:space="preserve">
+    <value>Context menu for custom content</value>
+  </data>
+  <data name="RightClickedHere" xml:space="preserve">
+    <value>Right clicked here</value>
+  </data>
+  <data name="AddTo" xml:space="preserve">
+    <value>Add To</value>
+  </data>
+  <data name="Video" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="CommandBar" xml:space="preserve">
+    <value>Command Bar</value>
+  </data>
+  <data name="Typography" xml:space="preserve">
+    <value>Typography</value>
+  </data>
+  <data name="HyperlinkLabel" xml:space="preserve">
+    <value>Hyperlink Label</value>
+  </data>
+  <data name="Prefix" xml:space="preserve">
+    <value>Prefix</value>
+  </data>
+  <data name="Suffix" xml:space="preserve">
+    <value>Suffix</value>
+  </data>
+  <data name="Avatar" xml:space="preserve">
+    <value>Avatar</value>
+  </data>
+  <data name="IsCircular" xml:space="preserve">
+    <value>Is circular</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="Radius" xml:space="preserve">
+    <value>Radius</value>
+  </data>
+  <data name="ShortcutKeyPicker" xml:space="preserve">
+    <value>ShortcutKeyPicker</value>
+  </data>
+  <data name="ShortcutKeyPanel" xml:space="preserve">
+    <value>Shortcut Key Panel</value>
+  </data>
+  <data name="DG_ShortcutKeyPicker" xml:space="preserve">
+    <value>Shortcut Key Picker</value>
+  </data>
+  <data name="VE_FolderDropPicker" xml:space="preserve">
+    <value>Folder Drop Picker</value>
+  </data>
+  <data name="VE_FileDropPicker" xml:space="preserve">
+    <value>File Drop Picker</value>
+  </data>
+  <data name="FileDropPicker" xml:space="preserve">
+    <value>FileDropPicker</value>
+  </data>
+  <data name="AllowMultiple" xml:space="preserve">
+    <value>Allow multiple</value>
+  </data>
+  <data name="DefaultStartLocation" xml:space="preserve">
+    <value>Default start location</value>
+  </data>
+  <data name="SelectedButtonIsVisible" xml:space="preserve">
+    <value>Selected button is visible</value>
+  </data>
+  <data name="ShowPercentage" xml:space="preserve">
+    <value>Show percentage</value>
+  </data>
+  <data name="PleaseSelectYourOption" xml:space="preserve">
+    <value>Please select your option</value>
   </data>
 </root>

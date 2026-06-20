@@ -1,12 +1,14 @@
 ﻿using System;
 using Avalonia.Controls;
 using Avalonia.Media;
+using AvaloniaFluentUI.Locale;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Gallery.ViewModels;
 
 public partial class DateTimeViewModel : ViewModelBase
 {
+    public override string Title => LocalizationService.Instance.GetString("DateTime");
     
     [ObservableProperty]
     private CalendarSelectionMode _calendarSelectionMode = CalendarSelectionMode.SingleDate;

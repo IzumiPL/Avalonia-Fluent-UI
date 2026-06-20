@@ -1,0 +1,223 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.ContextMenuPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:ContextMenuViewModel"
+  mc:Ignorable="d">
+
+  <ui:ViewBase.Styles>
+    <Style Selector="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+  </ui:ViewBase.Styles>
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="MenuCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CustomItemContextMenu]}">
+      <Border
+        Height="256"
+        Margin="24"
+        Background="#01FFFFFF"
+        CornerRadius="10">
+        <Border.ContextMenu>
+          <fui:FluentContextMenu MinWidth="300">
+            <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto">
+              <Image
+                Grid.RowSpan="3"
+                Grid.Column="0"
+                Width="64"
+                Height="64"
+                Margin="-18,0,10,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                RenderOptions.BitmapInterpolationMode="HighQuality"
+                Source="avares://Gallery/Assets/Images/avater.png"
+                Stretch="Uniform"/>
+              <TextBlock
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="11,0,0,0"
+                VerticalAlignment="Center"
+                FontSize="18"
+                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_LoginName]}"/>
+              <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="11,0,0,0"
+                VerticalAlignment="Center"
+                FontSize="12"
+                Text="hanserinterval@outlook.com"/>
+              <Button
+                Grid.Row="2"
+                Grid.Column="1"
+                HorizontalAlignment="Left"
+                Classes="Transparent"
+                Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Logout]}"
+                Foreground="{DynamicResource SystemAccentColor}"/>
+            </Grid>
+            <Separator HorizontalAlignment="Stretch"/>
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_ManageAccounts]}">
+              <MenuItem.Icon>
+                <PathIcon Data="{x:Static fi:FluentIcon.People}"/>
+              </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_PaymentMethods]}">
+              <MenuItem.Icon>
+                <PathIcon Data="{x:Static fi:FluentIcon.ShoppingCart}"/>
+              </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_RedeemCode]}">
+              <MenuItem.Icon>
+                <PathIcon Data="{x:Static fi:FluentIcon.Code}"/>
+              </MenuItem.Icon>
+            </MenuItem>
+            <Separator HorizontalAlignment="Stretch"/>
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Settings]}">
+              <MenuItem.Icon>
+                <PathIcon Data="{x:Static fi:FluentIcon.Setting}"/>
+              </MenuItem.Icon>
+            </MenuItem>
+          </fui:FluentContextMenu>
+        </Border.ContextMenu>
+        <TextBlock
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          FontSize="24"
+          Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[RightClickedHere]}"/>
+      </Border>
+    </ui:CodeCard>
+
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_SelectedMenu]}">
+      <Border
+        Height="256"
+        Margin="24"
+        Background="#01FFFFFF"
+        CornerRadius="10">
+        <Border.ContextMenu>
+          <fui:FluentContextMenu>
+            <MenuItem
+              GroupName="Top"
+              Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_CreationDate]}"
+              IsChecked="True"
+              ToggleType="CheckBox"/>
+            <MenuItem
+              GroupName="Top"
+              Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_TakeDate]}"
+              ToggleType="CheckBox"/>
+            <MenuItem
+              GroupName="Top"
+              Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_ModificationDate]}"
+              ToggleType="CheckBox"/>
+            <MenuItem
+              GroupName="Top"
+              Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Name]}"
+              ToggleType="CheckBox"/>
+
+            <Separator HorizontalAlignment="Stretch"/>
+
+            <MenuItem
+              GroupName="Bottom"
+              Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Ascending]}"
+              ToggleType="Radio"/>
+            <MenuItem
+              GroupName="Bottom"
+              Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Descending]}"
+              IsChecked="True"
+              ToggleType="Radio"/>
+          </fui:FluentContextMenu>
+        </Border.ContextMenu>
+        <TextBlock
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          FontSize="24"
+          Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[RightClickedHere]}"/>
+      </Border>
+    </ui:CodeCard>
+
+    <!--  ContextMenu  -->
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ContextMenu]}">
+      <Border
+        MinHeight="256"
+        Margin="24"
+        Background="#01FFFFFF"
+        CornerRadius="10">
+        <Border.ContextMenu>
+          <fui:FluentContextMenu Name="ContextMenu" MinWidth="200">
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Copy]}" InputGesture="Ctrl+C">
+              <MenuItem.Icon>
+                <PathIcon Data="{x:Static fi:FluentIcon.Copy}"/>
+              </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Cut]}" InputGesture="Ctrl+X">
+              <MenuItem.Icon>
+                <PathIcon Data="{x:Static fi:FluentIcon.Cut}"/>
+              </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[AddTo]}">
+              <MenuItem.Icon>
+                <PathIcon Data="{x:Static fi:FluentIcon.AddTo}"/>
+              </MenuItem.Icon>
+
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Video]}">
+                <MenuItem.Icon>
+                  <PathIcon Data="{x:Static fi:FluentIcon.Video}"/>
+                </MenuItem.Icon>
+              </MenuItem>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Music]}">
+                <MenuItem.Icon>
+                  <PathIcon Data="{x:Static fi:FluentIcon.Music}"/>
+                </MenuItem.Icon>
+              </MenuItem>
+            </MenuItem>
+
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Paste]}" InputGesture="Ctrl+V">
+              <MenuItem.Icon>
+                <PathIcon Data="{x:Static fi:FluentIcon.Paste}"/>
+              </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Undo]}" InputGesture="Ctrl+Z">
+              <MenuItem.Icon>
+                <PathIcon Data="{x:Static fi:FluentIcon.Cancel}"/>
+              </MenuItem.Icon>
+            </MenuItem>
+
+            <Separator/>
+
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Settings]}" InputGesture="Ctrl+S">
+              <MenuItem.Icon>
+                <PathIcon Data="{x:Static fi:FluentIcon.Setting}"/>
+              </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Help]}" InputGesture="Ctrl+H">
+              <MenuItem.Icon>
+                <PathIcon Data="{x:Static fi:FluentIcon.Help}"/>
+              </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Feedback]}" InputGesture="Ctrl+F">
+              <MenuItem.Icon>
+                <PathIcon Data="{x:Static fi:FluentIcon.Feedback}"/>
+              </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SelectAll]}" InputGesture="Ctrl+A"/>
+          </fui:FluentContextMenu>
+        </Border.ContextMenu>
+        <TextBlock
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          FontSize="24"
+          Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[RightClickedHere]}"/>
+      </Border>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

@@ -1,14 +1,16 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using Avalonia.Threading;
 using AvaloniaFluentUI.Controls;
 using AvaloniaFluentUI.Icons;
 using AvaloniaFluentUI.Locale;
@@ -38,14 +40,16 @@ public class MainWindowSplashScreen : IApplicationSplashScreen
 
 public partial class MainWindow : AppWindow
 {
+    private Bitmap? _backgroundImage;
+    
     public MainWindow()
-    { 
+    {
+        Application.Current.Resources["NavigationViewContentMargin"] = new Thickness(0, 55, 0, 0);
         SplashScreen = new MainWindowSplashScreen();
         InitializeComponent();
         
         RegisterMessages();
         
-        BackgroundImage.Source = Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/bg.jpg")), 1024);
 
         Loaded += OnLoaded;
         
@@ -61,6 +65,8 @@ public partial class MainWindow : AppWindow
                 ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("Pin"));
             }
         };
+
+        TitleBar.Height = 45;
     }
 
     private void RegisterMessages()
@@ -70,14 +76,32 @@ public partial class MainWindow : AppWindow
         WeakReferenceMessenger.Default.Register<EnabledBackgroundImageMessage>(this, OnEnabledBackgroundImage);
     }
 
+    private Bitmap LoadImageResource()
+    {
+        return Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://Gallery/Assets/Images/bg.jpg")), 1024);
+    }
+
     private void OnEnabledBackgroundImage(object recipient, EnabledBackgroundImageMessage message)
     {
-        BackgroundImage.IsVisible = message.IsVisible;
         if (message.IsVisible)
         {
-            EnabledAcrylicBlue(false);
-            EnabledMica(false);
+            if (_backgroundImage == null)
+            {
+                _backgroundImage = LoadImageResource();
+                BackgroundImage.Source = _backgroundImage;
+                
+                EnabledAcrylicBlue(false); 
+                EnabledMica(false);
+            }
         }
+        else
+        {
+            BackgroundImage.Source = null;
+            _backgroundImage?.Dispose();
+            _backgroundImage = null;
+        }
+        
+        BackgroundImage.IsVisible = message.IsVisible;
     }
 
     private void OnEnabledWindowEffect(object recipient, EnabledWindowEffectMessage message)
@@ -99,79 +123,90 @@ public partial class MainWindow : AppWindow
         EnabledMica(false);
     }
 
-    private void OnJumpToControl(object recipient, JumpToControlMessage message)
+    private NavigationViewItem? FindNavigationItem(IList<object> items, string tag)
     {
-        foreach (var item in NavigationView.MenuItems)
+        foreach (var item in items)
         {
             if (item is NavigationViewItem nvi)
             {
-                if (nvi.Tag!.ToString() == message.Page)
+                if (nvi.Tag?.ToString() == tag)
+                    return nvi;
+
+                if (nvi.MenuItems?.Count > 0)
                 {
-                    NavigationView.SelectedItem = nvi;
+                    var found = FindNavigationItem(nvi.MenuItems, tag);
+                    if (found != null)
+                    {
+                        return found;
+                    }
                 }
             }
         }
+        return null;
     }
 
-    protected override void OnClosing(WindowClosingEventArgs e)
+    private void OnJumpToControl(object recipient, JumpToControlMessage message)
     {
-        if (DataContext is MainWindowViewModel viewModel)
+        var nvi = FindNavigationItem(NavigationView.MenuItems, message.Page);
+        if (nvi != null)
         {
-            var svm = viewModel.SettingsViewModel;
-            try
+            NavigationView.SelectedItem = nvi;
+            nvi.BringIntoView();
+        }
+    }
+
+    private void SaveConfig()
+    {
+        try
+        {
+            if (DataContext is MainWindowViewModel viewModel)
             {
-                ConfigService.SaveConfig(new AppConfig
+                var svm = viewModel.SettingsViewModel;
+                var config = new AppConfig
                 {
-                    AccentColor = svm.IsDefaultAccentColor ? FluentAvaloniaTheme.Instance.CurrentAccentColor.ToString() : svm.SelectedAccentColor.ToString(),
+                    IsCustomAccentColor = svm.IsCustomColor,
                     Theme = FluentAvaloniaTheme.Instance.CurrentTheme.ToString(),
                     IsWindowEffectEnabled = svm.IsEnabledWindowEffect,
                     WindowEffect = svm.CurrentEffect,
                     IsEnabledBackgroundImage = svm.IsEnabledBackgroundImage,
                     Language = svm.CurrentLanguage
-                });
+                };
+                if (svm.IsCustomColor)
+                {
+                    config.CustomAccentColor = svm.SelectedAccentColor.ToString();
+                }
+                ConfigService.SaveConfig(config);
+                
 #if DEBUG
                 Debug.WriteLine("Save Config Success");
 #endif
             }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception);
-            }
         }
-#if DEBUG
-        else Debug.WriteLine("Save Config Error");
+        catch (Exception e)
+        {
+#if DEBUG 
+            Debug.WriteLine(e);
 #endif
+        }
+    }
+
+    protected override void OnClosing(WindowClosingEventArgs e)
+    {
+        SaveConfig();
         base.OnClosing(e);
     }
 
-    private async void OnLoaded(object? sender, RoutedEventArgs e)
+    private void OnLoaded(object? sender, RoutedEventArgs e)
     {
-        NavigationView.SettingsItem.Tag = "Settings";
-
         if (DataContext is MainWindowViewModel viewModel)
         {
-            var svm = viewModel.SettingsViewModel;
-            BackgroundImage.IsVisible = svm.IsEnabledBackgroundImage;
-        }
+            bool visible = viewModel.SettingsViewModel.IsEnabledBackgroundImage;
+            BackgroundImage.IsVisible = visible;
 
-        await PreloadViewsAsync();
-    }
-
-    private async Task PreloadViewsAsync()
-    {
-        await Task.Delay(499);
-
-        var app = Application.Current;
-        if (app == null) return;
-
-        foreach (var template in app.DataTemplates)
-        {
-            if (template is ViewLocator locator)
+            if (visible)
             {
-                await Dispatcher.UIThread.InvokeAsync(
-                    () => locator.PreloadAllAsync(),
-                    DispatcherPriority.Background);
-                break;
+                _backgroundImage = LoadImageResource(); 
+                BackgroundImage.Source = _backgroundImage;
             }
         }
     }
@@ -184,11 +219,6 @@ public partial class MainWindow : AppWindow
             Topmost = false;
             Topmost = true;
         }
-    }
-
-    public void SetBackgroundImageIsVisible(bool visible)
-    {
-        BackgroundImage.IsVisible = visible;
     }
 
     private void OnToggleTopmost(object? sender, RoutedEventArgs e)
@@ -209,6 +239,22 @@ public partial class MainWindow : AppWindow
                 this.Topmost = true;
                 ToolTip.SetTip(btn, LocalizationService.Instance.GetString("UnPin"));
             }
+        }
+    }
+    
+    private void OnPopupAvatarFlyout(object? sender, PointerReleasedEventArgs e)
+    {
+        if (sender is Avatar ct)
+        {
+            FlyoutBase.ShowAttachedFlyout(ct);
+        }
+    }
+
+    private void OnPopupContextMenu(object? sender, PointerReleasedEventArgs e)
+    {
+        if (sender is Panel panel)
+        {
+            panel.ContextMenu?.Open();
         }
     }
 }
