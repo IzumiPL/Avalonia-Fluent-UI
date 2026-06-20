@@ -24,6 +24,12 @@ public class ProgressRing : RangeBase
             new StyledPropertyMetadata<bool>(defaultValue: true));
 
     /// <summary>
+    /// Defines the <see cref="ShowPercent"/> property
+    /// </summary>
+    public static readonly StyledProperty<bool> ShowPercentProperty =
+        AvaloniaProperty.Register<ProgressRing, bool>(nameof(ShowPercent));
+
+    /// <summary>
     /// Gets or sets a value that indicates whether the ProgressRing is showing progress
     /// </summary>
     public bool IsActive
@@ -33,13 +39,22 @@ public class ProgressRing : RangeBase
     }
 
     /// <summary>
-    /// Gets or sets a value that indicates whether the progress ring reports generic progress 
+    /// Gets or sets a value that indicates whether the progress ring reports generic progress
     /// with a repeating pattern or reports progress based on the Value property.
     /// </summary>
     public bool IsIndeterminate
     {
         get => GetValue(IsIndeterminateProperty);
         set => SetValue(IsIndeterminateProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets a value that indicates whether the progress ring shows a percentage text in the center.
+    /// </summary>
+    public bool ShowPercent
+    {
+        get => GetValue(ShowPercentProperty);
+        set => SetValue(ShowPercentProperty, value);
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
