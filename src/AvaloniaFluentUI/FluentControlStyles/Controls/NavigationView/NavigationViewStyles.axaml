@@ -15,8 +15,6 @@
     </Border>
   </Design.PreviewWith>
 
-  <Thickness x:Key="NavigationViewItemExpandedChevronMargin">0,12,0,0</Thickness>
-
   <ControlTheme x:Key="{x:Type ui:NavigationView}" TargetType="ui:NavigationView">
     <!--<Setter Property="KeyboardNavigation.IsTabStop" Value="False" />-->
     <Setter Property="CompactPaneLength" Value="{DynamicResource NavigationViewCompactPaneLength}"/>
@@ -45,14 +43,12 @@
                 Command="{TemplateBinding BackCommand}"
                 IsEnabled="{TemplateBinding IsBackEnabled}"
                 IsVisible="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.BackButtonVisibility}"
-                Theme="{StaticResource NavigationBackButtonNormalStyle}"
-                ToolTip.Tip="Go Back"/>
+                Theme="{StaticResource NavigationBackButtonNormalStyle}"/>
 
               <Button
                 Name="NavigationViewCloseButton"
                 VerticalAlignment="Top"
-                Theme="{StaticResource NavigationBackButtonNormalStyle}"
-                ToolTip.Tip="Close Navigation"/>
+                Theme="{StaticResource NavigationBackButtonNormalStyle}"/>
 
               <Button
                 Name="TogglePaneButton"
@@ -67,8 +63,9 @@
                   HorizontalAlignment="Left"
                   VerticalAlignment="Center"
                   FontFamily="{DynamicResource ContentControlThemeFontFamily}"
+                  FontSize="15"
                   Text="{TemplateBinding PaneTitle}"
-                  Theme="{StaticResource NavigationViewItemHeaderTextStyle}"/>
+                  TextWrapping="NoWrap"/>
               </Button>
               <Panel
                 Name="PaneTitleHolder"
@@ -295,7 +292,6 @@
                     Name="AutoSuggestArea"
                     Grid.Row="3"
                     Height="{DynamicResource NavigationViewAutoSuggestAreaHeight}"
-                    Margin="0,0,0,8"
                     VerticalAlignment="Center">
                     <ContentControl
                       Name="PaneAutoSuggestBoxPresenter"
@@ -327,10 +323,7 @@
                     IsVisible="{Binding #TogglePaneButton.IsVisible}"/>
 
                   <!--  "Non header" content  -->
-                  <Grid
-                    Name="ItemsContainerGrid"
-                    Grid.Row="6"
-                    Margin="0,0,0,8">
+                  <Grid Name="ItemsContainerGrid" Grid.Row="6">
                     <Grid.RowDefinitions>
                       <RowDefinition Height="*"/>
                       <!--  MenuItems  -->
@@ -357,12 +350,12 @@
                     </ui:SmoothScrollViewer>
 
                     <ui:NavigationViewItemSeparator
-                      Name="VisualItemsSeparator"
+                      Name="PaneFooterSeparator"
                       Grid.Row="1"
                       Margin="0,0,0,2"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Center"
-                      IsVisible="False"/>
+                      IsVisible="{TemplateBinding PaneFooterSeparatorIsVisible}"/>
 
                     <!--  PaneFooter  -->
                     <ContentControl
@@ -435,10 +428,7 @@
 
                   </Grid>
                 </Border>
-
-
               </SplitView.Content>
-
             </SplitView>
 
             <Border
@@ -453,7 +443,6 @@
                 </Transitions>
               </Border.Transitions>
             </Border>
-
           </Grid>
 
         </Panel>
@@ -566,10 +555,6 @@
       <Style Selector="^ /template/ Border#ShadowCaster">
         <Setter Property="Opacity" Value="0"/>
       </Style>
-    </Style>
-
-    <Style Selector="^:separator /template/ ui|NavigationViewItemSeparator#VisualItemsSeparator">
-      <Setter Property="IsVisible" Value="True"/>
     </Style>
   </ControlTheme>
 
