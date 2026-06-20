@@ -21,6 +21,8 @@
     <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
     <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
     <Setter Property="BackgroundSizing" Value="InnerBorderEdge"/>
     <Setter Property="Template">
       <ControlTemplate>
@@ -36,14 +38,18 @@
             BorderThickness="{TemplateBinding BorderThickness}"
             ClipToBounds="True"
             CornerRadius="{TemplateBinding CornerRadius}">
-
-            <ContentPresenter
-              Margin="{TemplateBinding Padding}"
-              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-              ClipToBounds="True"
-              Content="{TemplateBinding Content}"
-              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            <ui:SmoothScrollViewer
+              Name="ScrollViewer"
+              HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+              VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+              <ContentPresenter
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                ClipToBounds="True"
+                Content="{TemplateBinding Content}"
+                ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            </ui:SmoothScrollViewer>
           </Border>
         </Border>
       </ControlTemplate>
