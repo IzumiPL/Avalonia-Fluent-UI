@@ -16,6 +16,9 @@
 
 ![gallery](README.png)
 
+> [!Info]
+> 如需使用最新的功能,克隆本仓库构建
+
 ## 安装🚀
 ```shell
 dotnet add package AvaloniaFluentUI --version 2.0.0
