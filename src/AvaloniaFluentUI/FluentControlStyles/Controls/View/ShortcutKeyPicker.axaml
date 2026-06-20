@@ -1,0 +1,49 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
+  <!--  Add Resources Here  -->
+  <ControlTheme x:Key="{x:Type ui:ShortcutKeyPicker}" TargetType="ui:ShortcutKeyPicker">
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    <Setter Property="VerticalAlignment" Value="Top"/>
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
+    <Setter Property="CornerRadius" Value="6"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Padding" Value="3"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Padding="{TemplateBinding Padding}"
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <Panel>
+            <ui:ShortcutKeyPanel
+              Margin="6,6,36,6"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Stretch"
+              Keys="{TemplateBinding Keys}"/>
+            <ui:FluentIconElement
+              Width="20"
+              Height="20"
+              Margin="0,0,8,0"
+              HorizontalAlignment="Right"
+              Source="{x:Static fi:FluentIcon.Edit}"/>
+          </Panel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:pointerover">
+      <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
+    </Style>
+
+    <Style Selector="^:pressed">
+      <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}"/>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>
+
