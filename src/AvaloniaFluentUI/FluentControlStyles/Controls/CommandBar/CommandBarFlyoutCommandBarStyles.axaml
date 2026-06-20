@@ -808,8 +808,21 @@
       </ControlTemplate>
     </Setter>
 
+    <Style Selector="^ /template/ Border#OverflowLayoutRoot">
+      <Setter Property="Opacity" Value="0"/>
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Opacity" Duration="0:0:0.168"/>
+        </Transitions>
+      </Setter>
+    </Style>
+
     <Style Selector="^:open">
       <Setter Property="Height" Value="NaN"/>
+
+      <Style Selector="^ /template/ Border#OverflowLayoutRoot">
+        <Setter Property="Opacity" Value="1"/>
+      </Style>
 
       <Style Selector="^ /template/ Border#OverflowLayoutRoot">
         <Setter Property="IsVisible" Value="True"/>

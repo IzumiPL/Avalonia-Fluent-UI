@@ -17,6 +17,7 @@
     <Setter Property="MinWidth" Value="{DynamicResource TextControlThemeMinWidth}"/>
     <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}"/>
     <Setter Property="FocusAdorner" Value="{x:Null}"/>
+    <Setter Property="VerticalAlignment" Value="Top"/>
     <Setter Property="ContextFlyout" Value="{StaticResource DefaultTextBoxContextFlyout}"/>
     <Setter Property="ScrollViewer.IsScrollChainingEnabled" Value="True"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
@@ -167,6 +168,7 @@
       <Setter Property="InnerLeftContent">
         <Template>
           <Button
+            Margin="2,2,0,2"
             VerticalAlignment="Stretch"
             Content="{Binding $parent[ui:LabelTextBox].Prefix}"
             CornerRadius="{DynamicResource ControlCornerRadius}"
@@ -191,7 +193,7 @@
               IsVisible="{Binding $parent[ui:LabelTextBox].IsFocused}"
               Theme="{StaticResource TextBoxDeleteButtonStyle}"/>
             <Button
-              Margin="0,1,3,0"
+              Margin="0,2,2,2"
               VerticalAlignment="Stretch"
               Content="{Binding $parent[ui:LabelTextBox].Suffix}"
               CornerRadius="{DynamicResource ControlCornerRadius}"

@@ -91,7 +91,7 @@
     <Style Selector="^.Accent">
       <Style Selector="^ /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}"/>
       </Style>
 
       <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">

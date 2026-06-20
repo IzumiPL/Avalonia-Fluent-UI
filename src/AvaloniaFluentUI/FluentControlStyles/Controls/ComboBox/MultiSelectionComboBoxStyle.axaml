@@ -3,21 +3,32 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
 
+  <x:Double x:Key="MultiSelectionViewMinWidth">168</x:Double>
+  <x:Double x:Key="MultiSelectionComboBoxMinWidth">168</x:Double>
+  <x:Double x:Key="MultiSelectionComboBoxMaxWidth">648</x:Double>
   <StreamGeometry x:Key="DropDown">M0 9.046q0-0.422 0.164-0.785t0.433-0.633 0.632-0.433 0.785-0.164q0.445 0 0.773 0.152t0.632 0.457l12.58 12.58 12.58-12.58q0.609-0.609 1.405-0.609 0.422 0 0.785 0.164t0.633 0.433 0.433 0.633 0.164 0.785q0 0.82-0.586 1.405l-14.009 14.009q-0.586 0.586-1.406 0.586t-1.406-0.586l-14.009-14.009q-0.586-0.586-0.586-1.405z</StreamGeometry>
   <StreamGeometry x:Key="Close">M3.154 1.923l0.466 0.091 0.399 0.274 11.442 11.442 11.442-11.442 0.399-0.274 0.466-0.091 0.466 0.091 0.399 0.274 0.274 0.399 0.091 0.466-0.091 0.466-0.274 0.399-11.442 11.442 11.442 11.442 0.274 0.399 0.091 0.466-0.091 0.466-0.274 0.399-0.399 0.274-0.466 0.091-0.466-0.091-0.399-0.274-11.442-11.442-11.442 11.442-0.399 0.274-0.466 0.091-0.466-0.091-0.399-0.274-0.274-0.399-0.091-0.466 0.091-0.466 0.274-0.399 11.442-11.442-11.442-11.442-0.274-0.399-0.091-0.466 0.091-0.466 0.274-0.399 0.399-0.274 0.466-0.091z</StreamGeometry>
 
   <ControlTheme x:Key="{x:Type ui:MultiSelectionComboBox}" TargetType="ui:MultiSelectionComboBox">
     <Setter Property="Height" Value="35"/>
+    <Setter Property="Width" Value="256"/>
     <Setter Property="Padding" Value="0 0 5 0"/>
     <Setter Property="ViewPortMaxHeight" Value="400"/>
+    <Setter Property="HorizontalAlignment" Value="Left"/>
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}"/>
+    <Setter Property="MaxWidth" Value="{StaticResource MultiSelectionComboBoxMaxWidth}"/>
+    <Setter Property="MinWidth" Value="{StaticResource MultiSelectionComboBoxMinWidth}"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border
           Name="Background"
           Width="{TemplateBinding Width}"
           Height="{TemplateBinding Height}"
+          MinWidth="{TemplateBinding MinWidth}"
+          MinHeight="{TemplateBinding MinHeight}"
+          MaxWidth="{TemplateBinding MaxWidth}"
+          MaxHeight="{TemplateBinding MaxHeight}"
           Padding="{TemplateBinding Padding}"
           Background="{TemplateBinding Background}"
           BorderBrush="{TemplateBinding BorderBrush}"
@@ -71,8 +82,14 @@
               Name="PART_MultiSelectionPopup"
               MaxHeight="{TemplateBinding ViewPortMaxHeight}"
               Margin="0,7,0,0"
-              Placement="Bottom">
-              <ui:MultiSelectionView Name="PART_MultiSelectionView"/>
+              IsLightDismissEnabled="True"
+              Placement="Bottom"
+              PlacementTarget="{Binding $parent[ui:MultiSelectionComboBox]}">
+              <ui:MultiSelectionView
+                Name="PART_MultiSelectionView"
+                ItemsSource="{TemplateBinding ItemsSource}"
+                SelectedItems="{TemplateBinding SelectedItems,
+                                                Mode=TwoWay}"/>
             </ui:FluentPopup>
           </Grid>
         </Border>
@@ -116,10 +133,10 @@
   <ControlTheme x:Key="{x:Type ui:MultiSelectionView}" TargetType="ui:MultiSelectionView">
     <Setter Property="BorderBrush" Value="{DynamicResource SurfaceStrokeColorFlyoutBrush}"/>
     <Setter Property="Background" Value="{DynamicResource AcrylicInAppFillColorDefaultBrush}"/>
+    <Setter Property="MinWidth" Value="{StaticResource MultiSelectionViewMinWidth}"/>
     <Setter Property="Padding" Value="0 6 6 6"/>
     <Setter Property="BorderThickness" Value="2"/>
     <Setter Property="CornerRadius" Value="8"/>
-    <Setter Property="MinWidth" Value="64"/>
 
     <Setter Property="Template">
       <ControlTemplate>

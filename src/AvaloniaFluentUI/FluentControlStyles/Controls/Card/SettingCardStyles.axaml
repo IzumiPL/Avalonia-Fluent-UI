@@ -34,7 +34,7 @@
             ColumnDefinitions="Auto, Auto, *"
             ColumnSpacing="15"
             RowDefinitions="*,*">
-            <!--  <PathIcon  -->
+            <!--  <Icon  -->
             <ui:FluentIconElement
               Grid.RowSpan="2"
               Grid.Column="0"
@@ -54,6 +54,7 @@
               Grid.Row="1"
               Grid.Column="1"
               FontSize="12"
+              Foreground="{DynamicResource TextFillColorSecondaryBrush}"
               Text="{TemplateBinding Description}"/>
 
             <ContentPresenter

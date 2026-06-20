@@ -47,14 +47,14 @@
         <Panel>
           <Grid
             Name="DefaultTitleBar"
-            Height="{TemplateBinding TitleBarHeight}"
+            Height="{Binding $parent[wnd:AppWindow].TitleBarHeight}"
             Margin="{Binding $parent[wnd:AppWindow].TitleBarMargin}"
             VerticalAlignment="Top"
             Background="{DynamicResource FluentTitleBarBackground}"
             ColumnDefinitions="Auto, Auto, *"
             TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
             WindowDecorationProperties.ElementRole="DecorationsElement"
-            ZIndex="999">
+            ZIndex="99">
 
             <Image
               Name="Icon"
