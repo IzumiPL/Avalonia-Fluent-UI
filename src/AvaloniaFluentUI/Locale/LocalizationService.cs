@@ -17,8 +17,7 @@ namespace AvaloniaFluentUI.Locale;
 public class LocalizationService : INotifyPropertyChanged
 {
     private static readonly ResourceManager resourceManager =
-        new("AvaloniaFluentUI.Locale.Strings",
-            typeof(LocalizationService).Assembly);
+        new("AvaloniaFluentUI.Locale.Strings", typeof(LocalizationService).Assembly);
 
     public static CultureInfo DefaultCultureInfo { get; } = new("en-US");
 
@@ -40,9 +39,9 @@ public class LocalizationService : INotifyPropertyChanged
     /// <summary>
     /// Gets the current culture name, e.g. "en-US", "zh-CN", "ja-JP".
     /// </summary>
-    public string CurrentLanguage => CultureInfo.CurrentCulture.Name;
+    public string CurrentLanguage => CultureInfo.CurrentUICulture.Name;
 
-    public CultureInfo CurrentCultureInfo => throw new NotImplementedException();
+    public CultureInfo CurrentCultureInfo => CultureInfo.CurrentUICulture;
 
     /// <summary>
     /// Custom string overrides. Keys take the form <c>"ResourceName"</c>
@@ -51,6 +50,18 @@ public class LocalizationService : INotifyPropertyChanged
     /// Checked before the embedded RESX resources.
     /// </summary>
     public ConcurrentDictionary<string, string> CustomStrings { get; private set; } = new();
+
+    /// <summary>
+    /// Entries loaded from disk <c>.resx</c> files for the current culture only.
+    /// Cleared and reloaded when the culture changes.
+    /// </summary>
+    public ConcurrentDictionary<string, string> _resourceEntries = new();
+
+    /// <summary>
+    /// Directory path passed to <see cref="LoadResxDirectory"/> last time,
+    /// so we can auto-reload on culture switch. <c>null</c> if never loaded.
+    /// </summary>
+    private string? _loadedResxDirectory;
 
     /// <summary>
     /// 索引器允许通过 <c>Path=[key] 进行 XAML 绑定, 但最好还是切换语言后重启应用</c>.
@@ -63,7 +74,7 @@ public class LocalizationService : INotifyPropertyChanged
     /// </summary>
     public string GetString(string key)
     {
-        return GetString(key, CultureInfo.CurrentCulture);
+        return GetString(key, CultureInfo.CurrentUICulture);
     }
 
     /// <summary>
@@ -107,7 +118,11 @@ public class LocalizationService : INotifyPropertyChanged
         if (CustomStrings.TryGetValue(key, out val))
             return val;
 
-        // 3. Built-in embedded RESX
+        // 3. Entries from disk .resx files (current culture only)
+        if (_resourceEntries.TryGetValue(key, out val))
+            return val;
+
+        // 4. Built-in embedded RESX
         string? value;
         try
         {
@@ -120,7 +135,7 @@ public class LocalizationService : INotifyPropertyChanged
         if (value != null)
             return value;
 
-        // 4. Fallback to default culture
+        // 5. Fallback to default culture
         try
         {
             value = resourceManager.GetString(key, DefaultCultureInfo);
@@ -136,15 +151,23 @@ public class LocalizationService : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Loads string entries from a <c>.resx</c> file at runtime and adds them
-    /// to <see cref="CustomStrings"/>. If the file name contains a culture
-    /// suffix (e.g. <c>Strings.fr-FR.resx</c>), the entries are scoped to that
-    /// culture; otherwise they apply to all cultures.
+    /// Loads string entries from a <c>.resx</c> file at runtime into
+    /// <see cref="_resourceEntries"/>, overriding any previous entries with
+    /// the same key. Only entries for the current culture (or culture-neutral
+    /// files) are loaded.
     /// </summary>
     /// <param name="filePath">Path to the <c>.resx</c> file on disk.</param>
     public void LoadResxFile(string filePath)
     {
         var culture = ParseCultureFromFileName(filePath);
+
+        // Skip if this file targets a different culture than the current one
+        if (culture != null &&
+            !culture.Equals(CultureInfo.CurrentUICulture.Name, StringComparison.OrdinalIgnoreCase))
+        {
+            return;
+        }
+
         var doc = new XmlDocument();
         doc.Load(filePath);
 
@@ -156,26 +179,38 @@ public class LocalizationService : INotifyPropertyChanged
             var value = dataNode.SelectSingleNode("value")?.InnerText;
             if (value == null) continue;
 
-            var key = culture != null ? $"{culture}:{name}" : name;
-            CustomStrings[key] = value;
+            _resourceEntries[name] = value;
         }
     }
 
     /// <summary>
-    /// Loads all <c>.resx</c> files from the specified directory. See
-    /// <see cref="LoadResxFile"/> for the culture-detection convention.
+    /// Loads <c>.resx</c> files from the specified directory that match the
+    /// current UI culture. Called automatically by <see cref="SetCulture"/>
+    /// when a directory was previously loaded.
     /// </summary>
     /// <param name="directoryPath">Directory containing <c>.resx</c> files.</param>
     public void LoadResxDirectory(string directoryPath)
     {
+        _resourceEntries.Clear();
+        _loadedResxDirectory = directoryPath;
+
+        var currentCulture = CultureInfo.CurrentUICulture.Name;
+
         foreach (var file in Directory.GetFiles(directoryPath, "*.resx"))
         {
-            LoadResxFile(file);
+            var culture = ParseCultureFromFileName(file);
+            // Load if: culture-neutral (e.g. Strings.resx) OR matches current culture
+            if (culture == null || culture.Equals(currentCulture, StringComparison.OrdinalIgnoreCase))
+            {
+                LoadResxFile(file);
+            }
         }
     }
 
     /// <summary>
-    /// Switches the app's UI culture at runtime. Raises
+    /// Switches the app's UI culture at runtime. Reloads disk-based
+    /// <c>.resx</c> files for the new culture if a directory was loaded
+    /// via <see cref="LoadResxDirectory"/>. Raises
     /// <see cref="PropertyChanged"/> so that bound UI elements refresh.
     /// </summary>
     /// <param name="language">
@@ -184,11 +219,17 @@ public class LocalizationService : INotifyPropertyChanged
     public void SetCulture(string language)
     {
         var culture = new CultureInfo(language);
-        
+
         CultureInfo.CurrentCulture = culture;
         CultureInfo.CurrentUICulture = culture;
         CultureInfo.DefaultThreadCurrentCulture = culture;
         CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+        // Reload disk .resx files for the new culture (old entries auto-cleared)
+        if (_loadedResxDirectory != null)
+        {
+            LoadResxDirectory(_loadedResxDirectory);
+        }
 
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(string.Empty));
     }
