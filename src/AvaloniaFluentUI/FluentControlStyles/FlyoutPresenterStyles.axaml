@@ -13,14 +13,14 @@
     <Setter Property="BorderBrush" Value="{DynamicResource SurfaceStrokeColorFlyoutBrush}"/>
     <Setter Property="BorderThickness" Value="1"/>
     <Setter Property="Padding" Value="0"/>
-    <Setter Property="ClipToBounds" Value="False"/>
+    <Setter Property="ClipToBounds" Value="True"/>
     <Setter Property="MinWidth" Value="{DynamicResource FlyoutThemeMinWidth}"/>
     <Setter Property="MaxWidth" Value="{DynamicResource FlyoutThemeMaxWidth}"/>
     <Setter Property="MinHeight" Value="{DynamicResource FlyoutThemeMinHeight}"/>
     <Setter Property="MaxHeight" Value="{DynamicResource FlyoutThemeMaxHeight}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
-    <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+    <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
     <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
     <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
     <Setter Property="BackgroundSizing" Value="InnerBorderEdge"/>
@@ -36,7 +36,7 @@
             BackgroundSizing="{TemplateBinding BackgroundSizing}"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
-            ClipToBounds="True"
+            ClipToBounds="{TemplateBinding ClipToBounds}"
             CornerRadius="{TemplateBinding CornerRadius}">
             <ui:SmoothScrollViewer
               Name="ScrollViewer"
@@ -46,7 +46,7 @@
                 Margin="{TemplateBinding Padding}"
                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                ClipToBounds="True"
+                ClipToBounds="{TemplateBinding ClipToBounds}"
                 Content="{TemplateBinding Content}"
                 ContentTemplate="{TemplateBinding ContentTemplate}"/>
             </ui:SmoothScrollViewer>
@@ -54,6 +54,39 @@
         </Border>
       </ControlTemplate>
     </Setter>
+
+    <Style Selector="^.NoScroll">
+      <Setter Property="MinWidth" Value="{DynamicResource FlyoutThemeMinWidth}"/>
+      <Setter Property="MinHeight" Value="{DynamicResource FlyoutThemeMinHeight}"/>
+      <Setter Property="MaxHeight" Value="Infinity"/>
+      <Setter Property="MaxWidth" Value="Infinity"/>
+
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border
+            Margin="5,5,5,5"
+            BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
+            CornerRadius="{TemplateBinding CornerRadius}">
+            <Border
+              Padding="{TemplateBinding Padding}"
+              Background="{TemplateBinding Background}"
+              BackgroundSizing="{TemplateBinding BackgroundSizing}"
+              BorderBrush="{TemplateBinding BorderBrush}"
+              BorderThickness="{TemplateBinding BorderThickness}"
+              ClipToBounds="{TemplateBinding ClipToBounds}"
+              CornerRadius="{TemplateBinding CornerRadius}">
+              <ContentPresenter
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                ClipToBounds="{TemplateBinding ClipToBounds}"
+                Content="{TemplateBinding Content}"
+                ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            </Border>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
   </ControlTheme>
 
   <!--  This is the Avalonia MenuFlyoutPresenter  -->
@@ -69,7 +102,7 @@
     <Setter Property="ClipToBounds" Value="False"/>
     <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
-    <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+    <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
     <Setter Property="BackgroundSizing" Value="InnerBorderEdge"/>
     <Setter Property="Template">
       <ControlTemplate>

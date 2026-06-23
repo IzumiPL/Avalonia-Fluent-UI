@@ -78,7 +78,7 @@
     Use the 21h1 Styles!
   -->
   <ControlTheme x:Key="{x:Type ListBoxItem}" TargetType="ListBoxItem">
-    <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+    <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
     <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>

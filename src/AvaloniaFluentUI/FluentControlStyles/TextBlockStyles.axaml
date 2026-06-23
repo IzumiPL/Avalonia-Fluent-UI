@@ -32,7 +32,7 @@
   <ControlTheme x:Key="{x:Type TextBlock}" TargetType="TextBlock">
     <Setter Property="FontSize" Value="{StaticResource BodyFontSize}"/>
     <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
-    <!-- <Setter Property="TextWrapping" Value="Wrap"/> -->
+    <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
     <Setter Property="FontWeight" Value="Normal"/>
 
     <Style Selector="^.Caption">

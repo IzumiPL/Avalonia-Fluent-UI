@@ -8,7 +8,7 @@
     <Setter Property="ClipToBounds" Value="False"/>
     <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
-    <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+    <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
     <Setter Property="Template">
       <ControlTemplate>
         <LayoutTransformControl LayoutTransform="{TemplateBinding Transform}">
