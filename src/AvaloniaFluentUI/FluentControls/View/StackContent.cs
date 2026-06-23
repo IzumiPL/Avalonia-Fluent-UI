@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
@@ -12,10 +13,10 @@ namespace AvaloniaFluentUI.Controls;
 [TemplatePart(PART_CONTENT_PRESENTER, typeof(ContentPresenter))]
 public class StackContent : ContentControl
 {
-    public static readonly StyledProperty<NavigationTransitionInfo> TransitionInfoProperty =
-        AvaloniaProperty.Register<StackContent, NavigationTransitionInfo>(nameof(TransitionInfo));
+    public static readonly StyledProperty<NavigationTransitionInfo?> TransitionInfoProperty =
+        AvaloniaProperty.Register<StackContent, NavigationTransitionInfo?>(nameof(TransitionInfo), defaultValue: new EntranceNavigationTransitionInfo());
 
-    public NavigationTransitionInfo TransitionInfo
+    public NavigationTransitionInfo? TransitionInfo
     {
         get => GetValue(TransitionInfoProperty);
         set => SetValue(TransitionInfoProperty, value);
@@ -25,11 +26,6 @@ public class StackContent : ContentControl
     private ContentPresenter _presenter;
 
     private const string PART_CONTENT_PRESENTER = "PART_ContentPresenter";
-    
-    public StackContent()
-    {
-        TransitionInfo = new EntranceNavigationTransitionInfo();
-    }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
