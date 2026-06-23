@@ -104,7 +104,6 @@ public partial class FontIcon : IconElement
         else if (change.Property == TextElement.ForegroundProperty)
         {
             _textLayout = null;
-            // FAIconElement calls InvalidateVisual
         }
     }
 
