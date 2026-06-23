@@ -1,5 +1,5 @@
 <Styles
-  x:Class="AvaloniaFluentUI.Styling.FluentAvaloniaTheme"
+  x:Class="AvaloniaFluentUI.Styling.AvaloniaFluentTheme"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <Styles.Resources>
@@ -19,7 +19,11 @@
       <ResourceDictionary.MergedDictionaries>
         <ResourceInclude Source="/FluentControlStyles/Themes/Compact.axaml"/>
       </ResourceDictionary.MergedDictionaries>
+
+      <!--  Font Family  -->
+      <FontFamily x:Key="DefaultFontFamily">avares://Gallery/Assets/Fonts/MiSans-Regular.otf#MiSans</FontFamily>
       <FontFamily x:Key="SymbolThemeFontFamily">/Assets/Fonts/#Symbols</FontFamily>
+
     </ResourceDictionary>
   </Styles.Resources>
 

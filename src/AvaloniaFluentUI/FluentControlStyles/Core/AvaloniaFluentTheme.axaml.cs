@@ -17,17 +17,17 @@ namespace AvaloniaFluentUI.Styling;
 /// Theme manager for AvaloniaFluentUI, managing various components of the Fluentv2 theme
 /// like AccentColor, styles, and platform settings
 /// </summary>
-public partial class FluentAvaloniaTheme : Styles, IResourceProvider
+public partial class AvaloniaFluentTheme : Styles, IResourceProvider
 {
     /// <summary>
-    /// Gets the current <see cref="FluentAvaloniaTheme"/> instance.
+    /// Gets the current <see cref="AvaloniaFluentTheme"/> instance.
     /// </summary>
-    public static FluentAvaloniaTheme Instance { get; private set; }
+    public static AvaloniaFluentTheme Instance { get; private set; }
 
     /// <summary>
-    /// Create new instance of <see cref="FluentAvaloniaTheme"/>.
+    /// Create new instance of <see cref="AvaloniaFluentTheme"/>.
     /// </summary>
-    public FluentAvaloniaTheme()
+    public AvaloniaFluentTheme()
     {
         Instance = this;
         MergedDictionaries = new AvaloniaList<IResourceDictionary>();
@@ -44,14 +44,6 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
             ThemeChanged?.Invoke(sender, (ThemeVariant)e.NewValue);
         }
     }
-
-    /// <summary>
-    /// Gets or sets whether the system font should be used on Windows. Value only applies at startup
-    /// </summary>
-    /// <remarks>
-    /// On Windows 10, this is "Segoe UI", and Windows 11, this is "Segoe UI Variable Text".
-    /// </remarks>
-    public bool UseSystemFontOnWindows { get; set; } = true;
 
     /// <summary>
     /// Gets or sets whether to use the current system theme (light or dark mode).
@@ -255,11 +247,9 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
             if (PreferSystemTheme)
                 theme = GetThemeFromIPlatformSettings(_platformSettings);
 
-            // MacOS logic is also used for WASM/Mobile since it just pulls from 
+            // MacOS logic is also used for WASM/Mobile since it just pulls from
             // IPlatformSettings Color Values
             TryLoadMacOSAccentColor(_platformSettings);
-
-            AddOrUpdateSystemResource("ContentControlThemeFontFamily", FontFamily.Default);
         }
 
         // The Resolve...Settings will return null if PreferSystemTheme is false
@@ -328,8 +318,6 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
             LoadDefaultAccentColor();
         }
 
-        AddOrUpdateSystemResource("ContentControlThemeFontFamily", FontFamily.Default);
-
         return theme;
     }
 
@@ -363,8 +351,6 @@ public partial class FluentAvaloniaTheme : Styles, IResourceProvider
         {
             LoadDefaultAccentColor();
         }
-
-        AddOrUpdateSystemResource("ContentControlThemeFontFamily", FontFamily.Default);
 
         return theme;
     }

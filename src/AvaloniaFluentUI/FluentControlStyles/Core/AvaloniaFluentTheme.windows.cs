@@ -9,7 +9,7 @@ using AvaloniaFluentUI.Controls.Interop.WinRT;
 
 namespace AvaloniaFluentUI.Styling;
 
-public partial class FluentAvaloniaTheme
+public partial class AvaloniaFluentTheme
 {
     private ThemeVariant ResolveWindowsSystemSettings(IPlatformSettings platformSettings)
     {
@@ -39,28 +39,6 @@ public partial class FluentAvaloniaTheme
         else
         {
             LoadDefaultAccentColor();
-        }
-
-        if (UseSystemFontOnWindows)
-        {
-            try
-            {
-                if (OSVersionHelper.IsWindows11())
-                {
-                    AddOrUpdateSystemResource("ContentControlThemeFontFamily", new FontFamily("Segoe UI Variable Text"));
-                }
-                else
-                {
-                    AddOrUpdateSystemResource("ContentControlThemeFontFamily", new FontFamily("Segoe UI"));
-                }
-            }
-            catch
-            {
-                Logger.TryGet(LogEventLevel.Information, "FluentAvaloniaTheme")?
-                    .Log("FluentAvaloniaTheme", "Error in detecting Windows system font.");
-
-                AddOrUpdateSystemResource("ContentControlThemeFontFamily", FontFamily.Default);
-            }
         }
 
         return theme;

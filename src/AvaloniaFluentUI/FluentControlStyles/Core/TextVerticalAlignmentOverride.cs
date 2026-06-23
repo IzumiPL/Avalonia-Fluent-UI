@@ -2,7 +2,7 @@
 
 /// <summary>
 /// Specifies constants for when text alignment style overrides should be applied
-/// See <see cref="FluentAvaloniaTheme.TextVerticalAlignmentOverrideBehavior"/> and GH PR #210
+/// See <see cref="AvaloniaFluentTheme.TextVerticalAlignmentOverrideBehavior"/> and GH PR #210
 /// </summary>
 public enum TextVerticalAlignmentOverride
 {
