@@ -1,0 +1,44 @@
+﻿<UserControl
+  x:Class="Gallery.Pages.IconPage.FontIconPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  x:DataType="viewModel:FontIconPageViewModel"
+  mc:Ignorable="d">
+  <StackPanel Spacing="8">
+    <TextBlock
+      HorizontalAlignment="Left"
+      VerticalAlignment="Center"
+      Text="使用示例(XAML)"/>
+    <Border
+      Height="35"
+      Padding="8"
+      Background="{DynamicResource AvatarBackgroundDefault}"
+      CornerRadius="6">
+      <SelectableTextBlock VerticalAlignment="Center"><Run Foreground="#62bbc4" Text="&lt;fui"/><Run Foreground="#e75043" Text=":"/><Run Foreground="#e4c07b" Text="FontIcon"/><Run Foreground="#ff7b7b" Text=" FontFamily"/><Run Foreground="#16b15e" Text="="/><Run Foreground="#16b15e">"{</Run><Run Foreground="#e4c07b" Text="StaticResource"/><Run Foreground="#62bbc4" Text=" SymbolThemeFontFamily"/><Run Foreground="#16b15e">}"</Run><Run Foreground="#ff7b7b" Text=" Glyph"/><Run Foreground="#16b15e">=</Run><Run Foreground="#16b15e">"</Run><Run Foreground="#cf9965" Text="&amp;#xE10B"/><Run Foreground="#cf9965" Text=";"/><Run Foreground="#16b15e">"</Run><Run Foreground="#62bbc4" Text="&gt;"/>
+      </SelectableTextBlock>
+    </Border>
+
+    <TextBlock
+      HorizontalAlignment="Left"
+      VerticalAlignment="Center"
+      Text="使用示例(C#)"/>
+    <Border
+      Height="35"
+      Padding="8"
+      Background="{DynamicResource AvatarBackgroundDefault}"
+      CornerRadius="6">
+      <Panel>
+        <SelectableTextBlock VerticalAlignment="Top"><Run Foreground="#e4c07b" Text="FontIcon"/><Run Foreground="#62bbc4" Text=" fontIcon"/><Run Foreground="#16b15e" Text=" = "/><Run Foreground="#c478da" Text="new"/><Run Foreground="#e4c07b" Text=" FontIcon "/><Run Foreground="#a287a3">{</Run><Run Foreground="#ff7b7b" Text=" Glyph "/><Run Foreground="#16b15e" Text="= "/><Run Foreground="#16b15e">"</Run><Run Foreground="#ab995e" Text="\uE108;"/><Run Foreground="#16b15e" Text="&quot; "/><Run Foreground="#a287a3">}</Run>
+        </SelectableTextBlock>
+      </Panel>
+    </Border>
+  </StackPanel>
+</UserControl>

@@ -1,0 +1,44 @@
+﻿<UserControl
+  x:Class="Gallery.Pages.IconPage.SymbolIconPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  x:DataType="viewModel:SymbolIconPageViewModel"
+  mc:Ignorable="d">
+  <StackPanel Spacing="8">
+    <TextBlock
+      HorizontalAlignment="Left"
+      VerticalAlignment="Center"
+      Text="使用示例(XAML)"/>
+    <Border
+      Height="35"
+      Padding="8"
+      Background="{DynamicResource AvatarBackgroundDefault}"
+      CornerRadius="6">
+      <SelectableTextBlock VerticalAlignment="Center"><Run Foreground="#62bbc4">&lt;fui</Run><Run Foreground="#e75043" Text=":"/><Run Foreground="#e4c07b">SymbolIcon</Run><Run Foreground="#ff7b7b" Text=" Symbol"/><Run Foreground="#16b15e" Text=" = &quot;"/><Run Foreground="#7e95ff">Accept</Run><Run Foreground="#16b15e">"</Run><Run Foreground="#62bbc4">/&gt;</Run>
+      </SelectableTextBlock>
+    </Border>
+
+    <TextBlock
+      HorizontalAlignment="Left"
+      VerticalAlignment="Center"
+      Text="使用示例(C#)"/>
+    <Border
+      Height="35"
+      Padding="8"
+      Background="{DynamicResource AvatarBackgroundDefault}"
+      CornerRadius="6">
+      <Panel>
+        <SelectableTextBlock VerticalAlignment="Top"><Run Foreground="#e4c07b" Text="SymbolIcon"/><Run Foreground="#62bbc4" Text=" symbolIcon"/><Run Foreground="#16b15e" Text=" = "/><Run Foreground="#c478da" Text="new"/><Run Foreground="#e4c07b" Text=" SymbolIcon "/><Run Foreground="#a287a3">{</Run><Run Foreground="#ff7b7b" Text=" Symbol "/><Run Foreground="#16b15e" Text="= "/><Run Foreground="#ab995e" Text="Symbol"/><Run Foreground="#16b15e" Text="."/><Run Foreground="#7e95ff" Text="Accept "/><Run Foreground="#a287a3">}</Run>
+        </SelectableTextBlock>
+      </Panel>
+    </Border>
+  </StackPanel>
+</UserControl>

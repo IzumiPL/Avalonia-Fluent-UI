@@ -1553,4 +1553,16 @@
   <data name="PleaseSelectYourOption" xml:space="preserve">
     <value>オプションを選択してください</value>
   </data>
+  <data name="MV_Title" xml:space="preserve">
+    <value>Avalonia Fluent UI Gallery</value>
+  </data>
+  <data name="FluentIcon" xml:space="preserve">
+    <value>流暢なアイコンライブラリ</value>
+  </data>
+  <data name="FontIcon" xml:space="preserve">
+    <value>フォントアイコン</value>
+  </data>
+  <data name="SymbolIcon" xml:space="preserve">
+    <value>シンボルアイコン</value>
+  </data>
 </root>

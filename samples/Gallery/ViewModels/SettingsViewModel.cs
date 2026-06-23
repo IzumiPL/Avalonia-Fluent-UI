@@ -21,7 +21,7 @@ public partial class SettingsViewModel : ViewModelBase
     
     public SettingsViewModel(AppConfig? config)
     {
-        FluentAvaloniaTheme.Instance.ThemeChanged += OnThemeChanged;
+        AvaloniaFluentTheme.Instance.ThemeChanged += OnThemeChanged;
         LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
         
         LoadSetting(config);
@@ -100,7 +100,7 @@ public partial class SettingsViewModel : ViewModelBase
     {
         if (value)
         {
-            FluentAvaloniaTheme.Instance.CustomAccentColor = null;
+            AvaloniaFluentTheme.Instance.CustomAccentColor = null;
         }
     }
 
@@ -109,13 +109,13 @@ public partial class SettingsViewModel : ViewModelBase
 
     partial void OnSelectedAccentColorChanged(Color value)
     {
-        FluentAvaloniaTheme.Instance.CustomAccentColor = value;
+        AvaloniaFluentTheme.Instance.CustomAccentColor = value;
     }
 
     [RelayCommand]
     private void ToggleTheme(string value)
     {
-        FluentAvaloniaTheme.Instance.CurrentTheme = value switch
+        AvaloniaFluentTheme.Instance.CurrentTheme = value switch
         {
             "Light" => ThemeVariant.Light,
             "Dark" => ThemeVariant.Dark,
@@ -191,7 +191,7 @@ public partial class SettingsViewModel : ViewModelBase
     {
         if (value)
         {
-            FluentAvaloniaTheme.Instance.CustomAccentColor = SelectedAccentColor;
+            AvaloniaFluentTheme.Instance.CustomAccentColor = SelectedAccentColor;
         }
     }
 

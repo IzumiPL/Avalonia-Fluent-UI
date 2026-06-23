@@ -1556,4 +1556,13 @@
   <data name="PleaseSelectYourOption" xml:space="preserve">
     <value>请选择你的选项</value>
   </data>
+  <data name="FluentIcon" xml:space="preserve">
+    <value>流畅图标库</value>
+  </data>
+  <data name="FontIcon" xml:space="preserve">
+    <value>字体图标</value>
+  </data>
+  <data name="SymbolIcon" xml:space="preserve">
+    <value>符号图标</value>
+  </data>
 </root>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Gallery.Pages;
+using Gallery.Pages.IconPage;
 using Gallery.ViewModels;
 using Gallery.Views;
 
@@ -20,7 +21,11 @@ public class ViewLocator : IDataTemplate
     private void Register()
     {
         _factory[typeof(HomeViewModel)] = () => new HomeView();
+        
         _factory[typeof(IconsViewModel)] = () => new IconsView();
+        _factory[typeof(FluentIconPageViewModel)] = () => new FluentIconPage();
+        _factory[typeof(FontIconPageViewModel)] = () => new FontIconPage();
+        _factory[typeof(SymbolIconPageViewModel)] = () => new SymbolIconPage();
         
         _factory[typeof(BasicInputViewModel)] = () => new BasicInputView();
         _factory[typeof(ButtonPageViewModel)] = () => new ButtonPage();

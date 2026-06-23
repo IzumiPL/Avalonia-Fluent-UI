@@ -175,7 +175,7 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void ToggleTheme() => FluentAvaloniaTheme.Instance.ToggleTheme(); 
+    private void ToggleTheme() => AvaloniaFluentTheme.Instance.ToggleTheme(); 
 
     [RelayCommand]
     private void TogglePage(string page)

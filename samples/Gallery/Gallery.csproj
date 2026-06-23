@@ -138,5 +138,13 @@
       <DependentUpon>FilesDropPickerPage.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\IconPage\FontIconPage.axaml.cs">
+      <DependentUpon>FontIconPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\IconPage\SymbolIconPage.axaml.cs">
+      <DependentUpon>SymbolIcon.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

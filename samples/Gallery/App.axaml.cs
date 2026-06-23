@@ -27,6 +27,24 @@ public class App : Application
         {
             LocalizationService.Instance.LoadResxDirectory(localeDir);
         }
+        
+        LocalizationService.Instance.PropertyChanged += (_, _) =>
+        {
+            Console.WriteLine($"Toggle Language To => {LocalizationService.Instance.CurrentLanguage}");
+            Console.WriteLine($"Default Language: {LocalizationService.DefaultCultureInfo.Name} | {LocalizationService.Instance.CurrentLanguage}");
+            Console.WriteLine("Custom Keys:");
+            foreach (var item in LocalizationService.Instance.CustomStrings.Values)
+            {
+                Console.WriteLine(item);
+            }
+
+            Console.WriteLine("==============================");
+            Console.WriteLine("Loaded Keys:");
+            foreach (var item in LocalizationService.Instance._resourceEntries.Values)
+            {
+                Console.WriteLine(item);
+            }
+        };
     }
 
     public override void OnFrameworkInitializationCompleted()

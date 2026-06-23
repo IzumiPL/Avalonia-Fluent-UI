@@ -165,7 +165,7 @@ public partial class MainWindow : AppWindow
                 var config = new AppConfig
                 {
                     IsCustomAccentColor = svm.IsCustomColor,
-                    Theme = FluentAvaloniaTheme.Instance.CurrentTheme.ToString(),
+                    Theme = AvaloniaFluentTheme.Instance.CurrentTheme.ToString(),
                     IsWindowEffectEnabled = svm.IsEnabledWindowEffect,
                     WindowEffect = svm.CurrentEffect,
                     IsEnabledBackgroundImage = svm.IsEnabledBackgroundImage,

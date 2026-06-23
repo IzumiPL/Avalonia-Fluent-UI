@@ -1553,4 +1553,16 @@
   <data name="PleaseSelectYourOption" xml:space="preserve">
     <value>Please select your option</value>
   </data>
+  <data name="MV_Title" xml:space="preserve">
+    <value>Avalonia Fluent UI Gallery</value>
+  </data>
+  <data name="FluentIcon" xml:space="preserve">
+    <value>Fluent icon library</value>
+  </data>
+  <data name="FontIcon" xml:space="preserve">
+    <value>Font Icon</value>
+  </data>
+  <data name="SymbolIcon" xml:space="preserve">
+    <value>Symbol icon</value>
+  </data>
 </root>

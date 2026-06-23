@@ -1,0 +1,101 @@
+﻿<UserControl
+  x:Class="Gallery.Pages.IconPage.FluentIconPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  x:DataType="viewModel:FluentIconPageViewModel"
+  mc:Ignorable="d">
+  <Grid ColumnDefinitions="*, 256" RowDefinitions="Auto Auto Auto Auto Auto, *">
+    <!--  RowSpacing="8"  -->
+    <!--  <TextBlock  -->
+    <!--  Grid.Row="0"  -->
+    <!--  Grid.ColumnSpan="2"  -->
+    <!--  HorizontalAlignment="Left"  -->
+    <!--  VerticalAlignment="Center"  -->
+    <!--  Text="使用示例(XAML)"/>  -->
+    <!--  <Border  -->
+    <!--  Grid.Row="1"  -->
+    <!--  Grid.ColumnSpan="2"  -->
+    <!--  Height="35"  -->
+    <!--  Padding="8"  -->
+    <!--  Background="{DynamicResource AvatarBackgroundDefault}"  -->
+    <!--  CornerRadius="6">  -->
+    <!--   <SelectableTextBlock VerticalAlignment="Center"><Run Foreground="#e4c07b" Text="&lt;PathIcon"/><Run Foreground="#ff7b7b" Text=" Data"/><Run Foreground="#16b15e" Text="="/><Run Foreground="#16b15e">"{</Run><Run Foreground="#62bbc4" Text="x"/><Run Foreground="#16b15e" Text=":"/><Run Foreground="#e4c07b" Text="Static "/><Run Foreground="#62bbc4" Text="fi"/><Run Foreground="#16b15e" Text=":"/><Run Foreground="#e4c07b" Text="FluentIcon"/><Run Foreground="#16b15e" Text="."/><Run Foreground="#ff7b7b" Text="Accept"/><Run Foreground="#16b15e">}"</Run> -->
+    <!--   </SelectableTextBlock> -->
+    <!-- </Border> -->
+    <!--    -->
+    <!--  <TextBlock  -->
+    <!--  Grid.Row="2"  -->
+    <!--  Grid.ColumnSpan="2"  -->
+    <!--  HorizontalAlignment="Left"  -->
+    <!--  VerticalAlignment="Center"  -->
+    <!--  Text="使用示例(C#)"/>  -->
+    <!--  <Border  -->
+    <!--  Grid.Row="3"  -->
+    <!--  Grid.ColumnSpan="2"  -->
+    <!--  Height="35"  -->
+    <!--  Padding="8"  -->
+    <!--  Background="{DynamicResource AvatarBackgroundDefault}"  -->
+    <!--  CornerRadius="6">  -->
+    <!--  <SelectableTextBlock  -->
+    <!--  VerticalAlignment="Center"  -->
+    <!--  LetterSpacing="0"  -->
+    <!--     LineSpacing="0"><Run Foreground="#e4c07b" Text="PathIcon"/><Run Foreground="#16b15e" Text="."/><Run Foreground="#ff7b7b" Text="Data"/><Run Foreground="#16b15e" Text=" = "/><Run Foreground="#e4c07b" Text="FluentIcon"/><Run Foreground="#16b15e" Text="."/><Run Foreground="#ff7b7b" Text="Accept"/> -->
+    <!--   </SelectableTextBlock> -->
+    <!-- </Border> -->
+
+    <fui:SearchTextBox
+      Grid.Row="4"
+      Grid.ColumnSpan="2"
+      Width="256"
+      HorizontalAlignment="Left"
+      PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[IV_SearchIcon]}"
+      TextChanged="OnSearchTextChanged"/>
+    <fui:SmoothScrollViewer
+      Grid.Row="5"
+      Grid.Column="0"
+      Margin="0,24,0,12"
+      VerticalScrollBarVisibility="Visible">
+      <UniformGrid
+        x:Name="UniformGrid"
+        Margin="0,0,15,0"
+        VerticalAlignment="Top"
+        ColumnSpacing="5"
+        RowSpacing="5"/>
+    </fui:SmoothScrollViewer>
+
+    <StackPanel
+      Grid.Row="5"
+      Grid.Column="1"
+      Margin="10,0,0,0"
+      HorizontalAlignment="Left">
+      <TextBlock
+        FontSize="18"
+        FontWeight="Bold"
+        Text="{Binding CurrentIconName}"/>
+      <PathIcon
+        Width="64"
+        Height="64"
+        Margin="5,5,5,20"
+        HorizontalAlignment="Left"
+        Data="{Binding CurrentIconData, Mode=TwoWay}"/>
+      <!--  Stretch="Uniform"  -->
+
+      <TextBlock FontSize="16" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[IV_IconName]}"/>
+      <TextBlock FontSize="12" Text="{Binding CurrentIconName}"/>
+
+      <TextBlock
+        Margin="0,20,0,0"
+        FontSize="16"
+        Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[IV_EnumMember]}"/>
+      <TextBlock FontSize="12" Text="{Binding CurrentItemEnumName}"/>
+    </StackPanel>
+  </Grid>
+</UserControl>

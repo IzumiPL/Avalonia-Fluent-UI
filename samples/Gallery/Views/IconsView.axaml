@@ -2,6 +2,7 @@
   x:Class="Gallery.Views.IconsView"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ani="clr-namespace:AvaloniaFluentUI.Media.Animation;assembly=AvaloniaFluentUI"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
@@ -74,10 +75,11 @@
     </Style>
   </UserControl.Styles>
 
+
   <Grid
     Margin="18,24,24,12"
-    ColumnDefinitions="*, 256"
-    RowDefinitions="Auto, Auto, *">
+    RowDefinitions="Auto, Auto, *"
+    RowSpacing="12">
     <Grid
       Grid.Row="0"
       ColumnSpan="2"
@@ -121,105 +123,17 @@
       </Grid>
     </Grid>
 
-    <fui:SearchTextBox
+    <fui:SegmentedToggleView
       Grid.Row="1"
-      Grid.ColumnSpan="2"
-      Width="256"
-      Margin="0,12,0,0"
-      HorizontalAlignment="Left"
-      PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[IV_SearchIcon]}"
-      TextChanged="OnSearchTextChanged"/>
-
-    <fui:SmoothScrollViewer
-      Grid.Row="2"
-      Grid.Column="0"
-      Margin="0,24,0,20"
-      VerticalScrollBarVisibility="Visible">
-      <UniformGrid
-        x:Name="UniformGrid"
-        Margin="0,0,15,0"
-        VerticalAlignment="Top"
-        ColumnSpacing="5"
-        RowSpacing="5"/>
-    </fui:SmoothScrollViewer>
-
-    <StackPanel
-      Grid.Row="2"
-      Grid.Column="1"
-      Margin="10,0,0,0"
-      HorizontalAlignment="Left">
-      <TextBlock
-        FontSize="18"
-        FontWeight="Bold"
-        Text="{Binding CurrentIconName}"/>
-      <PathIcon
-        Width="64"
-        Height="64"
-        Margin="5,5,5,20"
-        HorizontalAlignment="Left"
-        Data="{Binding CurrentIconData, Mode=TwoWay}"/>
-      <!--  Stretch="Uniform"  -->
-
-      <TextBlock FontSize="16" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[IV_IconName]}"/>
-      <TextBlock FontSize="12" Text="{Binding CurrentIconName}"/>
-
-      <TextBlock
-        Margin="0,20,0,0"
-        FontSize="16"
-        Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[IV_EnumMember]}"/>
-      <TextBlock FontSize="12" Text="{Binding CurrentItemEnumName}"/>
-    </StackPanel>
+      HorizontalAlignment="Stretch"
+      SelectedItem="{Binding CurrentItem, Mode=TwoWay}">
+      <fui:SegmentedItem
+        Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FluentIcon]}"
+        IsSelected="True"
+        Tag="FluentIcon"/>
+      <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FontIcon]}" Tag="FontIcon"/>
+      <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SymbolIcon]}" Tag="SymbolIcon"/>
+    </fui:SegmentedToggleView>
+    <fui:StackContent Grid.Row="2" Content="{Binding CurrentViewModel}"/>
   </Grid>
-
-  <!--  <Grid  -->
-  <!--  Margin="15"  -->
-  <!--  ColumnDefinitions="*, 256"  -->
-  <!--  RowDefinitions="Auto, *">  -->
-  <!--  <TextBlock  -->
-  <!--  Grid.Row="0"  -->
-  <!--  Margin="0,0,0,20"  -->
-  <!--  Text="Icons"  -->
-  <!--  FontSize="36" />  -->
-  <!--  <fui:SmoothScrollViewer  -->
-  <!--  x:Name="ScrollViewer"  -->
-  <!--  Grid.Row="1"  -->
-  <!--  Grid.Column="0"  -->
-  <!--  Margin="0,0,0,20"  -->
-  <!--  VerticalScrollBarVisibility="Visible">  -->
-  <!--  <UniformGrid  -->
-  <!--  x:Name="UniformGrid"  -->
-  <!--  Margin="0,0,15,0"  -->
-  <!--  ColumnSpacing="5"  -->
-  <!--  RowSpacing="5" />  -->
-  <!--   </fui:SmoothScrollViewer> -->
-  <!--    -->
-  <!--  <StackPanel  -->
-  <!--  Grid.Row="1"  -->
-  <!--  Grid.Column="1"  -->
-  <!--  Margin="10,0,0,0"  -->
-  <!--  HorizontalAlignment="Left">  -->
-  <!--  <TextBlock  -->
-  <!--  Text="{Binding CurrentIconName}"  -->
-  <!--  FontSize="18"  -->
-  <!--  FontWeight="Bold" />  -->
-  <!--  <Path  -->
-  <!--  Width="64"  -->
-  <!--  Height="64"  -->
-  <!--  Margin="5,5,5,20"  -->
-  <!--  HorizontalAlignment="Left"  -->
-  <!--  Data="{Binding CurrentIconData, Mode=TwoWay}"  -->
-  <!--  Fill="#000000"  -->
-  <!--  Stretch="Uniform" />  -->
-  <!--    -->
-  <!--     <TextBlock Text="图标名字" FontSize="16" /> -->
-  <!--     <TextBlock Text="{Binding CurrentIconName}" FontSize="12" /> -->
-  <!--    -->
-  <!--  <TextBlock  -->
-  <!--  Margin="0,20,0,0"  -->
-  <!--  Text="枚举成员"  -->
-  <!--  FontSize="16" />  -->
-  <!--     <TextBlock Text="{Binding CurrentItemEnumName}" FontSize="12" /> -->
-  <!--   </StackPanel> -->
-  <!-- </Grid> -->
-
 </UserControl>

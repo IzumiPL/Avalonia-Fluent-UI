@@ -1,10 +1,7 @@
-﻿using System.Diagnostics;
-using Avalonia.Media;
+﻿using System.Collections.Generic;
+using AvaloniaFluentUI.Controls;
 using AvaloniaFluentUI.Locale;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Messaging;
-
-using Gallery.Messages.IconViewMessages;
 
 namespace Gallery.ViewModels;
 
@@ -12,26 +9,40 @@ public partial class IconsViewModel : ViewModelBase
 {
     public override string Title => LocalizationService.Instance.GetString("Icon");
 
-    public IconsViewModel()
+    [ObservableProperty]
+    private SegmentedItem _currentItem;
+
+    partial void OnCurrentItemChanged(SegmentedItem value)
     {
-#if DEBUG
-        Debug.WriteLine("IconViewModel Init");
-#endif
-        WeakReferenceMessenger.Default.Register<CheckedIconChangedMessage>(this, OnCheckedIconChanged);
+        ToggleView($"{value.Tag}");
     }
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(CurrentItemEnumName))]
-    private string _currentIconName = "";
+    private ViewModelBase _currentViewModel;
 
-    [ObservableProperty]
-    private Geometry? _currentIconData;
+    private readonly Dictionary<string, ViewModelBase> _viewModels;
     
-    public string CurrentItemEnumName => CurrentIconName == "" ? "" : $"Fluent.{CurrentIconName}";
-
-    private void OnCheckedIconChanged(object? sender, CheckedIconChangedMessage message)
+    public IconsViewModel()
     {
-        CurrentIconName = message.Name;
-        CurrentIconData = message.Data;
+        _viewModels = new Dictionary<string, ViewModelBase>
+        {
+            {"FluentIcon", FluentIconPageViewModel},
+            {"FontIcon", FontIconPageViewModel},
+            {"SymbolIcon", SymbolIconPageViewModel},
+        };
+
+        CurrentViewModel = FluentIconPageViewModel;
+    }
+    
+    private FluentIconPageViewModel FluentIconPageViewModel { get; } =  new FluentIconPageViewModel();
+    private FontIconPageViewModel FontIconPageViewModel { get; } =  new FontIconPageViewModel();
+    private SymbolIconPageViewModel SymbolIconPageViewModel { get; } =  new SymbolIconPageViewModel();
+
+    private void ToggleView(string page)
+    {
+        if (_viewModels.TryGetValue(page, out var viewModel) && viewModel != CurrentViewModel)
+        {
+            CurrentViewModel = viewModel;
+        }
     }
 }

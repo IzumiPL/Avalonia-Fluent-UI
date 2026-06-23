@@ -28,6 +28,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Assets\Locale\*.resx" />
+  </ItemGroup>
+  
+<!--  <ItemGroup>-->
+<!--    <Content Include="..\Gallery\Assets\Locale\**" CopyToOutputDirectory="PreserveNewest" Link="Assets\Locale\%(RecursiveDir)%(Filename)%(Extension)"/>-->
+<!--  </ItemGroup>-->
+  
+  <ItemGroup>
     <ProjectReference Include="..\Gallery\Gallery.csproj" />
   </ItemGroup>
 </Project>

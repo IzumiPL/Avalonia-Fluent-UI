@@ -73,7 +73,7 @@ public class ViewBase : ContentControl
         UrlHelpers.OpenUrl("https://github.com/HiyorinI/AvaloniaFluentUI.git");
     }
 
-    private void OnToggleThemeClicked(object? sender, RoutedEventArgs e) => FluentAvaloniaTheme.Instance.ToggleTheme();
+    private void OnToggleThemeClicked(object? sender, RoutedEventArgs e) => AvaloniaFluentTheme.Instance.ToggleTheme();
     
     protected async void ScrollTo(string name)
     {
