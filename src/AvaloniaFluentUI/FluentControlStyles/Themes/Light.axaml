@@ -86,7 +86,7 @@
   <Color x:Key="FilledPressed">#979798</Color>
   <Color x:Key="FilledBorderPointerOver">#85898B</Color>
 
-  <Color x:Key="AvatarBackgroundDefault">#CDCDCD</Color>
+  <Color x:Key="AvatarBackgroundDefault">#D6D6D6</Color>
 
   <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="{StaticResource TextFillColorPrimary}"/>
   <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="{StaticResource TextFillColorSecondary}"/>
