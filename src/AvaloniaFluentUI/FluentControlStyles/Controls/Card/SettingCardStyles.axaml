@@ -48,6 +48,7 @@
             <TextBlock
               Grid.Row="0"
               Grid.Column="1"
+              MinHeight="18"
               FontSize="14"
               Text="{TemplateBinding Header}"/>
             <TextBlock

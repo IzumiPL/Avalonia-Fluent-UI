@@ -76,7 +76,7 @@
     <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
     <Setter Property="HorizontalAlignment" Value="Left"/>
     <Setter Property="VerticalAlignment" Value="Top"/>
-    <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+    <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
     <Setter Property="FontWeight" Value="Normal"/>
     <Setter Property="Width" Value="68"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>

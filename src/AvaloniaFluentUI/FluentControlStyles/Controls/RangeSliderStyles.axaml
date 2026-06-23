@@ -33,7 +33,7 @@
     <Setter Property="Background" Value="{DynamicResource ControlStrongFillColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource SliderBorderThemeThickness}"/>
     <Setter Property="Foreground" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
-    <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+    <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
     <Setter Property="VerticalAlignment" Value="Top"/>
     <Setter Property="Template">

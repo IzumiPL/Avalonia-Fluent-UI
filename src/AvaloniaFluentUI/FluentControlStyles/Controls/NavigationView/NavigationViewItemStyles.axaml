@@ -19,7 +19,7 @@
     <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource NavigationViewItemBorderThickness}"/>
-    <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+    <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
     <Setter Property="FontWeight" Value="Normal"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
     <Setter Property="Margin" Value="{DynamicResource NavigationViewItemMargin}"/>

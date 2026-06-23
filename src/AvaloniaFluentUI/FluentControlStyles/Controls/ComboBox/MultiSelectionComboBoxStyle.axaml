@@ -198,7 +198,7 @@
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type ui:MultiSelectionComboBoxItem}" TargetType="ui:MultiSelectionComboBoxItem">
-    <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+    <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
     <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>

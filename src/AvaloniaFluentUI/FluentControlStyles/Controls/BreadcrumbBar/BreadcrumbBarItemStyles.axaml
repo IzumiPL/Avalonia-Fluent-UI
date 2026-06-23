@@ -24,7 +24,7 @@
     <Setter Property="Background" Value="{DynamicResource BreadcrumbBarBackgroundBrush}"/>
     <Setter Property="HorizontalAlignment" Value="Left"/>
     <Setter Property="VerticalAlignment" Value="Center"/>
-    <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+    <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
     <Setter Property="FontWeight" Value="Normal"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
     <!--<Setter Property="UseSystemFocusVisuals" Value="{DynamicResource UseSystemFocusVisuals}" />-->
@@ -244,7 +244,7 @@
     <Setter Property="Background" Value="{DynamicResource BreadcrumbBarBackgroundBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource BreadcrumbBarBorderBrush}"/>
     <!--<Setter Property="FocusVisualMargin" Value="1" />-->
-    <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}"/>
+    <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
     <Setter Property="FontWeight" Value="{DynamicResource BreadcrumbBarItemFontWeight}"/>
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>

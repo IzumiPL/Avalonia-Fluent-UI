@@ -61,47 +61,54 @@
   <x:Double x:Key="NumberBoxPopupShadowDepth">16</x:Double>
   <Thickness x:Key="NumberBoxPopupIndicatorMargin">0,0,8,0</Thickness>
 
-
   <!--  Control-specific resources  -->
   <Thickness x:Key="NumberBoxPopupSpinButtonBorderThickness">0</Thickness>
-
   <Thickness x:Key="NumberBoxPopupBorderThickness">1</Thickness>
+
   <ControlTheme x:Key="NumberBoxSpinButtonStyle" TargetType="RepeatButton">
     <Setter Property="MinWidth" Value="32"/>
     <Setter Property="Padding" Value="0"/>
     <Setter Property="VerticalAlignment" Value="Stretch"/>
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="FontFamily" Value="{StaticResource SymbolThemeFontFamily}"/>
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource NumberBoxSpinButtonBorderThickness}"/>
-    <Setter Property="FontFamily" Value="{DynamicResource SymbolThemeFontFamily}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <ContentPresenter
+        <Border
+          Name="RootBorder"
           Padding="{TemplateBinding Padding}"
-          HorizontalContentAlignment="Center"
-          VerticalContentAlignment="Center"
+          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+          VerticalAlignment="{TemplateBinding VerticalAlignment}"
           Background="{TemplateBinding Background}"
           BorderBrush="{TemplateBinding BorderBrush}"
           BorderThickness="{TemplateBinding BorderThickness}"
-          Content="{TemplateBinding Content}"
-          CornerRadius="{TemplateBinding CornerRadius}"
-          Foreground="{TemplateBinding Foreground}"/>
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <ui:FontIcon
+            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+            FontFamily="{TemplateBinding FontFamily}"
+            Foreground="{TemplateBinding Foreground}"
+            Glyph="{TemplateBinding Content}"/>
+        </Border>
       </ControlTemplate>
     </Setter>
 
-    <Style Selector="^:pointerover /template/ ContentPresenter">
+    <Style Selector="^:pointerover">
       <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
       <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
       <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
     </Style>
-    <Style Selector="^:pressed /template/ ContentPresenter">
+    <Style Selector="^:pressed">
       <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
       <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
       <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/>
     </Style>
-    <Style Selector="^:disabled /template/ ContentPresenter">
+    <Style Selector="^:disabled">
       <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
     </Style>
   </ControlTheme>

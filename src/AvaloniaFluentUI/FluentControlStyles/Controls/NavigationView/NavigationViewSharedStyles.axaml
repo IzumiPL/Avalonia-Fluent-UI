@@ -129,6 +129,7 @@
                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                 <TextBlock
                   Name="Icon"
+                  FontFamily="{TemplateBinding FontFamily}"
                   FontSize="{TemplateBinding FontSize}"
                   RenderTransform="none"
                   Text="&#xE700;">

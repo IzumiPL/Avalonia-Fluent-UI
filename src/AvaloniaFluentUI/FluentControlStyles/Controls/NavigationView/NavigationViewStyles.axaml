@@ -62,7 +62,7 @@
                   Margin="0,-2,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Center"
-                  FontFamily="{DynamicResource ContentControlThemeFontFamily}"
+                  FontFamily="{DynamicResource DefaultFontFamily}"
                   FontSize="15"
                   Text="{TemplateBinding PaneTitle}"
                   TextWrapping="NoWrap"/>
