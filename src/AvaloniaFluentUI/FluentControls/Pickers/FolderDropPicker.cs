@@ -31,6 +31,15 @@ public class FolderDropPicker : TemplatedControl
     public static readonly StyledProperty<string> HeaderProperty =
         AvaloniaProperty.Register<FolderDropPicker, string>(nameof(Header));
 
+    public static readonly StyledProperty<string> OrTextProperty =
+        AvaloniaProperty.Register<FolderDropPicker, string>(nameof(OrText));
+
+    public string OrText
+    {
+        get => GetValue(OrTextProperty);
+        set => SetValue(OrTextProperty, value);
+    }
+    
     public string Header
     {
         get => GetValue(HeaderProperty);
@@ -80,15 +89,6 @@ public class FolderDropPicker : TemplatedControl
         DragDrop.AddDragOverHandler(this, OnDragOver);
     }
 
-    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
-    {
-        base.OnPropertyChanged(change);
-        if (change.Property == SelectedButtonIsVisibleProperty)
-        {
-            _selectedButton?.IsVisible = change.GetNewValue<bool>();
-        }
-    }
-
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
@@ -113,6 +113,11 @@ public class FolderDropPicker : TemplatedControl
     internal void OnDropped(DroppedEventArgs e)
     {
         Dropped?.Invoke(this, e);
+    }
+
+    public void Open()
+    {
+        OnSelectedClicked(null, null);
     }
 
     protected virtual async Task<IReadOnlyList<string>> OpenSelectionDialog()
