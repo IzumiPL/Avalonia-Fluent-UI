@@ -37,6 +37,7 @@
   <x:Double x:Key="NavigationViewItemOnLeftMinHeight">36</x:Double>
   <x:Double x:Key="NavigationViewPaneHeaderRowMinHeight">40</x:Double>
   <x:Double x:Key="NavigationViewItemOnLeftIconBoxHeight">16</x:Double>
+  <x:Double x:Key="NavigationViewItemOnLeftIconBoxWidth">16</x:Double>
   <x:Double x:Key="NavigationViewSelectionIndicatorWidth">3</x:Double>
   <x:Double x:Key="NavigationViewSelectionIndicatorHeight">16</x:Double>
   <!--  Changed to CornerRadius  -->

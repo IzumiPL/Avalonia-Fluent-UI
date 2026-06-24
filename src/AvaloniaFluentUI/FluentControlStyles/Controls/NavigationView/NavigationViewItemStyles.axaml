@@ -82,6 +82,11 @@
     <Style Selector="^:topoverflow /template/ uip|NavigationViewItemPresenter">
       <Setter Property="Theme" Value="{DynamicResource NavigationViewItemPresenterWhenOnTopPaneOverflow}"/>
     </Style>
-  </ControlTheme>
 
+    <Style Selector="^.MSNavigationViewItem">
+      <Style Selector="^ /template/ uip|NavigationViewItemPresenter">
+        <Setter Property="Theme" Value="{StaticResource MSNavigationViewItemPresenterStyle}"/>
+      </Style>
+    </Style>
+  </ControlTheme>
 </ResourceDictionary>
