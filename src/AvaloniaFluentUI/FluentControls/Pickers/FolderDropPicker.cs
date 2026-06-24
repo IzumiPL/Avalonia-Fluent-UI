@@ -26,7 +26,7 @@ public class FolderDropPicker : TemplatedControl
         AvaloniaProperty.Register<FolderDropPicker, string?>(nameof(SuggestedStartLocation), defaultValue: null);
 
     public static readonly StyledProperty<bool> SelectedButtonIsVisibleProperty =
-        AvaloniaProperty.Register<FolderDropPicker, bool>(nameof(SelectedButtonIsVisible));
+        AvaloniaProperty.Register<FolderDropPicker, bool>(nameof(SelectedButtonIsVisible), defaultValue: true);
 
     public static readonly StyledProperty<string> HeaderProperty =
         AvaloniaProperty.Register<FolderDropPicker, string>(nameof(Header));
