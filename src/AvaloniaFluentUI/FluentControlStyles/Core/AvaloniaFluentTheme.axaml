@@ -21,7 +21,7 @@
       </ResourceDictionary.MergedDictionaries>
 
       <!--  Font Family  -->
-      <FontFamily x:Key="DefaultFontFamily">/Assets/Fonts/MiSans-Regular-Subset#MiSans</FontFamily>
+      <FontFamily x:Key="DefaultFontFamily">/Assets/Fonts/MiSans-Regular-Subset.otf#MiSans</FontFamily>
       <FontFamily x:Key="SymbolThemeFontFamily">/Assets/Fonts/#Symbols</FontFamily>
 
     </ResourceDictionary>
