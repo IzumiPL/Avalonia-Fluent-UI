@@ -10,7 +10,7 @@ namespace AvaloniaFluentUI.Windowing;
 
 internal class Win32AppWindowFeatures : IAppWindowPlatformFeatures
 {
-    public Win32AppWindowFeatures(AppWindow owner)
+    public Win32AppWindowFeatures(FluentWindow owner)
     {
         _owner = owner;
     }
@@ -77,6 +77,6 @@ internal class Win32AppWindowFeatures : IAppWindowPlatformFeatures
         }
     }
 
-    private AppWindow _owner;
+    private FluentWindow _owner;
     private ITaskbarList3 _taskBarList;
 }

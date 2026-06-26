@@ -13,7 +13,7 @@ namespace AvaloniaFluentUI.Windowing;
 
 internal unsafe class Win32WindowManager
 {
-    public Win32WindowManager(AppWindow window)
+    public Win32WindowManager(FluentWindow window)
     {
         _window = window;
 
@@ -138,7 +138,7 @@ internal unsafe class Win32WindowManager
         new Dictionary<HWND, Win32WindowManager>();
 
 
-    private readonly AppWindow _window;
+    private readonly FluentWindow _window;
 
     private readonly nint _oldWndProc;
     private readonly nint _wndProc;
