@@ -91,7 +91,10 @@
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ImageButtonFlyout]}">
       <Button Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ShowFlyout]}">
         <Button.Flyout>
-          <fui:FluentFlyout IsOpen="{Binding FluentFlyoutIsOpen, Mode=TwoWay}" Placement="{Binding FlyoutPlacement}">
+          <fui:FluentFlyout
+            FlyoutPresenterClasses="NoScroll"
+            IsOpen="{Binding FluentFlyoutIsOpen, Mode=TwoWay}"
+            Placement="{Binding FlyoutPlacement}">
             <Grid
               Width="512"
               Height="388"

@@ -38,7 +38,7 @@ public class MainWindowSplashScreen : IApplicationSplashScreen
     public int MinimumShowTime => 1500;
 }
 
-public partial class MainWindow : AppWindow
+public partial class MainWindow : FluentWindow
 {
     private Bitmap? _backgroundImage;
     
@@ -49,8 +49,6 @@ public partial class MainWindow : AppWindow
         InitializeComponent();
         
         RegisterMessages();
-        
-
         Loaded += OnLoaded;
         
         ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("Pin"));
@@ -65,8 +63,6 @@ public partial class MainWindow : AppWindow
                 ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("Pin"));
             }
         };
-
-        TitleBar.Height = 45;
     }
 
     private void RegisterMessages()

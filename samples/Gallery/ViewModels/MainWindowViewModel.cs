@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using Avalonia;
+using Avalonia.Media;
 using AvaloniaFluentUI.Locale;
 using AvaloniaFluentUI.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -126,6 +128,13 @@ public partial class MainWindowViewModel : ViewModelBase
         CurrentViewModel = _viewModels["Home"];
 
         LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
+        AvaloniaFluentTheme.Instance.ThemeChanged += (_, _) =>
+        {
+            if (SelectedBorderColor == Colors.Transparent)
+            {
+                OnPropertyChanged(nameof(BorderBrush));
+            }
+        };
     }
 
     private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
@@ -174,6 +183,20 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(BorderWidth))]
+    private int _selectedBorderWidthItem = 2;
+    
+    public int[] BorderWidthItems => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] ;
+
+    public Thickness BorderWidth => new Thickness(SelectedBorderWidthItem);
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(BorderBrush))]
+    private Color _selectedBorderColor = Colors.Transparent;
+    
+    public IBrush BorderBrush => SelectedBorderColor == Colors.Transparent ? Brush.Parse(AvaloniaFluentTheme.Instance.IsDarkTheme ? "#484848" : "#D6D6D6") : new SolidColorBrush(SelectedBorderColor);
+    
     [RelayCommand]
     private void ToggleTheme() => AvaloniaFluentTheme.Instance.ToggleTheme(); 
 

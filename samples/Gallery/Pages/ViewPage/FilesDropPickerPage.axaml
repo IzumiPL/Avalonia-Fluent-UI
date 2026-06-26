@@ -67,7 +67,7 @@
                 <Border
                   Margin="2,0"
                   Padding="6"
-                  Background="{DynamicResource AvatarBackgroundDefault}"
+                  Background="{DynamicResource ControlBorderHighBorderBrush}"
                   CornerRadius="6">
                   <TextBlock VerticalAlignment="Center" Text="{Binding}"/>
                 </Border>
@@ -128,7 +128,7 @@
                 <Border
                   Margin="2,0"
                   Padding="6"
-                  Background="{DynamicResource AvatarBackgroundDefault}"
+                  Background="{DynamicResource ControlBorderHighBorderBrush}"
                   CornerRadius="6">
                   <TextBlock VerticalAlignment="Center" Text="{Binding}"/>
                 </Border>

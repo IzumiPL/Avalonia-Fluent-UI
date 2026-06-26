@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AvaloniaResource Include="Assets\**"/>
+    <AvaloniaResource Include="Assets\**" Exclude="Assets\Fonts\**"/>
   </ItemGroup>
 
   <ItemGroup>
