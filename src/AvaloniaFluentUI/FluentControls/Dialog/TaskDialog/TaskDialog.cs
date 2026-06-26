@@ -523,9 +523,13 @@ public partial class TaskDialog : ContentControl
             PseudoClasses.Set(s_pcHidden, false);
             PseudoClasses.Set(s_pcHosted, false);
 
-            var host = new AppWindow()
+            var host = new FluentWindow()
             {
                 CanResize = false,
+                MaxButtonIsVisible = false,
+                MinButtonIsVisible = false,
+                CanMinimize = false,
+                CanMaximize = false,
                 SizeToContent = SizeToContent.WidthAndHeight,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
                 ShowAsDialog = true,

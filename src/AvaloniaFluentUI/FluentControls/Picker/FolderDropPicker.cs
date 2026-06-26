@@ -154,7 +154,8 @@ public class FolderDropPicker : TemplatedControl
 
         return null;
     }
-
+    
+    // TODO: 在Wayland桌面环境上拖拽无效
     private void OnDragOver(object? sender, DragEventArgs e)
     {
         e.DragEffects = e.DataTransfer.Contains(DataFormat.File)
