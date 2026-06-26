@@ -80,12 +80,12 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/InfoBarStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/NumberBoxStyles.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/FAMenuFlyout/FAMenuFlyoutPresenter.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/FAMenuFlyout/MenuFlyoutItemStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/FAMenuFlyout/MenuFlyoutSubItemStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/FAMenuFlyout/ToggleMenuFlyoutItemStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/FAMenuFlyout/RadioMenuFlyoutItemStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/FAMenuFlyout/MenuFlyoutSeparatorStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/MenuFlyoutPresenter.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/MenuFlyoutItemStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/MenuFlyoutSubItemStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/ToggleMenuFlyoutItemStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/RadioMenuFlyoutItemStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/MenuFlyoutSeparatorStyles.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarButtonStyles.axaml"/>
@@ -150,10 +150,10 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FlipViewStyle.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/View/Avatar.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FolderDropPicker.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FileDropPicker.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/View/ShortcutKeyPicker.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/View/ShortcutKeyPanel.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Picker/FolderDropPicker.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Picker/FileDropPicker.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Picker/ShortcutKeyPicker.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Picker/ShortcutKeyPanel.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/ListBox/RoundListBoxStyle.axaml"/>
 

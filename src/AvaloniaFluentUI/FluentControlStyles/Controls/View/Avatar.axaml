@@ -4,7 +4,7 @@
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
   <!--  Add Resources Here  -->
   <ControlTheme x:Key="{x:Type ui:Avatar}" TargetType="ui:Avatar">
-    <Setter Property="Background" Value="{DynamicResource AvatarBackgroundDefault}"/>
+    <Setter Property="Background" Value="{DynamicResource AvatarBackgroundDefaultBrush}"/>
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
   </ControlTheme>
 </ResourceDictionary>
