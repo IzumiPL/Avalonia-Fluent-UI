@@ -118,10 +118,7 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/SettingsExpander/SettingsExpanderStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/SettingsExpander/SettingsExpanderItemStyles.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/FAComboBox/FAComboBoxStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/FAComboBox/FAComboBoxItemStyles.axaml"/>
-
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/AppWindowStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Windowing/FluentWindowStyles.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/RangeSliderStyles.axaml"/>
 
