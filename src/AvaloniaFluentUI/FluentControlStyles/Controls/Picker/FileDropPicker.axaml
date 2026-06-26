@@ -4,23 +4,20 @@
   xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
   <!--  Add Resources Here  -->
-  <x:Double x:Key="DropPickerWidth">256</x:Double>
-  <x:Double x:Key="DropPickerHeight">150</x:Double>
-
-  <ControlTheme x:Key="{x:Type ui:FolderDropPicker}" TargetType="ui:FolderDropPicker">
-    <Setter Property="BorderBrush" Value="{DynamicResource AvatarBackgroundDefault}"/>
+  <ControlTheme x:Key="{x:Type ui:FileDropPicker}" TargetType="ui:FileDropPicker">
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBorderBrush}"/>
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
     <Setter Property="Width" Value="{StaticResource DropPickerWidth}"/>
     <Setter Property="Height" Value="{StaticResource DropPickerHeight}"/>
     <Setter Property="BorderThickness" Value="2"/>
     <Setter Property="CornerRadius" Value="8"/>
     <Setter Property="Background" Value="#01FFFFFF"/>
-    <Setter Property="Header" Value="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DragTheFolderHere]}"/>
+    <Setter Property="Header" Value="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DragTheFileHere]}"/>
     <Setter Property="OrText" Value="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Or]}"/>
 
     <Setter Property="Template">
       <ControlTemplate>
-        <Grid RowDefinitions="*,Auto,*">
+        <Grid RowDefinitions="*, Auto, *">
           <Rectangle
             Grid.RowSpan="3"
             Width="{TemplateBinding Width}"
@@ -37,7 +34,7 @@
             Grid.Row="0"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
-            FontSize="14"
+            FontSize="{TemplateBinding FontSize}"
             Text="{TemplateBinding Header}"
             TextAlignment="Center"
             TextWrapping="NoWrap"/>
@@ -58,7 +55,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Classes="Transparent"
-            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SelectFolder]}"
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SelectFile]}"
             Foreground="{DynamicResource SystemAccentColor}"
             IsVisible="{TemplateBinding SelectedButtonIsVisible}"/>
         </Grid>

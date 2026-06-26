@@ -4,12 +4,12 @@ using AvaloniaFluentUI.Core;
 namespace AvaloniaFluentUI.Windowing;
 
 /// <summary>
-/// Represents the title bar of an <see cref="AppWindow"/> allowing customization such as
+/// Represents the title bar of an <see cref="FluentWindow"/> allowing customization such as
 /// colors, hit testing, and allowing app content in the title bar area
 /// </summary>
-public class AppWindowTitleBar
+public class FluentWindowTitleBar
 {
-    internal AppWindowTitleBar(AppWindow parent)
+    internal FluentWindowTitleBar(FluentWindow parent)
     {
         _parent = parent;
     }
@@ -230,7 +230,10 @@ public class AppWindowTitleBar
         }
     }
 
-    private AppWindow _parent;
+    private FluentWindow _parent;
+    private double _height = 45;
+    
+    // TODO: 未使用的配置
     private Color? _backgroundColor;
     private Color? _buttonBackgroundColor;
     private Color? _buttonForegroundColor;
@@ -242,7 +245,6 @@ public class AppWindowTitleBar
     private Color? _buttonPressedForegroundColor;
     // private bool _extendsContentIntoTitleBar;
     private Color? _foregroundColor;
-    private double _height = 40;
     private Color? _inactiveBackgroundColor;
     private Color? _inactiveForegroundColor;
 }

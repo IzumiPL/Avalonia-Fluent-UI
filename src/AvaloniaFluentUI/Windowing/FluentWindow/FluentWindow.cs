@@ -3,10 +3,12 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Controls;
+using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Styling;
@@ -21,28 +23,116 @@ namespace AvaloniaFluentUI.Windowing;
 /// Custom Window that supports a modern Windows look and title bar customization,
 /// with a graceful fallback for MacOS and Linux
 /// </summary>
-public partial class AppWindow : Window
+[TemplatePart(Name = PART_DEFAULT_TITLE_BAR, Type =  typeof(Grid))]
+[TemplatePart(Name = PART_MINIMIZE_BUTTON, Type = typeof(Button))]
+[TemplatePart(Name = PART_MAXIMIZE_BUTTON, Type = typeof(Button))]
+[TemplatePart(Name = PART_CLOSE_BUTTON, Type = typeof(Button))]
+public partial class FluentWindow : Window
 {
     /// <summary>
     /// Defines the <see cref="Icon"/> property
     /// </summary>
     public static readonly new StyledProperty<IImage> IconProperty =
-        AvaloniaProperty.Register<AppWindow, IImage>(nameof(Icon));
+        AvaloniaProperty.Register<FluentWindow, IImage>(nameof(Icon));
 
     /// <summary>
     /// Defines the AllowInteractionInTitleBar attached property
     /// </summary>
     public static readonly AttachedProperty<bool> AllowInteractionInTitleBarProperty =
-        AvaloniaProperty.RegisterAttached<AppWindow, Control, bool>("AllowInteractionInTitleBar");
+        AvaloniaProperty.RegisterAttached<FluentWindow, Control, bool>("AllowInteractionInTitleBar");
 
     public static readonly StyledProperty<double> IconSizeProperty =
-        AvaloniaProperty.Register<AppWindow, double>(nameof(IconSize), defaultValue: 16);
+        AvaloniaProperty.Register<FluentWindow, double>(nameof(IconSize), defaultValue: 16);
 
     public static readonly StyledProperty<bool> FullScreenButtonIsVisibleProperty =
-        AvaloniaProperty.Register<AppWindow, bool>(nameof(FullScreenButtonIsVisible));
+        AvaloniaProperty.Register<FluentWindow, bool>(nameof(FullScreenButtonIsVisible));
 
     public static readonly StyledProperty<Thickness> TitleBarMarginProperty =
-        AvaloniaProperty.Register<AppWindow, Thickness>(nameof(TitleBarMargin));
+        AvaloniaProperty.Register<FluentWindow, Thickness>(nameof(TitleBarMargin));
+
+    public static readonly StyledProperty<bool> MinButtonIsVisibleProperty =
+        AvaloniaProperty.Register<FluentWindow, bool>(nameof(MinButtonIsVisible), defaultValue: true);
+
+    public static readonly StyledProperty<bool> MaxButtonIsVisibleProperty =
+        AvaloniaProperty.Register<FluentWindow, bool>(nameof(MaxButtonIsVisible), defaultValue: true);
+
+    public static readonly StyledProperty<bool> CloseButtonIsVisibleProperty =
+        AvaloniaProperty.Register<FluentWindow, bool>(nameof(CloseButtonIsVisible), defaultValue: true);
+    
+    /// <summary>
+    /// Defines the <see cref="TitleBarHeight"/> property
+    /// </summary>
+    public static readonly StyledProperty<double> TitleBarHeightProperty =
+        AvaloniaProperty.Register<FluentWindow, double>(nameof(TitleBarHeight));
+
+    /// <summary>
+    /// Defines the <see cref="TitleBarContentIsVisibleProperty"/> property
+    /// </summary>
+    public static readonly StyledProperty<bool> TitleBarContentIsVisibleProperty =
+        AvaloniaProperty.Register<FluentWindow, bool>(nameof(TitleBarContentIsVisible), defaultValue: true);
+
+    public static readonly StyledProperty<object?> TitleBarContentProperty =
+        AvaloniaProperty.Register<FluentWindow, object?>(nameof(TitleBarContent));
+    
+    public static readonly StyledProperty<IDataTemplate?> TitleBarContentTemplateProperty =
+        AvaloniaProperty.Register<FluentWindow, IDataTemplate?>(nameof(TitleBarContentTemplate));
+
+    public static readonly StyledProperty<Thickness> TitleBarContentMarginProperty =
+        AvaloniaProperty.Register<FluentWindow, Thickness>(nameof(TitleBarContentMargin), new Thickness(8, 0, 140, 0));
+
+    public Thickness TitleBarContentMargin
+    {
+        get => GetValue(TitleBarContentMarginProperty);
+        set => SetValue(TitleBarContentMarginProperty, value);
+    }
+    
+    public IDataTemplate? TitleBarContentTemplate
+    {
+        get => GetValue(TitleBarContentTemplateProperty);
+        set => SetValue(TitleBarContentTemplateProperty, value);
+    }
+    
+    public object? TitleBarContent
+    {
+        get => GetValue(TitleBarContentProperty);
+        set => SetValue(TitleBarContentProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets the height of the managed titlebar for AppWindow
+    /// </summary>
+    public double TitleBarHeight
+    {
+        get => GetValue(TitleBarHeightProperty);
+        set => SetValue(TitleBarHeightProperty, value);
+    }
+
+    /// <summary>
+    /// Gets or sets whether the titlebar content is visible (Icon and App name text)
+    /// </summary>
+    public bool TitleBarContentIsVisible
+    {
+        get => GetValue(TitleBarContentIsVisibleProperty);
+        set => SetValue(TitleBarContentIsVisibleProperty, value);
+    }
+
+    public bool CloseButtonIsVisible
+    {
+        get => GetValue(CloseButtonIsVisibleProperty);
+        set => SetValue(CloseButtonIsVisibleProperty, value);
+    }
+    
+    public bool MaxButtonIsVisible
+    {
+        get => GetValue(MaxButtonIsVisibleProperty);
+        set => SetValue(MaxButtonIsVisibleProperty, value);
+    }
+
+    public bool MinButtonIsVisible
+    {
+        get => GetValue(MinButtonIsVisibleProperty);
+        set => SetValue(MinButtonIsVisibleProperty, value);
+    }
 
     public Thickness TitleBarMargin
     {
@@ -61,18 +151,6 @@ public partial class AppWindow : Window
         get => GetValue(IconSizeProperty);
         set => SetValue(IconSizeProperty, value);
     }
-
-    /// <summary>
-    /// Gets the value of the <see cref="AllowInteractionInTitleBarProperty"/> attached property for the given control
-    /// </summary>
-    public static bool GetAllowInteractionInTitleBar(Control c) => c.GetValue(AllowInteractionInTitleBarProperty);
-
-    /// <summary>
-    /// Sets the value of the <see cref="AllowInteractionInTitleBarProperty"/> attached property for the given control
-    /// </summary>
-    /// <param name="c"></param>
-    /// <param name="b"></param>
-    public static void SetAllowInteractionInTitleBar(Control c, bool b) => c.SetValue(AllowInteractionInTitleBarProperty, b);
 
     /// <summary>
     /// Gets or sets the icon for the window
@@ -136,7 +214,7 @@ public partial class AppWindow : Window
     /// Use this property to customize the colors, height, and whether the window contents should
     /// display in the titlebar area
     /// </remarks>
-    public AppWindowTitleBar TitleBar => _titleBar;
+    public FluentWindowTitleBar TitleBar => _titleBar;
 
     /// <summary>
     /// Gets the interface for custom platform-specific features through the AppWindow class
@@ -148,15 +226,40 @@ public partial class AppWindow : Window
 
     protected internal bool IsWindows { get; internal set; }
 
-    protected override Type StyleKeyOverride => typeof(AppWindow);
+    protected internal bool IsLinux { get; internal set; }
+
+    protected override Type StyleKeyOverride => typeof(FluentWindow);
+    
+    /// <summary>
+    /// Gets the value of the <see cref="AllowInteractionInTitleBarProperty"/> attached property for the given control
+    /// </summary>
+    public static bool GetAllowInteractionInTitleBar(Control c) => c.GetValue(AllowInteractionInTitleBarProperty);
+
+    /// <summary>
+    /// Sets the value of the <see cref="AllowInteractionInTitleBarProperty"/> attached property for the given control
+    /// </summary>
+    /// <param name="c"></param>
+    /// <param name="b"></param>
+    public static void SetAllowInteractionInTitleBar(Control c, bool b) => c.SetValue(AllowInteractionInTitleBarProperty, b);
 
     private SplashScreenContext _splashContext;
     private Grid _defaultTitleBar;
-    private AppWindowTitleBar _titleBar;
+    private FluentWindowTitleBar _titleBar;
+    private Border _windowBorder;
     private bool _hideSizeButtons;
+    
+    private Button? _minimizeButton;
+    private Button? _maximizeButton;
+    private Button? _closeButton;
+    
+    private const string PART_DEFAULT_TITLE_BAR = "PART_DefaultTitleBar";
+    private const string SPLASH_HOST = "SplashHost";
+    
+    private const string PART_MINIMIZE_BUTTON = "PART_MinimizeButton";
+    private const string PART_MAXIMIZE_BUTTON = "PART_MaximizeButton";
+    private const string PART_CLOSE_BUTTON = "PART_CloseButton";
 
     // Resource names used in SetTitleBarColors
-
     private const string TITLE_BAR_BACKGROUND = "FluentTitleBarBackground";
     private const string TITLE_BAR_FOREGROUND = "FluentTitleBarForeground";
     private const string TITLE_BAR_INACTIVE_BACKGROUND = "FluentTitleBarBackgroundInactive";
@@ -170,79 +273,31 @@ public partial class AppWindow : Window
     private const string SYSTEM_CAPTION_BACKGROUND_INACTIVE = "FluentSysCaptionBackgroundInactive";
     private const string SYSTEM_CAPTION_FOREGROUND_INACTIVE = "FluentSysCaptionForegroundInactive";
     
-    /// <summary>
-    /// Defines the <see cref="TitleBarHeight"/> property
-    /// </summary>
-    public static readonly StyledProperty<double> TitleBarHeightProperty =
-        AvaloniaProperty.Register<AppWindow, double>(nameof(TitleBarHeight));
-
-    /// <summary>
-    /// Defines the <see cref="IsTitleBarContentVisible"/> property
-    /// </summary>
-    public static readonly StyledProperty<bool> IsTitleBarContentVisibleProperty =
-        AvaloniaProperty.Register<AppWindow, bool>(nameof(IsTitleBarContentVisible), defaultValue: true);
-
-    public static readonly StyledProperty<object?> TitleBarContentProperty =
-        AvaloniaProperty.Register<AppWindow, object?>(nameof(TitleBarContent));
-    
-    public static readonly StyledProperty<IDataTemplate?> TitleBarContentTemplateProperty =
-        AvaloniaProperty.Register<AppWindow, IDataTemplate?>(nameof(TitleBarContentTemplate));
-
-    public static readonly StyledProperty<Thickness> TitleBarContentMarginProperty =
-        AvaloniaProperty.Register<AppWindow, Thickness>(nameof(TitleBarContentMargin), new Thickness(8, 0, 140, 0));
-
-    public Thickness TitleBarContentMargin
+    public FluentWindow()
     {
-        get => GetValue(TitleBarContentMarginProperty);
-        set => SetValue(TitleBarContentMarginProperty, value);
-    }
-    
-    public IDataTemplate? TitleBarContentTemplate
-    {
-        get => GetValue(TitleBarContentTemplateProperty);
-        set => SetValue(TitleBarContentTemplateProperty, value);
-    }
-    
-    public object? TitleBarContent
-    {
-        get => GetValue(TitleBarContentProperty);
-        set => SetValue(TitleBarContentProperty, value);
-    }
-
-    /// <summary>
-    /// Gets or sets the height of the managed titlebar for AppWindow
-    /// </summary>
-    public double TitleBarHeight
-    {
-        get => GetValue(TitleBarHeightProperty);
-        set => SetValue(TitleBarHeightProperty, value);
-    }
-
-    /// <summary>
-    /// Gets or sets whether the titlebar content is visible (Icon and App name text)
-    /// </summary>
-    public bool IsTitleBarContentVisible
-    {
-        get => GetValue(IsTitleBarContentVisibleProperty);
-        set => SetValue(IsTitleBarContentVisibleProperty, value);
-    }
-    
-    public AppWindow()
-    {
-        _titleBar = new AppWindowTitleBar(this);
+        _titleBar = new FluentWindowTitleBar(this);
         PseudoClasses.Add(":noFullScreen");
 
         if (OperatingSystem.IsWindows() && !Design.IsDesignMode)
         {
-            InitializeAppWindow();
+            InitializeWindowPlatform();
+        }
+        else if (OperatingSystem.IsLinux() && !Design.IsDesignMode)
+        {
+            InitializeLinuxPlatform();
         }
 
         PointerPressed += OnWindowPointerPressed;
+        
+        if (!IsWindows11)
+        {
+            PseudoClasses.Add(":isNotWin11");
+        } 
     }
 
     private void OnWindowPointerPressed(object sender, PointerPressedEventArgs e)
     {
-        if (!IsWindows || _defaultTitleBar == null)
+        if (_defaultTitleBar == null)
             return;
 
         if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
@@ -265,17 +320,11 @@ public partial class AppWindow : Window
         }
     }
 
-    static AppWindow()
-    {
-        if (OperatingSystem.IsWindows())
-            ExtendClientAreaToDecorationsHintProperty.OverrideDefaultValue<AppWindow>(true);
-    }
-
     public void EnabledAcrylicBlue(bool enable)
     {
         if (enable)
         {
-            Background = Brush.Parse(FluentAvaloniaTheme.Instance.IsDarkTheme ? "#30161616" : "#30F3F3F3");  
+            Background = Brush.Parse(AvaloniaFluentTheme.Instance.IsDarkTheme ? "#30161616" : "#30F3F3F3");  
             TransparencyLevelHint = [WindowTransparencyLevel.AcrylicBlur];
             return;
         } 
@@ -296,31 +345,50 @@ public partial class AppWindow : Window
     private void ResetBackground()
     {
         TransparencyLevelHint = [];
-        Background = Brush.Parse(FluentAvaloniaTheme.Instance.IsDarkTheme ? "#202020" : "#F3F3F3"); 
+        Background = Brush.Parse(AvaloniaFluentTheme.Instance.IsDarkTheme ? "#202020" : "#F3F3F3"); 
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);      
+        _minimizeButton?.Click -= OnMinimizeButtonClicked;
+        _maximizeButton?.Click -= OnMaximizeButtonClicked;
+        _closeButton?.Click -= OnCloseButtonClicked;
+        
+        _minimizeButton = e.NameScope.Find<Button>(PART_MINIMIZE_BUTTON);
+        _maximizeButton = e.NameScope.Find<Button>(PART_MAXIMIZE_BUTTON);
+        _closeButton = e.NameScope.Find<Button>(PART_CLOSE_BUTTON);
+        
+        _minimizeButton?.Click += OnMinimizeButtonClicked;
+        _maximizeButton?.Click += OnMaximizeButtonClicked;
+        _closeButton?.Click += OnCloseButtonClicked;
 
-        if (IsWindows && !Design.IsDesignMode)
+        if (!Design.IsDesignMode)
         {
-            _defaultTitleBar = e.NameScope.Find<Grid>("DefaultTitleBar");
+            _defaultTitleBar = e.NameScope.Find<Grid>(PART_DEFAULT_TITLE_BAR);
 
             OnTitleBarHeightChanged(_titleBar.Height);
 
             SetTitleBarColors();
         }
 
+        _windowBorder = e.NameScope.Find<Border>("RootBorder");
+
         if (SplashScreen != null)
         {
-            var host = e.NameScope.Find<AppSplashScreen>("SplashHost");
+            var host = e.NameScope.Find<AppSplashScreen>(SPLASH_HOST);
             if (host != null)
             {
                 _splashContext.Host = host;
             }
         }
     }
+    
+    private void OnCloseButtonClicked(object? sender, RoutedEventArgs e) => Close();
+
+    private void OnMaximizeButtonClicked(object? sender, RoutedEventArgs e) => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+
+    private void OnMinimizeButtonClicked(object? sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
@@ -328,11 +396,11 @@ public partial class AppWindow : Window
         
         if (change.Property == ExtendClientAreaToDecorationsHintProperty)
         {
-            if (IsWindows)
-            {
-                throw new InvalidOperationException("AppWindow cannot be customized with ExtendClientAreaToDecorationsHintProperty." +
-                    "Use the TitleBar property or a regular Avalonia window");
-            }
+            // if (IsWindows)
+            // {
+                // throw new InvalidOperationException("AppWindow cannot be customized with ExtendClientAreaToDecorationsHintProperty." +
+                    // "Use the TitleBar property or a regular Avalonia window");
+            // }
         }
         else if (change.Property == IconProperty)
         {
@@ -343,10 +411,15 @@ public partial class AppWindow : Window
         {
             SetTitleBarColors();
         }
-
+        
         if (change.Property == FullScreenButtonIsVisibleProperty)
         {
             TitleBarContentMargin = change.GetNewValue<bool>() ?  new Thickness(8, 0, 185, 0) : new Thickness(8, 0, 140, 0);
+        }
+
+        if (change.Property == CanResizeProperty)
+        {
+            _maximizeButton?.IsEnabled = change.GetNewValue<bool>();
         }
     }
 

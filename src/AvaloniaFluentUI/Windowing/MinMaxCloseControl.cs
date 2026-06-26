@@ -9,7 +9,7 @@ using AvaloniaFluentUI.Core;
 namespace AvaloniaFluentUI.Windowing;
 
 /// <summary>
-/// Represents the caption buttons for a <see cref="AppWindow"/>
+/// Represents the caption buttons for a <see cref="FluentWindow"/>
 /// </summary>
 public class MinMaxCloseControl : TemplatedControl
 {
@@ -50,7 +50,7 @@ public class MinMaxCloseControl : TemplatedControl
 
         // MinMaxCloseControl should only be used in Template of AppWindow - so TemplatedParent
         // here should A) never be null, and B) Always be AppWindow
-        _owner = TemplatedParent as AppWindow;
+        _owner = TemplatedParent as FluentWindow;
         _owner.Opened += OwnerWindowOpened;
 
         if (_owner.ShowAsDialog)
@@ -177,7 +177,7 @@ public class MinMaxCloseControl : TemplatedControl
     }
 
     private IDisposable _windowStateObservable;
-    private AppWindow _owner;
+    private FluentWindow _owner;
     private Button _minimizeButton;
     private Button _maximizeButton;
     private Button _closeButton;
