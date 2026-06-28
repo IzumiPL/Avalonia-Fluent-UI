@@ -8,7 +8,7 @@
 
   <ControlTheme x:Key="{x:Type ui:SettingCard}" TargetType="ui:SettingCard">
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource CardBorderThickness}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
     <Setter Property="Padding" Value="{DynamicResource SettingCardPadding}"/>

@@ -32,7 +32,7 @@
       <ScaleTransform ScaleY="-1"/>
     </LinearGradientBrush.Transform>
     <LinearGradientBrush.GradientStops>
-      <GradientStop Offset="0.5" Color="{DynamicResource ControlStrongStrokeColorDefault}"/>
+      <GradientStop Offset="0.5" Color="{DynamicResource ControlStrongFillColorDefault}"/>
       <GradientStop Offset="1.0" Color="{DynamicResource ControlStrokeColorDefault}"/>
     </LinearGradientBrush.GradientStops>
   </LinearGradientBrush>

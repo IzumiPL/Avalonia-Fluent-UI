@@ -107,7 +107,7 @@
               Width="40"
               Height="20"
               Background="{DynamicResource ControlAltFillColorSecondaryBrush}"
-              BorderBrush="{DynamicResource ControlStrongStrokeColorDefaultBrush}"
+              BorderBrush="{DynamicResource ControlStrongFillColorDefaultBrush}"
               BorderThickness="{DynamicResource ToggleSwitchOuterBorderStrokeThickness}"
               CornerRadius="10">
               <Border.Transitions>
@@ -194,7 +194,7 @@
 
     <Style Selector="^:pointerover">
       <Style Selector="^ /template/ Border#OuterBorder">
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrongStrokeColorDefaultBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrongFillColorDefaultBrush}"/>
         <Setter Property="Background" Value="{DynamicResource ControlAltFillColorTertiaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ Ellipse#SwitchKnobOff">
@@ -218,8 +218,8 @@
 
     <Style Selector="^:pressed">
       <Style Selector="^ /template/ Border#OuterBorder">
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrongStrokeColorDefaultBrush}"/>
-        <Setter Property="Background" Value="{DynamicResource ControlAltFillColorQuarternaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrongFillColorDefaultBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorQuarternaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ Border#SwitchKnobBounds">
         <Setter Property="Background" Value="{DynamicResource AccentFillColorTertiaryBrush}"/>
@@ -244,8 +244,8 @@
       <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
 
       <Style Selector="^ /template/ Border#OuterBorder">
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrongStrokeColorDisabledBrush}"/>
-        <Setter Property="Background" Value="{DynamicResource ControlAltFillColorQuarternaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentFillColorDisabledBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorQuarternaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ Ellipse#SwitchKnobOff">
         <Setter Property="Fill" Value="{DynamicResource TextFillColorDisabledBrush}"/>

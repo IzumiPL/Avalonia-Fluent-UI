@@ -6,7 +6,7 @@
   <ControlTheme x:Key="{x:Type ui:SegmentedToggleView}" TargetType="ui:SegmentedToggleView">
     <Setter Property="HorizontalAlignment" Value="Left"/>
     <Setter Property="Orientation" Value="Horizontal"/>
-    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Background" Value="{DynamicResource SegmentedBackgroundBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
     <Setter Property="BorderThickness" Value="1"/>
     <Setter Property="CornerRadius" Value="5"/>
@@ -69,7 +69,7 @@
     <!-- </Style> -->
 
     <Style Selector="^[Orientation=Horizontal]">
-      <Setter Property="Padding" Value="2"/>
+      <Setter Property="Padding" Value="0"/>
       <Setter Property="VerticalAlignment" Value="Top"/>
 
       <Style Selector="^ /template/ ui|SingleDirectionScrollViewer#PART_ScrollViewer">

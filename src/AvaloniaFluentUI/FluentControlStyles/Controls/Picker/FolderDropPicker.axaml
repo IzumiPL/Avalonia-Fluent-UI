@@ -8,7 +8,7 @@
   <x:Double x:Key="DropPickerHeight">150</x:Double>
 
   <ControlTheme x:Key="{x:Type ui:FolderDropPicker}" TargetType="ui:FolderDropPicker">
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBorderBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBrush}"/>
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
     <Setter Property="Width" Value="{StaticResource DropPickerWidth}"/>
     <Setter Property="Height" Value="{StaticResource DropPickerHeight}"/>

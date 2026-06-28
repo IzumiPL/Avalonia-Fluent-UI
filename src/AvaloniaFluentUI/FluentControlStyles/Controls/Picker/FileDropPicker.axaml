@@ -5,7 +5,7 @@
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
   <!--  Add Resources Here  -->
   <ControlTheme x:Key="{x:Type ui:FileDropPicker}" TargetType="ui:FileDropPicker">
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBorderBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBrush}"/>
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
     <Setter Property="Width" Value="{StaticResource DropPickerWidth}"/>
     <Setter Property="Height" Value="{StaticResource DropPickerHeight}"/>

@@ -36,7 +36,7 @@
   <Thickness x:Key="ProgressBarBorderThemeThickness">0</Thickness>
   <ControlTheme x:Key="{x:Type ProgressBar}" TargetType="ProgressBar">
     <Setter Property="Foreground" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
-    <Setter Property="Background" Value="{DynamicResource ControlStrongStrokeColorDefaultBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource ControlStrongFillColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ProgressBarBorderThemeThickness}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
     <Setter Property="VerticalAlignment" Value="Center"/>

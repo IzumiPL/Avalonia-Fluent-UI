@@ -65,8 +65,8 @@
                     VerticalScrollBarVisibility="Auto">
                     <Border
                       Padding="{DynamicResource ContentDialogPadding}"
-                      Background="{DynamicResource LayerFillColorAltBrush}"
-                      BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
+                      Background="{DynamicResource LayerFillColorBrush}"
+                      BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                       BorderThickness="{StaticResource ContentDialogSeparatorThickness}">
                       <Grid RowDefinitions="Auto,*">
                         <Grid.Styles>

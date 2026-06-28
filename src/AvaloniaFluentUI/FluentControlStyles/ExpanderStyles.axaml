@@ -52,7 +52,7 @@
   <Thickness x:Key="ExpanderHeaderBorderThickness">1</Thickness>
   <Thickness x:Key="ExpanderChevronBorderThickness">0</Thickness>
   <ControlTheme x:Key="ExpanderToggleButtonTheme" TargetType="ToggleButton">
-    <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}"/>
+    <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ExpanderHeaderBorderThickness}"/>
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
@@ -158,7 +158,7 @@
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
       </Style>
       <Style Selector="^ /template/ Border#ExpandCollapseChevronBorder">
-        <Setter Property="BorderBrush" Value="{DynamicResource ExpanderDisabledBorderBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
       </Style>
       <Style Selector="^ /template/ TextBlock#ExpandCollapseChevron">
@@ -225,11 +225,11 @@
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
         </Style>
         <Style Selector="^ /template/ Border#ExpandCollapseChevronBorder">
-          <Setter Property="BorderBrush" Value="{DynamicResource ExpanderDisabledBorderBrush}"/>
+          <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
         </Style>
         <Style Selector="^ /template/ TextBlock#ExpandCollapseChevron">
-          <Setter Property="Foreground" Value="{DynamicResource ExpanderDisabledForeground}"/>
+          <Setter Property="Foreground" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
         </Style>
       </Style>
     </Style>
@@ -272,7 +272,7 @@
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type Expander}" TargetType="Expander">
-    <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorSecondaryBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}"/>
     <Setter Property="MinWidth" Value="{DynamicResource FlyoutThemeMinWidth}"/>
     <Setter Property="MinHeight" Value="{DynamicResource ExpanderMinHeight}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
@@ -400,7 +400,7 @@
 
   <!--  Special ControlTheme which activates a WinUI style animation for the Expander  -->
   <ControlTheme x:Key="ExpanderWinUIAnimationStyle" TargetType="Expander">
-    <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorSecondaryBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}"/>
     <Setter Property="MinWidth" Value="{DynamicResource FlyoutThemeMinWidth}"/>
     <Setter Property="MinHeight" Value="{DynamicResource ExpanderMinHeight}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>

@@ -77,13 +77,13 @@
                   <ResourceDictionary>
                     <ResourceDictionary.ThemeDictionaries>
                       <ResourceDictionary x:Key="Default">
-                        <StaticResource x:Key="ColorViewContentBackgroundBrush" ResourceKey="LayerFillColorAltBrush"/>
+                        <StaticResource x:Key="ColorViewContentBackgroundBrush" ResourceKey="ControlSolidFillColorDefaultBrush"/>
                         <StaticResource x:Key="ColorViewContentBorderBrush" ResourceKey="DividerStrokeColorDefaultBrush"/>
                         <SolidColorBrush x:Key="ColorViewTabBackgroundBrush" Color="Transparent"/>
                         <SolidColorBrush x:Key="ColorViewTabBorderBrush" Color="Transparent"/>
                       </ResourceDictionary>
                       <ResourceDictionary x:Key="Dark">
-                        <StaticResource x:Key="ColorViewContentBackgroundBrush" ResourceKey="LayerFillColorAltBrush"/>
+                        <StaticResource x:Key="ColorViewContentBackgroundBrush" ResourceKey="ControlSolidFillColorDefaultBrush"/>
                         <StaticResource x:Key="ColorViewContentBorderBrush" ResourceKey="DividerStrokeColorDefaultBrush"/>
                         <SolidColorBrush x:Key="ColorViewTabBackgroundBrush" Color="Transparent"/>
                         <SolidColorBrush x:Key="ColorViewTabBorderBrush" Color="Transparent"/>

@@ -5,7 +5,7 @@
 
   <ControlTheme x:Key="{x:Type ui:Card}" TargetType="ui:Card">
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource CardBorderThickness}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource CardCornerRadius}"/>
     <Setter Property="Padding" Value="{DynamicResource CardPadding}"/>
@@ -97,7 +97,7 @@
   <!--  HeaderCard  -->
   <ControlTheme x:Key="{x:Type ui:HeaderCard}" TargetType="ui:HeaderCard">
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource CardBorderThickness}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource CardCornerRadius}"/>
     <Setter Property="Padding" Value="0 16 0 16"/>

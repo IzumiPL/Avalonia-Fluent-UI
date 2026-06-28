@@ -34,8 +34,8 @@
                 Name="OuterEllipse"
                 Width="20"
                 Height="20"
-                Fill="{DynamicResource ControlAltFillColorSecondaryBrush}"
-                Stroke="{DynamicResource ControlStrongStrokeColorDefaultBrush}"
+                Fill="{DynamicResource SubtleFillColorTertiaryBrush}"
+                Stroke="{DynamicResource ControlStrongFillColorDefaultBrush}"
                 StrokeThickness="{DynamicResource RadioButtonBorderThemeThickness}"
                 UseLayoutRounding="False"/>
 
@@ -117,16 +117,13 @@
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
-      <Style Selector="^ /template/ TextBlock#SubTitle">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-      </Style>
       <Style Selector="^ /template/ Border#Root">
         <Setter Property="Background" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
       </Style>
       <Style Selector="^ /template/ Ellipse#OuterEllipse">
-        <Setter Property="Stroke" Value="{DynamicResource ControlStrongStrokeColorDefaultBrush}"/>
-        <Setter Property="Fill" Value="{DynamicResource ControlAltFillColorTertiaryBrush}"/>
+        <Setter Property="Stroke" Value="{DynamicResource ControlStrongFillColorDefaultBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
       </Style>
       <Style Selector="^ /template/ Ellipse#CheckOuterEllipse">
         <Setter Property="Stroke" Value="{DynamicResource AccentFillColorSecondaryBrush}"/>
@@ -160,8 +157,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
       </Style>
       <Style Selector="^ /template/ Ellipse#OuterEllipse">
-        <Setter Property="Stroke" Value="{DynamicResource ControlStrongStrokeColorDisabledBrush}"/>
-        <Setter Property="Fill" Value="{DynamicResource ControlAltFillColorQuarternaryBrush}"/>
+        <Setter Property="Stroke" Value="{DynamicResource AccentFillColorDisabledBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource ControlFillColorQuarternaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ Ellipse#CheckOuterEllipse">
         <Setter Property="Stroke" Value="{DynamicResource AccentFillColorTertiaryBrush}"/>
@@ -200,8 +197,8 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
       </Style>
       <Style Selector="^ /template/ Ellipse#OuterEllipse">
-        <Setter Property="Stroke" Value="{DynamicResource ControlStrongStrokeColorDisabledBrush}"/>
-        <Setter Property="Fill" Value="{DynamicResource ControlAltFillColorDisabledBrush}"/>
+        <Setter Property="Stroke" Value="{DynamicResource AccentFillColorDisabledBrush}"/>
+        <Setter Property="Fill" Value="{DynamicResource SubtleFillColorDisabledBrush}"/>
       </Style>
       <Style Selector="^ /template/ Ellipse#CheckOuterEllipse">
         <Setter Property="Stroke" Value="{DynamicResource AccentFillColorDisabledBrush}"/>

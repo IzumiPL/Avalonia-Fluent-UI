@@ -69,6 +69,10 @@
         <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
       </Style>
+
+      <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+      </Style>
     </Style>
 
     <Style Selector="^:disabled">
@@ -95,7 +99,7 @@
       </Style>
 
       <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
-        <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
       </Style>
 
       <Style Selector="^:pointerover">
@@ -117,7 +121,7 @@
         </Style>
 
         <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
-          <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
+          <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
         </Style>
       </Style>
 

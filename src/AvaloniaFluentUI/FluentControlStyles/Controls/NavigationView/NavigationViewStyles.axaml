@@ -389,7 +389,7 @@
                 <Border
                   Name="ContentGridBorder"
                   Margin="{DynamicResource NavigationViewContentMargin}"
-                  Background="{DynamicResource LayerFillColorDefaultBrush}"
+                  Background="{DynamicResource ControlFillColorDefaultBrush}"
                   BorderBrush="{DynamicResource ControlStrokeColorDefault}"
                   BorderThickness="{DynamicResource NavigationViewContentGridBorderThickness}"
                   ClipToBounds="True"

@@ -24,7 +24,7 @@
   <!--  ToggleButton for the Expander  -->
   <ControlTheme x:Key="SettingsExpanderToggleButtonStyle" TargetType="ToggleButton">
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource SettingsExpanderHeaderBorderThickness}"/>
     <Setter Property="Padding" Value="0"/>
     <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -127,7 +127,7 @@
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="MinWidth" Value="0"/>
     <Setter Property="MinHeight" Value="{DynamicResource SettingsExpanderMinHeight}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource SettingsExpanderContentDownBorderThickness}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
     <Setter Property="Template">
@@ -199,7 +199,7 @@
 
   <ControlTheme x:Key="{x:Type ui:SettingsExpander}" TargetType="ui:SettingsExpander">
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ExpanderHeaderBorderThickness}"/>
     <Setter Property="Padding" Value="{DynamicResource SettingsExpanderPadding}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
@@ -222,7 +222,7 @@
 
   <ControlTheme x:Key="SettingsExpanderNoAnimationStyle" TargetType="ui:SettingsExpander">
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ExpanderHeaderBorderThickness}"/>
     <Setter Property="Padding" Value="{DynamicResource SettingsExpanderPadding}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
