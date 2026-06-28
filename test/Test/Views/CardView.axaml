@@ -106,7 +106,7 @@
           VerticalAlignment="Center"
           Text="简单卡片, 鼠标进入改变样式"/>
       </ui:SimpleCard>
-      <ui:SimpleCard Classes="Border">
+      <ui:SimpleCard Classes="Outlined">
         <TextBlock
           HorizontalAlignment="Center"
           VerticalAlignment="Center"

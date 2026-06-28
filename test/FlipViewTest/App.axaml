@@ -12,6 +12,6 @@
   </Application.DataTemplates>
 
   <Application.Styles>
-    <fs:FluentAvaloniaTheme/>
+    <fs:AvaloniaFluentTheme/>
   </Application.Styles>
 </Application>

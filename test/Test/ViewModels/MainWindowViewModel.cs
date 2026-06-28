@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Avalonia.Threading;
 using AvaloniaFluentUI.Controls;
+using AvaloniaFluentUI.Locale;
 using AvaloniaFluentUI.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -26,8 +27,9 @@ public partial class MainWindowViewModel : ViewModelBase
             { "Main", MainViewModel },
             { "FlipView", FlipViewModel },
             { "Navi", NaviViewModel },
-            { "Button", ButtonViewModel },
-            { "Card", CardViewModel }
+            { "Card", CardViewModel },
+            {"InfoBar", InfoBarViewModel},
+            {"Flyout", FlyoutViewModel}
         };
 
         CurrentViewModel = MainViewModel;
@@ -36,10 +38,24 @@ public partial class MainWindowViewModel : ViewModelBase
     private MainViewModel MainViewModel { get; } = new();
     private FlipViewModel FlipViewModel { get; } = new();
     private NaviViewModel NaviViewModel { get; } = new();
-    private ButtonViewModel ButtonViewModel { get; } = new();
     private CardViewModel CardViewModel { get; } = new();
+    private InfoBarViewModel InfoBarViewModel { get; } = new();
+    private FlyoutViewModel FlyoutViewModel { get; } = new();
 
     private int Count { get; set; } = 0;
+
+    [ObservableProperty]
+    private string _currentLanguage = "zh-CN";
+
+    public string[] LanguageItems => ["zh-CN", "ja-JP", "en-US"];
+
+    partial void OnCurrentLanguageChanged(string value)
+    {
+        if (value != LocalizationService.Instance.CurrentLanguage)
+        {
+            LocalizationService.Instance.SetCulture(value);
+        }
+    }
 
     [ObservableProperty]
     private int _currentIndex = 0;
@@ -86,6 +102,6 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void ToggleTheme()
     {
-        FluentAvaloniaTheme.Instance.ToggleTheme();
+        AvaloniaFluentTheme.Instance.ToggleTheme();
     }
 }

@@ -3,7 +3,7 @@ using AvaloniaFluentUI.Locale;
 
 namespace LocaleTest.Views;
 
-public partial class MainWindow : AppWindow 
+public partial class MainWindow : FluentWindow 
 {
     public MainWindow()
     {

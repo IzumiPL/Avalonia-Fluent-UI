@@ -4,7 +4,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:fui="clr-namespace:AvaloniaFluentUI.Styling;assembly=AvaloniaFluentUI"
   xmlns:locale="clr-namespace:Test"
-  RequestedThemeVariant="Dark">
+  RequestedThemeVariant="Default">
   <!--  "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options.  -->
   <Application.DataTemplates>
     <locale:ViewLocator/>
@@ -12,11 +12,15 @@
 
   <Application.Resources>
     <ResourceDictionary>
-      <ResourceDictionary.MergedDictionaries/>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceInclude Source="avares://Test/Controls/SettingButton.axaml"/>
+        <ResourceInclude Source="avares://Test/Controls/HyperlinkLabel.axaml"/>
+        <ResourceInclude Source="avares://Test/Controls/LabelTextBox.axaml"/>
+      </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
 
   <Application.Styles>
-    <fui:FluentAvaloniaTheme/>
+    <fui:AvaloniaFluentTheme/>
   </Application.Styles>
 </Application>

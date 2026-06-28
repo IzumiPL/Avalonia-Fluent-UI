@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Avalonia.Controls;
+using Avalonia.Platform.Storage;
 using AvaloniaFluentUI.Controls;
 using AvaloniaFluentUI.Locale;
 using AvaloniaFluentUI.Styling;
@@ -13,7 +15,7 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]
     private void ToggleTheme()
     {
-        FluentAvaloniaTheme.Instance.ToggleTheme();
+        AvaloniaFluentTheme.Instance.ToggleTheme();
     }
 
     public MainViewModel()
@@ -30,8 +32,41 @@ public partial class MainViewModel : ViewModelBase
     public List<string> Items { get; }
     
     public string CurrentLanguageFormat => LocalizationService.Instance.CurrentLanguage;
+    public IReadOnlyList<FilePickerFileType> FileTypeFilter => [new FilePickerFileType("图片")
+    {
+        Patterns =
+        [
+            "*.png",
+            "*.jpg",
+            "*.jpeg",
+            "*.gif",
+            "*.webp"
+        ]
+    }];
 
-    
+    [RelayCommand]
+    private void OnFileDropped(IReadOnlyList<string> files)
+    {
+        foreach (var file in files)
+        {
+            Console.WriteLine($"选择的文件: {file}");
+        }
+
+        Console.WriteLine("========================");
+    }
+
+    [RelayCommand]
+    private void OnFolderDropped(IReadOnlyList<string> folders)
+    {
+        
+        foreach (var folder in folders)
+        {
+            Console.WriteLine($"选择的文件夹: {folder}");
+        }
+        
+        Console.WriteLine("========================");
+    }
+
 
     [RelayCommand]
     private void ToggleLanguage(object value)

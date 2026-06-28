@@ -4,147 +4,154 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:viewModel="clr-namespace:Test.ViewModels"
   d:DesignHeight="450"
   d:DesignWidth="800"
   x:DataType="viewModel:NaviViewModel"
   mc:Ignorable="d">
 
-  <StackPanel Orientation="Vertical" Spacing="8">
-    <ContentPage
-      Height="256"
-      BorderBrush="DeepPink"
-      BorderThickness="1"
-      CornerRadius="6">
-      <TextBlock
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
-        Text="你好!"/>
-    </ContentPage>
-
-    <CarouselPage
-      Name="CarouselPage"
-      Height="256"
-      BorderBrush="DeepPink"
-      IsGestureEnabled="True">
-      <ContentPage Header="Welcome">
-        <StackPanel
+  <ui:SmoothScrollViewer>
+    <StackPanel Orientation="Vertical" Spacing="8">
+      <ContentPage
+        Height="256"
+        BorderBrush="DeepPink"
+        BorderThickness="1"
+        CornerRadius="6">
+        <TextBlock
           HorizontalAlignment="Center"
           VerticalAlignment="Center"
-          Spacing="16">
-          <TextBlock
-            HorizontalAlignment="Center"
-            FontSize="28"
-            Text="Welcome to MyApp"/>
-          <TextBlock
-            HorizontalAlignment="Center"
-            Opacity="0.6"
-            Text="Swipe to learn more"/>
-        </StackPanel>
+          Text="你好!"/>
       </ContentPage>
 
-      <ContentPage Header="Features">
-        <StackPanel
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Spacing="16">
-          <TextBlock
+      <CarouselPage
+        Name="CarouselPage"
+        Height="256"
+        BorderBrush="DeepPink"
+        IsGestureEnabled="True">
+        <ContentPage Header="Welcome">
+          <StackPanel
             HorizontalAlignment="Center"
-            FontSize="28"
-            Text="Powerful Features"/>
-          <TextBlock
-            HorizontalAlignment="Center"
-            Opacity="0.6"
-            Text="Everything you need in one place"/>
-        </StackPanel>
-      </ContentPage>
-
-      <ContentPage Header="Get Started">
-        <StackPanel
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Spacing="16">
-          <TextBlock
-            HorizontalAlignment="Center"
-            FontSize="28"
-            Text="Ready?"/>
-          <Button HorizontalAlignment="Center" Content="Get Started"/>
-        </StackPanel>
-      </ContentPage>
-    </CarouselPage>
-
-    <DrawerPage Height="512">
-      <DrawerPage.Drawer>
-        <ContentPage Header="Menu">
-          <StackPanel Margin="12" Spacing="8">
-            <Button Content="Home"/>
-            <Button Content="Profile"/>
-            <Button Content="Settings"/>
+            VerticalAlignment="Center"
+            Spacing="16">
+            <TextBlock
+              HorizontalAlignment="Center"
+              FontSize="28"
+              Text="Welcome to MyApp"/>
+            <TextBlock
+              HorizontalAlignment="Center"
+              Opacity="0.6"
+              Text="Swipe to learn more"/>
           </StackPanel>
         </ContentPage>
-      </DrawerPage.Drawer>
 
-      <NavigationPage>
-        <TextBlock Text="Content"/>
-      </NavigationPage>
-    </DrawerPage>
+        <ContentPage Header="Features">
+          <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Spacing="16">
+            <TextBlock
+              HorizontalAlignment="Center"
+              FontSize="28"
+              Text="Powerful Features"/>
+            <TextBlock
+              HorizontalAlignment="Center"
+              Opacity="0.6"
+              Text="Everything you need in one place"/>
+          </StackPanel>
+        </ContentPage>
 
-    <TabControl>
-      <TabItem Header="Home"/>
-      <TabItem Header="Profile"/>
-      <TabItem Header="Settings"/>
-    </TabControl>
+        <ContentPage Header="Get Started">
+          <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Spacing="16">
+            <TextBlock
+              HorizontalAlignment="Center"
+              FontSize="28"
+              Text="Ready?"/>
+            <Button HorizontalAlignment="Center" Content="Get Started"/>
+          </StackPanel>
+        </ContentPage>
+      </CarouselPage>
 
-    <TabControl TabStripPlacement="Left">
-      <TabItem Header="Home"/>
-      <TabItem Header="Profile"/>
-      <TabItem Header="Settings"/>
-    </TabControl>
+      <DrawerPage
+        Height="512"
+        BorderBrush="DeepPink"
+        BorderThickness="1"
+        CornerRadius="8">
+        <DrawerPage.Drawer>
+          <ContentPage Header="Menu">
+            <StackPanel Margin="12" Spacing="8">
+              <Button Content="Home"/>
+              <Button Content="Profile"/>
+              <Button Content="Settings"/>
+            </StackPanel>
+          </ContentPage>
+        </DrawerPage.Drawer>
 
-    <TabbedPage>
-      <ContentPage Header="Home">
-        <TextBlock
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Text="Home content"/>
-      </ContentPage>
+        <NavigationPage>
+          <TextBlock Text="Content"/>
+        </NavigationPage>
+      </DrawerPage>
 
-      <ContentPage Header="Profile">
-        <TextBlock
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Text="Profile content"/>
-      </ContentPage>
+      <TabControl>
+        <TabItem Header="Home"/>
+        <TabItem Header="Profile"/>
+        <TabItem Header="Settings"/>
+      </TabControl>
 
-      <ContentPage Header="Settings">
-        <TextBlock
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Text="Settings content"/>
-      </ContentPage>
-    </TabbedPage>
+      <TabControl TabStripPlacement="Left">
+        <TabItem Header="Home"/>
+        <TabItem Header="Profile"/>
+        <TabItem Header="Settings"/>
+      </TabControl>
 
-    <TabbedPage TabPlacement="Left">
-      <ContentPage Header="Home">
-        <TextBlock
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Text="Home content"/>
-      </ContentPage>
+      <TabbedPage>
+        <ContentPage Header="Home">
+          <TextBlock
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Home content"/>
+        </ContentPage>
 
-      <ContentPage Header="Profile">
-        <TextBlock
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Text="Profile content"/>
-      </ContentPage>
+        <ContentPage Header="Profile">
+          <TextBlock
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Profile content"/>
+        </ContentPage>
 
-      <ContentPage Header="Settings">
-        <TextBlock
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          Text="Settings content"/>
-      </ContentPage>
-    </TabbedPage>
-  </StackPanel>
+        <ContentPage Header="Settings">
+          <TextBlock
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Settings content"/>
+        </ContentPage>
+      </TabbedPage>
+
+      <TabbedPage TabPlacement="Left">
+        <ContentPage Header="Home">
+          <TextBlock
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Home content"/>
+        </ContentPage>
+
+        <ContentPage Header="Profile">
+          <TextBlock
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Profile content"/>
+        </ContentPage>
+
+        <ContentPage Header="Settings">
+          <TextBlock
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Settings content"/>
+        </ContentPage>
+      </TabbedPage>
+    </StackPanel>
+  </ui:SmoothScrollViewer>
 </UserControl>

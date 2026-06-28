@@ -5,6 +5,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:tc="clr-namespace:Test.Controls"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:viewModel="clr-namespace:Test.ViewModels"
   d:DesignHeight="450"
@@ -17,6 +18,124 @@
     VerticalScrollBarVisibility="Auto">
 
     <StackPanel Orientation="Vertical" Spacing="8">
+
+
+      <ui:FileDropPicker AllowMultiple="True"/>
+      <ui:FolderDropPicker AllowMultiple="True" SuggestedStartLocation="C:\"/>
+
+      <StackPanel Orientation="Horizontal" Spacing="12">
+        <ui:Avatar
+          Width="64"
+          Height="64"
+          IsCircular="True"
+          Source="avares://Test/Assets/11.png"/>
+        <ui:Avatar
+          Width="64"
+          Height="64"
+          IsCircular="True"
+          Text="迪亚"/>
+        <ui:Avatar
+          Width="64"
+          Height="64"
+          CornerRadius="16"
+          IsCircular="False"
+          Text="迪亚"/>
+      </StackPanel>
+
+      <ui:ShortcutKeyPicker
+        HorizontalAlignment="Center"
+        DefaultKeyGesture="Ctrl+Alt+B"
+        KeyGesture="Ctrl+Alt+B"/>
+
+      <!-- <ui:ShortcutKeyPanel Name="ShortcutKeyPanel" HorizontalAlignment="Center"/> -->
+
+      <ui:ShortcutKeyPicker Margin="0,328,0,0" DefaultKeyGesture="Ctrl+Shift+Alt+D"/>
+
+      <ui:FileDropPicker
+        Command="{Binding FileDroppedCommand}"
+        FileTypeFilter="{Binding FileTypeFilter}"
+        Header="选择图片文件"/>
+      <ui:FolderDropPicker Command="{Binding FolderDroppedCommand}"/>
+
+      <ui:ProgressRing
+        Width="128"
+        Height="128"
+        Maximum="256"
+        Minimum="0"
+        ShowPercent="True"
+        Value="0"/>
+
+      <!-- <ColorView/> -->
+      <ui:Avatar
+        Width="64"
+        Height="64"
+        IsCircular="True"
+        Source="C:\Users\Administrator\OneDrive\Pictures\Avatar\9aebefb05fc752cb6519726b69fec4ab16efb92f301d7cfd029c22b54c9a2f80.jpg"
+        ToolTip.Placement="Top"
+        ToolTip.Tip="自定义头像"
+        ToolTip.VerticalOffset="0"/>
+      <ui:Avatar
+        Width="64"
+        Height="64"
+        CornerRadius="32"
+        Source="avares://Test/Assets/11.png"
+        ToolTip.Placement="Top"
+        ToolTip.Tip="自定义头像"
+        ToolTip.VerticalOffset="0"/>
+      <ui:Avatar
+        Name="Avatar"
+        Width="64"
+        Height="64"
+        CornerRadius="32"
+        Text="迪亚"
+        ToolTip.Placement="Top"
+        ToolTip.Tip="文字头像"
+        ToolTip.VerticalOffset="0">
+        <ui:Avatar.ContextMenu>
+          <ui:FluentContextMenu>
+            <MenuItem
+              Width="256"
+              Click="OnChangedBg"
+              Header="修改背景"/>
+            <MenuItem Click="OnChangedFg" Header="修改前景"/>
+          </ui:FluentContextMenu>
+        </ui:Avatar.ContextMenu>
+      </ui:Avatar>
+      <ui:Avatar
+        Width="64"
+        Height="64"
+        CornerRadius="32"
+        Text="马超"/>
+      <ui:Avatar
+        Width="64"
+        Height="64"
+        CornerRadius="32"
+        Text="自定义"/>
+      <ui:Avatar
+        Width="64"
+        Height="64"
+        CornerRadius="32"
+        Text="自定义"/>
+      <ui:Avatar
+        Width="64"
+        Height="64"
+        CornerRadius="32"
+        Source="C:\Users\Administrator\OneDrive\Pictures\Avatar\IMG_20251004_155511.jpg"/>
+
+      <TextBox Classes="Clear"/>
+      <tc:LabelTextBox/>
+      <tc:LabelTextBox Prefix="https://" Suffix=".com"/>
+
+      <tc:HyperlinkLabel Text="GitHub"/>
+      <tc:HyperlinkLabel Text="GitHub" Uri="https://www.baidu.com"/>
+      <tc:HyperlinkLabel Text="打开我的">
+        <Run Text="BiliBili" TextDecorations="Underline"/>
+        <Run Text="主页"/>
+      </tc:HyperlinkLabel>
+      <tc:HyperlinkLabel Text="打开我的" Uri="https://www.github.com">
+        <Run Text="GitHub" TextDecorations="Underline"/>
+        <Run Text="主页"/>
+      </tc:HyperlinkLabel>
 
       <StackPanel Orientation="Horizontal" Spacing="8">
         <Button Background="{DynamicResource InformationDefaultBrush}" Content="Clicked Me"/>
@@ -67,8 +186,6 @@
         Maximum="114514"
         Minimum="0"/>
       <!-- <StackPanel Orientation="Horizontal" Spacing="8"></StackPanel> -->
-
-
 
       <CommandBar>
         <CommandBar.PrimaryCommands>

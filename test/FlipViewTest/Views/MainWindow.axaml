@@ -1,4 +1,4 @@
-<wnd:AppWindow
+<wnd:FluentWindow
   x:Class="FlipViewTest.Views.MainWindow"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -31,4 +31,4 @@
       Orientation="Horizontal"/>
   </Grid>
 
-</wnd:AppWindow>
+</wnd:FluentWindow>

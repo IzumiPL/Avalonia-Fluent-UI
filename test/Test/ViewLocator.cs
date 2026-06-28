@@ -17,7 +17,6 @@ namespace Test;
 public class ViewLocator : IDataTemplate
 {
     private readonly Dictionary<Type, Func<Control>> _factory = new();
-    private readonly Dictionary<Type, WeakReference<Control>> _views = new();
 
     public ViewLocator()
     {
@@ -30,31 +29,22 @@ public class ViewLocator : IDataTemplate
         _factory[typeof(FlipViewModel)] = () => new FlipView();
         _factory[typeof(NaviViewModel)] = () => new NaviView();
         _factory[typeof(CardViewModel)] = () => new CardView();
-        _factory[typeof(ButtonViewModel)] = () => new ButtonView();
+        _factory[typeof(InfoBarViewModel)] = () => new InfoBarView();
+        _factory[typeof(FlyoutViewModel)] = () => new FlyoutView();
+        _factory[typeof(ComboBoxViewModel)] = () => new ComboBoxView();
     }
 
     public Control? Build(object? param)
     {
-        Console.WriteLine(param);
-        if (param is null) { return null; }
-        var vmType = param.GetType();
+        if (param is null)
+            return null;
 
-        if (!_factory.TryGetValue(vmType, out var creator))
-        {
-            return new TextBlock
+        return _factory.TryGetValue(param.GetType(), out var creator)
+            ? creator()
+            : new TextBlock
             {
-                Text = $"View not registered: {vmType.Name}"
+                Text = $"View not registered: {param.GetType().Name}"
             };
-        }
-
-        if (_views.TryGetValue(vmType, out var weakRef) && weakRef.TryGetTarget(out var view))
-        {
-            return view;
-        }
-
-        view = creator();
-        _views[vmType] = new WeakReference<Control>(view);
-        return view;
     }
 
     public bool Match(object? data)

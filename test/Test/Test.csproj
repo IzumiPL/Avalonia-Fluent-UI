@@ -5,12 +5,12 @@
         <Nullable>enable</Nullable>
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+        <LangVersion>preview</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
         <Folder Include="Assets\BC2\" />
         <Folder Include="Assets\demo\" />
-        <Folder Include="Controls\" />
         <Folder Include="Models\"/>
         <AvaloniaResource Include="Assets\**"/>
     </ItemGroup>
