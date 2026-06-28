@@ -42,11 +42,4 @@
     <PackageReference Include="MicroCom.Runtime" />
     <MicroComIdl Include="$(MSBuildThisFileDirectory)\FluentControls\Interop\WinRT\WinRT.idl" CSharpInteropPath="$(MSBuildThisFileDirectory)\FluentControls\Interop\WinRT\WinRT.Generated.cs" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="FluentControlStyles\Controls\Flyout\" />
-    <Folder Include="FluentControls\Toast\" />
-  </ItemGroup>
-
-
 </Project>
