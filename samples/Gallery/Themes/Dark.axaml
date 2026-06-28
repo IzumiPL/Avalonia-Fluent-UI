@@ -6,7 +6,7 @@
   <SolidColorBrush x:Key="IconCardForegroundHoverBrush" Color="#000000"/>
 
   <SolidColorBrush x:Key="CardBorderBrush" Color="#393939"/>
-  <SolidColorBrush x:Key="CardBrush" Color="{StaticResource CardBackgroundFillColorDefault}"/>
+  <SolidColorBrush x:Key="CardBrush" Color="{StaticResource ControlFillColorDefault}"/>
   <SolidColorBrush x:Key="CodeCardBrush" Color="#80202020"/>
 
   <SolidColorBrush x:Key="TextForegroundInverted" Color="#000000"/>
