@@ -1,18 +1,20 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Shapes;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 
 namespace AvaloniaFluentUI.Controls;
 
 [TemplatePart(Name = PART_SELECTED_INDICATOR, Type = typeof(Rectangle))]
-[TemplatePart(Name = PART_HEADERS_ARES, Type = typeof(Control))]
+[TemplatePart(Name = PART_HEADERS_ARES, Type = typeof(Panel))]
 public class SegmentedView : SelectingItemsControl
 {
     protected Rectangle? _selectedIndicator;
-    protected Control? _headersArea;
+    protected Panel? _headersArea;
     
     private const string PART_SELECTED_INDICATOR = "PART_SelectedIndicator";
     private const string PART_HEADERS_ARES = "PART_HeadersArea";
@@ -37,7 +39,12 @@ public class SegmentedView : SelectingItemsControl
         base.OnApplyTemplate(e);
         
         _selectedIndicator = e.NameScope.Find<Rectangle>(PART_SELECTED_INDICATOR);
-        _headersArea = e.NameScope.Find<Control>(PART_HEADERS_ARES);
+        _headersArea = e.NameScope.Find<Panel>(PART_HEADERS_ARES);
+    }
+
+    protected override void OnLoaded(RoutedEventArgs e)
+    {
+        base.OnLoaded(e);
         UpdateSelectedIndicatorPosition();
     }
 
