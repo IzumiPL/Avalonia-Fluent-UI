@@ -80,6 +80,15 @@ public partial class FluentWindow : Window
     public static readonly StyledProperty<Thickness> TitleBarContentMarginProperty =
         AvaloniaProperty.Register<FluentWindow, Thickness>(nameof(TitleBarContentMargin), new Thickness(8, 0, 140, 0));
 
+    public static readonly StyledProperty<bool> TitleBarIsVisibleProperty =
+        AvaloniaProperty.Register<FluentWindow, bool>(nameof(TitleBarIsVisible), defaultValue: true);
+
+    public bool TitleBarIsVisible
+    {
+        get => GetValue(TitleBarIsVisibleProperty);
+        set => SetValue(TitleBarIsVisibleProperty, value);
+    }
+
     public Thickness TitleBarContentMargin
     {
         get => GetValue(TitleBarContentMarginProperty);
