@@ -10,16 +10,6 @@ namespace AvaloniaFluentUI.Windowing;
 public interface IApplicationSplashScreen
 {
     /// <summary>
-    /// Specifies the name of the Application to display during the SplashScreen
-    /// </summary>
-    string AppName { get; }
-
-    /// <summary>
-    /// Specifies the desired image to be shown during the SplashScreen
-    /// </summary>
-    IImage AppIcon { get; }
-
-    /// <summary>
     /// Specifies custom content to be shown during the SplashScreen
     /// </summary>
     object SplashScreenContent { get; }
