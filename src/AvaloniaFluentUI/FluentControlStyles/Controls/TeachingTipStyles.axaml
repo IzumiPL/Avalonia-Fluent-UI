@@ -119,7 +119,7 @@
 
   <ControlTheme x:Key="{x:Type ui:TeachingTip}" TargetType="ui:TeachingTip">
     <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
-    <Setter Property="Background" Value="{DynamicResource SolidBackgroundFillColorTertiaryBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource AcrylicInAppFillColorDefaultBrush}"/>
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource TeachingTipContentBorderThicknessUntargeted}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}"/>

@@ -288,13 +288,13 @@
 
     <!--  Focus visible  -->
     <Style Selector="^:focus-visible /template/ Border#PART_LayoutRoot">
-      <Setter Property="BorderBrush" Value="{DynamicResource SystemColorButtonTextColor}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
       <Setter Property="BorderThickness" Value="2"/>
     </Style>
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type TabbedPage}" TargetType="TabbedPage">
-    <Setter Property="Background" Value="{DynamicResource SystemControlPageBackgroundAltHighBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource SystemControlTransparentBrush}"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Panel Background="{TemplateBinding Background}">

@@ -25,7 +25,7 @@
     Symbol="Navigation"/>
 
   <x:Double x:Key="NavigationControlNavBarHeight">48</x:Double>
-  <SolidColorBrush x:Key="NavigationControlNavBarBackground" Color="{DynamicResource LayerFillColorDefault}"/>
+  <SolidColorBrush x:Key="NavigationControlNavBarBackground" Color="{DynamicResource LayerFillColorBrush}"/>
 
 
   <ControlTheme x:Key="{x:Type DrawerPage}" TargetType="DrawerPage">

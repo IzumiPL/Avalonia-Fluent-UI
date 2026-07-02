@@ -17,7 +17,7 @@
 
   <DrawingImage x:Key="TextSelectionHandleDrawing">
     <DrawingImage.Drawing>
-      <GeometryDrawing Brush="{DynamicResource TextControlSelectionHighlightColor}" Geometry="{DynamicResource TextSelectionHandlePath}">
+      <GeometryDrawing Brush="{DynamicResource TextFillColorInverseBrush}" Geometry="{DynamicResource TextSelectionHandlePath}">
         <GeometryDrawing.Pen>
           <Pen
             Brush="{DynamicResource TextFillColorPrimaryBrush}"
@@ -30,7 +30,7 @@
 
   <DrawingImage x:Key="TextCaretHandleDrawing">
     <DrawingImage.Drawing>
-      <GeometryDrawing Brush="{DynamicResource TextControlSelectionHighlightColor}" Geometry="{DynamicResource TextCaretHandlePath}">
+      <GeometryDrawing Brush="{DynamicResource TextFillColorInverseBrush}" Geometry="{DynamicResource TextCaretHandlePath}">
         <GeometryDrawing.Pen>
           <Pen
             Brush="{DynamicResource TextFillColorPrimaryBrush}"

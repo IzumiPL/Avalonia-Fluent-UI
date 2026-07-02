@@ -293,6 +293,7 @@
                     Name="AutoSuggestArea"
                     Grid.Row="3"
                     Height="{DynamicResource NavigationViewAutoSuggestAreaHeight}"
+                    Margin="0,6,0,5"
                     VerticalAlignment="Center">
                     <ContentControl
                       Name="PaneAutoSuggestBoxPresenter"
@@ -390,7 +391,7 @@
                   Name="ContentGridBorder"
                   Margin="{DynamicResource NavigationViewContentMargin}"
                   Background="{DynamicResource ControlFillColorDefaultBrush}"
-                  BorderBrush="{DynamicResource ControlStrokeColorDefault}"
+                  BorderBrush="{DynamicResource DividerStrokeColorDefaultBrush}"
                   BorderThickness="{DynamicResource NavigationViewContentGridBorderThickness}"
                   ClipToBounds="True"
                   CornerRadius="{DynamicResource NavigationViewContentGridCornerRadius}">
@@ -543,7 +544,7 @@
     <Style Selector="^:panenotoverlaying">
       <Style Selector="^ /template/ SplitView#RootSplitView">
         <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="PaneBackground" Value="{DynamicResource SolidBackgroundFillColorTransparent}"/>
+        <Setter Property="PaneBackground" Value="{DynamicResource SolidBackgroundFillColorTertiaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ Border#ShadowCaster">
         <Setter Property="Transitions">

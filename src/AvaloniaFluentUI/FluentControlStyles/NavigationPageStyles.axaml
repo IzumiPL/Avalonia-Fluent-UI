@@ -18,7 +18,7 @@
     FontSize="20"
     Symbol="Back"/>
 
-  <SolidColorBrush x:Key="NavigationBarBackground" Color="{DynamicResource LayerFillColorDefault}"/>
+  <SolidColorBrush x:Key="NavigationBarBackground" Color="{DynamicResource LayerFillColorBrush}"/>
   <SolidColorBrush x:Key="NavigationBarForeground" Color="{DynamicResource TextFillColorPrimary}"/>
 
   <LinearGradientBrush x:Key="NavBarShadowGradient" StartPoint="0%,0%" EndPoint="0%,100%">

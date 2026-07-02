@@ -389,10 +389,10 @@
           </Setter>
 
           <Style Selector="^:pointerover /template/ Border#LayoutRoot">
-            <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltMediumBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource SolidBackgroundFillColorTertiaryBrush}"/>
           </Style>
           <Style Selector="^:selected /template/ Border#LayoutRoot">
-            <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltMediumHighBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource SolidBackgroundFillColorBaseBrush}"/>
           </Style>
         </ControlTheme>
       </Setter>

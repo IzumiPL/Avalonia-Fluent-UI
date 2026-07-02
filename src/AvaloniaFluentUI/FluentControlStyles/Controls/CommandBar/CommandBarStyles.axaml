@@ -185,7 +185,7 @@
                 Name="OpenBorder"
                 Grid.ColumnSpan="2"
                 VerticalAlignment="Stretch"
-                BorderBrush="{DynamicResource CardStrokeColorDefaultSolidBrush}"
+                BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
                 BorderThickness="{DynamicResource CommandBarBorderThicknessOpen}"
                 CornerRadius="{TemplateBinding CornerRadius}"
                 IsVisible="False"/>
