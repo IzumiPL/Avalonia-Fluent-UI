@@ -47,8 +47,10 @@
   <Color x:Key="SmokeFillColorDefault">#4D000000</Color>
   <Color x:Key="LayerFillColor">#FFFFFF</Color>
 
+  <Color x:Key="PopupControlColorDefault">#F2F2F2</Color>
+
   <Color x:Key="SolidBackgroundFillColorSecondary">#EEEEEE</Color>
-  <Color x:Key="SolidBackgroundFillColorTertiary">#F9F9F9</Color>
+  <Color x:Key="SolidBackgroundFillColorTertiary">#00F0F4F9</Color>
 
   <Color x:Key="SystemFillColorSuccess">#0F7B0F</Color>
   <Color x:Key="SystemFillColorCaution">#9D5D00</Color>
@@ -56,13 +58,13 @@
   <Color x:Key="SystemFillColorNeutral">#787878</Color>
 
   <Color x:Key="SystemFillColorSolidNeutral">#8A8A8A</Color>
-  <Color x:Key="SystemFillColorAttentionBackground">#80F6F6F6</Color>
+  <Color x:Key="SystemFillColorAttentionBackground">#F6F6F6</Color>
   <Color x:Key="SystemFillColorSuccessBackground">#DFF6DD</Color>
   <Color x:Key="SystemFillColorCautionBackground">#FFF4CE</Color>
   <Color x:Key="SystemFillColorCriticalBackground">#FDE7E9</Color>
   <Color x:Key="SystemFillColorNeutralBackground">#06000000</Color>
   <Color x:Key="SystemFillColorSolidAttentionBackground">#F7F7F7</Color>
-  <Color x:Key="SystemFillColorSolidNeutralBackground">#F3F3F3</Color>
+  <Color x:Key="SystemFillColorSolidNeutralBackground">#F0F4F9</Color>
 
   <Color x:Key="FilledPointerOver">#C9CACB</Color>
   <Color x:Key="FilledPressed">#979798</Color>
@@ -72,6 +74,7 @@
   <SolidColorBrush x:Key="AvatarBackgroundDefaultBrush" Color="{StaticResource ControlBorderHigh}"/>
   <SolidColorBrush x:Key="ControlBorderHighBrush" Color="{StaticResource ControlBorderHigh}"/>
   <SolidColorBrush x:Key="SegmentedBackgroundBrush" Color="{StaticResource ControlBackgroundHigh}"/>
+  <SolidColorBrush x:Key="PopupControlBackgroundBurhs" Color="{StaticResource PopupControlColorDefault}"/>
 
   <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="{StaticResource TextFillColorPrimary}"/>
   <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="{StaticResource TextFillColorSecondary}"/>
