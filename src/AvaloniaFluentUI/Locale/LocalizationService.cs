@@ -103,6 +103,14 @@ public class LocalizationService : INotifyPropertyChanged
         }
     }
 
+    public void AddValuesWithLanguage(string language, IEnumerable<string> keys, IEnumerable<string> values)
+    {
+        foreach (var (key, value) in keys.Zip(values))
+        {
+            CustomStrings[$"{language}:{key}"] = value;
+        }
+    }
+
     /// <summary>
     /// Gets a localized string for the specified resource key using the
     /// given culture.
