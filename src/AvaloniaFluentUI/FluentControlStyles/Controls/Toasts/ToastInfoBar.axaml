@@ -1,0 +1,87 @@
+<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI">
+
+  <ControlTheme x:Key="{x:Type ui:ToastInfoBar}" TargetType="ui:ToastInfoBar">
+    <Setter Property="Background" Value="{DynamicResource SystemAccentColor}"/>
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBrush}"/>
+    <Setter Property="BorderThickness" Value="1 1 1 1"/>
+    <Setter Property="Padding" Value="10"/>
+    <Setter Property="CornerRadius" Value="6"/>
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Name="PART_RootBorder"
+          MinHeight="45"
+          MaxWidth="{TemplateBinding MaxWidth}"
+          MaxHeight="{TemplateBinding MaxHeight}"
+          Margin="8"
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
+          CornerRadius="6 6 10 10">
+          <Border
+            Margin="0,5,0,0"
+            Background="{DynamicResource PopupControlBackgroundBurhs}"
+            CornerRadius="{TemplateBinding CornerRadius}"
+            Opacity="1">
+            <Grid
+              Margin="{TemplateBinding Padding}"
+              VerticalAlignment="Center"
+              ColumnDefinitions="*, Auto">
+              <StackPanel Spacing="4">
+                <TextBlock
+                  Name="PART_TitleText"
+                  Classes="StrongBody"
+                  Text="{TemplateBinding Title}"
+                  TextTrimming="CharacterEllipsis"/>
+                <ContentPresenter
+                  Name="ContentPresenter"
+                  Content="{TemplateBinding Content}"
+                  FontSize="13"
+                  TextWrapping="Wrap"/>
+              </StackPanel>
+
+              <ui:ToolButton
+                Name="PART_CloseButton"
+                Grid.Column="1"
+                Width="20"
+                Height="20"
+                Margin="6,0,0,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Classes="Transparent"
+                Content="{x:Static fi:FluentIcon.Close}"
+                Cursor="Hand"
+                Foreground="{TemplateBinding Foreground}"
+                IconHeight="8"
+                IconWidth="8"
+                IsVisible="{TemplateBinding IsClosable}"/>
+            </Grid>
+          </Border>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^[Severity=Informational]">
+      <Setter Property="Background" Value="{DynamicResource InformationDefaultBrush}"/>
+    </Style>
+
+    <Style Selector="^[Severity=Success]">
+      <Setter Property="Background" Value="{DynamicResource SuccessDefaultBrush}"/>
+    </Style>
+
+    <Style Selector="^[Severity=Warning]">
+      <Setter Property="Background" Value="{DynamicResource WarningDefaultBrush}"/>
+    </Style>
+
+    <Style Selector="^[Severity=Error]">
+      <Setter Property="Background" Value="{DynamicResource ErrorDefaultBrush}"/>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

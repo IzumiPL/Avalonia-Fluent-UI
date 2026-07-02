@@ -1,0 +1,145 @@
+<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
+
+  <Thickness x:Key="PopupInfoBarMargin">0,3,14,16</Thickness>
+
+  <ControlTheme x:Key="{x:Type ui:PopupInfoBar}" TargetType="ui:PopupInfoBar">
+    <Setter Property="Background" Value="{DynamicResource PopupControlBackgroundBurhs}"/>
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBrush}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Padding" Value="10 10 5 10"/>
+    <Setter Property="CornerRadius" Value="6"/>
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Name="PART_RootBorder"
+          MinHeight="45"
+          MaxWidth="{TemplateBinding MaxWidth}"
+          MaxHeight="{TemplateBinding MaxHeight}"
+          Margin="8"
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <Grid
+            Margin="{TemplateBinding Padding}"
+            VerticalAlignment="Center"
+            ColumnDefinitions="Auto, *, Auto">
+            <Panel Name="IconArea" Grid.Column="0">
+              <Ellipse
+                Name="IconBackground"
+                Width="16"
+                Height="16"
+                Margin="{DynamicResource PopupInfoBarMargin}"
+                VerticalAlignment="Top"/>
+
+              <ui:FontIcon
+                Name="Icon"
+                Margin="{DynamicResource PopupInfoBarMargin}"
+                VerticalAlignment="Top"
+                FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+            </Panel>
+            <StackPanel Grid.Column="1" Spacing="4">
+              <TextBlock
+                Name="PART_TitleText"
+                Classes="StrongBody"
+                Text="{TemplateBinding Title}"
+                TextTrimming="CharacterEllipsis"/>
+              <ContentPresenter
+                Name="ContentPresenter"
+                Content="{TemplateBinding Content}"
+                FontSize="13"
+                TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <ui:ToolButton
+              Name="PART_CloseButton"
+              Grid.Column="2"
+              Width="28"
+              Height="28"
+              Margin="6,0,0,0"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Top"
+              Classes="Transparent"
+              Content="{x:Static fi:FluentIcon.Close}"
+              Cursor="Hand"
+              Foreground="{TemplateBinding Foreground}"
+              IconHeight="8"
+              IconWidth="8"
+              IsVisible="{TemplateBinding IsClosable}"/>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^[Severity=Informational]">
+      <Setter Property="Background" Value="{DynamicResource SystemFillColorAttentionBackgroundBrush}"/>
+
+      <Style Selector="^ /template/ Ellipse#IconBackground">
+        <Setter Property="Fill" Value="{DynamicResource SystemFillColorAttentionBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ ui|FontIcon#Icon">
+        <Setter Property="Glyph" Value="&#x0069;"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorInverseBrush}"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^[Severity=Success]">
+      <Setter Property="Background" Value="{DynamicResource SystemFillColorSuccessBackgroundBrush}"/>
+
+      <Style Selector="^ /template/ Ellipse#IconBackground">
+        <Setter Property="Fill" Value="{DynamicResource SystemFillColorSuccessBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ ui|FontIcon#Icon">
+        <Setter Property="Glyph" Value="&#xE10B;"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorInverseBrush}"/>
+        <Setter Property="Margin" Value="0,6,14,0"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^[Severity=Warning]">
+      <Setter Property="Background" Value="{DynamicResource SystemFillColorCautionBackgroundBrush}"/>
+
+      <Style Selector="^ /template/ Ellipse#IconBackground">
+        <Setter Property="Fill" Value="{DynamicResource SystemFillColorCautionBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ ui|FontIcon#Icon">
+        <Setter Property="Glyph" Value="&#x0021;"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorInverseBrush}"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^[Severity=Error]">
+      <Setter Property="Background" Value="{DynamicResource SystemFillColorCriticalBackgroundBrush}"/>
+
+      <Style Selector="^ /template/ Ellipse#IconBackground">
+        <Setter Property="Fill" Value="{DynamicResource SystemFillColorCriticalBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ ui|FontIcon#Icon">
+        <Setter Property="Glyph" Value="&#xE10A;"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorInverseBrush}"/>
+        <Setter Property="Margin" Value="0,6,14,0"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^[Severity=Custom]">
+      <Style Selector="^ /template/ Panel#IconArea">
+        <Setter Property="IsVisible" Value="False"/>
+      </Style>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>
