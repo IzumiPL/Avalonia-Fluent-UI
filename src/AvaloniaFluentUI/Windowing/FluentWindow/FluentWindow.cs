@@ -13,6 +13,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Styling;
 using Avalonia.VisualTree;
+using AvaloniaFluentUI.Controls;
 using AvaloniaFluentUI.Core;
 using AvaloniaFluentUI.Controls.Primitives;
 using AvaloniaFluentUI.Styling;
@@ -261,8 +262,11 @@ public partial class FluentWindow : Window
     private Button? _maximizeButton;
     private Button? _closeButton;
     
+    public InfoBarHost InfoBarHost { get; private set; }
+    
     private const string PART_DEFAULT_TITLE_BAR = "PART_DefaultTitleBar";
     private const string SPLASH_HOST = "SplashHost";
+    private const string INFO_BAR_HOST = "InfoBarHost";
     
     private const string PART_MINIMIZE_BUTTON = "PART_MinimizeButton";
     private const string PART_MAXIMIZE_BUTTON = "PART_MaximizeButton";
@@ -354,7 +358,7 @@ public partial class FluentWindow : Window
     private void ResetBackground()
     {
         TransparencyLevelHint = [];
-        Background = Brush.Parse(AvaloniaFluentTheme.Instance.IsDarkTheme ? "#202020" : "#F3F3F3"); 
+        Background = Brush.Parse(AvaloniaFluentTheme.Instance.IsDarkTheme ? "#202020" : "#F0F4F9"); 
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -367,6 +371,7 @@ public partial class FluentWindow : Window
         _minimizeButton = e.NameScope.Find<Button>(PART_MINIMIZE_BUTTON);
         _maximizeButton = e.NameScope.Find<Button>(PART_MAXIMIZE_BUTTON);
         _closeButton = e.NameScope.Find<Button>(PART_CLOSE_BUTTON);
+        InfoBarHost = e.NameScope.Find<InfoBarHost>(INFO_BAR_HOST);
         
         _minimizeButton?.Click += OnMinimizeButtonClicked;
         _maximizeButton?.Click += OnMaximizeButtonClicked;
@@ -464,6 +469,7 @@ public partial class FluentWindow : Window
     internal void OnTitleBarHeightChanged(double height)
     {
         TitleBarHeight = height;
+        InfoBarHost?.Margin = new Thickness(0, height, 0, 0);
     }
 
     internal void TitleBarColorsChanged()
