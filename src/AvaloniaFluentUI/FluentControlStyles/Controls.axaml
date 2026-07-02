@@ -167,7 +167,8 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/SettingCardStyles.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Label/HyperlinkLabel.axaml"/>
-
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Toasts/ToastInfoBar.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Toasts/PopupInfoBar.axaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Styles.Resources>
