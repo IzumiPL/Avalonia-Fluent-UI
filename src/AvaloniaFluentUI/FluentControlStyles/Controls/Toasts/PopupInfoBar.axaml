@@ -43,7 +43,8 @@
                 Name="Icon"
                 Margin="{DynamicResource PopupInfoBarMargin}"
                 VerticalAlignment="Top"
-                FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                FontFamily="{StaticResource SymbolThemeFontFamily}"
+                FontSize="10"/>
             </Panel>
             <StackPanel Grid.Column="1" Spacing="4">
               <TextBlock
@@ -87,7 +88,6 @@
 
       <Style Selector="^ /template/ ui|FontIcon#Icon">
         <Setter Property="Glyph" Value="&#x0069;"/>
-        <Setter Property="FontSize" Value="10"/>
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorInverseBrush}"/>
       </Style>
     </Style>
@@ -101,7 +101,6 @@
 
       <Style Selector="^ /template/ ui|FontIcon#Icon">
         <Setter Property="Glyph" Value="&#xE10B;"/>
-        <Setter Property="FontSize" Value="10"/>
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorInverseBrush}"/>
         <Setter Property="Margin" Value="0,6,14,0"/>
       </Style>
@@ -116,7 +115,6 @@
 
       <Style Selector="^ /template/ ui|FontIcon#Icon">
         <Setter Property="Glyph" Value="&#x0021;"/>
-        <Setter Property="FontSize" Value="10"/>
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorInverseBrush}"/>
       </Style>
     </Style>
@@ -130,7 +128,6 @@
 
       <Style Selector="^ /template/ ui|FontIcon#Icon">
         <Setter Property="Glyph" Value="&#xE10A;"/>
-        <Setter Property="FontSize" Value="10"/>
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorInverseBrush}"/>
         <Setter Property="Margin" Value="0,6,14,0"/>
       </Style>
