@@ -1565,4 +1565,7 @@
   <data name="SymbolIcon" xml:space="preserve">
     <value>シンボルアイコン</value>
   </data>
+  <data name="Icon_Segmented_Item" xml:space="preserve">
+    <value>アイコンセグメント項目</value>
+  </data>
 </root>

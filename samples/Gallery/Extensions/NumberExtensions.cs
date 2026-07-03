@@ -26,4 +26,9 @@ public static class NumericExtensions
             ? result
             : 0d;
     }
+
+    public static double ToDoubleOrNan(this string? value)
+    {
+        return double.TryParse(value, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InstalledUICulture, out var result) ? result : double.NaN;
+    }
 }

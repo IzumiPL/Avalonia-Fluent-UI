@@ -1565,4 +1565,7 @@
   <data name="SymbolIcon" xml:space="preserve">
     <value>Symbol icon</value>
   </data>
+  <data name="Icon_Segmented_Item" xml:space="preserve">
+    <value>Icon Segmented Item</value>
+  </data>
 </root>

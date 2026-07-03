@@ -27,7 +27,11 @@
       Height="400">
       <Grid RowDefinitions="Auto, *">
 
-        <fui:SegmentedView SelectedIndex="0" SelectedItem="{Binding SegmentedSelectedItem}">
+        <fui:SegmentedView
+          HorizontalAlignment="Center"
+          SelectedIndex="0"
+          SelectedItem="{Binding SegmentedSelectedItem}"
+          SelectionChanged="OnSelectedItemChanged">
           <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Home]}" IsSelected="True"/>
           <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
           <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Edit]}"/>
@@ -70,7 +74,11 @@
 
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_SegmentedToggleBar]}" Height="400">
       <Grid RowDefinitions="Auto, *">
-        <fui:SegmentedToggleView SelectedIndex="0" SelectedItem="{Binding SegmentedToggleSelectedItem}">
+        <fui:SegmentedToggleView
+          MaxHeight="256"
+          HorizontalAlignment="Center"
+          SelectedIndex="0"
+          SelectedItem="{Binding SegmentedToggleSelectedItem}">
           <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Home]}" IsSelected="True"/>
           <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
           <fui:SegmentedItem>
@@ -111,6 +119,35 @@
           FontSize="24"
           Text="{Binding SegmentedSelectedItemFormat}"
           TextAlignment="Center"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{locale:Localization Icon_Segmented_Item}" Height="200">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:SegmentedToggleView
+          Width="{Binding IconSegmentedViewWidthFormat}"
+          MaxHeight="256"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          ItemsSource="{Binding IconSegmentedItems}"
+          SelectedIndex="0">
+          <fui:SegmentedToggleView.ItemTemplate>
+            <DataTemplate>
+              <PathIcon Data="{Binding}"/>
+            </DataTemplate>
+          </fui:SegmentedToggleView.ItemTemplate>
+        </fui:SegmentedToggleView>
+
+        <ui:Card Grid.Column="1">
+          <StackPanel Orientation="Vertical" Spacing="6">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <TextBox
+              MinWidth="128"
+              HorizontalAlignment="Stretch"
+              PlaceholderText="Width"
+              Text="{Binding IconSegmentedViewWidth}"/>
+          </StackPanel>
+        </ui:Card>
       </Grid>
     </ui:CodeCard>
   </StackPanel>

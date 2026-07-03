@@ -19,7 +19,6 @@
   d:DesignHeight="1080"
   d:DesignWidth="1920"
   x:DataType="vm:MainWindowViewModel"
-  Background="{DynamicResource SystemBrush}"
   Icon="/Assets/app.ico"
   IconSize="20"
   TitleBarMargin="40 0 0 0"

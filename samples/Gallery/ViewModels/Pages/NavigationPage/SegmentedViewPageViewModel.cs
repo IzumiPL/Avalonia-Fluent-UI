@@ -1,15 +1,36 @@
 ﻿using System.ComponentModel;
+using Avalonia.Media;
 using AvaloniaFluentUI.Controls;
+using AvaloniaFluentUI.Icons;
 using AvaloniaFluentUI.Locale;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Gallery.Extensions;
 
 namespace Gallery.ViewModels;
 
 public partial class SegmentedViewPageViewModel : ViewModelBase
-{ 
+{
     public override string Title => LocalizationService.Instance.GetString("SegmentedView");
-    
-   [ObservableProperty]
+
+    public Geometry[] IconSegmentedItems =>
+    [
+        FluentIcon.Home,
+        FluentIcon.Application,
+        FluentIcon.Message,
+        FluentIcon.View,
+        FluentIcon.Music,
+        FluentIcon.GitHub,
+        FluentIcon.Help,
+        FluentIcon.Setting
+    ];
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IconSegmentedViewWidthFormat))]
+    private string? _iconSegmentedViewWidth;
+
+    public double IconSegmentedViewWidthFormat => IconSegmentedViewWidth.ToDoubleOrNan();
+
+    [ObservableProperty]
     private object _segmentedToggleSelectedItem;
     
     [ObservableProperty]
