@@ -14,38 +14,38 @@
           Increment="0.5"
           Maximum="1454350"
           Minimum="0"
+          PlaceholderText="Enter text"
           ShowButtonSpinner="True"
-          Watermark="Enter text"
           Value="28393255555555"/>
         <NumericUpDown
           ButtonSpinnerLocation="Left"
           Increment="0.5"
           Maximum="10"
           Minimum="0"
+          PlaceholderText="Enter text"
           TextAlignment="Right"
-          Watermark="Enter text"
           Value="28393255555555"/>
         <NumericUpDown
           Increment="0.5"
           Maximum="1454350"
           Minimum="0"
+          PlaceholderText="Enter text"
           ShowButtonSpinner="True"
           TextAlignment="Right"
-          Watermark="Enter text"
           Value="28393255555555"/>
         <NumericUpDown
           Increment="0.5"
           Maximum="1454350"
           Minimum="0"
-          ShowButtonSpinner="True"
-          Watermark="Enter text"/>
+          PlaceholderText="Enter text"
+          ShowButtonSpinner="True"/>
         <NumericUpDown
           Increment="0.5"
           Maximum="1454350"
           Minimum="0"
+          PlaceholderText="Enter text"
           ShowButtonSpinner="True"
-          TextAlignment="Right"
-          Watermark="Enter text"/>
+          TextAlignment="Right"/>
       </StackPanel>
     </Border>
   </Design.PreviewWith>
@@ -147,7 +147,7 @@
                     FontSize="{TemplateBinding FontSize}"
                     Foreground="{DynamicResource SystemAccentColor}"
                     IsVisible="False"
-                    Text="{TemplateBinding Watermark}"/>
+                    Text="{TemplateBinding PlaceholderText}"/>
                   <ui:SmoothScrollViewer
                     AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}"
                     HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
@@ -161,7 +161,7 @@
                         Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                         IsVisible="{TemplateBinding Text,
                                                     Converter={x:Static StringConverters.IsNullOrEmpty}}"
-                        Text="{TemplateBinding Watermark}"
+                        Text="{TemplateBinding PlaceholderText}"
                         TextAlignment="{TemplateBinding TextAlignment}"
                         TextWrapping="{TemplateBinding TextWrapping}"/>
                       <TextPresenter
@@ -210,7 +210,7 @@
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource TextControlBorderThemeThickness}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource TextControlElevationBorderBrush}"/>
     <Setter Property="MinHeight" Value="{DynamicResource TextControlThemeMinHeight}"/>
     <Setter Property="MinWidth" Value="{DynamicResource TextControlThemeMinWidth}"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
@@ -249,11 +249,11 @@
             InnerLeftContent="{TemplateBinding InnerLeftContent}"
             InnerRightContent="{TemplateBinding InnerRightContent}"
             IsReadOnly="{TemplateBinding IsReadOnly}"
+            PlaceholderText="{TemplateBinding PlaceholderText}"
             Text="{TemplateBinding Text}"
             TextAlignment="{TemplateBinding TextAlignment}"
             TextWrapping="NoWrap"
-            Theme="{StaticResource NumericUpDownTextBoxTheme}"
-            Watermark="{TemplateBinding Watermark}"/>
+            Theme="{StaticResource NumericUpDownTextBoxTheme}"/>
         </ButtonSpinner>
       </ControlTemplate>
     </Setter>
