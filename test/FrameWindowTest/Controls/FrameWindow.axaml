@@ -1,0 +1,406 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:FrameWindowTest.Controls">
+  <!--  Add Resources Here  -->
+
+  <ControlTemplate x:Key="FrameWindowsTemplate" TargetType="{x:Type ui:FrameWindow}">
+    <VisualLayerManager Name="PART_VisualLayerManager">
+      <Border
+        Name="RootBorder"
+        Padding="{TemplateBinding Padding}"
+        Background="{TemplateBinding Background}"
+        ClipToBounds="True"
+        CornerRadius="10">
+        <Panel>
+          <!--  Background="{DynamicResource FluentTitleBarBackground}"  -->
+          <Grid
+            Name="DefaultTitleBar"
+            Height="{TemplateBinding TitleBarHeight}"
+            VerticalAlignment="Top"
+            Background="#01000000"
+            ColumnDefinitions="Auto, Auto, *"
+            TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+            WindowDecorationProperties.ElementRole="TitleBar"
+            ZIndex="99">
+
+            <Image
+              Name="Icon"
+              Grid.Column="0"
+              Width="16"
+              Height="16"
+              Margin="10,0,0,0"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Center"
+              IsVisible="True"
+              Source="avares://FrameWindowTest/Assets/app.ico"/>
+            <!--  Source="{TemplateBinding Icon}"  -->
+
+            <TextBlock
+              Name="TitleText"
+              Grid.Column="1"
+              Margin="8,0,0,0"
+              HorizontalAlignment="Left"
+              VerticalAlignment="Center"
+              FontSize="12"
+              Text="{TemplateBinding Title}"/>
+
+            <!--  <ContentPresenter  -->
+            <!--  Content="{TemplateBinding TitleBarContent}"  -->
+            <!--  ContentTemplate="{TemplateBinding TitleBarContentTemplate}"  -->
+            <!--  Grid.Column="2"  -->
+            <!--  IsVisible="{TemplateBinding IsTitleBarContentVisible}"  -->
+            <!--  Margin="{TemplateBinding TitleBarContentMargin}"  -->
+            <!--  VerticalAlignment="Center" />  -->
+          </Grid>
+
+          <ContentPresenter
+            Name="PART_ContentPresenter"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ClipToBounds="False"
+            Content="{TemplateBinding Content}"
+            ContentTemplate="{TemplateBinding ContentTemplate}"/>
+
+          <!--  Overlay: only interactive caption buttons  -->
+          <Panel Name="PART_OverlayWrapper" ZIndex="999">
+            <!--  Title text lives in overlay so it renders above client content  -->
+            <StackPanel
+              Name="PART_OverlayPanel"
+              Height="45"
+              HorizontalAlignment="Right"
+              VerticalAlignment="Top"
+              IsVisible="True"
+              Orientation="Horizontal"
+              TextElement.FontSize="10">
+              <Button
+                Name="PART_MinimizeButton"
+                Classes="CaptionButton"
+                Classes.inactive="{Binding !$parent[Window].IsActive}"
+                Content="&#xE738;"
+                Theme="{StaticResource FluentDrawnCaptionButton}"
+                WindowDecorationProperties.ElementRole="MinimizeButton"/>
+
+              <Button
+                Name="PART_MaximizeButton"
+                Classes="CaptionButton"
+                Classes.inactive="{Binding !$parent[Window].IsActive}"
+                Content="&#xE739;"
+                Theme="{StaticResource FluentDrawnCaptionButton}"
+                WindowDecorationProperties.ElementRole="MaximizeButton"/>
+
+              <Button
+                Name="PART_CloseButton"
+                Classes="Close CaptionButton"
+                Classes.inactive="{Binding !$parent[Window].IsActive}"
+                Content="&#xE711;"
+                FontSize="16"
+                Theme="{StaticResource FluentDrawnCaptionButton}"
+                WindowDecorationProperties.ElementRole="CloseButton"/>
+            </StackPanel>
+          </Panel>
+          <!-- <wnd:AppSplashScreen Name="SplashHost" IsVisible="False"/> -->
+        </Panel>
+      </Border>
+    </VisualLayerManager>
+  </ControlTemplate>
+
+  <ControlTheme x:Key="AppWindowDecorations" TargetType="WindowDrawnDecorations">
+    <Setter Property="DefaultTitleBarHeight" Value="45"/>
+    <Setter Property="Template">
+      <WindowDrawnDecorationsTemplate>
+        <WindowDrawnDecorationsContent>
+          <WindowDrawnDecorationsContent.Underlay>
+            <Panel Name="PART_UnderlayWrapper">
+              <Border
+                Name="PART_WindowBorder"
+                Background="Transparent"
+                BorderBrush="{DynamicResource AccentFillColorDefaultBrush}"
+                BorderThickness="{TemplateBinding FrameThickness}"
+                IsHitTestVisible="False"/>
+              <!--  Titlebar: background, title text, and drag area live in underlay  -->
+              <Panel
+                Name="PART_TitleBar"
+                Height="{TemplateBinding TitleBarHeight}"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                IsVisible="{TemplateBinding HasTitleBar}"
+                WindowDecorationProperties.ElementRole="TitleBar"/>
+            </Panel>
+          </WindowDrawnDecorationsContent.Underlay>
+
+          <WindowDrawnDecorationsContent.Overlay>
+            <!--  Overlay: only interactive caption buttons  -->
+            <!-- <Panel Name="PART_OverlayWrapper"> -->
+            <!--  ~1~  Title text lives in overlay so it renders above client content  @1@  -->
+            <!--  <StackPanel  -->
+            <!--  Height="{TemplateBinding TitleBarHeight}"  -->
+            <!--  HorizontalAlignment="Right"  -->
+            <!--  IsVisible="{TemplateBinding HasTitleBar}"  -->
+            <!--  Name="PART_OverlayPanel"  -->
+            <!--  Orientation="Horizontal"  -->
+            <!--  TextElement.FontSize="10"  -->
+            <!--  VerticalAlignment="Top">  -->
+            <!--  <Button  -->
+            <!--  Classes="CaptionButton"  -->
+            <!--  Classes.inactive="{Binding !$parent[Window].IsActive}"  -->
+            <!--  Content="&#xE740;"  -->
+            <!--  Name="PART_FullScreenButton"  -->
+            <!--  Theme="{StaticResource FluentDrawnCaptionButton}"  -->
+            <!--  WindowDecorationProperties.ElementRole="FullScreenButton" />  -->
+            <!--    -->
+            <!--  <Button  -->
+            <!--  Classes="CaptionButton"  -->
+            <!--  Classes.inactive="{Binding !$parent[Window].IsActive}"  -->
+            <!--  Content="&#xE738;"  -->
+            <!--  Name="PART_MinimizeButton"  -->
+            <!--  Theme="{StaticResource FluentDrawnCaptionButton}"  -->
+            <!--  WindowDecorationProperties.ElementRole="MinimizeButton" />  -->
+            <!--    -->
+            <!--  <Button  -->
+            <!--  Classes="CaptionButton"  -->
+            <!--  Classes.inactive="{Binding !$parent[Window].IsActive}"  -->
+            <!--  Content="&#xE739;"  -->
+            <!--  Name="PART_MaximizeButton"  -->
+            <!--  Theme="{StaticResource FluentDrawnCaptionButton}"  -->
+            <!--  WindowDecorationProperties.ElementRole="MaximizeButton" />  -->
+            <!--    -->
+            <!--  <Button  -->
+            <!--  Classes="Close CaptionButton"  -->
+            <!--  Classes.inactive="{Binding !$parent[Window].IsActive}"  -->
+            <!--  Content="&#xE711;"  -->
+            <!--  FontSize="16"  -->
+            <!--  Name="PART_CloseButton"  -->
+            <!--  Theme="{StaticResource FluentDrawnCaptionButton}"  -->
+            <!--  WindowDecorationProperties.ElementRole="CloseButton" />  -->
+            <!--     </StackPanel> -->
+            <!-- </Panel> -->
+          </WindowDrawnDecorationsContent.Overlay>
+
+          <WindowDrawnDecorationsContent.FullscreenPopover>
+            <!--  <Panel  -->
+            <!--  Background="Transparent"  -->
+            <!--  Height="{TemplateBinding DefaultTitleBarHeight}"  -->
+            <!--  VerticalAlignment="Top"  -->
+            <!--  WindowDecorationProperties.ElementRole="TitleBar">  -->
+            <!--  <TextBlock  -->
+            <!--  FontSize="12"  -->
+            <!--  Margin="8,0,0,8"  -->
+            <!--  Text="{TemplateBinding Title}"  -->
+            <!--  VerticalAlignment="Center" />  -->
+            <!--  <StackPanel  -->
+            <!--  HorizontalAlignment="Right"  -->
+            <!--  Orientation="Horizontal"  -->
+            <!--  Spacing="2"  -->
+            <!--  TextElement.FontSize="10">  -->
+            <!--  <Button  -->
+            <!--  Classes="CaptionButton"  -->
+            <!--  Classes.inactive="{Binding !$parent[Window].IsActive}"  -->
+            <!--  Content="&#xE73F;"  -->
+            <!--  Name="PART_PopoverFullScreenButton"  -->
+            <!--  Theme="{StaticResource FluentDrawnCaptionButton}"  -->
+            <!--  WindowDecorationProperties.ElementRole="FullScreenButton" />  -->
+            <!--  <Button  -->
+            <!--  Classes="Close CaptionButton"  -->
+            <!--  Classes.inactive="{Binding !$parent[Window].IsActive}"  -->
+            <!--  Content="&#xE711;"  -->
+            <!--  FontSize="16"  -->
+            <!--  Name="PART_PopoverCloseButton"  -->
+            <!--  Theme="{StaticResource FluentDrawnCaptionButton}"  -->
+            <!--  WindowDecorationProperties.ElementRole="CloseButton" />  -->
+            <!--     </StackPanel> -->
+            <!-- </Panel> -->
+          </WindowDrawnDecorationsContent.FullscreenPopover>
+
+        </WindowDrawnDecorationsContent>
+      </WindowDrawnDecorationsTemplate>
+    </Setter>
+    <!--  Shadow: inset border and add drop shadow  -->
+    <Style Selector="^:has-shadow /template/ Panel#PART_UnderlayWrapper">
+      <Setter Property="Margin" Value="{TemplateBinding ShadowThickness}"/>
+    </Style>
+    <Style Selector="^:has-shadow /template/ Border#PART_WindowBorder">
+      <Setter Property="BoxShadow" Value="0 2 10 2 #80000000"/>
+    </Style>
+    <Style Selector="^:has-shadow /template/ Panel#PART_OverlayWrapper">
+      <Setter Property="Margin" Value="{TemplateBinding ShadowThickness}"/>
+    </Style>
+
+    <!--  Border: inset titlebar and buttons inside frame  -->
+    <Style Selector="^:has-border /template/ Panel#PART_TitleTextPanel">
+      <Setter Property="Margin" Value="1,1,1,0"/>
+    </Style>
+    <Style Selector="^:has-border /template/ Panel#PART_TitleBar">
+      <Setter Property="Margin" Value="1,1,1,0"/>
+    </Style>
+    <Style Selector="^:has-border /template/ StackPanel#PART_OverlayPanel">
+      <Setter Property="Margin" Value="0,1,1,0"/>
+    </Style>
+
+    <!--  Maximized: restore button path changes  -->
+    <Style Selector="^:maximized /template/ Button#PART_MaximizeButton">
+      <Setter Property="Content" Value="&#xE923;"/>
+      <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <!--  Disabled buttons  -->
+    <Style Selector="^ /template/ Button:disabled">
+      <Setter Property="Opacity" Value="0.2"/>
+    </Style>
+
+    <!--  Hide caption buttons when the platform does not support the action  -->
+    <Style Selector="^:not(:has-minimize) /template/ Button#PART_MinimizeButton">
+      <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="^:not(:has-maximize) /template/ Button#PART_MaximizeButton">
+      <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="^:not(:has-fullscreen) /template/ Button#PART_FullScreenButton">
+      <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="^:not(:has-fullscreen) /template/ Button#PART_PopoverFullScreenButton">
+      <Setter Property="IsVisible" Value="False"/>
+    </Style>
+
+    <!--  Fullscreen: hide overlay and titlebar (popover takes over)  -->
+    <Style Selector="^:fullscreen /template/ Panel#PART_TitleTextPanel">
+      <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="^:fullscreen /template/ StackPanel#PART_OverlayPanel">
+      <Setter Property="IsVisible" Value="False"/>
+    </Style>
+    <Style Selector="^:fullscreen /template/ Panel#PART_TitleBar">
+      <Setter Property="IsVisible" Value="False"/>
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type ui:FrameWindow}" TargetType="ui:FrameWindow">
+    <Setter Property="TransparencyBackgroundFallback" Value="{DynamicResource ApplicationPageBackgroundThemeBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
+    <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
+    <Setter Property="Background" Value="{DynamicResource ApplicationPageBackgroundThemeBrush}"/>
+    <!-- <Setter Property="Template" Value="{StaticResource FrameWindowsTemplate}" /> -->
+    <Setter Property="WindowDecorationsTheme" Value="{StaticResource AppWindowDecorations}"/>
+    <Setter Property="ExtendClientAreaToDecorationsHint" Value="True"/>
+    <Setter Property="ExtendClientAreaTitleBarHeightHint" Value="-1"/>
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <VisualLayerManager Name="PART_VisualLayerManager" ClipToBounds="True">
+          <Border
+            Name="RootBorder"
+            Padding="{TemplateBinding Padding}"
+            Background="{TemplateBinding Background}"
+            ClipToBounds="True"
+            CornerRadius="8">
+            <!--  BorderBrush="{DynamicResource ControlStrokeColorDefault}"  -->
+            <!--  BorderThickness="1"  -->
+            <Panel>
+              <!--  Background="{DynamicResource FluentTitleBarBackground}"  -->
+              <Grid
+                Name="DefaultTitleBar"
+                Height="45"
+                VerticalAlignment="Top"
+                Background="#01000000"
+                ColumnDefinitions="Auto, Auto, *"
+                TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                WindowDecorationProperties.ElementRole="TitleBar"
+                ZIndex="99">
+
+                <Image
+                  Name="Icon"
+                  Grid.Column="0"
+                  Width="{TemplateBinding IconSize}"
+                  Height="{TemplateBinding IconSize}"
+                  Margin="10,0,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  IsVisible="True"
+                  Source="avares://FrameWindowTest/Assets/app.ico"/>
+                <!--  Source="{TemplateBinding Icon}"  -->
+
+                <TextBlock
+                  Name="TitleText"
+                  Grid.Column="1"
+                  Margin="8,0,0,0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  FontSize="12"
+                  Text="{TemplateBinding Title}"/>
+
+                <ContentPresenter
+                  Grid.Column="2"
+                  Margin="{TemplateBinding TitleBarContentMargin}"
+                  VerticalAlignment="Center"
+                  Content="{TemplateBinding TitleBarContent}"
+                  ContentTemplate="{TemplateBinding TitleBarContentTemplate}"
+                  IsVisible="{TemplateBinding TitleBarContentIsVisible}"
+                  WindowDecorationProperties.ElementRole="DecorationsElement"/>
+              </Grid>
+
+              <ContentPresenter
+                Name="PART_ContentPresenter"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                ClipToBounds="False"
+                Content="{TemplateBinding Content}"
+                ContentTemplate="{TemplateBinding ContentTemplate}"/>
+
+              <!--  Overlay: only interactive caption buttons  -->
+              <Panel Name="PART_OverlayWrapper" ZIndex="999">
+                <!--  Title text lives in overlay so it renders above client content  -->
+                <StackPanel
+                  Name="PART_OverlayPanel"
+                  Height="45"
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Top"
+                  Orientation="Horizontal"
+                  TextElement.FontSize="10">
+                  <Button
+                    Name="PART_MinimizeButton"
+                    Classes="CaptionButton"
+                    Classes.inactive="{Binding !$parent[Window].IsActive}"
+                    Content="&#xE738;"
+                    Theme="{StaticResource FluentDrawnCaptionButton}"
+                    WindowDecorationProperties.ElementRole="MinimizeButton"/>
+
+                  <Button
+                    Name="PART_MaximizeButton"
+                    Classes="CaptionButton"
+                    Classes.inactive="{Binding !$parent[Window].IsActive}"
+                    Content="&#xE739;"
+                    Theme="{StaticResource FluentDrawnCaptionButton}"
+                    WindowDecorationProperties.ElementRole="MaximizeButton"/>
+
+                  <Button
+                    Name="PART_CloseButton"
+                    Classes="Close CaptionButton"
+                    Classes.inactive="{Binding !$parent[Window].IsActive}"
+                    Content="&#xE711;"
+                    FontSize="16"
+                    Theme="{StaticResource FluentDrawnCaptionButton}"
+                    WindowDecorationProperties.ElementRole="CloseButton"/>
+                </StackPanel>
+              </Panel>
+              <!-- <wnd:AppSplashScreen Name="SplashHost" IsVisible="False"/> -->
+            </Panel>
+          </Border>
+        </VisualLayerManager>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^[WindowState=Maximized]">
+      <Style Selector="^ /template/ Button#PART_MaximizeButton">
+        <Setter Property="Content" Value="&#xE923;"/>
+        <Setter Property="FontSize" Value="16"/>
+      </Style>
+
+      <Style Selector="^ /template/ Border#RootBorder">
+        <Setter Property="CornerRadius" Value="0"/>
+        <Setter Property="BorderThickness" Value="0"/>
+      </Style>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>
+

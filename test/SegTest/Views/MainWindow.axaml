@@ -1,0 +1,78 @@
+<wnd:FluentWindow
+  x:Class="SegTest.Views.MainWindow"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:vm="using:SegTest.ViewModels"
+  xmlns:wnd="clr-namespace:AvaloniaFluentUI.Windowing;assembly=AvaloniaFluentUI"
+  Title="SegTest"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  x:DataType="vm:MainWindowViewModel"
+  Icon="/Assets/avalonia-logo.ico"
+  mc:Ignorable="d">
+
+  <Design.DataContext>
+    <!--
+      This only sets the DataContext for the previewer in an IDE,
+      to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)
+    -->
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
+
+  <wnd:FluentWindow.TitleBarContent>
+    <Grid ColumnDefinitions="*">
+      <ui:ToolButton
+        Width="46"
+        Height="45"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Stretch"
+        Classes="Transparent"
+        Click="OnToggleTheme"
+        Content="{x:Static fi:FluentIcon.Constract}"/>
+    </Grid>
+  </wnd:FluentWindow.TitleBarContent>
+
+  <Grid
+    Margin="10,50,10,8"
+    ColumnDefinitions="*, Auto"
+    ColumnSpacing=""
+    RowDefinitions="Auto, Auto, *">
+    <ui:SegmentedView
+      Grid.Row="0"
+      Grid.ColumnSpan="2"
+      HorizontalAlignment="Center"
+      ItemsSource="{Binding SegmentedItems}"
+      SelectedIndex="{Binding CurrentIndex}"
+      SelectedItem="{Binding CurrentItem}"/>
+
+    <ui:SegmentedToggleView
+      Grid.Row="1"
+      Grid.ColumnSpan="2"
+      HorizontalAlignment="Center"
+      ItemsSource="{Binding SegmentedItems}"
+      SelectedIndex="{Binding CurrentIndex}"
+      SelectedItem="{Binding CurrentItem}"/>
+
+    <ui:StackContent
+      Grid.Row="2"
+      Grid.Column="0"
+      Content="{Binding CurrentViewModel}"/>
+    <StackPanel Grid.Row="1" Grid.Column="1">
+      <ComboBox
+        MinWidth="100"
+        HorizontalAlignment="Stretch"
+        ItemsSource="{Binding IndexItems}"
+        SelectedItem="{Binding CurrentIndex}"/>
+      <ComboBox
+        MinWidth="100"
+        HorizontalAlignment="Stretch"
+        ItemsSource="{Binding SegmentedItems}"
+        SelectedItem="{Binding CurrentItem}"/>
+    </StackPanel>
+  </Grid>
+
+</wnd:FluentWindow>

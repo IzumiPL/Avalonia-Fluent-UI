@@ -1,0 +1,142 @@
+<Window
+  Icon="/Assets/avalonia-logo.ico"
+  Title="InfoBar Demo"
+  d:DesignHeight="600"
+  d:DesignWidth="800"
+  mc:Ignorable="d"
+  x:Class="InfoBarTest.Views.MainWindow"
+  x:DataType="vm:MainWindowViewModel"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:vm="using:InfoBarTest.ViewModels"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Design.DataContext>
+    <vm:MainWindowViewModel />
+  </Design.DataContext>
+
+  <Panel>
+    <Grid RowDefinitions="Auto, Auto,Auto,Auto,*">
+      <Grid.Styles>
+        <Style Selector="TextBlock.section">
+          <Setter Property="FontSize" Value="16" />
+          <Setter Property="FontWeight" Value="SemiBold" />
+          <Setter Property="Margin" Value="0,12,0,4" />
+        </Style>
+      </Grid.Styles>
+
+      <!--  InfoBar 区域  -->
+      <ui:PopupInfoBar
+        Content="这是一个普通的 InfoBar 控件，用于在页面内展示通知信息。"
+        Grid.Row="0"
+        IsClosable="True"
+        Margin="12"
+        Opacity="1"
+        Severity="Informational"
+        Title="InfoBar 示例" />
+
+      <ui:ToastInfoBar
+        Content="这是一个普通的 ToastInfoBar 控价, 用于在页面内显示通知消息"
+        Grid.Row="1"
+        IsClosable="True"
+        IsVisible="True"
+        Margin="12"
+        Opacity="1"
+        Severity="Informational"
+        Title="Toast InfoBar 示例" />
+
+      <!--  通用选项  -->
+      <StackPanel
+        Grid.Row="2"
+        Margin="12,0"
+        Spacing="8">
+        <TextBlock Classes="section" Text="选项" />
+        <StackPanel Orientation="Horizontal" Spacing="16">
+          <!--  位置选择  -->
+          <StackPanel Spacing="4">
+            <TextBlock FontSize="12" Text="弹出位置" />
+            <ComboBox
+              SelectedIndex="2"
+              Width="140"
+              x:Name="PositionComboBox">
+              <ComboBoxItem Content="TopLeft" />
+              <ComboBoxItem Content="Top" />
+              <ComboBoxItem Content="TopRight" />
+              <ComboBoxItem Content="BottomLeft" />
+              <ComboBoxItem Content="Bottom" />
+              <ComboBoxItem Content="BottomRight" />
+            </ComboBox>
+          </StackPanel>
+
+          <!--  持续时间  -->
+          <StackPanel Spacing="4">
+            <TextBlock FontSize="12" Text="持续时间 (ms)" />
+            <NumericUpDown
+              FormatString="F0"
+              Increment="1000"
+              Minimum="-1"
+              Value="3000"
+              Width="140"
+              x:Name="DurationBox" />
+          </StackPanel>
+
+          <!--  是否可关闭  -->
+          <StackPanel Spacing="4">
+            <TextBlock FontSize="12" Text="可关闭" />
+            <CheckBox
+              Content="IsClosable"
+              IsChecked="True"
+              x:Name="ClosableCheckBox" />
+          </StackPanel>
+        </StackPanel>
+      </StackPanel>
+
+      <!--  按钮区域  -->
+      <StackPanel
+        Grid.Row="3"
+        Margin="12,0"
+        Spacing="8">
+        <TextBlock Classes="section" Text="PopupInfoBar（弹出式通知）" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button Click="OnPopupInfoClick" Content="Information" />
+          <Button Click="OnPopupSuccessClick" Content="Success" />
+          <Button Click="OnPopupWarningClick" Content="Warning" />
+          <Button Click="OnPopupErrorClick" Content="Error" />
+        </StackPanel>
+
+        <TextBlock Classes="section" Text="ToastInfoBar（Toast 通知）" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button Click="OnToastInfoClick" Content="Information" />
+          <Button Click="OnToastSuccessClick" Content="Success" />
+          <Button Click="OnToastWarningClick" Content="Warning" />
+          <Button Click="OnToastErrorClick" Content="Error" />
+        </StackPanel>
+      </StackPanel>
+
+      <Grid
+        ColumnDefinitions="*, Auto"
+        Grid.Row="4"
+        VerticalAlignment="Bottom">
+        <TextBlock
+          Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          Margin="12"
+          Text="提示：点击按钮后，通知会从对应角落滑入。PopupInfoBar 为白色卡片样式，ToastInfoBar 为彩色背景样式。"
+          VerticalAlignment="Bottom" />
+
+        <Button
+          Classes="Transparent"
+          Click="OnToggleTheme"
+          Content="Toggle Theme"
+          Grid.Column="1"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Bottom" />
+      </Grid>
+    </Grid>
+    <!--  用于放置 PopupInfoBar 和 ToastInfoBar 的 InfoBarHost  -->
+    <ui:InfoBarHost x:Name="InfoBarHost" />
+  </Panel>
+</Window>
