@@ -13,13 +13,7 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
-/test/FlipViewTest/
-/test/LocaleTest/
-/test/Test/
-
 /samples/Gallery/Assets/Fonts/
-
-**/test/
 
 # Build results
 [Dd]ebug/
@@ -350,5 +344,3 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
-/FluentAvalonia.UI.Windowing/Win32/Win32Com.Generated.cs
-/samples/FluentAvaloniaSamples
