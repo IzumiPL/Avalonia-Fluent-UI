@@ -33,25 +33,30 @@
             <Grid
               Margin="{TemplateBinding Padding}"
               VerticalAlignment="Center"
-              ColumnDefinitions="*, Auto">
-              <StackPanel Spacing="4">
-                <TextBlock
-                  Name="PART_TitleText"
-                  Classes="StrongBody"
-                  Text="{TemplateBinding Title}"
-                  TextTrimming="CharacterEllipsis"/>
-                <ContentPresenter
-                  Name="ContentPresenter"
-                  Content="{TemplateBinding Content}"
-                  FontSize="13"
-                  TextWrapping="Wrap"/>
-              </StackPanel>
+              ColumnDefinitions="*, Auto"
+              RowDefinitions="Auto, *">
+              <TextBlock
+                Name="PART_TitleText"
+                Grid.Row="0"
+                Grid.Column="0"
+                Classes="StrongBody"
+                Text="{TemplateBinding Title}"
+                TextTrimming="CharacterEllipsis"/>
+              <ContentPresenter
+                Name="ContentPresenter"
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Margin="0,0,5,0"
+                Content="{TemplateBinding Content}"
+                FontSize="13"
+                TextWrapping="Wrap"/>
 
               <ui:ToolButton
                 Name="PART_CloseButton"
+                Grid.Row="0"
                 Grid.Column="1"
-                Width="28"
-                Height="28"
+                Width="24"
+                Height="24"
                 Margin="6,0,0,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
