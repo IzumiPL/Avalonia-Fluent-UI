@@ -5,7 +5,7 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// Manages the lifecycle and positioning of <see cref="PopupInfoBar"/> popups.
 /// </summary>
-public class PopUpInfoBarManager : InfoBarManagerBase<PopupInfoBar>
+public class PopupInfoBarManager : InfoBarManagerBase<PopupInfoBar>
 {
     public void New(string title, object content, PopupInfoBarPosition position,
         PopupInfoBarSeverity severity, bool isClosable, int duration)

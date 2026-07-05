@@ -4,7 +4,7 @@
   xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
 
-  <Thickness x:Key="PopupInfoBarMargin">0,3,14,16</Thickness>
+  <Thickness x:Key="PopupInfoBarMargin">0,3,14,0</Thickness>
 
   <ControlTheme x:Key="{x:Type ui:PopupInfoBar}" TargetType="ui:PopupInfoBar">
     <Setter Property="Background" Value="{DynamicResource PopupControlBackgroundBurhs}"/>
@@ -30,8 +30,12 @@
           <Grid
             Margin="{TemplateBinding Padding}"
             VerticalAlignment="Center"
-            ColumnDefinitions="Auto, *, Auto">
-            <Panel Name="IconArea" Grid.Column="0">
+            ColumnDefinitions="Auto, *, Auto"
+            RowDefinitions="Auto, *">
+            <Panel
+              Name="IconArea"
+              Grid.Row="0"
+              Grid.Column="0">
               <Ellipse
                 Name="IconBackground"
                 Width="16"
@@ -46,24 +50,29 @@
                 FontFamily="{StaticResource SymbolThemeFontFamily}"
                 FontSize="10"/>
             </Panel>
-            <StackPanel Grid.Column="1" Spacing="4">
-              <TextBlock
-                Name="PART_TitleText"
-                Classes="StrongBody"
-                Text="{TemplateBinding Title}"
-                TextTrimming="CharacterEllipsis"/>
-              <ContentPresenter
-                Name="ContentPresenter"
-                Content="{TemplateBinding Content}"
-                FontSize="13"
-                TextWrapping="Wrap"/>
-            </StackPanel>
+            <TextBlock
+              Name="PART_TitleText"
+              Grid.Row="0"
+              Grid.Column="1"
+              Classes="StrongBody"
+              Text="{TemplateBinding Title}"
+              TextTrimming="CharacterEllipsis"/>
+            <ContentPresenter
+              Name="ContentPresenter"
+              Grid.Row="1"
+              Grid.Column="1"
+              Grid.ColumnSpan="2"
+              Margin="0,0,5,0"
+              Content="{TemplateBinding Content}"
+              FontSize="13"
+              TextWrapping="Wrap"/>
 
             <ui:ToolButton
               Name="PART_CloseButton"
+              Grid.Row="0"
               Grid.Column="2"
-              Width="28"
-              Height="28"
+              Width="24"
+              Height="24"
               Margin="6,0,0,0"
               HorizontalAlignment="Right"
               VerticalAlignment="Top"
