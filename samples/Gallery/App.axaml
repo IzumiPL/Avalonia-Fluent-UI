@@ -53,6 +53,7 @@
         <!-- <ResourceInclude Source="avares://Gallery/Controls/Menu/MenuItemIcon.axaml"/> -->
 
         <ResourceInclude Source="avares://Gallery/Controls/View/ViewBase.axaml"/>
+        <ResourceInclude Source="avares://Gallery/Controls/View/InfoBarHostViewBase.axaml"/>
 
         <!--  ComboBox  -->
         <!-- <ResourceInclude Source="avares://Gallery/Controls/ComboBox/ComboBox.axaml" /> -->

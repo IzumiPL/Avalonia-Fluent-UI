@@ -44,6 +44,25 @@ public partial class StatusAndInformationViewModel : ViewModelBase
     private double _progressRingCurrentValue = 24.0;
 
     public IBrush ProgressRingBackground => new SolidColorBrush(ProgressRingColor);
+    public PopupInfoBarPosition[] PopupInfoBarPositions => 
+    [
+        PopupInfoBarPosition.Top,
+        PopupInfoBarPosition.TopLeft,
+        PopupInfoBarPosition.TopRight,
+        PopupInfoBarPosition.Bottom,
+        PopupInfoBarPosition.BottomLeft,
+        PopupInfoBarPosition.BottomRight
+    ];
+
+    public ToastInfoBarPosition[] ToastInfoBarPositions => 
+    [
+        ToastInfoBarPosition.Top,
+        ToastInfoBarPosition.TopLeft,
+        ToastInfoBarPosition.TopRight,
+        ToastInfoBarPosition.Bottom,
+        ToastInfoBarPosition.BottomLeft,
+        ToastInfoBarPosition.BottomRight
+    ];
 
     [ObservableProperty]
     private bool _showPercent = false;

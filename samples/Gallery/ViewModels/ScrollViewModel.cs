@@ -4,5 +4,5 @@ namespace Gallery.ViewModels;
 
 public class ScrollViewModel : ViewModelBase
 {
-    public string SettingsTitle => LocalizationService.Instance.GetString("Scroll");
+    public override string Title => LocalizationService.Instance.GetString("Scroll");
 }

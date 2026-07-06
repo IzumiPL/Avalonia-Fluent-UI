@@ -1568,4 +1568,31 @@
   <data name="Icon_Segmented_Item" xml:space="preserve">
     <value>Icon Segmented Item</value>
   </data>
+  <data name="SI_PopupInfoBar" xml:space="preserve">
+    <value>Popup Info Bar</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="Im_Title" xml:space="preserve">
+    <value>I am the title</value>
+  </data>
+  <data name="Custom_Title_Bar_Content" xml:space="preserve">
+    <value>This is a Custom message bar. You can customize the content of the message bar.</value>
+  </data>
+  <data name="Error_Title_Bar_Content" xml:space="preserve">
+    <value>This is an Error message bar</value>
+  </data>
+  <data name="Information_Title_Bar_Content" xml:space="preserve">
+    <value>This is an Information message bar</value>
+  </data>
+  <data name="Success_Title_Bar_Content" xml:space="preserve">
+    <value>This is a Success message bar</value>
+  </data>
+  <data name="Warning_Title_Bar_Content" xml:space="preserve">
+    <value>This is a Warning message</value>
+  </data>
+  <data name="SI_ToastInfoBar" xml:space="preserve">
+    <value>Toast Info Bar</value>
+  </data>
 </root>

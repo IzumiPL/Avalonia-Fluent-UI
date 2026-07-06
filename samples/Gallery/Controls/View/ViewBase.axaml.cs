@@ -30,7 +30,7 @@ public class ViewBase : ContentControl
     public ViewBase() { }
 
     protected override Type StyleKeyOverride => typeof(ViewBase);
-
+    
     public static readonly StyledProperty<string?> TitleProperty =
         AvaloniaProperty.Register<ViewBase, string?>(nameof(Title));
 
