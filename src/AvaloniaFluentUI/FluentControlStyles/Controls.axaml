@@ -75,7 +75,6 @@
 
         <!--  FluentAvalonia Controls  -->
         <MergeResourceInclude Source="/FluentControlStyles/Controls/FrameStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/ContentDialogStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/InfoBadgeStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/InfoBarStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/NumberBoxStyles.axaml"/>
@@ -107,11 +106,14 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewItemStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewStyles.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/TaskDialog/TaskDialogStyles.axaml"/>
+        <!--  Dialog  -->
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/ContentDialog/ContentDialogStyles.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/TaskDialog/TaskDialogCommandStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/TaskDialog/TaskDialogStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/TaskDialog/TaskDialogButtonStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/TaskDialog/TaskDialogCommandStyles.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/TaskDialog/TaskDialogButtonStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/ColorDialog/FluentColorView.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/TeachingTipStyles.axaml"/>
 
