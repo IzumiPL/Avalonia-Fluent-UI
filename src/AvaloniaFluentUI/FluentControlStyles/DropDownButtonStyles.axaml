@@ -109,22 +109,6 @@
         <Setter Property="BorderThickness" Value="0"/>
       </Style>
 
-      <Style Selector="^ /template/ PathIcon#PART_DropDownIcon">
-        <Setter Property="RenderTransformOrigin" Value="50%, 100%"/>
-        <Setter Property="Transitions">
-          <Transitions>
-            <TransformOperationsTransition
-              Easing="CubicEaseOut"
-              Property="RenderTransform"
-              Duration="0:0:0.15"/>
-          </Transitions>
-        </Setter>
-      </Style>
-
-      <Style Selector="^:pressed /template/ PathIcon#PART_DropDownIcon">
-        <Setter Property="RenderTransform" Value="scale(1, 0.75)"/>
-      </Style>
-
       <!--  PointerOver State  -->
       <Style Selector="^:pointerover /template/ Border#RootBorder">
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>

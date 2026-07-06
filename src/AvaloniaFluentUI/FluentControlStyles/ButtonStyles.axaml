@@ -25,6 +25,7 @@
   <Thickness x:Key="ButtonBorderThemeThickness">1</Thickness>
   <Thickness x:Key="RepeatButtonBorderThemeThickness">1</Thickness>
   <Thickness x:Key="ToggleButtonBorderThemeThickness">1</Thickness>
+
   <ControlTheme x:Key="{x:Type Button}" TargetType="Button">
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
