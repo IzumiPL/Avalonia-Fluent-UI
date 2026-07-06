@@ -1439,12 +1439,9 @@ public partial class NavigationView : HeaderedContentControl
 
     // Localization String Resources
     private const string SR_SettingsButtonName = "SettingsButtonName";
-    private const string SR_NavigationOverflowButtonToolTip = "NavigationOverflowButtonToolTip";
     private const string SR_NavigationViewSearchButtonName = "NavigationViewSearchButtonName";
-    private const string SR_NavigationBackButtonToolTip = "NavigationBackButtonToolTip";
     private const string SR_NavigationButtonOpenName = "NavigationButtonOpenName";
     private const string SR_NavigationButtonClosedName = "NavigationButtonClosedName";
-    private const string SR_NavigationOverflowButtonName = "NavigationOverflowButtonName";
     
     public NavigationView()
     {
@@ -1494,14 +1491,14 @@ public partial class NavigationView : HeaderedContentControl
             var tip = ToolTip.GetTip(_topNavOverflowButton);
             if (tip != null)
             {
-                ToolTip.SetTip(_topNavOverflowButton, LocalizationService.Instance.GetString(SR_NavigationOverflowButtonToolTip));
+                ToolTip.SetTip(_topNavOverflowButton, LocalizationService.Instance.GetString("More"));
             }
         
             var searchButtonName = LocalizationService.Instance.GetString(SR_NavigationViewSearchButtonName);
             AutomationProperties.SetName(_paneSearchButton, searchButtonName); 
             ToolTip.SetTip(_paneSearchButton, searchButtonName);
         
-            var navigationName = LocalizationService.Instance.GetString(SR_NavigationBackButtonToolTip);
+            var navigationName = LocalizationService.Instance.GetString("Backward");
             ToolTip.SetTip(_backButton, navigationName);
             AutomationProperties.SetName(_backButton, navigationName);
         
@@ -1621,7 +1618,7 @@ public partial class NavigationView : HeaderedContentControl
                 var tip = ToolTip.GetTip(_topNavOverflowButton);
                 if (tip != null)
                 {
-                    ToolTip.SetTip(_topNavOverflowButton, LocalizationService.Instance.GetString(SR_NavigationOverflowButtonToolTip));
+                    ToolTip.SetTip(_topNavOverflowButton, LocalizationService.Instance.GetString("More"));
                 }
             }
 
@@ -1696,7 +1693,7 @@ public partial class NavigationView : HeaderedContentControl
             if (_backButton != null)
             {
                 _backButton.Click += OnBackButtonClicked;
-                var navigationName = LocalizationService.Instance.GetString(SR_NavigationBackButtonToolTip);
+                var navigationName = LocalizationService.Instance.GetString("Backward");
                 ToolTip.SetTip(_backButton, navigationName);
                 AutomationProperties.SetName(_backButton, navigationName);
             }
