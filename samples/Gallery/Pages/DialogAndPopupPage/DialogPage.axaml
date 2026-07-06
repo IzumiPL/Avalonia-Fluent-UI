@@ -44,6 +44,15 @@
       <Button Click="OnShowCustomDialog" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Open]}"/>
     </ui:CodeCard>
 
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ColorDialog]}">
+      <fui:FilledPushButton
+        Name="FilledPushButton"
+        Padding="16,5"
+        Background="DeepPink"
+        Click="OnShowColorDialog"
+        Content="{locale:Localization DP_ShowColorDialog}"/>
+    </ui:CodeCard>
+
     <ui:CodeCard Name="TaskDialogCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_TaskDialog]}">
       <Button Click="OnShowTaskDialog" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ShowTaskDialog]}"/>
     </ui:CodeCard>

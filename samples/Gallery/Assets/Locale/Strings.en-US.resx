@@ -1595,4 +1595,10 @@
   <data name="SI_ToastInfoBar" xml:space="preserve">
     <value>Toast Info Bar</value>
   </data>
+  <data name="DP_ColorDialog" xml:space="preserve">
+    <value>Color dialog</value>
+  </data>
+  <data name="DP_ShowColorDialog" xml:space="preserve">
+    <value>Show color dialog</value>
+  </data>
 </root>

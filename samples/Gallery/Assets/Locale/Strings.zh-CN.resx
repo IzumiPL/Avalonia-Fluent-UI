@@ -1595,4 +1595,10 @@
   <data name="SI_ToastInfoBar" xml:space="preserve">
     <value>吐司信息条</value>
   </data>
+  <data name="DP_ColorDialog" xml:space="preserve">
+    <value>颜色对话框</value>
+  </data>
+  <data name="DP_ShowColorDialog" xml:space="preserve">
+    <value>显示颜色对话框</value>
+  </data>
 </root>
