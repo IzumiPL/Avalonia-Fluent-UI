@@ -152,7 +152,7 @@
 
                     <Popup x:Name="PART_Popup" PlacementTarget="{Binding #PART_Thumb}">
                       <Border
-                        Margin="5"
+                        Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
                         Padding="{StaticResource PopupBorderPadding}"
                         Background="{DynamicResource AcrylicBackgroundFillColorDefaultBrush}"
                         BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
@@ -305,7 +305,7 @@
 
                     <Popup x:Name="PART_Popup" PlacementTarget="{Binding #PART_Thumb}">
                       <Border
-                        Margin="5"
+                        Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
                         Padding="{StaticResource PopupBorderPadding}"
                         Background="{DynamicResource AcrylicBackgroundFillColorDefaultBrush}"
                         BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"

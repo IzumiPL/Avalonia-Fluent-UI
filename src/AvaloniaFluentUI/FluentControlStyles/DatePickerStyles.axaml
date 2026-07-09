@@ -343,7 +343,7 @@
               PlacementTarget="{TemplateBinding}"
               WindowManagerAddShadowHint="False">
               <Border
-                Margin="5"
+                Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
                 Background="{DynamicResource AcrylicInAppFillColorDefaultBrush}"
                 BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
                 CornerRadius="{DynamicResource OverlayCornerRadius}">

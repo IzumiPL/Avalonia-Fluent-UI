@@ -69,7 +69,7 @@
               Name="PART_SuggestionsContainer"
               Padding="{DynamicResource AutoSuggestListMargin}"
               Background="{DynamicResource AcrylicBackgroundFillColorDefaultBrush}"
-              BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
+              BorderBrush="{DynamicResource ControlBorderHighBrush}"
               BorderThickness="1"
               CornerRadius="{DynamicResource OverlayCornerRadius}">
               <ListBox
