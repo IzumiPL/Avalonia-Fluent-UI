@@ -122,9 +122,10 @@
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Windowing/FluentWindowStyles.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/RangeSliderStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Slider/RangeSliderStyles.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/ProgressRingStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Progress/ProgressRingStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Progress/FilledProgressBar.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/BreadcrumbBar/BreadcrumbBarStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/BreadcrumbBar/BreadcrumbBarItemStyles.axaml"/>
@@ -139,6 +140,7 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/FluentMenu/FluentContextMenuStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/ComboBox/MultiSelectionComboBoxStyle.axaml"/>
 
+        <!--  Button  -->
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/PushButtonStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/ToolButtonStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/FilledPushButtonStyle.axaml"/>
@@ -146,6 +148,7 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/OutlinePushButtonStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/OutlineToolButtonStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/SubTitleRadioButtonStyle.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/ColorPickerButton.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Slider/ToolTipSliderStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Pager/PipsPagerStyle.axaml"/>
