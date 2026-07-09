@@ -75,7 +75,7 @@
               Grid.Row="1"
               Grid.ColumnSpan="2"
               HorizontalAlignment="Left"
-              Text="{locale:Localization EditColor}"/>
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[EditColor]}"/>
             <TextBox
               Name="PART_HexInput"
               Grid.Row="1"

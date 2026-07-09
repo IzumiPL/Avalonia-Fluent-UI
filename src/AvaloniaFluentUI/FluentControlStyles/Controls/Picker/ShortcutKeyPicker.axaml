@@ -5,10 +5,10 @@
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
   <!--  Add Resources Here  -->
   <ControlTheme x:Key="{x:Type ui:ShortcutKeyPicker}" TargetType="ui:ShortcutKeyPicker">
-    <Setter Property="HorizontalAlignment" Value="Left"/>
-    <Setter Property="VerticalAlignment" Value="Top"/>
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    <Setter Property="VerticalAlignment" Value="Top"/>
     <Setter Property="CornerRadius" Value="6"/>
     <Setter Property="BorderThickness" Value="1"/>
     <Setter Property="Padding" Value="3"/>
@@ -43,6 +43,11 @@
 
     <Style Selector="^:pressed">
       <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}"/>
+    </Style>
+
+    <Style Selector="^:disabled">
+      <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
     </Style>
   </ControlTheme>
 </ResourceDictionary>
