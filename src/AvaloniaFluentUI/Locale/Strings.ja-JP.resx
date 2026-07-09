@@ -208,4 +208,10 @@
   <data name="EditColor" xml:space="preserve">
     <value>色の編集</value>
   </data>
+  <data name="ActivateShortcutKeys" xml:space="preserve">
+    <value>ショートカットキーを有効にする</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>リセット</value>
+  </data>
 </root>

@@ -208,4 +208,10 @@
   <data name="EditColor" xml:space="preserve">
     <value>Edit color</value>
   </data>
+  <data name="ActivateShortcutKeys" xml:space="preserve">
+    <value>Activate shortcut keys</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
 </root>
