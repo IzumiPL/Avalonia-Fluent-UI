@@ -8,9 +8,9 @@ using static AvaloniaFluentUI.Controls.Interop.Win32Interop;
 
 namespace AvaloniaFluentUI.Windowing;
 
-internal class Win32AppWindowFeatures : IAppWindowPlatformFeatures
+internal class Win32FluentWindowFeatures : IAppWindowPlatformFeatures
 {
-    public Win32AppWindowFeatures(FluentWindow owner)
+    public Win32FluentWindowFeatures(FluentWindow owner)
     {
         _owner = owner;
     }
@@ -57,7 +57,7 @@ internal class Win32AppWindowFeatures : IAppWindowPlatformFeatures
                 &cr, sizeof(COLORREF));
             if (!hr.SUCCEEDED)
             {
-                Logger.TryGet(LogEventLevel.Debug, "AppWindow")?
+                Logger.TryGet(LogEventLevel.Debug, "FluentWindow")?
                     .Log("SetWindowBorderColor", "Failed to set the border color of the window with hr: {hr}", hr);
             }
         }
@@ -72,11 +72,11 @@ internal class Win32AppWindowFeatures : IAppWindowPlatformFeatures
         }
         catch (Exception ex)
         {
-            Logger.TryGet(LogEventLevel.Debug, "AppWindow")?
+            Logger.TryGet(LogEventLevel.Debug, "FluentWindow")?
                     .Log("SetWindowBorderColor", "Unable to create instance of ITaskbarList3", ex);
         }
     }
 
     private FluentWindow _owner;
-    private ITaskbarList3 _taskBarList;
+    private ITaskbarList3? _taskBarList;
 }
