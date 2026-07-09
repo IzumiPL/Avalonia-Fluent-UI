@@ -14,11 +14,16 @@
   x:DataType="viewModel:DialogPageViewModel"
   mc:Ignorable="d">
   <StackPanel Spacing="50">
+
+    <!--  Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ThisIsDialogWithMask]}"  -->
+    <!--  CloseButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Close]}"  -->
+    <!--  Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_OptimisticContent]}"  -->
+
     <fui:ContentDialog
       Name="ContentDialog"
-      Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ThisIsDialogWithMask]}"
-      CloseButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Close]}"
-      Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_OptimisticContent]}"
+      Title="{locale:Localization DP_ThisIsDialogWithMask}"
+      CloseButtonText="{locale:Localization DP_Close}"
+      Content="{locale:Localization DP_OptimisticContent}"
       DefaultButton="Primary"
       IsPrimaryButtonEnabled="True"
       IsVisible="False"
@@ -50,7 +55,7 @@
         Padding="16,5"
         Background="DeepPink"
         Click="OnShowColorDialog"
-        Content="{locale:Localization DP_ShowColorDialog}"/>
+        Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ShowColorDialog]}"/>
     </ui:CodeCard>
 
     <ui:CodeCard Name="TaskDialogCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_TaskDialog]}">

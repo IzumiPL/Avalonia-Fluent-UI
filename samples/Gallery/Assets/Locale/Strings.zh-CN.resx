@@ -1601,4 +1601,10 @@
   <data name="DP_ShowColorDialog" xml:space="preserve">
     <value>显示颜色对话框</value>
   </data>
+  <data name="SI_FilledProgressBar" xml:space="preserve">
+    <value>填充进度条</value>
+  </data>
+  <data name="ShowProgressText" xml:space="preserve">
+    <value>显示进度文本</value>
+  </data>
 </root>

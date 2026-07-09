@@ -11,13 +11,14 @@
       <TrayIcon Icon="/Assets/app.ico" ToolTipText="Avalonia Tray Icon">
         <TrayIcon.Menu>
           <NativeMenu>
-            <NativeMenuItem Header="Settings">
+            <NativeMenuItem Click="ShowMainWindow" Header="显示主窗口"/>
+            <NativeMenuItem Click="OnToggleTheme" Header="切换主题"/>
+            <NativeMenuItem Click="OnClicked" Header="退出"/>
+            <NativeMenuItem Header="切换语言">
               <NativeMenu>
-                <NativeMenuItem Header="Option 1"/>
-                <NativeMenuItem Header="Option 2"/>
-                <NativeMenuItemSeparator/>
-                <NativeMenuItem Header="Option 3"/>
-                <NativeMenuItem Click="OnClicked" Header="退出"/>
+                <NativeMenuItem Click="OnToggleLanguage" Header="zh-CN"/>
+                <NativeMenuItem Click="OnToggleLanguage" Header="en-US"/>
+                <NativeMenuItem Click="OnToggleLanguage" Header="ja-JP"/>
               </NativeMenu>
             </NativeMenuItem>
           </NativeMenu>

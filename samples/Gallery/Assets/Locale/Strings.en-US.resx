@@ -1601,4 +1601,10 @@
   <data name="DP_ShowColorDialog" xml:space="preserve">
     <value>Show color dialog</value>
   </data>
+  <data name="SI_FilledProgressBar" xml:space="preserve">
+    <value>Filled progress bar</value>
+  </data>
+  <data name="ShowProgressText" xml:space="preserve">
+    <value>Show progress text</value>
+  </data>
 </root>

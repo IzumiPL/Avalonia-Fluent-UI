@@ -253,4 +253,9 @@ public partial class MainWindow : FluentWindow
             panel.ContextMenu?.Open();
         }
     }
+
+    private void OnHideFlyout(object? sender, RoutedEventArgs routedEventArgs)
+    {
+        SettingButton.Flyout?.IsOpen = false;
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Avalonia.Layout;
 using Avalonia.Media;
 using AvaloniaFluentUI.Controls;
 using AvaloniaFluentUI.Locale;
@@ -63,6 +64,17 @@ public partial class StatusAndInformationViewModel : ViewModelBase
         ToastInfoBarPosition.BottomLeft,
         ToastInfoBarPosition.BottomRight
     ];
+
+    public Orientation[] ProgressBarOrientations => [ Orientation.Horizontal, Orientation.Vertical ];
+
+    [ObservableProperty]
+    private bool _filledProgressBarIsIndeterminate;
+
+    [ObservableProperty]
+    private double _filledProgressBarCurrentValue = 64;
+
+    [ObservableProperty]
+    private bool _filledProgressBarShowProgressText;
 
     [ObservableProperty]
     private bool _showPercent = false;

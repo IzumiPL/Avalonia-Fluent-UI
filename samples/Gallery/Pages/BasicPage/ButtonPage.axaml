@@ -321,27 +321,27 @@
           Spacing="5">
           <fui:OutlinePushButton
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Music]}"
-            GroupName="{Binding OutlinePushButtonGroupName}"
+            Group="{Binding OutlinePushButtonGroup}"
             IconSource="{x:Static fi:FluentIcon.Music}"
             IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
           <fui:OutlinePushButton
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_MovieAndTV]}"
-            GroupName="{Binding OutlinePushButtonGroupName}"
+            Group="{Binding OutlinePushButtonGroup}"
             IconSource="{x:Static fi:FluentIcon.Video}"
             IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
           <fui:OutlinePushButton
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Game]}"
-            GroupName="{Binding OutlinePushButtonGroupName}"
+            Group="{Binding OutlinePushButtonGroup}"
             IconSource="{x:Static fi:FluentIcon.Game}"
             IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
           <fui:OutlinePushButton
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[GitHubRepo]}"
-            GroupName="{Binding OutlinePushButtonGroupName}"
+            Group="{Binding OutlinePushButtonGroup}"
             IconSource="{x:Static fi:FluentIcon.GitHub}"
             IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
           <fui:OutlinePushButton
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_AboutUs]}"
-            GroupName="{Binding OutlinePushButtonGroupName}"
+            Group="{Binding OutlinePushButtonGroup}"
             IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
         </StackPanel>
         <ui:Card Grid.Column="1">
@@ -362,16 +362,16 @@
           Orientation="Horizontal"
           Spacing="5">
           <fui:OutlineToolButton
-            GroupName="{Binding OutlineToolButtonGroupName}"
-            IconSource="{x:Static fi:FluentIcon.Add}"
+            Content="{x:Static fi:FluentIcon.Add}"
+            Group="{Binding OutlineToolButtonGroup}"
             IsEnabled="{Binding !OutlineToolButtonIsDisabled}"/>
           <fui:OutlineToolButton
-            GroupName="{Binding OutlineToolButtonGroupName}"
-            IconSource="{x:Static fi:FluentIcon.Bluetooth}"
+            Content="{x:Static fi:FluentIcon.Bluetooth}"
+            Group="{Binding OutlineToolButtonGroup}"
             IsEnabled="{Binding !OutlineToolButtonIsDisabled}"/>
           <fui:OutlineToolButton
-            GroupName="{Binding OutlineToolButtonGroupName}"
-            IconSource="{x:Static fi:FluentIcon.Brush}"
+            Content="{x:Static fi:FluentIcon.Brush}"
+            Group="{Binding OutlineToolButtonGroup}"
             IsEnabled="{Binding !OutlineToolButtonIsDisabled}"/>
         </StackPanel>
         <ui:Card Grid.Column="1">

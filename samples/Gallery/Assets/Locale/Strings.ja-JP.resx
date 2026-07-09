@@ -1601,4 +1601,10 @@
   <data name="DP_ShowColorDialog" xml:space="preserve">
     <value>カラーダイアログを表示</value>
   </data>
+  <data name="SI_FilledProgressBar" xml:space="preserve">
+    <value>プログレスバーを埋める</value>
+  </data>
+  <data name="ShowProgressText" xml:space="preserve">
+    <value>進行状況テキストを表示する</value>
+  </data>
 </root>
