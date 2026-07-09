@@ -1,6 +1,7 @@
 <ResourceDictionary
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:converters="using:Avalonia.Controls.Converters"
   x:CompileBindings="True">
 
   <Design.PreviewWith>
@@ -27,27 +28,24 @@
   </Design.PreviewWith>
 
   <x:Double x:Key="ProgressBarMinHeight">3</x:Double>
-  <x:Double x:Key="ProgressBarTrackHeight">1</x:Double>
-  <!--<CornerRadius x:Key="ProgressBarCornerRadius">1.5</CornerRadius>-->
-  <CornerRadius x:Key="ProgressBarTrackCornerRadius">0.5</CornerRadius>
+  <x:Double x:Key="ProgressBarTrackHeight">2</x:Double>
 
-
-  <!--  Control-specific resources  -->
-  <Thickness x:Key="ProgressBarBorderThemeThickness">0</Thickness>
   <ControlTheme x:Key="{x:Type ProgressBar}" TargetType="ProgressBar">
     <Setter Property="Foreground" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
     <Setter Property="Background" Value="{DynamicResource ControlStrongFillColorDefaultBrush}"/>
-    <Setter Property="BorderThickness" Value="{DynamicResource ProgressBarBorderThemeThickness}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
-    <Setter Property="VerticalAlignment" Value="Center"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
     <Setter Property="Template">
-      <ControlTemplate>
+
+      <ControlTemplate TargetType="ProgressBar">
         <Border
-          Name="ProgressBarRoot"
-          Padding="{TemplateBinding Padding}"
+          x:Name="ProgressBarRoot"
+          Background="Transparent"
           BorderBrush="{TemplateBinding BorderBrush}"
           BorderThickness="{TemplateBinding BorderThickness}"
+          ClipToBounds="True"
           CornerRadius="{TemplateBinding CornerRadius}">
           <Panel>
             <Panel Name="DeterminateRoot">
@@ -59,17 +57,18 @@
                 CornerRadius="{DynamicResource ProgressBarTrackCornerRadius}"/>
               <Border
                 Name="PART_Indicator"
+                Margin="{TemplateBinding Padding}"
                 Background="{TemplateBinding Foreground}"
                 CornerRadius="{TemplateBinding CornerRadius}"/>
             </Panel>
-            <Panel Name="IndeterminateRoot" Opacity="0">
+            <Panel x:Name="IndeterminateRoot" Opacity="0">
               <Border
-                Name="IndeterminateProgressBarIndicator"
+                x:Name="IndeterminateProgressBarIndicator"
                 Margin="{TemplateBinding Padding}"
                 Background="{TemplateBinding Foreground}"
                 CornerRadius="{TemplateBinding CornerRadius}"/>
               <Border
-                Name="IndeterminateProgressBarIndicator2"
+                x:Name="IndeterminateProgressBarIndicator2"
                 Margin="{TemplateBinding Padding}"
                 Background="{TemplateBinding Foreground}"
                 CornerRadius="{TemplateBinding CornerRadius}"/>
@@ -220,13 +219,13 @@
         DO NOT REMOVE THIS CODE
         For some unexplainable reason, removing this code will break the indeterminate and every other RenderTransform animation.
       -->
-      <Style Selector="^ /template/ LayoutTransformControl#PART_LayoutTransformControl">
-        <Setter Property="LayoutTransform">
-          <Setter.Value>
-            <RotateTransform Angle="90"/>
-          </Setter.Value>
-        </Setter>
-      </Style>
+      <!--   <Style Selector="^ /template/ LayoutTransformControl#PART_LayoutTransformControl"> -->
+      <!--     <Setter Property="LayoutTransform"> -->
+      <!--       <Setter.Value> -->
+      <!--         <RotateTransform Angle="90"/> -->
+      <!--       </Setter.Value> -->
+      <!--     </Setter> -->
+      <!--   </Style> -->
     </Style>
 
     <Style Selector="^:indeterminate">

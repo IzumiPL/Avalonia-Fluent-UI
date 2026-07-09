@@ -2,10 +2,12 @@ using System;
 using System.Globalization;
 using System.Linq;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using AvaloniaFluentUI.Controls;
 using AvaloniaFluentUI.Locale;
+using AvaloniaFluentUI.Styling;
 using Gallery.Pages;
 using Gallery.Services;
 using Gallery.ViewModels;
@@ -96,10 +98,41 @@ public class App : Application
 
     private void OnClicked(object? sender, EventArgs e)
     {
-        // Environment.Exit(0);
         if (Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow?.Close();
+        }
+    }
+
+    private void OnToggleLanguage(object? sender, EventArgs e)
+    {
+        if (sender is NativeMenuItem nmi)
+        {
+            var language = nmi.Header ?? "zh-CN";
+            if (LocalizationService.Instance.CurrentLanguage != language)
+            {
+                LocalizationService.Instance.SetCulture(language);
+            }
+        }
+    }
+
+    private void OnToggleTheme(object? sender, EventArgs e)
+    {
+        AvaloniaFluentTheme.Instance.ToggleTheme();
+    }
+
+    private void ShowMainWindow(object? sender, EventArgs e)
+    {
+        if (Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            var window = desktop.MainWindow;
+            if (window == null) { return; }
+            
+            window.Show();
+            window.WindowState = WindowState.Normal;
+            window.Topmost = true;
+            window.Activate();
+            window.Topmost = false;
         }
     }
 }

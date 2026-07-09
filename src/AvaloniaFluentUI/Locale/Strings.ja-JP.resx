@@ -97,22 +97,13 @@
   <data name="ForwardDescription" xml:space="preserve">
     <value>次の項目に移動する</value>
   </data>
-  <data name="InfoBarCloseButtonTooltip" xml:space="preserve">
-    <value>閉じる</value>
-  </data>
-  <data name="NavigationBackButtonToolTip" xml:space="preserve">
-    <value>戻る</value>
-  </data>
   <data name="NavigationButtonClosedName" xml:space="preserve">
     <value>ナビゲーションを開く</value>
   </data>
   <data name="NavigationButtonOpenName" xml:space="preserve">
     <value>ナビゲーションを閉じる</value>
   </data>
-  <data name="NavigationOverflowButtonName" xml:space="preserve">
-    <value>その他</value>
-  </data>
-  <data name="NavigationOverflowButtonToolTip" xml:space="preserve">
+  <data name="More" xml:space="preserve">
     <value>その他</value>
   </data>
   <data name="NavigationViewSearchButtonName" xml:space="preserve">
@@ -175,12 +166,6 @@
   <data name="TabViewScrollIncreaseButtonTooltip" xml:space="preserve">
     <value>タブ一覧を前へスクロール</value>
   </data>
-  <data name="TeachingTipAlternateCloseButtonName" xml:space="preserve">
-    <value>閉じる</value>
-  </data>
-  <data name="TeachingTipAlternateCloseButtonTooltip" xml:space="preserve">
-    <value>閉じる</value>
-  </data>
   <data name="Undo" xml:space="preserve">
     <value>元に戻す</value>
   </data>
@@ -210,5 +195,23 @@
   </data>
   <data name="DragTheFolderHere" xml:space="preserve">
     <value>フォルダーをここにドラッグします</value>
+  </data>
+  <data name="ChooseColor" xml:space="preserve">
+    <value>色を選択してください</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>確認してください</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="EditColor" xml:space="preserve">
+    <value>色の編集</value>
+  </data>
+  <data name="ActivateShortcutKeys" xml:space="preserve">
+    <value>ショートカットキーを有効にする</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>リセット</value>
   </data>
 </root>

@@ -68,7 +68,7 @@
     <value>Go back to previous item</value>
   </data>
   <data name="BreadcrumbBarItemLocalizedControlType" xml:space="preserve">
-    <value>breadcrumb bar item</value>
+    <value>Breadcrumb bar item</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
@@ -97,22 +97,13 @@
   <data name="ForwardDescription" xml:space="preserve">
     <value>Go to the next item</value>
   </data>
-  <data name="InfoBarCloseButtonTooltip" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="NavigationBackButtonToolTip" xml:space="preserve">
-    <value>Back</value>
-  </data>
   <data name="NavigationButtonClosedName" xml:space="preserve">
     <value>Open Navigation</value>
   </data>
   <data name="NavigationButtonOpenName" xml:space="preserve">
     <value>Close Navigation</value>
   </data>
-  <data name="NavigationOverflowButtonName" xml:space="preserve">
-    <value>More</value>
-  </data>
-  <data name="NavigationOverflowButtonToolTip" xml:space="preserve">
+  <data name="More" xml:space="preserve">
     <value>More</value>
   </data>
   <data name="NavigationViewSearchButtonName" xml:space="preserve">
@@ -175,12 +166,6 @@
   <data name="TabViewScrollIncreaseButtonTooltip" xml:space="preserve">
     <value>Scroll tab list forward</value>
   </data>
-  <data name="TeachingTipAlternateCloseButtonName" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="TeachingTipAlternateCloseButtonTooltip" xml:space="preserve">
-    <value>Close</value>
-  </data>
   <data name="Undo" xml:space="preserve">
     <value>Undo</value>
   </data>
@@ -210,5 +195,23 @@
   </data>
   <data name="DragTheFolderHere" xml:space="preserve">
     <value>Drag the folder here</value>
+  </data>
+  <data name="ChooseColor" xml:space="preserve">
+    <value>Choose color</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="EditColor" xml:space="preserve">
+    <value>Edit color</value>
+  </data>
+  <data name="ActivateShortcutKeys" xml:space="preserve">
+    <value>Activate shortcut keys</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
   </data>
 </root>

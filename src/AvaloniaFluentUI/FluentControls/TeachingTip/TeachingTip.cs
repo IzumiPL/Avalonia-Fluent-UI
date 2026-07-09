@@ -494,9 +494,9 @@ public partial class TeachingTip : ContentControl
         _alternateCloseButton.Click += OnCloseButtonClicked;
 
         AutomationProperties.SetName(_alternateCloseButton, 
-            LocalizationService.Instance.GetString(SR_TeachingTipAlternateCloseButtonName));
+            LocalizationService.Instance.GetString("Close"));
         ToolTip.SetTip(_alternateCloseButton, 
-            LocalizationService.Instance.GetString(SR_TeachingTipAlternateCloseButtonTooltip));
+            LocalizationService.Instance.GetString("Close"));
 
 
         _actionButton.Click += OnActionButtonClicked;
@@ -2965,10 +2965,6 @@ public partial class TeachingTip : ContentControl
     // These will just use the s_pc[] naming, but preserve these for reference from upstream
     // private static readonly string s_TitleTextVisibleStateName = ":showTitle";
     // private static readonly string s_SubTitleTextVisibleStateName = ":showSubtitle";
-
-    private static readonly string SR_TeachingTipAlternateCloseButtonName = "TeachingTipAlternateCloseButtonName";
-    private static readonly string SR_TeachingTipAlternateCloseButtonTooltip = "TeachingTipAlternateCloseButtonTooltip";
-
 
     private class ScopedBatchHelper
     {

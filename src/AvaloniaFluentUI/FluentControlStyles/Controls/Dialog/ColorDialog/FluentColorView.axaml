@@ -1,0 +1,193 @@
+<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:primitives="using:Avalonia.Controls.Primitives"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls"
+  x:CompileBindings="True">
+
+  <ControlTheme x:Key="{x:Type ui:FluentColorView}" TargetType="ui:FluentColorView">
+    <Setter Property="Width" Value="328"/>
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid RowDefinitions="Auto,Auto">
+          <!--  Spectrum + Preview  -->
+          <Grid
+            Grid.Row="0"
+            ColumnDefinitions="Auto,Auto"
+            ColumnSpacing="24"
+            RowDefinitions="*, *"
+            RowSpacing="2">
+            <primitives:ColorSpectrum
+              Name="PART_ColorSpectrum"
+              Grid.RowSpan="2"
+              Grid.Column="0"
+              Width="224"
+              Height="224"
+              HorizontalAlignment="Left"
+              CornerRadius="4"
+              HsvColor="{Binding HsvColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+              Shape="Box">
+              <primitives:ColorSpectrum.Styles>
+                <Style Selector="Rectangle#BorderRectangle">
+                  <Setter Property="Stroke" Value="{DynamicResource ControlBorderHighBrush}"/>
+                </Style>
+              </primitives:ColorSpectrum.Styles>
+            </primitives:ColorSpectrum>
+            <Border
+              Grid.Row="0"
+              Grid.Column="1"
+              Width="48"
+              VerticalAlignment="Stretch"
+              Background="{TemplateBinding OriginalColor}"
+              CornerRadius="6"/>
+            <Border
+              Grid.Row="1"
+              Grid.Column="1"
+              Width="48"
+              VerticalAlignment="Stretch"
+              Background="{TemplateBinding NewColor}"
+              CornerRadius="6"/>
+          </Grid>
+
+          <Grid
+            Grid.Row="1"
+            ColumnDefinitions="Auto, 100, *"
+            ColumnSpacing="6"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+            RowSpacing="6">
+
+            <!--  A  -->
+            <primitives:ColorSlider
+              Name="PART_AlphaSlider"
+              Grid.Row="0"
+              Grid.ColumnSpan="3"
+              Height="24"
+              Margin="0,28"
+              ColorComponent="Alpha"
+              ColorModel="Rgba"
+              HsvColor="{Binding HsvColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+              Orientation="Horizontal"/>
+
+            <!--  Edit  -->
+            <TextBlock
+              Grid.Row="1"
+              Grid.ColumnSpan="2"
+              HorizontalAlignment="Left"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[EditColor]}"/>
+            <TextBox
+              Name="PART_HexInput"
+              Grid.Row="1"
+              Grid.Column="2"
+              Height="28"
+              MinWidth="128"
+              Padding="1,5,6,6"
+              HorizontalAlignment="Right"
+              Classes="Clear"
+              MaxLength="8"
+              Text="{TemplateBinding HexText}">
+              <TextBox.InnerLeftContent>
+                <TextBlock Margin="4,6,0,0" Text="#"/>
+              </TextBox.InnerLeftContent>
+            </TextBox>
+
+            <!--  R  -->
+            <TextBlock
+              Grid.Row="2"
+              Grid.Column="0"
+              VerticalAlignment="Center"
+              FontWeight="SemiBold"
+              Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+              Text="R"/>
+            <NumericUpDown
+              Grid.Row="2"
+              Grid.Column="1"
+              Height="28"
+              Margin="8,0,0,0"
+              FormatString="0"
+              Increment="1"
+              Maximum="255"
+              Minimum="0"
+              ShowButtonSpinner="False"
+              Value="{Binding Value, ElementName=PART_RedSlider}"/>
+            <primitives:ColorSlider
+              x:Name="PART_RedSlider"
+              Grid.Row="2"
+              Grid.Column="2"
+              Height="24"
+              Margin="8,0"
+              ColorComponent="Component1"
+              ColorModel="Rgba"
+              HsvColor="{Binding HsvColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+              IsAlphaVisible="False"
+              Orientation="Horizontal"/>
+
+            <!--  G  -->
+            <TextBlock
+              Grid.Row="3"
+              Grid.Column="0"
+              VerticalAlignment="Center"
+              FontWeight="SemiBold"
+              Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+              Text="G"/>
+            <NumericUpDown
+              Grid.Row="3"
+              Grid.Column="1"
+              Height="28"
+              Margin="8,0,0,0"
+              FormatString="0"
+              Increment="1"
+              Maximum="255"
+              Minimum="0"
+              ShowButtonSpinner="False"
+              Value="{Binding Value, ElementName=PART_GreenSlider}"/>
+            <primitives:ColorSlider
+              x:Name="PART_GreenSlider"
+              Grid.Row="3"
+              Grid.Column="2"
+              Height="24"
+              Margin="8,0"
+              ColorComponent="Component2"
+              ColorModel="Rgba"
+              HsvColor="{Binding HsvColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+              IsAlphaVisible="False"
+              Orientation="Horizontal"/>
+
+            <!--  B  -->
+            <TextBlock
+              Grid.Row="4"
+              Grid.Column="0"
+              VerticalAlignment="Center"
+              FontWeight="SemiBold"
+              Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+              Text="B"/>
+            <NumericUpDown
+              Grid.Row="4"
+              Grid.Column="1"
+              Height="28"
+              Margin="8,0,0,0"
+              FormatString="0"
+              Increment="1"
+              Maximum="255"
+              Minimum="0"
+              ShowButtonSpinner="False"
+              Value="{Binding Value, ElementName=PART_BlueSlider}"/>
+            <primitives:ColorSlider
+              x:Name="PART_BlueSlider"
+              Grid.Row="4"
+              Grid.Column="2"
+              Height="24"
+              Margin="8,0"
+              ColorComponent="Component3"
+              ColorModel="Rgba"
+              HsvColor="{Binding HsvColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+              IsAlphaVisible="False"
+              Orientation="Horizontal"/>
+          </Grid>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+
+</ResourceDictionary>

@@ -122,10 +122,11 @@ public class SegmentedItem : ContentControl
         }
     }
 
-    protected override void OnPointerPressed(PointerPressedEventArgs e)
+    protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
-        base.OnPointerPressed(e);
-        if (!e.Handled && IsEffectivelyEnabled)
+        base.OnPointerReleased(e);
+        var pointe = e.GetPosition(this);
+        if (!e.Handled && IsEffectivelyEnabled && new Rect(Bounds.Size).Contains(pointe))
         {
             if (Parent is SegmentedView segmented)
             {

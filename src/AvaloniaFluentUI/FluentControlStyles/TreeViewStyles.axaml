@@ -167,7 +167,7 @@
       <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
       <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
     </Style>
-    <Style Selector="^ /template/ Border#PART_LayoutRoot:pointerover &gt; ContentPresenter#PART_HeaderPresenter">
+    <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
       <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
     </Style>
 
@@ -176,9 +176,6 @@
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
       </Style>
-      <Style Selector="^ /template/ Border#PART_LayoutRoot:pointerover &gt; ContentPresenter#PART_HeaderPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
-      </Style>
     </Style>
 
     <Style Selector="^:disabled">
@@ -186,7 +183,8 @@
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorDisabledBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
       </Style>
-      <Style Selector="^ /template/ Border#PART_LayoutRoot &gt; ContentPresenter#PART_HeaderPresenter">
+
+      <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
       </Style>
     </Style>
@@ -200,7 +198,8 @@
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
       </Style>
-      <Style Selector="^ /template/ Border#PART_LayoutRoot &gt; ContentPresenter#PART_HeaderPresenter">
+
+      <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
 
@@ -209,26 +208,23 @@
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
       </Style>
-      <Style Selector="^ /template/ Border#PART_LayoutRoot:pointerover &gt; ContentPresenter#PART_HeaderPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-      </Style>
 
       <!--  Selected Pressed state  -->
       <Style Selector="^:pressed /template/ Border#PART_LayoutRoot:pointerover">
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
       </Style>
-      <Style Selector="^:pressed /template/ Border#PART_LayoutRoot:pointerover &gt; ContentPresenter#PART_HeaderPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
-      </Style>
 
       <!--  Disabled Selected state  -->
-      <Style Selector="^:disabled /template/ Border#PART_LayoutRoot">
-        <Setter Property="Background" Value="{DynamicResource SubtleFillColorDisabledBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
-      </Style>
-      <Style Selector="^:disabled /template/ Border#PART_LayoutRoot &gt; ContentPresenter#PART_HeaderPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      <Style Selector="^:disabled">
+        <Style Selector="^ /template/ Border#PART_LayoutRoot">
+          <Setter Property="Background" Value="{DynamicResource SubtleFillColorDisabledBrush}"/>
+          <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
+        </Style>
+
+        <Style Selector="^ /template/ ContentPresenter#PART_HeaderPresenter">
+          <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+        </Style>
       </Style>
     </Style>
 

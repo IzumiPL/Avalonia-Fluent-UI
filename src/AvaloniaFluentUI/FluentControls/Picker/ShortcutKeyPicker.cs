@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Controls.Templates;
 using Avalonia.Input;
-using Avalonia.Markup.Xaml.Templates;
-using Avalonia.Media;
+using AvaloniaFluentUI.Locale;
 
 namespace AvaloniaFluentUI.Controls;
 
-public class ShortcutKeyPicker : TemplatedControl
+public class ShortcutKeyPicker : PickerButton 
 {
-    public static readonly StyledProperty<KeyGesture> KeyGestureProperty =
+    public static readonly StyledProperty<KeyGesture?> KeyGestureProperty =
         AvaloniaProperty.Register<ShortcutKeyPicker, KeyGesture?>(nameof(KeyGesture));
 
     public static readonly StyledProperty<IEnumerable<string>> KeysProperty =
@@ -41,18 +39,17 @@ public class ShortcutKeyPicker : TemplatedControl
         _shortcutKeyPanel = new ShortcutKeyPanel{ Height = 50 };
     }
 
-    protected override async void OnPointerReleased(PointerReleasedEventArgs e)
+    protected async override void OnClick()
     {
-        base.OnPointerReleased(e);
+        base.OnClick();
+        
         var dialog = new ContentDialog
         {
-            Title = "激活快捷键",
-            PrimaryButtonText = "保存",
-            IsPrimaryButtonEnabled = true,
+            Title = LocalizationService.Instance.GetString("ActivateShortcutKeys"),
+            PrimaryButtonText = LocalizationService.Instance.GetString("Save"),
             DefaultButton = ContentDialogButton.Primary,
-            IsSecondaryButtonEnabled = true,
-            CloseButtonText = "取消",
-            SecondaryButtonText = "重置",
+            CloseButtonText = LocalizationService.Instance.GetString("Cancel"),
+            SecondaryButtonText = LocalizationService.Instance.GetString("Reset"),
             Content = _shortcutKeyPanel,
             ContentWidth = 400,
             ContentHeight = 360,

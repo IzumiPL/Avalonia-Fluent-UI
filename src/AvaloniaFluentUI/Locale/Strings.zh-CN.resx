@@ -17,22 +17,13 @@
   <data name="BreadcrumbBarItemLocalizedControlType" xml:space="preserve">
     <value>面包屑栏项目</value>
   </data>
-  <data name="InfoBarCloseButtonTooltip" xml:space="preserve">
-    <value>关闭</value>
-  </data>
-  <data name="NavigationBackButtonToolTip" xml:space="preserve">
-    <value>返回</value>
-  </data>
   <data name="NavigationButtonClosedName" xml:space="preserve">
     <value>打开导航</value>
   </data>
   <data name="NavigationButtonOpenName" xml:space="preserve">
     <value>关闭导航</value>
   </data>
-  <data name="NavigationOverflowButtonName" xml:space="preserve">
-    <value>更多</value>
-  </data>
-  <data name="NavigationOverflowButtonToolTip" xml:space="preserve">
+  <data name="More" xml:space="preserve">
     <value>更多</value>
   </data>
   <data name="NavigationViewSearchButtonName" xml:space="preserve">
@@ -52,12 +43,6 @@
   </data>
   <data name="TabViewScrollIncreaseButtonTooltip" xml:space="preserve">
     <value>向前滚动选项卡列表</value>
-  </data>
-  <data name="TeachingTipAlternateCloseButtonName" xml:space="preserve">
-    <value>关闭</value>
-  </data>
-  <data name="TeachingTipAlternateCloseButtonTooltip" xml:space="preserve">
-    <value>关闭</value>
   </data>
   <data name="Backward" xml:space="preserve">
     <value>返回</value>
@@ -163,5 +148,23 @@
   </data>
   <data name="DragTheFolderHere" xml:space="preserve">
     <value>拖拽文件夹到此</value>
+  </data>
+  <data name="ChooseColor" xml:space="preserve">
+    <value>选择颜色</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="EditColor" xml:space="preserve">
+    <value>编辑颜色</value>
+  </data>
+  <data name="ActivateShortcutKeys" xml:space="preserve">
+    <value>激活快捷键</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>重置</value>
   </data>
 </root>

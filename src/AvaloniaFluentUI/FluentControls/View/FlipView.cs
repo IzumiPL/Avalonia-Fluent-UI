@@ -33,22 +33,22 @@ public class FlipView : TemplatedControl
         AvaloniaProperty.Register<FlipView, IEnumerable<string>?>(nameof(ImageSource));
 
     public static readonly StyledProperty<int> SelectedIndexProperty =
-        AvaloniaProperty.Register<FlipView, int>(nameof(SelectedIndex), defaultValue: -1);
+        AvaloniaProperty.Register<FlipView, int>(nameof(SelectedIndex), -1);
 
     public static readonly StyledProperty<BitmapInterpolationMode> ImageInterpolationModeProperty =
-        AvaloniaProperty.Register<FlipView, BitmapInterpolationMode>(nameof(ImageInterpolationMode));
+        AvaloniaProperty.Register<FlipView, BitmapInterpolationMode>(nameof(ImageInterpolationMode), BitmapInterpolationMode.MediumQuality);
 
     public static readonly StyledProperty<Stretch> StretchProperty =
-        AvaloniaProperty.Register<FlipView, Stretch>(nameof(Stretch));
+        AvaloniaProperty.Register<FlipView, Stretch>(nameof(Stretch), Stretch.UniformToFill);
 
     public static readonly StyledProperty<int> DecodeToHeightProperty =
-        AvaloniaProperty.Register<FlipView, int>(nameof(DecodeToHeight), defaultValue: 1080);
+        AvaloniaProperty.Register<FlipView, int>(nameof(DecodeToHeight), 1080);
 
     public static readonly StyledProperty<int> DecodeToWidthProperty =
         AvaloniaProperty.Register<FlipView, int>(nameof(DecodeToWidth));
     
     public static readonly StyledProperty<double> IntervalProperty =
-        AvaloniaProperty.Register<FlipView, double>(nameof(Interval), defaultValue: 1500, validate: value => value >= 600);
+        AvaloniaProperty.Register<FlipView, double>(nameof(Interval), 1500, validate: value => value >= 600);
 
     public static readonly StyledProperty<bool> IsAutoPlayProperty =
         AvaloniaProperty.Register<FlipView, bool>(nameof(IsAutoPlay));
@@ -57,10 +57,10 @@ public class FlipView : TemplatedControl
         AvaloniaProperty.Register<FlipView, int>(nameof(ItemCount));
 
     public static readonly StyledProperty<FlipOrientation> OrientationProperty =
-        AvaloniaProperty.Register<FlipView, FlipOrientation>(nameof(Orientation), defaultValue: FlipOrientation.Horizontal);
+        AvaloniaProperty.Register<FlipView, FlipOrientation>(nameof(Orientation), FlipOrientation.Horizontal);
 
     public static readonly StyledProperty<int> MaxVisiblePipsProperty =
-        AvaloniaProperty.Register<FlipView, int>(nameof(MaxVisiblePips), defaultValue: 8);
+        AvaloniaProperty.Register<FlipView, int>(nameof(MaxVisiblePips), 8);
 
     public int MaxVisiblePips
     {
@@ -215,7 +215,7 @@ public class FlipView : TemplatedControl
 
     private void HandleAutoPlayChanged(bool value)
     {
-        if (value && this.IsAttachedToVisualTree())
+        if (value && this.IsAttachedToVisualTree() && IsEnabled)
         {
             Start();
         }

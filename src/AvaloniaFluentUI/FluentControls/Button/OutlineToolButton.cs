@@ -1,6 +1,6 @@
 ﻿namespace AvaloniaFluentUI.Controls;
 
-public class OutlineToolButton : OutlinePushButton
+public class OutlineToolButton : OutlineButtonBase 
 {
     
 }

@@ -60,13 +60,12 @@
     <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    <Setter Property="MinWidth" Value="{DynamicResource ListViewItemMinWidth}"/>
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondary}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
     <Setter Property="Padding" Value="16,0,12,0"/>
     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
-    <Setter Property="MinWidth" Value="{DynamicResource ListViewItemMinWidth}"/>
-
-    <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
     <Setter Property="MinHeight" Value="45"/>
     <Setter Property="ClipToBounds" Value="True"/>
     <Setter Property="CornerRadius" Value="8"/>
@@ -85,28 +84,14 @@
           BorderThickness="{TemplateBinding BorderThickness}"
           ClipToBounds="{TemplateBinding ClipToBounds}"
           CornerRadius="{TemplateBinding CornerRadius}">
-          <Panel>
-            <ContentPresenter
-              Name="PART_ContentPresenter"
-              Grid.Column="1"
-              Margin="0"
-              Padding="{TemplateBinding Padding}"
-              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-              Content="{TemplateBinding Content}"
-              ContentTemplate="{TemplateBinding ContentTemplate}"/>
-            <TextBox
-              Name="PART_EditTextBox"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Stretch"
-              HorizontalContentAlignment="Left"
-              VerticalContentAlignment="Center"
-              Classes="clearButton"
-              FontSize="{TemplateBinding FontSize}"
-              IsVisible="False"
-              TextAlignment="Center"
-              ZIndex="999"/>
-          </Panel>
+          <ContentPresenter
+            Name="PART_ContentPresenter"
+            Margin="0"
+            Padding="{TemplateBinding Padding}"
+            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+            Content="{TemplateBinding Content}"
+            ContentTemplate="{TemplateBinding ContentTemplate}"/>
         </Border>
       </ControlTemplate>
     </Setter>
@@ -150,6 +135,7 @@
       </Style>
 
       <Style Selector="^ /template/ Border#PART_Border">
+        <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}"/>
       </Style>
 

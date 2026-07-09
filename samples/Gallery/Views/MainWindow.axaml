@@ -101,6 +101,7 @@
         PlaceholderText="{Binding SearchWatermark}"/>
 
       <fui:ToolButton
+        Name="SettingButton"
         Grid.Column="1"
         Width="46"
         Height="45"
@@ -136,10 +137,10 @@
                 Grid.Column="0"
                 VerticalAlignment="Center"
                 Text="边框颜色"/>
-              <ColorPicker
+              <fui:ColorPickerButton
                 Grid.Row="1"
                 Grid.Column="1"
-                HorizontalAlignment="Stretch"
+                Click="OnHideFlyout"
                 Color="{Binding SelectedBorderColor}"/>
             </Grid>
           </fui:FluentFlyout>

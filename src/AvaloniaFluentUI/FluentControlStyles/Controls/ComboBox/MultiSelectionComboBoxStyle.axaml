@@ -82,7 +82,7 @@
             <ui:FluentPopup
               Name="PART_MultiSelectionPopup"
               MaxHeight="{TemplateBinding ViewPortMaxHeight}"
-              Margin="0,7,0,0"
+              Margin="0,3,0,0"
               IsLightDismissEnabled="True"
               Placement="Bottom"
               PlacementTarget="{Binding $parent[ui:MultiSelectionComboBox]}">
@@ -129,6 +129,13 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}"/>
       </Style>
     </Style>
+
+    <Style Selector="^:disabled">
+      <Style Selector="^ /template/ Border#Background">
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+      </Style>
+    </Style>
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type ui:MultiSelectionView}" TargetType="ui:MultiSelectionView">
@@ -142,7 +149,7 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border
-          Margin="5"
+          Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
           Padding="{TemplateBinding Padding}"
           Background="{TemplateBinding Background}"
           BorderBrush="{TemplateBinding BorderBrush}"
@@ -168,19 +175,22 @@
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type ui:MultiSelectionDisplayItem}" TargetType="ui:MultiSelectionDisplayItem">
+    <Setter Property="Background" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+
     <Setter Property="Template">
       <ControlTemplate>
         <Border
           Name="PART_LayoutRoot"
           Margin="4,0"
           Padding="3,0,5,0"
-          Background="{DynamicResource ControlStrokeColorDefaultBrush}"
+          Background="{TemplateBinding Background}"
           CornerRadius="4">
           <Grid ColumnDefinitions="*, Auto" ColumnSpacing="5">
             <ContentPresenter
               Margin="8,0,4,0"
               VerticalAlignment="Center"
-              Content="{TemplateBinding Content}"/>
+              Content="{TemplateBinding Content}"
+              Foreground="{TemplateBinding Foreground}"/>
             <ui:ToolButton
               Name="PART_RemoveButton"
               Grid.Column="1"
@@ -196,6 +206,14 @@
         </Border>
       </ControlTemplate>
     </Setter>
+
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+
+      <Style Selector="^ /template/ Border#PART_LayoutRoot">
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
+      </Style>
+    </Style>
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type ui:MultiSelectionComboBoxItem}" TargetType="ui:MultiSelectionComboBoxItem">

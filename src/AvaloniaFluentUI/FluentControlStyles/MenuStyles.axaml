@@ -97,8 +97,8 @@
               Placement="BottomEdgeAlignedLeft"
               WindowManagerAddShadowHint="False">
               <Border
-                Margin="5,0,5,5"
-                BoxShadow="0 4 8 0 #24000000"
+                Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
+                BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
                 CornerRadius="{DynamicResource OverlayCornerRadius}">
                 <Border
                   MinHeight="{DynamicResource MenuFlyoutThemeMinHeight}"

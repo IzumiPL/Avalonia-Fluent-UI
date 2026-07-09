@@ -86,7 +86,7 @@
             WindowManagerAddShadowHint="False">
             <Border
               Name="DropDownRoot"
-              Margin="5"
+              Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
               Background="{DynamicResource AcrylicInAppFillColorDefaultBrush}"
               BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
               CornerRadius="{DynamicResource OverlayCornerRadius}">

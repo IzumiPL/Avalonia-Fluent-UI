@@ -23,7 +23,7 @@
           Background="{TemplateBinding Background}"
           BorderBrush="{TemplateBinding BorderBrush}"
           BorderThickness="{TemplateBinding BorderThickness}"
-          BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
+          BoxShadow="{DynamicResource PopupDefaultBoxShadow}"
           CornerRadius="6 6 10 10">
           <Border
             Margin="0,5,0,0"

@@ -1568,4 +1568,43 @@
   <data name="Icon_Segmented_Item" xml:space="preserve">
     <value>アイコンセグメント項目</value>
   </data>
+  <data name="SI_PopupInfoBar" xml:space="preserve">
+    <value>ポップアップメッセージバー</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>間隔</value>
+  </data>
+  <data name="Im_Title" xml:space="preserve">
+    <value>私がタイトルです</value>
+  </data>
+  <data name="Success_Title_Bar_Content" xml:space="preserve">
+    <value>これは成功メッセージ バーです</value>
+  </data>
+  <data name="Information_Title_Bar_Content" xml:space="preserve">
+    <value>これは情報メッセージ バーです</value>
+  </data>
+  <data name="Error_Title_Bar_Content" xml:space="preserve">
+    <value>これはエラーメッセージバーです</value>
+  </data>
+  <data name="Warning_Title_Bar_Content" xml:space="preserve">
+    <value>これは警告メッセージのストリップです</value>
+  </data>
+  <data name="Custom_Title_Bar_Content" xml:space="preserve">
+    <value>これはカスタム メッセージ バーです。メッセージバーの内容をカスタマイズできます。</value>
+  </data>
+  <data name="SI_ToastInfoBar" xml:space="preserve">
+    <value>トースト情報バー</value>
+  </data>
+  <data name="DP_ColorDialog" xml:space="preserve">
+    <value>カラーダイアログ</value>
+  </data>
+  <data name="DP_ShowColorDialog" xml:space="preserve">
+    <value>カラーダイアログを表示</value>
+  </data>
+  <data name="SI_FilledProgressBar" xml:space="preserve">
+    <value>プログレスバーを埋める</value>
+  </data>
+  <data name="ShowProgressText" xml:space="preserve">
+    <value>進行状況テキストを表示する</value>
+  </data>
 </root>

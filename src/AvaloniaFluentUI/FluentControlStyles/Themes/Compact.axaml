@@ -12,6 +12,9 @@
   <Thickness x:Key="CardBorderThickness">1</Thickness>
   <Thickness x:Key="CardPadding">16</Thickness>
 
+  <!--  BoxShadows Margin  -->
+  <Thickness x:Key="ControlDefaultBoxShadowsMargin">6 1 6 12</Thickness>
+
   <!--  Font Sizes  -->
   <x:Double x:Key="ControlContentThemeFontSize">14</x:Double>
 

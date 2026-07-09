@@ -40,7 +40,7 @@
             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
             Foreground="{TemplateBinding Foreground}"
-            Source="{TemplateBinding IconSource}"/>
+            Source="{TemplateBinding Content}"/>
         </Border>
       </ControlTemplate>
     </Setter>

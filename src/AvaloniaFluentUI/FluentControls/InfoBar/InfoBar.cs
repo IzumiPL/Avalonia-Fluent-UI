@@ -185,9 +185,6 @@ public partial class InfoBar : ContentControl
     /// </summary>
     public event TypedEventHandler<InfoBar, InfoBarClosedEventArgs> Closed;
 
-
-    private const string SR_InfoBarCloseButtonTooltip = "InfoBarCloseButtonTooltip";
-
     private const string s_tpCloseButton = "CloseButton";
 
     private const string s_pcSuccess = ":success";
@@ -214,7 +211,7 @@ public partial class InfoBar : ContentControl
         {
             _closeButton.Click += OnCloseButtonClick;
 
-            ToolTip.SetTip(_closeButton, LocalizationService.Instance.GetString(SR_InfoBarCloseButtonTooltip));
+            ToolTip.SetTip(_closeButton, LocalizationService.Instance.GetString("Close"));
         }
 
         _appliedTemplate = true;

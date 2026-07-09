@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using Avalonia.Threading;
 using AvaloniaFluentUI.Controls;
 using Gallery.Controls;
 
 namespace Gallery.Pages;
 
-public partial class DialogPage : ViewBase 
+public partial class DialogPage : ViewBase
 {
+    private ColorDialog ColorDialog { get; } = new ColorDialog { Color = Colors.DeepPink };
+    
     public DialogPage() : base("Dialog")
     {
         InitializeComponent();
@@ -66,5 +69,12 @@ public partial class DialogPage : ViewBase
         taskDialog.XamlRoot = TopLevel.GetTopLevel(this); 
         _=await taskDialog.ShowAsync();
     }
-}
 
+    private async void OnShowColorDialog(object? sender, RoutedEventArgs e)
+    {
+        if (await ColorDialog.ShowAsync(TopLevel.GetTopLevel(this)) == ContentDialogResult.Primary)
+        {
+            FilledPushButton.Background = new SolidColorBrush(ColorDialog.Color);
+        }
+    }
+}

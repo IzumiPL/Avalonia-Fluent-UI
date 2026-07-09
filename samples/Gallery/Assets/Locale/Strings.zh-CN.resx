@@ -1568,4 +1568,43 @@
   <data name="Icon_Segmented_Item" xml:space="preserve">
     <value>图标分段项</value>
   </data>
+  <data name="SI_PopupInfoBar" xml:space="preserve">
+    <value>弹出信息条</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>持续时间</value>
+  </data>
+  <data name="Im_Title" xml:space="preserve">
+    <value>我是标题</value>
+  </data>
+  <data name="Success_Title_Bar_Content" xml:space="preserve">
+    <value>这是一个Success消息条</value>
+  </data>
+  <data name="Information_Title_Bar_Content" xml:space="preserve">
+    <value>这是一个Information消息条</value>
+  </data>
+  <data name="Error_Title_Bar_Content" xml:space="preserve">
+    <value>这是一个Error消息条</value>
+  </data>
+  <data name="Custom_Title_Bar_Content" xml:space="preserve">
+    <value>这是一个Custom消息条, 可以自定义消息条的内容</value>
+  </data>
+  <data name="Warning_Title_Bar_Content" xml:space="preserve">
+    <value>这是一个Warning消息条</value>
+  </data>
+  <data name="SI_ToastInfoBar" xml:space="preserve">
+    <value>吐司信息条</value>
+  </data>
+  <data name="DP_ColorDialog" xml:space="preserve">
+    <value>颜色对话框</value>
+  </data>
+  <data name="DP_ShowColorDialog" xml:space="preserve">
+    <value>显示颜色对话框</value>
+  </data>
+  <data name="SI_FilledProgressBar" xml:space="preserve">
+    <value>填充进度条</value>
+  </data>
+  <data name="ShowProgressText" xml:space="preserve">
+    <value>显示进度文本</value>
+  </data>
 </root>

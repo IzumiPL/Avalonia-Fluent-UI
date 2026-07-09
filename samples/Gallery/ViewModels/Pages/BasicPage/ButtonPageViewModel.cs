@@ -1,4 +1,5 @@
 ﻿using Avalonia.Layout;
+using AvaloniaFluentUI.Controls;
 using AvaloniaFluentUI.Locale;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -72,18 +73,20 @@ public partial class ButtonPageViewModel : ViewModelBase
     // OutlinePushButton
     [ObservableProperty]
     private bool _outlinePushButtonIsDisabled;
-    
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(OutlinePushButtonGroupName))]
-    private bool _outlinePushButtonIsMC = true;
-    
-    public string? OutlinePushButtonGroupName => OutlinePushButtonIsMC ? null : "OutlinePushButtonGroup1";
 
     [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(OutlineToolButtonGroupName))]
+    [NotifyPropertyChangedFor(nameof(OutlinePushButtonGroup))]
+    private bool _outlinePushButtonIsMC = true;
+
+    public OutlineButtonGroup? OutlinePushButtonGroup => OutlinePushButtonIsMC ? _outlineButtonGroup : null;
+    private readonly OutlineButtonGroup _outlineButtonGroup = new();
+
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(OutlineToolButtonGroup))]
     private bool _outlineToolButtonIsMC = true;
-    
-    public string? OutlineToolButtonGroupName => OutlineToolButtonIsMC ? null : "OutlineToolButtonGroup1";
+
+    public OutlineButtonGroup? OutlineToolButtonGroup => OutlineToolButtonIsMC ? _outlineToolButtonGroup : null;
+    private readonly OutlineButtonGroup _outlineToolButtonGroup = new();
     
     // RadioButton
     [ObservableProperty]

@@ -132,13 +132,6 @@
         <Style Selector="^ /template/ Border#PART_Border">
           <Setter Property="Background" Value="{DynamicResource AccentFillColorSecondaryBrush}"/>
         </Style>
-
-        <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-          <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
-        </Style>
-        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
-          <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
-        </Style>
       </Style>
 
       <Style Selector="^:pressed">
@@ -219,15 +212,15 @@
 
       <Style Selector="^:disabled">
         <Style Selector="^ /template/ Border#PART_Border">
-          <Setter Property="Background" Value="{DynamicResource AccentFillColorDisabledBrush}"/>
-          <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+          <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
+          <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
         </Style>
 
         <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-          <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
+          <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
         </Style>
         <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
-          <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorDisabledBrush}"/>
+          <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
         </Style>
       </Style>
 

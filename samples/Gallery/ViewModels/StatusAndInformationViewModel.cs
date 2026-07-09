@@ -1,4 +1,5 @@
 ﻿using System;
+using Avalonia.Layout;
 using Avalonia.Media;
 using AvaloniaFluentUI.Controls;
 using AvaloniaFluentUI.Locale;
@@ -44,6 +45,36 @@ public partial class StatusAndInformationViewModel : ViewModelBase
     private double _progressRingCurrentValue = 24.0;
 
     public IBrush ProgressRingBackground => new SolidColorBrush(ProgressRingColor);
+    public PopupInfoBarPosition[] PopupInfoBarPositions => 
+    [
+        PopupInfoBarPosition.Top,
+        PopupInfoBarPosition.TopLeft,
+        PopupInfoBarPosition.TopRight,
+        PopupInfoBarPosition.Bottom,
+        PopupInfoBarPosition.BottomLeft,
+        PopupInfoBarPosition.BottomRight
+    ];
+
+    public ToastInfoBarPosition[] ToastInfoBarPositions => 
+    [
+        ToastInfoBarPosition.Top,
+        ToastInfoBarPosition.TopLeft,
+        ToastInfoBarPosition.TopRight,
+        ToastInfoBarPosition.Bottom,
+        ToastInfoBarPosition.BottomLeft,
+        ToastInfoBarPosition.BottomRight
+    ];
+
+    public Orientation[] ProgressBarOrientations => [ Orientation.Horizontal, Orientation.Vertical ];
+
+    [ObservableProperty]
+    private bool _filledProgressBarIsIndeterminate;
+
+    [ObservableProperty]
+    private double _filledProgressBarCurrentValue = 64;
+
+    [ObservableProperty]
+    private bool _filledProgressBarShowProgressText;
 
     [ObservableProperty]
     private bool _showPercent = false;
