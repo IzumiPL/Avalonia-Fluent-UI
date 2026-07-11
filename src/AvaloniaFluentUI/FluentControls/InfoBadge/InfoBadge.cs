@@ -17,8 +17,8 @@ public partial class InfoBadge : TemplatedControl
     /// <summary>
     /// Defines the <see cref="Value"/> property
     /// </summary>
-    public static readonly StyledProperty<int> ValueProperty =
-        AvaloniaProperty.Register<InfoBadge, int>(nameof(Value), -1);
+    public static readonly StyledProperty<string?> ValueProperty =
+        AvaloniaProperty.Register<InfoBadge, string?>(nameof(Value));
 
     /// <summary>
     /// Defines the <see cref="IconSource"/> property
@@ -35,7 +35,7 @@ public partial class InfoBadge : TemplatedControl
     /// <summary>
     /// Gets or sets the integer to be displayed in a numeric InfoBadge.
     /// </summary>
-    public int Value
+    public string? Value 
     {
         get => GetValue(ValueProperty);
         set => SetValue(ValueProperty, value);
@@ -93,12 +93,7 @@ public partial class InfoBadge : TemplatedControl
     {
         base.OnPropertyChanged(change);
 
-        if (change.Property == ValueProperty)
-        {
-            if (Value < -1)
-                throw new ArgumentOutOfRangeException(nameof(Value));
-        }
-        else if (change.Property == ValueProperty || change.Property == IconSourceProperty)
+        if (change.Property == ValueProperty || change.Property == IconSourceProperty)
         {
             OnDisplayKindPropertiesChanged();
         }
@@ -107,7 +102,7 @@ public partial class InfoBadge : TemplatedControl
     private void OnDisplayKindPropertiesChanged()
     {
         var icoSource = IconSource;
-        if (Value >= 0)
+        if (!String.IsNullOrWhiteSpace(Value))
         {
             PseudoClasses.Set(s_pcValue, true);
 
