@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using AvaloniaFluentUI.Media.Animation;
@@ -10,23 +9,27 @@ public class FluentPopup : Avalonia.Controls.Primitives.Popup
 {
     public static readonly StyledProperty<double> OffSetProperty =
         AvaloniaProperty.Register<FluentPopup, double>(nameof(OffSet), defaultValue: -16d);
-
+    
     public double OffSet
     {
         get => GetValue(OffSetProperty);
         set => SetValue(OffSetProperty, value);
     }
-
+    
+    public FluentPopup()
+    {
+        VerticalOffset = -2;
+    }
+    
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
-
+    
         if (change.Property == IsOpenProperty)
         {
             var isOpen = change.GetNewValue<bool>();
             if (isOpen)
-            { 
-                VerticalOffset = -2;
+            {
                 RunOpenAnimationAsync();
             }
         }
@@ -36,7 +39,7 @@ public class FluentPopup : Avalonia.Controls.Primitives.Popup
     {
         var child = Child as Visual;
         if (child == null) return;
-
+    
         var property = Placement switch
         { 
             PlacementMode.Left or 
@@ -71,7 +74,7 @@ public class ScaleFluentPopup : FluentPopup
     {
         var child = Child as Visual;
         if (child == null) return;
-
+    
         FluentAnimation.CenterScaleAsync(child, OffSet);
     }
 }

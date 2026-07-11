@@ -114,11 +114,11 @@
               BorderThickness="{DynamicResource ComboBoxBackgroundBorderThicknessFocused}"
               Opacity="0"/>
 
-            <Border
-              Name="Pill"
-              Margin="1,0,0,0"
-              Classes="ComboBoxItemPill"
-              Opacity="0"/>
+            <!--  <Border  -->
+            <!--  Name="Pill"  -->
+            <!--  Margin="1,0,0,0"  -->
+            <!--  Classes="ComboBoxItemPill"  -->
+            <!--  Opacity="0"/>  -->
 
             <TextBlock
               x:Name="PlaceholderTextBlock"
@@ -204,12 +204,12 @@
               <Border
                 Name="PopupBorder"
                 Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
-                BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
                 Padding="{DynamicResource ComboBoxDropdownBorderPadding}"
                 HorizontalAlignment="Stretch"
                 Background="{DynamicResource AcrylicInAppFillColorDefaultBrush}"
                 BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
                 BorderThickness="{DynamicResource ComboBoxDropdownBorderThickness}"
+                BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
                 CornerRadius="{DynamicResource OverlayCornerRadius}">
                 <ui:SmoothScrollViewer
                   HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
@@ -285,9 +285,9 @@
     </Style>
 
     <Style Selector="^:focus-visible">
-      <Style Selector="^ /template/ Border#Pill">
-        <Setter Property="Opacity" Value="1"/>
-      </Style>
+      <!-- <Style Selector="^ /template/ Border#Pill"> -->
+      <!-- <Setter Property="Opacity" Value="1"/> -->
+      <!-- </Style> -->
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
