@@ -1,0 +1,79 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
+
+  <ControlTheme x:Key="{x:Type ui:Tag}" TargetType="ui:Tag">
+    <Setter Property="Foreground" Value="{DynamicResource AttentionSecondaryBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource ButtonBorderThemeThickness}"/>
+    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
+    <Setter Property="BackgroundSizing" Value="InnerBorderEdge"/>
+    <Setter Property="Padding" Value="6"/>
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Name="PART_Border"
+          Width="{TemplateBinding Width}"
+          Height="{TemplateBinding Height}"
+          MinWidth="{TemplateBinding MinWidth}"
+          MinHeight="{TemplateBinding MinHeight}"
+          Padding="{TemplateBinding Padding}"
+          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+          VerticalAlignment="{TemplateBinding VerticalAlignment}"
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <ContentPresenter
+            x:Name="PART_ContentPresenter"
+            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+            Content="{TemplateBinding Content}"
+            ContentTemplate="{TemplateBinding ContentTemplate}"
+            Foreground="{TemplateBinding Foreground}"
+            TextWrapping="WrapWithOverflow"/>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:disabled">
+      <Style Selector="^ /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      </Style>
+    </Style>
+
+    <!--  Information  -->
+    <Style Selector="^.Information">
+      <Setter Property="Foreground" Value="{DynamicResource InformationDefaultBrush}"/>
+    </Style>
+
+    <!--  Success  -->
+    <Style Selector="^.Success">
+      <Setter Property="Foreground" Value="{DynamicResource SuccessDefaultBrush}"/>
+    </Style>
+
+    <!--  Attention  -->
+    <Style Selector="^.Attention">
+      <Setter Property="Foreground" Value="{DynamicResource AttentionDefaultBrush}"/>
+    </Style>
+
+    <!--  Warning  -->
+    <Style Selector="^.Warning">
+      <Setter Property="Foreground" Value="{DynamicResource WarningDefaultBrush}"/>
+    </Style>
+
+    <!--  Error  -->
+    <Style Selector="^.Error">
+      <Setter Property="Foreground" Value="{DynamicResource ErrorDefaultBrush}"/>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>
