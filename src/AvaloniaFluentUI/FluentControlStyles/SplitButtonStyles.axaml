@@ -102,14 +102,14 @@
     <Style Selector="^[Tag=checked]">
       <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
       </Style>
 
       <Style Selector="^:pointerover">
         <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
           <Setter Property="Background" Value="{DynamicResource AccentFillColorSecondaryBrush}"/>
-          <Setter Property="BorderBrush" Value="{DynamicResource AccentControlElevationBorderBrush}"/>
+          <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}"/>
           <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
         </Style>
       </Style>

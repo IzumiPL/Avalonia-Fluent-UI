@@ -106,6 +106,7 @@
                 Name="SubTitle"
                 Grid.Row="1"
                 FontSize="12"
+                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                 Text="{TemplateBinding SubTitle}"/>
             </Grid>
           </Grid>
@@ -147,9 +148,6 @@
 
     <Style Selector="^:pressed">
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-      </Style>
-      <Style Selector="^ /template/ TextBlock#SubTitle">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ Border#Root">

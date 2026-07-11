@@ -46,19 +46,6 @@
               IsVisible="{TemplateBinding IconSource,
                                           Converter={x:Static ObjectConverters.IsNotNull}}"
               Source="{TemplateBinding IconSource}"/>
-            <!--  <Viewbox  -->
-            <!--  Grid.Column="0"  -->
-            <!--  Width="{TemplateBinding IconWidth}"  -->
-            <!--  Height="{TemplateBinding IconHeight}"  -->
-            <!--  Margin="0,0,8,0"  -->
-            <!--  IsVisible="{TemplateBinding IconData,  -->
-            <!--  Converter={x:Static ObjectConverters.IsNotNull}}">  -->
-            <!--  <Path  -->
-            <!--  Name="PART_Icon"  -->
-            <!--  Data="{TemplateBinding IconData}"  -->
-            <!--  Fill="{TemplateBinding Foreground}"  -->
-            <!--  Stretch="Uniform"/>  -->
-            <!-- </Viewbox> -->
             <ContentPresenter
               x:Name="PART_ContentPresenter"
               Grid.Column="1"

@@ -4,16 +4,6 @@
   xmlns:ui="using:AvaloniaFluentUI.Controls"
   x:CompileBindings="True">
 
-  <ControlTheme x:Key="{x:Type SelectableTextBlock}" TargetType="SelectableTextBlock">
-    <Setter Property="SelectionBrush" Value="{DynamicResource AccentFillColorSelectedTextBackgroundBrush}"/>
-
-    <Style Selector="^[IsEnabled=true]">
-      <Setter Property="Cursor" Value="IBeam"/>
-      <!--  Defined in TextBoxStyles  -->
-      <Setter Property="ContextFlyout" Value="{StaticResource DefaultTextBoxContextFlyout}"/>
-    </Style>
-  </ControlTheme>
-
   <!--  Caption  -->
   <x:Double x:Key="CaptionFontSize">12</x:Double>
   <!--  Body  -->

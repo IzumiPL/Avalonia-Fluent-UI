@@ -151,6 +151,7 @@
             <TextBox
               Name="PART_EditableTextBox"
               Grid.Column="0"
+              Margin="1"
               Padding="{TemplateBinding Padding}"
               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -162,8 +163,6 @@
               Text="{TemplateBinding Text,
                                      Mode=TwoWay}">
               <TextBox.Resources>
-                <SolidColorBrush x:Key="TextControlBackgroundFocused">Transparent</SolidColorBrush>
-                <SolidColorBrush x:Key="TextControlBackgroundPointerOver">Transparent</SolidColorBrush>
                 <Thickness x:Key="TextControlBorderThemeThicknessFocused">0</Thickness>
               </TextBox.Resources>
             </TextBox>

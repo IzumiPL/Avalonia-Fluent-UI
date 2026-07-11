@@ -18,7 +18,7 @@
   <ControlTheme x:Key="{x:Type GroupBox}" TargetType="GroupBox">
     <Setter Property="BorderThickness" Value="{DynamicResource GroupBoxBorderThickness}"/>
     <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBrush}"/>
     <Setter Property="Padding" Value="{DynamicResource GroupBoxPadding}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
     <Setter Property="Template">
