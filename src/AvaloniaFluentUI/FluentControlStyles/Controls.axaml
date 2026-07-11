@@ -42,6 +42,7 @@
         <MergeResourceInclude Source="/FluentControlStyles/SliderStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/SplitButtonStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/SplitViewStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/SelectableTextBlock.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/TabControlStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/TabStripStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/TreeViewStyles.axaml"/>
@@ -171,6 +172,7 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/CardStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/SettingCardStyles.axaml"/>
 
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Label/Tag.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Label/HyperlinkLabel.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Toasts/ToastInfoBar.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Toasts/PopupInfoBar.axaml"/>
