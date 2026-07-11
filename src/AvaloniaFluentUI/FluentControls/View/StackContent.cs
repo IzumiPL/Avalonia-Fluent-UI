@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
@@ -22,8 +21,8 @@ public class StackContent : ContentControl
         set => SetValue(TransitionInfoProperty, value);
     }
     
-    private CancellationTokenSource _cts;
-    private ContentPresenter _presenter;
+    private CancellationTokenSource? _cts;
+    private ContentPresenter? _presenter;
 
     private const string PART_CONTENT_PRESENTER = "PART_ContentPresenter";
 
