@@ -14,8 +14,8 @@ namespace InfoBarTest.Views;
 
 public partial class MainWindow : FluentWindow 
 {
-    private PopupInfoBarManager PopupManager { get; } = new();
-    private ToastInfoBarManager ToastManager { get; } = new();
+    private PopupInfoBarManager PopupManager => InfoBarHost.GetManager<PopupInfoBarManager>();
+    private ToastInfoBarManager ToastManager => InfoBarHost.GetManager<ToastInfoBarManager>();
 
     private readonly Bitmap _bitmap = Bitmap.DecodeToHeight(AssetLoader.Open(new Uri("avares://InfoBarTest/Assets/mc.jpg")), 720);
 
@@ -25,9 +25,10 @@ public partial class MainWindow : FluentWindow
         Application.Current.Resources["NavigationViewContentGridCornerRadius"] = new CornerRadius(0);
         TitleBarMargin = new Thickness(50, 0, 0, 0);
 
+        
         // 注册 manager 到 InfoBarHost
-        InfoBarHost.RegisterManager(PopupManager);
-        InfoBarHost.RegisterManager(ToastManager);
+        InfoBarHost.RegisterManager<PopupInfoBarManager>();
+        InfoBarHost.RegisterManager<ToastInfoBarManager>();
         
         // InfoBarHost.GetManager<>()
         
@@ -64,16 +65,14 @@ public partial class MainWindow : FluentWindow
     private bool GetIsClosable() => ClosableCheckBox.IsChecked == true;
 
     // 枚举索引与 ComboBox 顺序一致: TopLeft=0, Top=1, TopRight=2, BottomLeft=3, Bottom=4, BottomRight=5
-    private PopupInfoBarPosition GetPopupPosition() => (PopupInfoBarPosition)(PositionComboBox.SelectedIndex);
-    private ToastInfoBarPosition GetToastPosition() => (ToastInfoBarPosition)(PositionComboBox.SelectedIndex);
+    private InfoBarPosition GetPosition() => (InfoBarPosition)(PositionComboBox.SelectedIndex);
 
     // 辅助方法：读取自定义输入
     private string GetCustomTitle() => CustomTitleBox.Text ?? "自定义标题";
     private string GetCustomContent() => CustomContentBox.Text ?? "自定义内容";
 
     // 枚举索引与 ComboBox 顺序一致: Informational=0, Success=1, Warning=2, Error=3, Custom=4
-    private PopupInfoBarSeverity GetCustomPopupSeverity() => (PopupInfoBarSeverity)(CustomSeverityBox.SelectedIndex);
-    private ToastSeverity GetCustomToastSeverity() => (ToastSeverity)(CustomSeverityBox.SelectedIndex);
+    private InfoBarSeverity GetSeverity() => (InfoBarSeverity)(CustomSeverityBox.SelectedIndex);
 
     // ========================
     //  PopupInfoBar 按钮事件
@@ -84,7 +83,7 @@ public partial class MainWindow : FluentWindow
         PopupManager.Information(
             "Information",
             "这是一条 PopupInfoBar 信息通知。",
-            GetPopupPosition(),
+            GetPosition(),
             GetIsClosable(),
             GetDuration());
     }
@@ -94,7 +93,7 @@ public partial class MainWindow : FluentWindow
         PopupManager.Success(
             "Success",
             "操作成功完成！（PopupInfoBar）",
-            GetPopupPosition(),
+            GetPosition(),
             GetIsClosable(),
             GetDuration());
     }
@@ -104,7 +103,7 @@ public partial class MainWindow : FluentWindow
         PopupManager.Warning(
             "Warning",
             "请注意，这是一条警告信息。（PopupInfoBar）",
-            GetPopupPosition(),
+            GetPosition(),
             GetIsClosable(),
             GetDuration());
     }
@@ -114,7 +113,7 @@ public partial class MainWindow : FluentWindow
         PopupManager.Error(
             "Error",
             "发生了一个错误！（PopupInfoBar）",
-            GetPopupPosition(),
+            GetPosition(),
             GetIsClosable(),
             GetDuration());
     }
@@ -128,7 +127,7 @@ public partial class MainWindow : FluentWindow
         ToastManager.Information(
             "Information",
             "这是一条 ToastInfoBar 信息通知。",
-            GetToastPosition(),
+            GetPosition(),
             GetIsClosable(),
             GetDuration());
     }
@@ -138,7 +137,7 @@ public partial class MainWindow : FluentWindow
         ToastManager.Success(
             "Success",
             "操作成功完成！（ToastInfoBar）",
-            GetToastPosition(),
+            GetPosition(),
             GetIsClosable(),
             GetDuration());
     }
@@ -148,7 +147,7 @@ public partial class MainWindow : FluentWindow
         ToastManager.Warning(
             "Warning",
             "请注意，这是一条警告信息。（ToastInfoBar）",
-            GetToastPosition(),
+            GetPosition(),
             GetIsClosable(),
             GetDuration());
     }
@@ -158,7 +157,7 @@ public partial class MainWindow : FluentWindow
         ToastManager.Error(
             "Error",
             "发生了一个错误！（ToastInfoBar）",
-            GetToastPosition(),
+            GetPosition(),
             GetIsClosable(),
             GetDuration());
     }
@@ -173,8 +172,8 @@ public partial class MainWindow : FluentWindow
         PopupManager.New(
             GetCustomTitle(),
             GetCustomContent(),
-            GetPopupPosition(),
-            GetCustomPopupSeverity(),
+            GetPosition(),
+            GetSeverity(),
             GetIsClosable(),
             GetDuration());
     }
@@ -185,8 +184,8 @@ public partial class MainWindow : FluentWindow
         ToastManager.New(
             GetCustomTitle(),
             GetCustomContent(),
-            GetToastPosition(),
-            GetCustomToastSeverity(),
+            GetPosition(),
+            GetSeverity(),
             GetIsClosable(),
             GetDuration());
     }
@@ -201,7 +200,7 @@ public partial class MainWindow : FluentWindow
         PopupManager.Custom(
             GetCustomTitle(),
             GetCustomContent(),
-            GetPopupPosition(),
+            GetPosition(),
             GetIsClosable(),
             GetDuration(),
             GetBgBrush(),
@@ -214,7 +213,7 @@ public partial class MainWindow : FluentWindow
         ToastManager.Custom(
             GetCustomTitle(),
             GetCustomContent(),
-            GetToastPosition(),
+            GetPosition(),
             GetIsClosable(),
             GetDuration(),
             GetBgBrush(),
@@ -236,8 +235,8 @@ public partial class MainWindow : FluentWindow
                     new Button { Content = "Action", HorizontalAlignment = HorizontalAlignment.Right }
                 }
             },
-            GetPopupPosition(),
-            GetCustomPopupSeverity(),
+            GetPosition(),
+            GetSeverity(),
             GetIsClosable(),
             GetDuration());
     }
@@ -270,8 +269,8 @@ public partial class MainWindow : FluentWindow
                     }
                 }
             },
-            GetToastPosition(),
-            GetCustomToastSeverity(),
+            GetPosition(),
+            GetSeverity(),
             GetIsClosable(),
             GetDuration());
     }
@@ -279,5 +278,25 @@ public partial class MainWindow : FluentWindow
     private void OnToggleTheme(object? sender, RoutedEventArgs e)
     {
         AvaloniaFluentTheme.Instance.ToggleTheme();
+    }
+
+    private void CloseAllToastInfoBar(object? sender, RoutedEventArgs e)
+    {
+        if ((bool)IsClosedByLocationCheckBox.IsChecked)
+        {
+            ToastManager.CloseAll((InfoBarPosition)ClosePositionComboBox.SelectedItem);
+            return;
+        }
+        ToastManager.CloseAll();
+    }
+
+    private void CloseAllPopupInfoBar(object? sender, RoutedEventArgs e)
+    {
+        if ((bool)IsClosedByLocationCheckBox.IsChecked)
+        {
+            PopupManager.CloseAll((InfoBarPosition)ClosePositionComboBox.SelectedItem);
+            return;
+        }
+        PopupManager.CloseAll();
     }
 }

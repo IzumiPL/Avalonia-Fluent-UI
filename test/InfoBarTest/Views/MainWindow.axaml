@@ -134,14 +134,8 @@
                 <ComboBox
                   x:Name="PositionComboBox"
                   Width="140"
-                  SelectedIndex="2">
-                  <ComboBoxItem Content="TopLeft"/>
-                  <ComboBoxItem Content="Top"/>
-                  <ComboBoxItem Content="TopRight"/>
-                  <ComboBoxItem Content="BottomLeft"/>
-                  <ComboBoxItem Content="Bottom"/>
-                  <ComboBoxItem Content="BottomRight"/>
-                </ComboBox>
+                  ItemsSource="{Binding Positions}"
+                  SelectedIndex="2"/>
               </StackPanel>
 
               <!--  持续时间  -->
@@ -164,6 +158,21 @@
                   Content="IsClosable"
                   IsChecked="True"/>
               </StackPanel>
+
+              <Button Click="CloseAllPopupInfoBar" Content="关闭所有PopupInfoBar"/>
+              <Button Click="CloseAllToastInfoBar" Content="关闭所有ToastInfoBar"/>
+
+              <StackPanel Spacing="4">
+                <TextBlock FontSize="12" Text="关闭位置"/>
+                <ComboBox
+                  Name="ClosePositionComboBox"
+                  ItemsSource="{Binding Positions}"
+                  SelectedIndex="0"/>
+              </StackPanel>
+              <CheckBox
+                x:Name="IsClosedByLocationCheckBox"
+                Content="是按位置关闭"
+                IsChecked="False"/>
             </StackPanel>
           </StackPanel>
 
@@ -197,25 +206,28 @@
             <TextBlock Classes="section" Text="自定义 InfoBar"/>
 
             <StackPanel Orientation="Horizontal" Spacing="16">
-              <StackPanel Spacing="4" Width="200">
+              <StackPanel Width="200" Spacing="4">
                 <TextBlock FontSize="12" Text="标题 (Title)"/>
-                <TextBox x:Name="CustomTitleBox" PlaceholderText="输入标题" Text="自定义标题"/>
+                <TextBox
+                  x:Name="CustomTitleBox"
+                  PlaceholderText="输入标题"
+                  Text="自定义标题"/>
               </StackPanel>
 
-              <StackPanel Spacing="4" Width="240">
+              <StackPanel Width="240" Spacing="4">
                 <TextBlock FontSize="12" Text="内容 (Content)"/>
-                <TextBox x:Name="CustomContentBox" PlaceholderText="输入内容" Text="这是一条自定义内容的 InfoBar。"/>
+                <TextBox
+                  x:Name="CustomContentBox"
+                  PlaceholderText="输入内容"
+                  Text="这是一条自定义内容的 InfoBar。"/>
               </StackPanel>
 
-              <StackPanel Spacing="4" Width="140">
+              <StackPanel Width="140" Spacing="4">
                 <TextBlock FontSize="12" Text="类型 (Severity)"/>
-                <ComboBox x:Name="CustomSeverityBox" SelectedIndex="0">
-                  <ComboBoxItem Content="Informational"/>
-                  <ComboBoxItem Content="Success"/>
-                  <ComboBoxItem Content="Warning"/>
-                  <ComboBoxItem Content="Error"/>
-                  <ComboBoxItem Content="Custom"/>
-                </ComboBox>
+                <ComboBox
+                  x:Name="CustomSeverityBox"
+                  ItemsSource="{Binding Severities}"
+                  SelectedIndex="0"/>
               </StackPanel>
             </StackPanel>
 
