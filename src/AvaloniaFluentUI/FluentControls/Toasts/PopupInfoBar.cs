@@ -1,29 +1,9 @@
 using System;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Animation.Easings;
 
 namespace AvaloniaFluentUI.Controls;
-
-public enum PopupInfoBarSeverity
-{
-    Informational,
-    Success,
-    Warning,
-    Error,
-    Custom
-}
-
-public enum PopupInfoBarPosition
-{
-    TopLeft,
-    Top,
-    TopRight,
-    BottomLeft,
-    Bottom,
-    BottomRight
-}
 
 /// <summary>
 /// Popup-style info bar with icon + colored-dot severity indicator.
@@ -31,24 +11,6 @@ public enum PopupInfoBarPosition
 /// </summary>
 public class PopupInfoBar : InfoBarBase
 {
-    public static readonly StyledProperty<PopupInfoBarSeverity> SeverityProperty =
-        AvaloniaProperty.Register<PopupInfoBar, PopupInfoBarSeverity>(nameof(Severity));
-
-    public static readonly StyledProperty<PopupInfoBarPosition> PositionsProperty =
-        AvaloniaProperty.Register<PopupInfoBar, PopupInfoBarPosition>(nameof(Positions));
-
-    public PopupInfoBarSeverity Severity
-    {
-        get => GetValue(SeverityProperty);
-        set => SetValue(SeverityProperty, value);
-    }
-
-    public PopupInfoBarPosition Positions
-    {
-        get => GetValue(PositionsProperty);
-        set => SetValue(PositionsProperty, value);
-    }
-
     public override void Run(double fromX, double fromY, double toX, double toY)
     {
         OffsetX = fromX;
@@ -86,6 +48,4 @@ public class PopupInfoBar : InfoBarBase
         Opacity = 0;
         return base.CloseAsync(x, y);
     }
-
-    public override int PositionValue => (int)Positions;
 }

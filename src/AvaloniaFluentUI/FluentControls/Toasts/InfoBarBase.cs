@@ -41,6 +41,24 @@ public abstract class InfoBarBase : TemplatedControl
     public static readonly StyledProperty<object?> ContentProperty =
         AvaloniaProperty.Register<InfoBarBase, object?>(nameof(Content));
 
+    public static readonly StyledProperty<InfoBarSeverity> SeverityProperty =
+        AvaloniaProperty.Register<InfoBarBase, InfoBarSeverity>(nameof(Severity));
+
+    public static readonly StyledProperty<InfoBarPosition> PositionProperty =
+        AvaloniaProperty.Register<InfoBarBase, InfoBarPosition>(nameof(Position), InfoBarPosition.TopRight);
+
+    public InfoBarPosition Position
+    {
+        get => GetValue(PositionProperty);
+        set => SetValue(PositionProperty, value);
+    }
+    
+    public InfoBarSeverity Severity
+    {
+        get => GetValue(SeverityProperty);
+        set => SetValue(SeverityProperty, value);
+    }
+
     public string Title
     {
         get => GetValue(TitleProperty);
@@ -76,8 +94,6 @@ public abstract class InfoBarBase : TemplatedControl
         get => GetValue(ContentProperty);
         set => SetValue(ContentProperty, value);
     }
-    
-    public abstract int PositionValue { get; }
     
     /// <summary>Duration of slide &amp; fade animations in ms.</summary>
     public double AnimationDuration { get; set; } = 300;

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace AvaloniaFluentUI.Controls;
 
 /// <summary>
@@ -9,8 +7,13 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public interface IInfoBarManager
 {
+    double Spacing { get; set; }
+    double Margin { get; set; }
+    double InfoBarMaxWidth { get; }
+
     void SetHost(InfoBarHost host);
+    
     void UpdateAllInfoBarPosition();
-    void UpdateInfoBarPosition(int value);
+    void UpdateInfoBarPosition(InfoBarPosition position);
     void AdjustedSize();
 }
