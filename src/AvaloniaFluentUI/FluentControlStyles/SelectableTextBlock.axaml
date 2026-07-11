@@ -1,0 +1,18 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  x:ClassModifier="internal">
+  <Design.PreviewWith>
+    <SelectableTextBlock Text="Preview"/>
+  </Design.PreviewWith>
+
+  <ControlTheme x:Key="{x:Type SelectableTextBlock}" TargetType="SelectableTextBlock">
+    <Setter Property="SelectionBrush" Value="{DynamicResource AccentFillColorSelectedTextBackgroundBrush}"/>
+    <Setter Property="SelectionForegroundBrush" Value="{DynamicResource TextOnAccentFillColorSelectedTextBrush}"/>
+
+    <Style Selector="^[IsEnabled=True]">
+      <Setter Property="Cursor" Value="IBeam"/>
+      <Setter Property="ContextFlyout" Value="{StaticResource DefaultTextBoxContextFlyout}"/>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>
