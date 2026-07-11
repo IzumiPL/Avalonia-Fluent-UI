@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Avalonia.Animation.Easings;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Input.Platform;
 using Avalonia.Media;
 using AvaloniaFluentUI.Media.Animation;
@@ -18,12 +19,12 @@ public class TextCommandBarFlyout : CommandBarFlyout
 {
     public TextCommandBarFlyout()
     {
-        Opening += (_, __) =>
+        Opening += (_, _) =>
         {
             UpdateButtons();
         };
 
-        Opened += (_, __) =>
+        Opened += (_, _) =>
         {
             _targetLocal = new WeakReference<Control>(Target);
 
@@ -46,7 +47,7 @@ public class TextCommandBarFlyout : CommandBarFlyout
         LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
     }
 
-    private void OnLanguageChanged(object sender, PropertyChangedEventArgs e)
+    private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
     {
         // Step 1: Refresh all cached StandardUICommands so their Label/Description
         // are up-to-date before we copy them to the buttons.
@@ -79,6 +80,7 @@ public class TextCommandBarFlyout : CommandBarFlyout
         // so it's only created once and we shouldn't leak
         command.ExecuteRequested += (_, __) => { executeFunc(); };
 
+        b.Cursor = Cursor.Default;
         b.Command = command;
     }
 
@@ -467,6 +469,6 @@ public class TextCommandBarFlyout : CommandBarFlyout
         }
     }
 
-    private Dictionary<TextControlButtons, ICommandBarElement> _buttons;
+    private Dictionary<TextControlButtons, ICommandBarElement>? _buttons;
     private WeakReference<Control> _targetLocal;
 }
