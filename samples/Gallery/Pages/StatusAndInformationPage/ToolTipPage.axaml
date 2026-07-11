@@ -1,0 +1,24 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.ToolTipPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  x:DataType="viewModel:ToolTipPageViewModel"
+  mc:Ignorable="d">
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="ToolTipCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_ToolTipButton]}">
+      <Button Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_ToolTipButton]}">
+        <ToolTip.Tip>
+          <ToolTip Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_ToolTipText]}"/>
+        </ToolTip.Tip>
+      </Button>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

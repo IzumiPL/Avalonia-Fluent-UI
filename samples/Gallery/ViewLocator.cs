@@ -64,6 +64,10 @@ public class ViewLocator : IDataTemplate
         _factory[typeof(ScrollViewModel)] = () => new ScrollView();
         
         _factory[typeof(StatusAndInformationViewModel)] = () => new StatusAndInformationView();
+        _factory[typeof(ToolTipPageViewModel)] = () => new ToolTipPage();
+        _factory[typeof(InformationPageViewModel)] = () => new InformationPage();
+        _factory[typeof(InfoBarPageViewModel)] = () => new InfoBarPage();
+        _factory[typeof(ProgressPageViewModel)] = () => new ProgressPage();
         
         _factory[typeof(MenuAndToolBarViewModel)] = () => new MenuAndToolBarView();
         _factory[typeof(MenuPageViewModel)] = () => new MenuPage();

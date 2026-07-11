@@ -1,0 +1,218 @@
+﻿<ui:InfoBarHostViewBase
+  x:Class="Gallery.Pages.InfoBarPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  x:DataType="viewModel:InfoBarPageViewModel"
+  mc:Ignorable="d">
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="InfoBarCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[InfoBar]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:InfoBar
+          Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_SaveSuccess]}"
+          Grid.Column="0"
+          Margin="0,10,10,0"
+          IsClosable="{Binding InfoBarIsClosable}"
+          IsOpen="{Binding InfoBarIsOpen, Mode=TwoWay}"
+          Message="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_FileSaved]}"
+          Severity="{Binding CurrentInfoBarSeverity}">
+          <fui:InfoBar.ActionButton>
+            <Button
+              Padding="20,5,20,6"
+              HorizontalAlignment="Right"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Action]}"/>
+          </fui:InfoBar.ActionButton>
+        </fui:InfoBar>
+        <ui:Card Grid.Column="1" Width="256">
+          <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto, Auto">
+            <TextBlock
+              Grid.Row="0"
+              Grid.Column="0"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Options]}"/>
+            <TextBlock
+              Grid.Row="1"
+              Grid.Column="0"
+              VerticalAlignment="Center"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Style]}"/>
+            <ComboBox
+              Grid.Row="1"
+              Grid.Column="1"
+              ItemsSource="{Binding InfoBarSeverityItems}"
+              SelectedItem="{Binding CurrentInfoBarSeverity}"/>
+            <CheckBox
+              Grid.Row="2"
+              Grid.ColumnSpan="2"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_IsClosable]}"
+              IsChecked="{Binding InfoBarIsClosable}"/>
+            <Button
+              Grid.Row="3"
+              Grid.ColumnSpan="2"
+              HorizontalAlignment="Stretch"
+              Classes="Accent"
+              Command="{Binding ResetInfoBarCommand}"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Restore]}"/>
+          </Grid>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_PopupInfoBar]}">
+      <Grid ColumnDefinitions="* Auto">
+        <StackPanel
+          Grid.Column="0"
+          VerticalAlignment="Center"
+          Orientation="Horizontal"
+          Spacing="6">
+          <fui:FilledPushButton
+            Classes="Information"
+            Click="OnShowInformationInfoBar"
+            Content="Information"/>
+          <fui:FilledPushButton
+            Classes="Success"
+            Click="OnShowSuccessInfoBar"
+            Content="Success"/>
+          <fui:FilledPushButton
+            Classes="Warning"
+            Click="OnShowWarningInfoBar"
+            Content="Warning"/>
+          <fui:FilledPushButton
+            Classes="Error"
+            Click="OnShowErrorInfoBar"
+            Content="Error"/>
+          <fui:FilledPushButton
+            Background="{DynamicResource SystemAccentColor}"
+            Classes="Custom"
+            Click="OnShowCustomInfoBar"
+            Content="Custom"/>
+        </StackPanel>
+
+        <ui:Card Grid.Column="1">
+          <Grid
+            ColumnDefinitions="Auto, *"
+            ColumnSpacing="8"
+            RowDefinitions="Auto, Auto, Auto, Auto"
+            RowSpacing="6">
+            <TextBlock
+              Grid.Row="0"
+              Grid.ColumnSpan="2"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Options]}"/>
+
+            <TextBlock
+              Grid.Row="1"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Duration]}"/>
+            <fui:NumberBox
+              Name="InfoBarDurationNumberBox"
+              Grid.Row="1"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              Maximum="10000"
+              Minimum="-1"
+              SpinButtonPlacementMode="Inline"
+              Value="3000"/>
+            <TextBlock
+              Grid.Row="2"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Position]}"/>
+            <ComboBox
+              Name="PopupInfoBarPositionComboBox"
+              Grid.Row="2"
+              Grid.Column="1"
+              MinWidth="128"
+              ItemsSource="{Binding InfoBarPositions}"/>
+            <CheckBox
+              Name="InfoBarIsClosableCheckBox"
+              Grid.Row="3"
+              Grid.ColumnSpan="2"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_IsClosable]}"/>
+          </Grid>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_ToastInfoBar]}">
+      <Grid ColumnDefinitions="* Auto">
+        <StackPanel
+          Grid.Column="0"
+          VerticalAlignment="Center"
+          Orientation="Horizontal"
+          Spacing="6">
+          <fui:FilledPushButton
+            Classes="Information"
+            Click="OnShowInformationToastInfoBar"
+            Content="Information"/>
+          <fui:FilledPushButton
+            Classes="Success"
+            Click="OnShowSuccessToastInfoBar"
+            Content="Success"/>
+          <fui:FilledPushButton
+            Classes="Warning"
+            Click="OnShowWarningToastInfoBar"
+            Content="Warning"/>
+          <fui:FilledPushButton
+            Classes="Error"
+            Click="OnShowErrorToastInfoBar"
+            Content="Error"/>
+          <fui:FilledPushButton
+            Background="{DynamicResource SystemAccentColor}"
+            Classes="Custom"
+            Click="OnShowCustomToastInfoBar"
+            Content="Custom"/>
+        </StackPanel>
+
+        <ui:Card Grid.Column="1">
+          <Grid
+            ColumnDefinitions="Auto, *"
+            ColumnSpacing="8"
+            RowDefinitions="Auto, Auto, Auto, Auto"
+            RowSpacing="6">
+            <TextBlock
+              Grid.Row="0"
+              Grid.ColumnSpan="2"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Options]}"/>
+
+            <TextBlock
+              Grid.Row="1"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Duration]}"/>
+            <fui:NumberBox
+              Name="ToastDurationNumberBox"
+              Grid.Row="1"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              Maximum="10000"
+              Minimum="-1"
+              SpinButtonPlacementMode="Inline"
+              Value="3000"/>
+            <TextBlock
+              Grid.Row="2"
+              Grid.Column="0"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Position]}"/>
+            <ComboBox
+              Name="ToastInfoBarPositionComboBox"
+              Grid.Row="2"
+              Grid.Column="1"
+              MinWidth="128"
+              ItemsSource="{Binding InfoBarPositions}"/>
+            <CheckBox
+              Name="ToastIsClosableCheckBox"
+              Grid.Row="3"
+              Grid.ColumnSpan="2"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_IsClosable]}"/>
+          </Grid>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:InfoBarHostViewBase>

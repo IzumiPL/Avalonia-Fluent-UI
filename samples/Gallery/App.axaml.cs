@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Resources;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -24,29 +25,13 @@ public class App : Application
 
     private void InitializeCulture()
     {
-        var localeDir = System.IO.Path.Combine(System.AppContext.BaseDirectory, "Assets", "Locale");
-        if (System.IO.Directory.Exists(localeDir))
-        {
-            LocalizationService.Instance.LoadResxDirectory(localeDir);
-        }
+        LocalizationService.Instance.AddResourceManager(new ResourceManager("Gallery.Assets.Locale.Strings", typeof(App).Assembly));
         
-        LocalizationService.Instance.PropertyChanged += (_, _) =>
-        {
-            Console.WriteLine($"Toggle Language To => {LocalizationService.Instance.CurrentLanguage}");
-            Console.WriteLine($"Default Language: {LocalizationService.DefaultCultureInfo.Name} | {LocalizationService.Instance.CurrentLanguage}");
-            Console.WriteLine("Custom Keys:");
-            foreach (var item in LocalizationService.Instance.CustomStrings.Values)
-            {
-                Console.WriteLine(item);
-            }
-
-            Console.WriteLine("==============================");
-            Console.WriteLine("Loaded Keys:");
-            foreach (var item in LocalizationService.Instance._resourceEntries.Values)
-            {
-                Console.WriteLine(item);
-            }
-        };
+        // var localeDir = System.IO.Path.Combine(System.AppContext.BaseDirectory, "Assets", "Locale");
+        // if (System.IO.Directory.Exists(localeDir))
+        // {
+            // LocalizationService.Instance.LoadResxDirectory(localeDir);
+        // }
     }
 
     public override void OnFrameworkInitializationCompleted()

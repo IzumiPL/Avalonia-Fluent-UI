@@ -113,6 +113,10 @@ public partial class MainWindowViewModel : ViewModelBase
             { "Scroll", () => new ScrollViewModel() },
             
             { "StatusAndInformation", () => new StatusAndInformationViewModel() },
+            { "ToolTip", () => new ToolTipPageViewModel() },
+            { "Information", () => new InformationPageViewModel() },
+            { "InfoBar", () => new InfoBarPageViewModel() },
+            { "ProgressBar", () => new ProgressPageViewModel() },
             
             { "MenuAndToolBar", () => new MenuAndToolBarViewModel() },
             { "Menu", () => new MenuPageViewModel() },
@@ -128,13 +132,6 @@ public partial class MainWindowViewModel : ViewModelBase
         CurrentViewModel = _viewModels["Home"];
 
         LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
-        AvaloniaFluentTheme.Instance.ThemeChanged += (_, _) =>
-        {
-            if (SelectedBorderColor == Colors.Transparent)
-            {
-                OnPropertyChanged(nameof(BorderBrush));
-            }
-        };
     }
 
     private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
@@ -191,12 +188,6 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public Thickness BorderWidth => new Thickness(SelectedBorderWidthItem);
 
-    [ObservableProperty]
-    [NotifyPropertyChangedFor(nameof(BorderBrush))]
-    private Color _selectedBorderColor = Colors.Transparent;
-    
-    public IBrush BorderBrush => SelectedBorderColor == Colors.Transparent ? Brush.Parse(AvaloniaFluentTheme.Instance.IsDarkTheme ? "#484848" : "#D6D6D6") : new SolidColorBrush(SelectedBorderColor);
-    
     [RelayCommand]
     private void ToggleTheme() => AvaloniaFluentTheme.Instance.ToggleTheme(); 
 

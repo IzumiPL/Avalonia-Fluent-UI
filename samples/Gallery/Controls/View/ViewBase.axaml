@@ -61,9 +61,9 @@
             Margin="0,24,0,20"
             Padding="0,0,16,0"
             BringIntoViewOnFocusChange="False"
+            HorizontalScrollBarVisibility="Disabled"
             VerticalScrollBarVisibility="Visible">
             <ContentPresenter
-              MinWidth="500"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch"
               Content="{TemplateBinding Content}"

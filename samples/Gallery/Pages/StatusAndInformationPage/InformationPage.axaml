@@ -1,0 +1,98 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.InformationPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  x:DataType="viewModel:InformationPageViewModel"
+  mc:Ignorable="d">
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="InfoBadgeCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[InfoBadge]}">
+      <StackPanel Orientation="Horizontal" Spacing="10">
+        <fui:InfoBadge Classes="Attention" Value="10"/>
+        <fui:InfoBadge Classes="Informational" Value="50"/>
+        <fui:InfoBadge Classes="Success" Value="100"/>
+        <fui:InfoBadge Classes="Caution" Value="500"/>
+        <fui:InfoBadge Classes="Critical" Value="1000"/>
+        <fui:InfoBadge Background="SlateBlue" Value="1w+"/>
+
+        <Panel>
+          <fui:InfoBadge
+            Margin="30,0,0,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Classes="Attention"
+            ZIndex="99"
+            Value="3"/>
+          <fui:ToolButton Content="{x:Static fi:FluentIcon.Wifi}"/>
+        </Panel>
+        <Panel>
+          <fui:InfoBadge
+            Margin="30,0,0,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Classes="Success"
+            ZIndex="99"
+            Value="1"/>
+          <fui:ToolButton Content="{x:Static fi:FluentIcon.Video}"/>
+        </Panel>
+      </StackPanel>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Tag]}">
+      <StackPanel
+        Margin="8"
+        Orientation="Vertical"
+        Spacing="6">
+        <fui:Tag Classes="Information" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[InformationTag]}"/>
+        <fui:Tag Classes="Attention" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[AttentionTag]}"/>
+        <fui:Tag Classes="Success">
+          <StackPanel Orientation="Horizontal" Spacing="6">
+            <PathIcon
+              Width="18"
+              Height="18"
+              Data="{x:Static fi:FluentIcon.Completed}"/>
+            <TextBlock Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SuccessTag]}"/>
+          </StackPanel>
+        </fui:Tag>
+        <fui:Tag Classes="Warning">
+          <StackPanel Orientation="Horizontal" Spacing="6">
+            <PathIcon
+              Width="18"
+              Height="18"
+              Data="{x:Static fi:FluentIcon.Info}"/>
+            <TextBlock Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[WarningTag]}"/>
+          </StackPanel>
+        </fui:Tag>
+        <fui:Tag Classes="Error" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ErrorTag]}"/>
+        <fui:Tag
+          Name="CtTag"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CustomTag]}"
+          Foreground="SlateBlue">
+          <fui:Tag.ContextMenu>
+            <fui:FluentContextMenu
+              Width="200"
+              Margin="0"
+              Padding="0">
+              <fui:ColorPickerButton
+                Width="158"
+                HorizontalAlignment="Stretch"
+                Click="OnClicked"
+                ColorChanged="OnSelectedColorChanged"
+                Color="SlateBlue"/>
+            </fui:FluentContextMenu>
+          </fui:Tag.ContextMenu>
+
+        </fui:Tag>
+      </StackPanel>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

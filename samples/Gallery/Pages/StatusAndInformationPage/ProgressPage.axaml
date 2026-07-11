@@ -1,0 +1,211 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.ProgressPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  x:DataType="viewModel:ProgressPageViewModel"
+  mc:Ignorable="d">
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="ProgressBarCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ProgressBar]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <ProgressBar
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          IsIndeterminate="{Binding ProgressBarIsIndeterminate}"
+          Maximum="100"
+          Minimum="0"
+          Orientation="{Binding #OrientationComboBox.SelectedItem}"
+          Value="{Binding ProgressBarCurrentValue}"/>
+        <ui:Card Grid.Column="1" Width="256">
+          <Grid
+            ColumnDefinitions="Auto, *"
+            ColumnSpacing="6"
+            RowDefinitions="Auto, Auto, Auto, Auto"
+            RowSpacing="6">
+            <TextBlock
+              Grid.Row="0"
+              Grid.ColumnSpan="2"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Options]}"/>
+            <CheckBox
+              Grid.Row="1"
+              Grid.ColumnSpan="2"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_IsIndeterminate]}"
+              IsChecked="{Binding ProgressBarIsIndeterminate}"/>
+
+            <TextBlock
+              Grid.Row="2"
+              Grid.Column="0"
+              VerticalAlignment="Center"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Progress]}"/>
+            <fui:NumberBox
+              Grid.Row="2"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              Maximum="100"
+              Minimum="0"
+              SpinButtonPlacementMode="Inline"
+              Value="{Binding ProgressBarCurrentValue}"/>
+
+            <TextBlock
+              Grid.Row="3"
+              Grid.Column="0"
+              VerticalAlignment="Center"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Direction]}"/>
+            <ComboBox
+              Name="OrientationComboBox"
+              Grid.Row="3"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding ProgressBarOrientations}"
+              SelectedIndex="0"/>
+          </Grid>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_FilledProgressBar]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:FilledProgressBar
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          IsIndeterminate="{Binding FilledProgressBarIsIndeterminate}"
+          Maximum="256"
+          Minimum="0"
+          Orientation="{Binding #FilledOrientationComboBox.SelectedItem}"
+          ShowProgressText="{Binding FilledProgressBarShowProgressText}"
+          Value="{Binding FilledProgressBarCurrentValue}">
+          <fui:FilledProgressBar.Styles>
+            <Style Selector="fui|FilledProgressBar[ShowProgressText=True]">
+              <Setter Property="CornerRadius" Value="12"/>
+            </Style>
+          </fui:FilledProgressBar.Styles>
+        </fui:FilledProgressBar>
+        <ui:Card Grid.Column="1" Width="256">
+          <Grid
+            ColumnDefinitions="Auto, *"
+            ColumnSpacing="6"
+            RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+            RowSpacing="6">
+            <TextBlock
+              Grid.Row="0"
+              Grid.ColumnSpan="2"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Options]}"/>
+            <CheckBox
+              Grid.Row="1"
+              Grid.ColumnSpan="2"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_IsIndeterminate]}"
+              IsChecked="{Binding FilledProgressBarIsIndeterminate}"/>
+
+            <CheckBox
+              Grid.Row="2"
+              Grid.ColumnSpan="2"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ShowProgressText]}"
+              IsChecked="{Binding FilledProgressBarShowProgressText}"/>
+
+            <TextBlock
+              Grid.Row="3"
+              Grid.Column="0"
+              VerticalAlignment="Center"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Progress]}"/>
+            <fui:NumberBox
+              Grid.Row="3"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              Maximum="256"
+              Minimum="0"
+              SpinButtonPlacementMode="Inline"
+              Value="{Binding FilledProgressBarCurrentValue}"/>
+
+            <TextBlock
+              Grid.Row="4"
+              Grid.Column="0"
+              VerticalAlignment="Center"
+              TextAlignment="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Direction]}"/>
+            <ComboBox
+              Name="FilledOrientationComboBox"
+              Grid.Row="4"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding ProgressBarOrientations}"
+              SelectedIndex="0"/>
+          </Grid>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="ProgressRingCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_ProgressRing]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:ProgressRing
+          Width="128"
+          Height="128"
+          HorizontalAlignment="Left"
+          Background="{Binding ProgressRingBackground}"
+          IsIndeterminate="{Binding !ShowPercent}"
+          Maximum="100"
+          Minimum="0"
+          ShowPercent="{Binding ShowPercent}"
+          Value="{Binding ProgressRingCurrentValue}"/>
+
+        <ui:Card Grid.Column="1" Width="256">
+          <Grid
+            ColumnDefinitions="Auto, *"
+            ColumnSpacing="6"
+            RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+            RowSpacing="6">
+            <TextBlock
+              Grid.Row="0"
+              Grid.ColumnSpan="2"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Options]}"/>
+
+            <CheckBox
+              Grid.Row="1"
+              Grid.ColumnSpan="2"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_IsIndeterminate]}"
+              IsChecked="{Binding !ShowPercent}"/>
+
+            <TextBlock
+              Grid.Row="2"
+              Grid.Column="0"
+              VerticalAlignment="Center"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Progress]}"/>
+            <fui:NumberBox
+              Grid.Row="2"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              Maximum="100"
+              Minimum="0"
+              SpinButtonPlacementMode="Inline"
+              Value="{Binding ProgressRingCurrentValue}"/>
+
+            <TextBlock
+              Grid.Row="3"
+              Grid.Column="0"
+              VerticalAlignment="Center"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_BgColor]}"/>
+            <fui:ColorPickerButton
+              Grid.Row="3"
+              Grid.Column="1"
+              Color="{Binding ProgressRingColor}"/>
+            <CheckBox
+              Grid.Row="4"
+              Grid.ColumnSpan="2"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ShowPercentage]}"
+              IsChecked="{Binding ShowPercent}"/>
+          </Grid>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+
+</ui:ViewBase>

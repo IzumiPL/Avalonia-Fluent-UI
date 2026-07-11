@@ -35,7 +35,10 @@
       HorizontalAlignment="Left"
       FontSize="32"
       Text="{Binding Title}"/>
-    <fui:SmoothScrollViewer Grid.Row="1" Padding="18,24,24,0">
+    <fui:SmoothScrollViewer
+      Grid.Row="1"
+      Padding="18,24,24,0"
+      HorizontalScrollBarVisibility="Auto">
       <StackPanel
         Margin="0,0,0,64"
         HorizontalAlignment="Stretch"

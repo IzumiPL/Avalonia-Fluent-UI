@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
@@ -204,8 +205,23 @@ public partial class MainWindow : FluentWindow
                 _backgroundImage = LoadImageResource(); 
                 BackgroundImage.Source = _backgroundImage;
             }
+
+            if (!IsWindows11)
+            {
+                Bind(BorderThicknessProperty, new Binding(nameof(viewModel.BorderWidth)));
+
+                AvaloniaFluentTheme.Instance.ThemeChanged += (_, theme) =>
+                {
+                    if (BorderBrush == Brushes.Transparent)
+                    {
+                        BorderBrush = Brush.Parse(AvaloniaFluentTheme.Instance.IsDarkTheme ? "#484848" : "#D6D6D6");
+                    }
+                };
+            }
         }
     }
+    
+    
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
@@ -257,5 +273,13 @@ public partial class MainWindow : FluentWindow
     private void OnHideFlyout(object? sender, RoutedEventArgs routedEventArgs)
     {
         SettingButton.Flyout?.IsOpen = false;
+    }
+
+    private void OnBorderColorChanged(object? sender, Color c)
+    {
+        if (!IsWindows11)
+        {
+            BorderBrush = new SolidColorBrush(c);
+        }
     }
 }

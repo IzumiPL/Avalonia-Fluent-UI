@@ -588,7 +588,7 @@
   <data name="SI_Progress" xml:space="preserve">
     <value>进度:</value>
   </data>
-  <data name="SI_ProgressBar" xml:space="preserve">
+  <data name="ProgressBar" xml:space="preserve">
     <value>进度条</value>
   </data>
   <data name="SI_ProgressRing" xml:space="preserve">
@@ -789,10 +789,10 @@
   <data name="SI_ToolTipText" xml:space="preserve">
     <value>我是工具提示</value>
   </data>
-  <data name="SI_InfoBadge" xml:space="preserve">
+  <data name="InfoBadge" xml:space="preserve">
     <value>信息徽章</value>
   </data>
-  <data name="SI_InfoBar" xml:space="preserve">
+  <data name="InfoBar" xml:space="preserve">
     <value>消息条</value>
   </data>
   <data name="SI_SaveSuccess" xml:space="preserve">
@@ -1606,5 +1606,32 @@
   </data>
   <data name="ShowProgressText" xml:space="preserve">
     <value>显示进度文本</value>
+  </data>
+  <data name="ToolTip" xml:space="preserve">
+    <value>工具提示</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="Tag" xml:space="preserve">
+    <value>标签</value>
+  </data>
+  <data name="InformationTag" xml:space="preserve">
+    <value>我是信息标签</value>
+  </data>
+  <data name="ErrorTag" xml:space="preserve">
+    <value>我是错误标签</value>
+  </data>
+  <data name="AttentionTag" xml:space="preserve">
+    <value>我是主题色强调标签</value>
+  </data>
+  <data name="SuccessTag" xml:space="preserve">
+    <value>我是成功标签</value>
+  </data>
+  <data name="WarningTag" xml:space="preserve">
+    <value>我是警告标签</value>
+  </data>
+  <data name="CustomTag" xml:space="preserve">
+    <value>我是自定义标签, 有很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的内容,宽度不够显示会触发自动换行</value>
   </data>
 </root>

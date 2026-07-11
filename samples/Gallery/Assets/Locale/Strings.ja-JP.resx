@@ -594,7 +594,7 @@
   <data name="SI_Progress" xml:space="preserve">
     <value>進捗:</value>
   </data>
-  <data name="SI_ProgressBar" xml:space="preserve">
+  <data name="ProgressBar" xml:space="preserve">
     <value>プログレスバー</value>
   </data>
   <data name="SI_ProgressRing" xml:space="preserve">
@@ -792,10 +792,10 @@
   <data name="SI_ToolTipText" xml:space="preserve">
     <value>私はツールチップです</value>
   </data>
-  <data name="SI_InfoBadge" xml:space="preserve">
+  <data name="InfoBadge" xml:space="preserve">
     <value>情報バッジ</value>
   </data>
-  <data name="SI_InfoBar" xml:space="preserve">
+  <data name="InfoBar" xml:space="preserve">
     <value>インフォバー</value>
   </data>
   <data name="SI_SaveSuccess" xml:space="preserve">
@@ -1606,5 +1606,32 @@
   </data>
   <data name="ShowProgressText" xml:space="preserve">
     <value>進行状況テキストを表示する</value>
+  </data>
+  <data name="ToolTip" xml:space="preserve">
+    <value>ツールチップ</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>情報</value>
+  </data>
+  <data name="Tag" xml:space="preserve">
+    <value>ラベル</value>
+  </data>
+  <data name="InformationTag" xml:space="preserve">
+    <value>私は情報タグです</value>
+  </data>
+  <data name="AttentionTag" xml:space="preserve">
+    <value>私はテーマカラーの強調ラベルです</value>
+  </data>
+  <data name="SuccessTag" xml:space="preserve">
+    <value>私は成功のラベルです</value>
+  </data>
+  <data name="WarningTag" xml:space="preserve">
+    <value>警告ラベルをつけています</value>
+  </data>
+  <data name="ErrorTag" xml:space="preserve">
+    <value>私は間違ったタグです</value>
+  </data>
+  <data name="CustomTag" xml:space="preserve">
+    <value>私はカスタムラベルです、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很長の内容、宽度不表示会触発自行</value>
   </data>
 </root>

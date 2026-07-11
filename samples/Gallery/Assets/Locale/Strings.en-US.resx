@@ -594,7 +594,7 @@
   <data name="SI_Progress" xml:space="preserve">
     <value>Progress:</value>
   </data>
-  <data name="SI_ProgressBar" xml:space="preserve">
+  <data name="ProgressBar" xml:space="preserve">
     <value>Progress Bar</value>
   </data>
   <data name="SI_ProgressRing" xml:space="preserve">
@@ -792,10 +792,10 @@
   <data name="SI_ToolTipText" xml:space="preserve">
     <value>I am a ToolTip</value>
   </data>
-  <data name="SI_InfoBadge" xml:space="preserve">
+  <data name="InfoBadge" xml:space="preserve">
     <value>Info Badge</value>
   </data>
-  <data name="SI_InfoBar" xml:space="preserve">
+  <data name="InfoBar" xml:space="preserve">
     <value>Info Bar</value>
   </data>
   <data name="SI_SaveSuccess" xml:space="preserve">
@@ -1606,5 +1606,32 @@
   </data>
   <data name="ShowProgressText" xml:space="preserve">
     <value>Show progress text</value>
+  </data>
+  <data name="ToolTip" xml:space="preserve">
+    <value>Tool Tip</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Tag" xml:space="preserve">
+    <value>Tag</value>
+  </data>
+  <data name="AttentionTag" xml:space="preserve">
+    <value>I am the theme color emphasis label</value>
+  </data>
+  <data name="ErrorTag" xml:space="preserve">
+    <value>I am the wrong tag</value>
+  </data>
+  <data name="InformationTag" xml:space="preserve">
+    <value>I am the information tag</value>
+  </data>
+  <data name="SuccessTag" xml:space="preserve">
+    <value>I am the success label</value>
+  </data>
+  <data name="WarningTag" xml:space="preserve">
+    <value>I have a warning label</value>
+  </data>
+  <data name="CustomTag" xml:space="preserve">
+    <value>I am a custom label, there is a long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, Long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long,</value>
   </data>
 </root>

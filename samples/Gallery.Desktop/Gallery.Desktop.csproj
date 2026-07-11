@@ -26,7 +26,7 @@
     <ProjectReference Include="..\Gallery\Gallery.csproj"/>
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="..\Gallery\Assets\Locale\**" CopyToOutputDirectory="PreserveNewest" Link="Assets\Locale\%(RecursiveDir)%(Filename)%(Extension)"/>
-  </ItemGroup>
+<!--  <ItemGroup>-->
+<!--    <Content Include="..\Gallery\Assets\Locale\**" CopyToOutputDirectory="PreserveNewest" Link="Assets\Locale\%(RecursiveDir)%(Filename)%(Extension)"/>-->
+<!--  </ItemGroup>-->
 </Project>
