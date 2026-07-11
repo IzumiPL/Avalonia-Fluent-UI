@@ -16,13 +16,33 @@ namespace AvaloniaFluentUI.Locale;
 /// </summary>
 public class LocalizationService : INotifyPropertyChanged
 {
-    private static readonly ResourceManager resourceManager =
-        new("AvaloniaFluentUI.Locale.Strings", typeof(LocalizationService).Assembly);
+    private readonly List<ResourceManager> _resourceManagers = new();
 
     public static CultureInfo DefaultCultureInfo { get; } = new("en-US");
 
-    private LocalizationService() { }
+    private LocalizationService()
+    {
+        // 添加默认资源管理
+        _resourceManagers.Add(new ResourceManager("AvaloniaFluentUI.Locale.Strings", typeof(LocalizationService).Assembly));
+    }
+    
+    /// <summary>
+    /// 添加resx到资源管理
+    /// </summary>
+    public void AddResourceManager(ResourceManager resourceManager)
+    {
+        ArgumentNullException.ThrowIfNull(resourceManager);
 
+        if (_resourceManagers.Contains(resourceManager))
+            return;
+        
+        // 默认新添加的为第一个查找的
+        _resourceManagers.Insert(0, resourceManager);
+
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(string.Empty));
+    }
+
+    // 全局唯一实例
     public static LocalizationService Instance { get; } = new();
 
     /// <summary>
@@ -44,18 +64,15 @@ public class LocalizationService : INotifyPropertyChanged
     public CultureInfo CurrentCultureInfo => CultureInfo.CurrentUICulture;
 
     /// <summary>
-    /// Custom string overrides. Keys take the form <c>"ResourceName"</c>
-    /// (applies to all cultures) or <c>"cultureCode:ResourceName"</c>
-    /// (applies only to that culture, e.g. <c>"fr-FR:SearchText"</c>).
-    /// Checked before the embedded RESX resources.
+    /// 添加的自定义的值, 默认查找优先级最高
     /// </summary>
-    public ConcurrentDictionary<string, string> CustomStrings { get; private set; } = new();
+    private readonly ConcurrentDictionary<string, string> _customStrings  = new();
 
     /// <summary>
     /// Entries loaded from disk <c>.resx</c> files for the current culture only.
     /// Cleared and reloaded when the culture changes.
     /// </summary>
-    public ConcurrentDictionary<string, string> _resourceEntries = new();
+    private readonly ConcurrentDictionary<string, string> _resourceEntries = new();
 
     /// <summary>
     /// Directory path passed to <see cref="LoadResxDirectory"/> last time,
@@ -85,7 +102,7 @@ public class LocalizationService : INotifyPropertyChanged
     /// <returns></returns>
     public LocalizationService AddValue(string key, string value)
     {
-        CustomStrings[key] = value;
+        _customStrings[key] = value;
         
         return this;
     }
@@ -99,15 +116,21 @@ public class LocalizationService : INotifyPropertyChanged
     {
         foreach (var (key, value) in keys.Zip(values))
         {
-            CustomStrings[key] = value;
+            _customStrings[key] = value;
         }
     }
 
+    /// <summary>
+    /// 添加同一种指定的语言
+    /// </summary>
+    /// <param name="language"></param>
+    /// <param name="keys"></param>
+    /// <param name="values"></param>
     public void AddValuesWithLanguage(string language, IEnumerable<string> keys, IEnumerable<string> values)
     {
         foreach (var (key, value) in keys.Zip(values))
         {
-            CustomStrings[$"{language}:{key}"] = value;
+            _customStrings[$"{language}:{key}"] = value;
         }
     }
 
@@ -117,52 +140,56 @@ public class LocalizationService : INotifyPropertyChanged
     /// </summary>
     public string GetString(string key, CultureInfo culture)
     {
-        // 1. Culture-specific custom override (e.g. "fr-FR:SearchText")
+        // 1.针对特定文化的自定义覆盖（例如“fr-FR：SearchText”）
         var cultureKey = $"{culture.Name}:{key}";
-        if (CustomStrings.TryGetValue(cultureKey, out var val))
+        if (_customStrings.TryGetValue(cultureKey, out var val))
             return val;
 
-        // 2. Culture-neutral custom override
-        if (CustomStrings.TryGetValue(key, out val))
+        if (_customStrings.TryGetValue(key, out val))
             return val;
 
-        // 3. Entries from disk .resx files (current culture only)
+        // 3.磁盘 .resx 文件中的条目（仅限当前区域性）
         if (_resourceEntries.TryGetValue(key, out val))
             return val;
 
-        // 4. Built-in embedded RESX
-        string? value;
-        try
+        // 4. 嵌入式资源管理器
+        foreach (var manager in _resourceManagers)
         {
-            value = resourceManager.GetString(key, culture);
-        }
-        catch (MissingManifestResourceException)
-        {
-            value = null;
-        }
-        if (value != null)
-            return value;
+            try
+            {
+                var value = manager.GetString(key, culture);
 
-        // 5. Fallback to default culture
-        try
-        {
-            value = resourceManager.GetString(key, DefaultCultureInfo);
+                if (!string.IsNullOrEmpty(value))
+                    return value;
+            }
+            catch (MissingManifestResourceException)
+            {
+            }
         }
-        catch (MissingManifestResourceException)
-        {
-            value = null;
-        }
-        if (value != null)
-            return value;
 
+        // 5.以上都未找到就查找默认语言的 
+        foreach (var manager in _resourceManagers)
+        {
+            try
+            {
+                var value = manager.GetString(key, DefaultCultureInfo);
+
+                if (!string.IsNullOrEmpty(value))
+                    return value;
+            }
+            catch (MissingManifestResourceException)
+            {
+            }
+        }
+
+        // 全都未找到返回空
         return string.Empty;
     }
 
     /// <summary>
-    /// Loads string entries from a <c>.resx</c> file at runtime into
-    /// <see cref="_resourceEntries"/>, overriding any previous entries with
-    /// the same key. Only entries for the current culture (or culture-neutral
-    /// files) are loaded.
+    /// 在Android下使用LoadResxFile和LoadResxDirectory可能会加载不到
+    /// 运行时从 <c>.resx</c> 文件加载字符串条目到
+    /// <see cref="_resourceEntries"/>, 覆盖之前的任何条目
     /// </summary>
     /// <param name="filePath">Path to the <c>.resx</c> file on disk.</param>
     public void LoadResxFile(string filePath)
@@ -216,14 +243,9 @@ public class LocalizationService : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Switches the app's UI culture at runtime. Reloads disk-based
-    /// <c>.resx</c> files for the new culture if a directory was loaded
-    /// via <see cref="LoadResxDirectory"/>. Raises
-    /// <see cref="PropertyChanged"/> so that bound UI elements refresh.
+    /// 设置当前的文化, 会触发属性更改, 默认不做更改判断
     /// </summary>
-    /// <param name="language">
-    /// A valid culture name, e.g. "en-US", "zh-CN", "ja-JP".
-    /// </param>
+    /// <param name="language"></param>
     public void SetCulture(string language)
     {
         var culture = new CultureInfo(language);
@@ -233,7 +255,7 @@ public class LocalizationService : INotifyPropertyChanged
         CultureInfo.DefaultThreadCurrentCulture = culture;
         CultureInfo.DefaultThreadCurrentUICulture = culture;
 
-        // Reload disk .resx files for the new culture (old entries auto-cleared)
+        // 重新加载磁盘 .resx 文件以获取新文化（旧条目自动清除）
         if (_loadedResxDirectory != null)
         {
             LoadResxDirectory(_loadedResxDirectory);
@@ -242,7 +264,7 @@ public class LocalizationService : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(string.Empty));
     }
 
-    private static string? ParseCultureFromFileName(string filePath)
+    public static string? ParseCultureFromFileName(string filePath)
     {
         var name = Path.GetFileNameWithoutExtension(filePath);
         var dotIndex = name.LastIndexOf('.');
