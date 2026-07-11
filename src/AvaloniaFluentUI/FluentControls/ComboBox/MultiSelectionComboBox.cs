@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Metadata;
+using Avalonia.Threading;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -18,7 +20,7 @@ namespace AvaloniaFluentUI.Controls;
 [TemplatePart(Name = PART_MULTI_SELECTION_VIEW, Type = typeof(MultiSelectionView))]
 public class MultiSelectionComboBox : TemplatedControl
 {
-    public static readonly StyledProperty<IEnumerable> ItemsSourceProperty =
+    public static readonly StyledProperty<IEnumerable?> ItemsSourceProperty =
         AvaloniaProperty.Register<MultiSelectionComboBox, IEnumerable?>(nameof(ItemsSource));
 
     public static readonly StyledProperty<IList?> SelectedItemsProperty =
@@ -55,7 +57,7 @@ public class MultiSelectionComboBox : TemplatedControl
     }
     
     private Popup? _multiSelectionPopup;
-    private MultiSelectionView _multiSelectionView;
+    private MultiSelectionView? _multiSelectionView;
 
     private readonly AvaloniaList<MultiSelectionComboBoxItem> _items = new ();
     
@@ -106,15 +108,19 @@ public class MultiSelectionComboBox : TemplatedControl
         UpdatePlaceholderStatus();
     }
 
-    private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         UpdatePlaceholderStatus();
     }
 
-    private async void UpdatePlaceholderStatus()
+    private void UpdatePlaceholderStatus()
     {
-        await Task.Yield();
-        PseudoClasses.Set(PC_HAS_PLACEHOLDER, SelectedItems?.Count == 0);
+        Dispatcher.UIThread.Post(() =>
+            {
+                PseudoClasses.Set(PC_HAS_PLACEHOLDER, SelectedItems?.Count == 0);
+            },
+            DispatcherPriority.Background
+        );
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -135,8 +141,7 @@ public class MultiSelectionComboBox : TemplatedControl
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
-        PseudoClasses.Remove(PC_PRESSED);
-        if (_multiSelectionPopup != null)
+        if (_multiSelectionPopup != null && e.Source is not SmoothScrollContentPresenter)
         {
             _multiSelectionPopup.Width = Bounds.Width;
             _multiSelectionPopup.IsOpen = true;

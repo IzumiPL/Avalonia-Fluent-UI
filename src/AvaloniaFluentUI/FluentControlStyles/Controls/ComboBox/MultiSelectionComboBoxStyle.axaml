@@ -10,7 +10,7 @@
   <StreamGeometry x:Key="Close">M3.154 1.923l0.466 0.091 0.399 0.274 11.442 11.442 11.442-11.442 0.399-0.274 0.466-0.091 0.466 0.091 0.399 0.274 0.274 0.399 0.091 0.466-0.091 0.466-0.274 0.399-11.442 11.442 11.442 11.442 0.274 0.399 0.091 0.466-0.091 0.466-0.274 0.399-0.399 0.274-0.466 0.091-0.466-0.091-0.399-0.274-11.442-11.442-11.442 11.442-0.399 0.274-0.466 0.091-0.466-0.091-0.399-0.274-0.274-0.399-0.091-0.466 0.091-0.466 0.274-0.399 11.442-11.442-11.442-11.442-0.274-0.399-0.091-0.466 0.091-0.466 0.274-0.399 0.399-0.274 0.466-0.091z</StreamGeometry>
 
   <ControlTheme x:Key="{x:Type ui:MultiSelectionComboBox}" TargetType="ui:MultiSelectionComboBox">
-    <Setter Property="Height" Value="35"/>
+    <Setter Property="Height" Value="32"/>
     <Setter Property="Width" Value="256"/>
     <Setter Property="Padding" Value="0 0 5 0"/>
     <Setter Property="ViewPortMaxHeight" Value="400"/>
@@ -61,7 +61,7 @@
               Margin="5,0,24,0"
               HorizontalAlignment="Left"
               VerticalAlignment="Center"
-              FontSize="12"
+              FontSize="14"
               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
               IsVisible="False"
               Opacity="0.8"
@@ -156,12 +156,9 @@
           BorderThickness="{TemplateBinding BorderThickness}"
           BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
           CornerRadius="{TemplateBinding CornerRadius}">
-          <ui:SingleDirectionScrollViewer
-            HorizontalScrollBarVisibility="Disabled"
-            Orientation="Vertical"
-            VerticalScrollBarVisibility="Auto">
+          <ui:SmoothScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}"/>
-          </ui:SingleDirectionScrollViewer>
+          </ui:SmoothScrollViewer>
         </Border>
       </ControlTemplate>
     </Setter>
@@ -241,6 +238,7 @@
               Grid.Column="0"
               Margin="0"
               Padding="0"
+              VerticalAlignment="Center"
               IsChecked="{TemplateBinding IsSelected,
                                           Mode=TwoWay}"/>
             <ContentPresenter
