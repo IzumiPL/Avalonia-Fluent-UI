@@ -6,25 +6,24 @@ namespace AvaloniaFluentUI.Controls;
 
 public class InfoBarHost : Canvas
 {
-    private Dictionary<Type, object> _managers = new Dictionary<Type, object>();
+    private readonly Dictionary<Type, IInfoBarManager> _managers = new();
 
     public InfoBarHost()
     {
-        ZIndex = 999;
+        ZIndex = int.MaxValue;
         IsHitTestVisible = true;
     }
-
-    public void RegisterManager<T>(T manager)
+    
+    public void RegisterManager<T>() where T : IInfoBarManager, new()
     {
+        var manager = new T();
+        if (_managers.ContainsKey(typeof(T))) throw new InvalidOperationException($"Manager '{typeof(T).Name}' has already been registered.");
+        
+        manager.SetHost(this);
         _managers.Add(typeof(T), manager);
-
-        if (manager is IInfoBarManager im)
-        {
-            im.SetHost(this);
-        }
     }
 
-    public T GetManager<T>()
+    public T GetManager<T>() where T : IInfoBarManager
     {
         return (T)_managers[typeof(T)];
     }
