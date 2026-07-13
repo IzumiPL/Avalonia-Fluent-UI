@@ -1,0 +1,61 @@
+<wnd:FluentWindow
+  x:Class="WizardTest.MainWindow"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ct="clr-namespace:WizardTest.Controls"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:view="clr-namespace:WizardTest.Pages"
+  xmlns:wnd="clr-namespace:AvaloniaFluentUI.Windowing;assembly=AvaloniaFluentUI"
+  Title="WizardTest"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  Icon="Assets/app.ico"
+  mc:Ignorable="d">
+
+  <wnd:FluentWindow.TitleBarContent>
+    <ui:ToolButton
+      Width="46"
+      Height="45"
+      HorizontalAlignment="Right"
+      VerticalAlignment="Center"
+      Classes="Transparent"
+      Click="OnToggleTheme"
+      Content="{x:Static fi:FluentIcon.Constract}"/>
+  </wnd:FluentWindow.TitleBarContent>
+
+  <Panel Margin="0,45,0,0">
+    <ui:SmoothScrollViewer Padding="15,10,0,10" HorizontalScrollBarVisibility="Disabled">
+      <StackPanel
+        Margin="0,0,20,0"
+        Orientation="Vertical"
+        Spacing="8">
+
+        <ct:WizardView
+          Name="WizardView"
+          Width="648"
+          Padding="24"
+          Finished="OnFinished"
+          Finishing="OnFinishing"
+          Nexted="OnNexted"
+          Nexting="OnNexting"
+          SelectedIndex="0">
+          <view:P1 Name="P1"/>
+          <view:P2 Name="P2"/>
+          <view:P3 Name="P3"/>
+          <view:P4 Name="P4"/>
+          <view:P5 Name="P5"/>
+        </ct:WizardView>
+
+
+        <Button
+          HorizontalAlignment="Center"
+          Click="OnShowWizardWindow"
+          Content="显示向导窗口"/>
+      </StackPanel>
+    </ui:SmoothScrollViewer>
+    <ui:InfoBarHost Name="InfoBarHost"/>
+  </Panel>
+</wnd:FluentWindow>

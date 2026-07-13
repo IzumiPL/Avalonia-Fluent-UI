@@ -1,0 +1,46 @@
+﻿<UserControl
+  x:Class="WizardTest.Pages.P4"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  mc:Ignorable="d">
+  <StackPanel
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
+    Orientation="Horizontal"
+    Spacing="24">
+    <TextBlock
+      HorizontalAlignment="Right"
+      VerticalAlignment="Center"
+      FontSize="168"
+      Text="🫣"/>
+    <StackPanel
+      VerticalAlignment="Center"
+      Orientation="Vertical"
+      Spacing="6">
+      <TextBlock Classes="Title" Text="账户配置"/>
+      <TextBlock
+        FontSize="12"
+        Foreground="Gray"
+        Text="用户名"/>
+      <TextBox
+        Name="UserNameEdit"
+        MinWidth="256"
+        PlaceholderText="请输登录用户名(1)"/>
+      <TextBlock
+        FontSize="12"
+        Foreground="Gray"
+        Text="密码"/>
+      <TextBox
+        Name="PasswordEdit"
+        MinWidth="256"
+        Classes="Password"
+        PasswordChar="*"
+        PlaceholderText="请输入密码(1)"/>
+    </StackPanel>
+  </StackPanel>
+</UserControl>
+

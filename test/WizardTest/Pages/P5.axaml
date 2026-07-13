@@ -1,0 +1,34 @@
+﻿<UserControl
+  x:Class="WizardTest.Pages.P5"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  mc:Ignorable="d">
+  <StackPanel
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
+    Orientation="Horizontal"
+    Spacing="24">
+    <TextBlock
+      HorizontalAlignment="Right"
+      VerticalAlignment="Center"
+      FontSize="168"
+      Text="🎉"/>
+    <StackPanel
+      VerticalAlignment="Center"
+      Orientation="Vertical"
+      Spacing="6">
+      <TextBlock Classes="Title" Text="你完成了所有配置!"/>
+      <TextBlock
+        MaxWidth="256"
+        FontSize="12"
+        Foreground="Gray"
+        Text="下载器将基于你提供的配置信息为您下载 AI模型，您随时可以在应用设置中修改它们，祝您使用愉快!"
+        TextWrapping="WrapWithOverflow"/>
+    </StackPanel>
+  </StackPanel>
+</UserControl>
+

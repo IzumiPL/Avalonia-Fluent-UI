@@ -1,0 +1,44 @@
+﻿<UserControl
+  x:Class="WizardTest.Pages.P3"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  mc:Ignorable="d">
+  <StackPanel
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
+    Orientation="Horizontal"
+    Spacing="24">
+    <TextBlock
+      HorizontalAlignment="Right"
+      VerticalAlignment="Center"
+      FontSize="168"
+      Text="👪"/>
+    <StackPanel
+      VerticalAlignment="Center"
+      Orientation="Vertical"
+      Spacing="6">
+      <TextBlock Classes="Title" Text="家庭成员"/>
+      <TextBlock
+        FontSize="12"
+        Foreground="Gray"
+        Text="父亲"/>
+      <TextBox
+        Name="FatherEdit"
+        MinWidth="256"
+        PlaceholderText="请输输入你的父亲姓名(1)"/>
+      <TextBlock
+        FontSize="12"
+        Foreground="Gray"
+        Text="母亲"/>
+      <TextBox
+        Name="MotherEdit"
+        MinWidth="256"
+        PlaceholderText="请输入你的母亲姓名(2)"/>
+    </StackPanel>
+  </StackPanel>
+</UserControl>
+

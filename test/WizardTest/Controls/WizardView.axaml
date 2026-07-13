@@ -1,0 +1,97 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:converts="clr-namespace:WizardTest.Converts"
+  xmlns:ui="clr-namespace:WizardTest.Controls">
+
+  <converts:CornerRadiusConverter x:Key="CornerRadiusConverter"/>
+
+  <ControlTheme x:Key="{x:Type ui:WizardView}" TargetType="ui:WizardView">
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="CornerRadius" Value="8"/>
+    <Setter Property="ClipToBounds" Value="True"/>
+    <Setter Property="PageTransition">
+      <CompositePageTransition>
+        <PageSlide
+          Orientation="Horizontal"
+          SlideInEasing="CubicEaseOut"
+          Duration="00:00:0.30"/>
+      </CompositePageTransition>
+    </Setter>
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          ClipToBounds="{TemplateBinding ClipToBounds}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <Grid RowDefinitions="*, Auto, Auto">
+            <ScrollViewer
+              Name="PART_ScrollViewer"
+              Height="328"
+              MinHeight="128"
+              Background="Transparent"
+              BringIntoViewOnFocusChange="False"
+              HorizontalScrollBarVisibility="Hidden"
+              VerticalScrollBarVisibility="Hidden">
+              <ItemsPresenter
+                Name="PART_ItemsPresenter"
+                Margin="{TemplateBinding Padding}"
+                ItemsPanel="{TemplateBinding ItemsPanel}"/>
+            </ScrollViewer>
+
+            <Separator
+              Grid.Row="1"
+              Height="1"
+              Margin="0"
+              Padding="0"
+              HorizontalAlignment="Stretch"/>
+
+            <Border
+              Grid.Row="2"
+              MinHeight="64"
+              Padding="15,12,12,12"
+              Background="{DynamicResource PopupControlBackgroundSecondaryBrush}"
+              CornerRadius="{TemplateBinding CornerRadius,
+                                             Converter={StaticResource CornerRadiusConverter}}">
+              <Grid ColumnDefinitions="*, Auto, Auto" ColumnSpacing="8">
+                <PipsPager
+                  Grid.Column="0"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  IsHitTestVisible="False"
+                  IsNextButtonVisible="False"
+                  IsPreviousButtonVisible="False"
+                  MaxVisiblePips="5"
+                  NumberOfPages="{TemplateBinding ItemCount}"
+                  Orientation="Horizontal"
+                  SelectedPageIndex="{TemplateBinding SelectedIndex}"/>
+
+                <Button
+                  Name="PART_BackButton"
+                  Grid.Column="1"
+                  Width="100"
+                  Classes="Transparent"
+                  Content="上一步"
+                  IsVisible="{TemplateBinding BackButtonIsVisible}"
+                  Theme="{StaticResource AccentForegroundButton}"/>
+                <Button
+                  Name="PART_NextButton"
+                  Grid.Column="2"
+                  Width="100"
+                  Classes="Accent"
+                  Content="下一步"
+                  IsVisible="{TemplateBinding NextButtonIsVisible}"/>
+              </Grid>
+            </Border>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>
+
