@@ -7,6 +7,60 @@
   <x:Double x:Key="DropPickerWidth">256</x:Double>
   <x:Double x:Key="DropPickerHeight">150</x:Double>
 
+  <ControlTheme x:Key="AccentForegroundButton" TargetType="Button">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}"/>
+    <Setter Property="BackgroundSizing" Value="InnerBorderEdge"/>
+    <Setter Property="Padding" Value="{StaticResource ButtonPadding}"/>
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter
+          Name="PART_ContentPresenter"
+          Padding="{TemplateBinding Padding}"
+          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+          Background="{TemplateBinding Background}"
+          BackgroundSizing="{TemplateBinding BackgroundSizing}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          Content="{TemplateBinding Content}"
+          ContentTemplate="{TemplateBinding ContentTemplate}"
+          CornerRadius="{TemplateBinding CornerRadius}"
+          RecognizesAccessKey="True"/>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Transitions">
+        <Transitions>
+          <BrushTransition Property="Background" Duration="00:00:00.083"/>
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource SystemControlHighlightListAccentVeryHighBrush}"/>
+    </Style>
+
+    <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource SystemControlHighlightListAccentMediumLowBrush}"/>
+    </Style>
+
+    <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
+      <Setter Property="Background" Value="{DynamicResource SubtleFillColorDisabledBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+    </Style>
+  </ControlTheme>
+
   <ControlTheme x:Key="{x:Type ui:FolderDropPicker}" TargetType="ui:FolderDropPicker">
     <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBrush}"/>
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
@@ -57,10 +111,9 @@
             Grid.Row="2"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Classes="Transparent"
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SelectFolder]}"
-            Foreground="{DynamicResource SystemAccentColor}"
-            IsVisible="{TemplateBinding SelectedButtonIsVisible}"/>
+            IsVisible="{TemplateBinding SelectedButtonIsVisible}"
+            Theme="{StaticResource AccentForegroundButton}"/>
         </Grid>
       </ControlTemplate>
     </Setter>

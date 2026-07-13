@@ -54,10 +54,9 @@
             Grid.Row="2"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Classes="Transparent"
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SelectFile]}"
-            Foreground="{DynamicResource SystemAccentColor}"
-            IsVisible="{TemplateBinding SelectedButtonIsVisible}"/>
+            IsVisible="{TemplateBinding SelectedButtonIsVisible}"
+            Theme="{StaticResource AccentForegroundButton}"/>
         </Grid>
       </ControlTemplate>
     </Setter>

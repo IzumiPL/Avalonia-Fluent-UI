@@ -1,7 +1,5 @@
-﻿using Avalonia.Input;
+﻿namespace AvaloniaFluentUI.Controls;
 
-namespace AvaloniaFluentUI.Controls;
-
-public class ElevatedCard : SimpleCard
+public class ElevatedCard : Card 
 {
 }

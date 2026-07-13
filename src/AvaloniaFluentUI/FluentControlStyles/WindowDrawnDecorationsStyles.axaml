@@ -58,6 +58,15 @@
       </Style>
     </Style>
 
+    <Style Selector="^:disabled">
+      <Style Selector="^ /template/ Border">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
+      </Style>
+      <Style Selector="^ /template/ ui|FontIcon#ButtonIcon">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      </Style>
+    </Style>
+
     <Style Selector="^.Close">
       <Style Selector="^:pointerover /template/ Border">
         <Setter Property="Background" Value="#e81123"/>

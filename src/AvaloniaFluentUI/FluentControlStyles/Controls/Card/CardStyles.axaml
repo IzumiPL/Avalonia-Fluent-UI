@@ -3,7 +3,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
 
-  <ControlTheme x:Key="{x:Type ui:Card}" TargetType="ui:Card">
+  <ControlTheme x:Key="{x:Type ui:SimpleCard}" TargetType="ui:SimpleCard">
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource CardBorderThickness}"/>
@@ -44,8 +44,8 @@
 
   <!--  SimpleCard  -->
   <ControlTheme
-    x:Key="{x:Type ui:SimpleCard}"
-    BasedOn="{StaticResource {x:Type ui:Card}}"
+    x:Key="{x:Type ui:Card}"
+    BasedOn="{StaticResource {x:Type ui:SimpleCard}}"
     TargetType="ui:SimpleCard">
 
     <Style Selector="^:pointerover">
@@ -70,7 +70,7 @@
   <!--  ElevatedCard  -->
   <ControlTheme
     x:Key="{x:Type ui:ElevatedCard}"
-    BasedOn="{StaticResource {x:Type ui:SimpleCard}}"
+    BasedOn="{StaticResource {x:Type ui:Card}}"
     TargetType="ui:ElevatedCard">
 
     <Style Selector="^">
@@ -116,26 +116,20 @@
           BorderBrush="{TemplateBinding BorderBrush}"
           BorderThickness="{TemplateBinding BorderThickness}"
           CornerRadius="{TemplateBinding CornerRadius}">
-          <Border.Transitions>
-            <Transitions>
-              <BrushTransition Property="Background" Duration="00:00:00.083"/>
-            </Transitions>
-          </Border.Transitions>
-          <DockPanel>
+          <StackPanel>
             <TextBlock
               Margin="16,0"
-              Classes="SubTitle"
-              DockPanel.Dock="Top"
+              FontSize="16"
+              FontWeight="SemiBold"
               Text="{TemplateBinding Header}"/>
-            <Separator Margin="0,16" DockPanel.Dock="Top"/>
+            <Separator Margin="0,16"/>
             <ContentPresenter
               Margin="16,0"
               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
               Content="{TemplateBinding Content}"
-              ContentTemplate="{TemplateBinding ContentTemplate}"
-              DockPanel.Dock="Bottom"/>
-          </DockPanel>
+              ContentTemplate="{TemplateBinding ContentTemplate}"/>
+          </StackPanel>
         </Border>
       </ControlTemplate>
     </Setter>

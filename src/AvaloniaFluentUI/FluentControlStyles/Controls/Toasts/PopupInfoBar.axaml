@@ -7,7 +7,7 @@
   <Thickness x:Key="PopupInfoBarMargin">0,3,14,0</Thickness>
 
   <ControlTheme x:Key="{x:Type ui:PopupInfoBar}" TargetType="ui:PopupInfoBar">
-    <Setter Property="Background" Value="{DynamicResource PopupControlBackgroundBurhs}"/>
+    <Setter Property="Background" Value="{DynamicResource PopupControlBackgroundBrush}"/>
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBrush}"/>
     <Setter Property="BorderThickness" Value="1"/>

@@ -49,6 +49,7 @@
   <Color x:Key="LayerFillColor">#FFFFFF</Color>
 
   <Color x:Key="PopupControlColorDefault">#F2F2F2</Color>
+  <Color x:Key="PopupControlColorSecondary">#80F0F4F9</Color>
 
   <Color x:Key="SolidBackgroundFillColorSecondary">#EEEEEE</Color>
   <Color x:Key="SolidBackgroundFillColorTertiary">#00F0F4F9</Color>
@@ -75,7 +76,8 @@
   <SolidColorBrush x:Key="AvatarBackgroundDefaultBrush" Color="{StaticResource ControlBorderHigh}"/>
   <SolidColorBrush x:Key="ControlBorderHighBrush" Color="{StaticResource ControlBorderHigh}"/>
   <SolidColorBrush x:Key="SegmentedBackgroundBrush" Color="{StaticResource ControlBackgroundSecondaryHigh}"/>
-  <SolidColorBrush x:Key="PopupControlBackgroundBurhs" Color="{StaticResource PopupControlColorDefault}"/>
+  <SolidColorBrush x:Key="PopupControlBackgroundBrush" Color="{StaticResource PopupControlColorDefault}"/>
+  <SolidColorBrush x:Key="PopupControlBackgroundSecondaryBrush" Color="{StaticResource PopupControlColorSecondary}"/>
 
   <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="{StaticResource TextFillColorPrimary}"/>
   <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="{StaticResource TextFillColorSecondary}"/>

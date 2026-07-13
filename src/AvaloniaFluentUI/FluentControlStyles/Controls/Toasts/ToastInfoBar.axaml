@@ -27,8 +27,9 @@
           CornerRadius="6 6 10 10">
           <Border
             Margin="0,5,0,0"
-            Background="{DynamicResource PopupControlBackgroundBurhs}"
-            CornerRadius="{TemplateBinding CornerRadius}"
+            Background="{DynamicResource PopupControlBackgroundBrush}"
+            CornerRadius="{TemplateBinding CornerRadius,
+                                           Converter={StaticResource CornerRadiusConverter}}"
             Opacity="1">
             <Grid
               Margin="{TemplateBinding Padding}"

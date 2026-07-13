@@ -22,7 +22,7 @@
       <ControlTemplate>
         <Border
           Height="{TemplateBinding Height}"
-          MinHeight="68"
+          MinHeight="40"
           Padding="{TemplateBinding Padding}"
           HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
           VerticalAlignment="{TemplateBinding VerticalAlignment}"
@@ -38,24 +38,28 @@
             <ui:FluentIconElement
               Grid.RowSpan="2"
               Grid.Column="0"
-              Width="24"
-              Height="24"
+              Width="{TemplateBinding IconSize}"
+              Height="{TemplateBinding IconSize}"
               Margin="16,0,0,0"
               IsVisible="{TemplateBinding IconSource,
                                           Converter={x:Static ObjectConverters.IsNotNull}}"
               Source="{TemplateBinding IconSource}"/>
 
             <TextBlock
+              Name="PART_Header"
               Grid.Row="0"
               Grid.Column="1"
               MinHeight="18"
               FontSize="14"
+              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
               Text="{TemplateBinding Header}"/>
             <TextBlock
+              Name="PART_Description"
               Grid.Row="1"
               Grid.Column="1"
               FontSize="12"
               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+              IsVisible="{TemplateBinding DescriptionIsVisible}"
               Text="{TemplateBinding Description}"/>
 
             <ContentPresenter
@@ -69,6 +73,13 @@
         </Border>
       </ControlTemplate>
     </Setter>
+
+    <Style Selector="^[DescriptionIsVisible=False]">
+      <Style Selector="^ /template/ TextBlock#PART_Header">
+        <Setter Property="Grid.RowSpan" Value="2"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+      </Style>
+    </Style>
   </ControlTheme>
 </ResourceDictionary>
 
