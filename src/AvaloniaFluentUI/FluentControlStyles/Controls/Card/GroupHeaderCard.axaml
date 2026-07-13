@@ -1,0 +1,58 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
+
+  <ControlTheme x:Key="{x:Type ui:GroupHeaderCard}" TargetType="ui:GroupHeaderCard">
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource CardBorderThickness}"/>
+    <Setter Property="CornerRadius" Value="{DynamicResource CardCornerRadius}"/>
+    <Setter Property="Padding" Value="0 16 0 0"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Name="RootBorder"
+          Padding="{TemplateBinding Padding}"
+          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+          VerticalAlignment="{TemplateBinding VerticalAlignment}"
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <StackPanel Orientation="Vertical">
+            <TextBlock
+              Margin="16,0,0,16"
+              DockPanel.Dock="Top"
+              FontSize="16"
+              FontWeight="SemiBold"
+              Text="{TemplateBinding Header}"/>
+            <ItemsPresenter Name="PART_ItemsPresenter" DockPanel.Dock="Bottom"/>
+          </StackPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^ /template/ ItemsPresenter#PART_ItemsPresenter">
+      <Setter Property="ItemsPanel">
+        <ItemsPanelTemplate>
+          <VirtualizingStackPanel Orientation="Vertical"/>
+        </ItemsPanelTemplate>
+      </Setter>
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme
+    x:Key="{x:Type ui:GroupHeaderCardItem}"
+    BasedOn="{StaticResource {x:Type ui:SettingCard}}"
+    TargetType="ui:GroupHeaderCardItem">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0 1 0 0"/>
+    <Setter Property="CornerRadius" Value="0"/>
+    <Setter Property="Height" Value="68"/>
+  </ControlTheme>
+</ResourceDictionary>
+
