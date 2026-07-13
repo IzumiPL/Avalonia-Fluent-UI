@@ -154,6 +154,7 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Slider/ToolTipSliderStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Pager/PipsPagerStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FlipViewStyle.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/View/WizardView.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/View/Avatar.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Picker/FolderDropPicker.axaml"/>
@@ -171,6 +172,7 @@
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/CardStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/SettingCardStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/GroupHeaderCard.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Label/Tag.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Label/HyperlinkLabel.axaml"/>
