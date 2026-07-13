@@ -16,10 +16,9 @@
 
 ![gallery](README.png)
 
-## 安装🚀
-```shell
-dotnet add package AvaloniaFluentUI --version 1.0.3
-```
+> [!Warning]
+>
+> 如需使用`Avalonia11`版本,请克隆本仓库构建, `Nuget`不会再提供 `Avalonia11` 版本的更新
 
 ## 运行示例▶️
 克隆仓库后就可以运行 samples 目录下的示例程序, 也可以通过[Release](https://github.com/HiyorinI/AvaloniaFluentUI/releases)页面下载
