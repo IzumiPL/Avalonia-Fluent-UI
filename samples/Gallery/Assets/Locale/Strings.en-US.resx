@@ -1634,4 +1634,46 @@
   <data name="CustomTag" xml:space="preserve">
     <value>I am a custom label, there is a long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, Long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long,</value>
   </data>
+  <data name="GroupHeaderCard" xml:space="preserve">
+    <value>Group Title Card</value>
+  </data>
+  <data name="BasicSettings" xml:space="preserve">
+    <value>Basic Settings</value>
+  </data>
+  <data name="AS" xml:space="preserve">
+    <value>Always displayed (it is recommended to enable it for the first time packaging)</value>
+  </data>
+  <data name="BuildDirectory" xml:space="preserve">
+    <value>Build directory</value>
+  </data>
+  <data name="CliBuiPack" xml:space="preserve">
+    <value>Click the compile button to start packaging</value>
+  </data>
+  <data name="Compile" xml:space="preserve">
+    <value>compile</value>
+  </data>
+  <data name="IptIpPath" xml:space="preserve">
+    <value>Enter the path to the entry script</value>
+  </data>
+  <data name="IptSc" xml:space="preserve">
+    <value>Entry script</value>
+  </data>
+  <data name="IsShowTer" xml:space="preserve">
+    <value>Set whether to display the command line terminal</value>
+  </data>
+  <data name="NAS" xml:space="preserve">
+    <value>Don't show terminal</value>
+  </data>
+  <data name="RunTer" xml:space="preserve">
+    <value>Run terminal</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+  <data name="SelOtDir" xml:space="preserve">
+    <value>Select the Nuitka output directory</value>
+  </data>
+  <data name="SeSfIptSc" xml:space="preserve">
+    <value>Select the software's entry script</value>
+  </data>
 </root>

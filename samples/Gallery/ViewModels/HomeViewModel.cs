@@ -78,11 +78,11 @@ public partial class HomeViewModel : ViewModelBase
         );
 
         StatusAndInformationItemSource = ButtonItemModel.CreateList(
-            ("ToolTip", "ToolTip", "StatusAndInformation",  "A control tooltip, hover show tooltip"),
-            ("InfoBadge", "InfoBadge", "StatusAndInformation", "Information badges can display a variety of information"),
-            ("InfoBar", "InfoBar", "StatusAndInformation", "Information bar can display a variety of information and can be closed"),
-            ("ProgressBar", "ProgressBar", "StatusAndInformation", "The progress bar has two states: confirmed and uncertain."),
-            ("ProgressRing", "ProgressRing", "StatusAndInformation", "A progress ring")
+            ("ToolTip", "ToolTip", "ToolTip",  "A control tooltip, hover show tooltip"),
+            ("InfoBadge", "InfoBadge", "Information", "Information badges can display a variety of information"),
+            ("InfoBar", "InfoBar", "InfoBar", "Information bar can display a variety of information and can be closed"),
+            ("ProgressBar", "ProgressBar", "ProgressBar", "The progress bar has two states: confirmed and uncertain."),
+            ("ProgressRing", "ProgressRing", "ProgressBar", "A progress ring")
         );
 
         TextItemSource = ButtonItemModel.CreateList(

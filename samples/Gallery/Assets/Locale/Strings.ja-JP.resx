@@ -1634,4 +1634,46 @@
   <data name="CustomTag" xml:space="preserve">
     <value>私はカスタムラベルです、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い、長い很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很長の内容、宽度不表示会触発自行</value>
   </data>
+  <data name="GroupHeaderCard" xml:space="preserve">
+    <value>グループタイトルカード</value>
+  </data>
+  <data name="BasicSettings" xml:space="preserve">
+    <value>基本設定</value>
+  </data>
+  <data name="SelOtDir" xml:space="preserve">
+    <value>Nuitka 出力ディレクトリを選択します</value>
+  </data>
+  <data name="BuildDirectory" xml:space="preserve">
+    <value>ディレクトリを作成する</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>選ぶ</value>
+  </data>
+  <data name="IsShowTer" xml:space="preserve">
+    <value>コマンドラインターミナルを表示するかどうかを設定します</value>
+  </data>
+  <data name="RunTer" xml:space="preserve">
+    <value>ターミナルを実行する</value>
+  </data>
+  <data name="AS" xml:space="preserve">
+    <value>常に表示されます (初めてパッケージ化する場合は有効にすることをお勧めします)</value>
+  </data>
+  <data name="NAS" xml:space="preserve">
+    <value>端末表示なし</value>
+  </data>
+  <data name="SeSfIptSc" xml:space="preserve">
+    <value>ソフトウェアエントリスクリプトを選択します</value>
+  </data>
+  <data name="IptSc" xml:space="preserve">
+    <value>入口脚本</value>
+  </data>
+  <data name="IptIpPath" xml:space="preserve">
+    <value>入力スクリプトへのパスを入力します</value>
+  </data>
+  <data name="CliBuiPack" xml:space="preserve">
+    <value>コンパイルボタンをクリックして荷造りを始めてください</value>
+  </data>
+  <data name="Compile" xml:space="preserve">
+    <value>コンパイル</value>
+  </data>
 </root>

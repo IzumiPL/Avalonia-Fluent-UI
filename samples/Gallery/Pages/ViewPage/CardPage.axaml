@@ -128,6 +128,51 @@
       </fui:HeaderCard>
     </ui:CodeCard>
 
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[GroupHeaderCard]}">
+      <fui:GroupHeaderCard Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BasicSettings]}">
+        <fui:GroupHeaderCardItem
+          Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SelOtDir]}"
+          Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BuildDirectory]}"
+          IconSize="32"
+          IconSource="avares://Gallery/Assets/Icons/光辉矢愿_瞄准.png">
+          <Button Width="128" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Selected]}"/>
+        </fui:GroupHeaderCardItem>
+        <fui:GroupHeaderCardItem
+          Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[IsShowTer]}"
+          Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[RunTer]}"
+          IconSize="32"
+          IconSource="avares://Gallery/Assets/Icons/昔涟_收到.png">
+          <ComboBox SelectedIndex="0">
+            <ComboBoxItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[AS]}"/>
+            <ComboBoxItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NAS]}"/>
+          </ComboBox>
+        </fui:GroupHeaderCardItem>
+        <fui:GroupHeaderCardItem
+          Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SeSfIptSc]}"
+          Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[IptSc]}"
+          IconSize="32"
+          IconSource="avares://Gallery/Assets/Icons/帕姆_注意.png">
+          <fui:SearchTextBox MinWidth="256" PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[IptIpPath]}"/>
+        </fui:GroupHeaderCardItem>
+        <fui:GroupHeaderCardItem
+          DescriptionIsVisible="False"
+          Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CliBuiPack]}"
+          IconSize="32"
+          IconSource="avares://Gallery/Assets/Icons/光辉矢愿_遨游.png">
+          <StackPanel
+            HorizontalAlignment="Right"
+            Orientation="Horizontal"
+            Spacing="6">
+            <fui:PushButton Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Open]}" IconSource="{x:Static fi:FluentIcon.View}"/>
+            <fui:PushButton
+              Classes="Accent"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Compile]}"
+              IconSource="{x:Static fi:FluentIcon.Play}"/>
+          </StackPanel>
+        </fui:GroupHeaderCardItem>
+      </fui:GroupHeaderCard>
+    </ui:CodeCard>
+
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SimpleSettingsCard]}">
       <fui:SettingCard
         Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SoundDescription]}"
