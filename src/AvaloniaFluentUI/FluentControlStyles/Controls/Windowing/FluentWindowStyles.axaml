@@ -143,6 +143,7 @@
                       Classes="CaptionButton"
                       Classes.inactive="{Binding !$parent[wnd:FluentWindow].IsActive}"
                       Content="&#xE738;"
+                      IsEnabled="{Binding $parent[wnd:FluentWindow].CanMinimize}"
                       IsVisible="{TemplateBinding MinButtonIsVisible}"
                       Theme="{StaticResource FluentDrawnCaptionButton}"
                       WindowDecorationProperties.ElementRole="MinimizeButton"/>
@@ -152,6 +153,7 @@
                       Classes="CaptionButton"
                       Classes.inactive="{Binding !$parent[wnd:FluentWindow].IsActive}"
                       Content="&#xE739;"
+                      IsEnabled="{Binding $parent[wnd:FluentWindow].CanMaximize}"
                       IsVisible="{TemplateBinding MaxButtonIsVisible}"
                       Theme="{StaticResource FluentDrawnCaptionButton}"
                       WindowDecorationProperties.ElementRole="MaximizeButton"/>

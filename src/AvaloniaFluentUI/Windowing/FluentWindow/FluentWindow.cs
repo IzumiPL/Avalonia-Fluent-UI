@@ -255,6 +255,7 @@ public partial class FluentWindow : Window
     private SplashScreenContext _splashContext;
     private Grid _defaultTitleBar;
     private FluentWindowTitleBar _titleBar;
+    // TODO: 暂时没什么用
     private Border _windowBorder;
     private bool _hideSizeButtons;
     
@@ -272,7 +273,6 @@ public partial class FluentWindow : Window
     private const string PART_MAXIMIZE_BUTTON = "PART_MaximizeButton";
     private const string PART_CLOSE_BUTTON = "PART_CloseButton";
 
-    // Resource names used in SetTitleBarColors
     private const string TITLE_BAR_BACKGROUND = "FluentTitleBarBackground";
     private const string TITLE_BAR_FOREGROUND = "FluentTitleBarForeground";
     private const string TITLE_BAR_INACTIVE_BACKGROUND = "FluentTitleBarBackgroundInactive";
@@ -382,7 +382,8 @@ public partial class FluentWindow : Window
             _defaultTitleBar = e.NameScope.Find<Grid>(PART_DEFAULT_TITLE_BAR);
 
             OnTitleBarHeightChanged(_titleBar.Height);
-
+            
+            // TODO: 未实现
             SetTitleBarColors();
         }
 
@@ -423,17 +424,13 @@ public partial class FluentWindow : Window
         }
         else if (change.Property == ActualThemeVariantProperty)
         {
+            // TODO: 未实现
             SetTitleBarColors();
         }
         
         if (change.Property == FullScreenButtonIsVisibleProperty)
         {
             TitleBarContentMargin = change.GetNewValue<bool>() ?  new Thickness(8, 0, 185, 0) : new Thickness(8, 0, 140, 0);
-        }
-
-        if (change.Property == CanResizeProperty)
-        {
-            _maximizeButton?.IsEnabled = change.GetNewValue<bool>();
         }
     }
 
@@ -474,6 +471,7 @@ public partial class FluentWindow : Window
 
     internal void TitleBarColorsChanged()
     {
+            // TODO: 未实现
         SetTitleBarColors();
     }
 
@@ -520,6 +518,7 @@ public partial class FluentWindow : Window
 
     private void SetTitleBarColors()
     {
+            // TODO: 未实现
         if (_titleBar == null)
             return;
 

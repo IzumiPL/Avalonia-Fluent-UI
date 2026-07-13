@@ -7,6 +7,8 @@ namespace AvaloniaFluentUI.Windowing;
 /// Represents the title bar of an <see cref="FluentWindow"/> allowing customization such as
 /// colors, hit testing, and allowing app content in the title bar area
 /// </summary>
+
+// TODO: 除Height属性,其他属性不可用
 public class FluentWindowTitleBar
 {
     internal FluentWindowTitleBar(FluentWindow parent)
