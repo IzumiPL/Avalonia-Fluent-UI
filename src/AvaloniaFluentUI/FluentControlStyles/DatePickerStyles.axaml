@@ -413,13 +413,13 @@
               </Grid.Styles>
               <!--  Column Definitions set in code, ignore here  -->
               <Panel Name="PART_MonthHost">
-                <ui:SmoothScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                <ui:SmoothScrollSnapViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
                   <DateTimePickerPanel
                     Name="PART_MonthSelector"
                     ItemHeight="{DynamicResource DatePickerFlyoutPresenterItemHeight}"
                     PanelType="Month"
                     ShouldLoop="True"/>
-                </ui:SmoothScrollViewer>
+                </ui:SmoothScrollSnapViewer>
                 <RepeatButton
                   Name="PART_MonthUpButton"
                   Classes="UpButton"
@@ -430,13 +430,13 @@
                   Theme="{StaticResource DateTimePickerFlyoutLoopingNavButton}"/>
               </Panel>
               <Panel Name="PART_DayHost">
-                <ui:SmoothScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                <ui:SmoothScrollSnapViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
                   <DateTimePickerPanel
                     Name="PART_DaySelector"
                     ItemHeight="{DynamicResource DatePickerFlyoutPresenterItemHeight}"
                     PanelType="Day"
                     ShouldLoop="True"/>
-                </ui:SmoothScrollViewer>
+                </ui:SmoothScrollSnapViewer>
                 <RepeatButton
                   Name="PART_DayUpButton"
                   Classes="UpButton"
@@ -447,13 +447,13 @@
                   Theme="{StaticResource DateTimePickerFlyoutLoopingNavButton}"/>
               </Panel>
               <Panel Name="PART_YearHost">
-                <ui:SmoothScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                <ui:SmoothScrollSnapViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
                   <DateTimePickerPanel
                     Name="PART_YearSelector"
                     ItemHeight="{DynamicResource DatePickerFlyoutPresenterItemHeight}"
                     PanelType="Year"
                     ShouldLoop="False"/>
-                </ui:SmoothScrollViewer>
+                </ui:SmoothScrollSnapViewer>
                 <RepeatButton
                   Name="PART_YearUpButton"
                   Classes="UpButton"

@@ -266,13 +266,13 @@
             <Grid Name="PART_PickerContainer">
               <!--  Ignore col defs here, set in code  -->
               <Panel Name="PART_HourHost" Grid.Column="0">
-                <ui:SmoothScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                <ui:SmoothScrollSnapViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
                   <DateTimePickerPanel
                     Name="PART_HourSelector"
                     ItemHeight="{DynamicResource TimePickerFlyoutPresenterItemHeight}"
                     PanelType="Hour"
                     ShouldLoop="True"/>
-                </ui:SmoothScrollViewer>
+                </ui:SmoothScrollSnapViewer>
                 <RepeatButton
                   Name="PART_HourUpButton"
                   VerticalAlignment="Top"
@@ -286,13 +286,13 @@
               </Panel>
 
               <Panel Name="PART_MinuteHost" Grid.Column="2">
-                <ui:SmoothScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                <ui:SmoothScrollSnapViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
                   <DateTimePickerPanel
                     Name="PART_MinuteSelector"
                     ItemHeight="{DynamicResource TimePickerFlyoutPresenterItemHeight}"
                     PanelType="Minute"
                     ShouldLoop="True"/>
-                </ui:SmoothScrollViewer>
+                </ui:SmoothScrollSnapViewer>
                 <RepeatButton
                   Name="PART_MinuteUpButton"
                   Classes="UpButton"
@@ -305,13 +305,13 @@
               </Panel>
 
               <Panel Name="PART_SecondHost" Grid.Column="4">
-                <ui:SmoothScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                <ui:SmoothScrollSnapViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
                   <DateTimePickerPanel
                     Name="PART_SecondSelector"
                     ItemHeight="{DynamicResource TimePickerFlyoutPresenterItemHeight}"
                     PanelType="Second"
                     ShouldLoop="True"/>
-                </ui:SmoothScrollViewer>
+                </ui:SmoothScrollSnapViewer>
                 <RepeatButton
                   Name="PART_SecondUpButton"
                   Classes="UpButton"
@@ -323,13 +323,13 @@
               </Panel>
 
               <Panel Name="PART_PeriodHost" Grid.Column="6">
-                <ui:SmoothScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                <ui:SmoothScrollSnapViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
                   <DateTimePickerPanel
                     Name="PART_PeriodSelector"
                     ItemHeight="{DynamicResource TimePickerFlyoutPresenterItemHeight}"
                     PanelType="TimePeriod"
                     ShouldLoop="False"/>
-                </ui:SmoothScrollViewer>
+                </ui:SmoothScrollSnapViewer>
                 <RepeatButton
                   Name="PART_PeriodUpButton"
                   Classes="UpButton"
