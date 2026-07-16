@@ -40,9 +40,15 @@
         </Border>
       </ControlTemplate>
     </Setter>
+
+    <Style Selector="^:disabled">
+      <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+      <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+    </Style>
   </ControlTheme>
 
-  <!--  SimpleCard  -->
+  <!--  Card  -->
   <ControlTheme
     x:Key="{x:Type ui:Card}"
     BasedOn="{StaticResource {x:Type ui:SimpleCard}}"
@@ -133,6 +139,12 @@
         </Border>
       </ControlTemplate>
     </Setter>
+
+    <Style Selector="^:disabled">
+      <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+      <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+    </Style>
   </ControlTheme>
 </ResourceDictionary>
 

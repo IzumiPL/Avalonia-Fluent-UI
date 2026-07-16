@@ -12,6 +12,7 @@
     <Setter Property="BorderThickness" Value="{DynamicResource CardBorderThickness}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
     <Setter Property="Padding" Value="{DynamicResource SettingCardPadding}"/>
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
     <Setter Property="Height" Value="68"/>
 
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -31,7 +32,8 @@
           BorderThickness="{TemplateBinding BorderThickness}"
           CornerRadius="{TemplateBinding CornerRadius}">
           <Grid
-            ColumnDefinitions="Auto, Auto, *"
+            Name="Layout"
+            ColumnDefinitions="Auto, Auto, *, Auto"
             ColumnSpacing="15"
             RowDefinitions="*,*">
             <!--  <Icon  -->
@@ -45,39 +47,87 @@
                                           Converter={x:Static ObjectConverters.IsNotNull}}"
               Source="{TemplateBinding IconSource}"/>
 
-            <TextBlock
+            <ContentPresenter
               Name="PART_Header"
               Grid.Row="0"
+              Grid.RowSpan="2"
               Grid.Column="1"
               MinHeight="18"
+              VerticalAlignment="Center"
+              Content="{TemplateBinding Header}"
+              ContentTemplate="{TemplateBinding HeaderTemplate}"
               FontSize="14"
-              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-              Text="{TemplateBinding Header}"/>
+              Foreground="{TemplateBinding Foreground}"/>
             <TextBlock
               Name="PART_Description"
               Grid.Row="1"
               Grid.Column="1"
               FontSize="12"
               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-              IsVisible="{TemplateBinding DescriptionIsVisible}"
-              Text="{TemplateBinding Description}"/>
+              IsVisible="False"
+              Text="{TemplateBinding Description}"
+              TextWrapping="WrapWithOverflow"/>
 
             <ContentPresenter
+              Name="PART_ContentPresenter"
               Grid.RowSpan="2"
               Grid.Column="2"
+              Grid.ColumnSpan="2"
               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
               Content="{TemplateBinding Content}"
               ContentTemplate="{TemplateBinding ContentTemplate}"/>
+
+            <ui:SymbolIcon
+              Name="ChevronRightIcon"
+              Grid.RowSpan="2"
+              Grid.Column="3"
+              FontSize="18"
+              IsVisible="False"
+              Symbol="ChevronRight"/>
           </Grid>
         </Border>
       </ControlTemplate>
     </Setter>
 
-    <Style Selector="^[DescriptionIsVisible=False]">
-      <Style Selector="^ /template/ TextBlock#PART_Header">
-        <Setter Property="Grid.RowSpan" Value="2"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
+    <Style Selector="^:description">
+      <Style Selector="^ /template/ ContentPresenter#PART_Header">
+        <Setter Property="Grid.RowSpan" Value="1"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+      </Style>
+
+      <Style Selector="^ /template/ TextBlock#PART_Description">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:disabled">
+      <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+      <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+
+      <Style Selector="^ /template/ TextBlock#PART_Description">
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^.Clicked">
+      <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Grid.ColumnSpan" Value="1"/>
+      </Style>
+
+      <Style Selector="^ /template/ ui|SymbolIcon#ChevronRightIcon">
+        <Setter Property="IsVisible" Value="True"/>
+      </Style>
+
+      <Style Selector="^:pointerover">
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
+      </Style>
+
+      <Style Selector="^:pressed">
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
       </Style>
     </Style>
   </ControlTheme>

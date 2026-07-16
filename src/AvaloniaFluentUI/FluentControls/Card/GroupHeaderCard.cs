@@ -1,7 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using AvaloniaFluentUI.Controls;
+﻿using Avalonia.Controls.Primitives;
 
 namespace AvaloniaFluentUI.Controls;
 

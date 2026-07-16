@@ -24,12 +24,13 @@
           BorderThickness="{TemplateBinding BorderThickness}"
           CornerRadius="{TemplateBinding CornerRadius}">
           <StackPanel Orientation="Vertical">
-            <TextBlock
+            <ContentPresenter
               Margin="16,0,0,16"
+              Content="{TemplateBinding Header}"
+              ContentTemplate="{TemplateBinding HeaderTemplate}"
               DockPanel.Dock="Top"
-              FontSize="16"
-              FontWeight="SemiBold"
-              Text="{TemplateBinding Header}"/>
+              TextElement.FontSize="16"
+              TextElement.FontWeight="SemiBold"/>
             <ItemsPresenter Name="PART_ItemsPresenter" DockPanel.Dock="Bottom"/>
           </StackPanel>
         </Border>
@@ -42,6 +43,12 @@
           <VirtualizingStackPanel Orientation="Vertical"/>
         </ItemsPanelTemplate>
       </Setter>
+    </Style>
+
+    <Style Selector="^:disabled">
+      <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+      <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
     </Style>
   </ControlTheme>
 
