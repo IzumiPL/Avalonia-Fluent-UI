@@ -1676,4 +1676,85 @@
   <data name="Compile" xml:space="preserve">
     <value>コンパイル</value>
   </data>
+  <data name="WizardView" xml:space="preserve">
+    <value>ウィザードビュー</value>
+  </data>
+  <data name="WizardWindow" xml:space="preserve">
+    <value>ウィザードウィンドウ</value>
+  </data>
+  <data name="ShowWizardWindow" xml:space="preserve">
+    <value>ウィザードウィンドウを表示</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="TkError" xml:space="preserve">
+    <value>アクセストークンやプロキシサーバーのアドレスが間違っている場合は、新たに入力してください!</value>
+  </data>
+  <data name="NameError" xml:space="preserve">
+    <value>名前の入力に誤りがあります。もう一度入力してください。</value>
+  </data>
+  <data name="UnPsError" xml:space="preserve">
+    <value>入力したユーザー名またはパスワードが間違っています。再入力してください。</value>
+  </data>
+  <data name="WeApply" xml:space="preserve">
+    <value>コンポーネントライブラリへようこそ</value>
+  </data>
+  <data name="StartConf" xml:space="preserve">
+    <value>使い始める前に、私と一緒に簡単な設定をしてください</value>
+  </data>
+  <data name="ImportConf" xml:space="preserve">
+    <value>インポート設定</value>
+  </data>
+  <data name="HFConf" xml:space="preserve">
+    <value>Hugging Face 構成</value>
+  </data>
+  <data name="AccessToken" xml:space="preserve">
+    <value>アクセストークン</value>
+  </data>
+  <data name="InputAccessToken" xml:space="preserve">
+    <value>アクセストークン(tk_1)を入力してください</value>
+  </data>
+  <data name="Proxy" xml:space="preserve">
+    <value>プロキシサーバー</value>
+  </data>
+  <data name="InputProxy" xml:space="preserve">
+    <value>プロキシ サービス エリアのアドレス (locale) を入力してください</value>
+  </data>
+  <data name="FM" xml:space="preserve">
+    <value>Family members</value>
+  </data>
+  <data name="Father" xml:space="preserve">
+    <value>父さん</value>
+  </data>
+  <data name="InputFatherName" xml:space="preserve">
+    <value>お父さんの名前を入力してください(1)</value>
+  </data>
+  <data name="Mother" xml:space="preserve">
+    <value>母親</value>
+  </data>
+  <data name="InputMotherName" xml:space="preserve">
+    <value>お母様の名前を入力してください(2)</value>
+  </data>
+  <data name="AC" xml:space="preserve">
+    <value>アカウント設定</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>ユーザー名</value>
+  </data>
+  <data name="InputUserName" xml:space="preserve">
+    <value>ログインユーザー名を入力してください(1)</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>パスワード</value>
+  </data>
+  <data name="InputPassword" xml:space="preserve">
+    <value>パスワード(1)を入力してください。</value>
+  </data>
+  <data name="CAC" xml:space="preserve">
+    <value>すべてのセットアップを完了しました!</value>
+  </data>
+  <data name="CACMessage" xml:space="preserve">
+    <value>ダウンロード者は、あなたが提供した設定情報に基づいてAIモデルをダウンロードします。アプリの設定でいつでも変更可能です。お楽しみください!</value>
+  </data>
 </root>

@@ -1,0 +1,52 @@
+﻿<ui:InfoBarHostViewBase
+  x:Class="Gallery.Pages.WizardPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:page="clr-namespace:Gallery.Pages"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:WizardPageViewModel"
+  mc:Ignorable="d">
+
+  <ui:ViewBase.Styles>
+    <Style Selector="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+  </ui:ViewBase.Styles>
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[WizardView]}">
+      <fui:WizardView
+        Name="WizardView"
+        MinWidth="648"
+        Margin="12"
+        Padding="24"
+        HorizontalAlignment="Stretch"
+        Finished="OnFinished"
+        Finishing="OnFinishing"
+        Nexted="OnNexted"
+        Nexting="OnNexting"
+        SelectedIndex="0">
+        <page:P1 Name="P1"/>
+        <page:P2 Name="P2"/>
+        <page:P3 Name="P3"/>
+        <page:P4 Name="P4"/>
+        <page:P5 Name="P5"/>
+      </fui:WizardView>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[WizardWindow]}">
+      <Button
+        Width="150"
+        Click="OnShowWizardWindow"
+        Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ShowWizardWindow]}"/>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:InfoBarHostViewBase>

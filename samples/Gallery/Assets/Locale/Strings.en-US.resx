@@ -1676,4 +1676,85 @@
   <data name="SeSfIptSc" xml:space="preserve">
     <value>Select the software's entry script</value>
   </data>
+  <data name="WizardView" xml:space="preserve">
+    <value>Wizard view</value>
+  </data>
+  <data name="WizardWindow" xml:space="preserve">
+    <value>Wizard window</value>
+  </data>
+  <data name="ShowWizardWindow" xml:space="preserve">
+    <value>Show wizard window</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="TkError" xml:space="preserve">
+    <value>The access token or proxy server address is entered incorrectly, please re-enter it!</value>
+  </data>
+  <data name="NameError" xml:space="preserve">
+    <value>There is an error in entering the name, please re-enter it!</value>
+  </data>
+  <data name="UnPsError" xml:space="preserve">
+    <value>The username or password entered is incorrect, please re-enter it!</value>
+  </data>
+  <data name="WeApply" xml:space="preserve">
+    <value>Welcome to the component library</value>
+  </data>
+  <data name="StartConf" xml:space="preserve">
+    <value>Before you start using it, please do some simple configurations with me</value>
+  </data>
+  <data name="ImportConf" xml:space="preserve">
+    <value>Import configuration</value>
+  </data>
+  <data name="HFConf" xml:space="preserve">
+    <value>Hugging Face Configuration</value>
+  </data>
+  <data name="AccessToken" xml:space="preserve">
+    <value>Access Token</value>
+  </data>
+  <data name="InputAccessToken" xml:space="preserve">
+    <value>Please enter the access token (tk_1)</value>
+  </data>
+  <data name="Proxy" xml:space="preserve">
+    <value>Proxy Server</value>
+  </data>
+  <data name="InputProxy" xml:space="preserve">
+    <value>Please enter the proxy service area address (locale)</value>
+  </data>
+  <data name="FM" xml:space="preserve">
+    <value>家族メンバー</value>
+  </data>
+  <data name="Father" xml:space="preserve">
+    <value>Father</value>
+  </data>
+  <data name="InputFatherName" xml:space="preserve">
+    <value>Please enter your father's name(1)</value>
+  </data>
+  <data name="Mother" xml:space="preserve">
+    <value>Mother</value>
+  </data>
+  <data name="InputMotherName" xml:space="preserve">
+    <value>Please enter your mother's name(2)</value>
+  </data>
+  <data name="AC" xml:space="preserve">
+    <value>Account configuration</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="InputUserName" xml:space="preserve">
+    <value>Please enter your login username(1)</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="InputPassword" xml:space="preserve">
+    <value>Please enter password(1)</value>
+  </data>
+  <data name="CAC" xml:space="preserve">
+    <value>You have completed all configurations!</value>
+  </data>
+  <data name="CACMessage" xml:space="preserve">
+    <value>The downloader will download AI models for you based on the configuration information you provide. You can modify them in the application settings at any time. I wish you a happy use!</value>
+  </data>
 </root>

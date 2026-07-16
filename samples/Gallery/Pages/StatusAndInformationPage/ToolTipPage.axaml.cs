@@ -13,27 +13,5 @@ public partial class ToolTipPage : ViewBase
         CodeCards = new Dictionary<string, CodeCard>() { { "ToolTip", ToolTipCard } };
     }
     
-        private void OnNexting(object? sender, WizardNextingEventArgs e)
-    {
-        if (e.CurrentIndex == 1)
-        {
-            if ((TokenEdit.Text != "1") || (ProxyEdit.Text != "1"))
-            {
-                e.Cancel = true;
-            }
-        }
-    }
 
-    private void OnFinished(object? sender, System.EventArgs e)
-    {
-        WizardView.IsVisible = false;
-    }
-
-    private void OnFinishing(object? sender, WizardFinishingEventArgs e)
-    {
-    }
-
-    private void OnNexted(object? sender, System.EventArgs e)
-    {
-    }
 }
