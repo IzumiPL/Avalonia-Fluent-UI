@@ -18,7 +18,7 @@ internal class SharedPseudoclasses
     public const string s_pcChecked = ":checked";
 
     // SettingsExpander specific
-    public const string s_pcAllowClick = ":allowClick";
+    // public const string s_pcAllowClick = ":allowClick";
 
     // TabViewSpecific
     public const string s_pcNoBorder = ":noborder";

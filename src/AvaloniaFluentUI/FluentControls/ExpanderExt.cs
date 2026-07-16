@@ -167,7 +167,7 @@ public sealed class ExpanderExt : AvaloniaObject
             
             _expanderContent.SetCurrentValue(Visual.IsVisibleProperty, true);
 
-            if (_expander.Parent is SettingsExpander se && se.Presenter != null)
+            if (_expander.Parent is ExpanderSettingCard se && se.Presenter != null)
             {
                 // SettingsExpander does not use Virtualization, so it's safe here to use
                 // Infinity to measure
