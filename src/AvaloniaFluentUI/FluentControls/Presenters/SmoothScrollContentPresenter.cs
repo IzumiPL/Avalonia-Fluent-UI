@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Input;
@@ -9,13 +9,13 @@ namespace AvaloniaFluentUI.Controls;
 
 public class SmoothScrollContentPresenter : Avalonia.Controls.Presenters.ScrollContentPresenter
 {
-    private double _remainDelta;
-    private bool _isRunning;
-    
-    private async Task Scroll(Orientation orientation)
+    protected double _remainDelta;
+    protected bool _isRunning;
+
+    protected virtual async Task Scroll(Orientation orientation)
     {
         _isRunning = true;
-    
+
         while (Math.Abs(_remainDelta) > 0.5)
         {
             double delta = _remainDelta * 0.25;
@@ -33,12 +33,12 @@ public class SmoothScrollContentPresenter : Avalonia.Controls.Presenters.ScrollC
                 double max = Math.Max(0, Extent.Height - Viewport.Height);
                 vector = Offset.WithY(Math.Clamp(target, 0, max));
             }
-    
+
             SetCurrentValue(OffsetProperty, vector);
-    
+
             await Task.Delay(8);
         }
-    
+
         _remainDelta = 0;
         _isRunning = false;
     }
