@@ -45,7 +45,8 @@
               Margin="16,0,0,0"
               IsVisible="{TemplateBinding IconSource,
                                           Converter={x:Static ObjectConverters.IsNotNull}}"
-              Source="{TemplateBinding IconSource}"/>
+              Source="{TemplateBinding IconSource}"
+              TextElement.FontSize="{TemplateBinding IconSize}"/>
 
             <ContentPresenter
               Name="PART_Header"
@@ -112,6 +113,12 @@
     </Style>
 
     <Style Selector="^.Clicked">
+      <Setter Property="Transitions">
+        <Transitions>
+          <BrushTransition Property="Background" Duration="00:00:00.083"/>
+        </Transitions>
+      </Setter>
+
       <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Grid.ColumnSpan" Value="1"/>
       </Style>

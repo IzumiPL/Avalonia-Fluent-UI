@@ -186,7 +186,8 @@
                   VerticalAlignment="Center"
                   IsVisible="{TemplateBinding IconSource,
                                               Converter={x:Static ObjectConverters.IsNotNull}}"
-                  Source="{TemplateBinding IconSource}"/>
+                  Source="{TemplateBinding IconSource}"
+                  TextElement.FontSize="{DynamicResource ExpanderSettingCardIconSize}"/>
 
                 <ContentPresenter
                   Name="PART_Header"
