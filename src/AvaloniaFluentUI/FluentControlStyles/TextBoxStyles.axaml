@@ -8,7 +8,7 @@
       <StackPanel Spacing="5">
         <TextBox/>
         <TextBox Text="Hello Down there"/>
-        <TextBox Watermark="Watermark"/>
+        <TextBox PlaceholderText="Watermark"/>
         <TextBox IsEnabled="False" Text="Test"/>
         <TextBox Classes="Clear" Text="Test Clear"/>
         <TextBox
@@ -223,7 +223,7 @@
                   Margin="{TemplateBinding Padding}"
                   Cursor="IBeam">
                   <TextBlock
-                    Name="PART_FloatingWatermark"
+                    Name="PART_FloatingPlaceholder"
                     DockPanel.Dock="Top"
                     FontSize="{TemplateBinding FontSize}"
                     Foreground="{DynamicResource SystemAccentColor}"
@@ -236,7 +236,7 @@
                     VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}">
                     <Panel>
                       <TextBlock
-                        Name="PART_Watermark"
+                        Name="PART_Placeholder"
                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                         Foreground="{DynamicResource TextFillColorSecondaryBrush}"
@@ -297,7 +297,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
       </Style>
 
-      <Style Selector="^ /template/ TextBlock#PART_Watermark, ^ /template/ TextBlock#PART_FloatingWatermark">
+      <Style Selector="^ /template/ TextBlock#PART_Placeholder, ^ /template/ TextBlock#PART_FloatingPlaceholder">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
       </Style>
     </Style>
@@ -311,7 +311,7 @@
         <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
       </Style>
 
-      <Style Selector="^ /template/ TextBlock#PART_Watermark">
+      <Style Selector="^ /template/ TextBlock#PART_Placeholder">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
       </Style>
     </Style>
@@ -320,7 +320,7 @@
     <Style Selector="^:focus">
       <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
 
-      <Style Selector="^ /template/ TextBlock#PART_Watermark">
+      <Style Selector="^ /template/ TextBlock#PART_Placeholder">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/>
       </Style>
 
@@ -335,7 +335,7 @@
       <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorCriticalBrush}"/>
     </Style>
 
-    <Style Selector="^[UseFloatingWatermark=true]:not(:empty) /template/ TextBlock#PART_FloatingWatermark">
+    <Style Selector="^[UseFloatingPlaceholder=true]:not(:empty) /template/ TextBlock#PART_FloatingPlaceholder">
       <Setter Property="IsVisible" Value="True"/>
     </Style>
 

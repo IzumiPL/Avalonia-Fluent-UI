@@ -118,9 +118,6 @@
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/TeachingTipStyles.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/SettingsExpander/SettingsExpanderStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/SettingsExpander/SettingsExpanderItemStyles.axaml"/>
-
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Windowing/FluentWindowStyles.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Slider/RangeSliderStyles.axaml"/>
@@ -136,6 +133,7 @@
         -->
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/SmoothScrollViewer/SmoothScrollViewerStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/SmoothScrollViewer/SmoothScrollSnapViewer.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/SmoothScrollViewer/SingleDirectionScrollViewerStyle.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/FluentMenu/FluentContextMenuStyle.axaml"/>
@@ -173,6 +171,8 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/CardStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/SettingCardStyles.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/GroupHeaderCard.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/ExpanderSettingCard/ExpanderSettingCard.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/ExpanderSettingCard/ExpanderSettingCardItem.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Label/Tag.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Label/HyperlinkLabel.axaml"/>
