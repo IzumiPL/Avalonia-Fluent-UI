@@ -15,13 +15,13 @@ public class NativeMenuInverseBoolConverter : IValueConverter
     public bool Default { get; set; }
 
     /// <inheritdoc />
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         return value is bool b ? !b : Default;
     }
 
     /// <inheritdoc />
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         return value is bool b ? !b : !Default;
     }

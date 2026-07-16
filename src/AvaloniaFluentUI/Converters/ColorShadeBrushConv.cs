@@ -15,11 +15,11 @@ public class ColorShadeBrushConv : IValueConverter
 {
 
     /// <inheritdoc />
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         var color = (Color2)value;
 
-        if (!float.TryParse(parameter.ToString(), out float amount))
+        if (!float.TryParse(parameter?.ToString(), out float amount))
         {
             amount = 0;
         }
@@ -28,7 +28,7 @@ public class ColorShadeBrushConv : IValueConverter
     }
 
     /// <inheritdoc />
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         return BindingOperations.DoNothing;
     }
