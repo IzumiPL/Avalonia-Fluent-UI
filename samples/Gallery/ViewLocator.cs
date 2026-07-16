@@ -60,6 +60,7 @@ public class ViewLocator : IDataTemplate
         _factory[typeof(CardPageViewModel)] = () => new CardPage();
         _factory[typeof(AvatarViewPageViewModel)] = () => new AvatarViewPage();
         _factory[typeof(FilesDropPickerPageViewModel)] = () => new FilesDropPickerPage();
+        _factory[typeof(WizardPageViewModel)] = () => new WizardPage();
         
         _factory[typeof(ScrollViewModel)] = () => new ScrollView();
         

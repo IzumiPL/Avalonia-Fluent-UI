@@ -238,6 +238,7 @@
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Card]}" Tag="Card"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Avatar]}" Tag="AvatarView"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FileDropPicker]}" Tag="FileDropPicker"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[WizardView]}" Tag="WizardView"/>
           </fui:NavigationViewItem.MenuItems>
         </fui:NavigationViewItem>
         <fui:NavigationViewItem

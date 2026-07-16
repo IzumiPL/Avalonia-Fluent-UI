@@ -1,0 +1,45 @@
+﻿<UserControl
+  x:Class="Gallery.Pages.P3"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  mc:Ignorable="d">
+  <StackPanel
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
+    Orientation="Horizontal"
+    Spacing="24">
+    <TextBlock
+      HorizontalAlignment="Right"
+      VerticalAlignment="Center"
+      FontSize="168"
+      Text="👪"/>
+    <StackPanel
+      VerticalAlignment="Center"
+      Orientation="Vertical"
+      Spacing="6">
+      <TextBlock Classes="Title" Text="{locale:Localization FM}"/>
+      <TextBlock
+        FontSize="12"
+        Foreground="Gray"
+        Text="{locale:Localization Father}"/>
+      <TextBox
+        Name="FatherEdit"
+        MinWidth="256"
+        PlaceholderText="{locale:Localization InputFatherName}"/>
+      <TextBlock
+        FontSize="12"
+        Foreground="Gray"
+        Text="{locale:Localization Mother}"/>
+      <TextBox
+        Name="MotherEdit"
+        MinWidth="256"
+        PlaceholderText="{locale:Localization InputMotherName}"/>
+    </StackPanel>
+  </StackPanel>
+</UserControl>
+

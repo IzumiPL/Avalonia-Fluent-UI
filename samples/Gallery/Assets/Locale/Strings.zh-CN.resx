@@ -1676,4 +1676,85 @@
   <data name="Compile" xml:space="preserve">
     <value>编译</value>
   </data>
+  <data name="WizardView" xml:space="preserve">
+    <value>向导视图</value>
+  </data>
+  <data name="WizardWindow" xml:space="preserve">
+    <value>向导窗口</value>
+  </data>
+  <data name="ShowWizardWindow" xml:space="preserve">
+    <value>显示向导窗口</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="TkError" xml:space="preserve">
+    <value>访问令牌或代理服务器地址输入有误,请从新输入!</value>
+  </data>
+  <data name="NameError" xml:space="preserve">
+    <value>名称输入有误,请从新输入!</value>
+  </data>
+  <data name="UnPsError" xml:space="preserve">
+    <value>用户名或密码入有误,请从新输入!</value>
+  </data>
+  <data name="WeApply" xml:space="preserve">
+    <value>欢迎使用组件库</value>
+  </data>
+  <data name="StartConf" xml:space="preserve">
+    <value>在开始使用前, 请跟我做一些简单的配置吧</value>
+  </data>
+  <data name="ImportConf" xml:space="preserve">
+    <value>导入配置</value>
+  </data>
+  <data name="HFConf" xml:space="preserve">
+    <value>Hugging Face 配置</value>
+  </data>
+  <data name="AccessToken" xml:space="preserve">
+    <value>访问令牌</value>
+  </data>
+  <data name="InputAccessToken" xml:space="preserve">
+    <value>请输入访问令牌(tk_1)</value>
+  </data>
+  <data name="Proxy" xml:space="preserve">
+    <value>代理服务器</value>
+  </data>
+  <data name="InputProxy" xml:space="preserve">
+    <value>请输入代理服务区地址(locale)</value>
+  </data>
+  <data name="FM" xml:space="preserve">
+    <value>家庭成员</value>
+  </data>
+  <data name="Father" xml:space="preserve">
+    <value>父亲</value>
+  </data>
+  <data name="InputFatherName" xml:space="preserve">
+    <value>请输输入你的父亲姓名(1)</value>
+  </data>
+  <data name="Mother" xml:space="preserve">
+    <value>母亲</value>
+  </data>
+  <data name="InputMotherName" xml:space="preserve">
+    <value>请输入你的母亲姓名(2)</value>
+  </data>
+  <data name="AC" xml:space="preserve">
+    <value>账户配置</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="InputUserName" xml:space="preserve">
+    <value>请输登录用户名(1)</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="InputPassword" xml:space="preserve">
+    <value>请输入密码(1)</value>
+  </data>
+  <data name="CAC" xml:space="preserve">
+    <value>你完成了所有配置!</value>
+  </data>
+  <data name="CACMessage" xml:space="preserve">
+    <value>下载器将基于你提供的配置信息为您下载 AI模型，您随时可以在应用设置中修改它们，祝您使用愉快!</value>
+  </data>
 </root>

@@ -202,33 +202,32 @@
     </ui:CodeCard>
 
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_ClickableSettingsCard]}">
-      <fui:SettingsExpander
+      <fui:ExpanderSettingCard
         ActionIconSource="ChevronRight"
         Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SoundDescription]}"
         Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Sound]}"
-        IconSource="Volume"
-        IsClickEnabled="True"/>
+        IconSource="Volume"/>
     </ui:CodeCard>
 
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_ExpandableSettingsCard]}">
-      <fui:SettingsExpander
+      <fui:ExpanderSettingCard
         Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_AppsSettingsDescription]}"
         Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_ChooseDevice]}"
         IconSource="Microphone">
-        <fui:SettingsExpanderItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Headset]}" Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_DeviceName]}"/>
-        <fui:SettingsExpanderItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_HasFooterContent]}" Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_DeviceName]}">
-          <fui:SettingsExpanderItem.Footer>
+        <fui:ExpanderSettingCardItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Headset]}" Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_DeviceName]}"/>
+        <fui:ExpanderSettingCardItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_HasFooterContent]}" Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_DeviceName]}">
+          <fui:ExpanderSettingCardItem.Footer>
             <fui:PushButton
               Classes="Accent"
               Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_AddDevice]}"
               IconSource="{DynamicResource Add}"/>
-          </fui:SettingsExpanderItem.Footer>
-        </fui:SettingsExpanderItem>
-        <fui:SettingsExpanderItem
+          </fui:ExpanderSettingCardItem.Footer>
+        </fui:ExpanderSettingCardItem>
+        <fui:ExpanderSettingCardItem
           ActionIconSource="ChevronRight"
           Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_IsClickable]}"
           IsClickEnabled="True"/>
-      </fui:SettingsExpander>
+      </fui:ExpanderSettingCard>
     </ui:CodeCard>
   </StackPanel>
 </ui:ViewBase>

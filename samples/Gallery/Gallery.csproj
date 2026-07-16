@@ -44,5 +44,29 @@
       <DependentUpon>ProgressPage.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\ViewPage\WizardPage.axaml.cs">
+      <DependentUpon>WizardPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ViewPage\WizardPages\P1.axaml.cs">
+      <DependentUpon>P1.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ViewPage\WizardPages\P2.axaml.cs">
+      <DependentUpon>P2.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ViewPage\WizardPages\P3.axaml.cs">
+      <DependentUpon>P3.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ViewPage\WizardPages\P4.axaml.cs">
+      <DependentUpon>P4.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ViewPage\WizardPages\P5.axaml.cs">
+      <DependentUpon>P5.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

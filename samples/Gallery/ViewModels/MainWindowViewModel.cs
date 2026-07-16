@@ -109,6 +109,7 @@ public partial class MainWindowViewModel : ViewModelBase
             { "Card", () => new CardPageViewModel() },
             { "AvatarView", () => new AvatarViewPageViewModel() },
             { "FileDropPicker", () => new FilesDropPickerPageViewModel() },
+            { "WizardView", () => new WizardPageViewModel() },
             
             { "Scroll", () => new ScrollViewModel() },
             
