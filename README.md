@@ -18,21 +18,21 @@
 
 > [!Note]
 > 
-> 如需使用最新的功能,克隆本仓库构建
+> 如需使用最新的功能,请克隆本仓库构建
 
 ## 安装🚀
 ```shell
-dotnet add package AvaloniaFluentUI --version 2.0.0
+dotnet add package AvaloniaFluentUI --version 2.0.3
 ```
 
 > [!Warning]
 > 
 > 当前库为Avalonia12版本
 > 
-> 如果需要使用Avalonia11版本,请切换至[Avalonia-11.3.12](https://github.com/HiyorinI/AvaloniaFluentUI/tree/avalonia-11.3.12)分支
+> 如果需要使用Avalonia11版本,请切换至[Avalonia-11.3.12](https://github.com/IzumiPL/Avalonia-Fluent-UI/tree/avalonia-11.3.12)分支
 
 ## 运行示例▶️
-克隆仓库后就可以运行 samples 目录下的示例程序, 也可以通过[Release](https://github.com/HiyorinI/AvaloniaFluentUI/releases)页面下载
+克隆仓库后就可以运行 samples 目录下的示例程序, 也可以通过[Release](https://github.com/IzumiPL/Avalonia-Fluent-UI/releases)页面下载
 ```shell
 cd samples/Gallery.Desktop
 dotnet run -c Release
