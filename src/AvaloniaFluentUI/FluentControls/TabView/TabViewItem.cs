@@ -234,7 +234,7 @@ public partial class TabViewItem : SelectorItem
 
             TabView.TabDragCompletedWeakEvent.Subscribe(tabView, _completedDragSub);
 
-            _tabDragRevoker = new FACompositeDisposable(
+            _tabDragRevoker = new CompositeDisposable(
                 new FADisposable(() => TabView.TabDragStartingWeakEvent.Unsubscribe(tabView, _startingDragSub)),
                 new FADisposable(() => TabView.TabDragCompletedWeakEvent.Unsubscribe(tabView, _completedDragSub)));
 
@@ -404,7 +404,7 @@ public partial class TabViewItem : SelectorItem
         var dx = double.Abs(testPoint.X - dragRectangleCenter.X);
         var dy = double.Abs(testPoint.Y - dragRectangleCenter.Y);
 
-        FAUISettings.GetSystemDragSize(TopLevel.GetTopLevel(this).RenderScaling, out var maxDx, out var maxDy);
+        UISettings.GetSystemDragSize(TopLevel.GetTopLevel(this).RenderScaling, out var maxDx, out var maxDy);
 
         maxDx *= 2; //c_tabViewItemMouseDragThresholdMultiplier;
         maxDy *= 2; //c_tabViewItemMouseDragThresholdMultiplier;
@@ -717,7 +717,7 @@ public partial class TabViewItem : SelectorItem
     private ContentPresenter _headerContentPresenter;
     private TabViewWidthMode _tabViewWidthMode = TabViewWidthMode.Equal;
     private TabViewCloseButtonOverlayMode _closeButtonOverlayMode = TabViewCloseButtonOverlayMode.Auto;
-    private FACompositeDisposable _tabDragRevoker;
+    private CompositeDisposable _tabDragRevoker;
     private Path _selectedBackgroundPath;
     private TabViewTabStripLocation _location;
 

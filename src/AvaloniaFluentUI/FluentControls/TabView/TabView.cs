@@ -1751,7 +1751,7 @@ public partial class TabView : TemplatedControl
             var delta = (point.Position - _initDragPanePoint.Value).X;
             if (!_isDraggingPane)
             {
-                FAUISettings.GetSystemDragSize(TopLevel.GetTopLevel(this).RenderScaling, out var cxDrag, out _);
+                UISettings.GetSystemDragSize(TopLevel.GetTopLevel(this).RenderScaling, out var cxDrag, out _);
                 
                 if (double.Abs(delta) < cxDrag)
                 {

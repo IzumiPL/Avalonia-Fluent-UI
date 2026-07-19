@@ -87,6 +87,11 @@ public abstract class InfoBarManagerBase<TControl> : IInfoBarManager where TCont
         Show(bar);
     }
 
+    public void New(TControl bar)
+    {
+        Add(bar);
+    }
+
     protected async void CloseAsync(TControl bar)
     {
         var position = bar.Position;

@@ -1,7 +1,6 @@
 ﻿using System;
 using Avalonia;
 using Avalonia.Automation.Peers;
-using Avalonia.Automation.Provider;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data;
@@ -18,15 +17,15 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// Represents a control that can be used to display and edit numbers.
 /// </summary>
-[PseudoClasses(s_pcSpinVisible, s_pcSpinPopup, s_pcSpinCollapsed)]
-[PseudoClasses(s_pcUpDisabled, s_pcDownDisabled)]
 [PseudoClasses(SharedPseudoclasses.s_pcHeader)]
-[TemplatePart(s_tpDownSpinButton, typeof(RepeatButton))]
-[TemplatePart(s_tpPopupDownSpinButton, typeof(RepeatButton))]
-[TemplatePart(s_tpUpSpinButton, typeof(RepeatButton))]
-[TemplatePart(s_tpPopupUpSpinButton, typeof(RepeatButton))]
-[TemplatePart(s_tpInputBox, typeof(TextBox))]
-[TemplatePart(s_tpUpDownPopup, typeof(Popup))]
+[PseudoClasses(PC_SPIN_VISIBLE, PC_SPIN_POPUP, PC_SPIN_COLLAPSED)]
+[PseudoClasses(PC_UP_DISABLED, PC_DOWN_DISABLED)]
+[TemplatePart(DOWN_SPIN_BUTTON, typeof(RepeatButton))]
+[TemplatePart(POPUP_DOWN_SPIN_BUTTON, typeof(RepeatButton))]
+[TemplatePart(UP_SPIN_BUTTON, typeof(RepeatButton))]
+[TemplatePart(POPUP_UP_SPIN_BUTTON, typeof(RepeatButton))]
+[TemplatePart(INPUT_BOX, typeof(TextBox))]
+[TemplatePart(UP_DOWN_POPUP, typeof(Popup))]
 public partial class NumberBox : TemplatedControl
 {
     /// <summary>
@@ -44,13 +43,13 @@ public partial class NumberBox : TemplatedControl
     /// <summary>
     /// Defines the <see cref="Header"/> property
     /// </summary>
-    public static readonly StyledProperty<object> HeaderProperty =
+    public static readonly StyledProperty<object?> HeaderProperty =
         HeaderedContentControl.HeaderProperty.AddOwner<NumberBox>();
 
     /// <summary>
     /// Defines the <see cref="HeaderTemplate"/> property
     /// </summary>
-    public static readonly StyledProperty<IDataTemplate> HeaderTemplateProperty =
+    public static readonly StyledProperty<IDataTemplate?> HeaderTemplateProperty =
         HeaderedContentControl.HeaderTemplateProperty.AddOwner<NumberBox>();
 
     /// <summary>
@@ -104,13 +103,13 @@ public partial class NumberBox : TemplatedControl
     /// <summary>
     /// Defines the <see cref="PlaceholderText"/> property
     /// </summary>
-    public static readonly StyledProperty<string> PlaceholderTextProperty =
-        TextBox.WatermarkProperty.AddOwner<NumberBox>();
+    public static readonly StyledProperty<string?> PlaceholderTextProperty =
+        TextBox.PlaceholderTextProperty.AddOwner<NumberBox>();
 
     /// <summary>
     /// Defines the <see cref="SelectionHighlightColor"/> property
     /// </summary>
-    public static readonly StyledProperty<IBrush> SelectionHighlightColorProperty =
+    public static readonly StyledProperty<IBrush?> SelectionHighlightColorProperty =
         TextBox.SelectionBrushProperty.AddOwner<NumberBox>();
 
     /// <summary>
@@ -178,7 +177,7 @@ public partial class NumberBox : TemplatedControl
     /// <summary>
     /// Defines the <see cref="InnerLeftContent"/> property
     /// </summary>
-    public static readonly StyledProperty<object> InnerLeftContentProperty =
+    public static readonly StyledProperty<object?> InnerLeftContentProperty =
         TextBox.InnerLeftContentProperty.AddOwner<NumberBox>();
 
     /// <summary>
@@ -203,7 +202,7 @@ public partial class NumberBox : TemplatedControl
     /// <summary>
     /// Gets or sets the content for the control's header.
     /// </summary>
-    public object Header
+    public object? Header
     {
         get => GetValue(HeaderProperty);
         set => SetValue(HeaderProperty, value);
@@ -212,7 +211,7 @@ public partial class NumberBox : TemplatedControl
     /// <summary>
     /// Gets or sets the DataTemplate used to display the content of the control's header.
     /// </summary>
-    public IDataTemplate HeaderTemplate
+    public IDataTemplate? HeaderTemplate
     {
         get => GetValue(HeaderTemplateProperty);
         set => SetValue(HeaderTemplateProperty, value);
@@ -284,7 +283,7 @@ public partial class NumberBox : TemplatedControl
     /// Gets or sets the text that is displayed in the control until the value is changed by a 
     /// user action or some other operation.
     /// </summary>
-    public string PlaceholderText
+    public string? PlaceholderText
     {
         get => GetValue(PlaceholderTextProperty);
         set => SetValue(PlaceholderTextProperty, value);
@@ -293,7 +292,7 @@ public partial class NumberBox : TemplatedControl
     /// <summary>
     /// Gets or sets the brush used to highlight the selected text.
     /// </summary>
-    public IBrush SelectionHighlightColor
+    public IBrush? SelectionHighlightColor
     {
         get => GetValue(SelectionHighlightColorProperty);
         set => SetValue(SelectionHighlightColorProperty, value);
@@ -364,7 +363,7 @@ public partial class NumberBox : TemplatedControl
     /// <summary>
     /// Gets or sets the inner left content of the TextBox within the NumberBox
     /// </summary>
-    public object InnerLeftContent
+    public object? InnerLeftContent
     {
         get => GetValue(InnerLeftContentProperty);
         set => SetValue(InnerLeftContentProperty, value);
@@ -374,22 +373,22 @@ public partial class NumberBox : TemplatedControl
     /// Occurs after the user triggers evaluation of new input by pressing the Enter key, 
     /// clicking a spin button, or by changing focus.
     /// </summary>
-    public event TypedEventHandler<NumberBox, NumberBoxValueChangedEventArgs> ValueChanged;
+    public event TypedEventHandler<NumberBox, NumberBoxValueChangedEventArgs>? ValueChanged;
 
     public string _text = null;
 
-    private const string s_tpDownSpinButton = "DownSpinButton";
-    private const string s_tpPopupDownSpinButton = "PopupDownSpinButton";
-    private const string s_tpUpSpinButton = "UpSpinButton";
-    private const string s_tpPopupUpSpinButton = "PopupUpSpinButton";
-    private const string s_tpInputBox = "InputBox";
-    private const string s_tpUpDownPopup = "UpDownPopup";
+    private const string DOWN_SPIN_BUTTON = "DownSpinButton";
+    private const string POPUP_DOWN_SPIN_BUTTON = "PopupDownSpinButton";
+    private const string UP_SPIN_BUTTON = "UpSpinButton";
+    private const string POPUP_UP_SPIN_BUTTON = "PopupUpSpinButton";
+    private const string INPUT_BOX = "InputBox";
+    private const string UP_DOWN_POPUP = "UpDownPopup";
 
-    private const string s_pcSpinVisible = ":spinvisible";
-    private const string s_pcSpinPopup = ":spinpopup";
-    private const string s_pcSpinCollapsed = ":spincollapsed";
-    private const string s_pcUpDisabled = ":updisabled";
-    private const string s_pcDownDisabled = ":downdisabled";
+    private const string PC_SPIN_VISIBLE = ":spinvisible";
+    private const string PC_SPIN_POPUP = ":spinpopup";
+    private const string PC_SPIN_COLLAPSED = ":spincollapsed";
+    private const string PC_UP_DISABLED = ":updisabled";
+    private const string PC_DOWN_DISABLED = ":downdisabled";
     
     public NumberBox()
     {
@@ -400,8 +399,8 @@ public partial class NumberBox : TemplatedControl
     {
         base.OnApplyTemplate(e);
 
-        _spinDown = e.NameScope.Find<RepeatButton>(s_tpDownSpinButton);
-        _popupDownButton = e.NameScope.Find<RepeatButton>(s_tpPopupDownSpinButton);
+        _spinDown = e.NameScope.Find<RepeatButton>(DOWN_SPIN_BUTTON);
+        _popupDownButton = e.NameScope.Find<RepeatButton>(POPUP_DOWN_SPIN_BUTTON);
         if (_spinDown != null)
         {
             _spinDown.Click += OnSpinDownClick;
@@ -411,8 +410,8 @@ public partial class NumberBox : TemplatedControl
             _popupDownButton.Click += OnSpinDownClick;
         }
 
-        _spinUp = e.NameScope.Find<RepeatButton>(s_tpUpSpinButton);
-        _popupUpButton = e.NameScope.Find<RepeatButton>(s_tpPopupUpSpinButton);
+        _spinUp = e.NameScope.Find<RepeatButton>(UP_SPIN_BUTTON);
+        _popupUpButton = e.NameScope.Find<RepeatButton>(POPUP_UP_SPIN_BUTTON);
         if (_spinUp != null)
         {
             _spinUp.Click += OnSpinUpClick;
@@ -422,7 +421,7 @@ public partial class NumberBox : TemplatedControl
             _popupUpButton.Click += OnSpinUpClick;
         }
 
-        _textBox = e.NameScope.Find<TextBox>(s_tpInputBox);
+        _textBox = e.NameScope.Find<TextBox>(INPUT_BOX);
         if (_textBox != null)
         {
             _textBox.AddHandler(KeyDownEvent, OnNumberBoxKeyDown, RoutingStrategies.Tunnel);
@@ -430,7 +429,7 @@ public partial class NumberBox : TemplatedControl
             _textBox.KeyUp += OnNumberBoxKeyUp;
         }
 
-        _popup = e.NameScope.Find<Popup>(s_tpUpDownPopup);
+        _popup = e.NameScope.Find<Popup>(UP_DOWN_POPUP);
         if (_popup != null)
         {
             _popup.OverlayInputPassThroughElement = this;
@@ -453,7 +452,7 @@ public partial class NumberBox : TemplatedControl
         }
     }
 
-    protected override void UpdateDataValidation(AvaloniaProperty property, BindingValueType state, Exception error)
+    protected override void UpdateDataValidation(AvaloniaProperty property, BindingValueType state, Exception? error)
     {
         base.UpdateDataValidation(property, state, error);
 
@@ -559,7 +558,7 @@ public partial class NumberBox : TemplatedControl
         return new NumberBoxAutomationPeer(this);
     }
 
-    private void OnPointerPressedPreview(object sender, PointerPressedEventArgs args)
+    private void OnPointerPressedPreview(object? sender, PointerPressedEventArgs args)
     {
         // Hack: B/c we make popup lightdismissable, we need to ensure we can reopen the popup if focus
         // never leaves the control, but we click back on it
@@ -663,17 +662,17 @@ public partial class NumberBox : TemplatedControl
         return null;
     }
 
-    private void OnSpinDownClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void OnSpinDownClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         StepValue(-SmallChange);
     }
 
-    private void OnSpinUpClick(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void OnSpinUpClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         StepValue(SmallChange);
     }
 
-    private void OnNumberBoxKeyDown(object sender, KeyEventArgs e)
+    private void OnNumberBoxKeyDown(object? sender, KeyEventArgs e)
     {
         switch (e.Key)
         {
@@ -699,7 +698,7 @@ public partial class NumberBox : TemplatedControl
         }
     }
 
-    private void OnNumberBoxKeyUp(object sender, KeyEventArgs e)
+    private void OnNumberBoxKeyUp(object? sender, KeyEventArgs e)
     {
         switch (e.Key)
         {
@@ -800,38 +799,38 @@ public partial class NumberBox : TemplatedControl
 
         if (sbm == NumberBoxSpinButtonPlacementMode.Inline)
         {
-            PseudoClasses.Set(s_pcSpinVisible, true);
-            PseudoClasses.Set(s_pcSpinPopup, false);
-            PseudoClasses.Set(s_pcSpinCollapsed, false);
+            PseudoClasses.Set(PC_SPIN_VISIBLE, true);
+            PseudoClasses.Set(PC_SPIN_POPUP, false);
+            PseudoClasses.Set(PC_SPIN_COLLAPSED, false);
 
             if (_textBox != null)
             {
-                ((IPseudoClasses)_textBox.Classes).Set(s_pcSpinVisible, true);
-                ((IPseudoClasses)_textBox.Classes).Set(s_pcSpinPopup, false);
+                ((IPseudoClasses)_textBox.Classes).Set(PC_SPIN_VISIBLE, true);
+                ((IPseudoClasses)_textBox.Classes).Set(PC_SPIN_POPUP, false);
             }
         }
         else if (sbm == NumberBoxSpinButtonPlacementMode.Compact)
         {
-            PseudoClasses.Set(s_pcSpinVisible, false);
-            PseudoClasses.Set(s_pcSpinPopup, true);
-            PseudoClasses.Set(s_pcSpinCollapsed, false);
+            PseudoClasses.Set(PC_SPIN_VISIBLE, false);
+            PseudoClasses.Set(PC_SPIN_POPUP, true);
+            PseudoClasses.Set(PC_SPIN_COLLAPSED, false);
 
             if (_textBox != null)
             {
-                ((IPseudoClasses)_textBox.Classes).Set(s_pcSpinVisible, false);
-                ((IPseudoClasses)_textBox.Classes).Set(s_pcSpinPopup, true);
+                ((IPseudoClasses)_textBox.Classes).Set(PC_SPIN_VISIBLE, false);
+                ((IPseudoClasses)_textBox.Classes).Set(PC_SPIN_POPUP, true);
             }
         }
         else
         {
-            PseudoClasses.Set(s_pcSpinVisible, false);
-            PseudoClasses.Set(s_pcSpinPopup, false);
-            PseudoClasses.Set(s_pcSpinCollapsed, true);
+            PseudoClasses.Set(PC_SPIN_VISIBLE, false);
+            PseudoClasses.Set(PC_SPIN_POPUP, false);
+            PseudoClasses.Set(PC_SPIN_COLLAPSED, true);
 
             if (_textBox != null)
             {
-                ((IPseudoClasses)_textBox.Classes).Set(s_pcSpinVisible, false);
-                ((IPseudoClasses)_textBox.Classes).Set(s_pcSpinPopup, false);
+                ((IPseudoClasses)_textBox.Classes).Set(PC_SPIN_VISIBLE, false);
+                ((IPseudoClasses)_textBox.Classes).Set(PC_SPIN_POPUP, false);
             }
         }
     }
@@ -860,8 +859,8 @@ public partial class NumberBox : TemplatedControl
             }
         }
 
-        PseudoClasses.Set(s_pcUpDisabled, !isUpEnabled);
-        PseudoClasses.Set(s_pcDownDisabled, !isDownEnabled);
+        PseudoClasses.Set(PC_UP_DISABLED, !isUpEnabled);
+        PseudoClasses.Set(PC_DOWN_DISABLED, !isDownEnabled);
     }
 
     private void UpdateHeaderPresenterState()
@@ -929,12 +928,12 @@ public partial class NumberBox : TemplatedControl
     }
 
     //Template parts
-    private RepeatButton _spinDown;
-    private RepeatButton _spinUp;
-    private TextBox _textBox;
-    private Popup _popup;
-    private RepeatButton _popupUpButton;
-    private RepeatButton _popupDownButton;
+    private RepeatButton? _spinDown;
+    private RepeatButton? _spinUp;
+    private TextBox? _textBox;
+    private Popup? _popup;
+    private RepeatButton? _popupUpButton;
+    private RepeatButton? _popupDownButton;
 
     private bool _textUpdating;
     private bool _valueUpdating;

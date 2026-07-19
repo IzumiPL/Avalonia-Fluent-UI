@@ -7,7 +7,7 @@ namespace AvaloniaFluentUI.Controls;
 
 internal static class NumberBoxParser
 {
-    public const string numberBoxOperators = "+-*/^";
+    public const string NUMBER_BOX_OPERATORS = "+-*/^";
 
     public static IList<MathToken> GetTokens(ReadOnlySpan<char> input)
     {
@@ -44,7 +44,7 @@ internal static class NumberBoxParser
                 }
                 else
                 {
-                    if (numberBoxOperators.IndexOf(nextChar) != -1)
+                    if (NUMBER_BOX_OPERATORS.IndexOf(nextChar) != -1)
                     {
                         tokens.Add(new MathToken(MathTokenType.Operator, nextChar));
                         expectNumber = true;

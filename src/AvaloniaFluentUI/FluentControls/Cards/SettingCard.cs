@@ -51,7 +51,7 @@ public class SettingCard : HeaderedContentControl
 
     private void OnDescriptionChanged(AvaloniaPropertyChangedEventArgs args)
     {
-        PseudoClasses.Set(PC_PRESSED,  args.NewValue != null);
+        PseudoClasses.Set(PC_DESCRIPTION,  args.NewValue != null);
     }
 
     protected override void OnPointerPressed(PointerPressedEventArgs e)

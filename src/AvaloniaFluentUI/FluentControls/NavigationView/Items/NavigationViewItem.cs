@@ -829,7 +829,7 @@ public partial class NavigationViewItem : NavigationViewItemBase
 
     private void PrepNavigationViewItem(SplitView splitView)
     {
-        _splitViewRevokers = new FACompositeDisposable(
+        _splitViewRevokers = new CompositeDisposable(
             splitView.GetPropertyChangedObservable(SplitView.IsPaneOpenProperty).Subscribe(OnSplitViewPropertyChanged),
             splitView.GetPropertyChangedObservable(SplitView.DisplayModeProperty).Subscribe(OnSplitViewPropertyChanged),
             splitView.GetPropertyChangedObservable(SplitView.CompactPaneLengthProperty).Subscribe(OnSplitViewPropertyChanged));
@@ -889,7 +889,7 @@ public partial class NavigationViewItem : NavigationViewItemBase
         }
     }
 
-    private FACompositeDisposable _splitViewRevokers;
+    private CompositeDisposable _splitViewRevokers;
     private NavigationViewItemPresenter _presenter;
     private object _suggestedToolTipContent;
     private ItemsRepeater _repeater;

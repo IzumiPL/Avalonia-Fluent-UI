@@ -26,7 +26,7 @@ public class NavigationViewItemSeparator : NavigationViewItemBase
         var splitView = GetSplitView;
         if (splitView != null)
         {
-            _splitViewRevokers = new FACompositeDisposable(
+            _splitViewRevokers = new CompositeDisposable(
                 splitView.GetPropertyChangedObservable(SplitView.IsPaneOpenProperty).Subscribe(OnSplitViewPropertyChanged),
                 splitView.GetPropertyChangedObservable(SplitView.DisplayModeProperty).Subscribe(OnSplitViewPropertyChanged));
 
@@ -89,7 +89,7 @@ public class NavigationViewItemSeparator : NavigationViewItemBase
         }
     }
 
-    private FACompositeDisposable _splitViewRevokers;
+    private CompositeDisposable _splitViewRevokers;
     private bool _appliedTemplate;
     private bool _isClosedCompact;
     private Panel _rootGrid;

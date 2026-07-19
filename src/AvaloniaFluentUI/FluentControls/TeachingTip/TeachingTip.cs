@@ -1525,7 +1525,7 @@ public partial class TeachingTip : ContentControl
                     _lightDismissIndicatorPopup?.IsOpen = true;
                     _popup.IsOpen = true;
 
-                    if (FAUISettings.AreAnimationsEnabled())
+                    if (UISettings.AreAnimationsEnabled())
                     {
                         StartExpandToOpen();
                     }
@@ -1944,7 +1944,7 @@ public partial class TeachingTip : ContentControl
     {
         if (_popup != null && _popup.IsOpen)
         {
-            if (FAUISettings.AreAnimationsEnabled())
+            if (UISettings.AreAnimationsEnabled())
                 StartContractToClose();
             else
                 ClosePopup();

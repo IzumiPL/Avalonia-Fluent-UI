@@ -8,10 +8,10 @@ namespace AvaloniaFluentUI.Controls;
 
 public class MultiSelectionView : SelectingItemsControl
 {
-    public static readonly StyledProperty<IList?> SelectedItemsProperty =
+    public new static readonly StyledProperty<IList?> SelectedItemsProperty =
         AvaloniaProperty.Register<MultiSelectionView, IList?>(nameof(SelectedItems));
-
-    public IList? SelectedItems
+    
+    public new IList? SelectedItems
     {
         get => GetValue(SelectedItemsProperty);
         set => SetValue(SelectedItemsProperty, value);
@@ -22,13 +22,13 @@ public class MultiSelectionView : SelectingItemsControl
         SelectionMode = SelectionMode.Multiple | SelectionMode.Toggle;
     }
 
-    protected override bool NeedsContainerOverride(object item, int index, out object recycleKey)
+    protected override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
         => NeedsContainer<MultiSelectionComboBoxItem>(item, out recycleKey);
 
-    protected override Control CreateContainerForItemOverride(object item, int index, object recycleKey)
+    protected override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
         => new MultiSelectionComboBoxItem();
 
-    protected override void PrepareContainerForItemOverride(Control container, object item, int index)
+    protected override void PrepareContainerForItemOverride(Control container, object? item, int index)
     {
         base.PrepareContainerForItemOverride(container, item, index);
         if (container is MultiSelectionComboBoxItem multiItem)

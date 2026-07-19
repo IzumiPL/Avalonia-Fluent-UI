@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
@@ -146,6 +144,8 @@ public class MultiSelectionComboBox : TemplatedControl
             _multiSelectionPopup.Width = Bounds.Width;
             _multiSelectionPopup.IsOpen = true;
         }
+
+        PseudoClasses.Remove(PC_PRESSED);
     }
 
     private void OnDisplayItemRemoveClick(object? sender, RoutedEventArgs e)
