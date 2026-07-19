@@ -45,6 +45,7 @@
                     Grid.Row="0"
                     Grid.Column="1"
                     HorizontalAlignment="Left"
+                    FontWeight="Bold"
                     Text="{Binding Title}"
                     TextWrapping="WrapWithOverflow"/>
                   <TextBlock

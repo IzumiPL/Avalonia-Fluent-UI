@@ -1554,7 +1554,7 @@
     <value>显示百分比</value>
   </data>
   <data name="PleaseSelectYourOption" xml:space="preserve">
-    <value>请选择你的选项</value>
+    <value>请选择你的脑婆</value>
   </data>
   <data name="FluentIcon" xml:space="preserve">
     <value>流畅图标库</value>
@@ -1756,5 +1756,41 @@
   </data>
   <data name="CACMessage" xml:space="preserve">
     <value>下载器将基于你提供的配置信息为您下载 AI模型，您随时可以在应用设置中修改它们，祝您使用愉快!</value>
+  </data>
+  <data name="SetInfoBarTitle" xml:space="preserve">
+    <value>设置消息条标题</value>
+  </data>
+  <data name="SetInfoBarContent" xml:space="preserve">
+    <value>设置消息条内容</value>
+  </data>
+  <data name="SetInfoBarDuration" xml:space="preserve">
+    <value>持续时间(ms)</value>
+  </data>
+  <data name="SetInfoBarRadius" xml:space="preserve">
+    <value>设置圆角弧度</value>
+  </data>
+  <data name="BI_TransparentComboBox" xml:space="preserve">
+    <value>透明背景下拉框</value>
+  </data>
+  <data name="PleaseEnterTheTitle" xml:space="preserve">
+    <value>请输入消息条的标题</value>
+  </data>
+  <data name="PleaseEnterContent" xml:space="preserve">
+    <value>请输入消息条的内容</value>
+  </data>
+  <data name="CustomForeground" xml:space="preserve">
+    <value>自定义信息条的前景颜色</value>
+  </data>
+  <data name="CustomBackground" xml:space="preserve">
+    <value>自定义信息条的背景颜色</value>
+  </data>
+  <data name="EditCustom" xml:space="preserve">
+    <value>编辑自定义</value>
+  </data>
+  <data name="TV_OutlinedTextBox" xml:space="preserve">
+    <value>轮廓文本框</value>
+  </data>
+  <data name="VP_TableView" xml:space="preserve">
+    <value>表格视图</value>
   </data>
 </root>

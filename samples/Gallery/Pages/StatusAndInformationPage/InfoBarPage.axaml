@@ -3,6 +3,7 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
   xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -67,6 +68,69 @@
 
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_PopupInfoBar]}">
       <Grid ColumnDefinitions="* Auto">
+        <fui:ContentDialog
+          Name="PopupInfoBarEditDialog"
+          CloseButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Close]}"
+          ContentWidth="512"
+          DefaultButton="Close"
+          IsVisible="False">
+          <Grid ColumnDefinitions="*, *" ColumnSpacing="12">
+            <StackPanel
+              Grid.Column="0"
+              Orientation="Vertical"
+              Spacing="6">
+              <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SetInfoBarTitle]}"/>
+              <fui:OutlinedTextBox
+                Name="InfoBarTitleEdit"
+                HorizontalAlignment="Stretch"
+                PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[PleaseEnterTheTitle]}"
+                Text="我是消息条的标题"/>
+
+              <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SetInfoBarContent]}"/>
+              <fui:OutlinedTextBox
+                Name="InfoBarContentEdit"
+                PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[PleaseEnterTheTitle]}"
+                Text="我是消息条的内容"/>
+
+              <TextBlock
+                MinHeight="32"
+                Padding="0,8,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CustomForeground]}"/>
+              <TextBlock
+                MinHeight="32"
+                Padding="0,8,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CustomBackground]}"/>
+            </StackPanel>
+
+            <StackPanel
+              Grid.Column="1"
+              Orientation="Vertical"
+              Spacing="6">
+              <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SetInfoBarDuration]}"/>
+              <ComboBox
+                Name="InfoBarDurationEdit"
+                HorizontalAlignment="Stretch"
+                SelectedIndex="6"/>
+
+              <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SetInfoBarRadius]}"/>
+              <ComboBox
+                Name="InfoBarRadiusEdit"
+                HorizontalAlignment="Stretch"
+                SelectedIndex="3"/>
+
+              <fui:ColorPickerButton
+                Name="InfoBarForegroundEdit"
+                HorizontalAlignment="Stretch"
+                Color="#000000"/>
+              <fui:ColorPickerButton Name="InfoBarBackgroundEdit" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+          </Grid>
+        </fui:ContentDialog>
+
         <StackPanel
           Grid.Column="0"
           VerticalAlignment="Center"
@@ -99,7 +163,7 @@
           <Grid
             ColumnDefinitions="Auto, *"
             ColumnSpacing="8"
-            RowDefinitions="Auto, Auto, Auto, Auto"
+            RowDefinitions="Auto, Auto, Auto, Auto, Auto"
             RowSpacing="6">
             <TextBlock
               Grid.Row="0"
@@ -130,9 +194,23 @@
               Grid.Column="1"
               MinWidth="128"
               ItemsSource="{Binding InfoBarPositions}"/>
+
+            <TextBlock
+              Grid.Row="3"
+              Grid.Column="0"
+              VerticalAlignment="Center"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[EditCustom]}"/>
+            <fui:ToolButton
+              Grid.Row="3"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              Classes="Transparent"
+              Click="OnShowInfoBarEditDialog"
+              Content="{x:Static fi:FluentIcon.Edit}"/>
+
             <CheckBox
               Name="InfoBarIsClosableCheckBox"
-              Grid.Row="3"
+              Grid.Row="4"
               Grid.ColumnSpan="2"
               Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_IsClosable]}"/>
           </Grid>

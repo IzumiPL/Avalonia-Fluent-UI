@@ -1551,7 +1551,7 @@
     <value>パーセンテージ表示</value>
   </data>
   <data name="PleaseSelectYourOption" xml:space="preserve">
-    <value>オプションを選択してください</value>
+    <value>どうかあなたの妻を選んでください</value>
   </data>
   <data name="MV_Title" xml:space="preserve">
     <value>Avalonia Fluent UI Gallery</value>
@@ -1756,5 +1756,41 @@
   </data>
   <data name="CACMessage" xml:space="preserve">
     <value>ダウンロード者は、あなたが提供した設定情報に基づいてAIモデルをダウンロードします。アプリの設定でいつでも変更可能です。お楽しみください!</value>
+  </data>
+  <data name="SetInfoBarTitle" xml:space="preserve">
+    <value>メッセージバーのタイトルを設定する</value>
+  </data>
+  <data name="SetInfoBarContent" xml:space="preserve">
+    <value>メッセージバーの内容を設定する</value>
+  </data>
+  <data name="SetInfoBarDuration" xml:space="preserve">
+    <value>持続時間(ms)</value>
+  </data>
+  <data name="SetInfoBarRadius" xml:space="preserve">
+    <value>丸角ラジアンを設定します</value>
+  </data>
+  <data name="BI_TransparentComboBox" xml:space="preserve">
+    <value>プルダウンフレーム付きの透明背景</value>
+  </data>
+  <data name="PleaseEnterTheTitle" xml:space="preserve">
+    <value>タイトルを入力してください</value>
+  </data>
+  <data name="PleaseEnterContent" xml:space="preserve">
+    <value>このコンテンツを入力してください</value>
+  </data>
+  <data name="CustomForeground" xml:space="preserve">
+    <value>情報バーの前景色をカスタマイズする</value>
+  </data>
+  <data name="CustomBackground" xml:space="preserve">
+    <value>情報バーの背景色をカスタマイズする</value>
+  </data>
+  <data name="EditCustom" xml:space="preserve">
+    <value>カスタムの編集</value>
+  </data>
+  <data name="TV_OutlinedTextBox" xml:space="preserve">
+    <value>アウトラインテキストボックス</value>
+  </data>
+  <data name="VP_TableView" xml:space="preserve">
+    <value>テーブルビュー</value>
   </data>
 </root>
