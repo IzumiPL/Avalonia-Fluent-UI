@@ -244,7 +244,7 @@
               Name="InputBox"
               Grid.Row="1"
               Grid.ColumnSpan="3"
-              Classes="clearButton"
+              Classes="Clear"
               CornerRadius="{TemplateBinding CornerRadius}"
               DataValidationErrors.Errors="{TemplateBinding DataValidationErrors.Errors}"
               FontFamily="{TemplateBinding FontFamily}"
@@ -446,7 +446,7 @@
       </ControlTemplate>
     </Setter>
 
-    <Style Selector="^.clearButton[AcceptsReturn=False][IsReadOnly=False]:focus:not(TextBox:empty)">
+    <Style Selector="^.Clear[AcceptsReturn=False][IsReadOnly=False]:focus:not(TextBox:empty)">
       <Setter Property="InnerRightContent">
         <Template>
           <Button
@@ -501,7 +501,7 @@
               Name="InputBox"
               Grid.Row="1"
               Grid.ColumnSpan="3"
-              Classes="clearButton"
+              Classes="Clear"
               CornerRadius="{TemplateBinding CornerRadius}"
               DataValidationErrors.Errors="{TemplateBinding DataValidationErrors.Errors}"
               FontFamily="{TemplateBinding FontFamily}"

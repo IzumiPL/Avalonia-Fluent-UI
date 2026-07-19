@@ -90,8 +90,7 @@
       </Style>
     </Style>
 
-    <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
-      <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
+    <Style Selector="^:disabled">
       <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
       <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
     </Style>
@@ -181,10 +180,6 @@
     </Style>
 
     <Style Selector="^:disabled">
-      <Style Selector="^ /template/ Border#Root">
-        <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
-      </Style>
-
       <Style Selector="^ /template/ ui|FontIcon">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
       </Style>

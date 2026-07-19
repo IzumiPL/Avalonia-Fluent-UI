@@ -6,11 +6,11 @@ namespace AvaloniaFluentUI.Core;
 /// <summary>
 /// Provides settings related to the behavior of UI elements, like animation, etc.
 /// </summary>
-public class FAUISettings
+public class UISettings
 {
-    static FAUISettings()
+    static UISettings()
     {
-        s_Instance = new FAUISettings();
+        s_Instance = new UISettings();
     }
 
     /// <summary>
@@ -67,7 +67,7 @@ public class FAUISettings
         cyDrag = Win32Interop.GetSystemMetricsWithFallback(69, (uint)Math.Round(96 * scaling));
     }
 
-    private static readonly FAUISettings s_Instance;
+    private static readonly UISettings s_Instance;
     private bool _areAnimationsEnabled = true;
     private bool _useTabViewDragReorderPreview = true;
 }

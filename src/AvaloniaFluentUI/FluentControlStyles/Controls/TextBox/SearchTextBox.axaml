@@ -119,7 +119,7 @@
                   Margin="{TemplateBinding Padding}"
                   Cursor="IBeam">
                   <TextBlock
-                    Name="FloatingPlaceholder"
+                    Name="PART_FloatingPlaceholder"
                     DockPanel.Dock="Top"
                     FontSize="{TemplateBinding FontSize}"
                     Foreground="{DynamicResource SystemAccentColor}"
@@ -219,7 +219,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
       </Style>
 
-      <Style Selector="^ /template/ TextBlock#PART_Placeholder, ^ /template/ TextBlock#FloatingPlaceholder">
+      <Style Selector="^ /template/ TextBlock#PART_Placeholder, ^ /template/ TextBlock#PART_FloatingPlaceholder">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
       </Style>
     </Style>
@@ -229,7 +229,6 @@
       <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
 
       <Style Selector="^ /template/ Border#PART_BorderElement">
-        <Setter Property="BorderBrush" Value="{DynamicResource TextControlElevationBorderBrush}"/>
         <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
       </Style>
 
@@ -261,8 +260,20 @@
       <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorCriticalBrush}"/>
     </Style>
 
-    <Style Selector="^[UseFloatingPlaceholder=true]:not(:empty) /template/ TextBlock#FloatingPlaceholder">
+    <Style Selector="^[UseFloatingPlaceholder=true]:not(:empty) /template/ TextBlock#PART_FloatingPlaceholder">
       <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <Style Selector="^.Outlined">
+      <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBrush}"/>
+      <Setter Property="CornerRadius" Value="6"/>
+
+      <Style Selector="^:focus">
+        <Style Selector="^ /template/ Border#PART_BorderElement">
+          <Setter Property="BorderBrush" Value="{DynamicResource SystemAccentColor}"/>
+          <Setter Property="BorderThickness" Value="{DynamicResource OutlinedTextBoxFocusBorderThickness}"/>
+        </Style>
+      </Style>
     </Style>
   </ControlTheme>
 </ResourceDictionary>

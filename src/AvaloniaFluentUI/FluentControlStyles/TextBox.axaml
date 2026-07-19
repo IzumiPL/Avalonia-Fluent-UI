@@ -168,12 +168,12 @@
       visible if the button is pressed. To mimic this, we'll dim the foreground
       of the glyph when checked so there is a distinct visual state
     -->
-    <Style Selector="^:checked /template/ ui|FontIcon#Glyph">
-      <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/>
-    </Style>
-    <Style Selector="^:checked:pressed /template/ ui|FontIcon#Glyph">
-      <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
-    </Style>
+    <!-- <Style Selector="^:checked /template/ ui|FontIcon#Glyph"> -->
+    <!--   <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/> -->
+    <!-- </Style> -->
+    <!-- <Style Selector="^:checked:pressed /template/ ui|FontIcon#Glyph"> -->
+    <!--   <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/> -->
+    <!-- </Style> -->
 
     <Style Selector="^:disabled /template/ Border#ButtonLayoutGrid">
       <Setter Property="Opacity" Value="0"/>

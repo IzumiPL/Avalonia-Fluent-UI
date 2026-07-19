@@ -24,12 +24,12 @@
           BorderBrush="{TemplateBinding BorderBrush}"
           BorderThickness="{TemplateBinding BorderThickness}"
           BoxShadow="{DynamicResource PopupDefaultBoxShadow}"
-          CornerRadius="6 6 10 10">
+          CornerRadius="{TemplateBinding CornerRadius,
+                                         Converter={StaticResource KeepTopCornerRadiusConverter}}">
           <Border
             Margin="0,5,0,0"
             Background="{DynamicResource PopupControlBackgroundBrush}"
-            CornerRadius="{TemplateBinding CornerRadius,
-                                           Converter={StaticResource CornerRadiusConverter}}"
+            CornerRadius="{TemplateBinding CornerRadius}"
             Opacity="1">
             <Grid
               Margin="{TemplateBinding Padding}"

@@ -15,7 +15,7 @@
           HorizontalAlignment="Left"
           VerticalAlignment="Top">
           <Rectangle.Fill>
-            <RadialGradientBrush Center="100%,100%" GradientOrigin="100%,100%" Radius="1.5">
+            <RadialGradientBrush Center="100%,100%" GradientOrigin="100%,100%">
               <RadialGradientBrush.GradientStops>
                 <GradientStop Offset="0" Color="OrangeRed"/>
                 <GradientStop Offset="0.7" Color="DarkSlateBlue"/>

@@ -284,25 +284,4 @@
       </Setter>
     </Style>
   </ControlTheme>
-
-  <ControlTheme x:Key="{x:Type Separator}" TargetType="Separator">
-    <Setter Property="Focusable" Value="False"/>
-    <Setter Property="Background" Value="{DynamicResource DividerStrokeColorDefaultBrush}"/>
-    <Setter Property="HorizontalAlignment" Value="Stretch"/>
-    <Setter Property="Margin" Value="{DynamicResource MenuFlyoutSeparatorThemePadding}"/>
-    <Setter Property="Height" Value="{DynamicResource MenuFlyoutSeparatorHeight}"/>
-    <Setter Property="Template">
-      <ControlTemplate>
-        <Border
-          Height="{TemplateBinding Height}"
-          Padding="{TemplateBinding Margin}"
-          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-          VerticalAlignment="{TemplateBinding VerticalAlignment}"
-          Background="{TemplateBinding Background}"
-          BorderBrush="{TemplateBinding BorderBrush}"
-          BorderThickness="{TemplateBinding BorderThickness}"/>
-      </ControlTemplate>
-    </Setter>
-  </ControlTheme>
-
 </ResourceDictionary>

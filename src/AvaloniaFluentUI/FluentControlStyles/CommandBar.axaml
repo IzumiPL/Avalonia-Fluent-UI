@@ -42,9 +42,8 @@
     <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
     <Setter Property="BorderThickness" Value="0"/>
-    <Setter Property="Padding" Value="8,4"/>
+    <Setter Property="Padding" Value="11,6"/>
     <Setter Property="Width" Value="68"/>
-    <Setter Property="MinHeight" Value="40"/>
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
@@ -61,7 +60,7 @@
             Name="PART_LayoutRoot"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Spacing="4">
+            Spacing="6">
             <ContentPresenter
               Name="PART_IconPresenter"
               HorizontalAlignment="Center"
@@ -85,8 +84,12 @@
     </Style>
 
     <!--  Pressed  -->
-    <Style Selector="^:pressed /template/ Border#PART_Border">
-      <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+    <Style Selector="^:pressed">
+      <Style Selector="^ /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+      </Style>
+
+      <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
     </Style>
 
     <!--  Compact: hide label, reduce width  -->
@@ -104,6 +107,7 @@
     </Style>
     <Style Selector="^[LabelPosition=Right] /template/ StackPanel#PART_LayoutRoot">
       <Setter Property="Orientation" Value="Horizontal"/>
+      <Setter Property="Spacing" Value="6"/>
     </Style>
     <Style Selector="^[LabelPosition=Right] /template/ ContentPresenter#PART_IconPresenter">
       <Setter Property="VerticalAlignment" Value="Center"/>
@@ -129,9 +133,8 @@
     <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
     <Setter Property="BorderThickness" Value="0"/>
-    <Setter Property="Padding" Value="8,4"/>
+    <Setter Property="Padding" Value="11,6"/>
     <Setter Property="Width" Value="68"/>
-    <Setter Property="MinHeight" Value="40"/>
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
@@ -148,7 +151,7 @@
             Name="PART_LayoutRoot"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Spacing="4">
+            Spacing="6">
             <ContentPresenter
               Name="PART_IconPresenter"
               HorizontalAlignment="Center"
@@ -166,19 +169,35 @@
       </ControlTemplate>
     </Setter>
 
+    <Style Selector="^ /template/ Border#PART_Border">
+      <Setter Property="Transitions">
+        <Transitions>
+          <BrushTransition Property="Background" Duration="00:00:00.083"/>
+        </Transitions>
+      </Setter>
+    </Style>
+
     <!--  Hover  -->
     <Style Selector="^:pointerover /template/ Border#PART_Border">
       <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
     </Style>
 
     <!--  Pressed  -->
-    <Style Selector="^:pressed /template/ Border#PART_Border">
-      <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+    <Style Selector="^:pressed">
+      <Style Selector="^ /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+      </Style>
+
+      <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
     </Style>
 
     <!--  Checked  -->
-    <Style Selector="^:checked /template/ Border#PART_Border">
-      <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+    <Style Selector="^:checked">
+      <Style Selector="^ /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+      </Style>
+
+      <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
     </Style>
 
     <!--  Compact: hide label, reduce width  -->
@@ -218,10 +237,9 @@
 
   <!--  CommandBarSeparator ControlTheme  -->
   <ControlTheme x:Key="{x:Type CommandBarSeparator}" TargetType="CommandBarSeparator">
-    <!-- <Setter Property="Foreground" Value="{DynamicResource DividerStrokeColorDefaultBrush}"/> -->
-    <Setter Property="Foreground" Value="#000000"/>
-    <Setter Property="Padding" Value="8 4"/>
+    <Setter Property="Foreground" Value="{DynamicResource DividerStrokeColorDefaultBrush}"/>
     <Setter Property="Width" Value="1"/>
+    <Setter Property="Margin" Value="0"/>
     <Setter Property="MinHeight" Value="24"/>
     <Setter Property="Template">
       <ControlTemplate>
@@ -241,7 +259,6 @@
       <Setter Property="Width" Value="NaN"/>
       <Setter Property="Height" Value="1"/>
       <Setter Property="MinHeight" Value="0"/>
-      <Setter Property="Margin" Value="4 4"/>
     </Style>
   </ControlTheme>
 
@@ -249,12 +266,13 @@
   <ControlTheme x:Key="{x:Type CommandBar}" TargetType="CommandBar">
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
     <Setter Property="Background" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
-    <Setter Property="MinHeight" Value="48"/>
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
+    <Setter Property="MinHeight" Value="36"/>
     <Setter Property="Padding" Value="4,0"/>
     <Setter Property="ItemWidthBottom" Value="70"/>
     <Setter Property="ItemWidthRight" Value="102"/>
     <Setter Property="ItemWidthCollapsed" Value="42"/>
-    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border
@@ -291,13 +309,13 @@
               <!--  Primary commands (fills remaining space, right-aligned)  -->
               <ItemsControl
                 Name="PART_PrimaryCommands"
-                HorizontalAlignment="Right"
+                HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 ClipToBounds="True"
                 ItemsSource="{Binding VisiblePrimaryCommands, RelativeSource={RelativeSource TemplatedParent}}">
                 <ItemsControl.ItemsPanel>
                   <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" Spacing="2"/>
+                    <StackPanel Orientation="Horizontal" Spacing="4"/>
                   </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
               </ItemsControl>
@@ -313,21 +331,29 @@
               PlacementTarget="{Binding #PART_OverflowButton}"
               WindowManagerAddShadowHint="False">
               <Border
-                MinWidth="160"
-                MaxWidth="480"
-                Padding="0"
-                Background="{DynamicResource AcrylicInAppFillColorDefaultBrush}"
-                BackgroundSizing="InnerBorderEdge"
-                BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
-                BorderThickness="1"
+                Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
+                BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
                 CornerRadius="{DynamicResource OverlayCornerRadius}">
-                <ItemsControl x:Name="PART_OverflowPresenter" ItemsSource="{Binding OverflowItems, RelativeSource={RelativeSource TemplatedParent}}">
-                  <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                      <StackPanel Spacing="2"/>
-                    </ItemsPanelTemplate>
-                  </ItemsControl.ItemsPanel>
-                </ItemsControl>
+                <Border
+                  MinWidth="160"
+                  MaxWidth="480"
+                  Padding="0"
+                  Background="{DynamicResource AcrylicInAppFillColorDefaultBrush}"
+                  BackgroundSizing="InnerBorderEdge"
+                  BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
+                  BorderThickness="1"
+                  CornerRadius="{DynamicResource OverlayCornerRadius}">
+                  <ItemsControl
+                    x:Name="PART_OverflowPresenter"
+                    Margin="4"
+                    ItemsSource="{Binding OverflowItems, RelativeSource={RelativeSource TemplatedParent}}">
+                    <ItemsControl.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <StackPanel Spacing="2"/>
+                      </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                  </ItemsControl>
+                </Border>
               </Border>
             </ui:FluentPopup>
           </Panel>

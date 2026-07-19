@@ -70,7 +70,7 @@ public class MinMaxCloseControl : TemplatedControl
 
     private void OwnerWindowOpened(object sender, EventArgs args)
     {
-        _windowStateObservable = new FACompositeDisposable(
+        _windowStateObservable = new CompositeDisposable(
             _owner.GetObservable(Window.WindowStateProperty).Subscribe(OnWindowStateChanged),
             _owner.GetObservable(WindowBase.IsActiveProperty).Subscribe(OnWindowActiveChanged));
     }

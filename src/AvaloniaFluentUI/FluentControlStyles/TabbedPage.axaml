@@ -139,6 +139,8 @@
           </Border>
           <ContentPresenter
             Name="PART_SelectedPipe"
+            MaxWidth="168"
+            MaxHeight="168"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Bottom"
             HorizontalContentAlignment="Stretch"
@@ -173,7 +175,7 @@
           <TransformOperationsTransition
             Easing="CircularEaseOut"
             Property="RenderTransform"
-            Duration="0:0:0.25"/>
+            Duration="0:0:0.168"/>
         </Transitions>
       </Setter>
     </Style>

@@ -19,24 +19,24 @@ internal class FADisposable : IDisposable
     private Action _dispose;
 }
 
-internal class FACompositeDisposable : ICollection<IDisposable>, IEnumerable<IDisposable>, IEnumerable, IDisposable
+internal class CompositeDisposable : ICollection<IDisposable>, IEnumerable<IDisposable>, IEnumerable, IDisposable
 {
-    public FACompositeDisposable()
+    public CompositeDisposable()
     {
         _list = new List<IDisposable>();
     }
 
-    public FACompositeDisposable(int capacity)
+    public CompositeDisposable(int capacity)
     {
         _list = new List<IDisposable>(capacity);
     }
 
-    public FACompositeDisposable(params IDisposable[] disposables)
+    public CompositeDisposable(params IDisposable[] disposables)
     {
         _list = new List<IDisposable>(disposables);
     }
 
-    public FACompositeDisposable(IEnumerable<IDisposable> disposables)
+    public CompositeDisposable(IEnumerable<IDisposable> disposables)
     {
         _list = new List<IDisposable>(disposables);
     }

@@ -52,11 +52,10 @@
     </Border>
   </Design.PreviewWith>
 
-  <x:Double x:Key="MenuBarHeight">40</x:Double>
-
-
   <!--  Control-specific resources  -->
+  <x:Double x:Key="MenuBarHeight">40</x:Double>
   <Thickness x:Key="MenuBarItemBorderThickness">0</Thickness>
+
   <ControlTheme x:Key="MenuBarItemStyle" TargetType="MenuItem">
     <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlAltFillColorTertiaryBrush}"/>

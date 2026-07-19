@@ -276,6 +276,7 @@
       </Style>
       <Style Selector="^ /template/ Border#Background">
         <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
       </Style>
 
       <Style Selector="^ /template/ ui|FontIcon#DropDownGlyph">

@@ -18,6 +18,9 @@
       <Setter Property="Foreground" Value="{DynamicResource SystemControlHighlightListAccentLowBrush}"/>
     </Style>
 
+    <Style Selector="^:disabled">
+      <Setter Property="Opacity" Value="0.6"/>
+    </Style>
   </ControlTheme>
 </ResourceDictionary>
 

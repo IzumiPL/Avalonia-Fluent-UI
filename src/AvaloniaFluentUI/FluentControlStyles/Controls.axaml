@@ -5,152 +5,153 @@
   <Styles.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
-        <MergeResourceInclude Source="/FluentControlStyles/DataValidationErrorsStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/WindowStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/ButtonStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/ToggleButtonStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/AutoCompleteBoxStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/TextBlockStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/TextBoxStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/ScrollBarStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/ScrollViewerStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/EmbeddableControlRootStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/LabelStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/ItemsControlStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/OverlayPopupHostStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/PopupRootStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/ToolTipStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/WindowNotificationManagerStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/CarouselStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/ContentControlStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/DataValidationErrors.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Window.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Button.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/ToggleButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/AutoCompleteBox.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/TextBlock.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/TextBox.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/ScrollBar.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/ScrollViewer.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/EmbeddableControlRoot.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Label.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/ItemsControl.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/OverlayPopupHost.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/PopupRoot.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/ToolTip.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/WindowNotificationManager.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Carousel.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/ContentControl.axaml"/>
         <!-- <MergeResourceInclude Source="/FluentControlStyles/NativeMenuBarStyles.axaml"/> -->
-        <MergeResourceInclude Source="/FluentControlStyles/ButtonSpinnerStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/RepeatButtonStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/GridSplitterStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/ComboBoxStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/DropDownButtonStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/CalendarStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/CalendarDatePickerStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/ButtonSpinner.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/RepeatButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/GridSplitter.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/ComboBox.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/DropDownButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Calendar.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/CalendarDatePicker.axaml"/>
         <!-- <MergeResourceInclude Source="/FluentControlStyles/CaptionButtonStyles.axaml"/> -->
-        <MergeResourceInclude Source="/FluentControlStyles/CheckBoxStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/ListBoxStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/MenuStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/MenuItemStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/NotificationCardStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/ProgressBarStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/RadioButtonStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/SliderStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/SplitButtonStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/SplitViewStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/CheckBox.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/ListBox.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Menu.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/MenuItem.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/NotificationCard.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/ProgressBar.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/RadioButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Slider.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/SplitButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/SplitView.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/SelectableTextBlock.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/TabControlStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/TabStripStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/TreeViewStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/ToggleSwitchStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/NumericUpDownStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/ExpanderStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/ManagedFileChooserStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/FlyoutPresenterStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/DatePickerStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/TimePickerStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/TabControl.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/TabStrip.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/TreeView.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/ToggleSwitch.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/NumericUpDown.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Expander.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/ManagedFileChooser.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/FlyoutPresenter.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/DatePicker.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/TimePicker.axaml"/>
         <!-- <MergeResourceInclude Source="/FluentControlStyles/TitleBarStyles.axaml"/> -->
-        <MergeResourceInclude Source="/FluentControlStyles/TransitioningContentControlStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/TransitioningContentControl.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/ColorPicker/ColorPickerStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/DataGrid/DataGridStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/RefreshControlStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/DataGrid/DataGrid.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/RefreshControl.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/PathIcon.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/HyperlinkButtonStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/FocusAdornerStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/HyperlinkButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/FocusAdorner.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Sepasrator.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/TableView/TableView.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/PipsPagerStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/GroupBoxStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/ContentPageStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/CarouselPageStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/DrawerPageStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/NavigationPageStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/TabbedPageStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/TextSelectionHandleStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/CommandBarStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/WindowDrawnDecorationsStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/PipsPager.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/GroupBox.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/ContentPage.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/CarouselPage.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/DrawerPage.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/NavigationPage.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/TabbedPage.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/TextSelectionHandle.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/CommandBar.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/WindowDrawnDecorations.axaml"/>
 
 
-        <!--  FluentAvalonia Controls  -->
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/FrameStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/InfoBadgeStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/InfoBarStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/NumberBoxStyles.axaml"/>
+        <!--  Avalonia Fluent UI Controls  -->
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Frame.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Tip/InfoBadge.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/InfoBar/InfoBar.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Spinner/NumberBox.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/MenuFlyoutPresenter.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/MenuFlyoutItemStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/MenuFlyoutSubItemStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/ToggleMenuFlyoutItemStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/RadioMenuFlyoutItemStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/MenuFlyoutSeparatorStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/MenuFlyoutItem.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/MenuFlyoutSubItem.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/ToggleMenuFlyoutItem.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/RadioMenuFlyoutItem.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/MenuFlyoutSeparator.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarButtonStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarToggleButtonStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarElementContainerStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarOverflowPresenterStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarSeparatorStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarFlyoutCommandBarStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBar.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarToggleButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarElementContainer.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarOverflowPresenter.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarSeparator.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarFlyoutCommandBar.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/TabView/TabViewStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/TabView/TabViewItemStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/TabView/TabViewListViewStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/TabView/TabView.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/TabView/TabViewItem.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/TabView/TabViewListView.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewSharedStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewBackButtonStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewItemHeaderStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewItemSeparatorStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewItemPresenterStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewItemStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewShared.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewBackButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewItemHeader.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewItemSeparator.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewItemPresenter.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationViewItem.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/NavigationView/NavigationView.axaml"/>
 
         <!--  Dialog  -->
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/ContentDialog/ContentDialogStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/ContentDialog/ContentDialog.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/TaskDialog/TaskDialog.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/TaskDialog/TaskDialogButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/TaskDialog/TaskDialogCommand.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/TaskDialog/TaskDialogStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/TaskDialog/TaskDialogButtonStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/TaskDialog/TaskDialogCommandStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FluentColorView.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/ColorDialog/FluentColorView.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Tip/TeachingTip.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/TeachingTipStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Windowing/FluentWindow.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Windowing/FluentWindowStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Slider/RangeSlider.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Slider/RangeSliderStyles.axaml"/>
-
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Progress/ProgressRingStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Progress/ProgressRing.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Progress/FilledProgressBar.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/BreadcrumbBar/BreadcrumbBarStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/BreadcrumbBar/BreadcrumbBarItemStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/BreadcrumbBar/BreadcrumbBar.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/BreadcrumbBar/BreadcrumbBarItem.axaml"/>
 
         <!--
           ////
         -->
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/SmoothScrollViewer/SmoothScrollViewerStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/SmoothScrollViewer/SmoothScrollViewer.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/SmoothScrollViewer/SmoothScrollSnapViewer.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/SmoothScrollViewer/SingleDirectionScrollViewerStyle.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/SmoothScrollViewer/SingleDirectionScrollViewer.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/FluentMenu/FluentContextMenuStyle.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/ComboBox/MultiSelectionComboBoxStyle.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Menu/FluentContextMenu.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/ComboBox/MultiSelectionComboBox.axaml"/>
 
         <!--  Button  -->
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/PushButtonStyle.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/ToolButtonStyle.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/FilledPushButtonStyle.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/FilledToolButtonStyle.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/OutlinePushButtonStyle.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/OutlineToolButtonStyle.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/SubTitleRadioButtonStyle.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/PushButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/ToolButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/FilledPushButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/FilledToolButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/OutlinePushButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/OutlineToolButton.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/SubTitleRadioButton.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Button/ColorPickerButton.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Slider/ToolTipSliderStyle.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Pager/PipsPagerStyle.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Slider/ToolTipSlider.axaml"/>
+        <!-- <MergeResourceInclude Source="/FluentControlStyles/Controls/Pager/PipsPager.axaml"/> -->
         <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FlipViewStyle.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/View/WizardView.axaml"/>
 
@@ -160,46 +161,30 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Picker/ShortcutKeyPicker.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Picker/ShortcutKeyPanel.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/ListBox/RoundListBoxStyle.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/ListBox/RoundListBox.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Segmented/SegmentedViewStyle.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Segmented/SegmentedToggleViewStyle.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Segmented/SegmentedView.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Segmented/SegmentedToggleView.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/TextBox/SearchTextBox.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/TextBox/LabelTextBox.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/TextBox/OutlinedTextBox.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/CardStyles.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/SettingCardStyles.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/Card.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/SettingCard.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/GroupHeaderCard.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/ExpanderSettingCard/ExpanderSettingCard.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/ExpanderSettingCard/ExpanderSettingCardItem.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Label/Tag.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Label/HyperlinkLabel.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Toasts/ToastInfoBar.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Toasts/PopupInfoBar.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/InfoBar/ToastInfoBar.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/InfoBar/PopupInfoBar.axaml"/>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Styles.Resources>
 
-  <StyleInclude Source="/FluentControlStyles/UserControlStyles.axaml"/>
-
-
-  <!-- <Style Selector="wnd|AppWindow:dialog"> -->
-  <!--     <Style Selector="^ WindowDrawnDecorations /template/ Button#PART_MinimizeButton"> -->
-  <!--  Don't set IsVisible = false, it causes issues, see #3 on GH740  -->
-  <!--         <Setter Property="Opacity" Value="0" /> -->
-  <!--         <Setter Property="IsHitTestVisible" Value="False" /> -->
-  <!--         <Setter Property="Width" Value="0" /> -->
-  <!--     </Style> -->
-  <!--     <Style Selector="^ WindowDrawnDecorations /template/ Button#PART_MaximizeButton"> -->
-  <!--  Don't set IsVisible = false, it causes issues, see #3 on GH740  -->
-  <!--         <Setter Property="Opacity" Value="0" /> -->
-  <!--         <Setter Property="IsHitTestVisible" Value="False" /> -->
-  <!--         <Setter Property="Width" Value="0" /> -->
-  <!--     </Style> -->
-  <!-- </Style> -->
-
+  <StyleInclude Source="/FluentControlStyles/UserControl.axaml"/>
 
   <!--
     Amendments to CommandBar buttons which before ControlThemes used these styles to control their

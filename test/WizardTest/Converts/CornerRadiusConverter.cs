@@ -11,7 +11,12 @@ public class CornerRadiusConverter : IValueConverter
     {
         if (value is CornerRadius cr)
         {
-            return new CornerRadius(0, 0, cr.BottomLeft + 1, cr.BottomRight + 1);
+            if (parameter is null)
+            { 
+                return new CornerRadius(0, 0, cr.BottomLeft + 1, cr.BottomRight + 1);
+            }
+            
+            return new CornerRadius(cr.TopLeft, cr.TopRight, cr.BottomLeft + 1, cr.BottomRight + 1);
         }
         
         return new CornerRadius(0);

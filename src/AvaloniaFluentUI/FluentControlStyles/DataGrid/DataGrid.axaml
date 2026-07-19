@@ -3,19 +3,20 @@
   <Thickness x:Key="DataGridTextColumnCellTextBlockMargin">12 0</Thickness>
 
   <ResourceDictionary.MergedDictionaries>
-    <ResourceInclude Source="/FluentControlStyles/DataGrid/DataGridCellStyles.axaml"/>
-    <ResourceInclude Source="/FluentControlStyles/DataGrid/DataGridColumnHeaderStyles.axaml"/>
-    <ResourceInclude Source="/FluentControlStyles/DataGrid/DataGridRowGroupHeaderStyles.axaml"/>
-    <ResourceInclude Source="/FluentControlStyles/DataGrid/DataGridRowHeaderStyles.axaml"/>
-    <ResourceInclude Source="/FluentControlStyles/DataGrid/DataGridRowStyles.axaml"/>
+    <ResourceInclude Source="/FluentControlStyles/DataGrid/DataGridCell.axaml"/>
+    <ResourceInclude Source="/FluentControlStyles/DataGrid/DataGridColumnHeader.axaml"/>
+    <ResourceInclude Source="/FluentControlStyles/DataGrid/DataGridRowGroupHeader.axaml"/>
+    <ResourceInclude Source="/FluentControlStyles/DataGrid/DataGridRowHeader.axaml"/>
+    <ResourceInclude Source="/FluentControlStyles/DataGrid/DataGridRow.axaml"/>
   </ResourceDictionary.MergedDictionaries>
 
 
-  
-  <!-- Control-specific resources -->
+
+  <!--  Control-specific resources  -->
   <SolidColorBrush x:Key="DataGridDropLocationIndicatorBackground" Color="#3F4346"/>
   <SolidColorBrush x:Key="DataGridDisabledVisualElementBackground" Color="#8CFFFFFF"/>
-<ControlTheme x:Key="{x:Type DataGrid}" TargetType="DataGrid">
+
+  <ControlTheme x:Key="{x:Type DataGrid}" TargetType="DataGrid">
     <Setter Property="RowBackground" Value="Transparent"/>
     <Setter Property="HeadersVisibility" Value="Column"/>
     <Setter Property="HorizontalScrollBarVisibility" Value="Auto"/>
