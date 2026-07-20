@@ -4,6 +4,10 @@
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   x:CompileBindings="True">
 
+  <Thickness x:Key="CommandBarOverflowPresenterBorderPadding">0</Thickness>
+  <Thickness x:Key="CommandBarOverflowPresenterBorderThickness">1</Thickness>
+  <Thickness x:Key="CommandBarOverflowPresenterMargin">0,4,0,4</Thickness>
+
   <ControlTheme x:Key="{x:Type ui:CommandBarOverflowPresenter}" TargetType="ui:CommandBarOverflowPresenter">
     <Setter Property="Background" Value="{DynamicResource AcrylicInAppFillColorDefaultBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource SurfaceStrokeColorFlyoutBrush}"/>

@@ -28,13 +28,6 @@ namespace AvaloniaFluentUI.Controls;
 public partial class CommandBar : ContentControl
 {
     /// <summary>
-    /// Defines the <see cref="IsSticky"/> property
-    /// </summary>
-    public static readonly StyledProperty<bool> IsStickyProperty =
-        AvaloniaProperty.Register<CommandBar, bool>(nameof(IsSticky),
-            defaultValue: true);
-
-    /// <summary>
     /// Define the <see cref="IsOpen"/> property
     /// </summary>
     public static readonly StyledProperty<bool> IsOpenProperty =
@@ -85,15 +78,6 @@ public partial class CommandBar : ContentControl
     /// </summary>
     public static readonly StyledProperty<CommandBarDefaultLabelPosition> DefaultLabelPositionProperty =
         AvaloniaProperty.Register<CommandBar, CommandBarDefaultLabelPosition>(nameof(DefaultLabelPosition));
-
-    /// <summary>
-    /// Gets or sets a value that indicates whether the CommandBar does not close on light dismiss.
-    /// </summary>
-    public bool IsSticky
-    {
-        get => GetValue(IsStickyProperty);
-        set => SetValue(IsStickyProperty, value);
-    }
 
     /// <summary>
     /// Gets or sets a value that indicates whether the CommandBar is open.

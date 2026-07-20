@@ -31,7 +31,6 @@
   <x:Double x:Key="AppBarThemeCompactHeight">48</x:Double>
   <Thickness x:Key="AppBarEllipsisButtonInnerBorderMargin">2,6,6,6</Thickness>
   <x:Double x:Key="AppBarMoreButtonColumnMinWidth">6</x:Double>
-  <Thickness x:Key="CommandBarOverflowPresenterMargin">0,4,0,4</Thickness>
   <x:Double x:Key="AppBarExpandButtonThemeWidth">48</x:Double>
   <!--  doubled b/c it seemed to clip the icon  -->
   <x:Double x:Key="AppBarExpandButtonCircleDiameter">6</x:Double>
@@ -57,9 +56,8 @@
   <Thickness x:Key="AppBarButtonSecondarySubItemChevronMargin">0,0,16,0</Thickness>
 
   <Thickness x:Key="CommandBarBorderThicknessOpen">1</Thickness>
-  <Thickness x:Key="CommandBarOverflowPresenterBorderPadding">0</Thickness>
-  <Thickness x:Key="CommandBarOverflowPresenterBorderThickness">1</Thickness>
-  <ControlTheme x:Key="CBEllipsisButton" TargetType="Button">
+
+  <ControlTheme x:Key="EllipsisButton" TargetType="Button">
     <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
     <Setter Property="BorderThickness" Value="0"/>
@@ -173,7 +171,7 @@
                 Padding="{DynamicResource CommandBarMoreButtonMargin}"
                 VerticalAlignment="Top"
                 Foreground="{TemplateBinding Foreground}"
-                Theme="{StaticResource CBEllipsisButton}">
+                Theme="{StaticResource EllipsisButton}">
                 <ui:SymbolIcon
                   Name="EllipsisIcon"
                   Height="{StaticResource AppBarExpandButtonCircleDiameter}"
@@ -194,7 +192,7 @@
 
           <ui:FluentPopup
             Name="OverflowPopup"
-            IsLightDismissEnabled="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=!IsSticky}"
+            IsLightDismissEnabled="True"
             IsOpen="{TemplateBinding IsOpen,
                                      Mode=TwoWay}"
             Placement="AnchorAndGravity"
@@ -202,7 +200,12 @@
             PlacementGravity="BottomLeft"
             PlacementTarget="{TemplateBinding}"
             WindowManagerAddShadowHint="False">
-            <ui:CommandBarOverflowPresenter Name="SecondaryItemsControl"/>
+            <Border
+              Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
+              BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
+              CornerRadius="{DynamicResource OverlayCornerRadius}">
+              <ui:CommandBarOverflowPresenter Name="SecondaryItemsControl"/>
+            </Border>
           </ui:FluentPopup>
 
         </Panel>

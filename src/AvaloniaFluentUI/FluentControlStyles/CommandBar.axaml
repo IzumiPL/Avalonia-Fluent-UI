@@ -295,7 +295,7 @@
                 DockPanel.Dock="Right"
                 FontSize="16"
                 IsVisible="{TemplateBinding IsOverflowButtonVisible}"
-                Theme="{StaticResource CBEllipsisButton}">
+                Theme="{StaticResource EllipsisButton}">
                 <ui:SymbolIcon FontSize="20" Symbol="More"/>
               </Button>
 
