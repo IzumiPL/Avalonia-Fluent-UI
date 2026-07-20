@@ -1793,4 +1793,13 @@
   <data name="VP_TableView" xml:space="preserve">
     <value>Table View</value>
   </data>
+  <data name="SettingCard" xml:space="preserve">
+    <value>Setting Card</value>
+  </data>
+  <data name="GradientCard" xml:space="preserve">
+    <value>Gradient Card</value>
+  </data>
+  <data name="FT" xml:space="preserve">
+    <value>Right-click a file or folder to display the running process</value>
+  </data>
 </root>

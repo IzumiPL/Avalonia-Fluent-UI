@@ -1793,4 +1793,13 @@
   <data name="VP_TableView" xml:space="preserve">
     <value>テーブルビュー</value>
   </data>
+  <data name="SettingCard" xml:space="preserve">
+    <value>セットアップカード</value>
+  </data>
+  <data name="GradientCard" xml:space="preserve">
+    <value>グラデーションカード</value>
+  </data>
+  <data name="FT" xml:space="preserve">
+    <value>ファイルやフォルダを右クリックすると、実行中のプロセスが表示されます</value>
+  </data>
 </root>

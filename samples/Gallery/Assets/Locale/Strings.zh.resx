@@ -1793,4 +1793,13 @@
   <data name="VP_TableView" xml:space="preserve">
     <value>表格视图</value>
   </data>
+  <data name="SettingCard" xml:space="preserve">
+    <value>设置卡</value>
+  </data>
+  <data name="GradientCard" xml:space="preserve">
+    <value>渐变卡片</value>
+  </data>
+  <data name="FT" xml:space="preserve">
+    <value>右击文件或文件夹以显示正在运行的进程</value>
+  </data>
 </root>

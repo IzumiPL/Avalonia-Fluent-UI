@@ -172,56 +172,43 @@
       </fui:GroupHeaderCard>
     </ui:CodeCard>
 
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SimpleSettingsCard]}">
-      <fui:SettingCard
-        Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SoundDescription]}"
-        Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Volume]}"
-        IconSource="{x:Static fi:FluentIcon.Volume}">
-        <fui:ToolTipSlider
-          Width="168"
-          MinHeight="0"
-          MaxHeight="100"
-          Value="32"/>
-      </fui:SettingCard>
-    </ui:CodeCard>
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[GradientCard]}">
+      <fui:GradientCard>
+        <fui:GradientCard.GradientStops>
+          <GradientStop Offset="0.0" Color="#4d9bf6ff"/>
+          <GradientStop Offset="1.0" Color="#4dffc6ff"/>
+        </fui:GradientCard.GradientStops>
+        <Grid
+          ColumnDefinitions="Auto, *, Auto"
+          ColumnSpacing="8"
+          RowDefinitions="Auto, Auto"
+          RowSpacing="6">
+          <PathIcon
+            Grid.Row="0"
+            Grid.Column="0"
+            VerticalAlignment="Top"
+            Data="{x:Static fi:FluentIcon.Document}"/>
+          <TextBlock
+            Grid.Row="0"
+            Grid.Column="1"
+            Text="File Locksmith"/>
+          <TextBlock
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
+            FontSize="12"
+            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+            Text="{locale:Localization FT}"/>
 
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_NoIconCardTitle]}">
-      <fui:SettingCard Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SoundDescription]}" Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Volume]}">
-        <ToggleSwitch Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_NoIconCardTitleSwc]}"/>
-      </fui:SettingCard>
-    </ui:CodeCard>
-
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_CICardTitle]}">
-      <fui:SettingCard
-        Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SoundDescription]}"
-        Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Volume]}"
-        IconSource="avares://Gallery/Assets/Icons/Setting.png">
-        <ToggleSwitch Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_NoIconCardTitleSwc]}"/>
-      </fui:SettingCard>
-    </ui:CodeCard>
-
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_ClickableSettingsCard]}">
-      <fui:SettingCard
-        Classes="Clicked"
-        Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_SoundDescription]}"
-        Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Sound]}"
-        IconSource="Volume"/>
-    </ui:CodeCard>
-
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_ExpandableSettingsCard]}">
-      <fui:ExpanderSettingCard
-        Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_AppsSettingsDescription]}"
-        Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_ChooseDevice]}"
-        IconSource="Microphone">
-        <fui:ExpanderSettingCardItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_Headset]}" Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_DeviceName]}"/>
-        <fui:ExpanderSettingCardItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_DeviceName]}">
-          <fui:PushButton
-            Classes="Accent"
-            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_AddDevice]}"
-            IconSource="{DynamicResource Add}"/>
-        </fui:ExpanderSettingCardItem>
-        <fui:ExpanderSettingCardItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_IsClickable]}" IsClickEnabled="True"/>
-      </fui:ExpanderSettingCard>
+          <ToggleSwitch
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="3"
+            Margin="0,-12,-18,0"
+            HorizontalAlignment="Right"
+            VerticalContentAlignment="Top"
+            OffContent=""
+            OnContent=""/>
+        </Grid>
+      </fui:GradientCard>
     </ui:CodeCard>
   </StackPanel>
 </ui:ViewBase>
