@@ -846,7 +846,7 @@ public sealed class TabViewListView : ListBox
     private void UpdateDragInfo()
     {
         var scaling = TopLevel.GetTopLevel(this)?.RenderScaling ?? 1;
-        FAUISettings.GetSystemDragSize(scaling, out _cxDrag, out _cyDrag);
+        UISettings.GetSystemDragSize(scaling, out _cxDrag, out _cyDrag);
     }
 
     private TabViewItem _dragItem;

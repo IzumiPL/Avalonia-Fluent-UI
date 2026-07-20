@@ -24,7 +24,7 @@ public class NavigationViewItemHeader : NavigationViewItemBase
         var splitView = GetSplitView;
         if (splitView != null)
         {
-            _splitViewRevokers = new FACompositeDisposable(
+            _splitViewRevokers = new CompositeDisposable(
                 splitView.GetPropertyChangedObservable(SplitView.IsPaneOpenProperty).Subscribe(OnSplitViewPropertyChanged),
                 splitView.GetPropertyChangedObservable(SplitView.DisplayModeProperty).Subscribe(OnSplitViewPropertyChanged));
 

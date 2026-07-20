@@ -645,8 +645,8 @@ public partial class NavigationView : HeaderedContentControl
     /// Property that stores disposables to each NavigationViewItem when their created in the ItemsRepeater,
     /// so they can be disposed when the item is removed
     /// </summary>
-    internal static readonly AttachedProperty<FACompositeDisposable> NavigationViewItemBaseRevokersProperty =
-        AvaloniaProperty.RegisterAttached<NavigationView, NavigationViewItemBase, FACompositeDisposable>("NavigationViewItemBaseRevokers");
+    internal static readonly AttachedProperty<CompositeDisposable> NavigationViewItemBaseRevokersProperty =
+        AvaloniaProperty.RegisterAttached<NavigationView, NavigationViewItemBase, CompositeDisposable>("NavigationViewItemBaseRevokers");
 
     private object _selectedItem;
     private IList<object> _menuItems;
@@ -1548,7 +1548,7 @@ public partial class NavigationView : HeaderedContentControl
             _splitView = e.NameScope.Get<SplitView>(s_tpRootSplitView);
             if (_splitView != null)
             {
-                _splitViewRevokers = new FACompositeDisposable(
+                _splitViewRevokers = new CompositeDisposable(
                     _splitView.GetPropertyChangedObservable(SplitView.IsPaneOpenProperty).Subscribe(OnSplitViewClosedCompactChanged),
                     _splitView.GetPropertyChangedObservable(SplitView.DisplayModeProperty).Subscribe(OnSplitViewClosedCompactChanged));
 
@@ -3126,7 +3126,7 @@ public partial class NavigationView : HeaderedContentControl
 
     private void SetNavigationViewItemBaseRevokers(NavigationViewItemBase nvib)
     {
-        var disp = new FACompositeDisposable(
+        var disp = new CompositeDisposable(
             nvib.GetPropertyChangedObservable(IsVisibleProperty).Subscribe(OnNavigationViewItemBaseVisibilityPropertyChanged));
 
         nvib.SetValue(NavigationViewItemBaseRevokersProperty, disp);
@@ -3141,7 +3141,7 @@ public partial class NavigationView : HeaderedContentControl
         // Technically this shouldn't happen b/c BaseRevokers should be called first
         if (revokers == null)
         {
-            revokers = new FACompositeDisposable();
+            revokers = new CompositeDisposable();
             nvi.SetValue(NavigationViewItemBaseRevokersProperty, revokers);
         }
 
@@ -4762,7 +4762,7 @@ public partial class NavigationView : HeaderedContentControl
             var paneContentGrid = _paneContentGrid;
 
             if ((prevIndicator != nextIndicator) && paneContentGrid != null && prevIndicator != null && 
-                nextIndicator != null && FAUISettings.AreAnimationsEnabled())
+                nextIndicator != null && UISettings.AreAnimationsEnabled())
             {
                 // Make sure both indicators are visible and in their original locations
                 ResetElementAnimationProperties(prevIndicator, 1f);

@@ -1551,7 +1551,7 @@
     <value>Show percentage</value>
   </data>
   <data name="PleaseSelectYourOption" xml:space="preserve">
-    <value>Please select your option</value>
+    <value>Please choose your wife</value>
   </data>
   <data name="MV_Title" xml:space="preserve">
     <value>Avalonia Fluent UI Gallery</value>
@@ -1756,5 +1756,50 @@
   </data>
   <data name="CACMessage" xml:space="preserve">
     <value>The downloader will download AI models for you based on the configuration information you provide. You can modify them in the application settings at any time. I wish you a happy use!</value>
+  </data>
+  <data name="SetInfoBarTitle" xml:space="preserve">
+    <value>Set the message bar title</value>
+  </data>
+  <data name="SetInfoBarContent" xml:space="preserve">
+    <value>Set message strip content</value>
+  </data>
+  <data name="SetInfoBarDuration" xml:space="preserve">
+    <value>Duration (ms)</value>
+  </data>
+  <data name="SetInfoBarRadius" xml:space="preserve">
+    <value>Set the rounded corner radians</value>
+  </data>
+  <data name="BI_TransparentComboBox" xml:space="preserve">
+    <value>Transparent Background ComboBox</value>
+  </data>
+  <data name="PleaseEnterTheTitle" xml:space="preserve">
+    <value>Please enter the title</value>
+  </data>
+  <data name="PleaseEnterContent" xml:space="preserve">
+    <value>Please enter this content</value>
+  </data>
+  <data name="CustomBackground" xml:space="preserve">
+    <value>Customize the background color of the infobar</value>
+  </data>
+  <data name="CustomForeground" xml:space="preserve">
+    <value>Customize the frontline color of the infobar</value>
+  </data>
+  <data name="EditCustom" xml:space="preserve">
+    <value>Edit custom</value>
+  </data>
+  <data name="TV_OutlinedTextBox" xml:space="preserve">
+    <value>Outlined Text Box</value>
+  </data>
+  <data name="VP_TableView" xml:space="preserve">
+    <value>Table View</value>
+  </data>
+  <data name="SettingCard" xml:space="preserve">
+    <value>Setting Card</value>
+  </data>
+  <data name="GradientCard" xml:space="preserve">
+    <value>Gradient Card</value>
+  </data>
+  <data name="FT" xml:space="preserve">
+    <value>Right-click a file or folder to display the running process</value>
   </data>
 </root>

@@ -25,10 +25,8 @@
                 IsVisible="{TemplateBinding Shape,
                                             Converter={StaticResource EnumToBoolConverter},
                                             ConverterParameter={x:Static controls:ColorSpectrumShape.Box}}"
-                RadiusX="{TemplateBinding CornerRadius,
-                                          Converter={StaticResource TopLeftCornerRadiusConverter}}"
-                RadiusY="{TemplateBinding CornerRadius,
-                                          Converter={StaticResource BottomRightCornerRadiusConverter}}"/>
+                RadiusX="8"
+                RadiusY="8"/>
               <Rectangle
                 x:Name="PART_SpectrumOverlayRectangle"
                 HorizontalAlignment="Stretch"
@@ -37,10 +35,8 @@
                 IsVisible="{TemplateBinding Shape,
                                             Converter={StaticResource EnumToBoolConverter},
                                             ConverterParameter={x:Static controls:ColorSpectrumShape.Box}}"
-                RadiusX="{TemplateBinding CornerRadius,
-                                          Converter={StaticResource TopLeftCornerRadiusConverter}}"
-                RadiusY="{TemplateBinding CornerRadius,
-                                          Converter={StaticResource BottomRightCornerRadiusConverter}}"/>
+                RadiusX="8"
+                RadiusY="8"/>
               <Ellipse
                 x:Name="PART_SpectrumEllipse"
                 HorizontalAlignment="Stretch"
@@ -93,10 +89,8 @@
                 IsVisible="{TemplateBinding Shape,
                                             Converter={StaticResource EnumToBoolConverter},
                                             ConverterParameter={x:Static controls:ColorSpectrumShape.Box}}"
-                RadiusX="{TemplateBinding CornerRadius,
-                                          Converter={StaticResource TopLeftCornerRadiusConverter}}"
-                RadiusY="{TemplateBinding CornerRadius,
-                                          Converter={StaticResource BottomRightCornerRadiusConverter}}"/>
+                RadiusX="4"
+                RadiusY="4"/>
               <Ellipse
                 x:Name="BorderEllipse"
                 HorizontalAlignment="Stretch"
@@ -114,7 +108,7 @@
     <!--  Normal  -->
     <!--  Separating this allows easier customization in applications  -->
     <Style Selector="^ /template/ Ellipse#BorderEllipse,                      ^ /template/ Rectangle#BorderRectangle">
-      <Setter Property="Stroke" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+      <Setter Property="Stroke" Value="{DynamicResource ControlBorderHighBrush}"/>
       <Setter Property="StrokeThickness" Value="1"/>
     </Style>
 

@@ -116,6 +116,14 @@
         Text="Hello World"/>
     </ui:CodeCard>
 
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_OutlinedTextBox]}">
+      <fui:OutlinedTextBox
+        Width="256"
+        HorizontalAlignment="Left"
+        Classes="Clear"
+        Text="Hello World"/>
+    </ui:CodeCard>
+
     <ui:CodeCard Name="PasswordBoxCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_PasswordBox]}">
       <TextBox
         Width="256"

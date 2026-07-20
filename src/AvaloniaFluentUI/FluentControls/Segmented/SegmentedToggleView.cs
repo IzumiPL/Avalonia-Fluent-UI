@@ -1,6 +1,10 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
+using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Layout;
+using Avalonia.Media;
+using Avalonia.Styling;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -15,7 +19,7 @@ public class SegmentedToggleView : SegmentedView
         set => SetValue(OrientationProperty, value);
     }
 
-    protected override void PrepareContainerForItemOverride(Control container, object item, int index)
+    protected override void PrepareContainerForItemOverride(Control container, object? item, int index)
     {
         base.PrepareContainerForItemOverride(container, item, index);
         if (container is SegmentedItem segmentedItem)
@@ -46,6 +50,56 @@ public class SegmentedToggleView : SegmentedView
         return size;
     }
 
+    protected async override void RunSliderAnimation(Point position)
+    {
+        if (_selectedIndicator == null) { return; }
+
+        _selectedIndicator.RenderTransform = _transform;
+
+        AvaloniaProperty property;
+        double startValue;
+        double endValue;
+        if (Orientation == Orientation.Horizontal)
+        {
+            property = TranslateTransform.XProperty;
+            startValue = _transform.X;
+            endValue = position.X;
+        }
+        else
+        {
+            property = TranslateTransform.YProperty;
+            startValue = _transform.Y;
+            endValue = position.Y;
+        }
+        
+        var animation = new Animation
+        {
+            Duration = TimeSpan.FromMilliseconds(150),
+            FillMode = FillMode.Forward,
+            Children =
+            {
+                new KeyFrame
+                {
+                    Cue = new Cue(0d),
+                    Setters = 
+                    {
+                        new Setter(property, startValue)
+                    }
+                },
+                new KeyFrame
+                {
+                    Cue = new Cue(1d),
+                    Setters =
+                    {
+                        new Setter(property, endValue)
+                    }
+                }
+            }
+        };
+
+        await animation.RunAsync(_selectedIndicator);
+    }
+
     protected override void UpdateSelectedIndicatorPosition()
     {
         if (_selectedIndicator == null || _headersArea == null)
@@ -72,11 +126,8 @@ public class SegmentedToggleView : SegmentedView
         {
             double width = container.Bounds.Width;
             double height = container.Bounds.Height;
-            var position = transform.Value.Transform(new Point(0, 0));
-
-            _selectedIndicator.Margin = Orientation == Orientation.Horizontal
-                ? new Thickness(position.X, 2, 2, 2)
-                : new Thickness(3, position.Y, 0, 2);
+            
+            RunSliderAnimation(transform.Value.Transform(new Point(0, 0)));
             _selectedIndicator.Width = width;
             _selectedIndicator.Height = height;
         }

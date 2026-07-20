@@ -31,7 +31,7 @@ public abstract class ItemCollectionTransitionProvider
         _transitions ??= new List<ItemCollectionTransition>();
         _transitionsWithAnimations ??= new List<ItemCollectionTransition>();
 
-        if (FAUISettings.AreAnimationsEnabled() && ShouldAnimate(transition))
+        if (UISettings.AreAnimationsEnabled() && ShouldAnimate(transition))
         {
             _transitionsWithAnimations.Add(transition);
         }

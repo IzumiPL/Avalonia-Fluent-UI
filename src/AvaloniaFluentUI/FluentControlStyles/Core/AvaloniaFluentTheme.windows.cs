@@ -31,8 +31,8 @@ public partial class AvaloniaFluentTheme
             }
             catch
             {
-                Logger.TryGet(LogEventLevel.Information, "FluentAvaloniaTheme")?
-                        .Log("FluentAvaloniaTheme", "Unable to create instance of ComObject IUISettings");
+                Logger.TryGet(LogEventLevel.Information, "AvaloniaFluentTheme")?
+                        .Log("AvaloniaFluentTheme", "Unable to create instance of ComObject IUISettings");
                 LoadDefaultAccentColor();
             }            
         }
@@ -60,8 +60,8 @@ public partial class AvaloniaFluentTheme
         }
         catch
         {
-            Logger.TryGet(LogEventLevel.Information, "FluentAvaloniaTheme")?
-                .Log("FluentAvaloniaTheme", "Loading system accent color failed, using fallback (SlateBlue)");
+            Logger.TryGet(LogEventLevel.Information, "AvaloniaFluentTheme")?
+                .Log("AvaloniaFluentTheme", "Loading system accent color failed, using fallback (SlateBlue)");
 
             // We don't know where it failed, so override all
             LoadDefaultAccentColor();
@@ -88,8 +88,8 @@ public partial class AvaloniaFluentTheme
         }
         catch
         {
-            Logger.TryGet(LogEventLevel.Information, "FluentAvaloniaTheme")?
-                        .Log("FluentAvaloniaTheme", "Unable to set window to theme.");
+            Logger.TryGet(LogEventLevel.Information, "AvaloniaFluentTheme")?
+                        .Log("AvaloniaFluentTheme", "Unable to set window to theme.");
         }
     }
 }

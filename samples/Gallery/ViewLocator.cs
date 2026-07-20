@@ -58,6 +58,7 @@ public class ViewLocator : IDataTemplate
         _factory[typeof(TreeViewPageViewModel)] = () => new TreeViewPage();
         _factory[typeof(CarouselViewPageViewModel)] = () => new CarouselViewPage();
         _factory[typeof(CardPageViewModel)] = () => new CardPage();
+        _factory[typeof(SettingCardPageViewModel)] = () => new SettingCardPage();
         _factory[typeof(AvatarViewPageViewModel)] = () => new AvatarViewPage();
         _factory[typeof(FilesDropPickerPageViewModel)] = () => new FilesDropPickerPage();
         _factory[typeof(WizardPageViewModel)] = () => new WizardPage();

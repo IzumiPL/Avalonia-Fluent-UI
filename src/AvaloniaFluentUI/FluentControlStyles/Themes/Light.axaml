@@ -78,6 +78,7 @@
   <SolidColorBrush x:Key="SegmentedBackgroundBrush" Color="{StaticResource ControlBackgroundSecondaryHigh}"/>
   <SolidColorBrush x:Key="PopupControlBackgroundBrush" Color="{StaticResource PopupControlColorDefault}"/>
   <SolidColorBrush x:Key="PopupControlBackgroundSecondaryBrush" Color="{StaticResource PopupControlColorSecondary}"/>
+  <SolidColorBrush x:Key="ControlBackgroundHighBrush" Color="{StaticResource ControlBackgroundHigh}"/>
 
   <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="{StaticResource TextFillColorPrimary}"/>
   <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="{StaticResource TextFillColorSecondary}"/>

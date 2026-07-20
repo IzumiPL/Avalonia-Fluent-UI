@@ -2,7 +2,7 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:avconv="using:Avalonia.Controls.Converters"
-  xmlns:conv="using:AvaloniaFluentUI.Converters">
+  xmlns:converts="using:AvaloniaFluentUI.Converters">
 
   <!--  Corner Radius  -->
   <CornerRadius x:Key="ControlCornerRadius">4</CornerRadius>
@@ -26,7 +26,7 @@
   <x:Double x:Key="FlyoutThemeMinWidth">96</x:Double>
 
   <!--  Text Control  -->
-  <x:Double x:Key="TextControlThemeMinHeight">35</x:Double>
+  <x:Double x:Key="TextControlThemeMinHeight">32</x:Double>
   <x:Double x:Key="TextControlThemeMinWidth">64</x:Double>
 
   <!--  Converters  -->
@@ -35,7 +35,13 @@
   <avconv:CornerRadiusFilterConverter x:Key="BottomCornerRadiusFilterConverter" Filter="BottomLeft, BottomRight"/>
   <avconv:CornerRadiusFilterConverter x:Key="LeftCornerRadiusFilterConverter" Filter="TopLeft, BottomLeft"/>
   <avconv:PlatformKeyGestureConverter x:Key="KeyGestureConverter"/>
-  <conv:ColorToBrushConv x:Key="ColorBrushConv"/>
+  <converts:ColorToBrushConv x:Key="ColorBrushConv"/>
+
+  <converts:CornerRadiusAdjustConverter x:Key="KeepTopCornerRadiusConverter"/>
+  <converts:CornerRadiusAdjustConverter
+    x:Key="CropTopCornerRadiusConverter"
+    BottomOffset="1.5"
+    KeepTop="False"/>
 
   <!--  Buttons  -->
   <Thickness x:Key="HelperButtonThemePadding">0,0,-2,0</Thickness>
@@ -77,7 +83,7 @@
   <Thickness x:Key="MenuInputGestureTextMargin">24,0,0,0</Thickness>
 
   <!--  PathIcon  -->
-  <x:Double x:Key="IconElementThemeHeight">20</x:Double>
-  <x:Double x:Key="IconElementThemeWidth">20</x:Double>
+  <x:Double x:Key="IconElementThemeHeight">16</x:Double>
+  <x:Double x:Key="IconElementThemeWidth">16</x:Double>
 
 </ResourceDictionary>

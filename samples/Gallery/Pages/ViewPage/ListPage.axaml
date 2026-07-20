@@ -34,5 +34,42 @@
         HorizontalAlignment="Stretch"
         ItemsSource="{Binding ItemSource}"/>
     </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_TableView]}">
+      <TableView
+        MaxHeight="486"
+        Margin="6"
+        ItemsSource="{Binding TableDatas}">
+        <TableView.Columns>
+          <TableViewColumn
+            HorizontalContentAlignment="Center"
+            Binding="{Binding ID}"
+            Header="ID"/>
+          <TableViewColumn
+            HorizontalContentAlignment="Center"
+            Binding="{Binding Name}"
+            Header="Name"/>
+          <TableViewColumn
+            HorizontalContentAlignment="Center"
+            Binding="{Binding Age}"
+            Header="Age"/>
+          <TableViewColumn
+            HorizontalContentAlignment="Center"
+            Binding="{Binding Gender}"
+            Header="Gender"/>
+          <TableViewColumn
+            HorizontalContentAlignment="Center"
+            Binding="{Binding Phone}"
+            Header="Phone"/>
+          <TableViewColumn HorizontalContentAlignment="Center" Header="Working">
+            <TableViewColumn.CellTemplate>
+              <DataTemplate>
+                <CheckBox IsChecked="{Binding IsActive}"/>
+              </DataTemplate>
+            </TableViewColumn.CellTemplate>
+          </TableViewColumn>
+        </TableView.Columns>
+      </TableView>
+    </ui:CodeCard>
   </StackPanel>
 </ui:ViewBase>

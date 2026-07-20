@@ -1,0 +1,378 @@
+<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  x:CompileBindings="True">
+  <Design.PreviewWith>
+    <Border Padding="50">
+      <StackPanel Spacing="5">
+        <TextBox/>
+        <TextBox Text="Hello Down there"/>
+        <TextBox PlaceholderText="Watermark"/>
+        <TextBox IsEnabled="False" Text="Test"/>
+        <TextBox Classes="Clear" Text="Test Clear"/>
+        <TextBox
+          Classes="Password"
+          PasswordChar="&#x25CF;"
+          Text="Test Password"/>
+      </StackPanel>
+    </Border>
+  </Design.PreviewWith>
+
+  <StreamGeometry x:Key="View">M0 19.675q0-0.097 0.032-0.258 0.499-1.867 1.312-3.573t1.924-3.171 2.487-2.648 2.986-2.028 3.437-1.296 3.823-0.451q2.318 0 4.467 0.66t4.016 1.851 3.396 2.857 2.592 3.694q0.161 0.306 0.418 0.901t0.507 1.255 0.427 1.264 0.177 0.91q0 0.419-0.306 0.724t-0.724 0.306-0.628-0.217-0.37-0.572q-0.177-0.37-0.258-0.773t-0.209-0.789q-0.37-1.175-1.006-2.318t-1.408-2.109q-1.030-1.32-2.286-2.358t-2.688-1.755-3.010-1.095-3.268-0.378q-1.996 0-3.847 0.596t-3.461 1.65-2.93 2.511-2.237 3.179q-0.113 0.209-0.306 0.628t-0.386 0.885-0.33 0.885-0.137 0.628q0 0.241-0.088 0.491t-0.241 0.451-0.37 0.338-0.475 0.137q-0.418 0-0.724-0.29t-0.306-0.724zM8.789 19.514q0-1.449 0.588-2.736t1.578-2.254 2.294-1.529 2.753-0.563q1.481 0 2.793 0.571t2.294 1.553 1.553 2.294 0.571 2.793-0.571 2.793-1.553 2.294-2.294 1.553-2.793 0.571q-1.529 0-2.849-0.58t-2.286-1.577-1.521-2.334-0.555-2.849zM21.151 19.53q0-1.046-0.419-1.964t-1.127-1.602-1.642-1.078-1.964-0.394q-1.078 0-2.012 0.402t-1.634 1.103-1.103 1.634-0.402 2.012 0.402 2.012 1.103 1.634 1.634 1.103 2.012 0.402q1.111 0 2.052-0.41t1.626-1.127 1.079-1.674 0.394-2.052z</StreamGeometry>
+  <StreamGeometry x:Key="Hide">M32 30.985q0 0.406-0.297 0.703t-0.703 0.297q-0.422 0-0.718-0.297l-8.605-8.605q-1.046 1.437-2.545 2.171t-3.264 0.734q-1.374 0-2.616-0.562t-2.187-1.507-1.507-2.186-0.562-2.616q0-1.765 0.734-3.264t2.171-2.546l-3.155-3.155q-1.999 1.281-3.475 3.178t-2.288 4.115q-0.109 0.297-0.203 0.734t-0.25 0.851-0.406 0.703-0.656 0.289-0.703-0.297-0.297-0.703q0-0.094 0.031-0.25 0.344-1.515 0.976-2.944t1.499-2.717 1.96-2.397 2.374-1.999l-7.012-7.012q-0.297-0.297-0.297-0.703 0-0.422 0.305-0.711t0.711-0.289 0.703 0.297l29.985 29.985q0.297 0.297 0.297 0.703zM12.666 8.418l-1.593-1.609q1.187-0.406 2.421-0.609t2.499-0.203q2.249 0 4.334 0.64t3.897 1.804 3.295 2.78 2.514 3.569q0.156 0.281 0.406 0.867t0.492 1.226 0.414 1.226 0.172 0.883q0 0.422-0.297 0.711t-0.718 0.289q-0.406 0-0.609-0.211t-0.344-0.555q-0.172-0.406-0.273-0.843t-0.242-0.859q-0.375-1.078-0.96-2.132t-1.288-1.944q-0.984-1.265-2.186-2.272t-2.577-1.71-2.897-1.085-3.131-0.383q-1.718 0-3.327 0.422zM20.24 21.646l-6.903-6.903q-1.156 0.75-1.749 1.866t-0.593 2.491q0 0.984 0.398 1.874t1.062 1.554 1.554 1.062 1.874 0.398q1.374 0 2.491-0.593t1.866-1.749z</StreamGeometry>
+  <Thickness x:Key="TextBoxTopHeaderMargin">0,0,0,8</Thickness>
+  <Thickness x:Key="TextBoxInnerButtonMargin">0,4,4,4</Thickness>
+  <x:Double x:Key="TextBoxIconFontSize">12</x:Double>
+  <ui:TextCommandBarFlyout x:Key="DefaultTextBoxContextFlyout"/>
+
+  <!--  TextBox-specific resources  -->
+  <LinearGradientBrush x:Key="TextControlElevationBorderBrush" TransformOrigin="50%,50%" StartPoint="0,0" EndPoint="0,2">
+    <LinearGradientBrush.Transform>
+      <ScaleTransform ScaleY="-1"/>
+    </LinearGradientBrush.Transform>
+    <LinearGradientBrush.GradientStops>
+      <GradientStop Offset="0.5" Color="{DynamicResource ControlStrongFillColorDefault}"/>
+      <GradientStop Offset="1.0" Color="{DynamicResource ControlStrokeColorDefault}"/>
+    </LinearGradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+  <LinearGradientBrush x:Key="TextControlElevationBorderFocusedBrush" TransformOrigin="50%,50%" StartPoint="0,1.5" EndPoint="0,2.5">
+    <LinearGradientBrush.Transform>
+      <ScaleTransform ScaleY="-1"/>
+    </LinearGradientBrush.Transform>
+    <LinearGradientBrush.GradientStops>
+      <GradientStop Offset="1.0" Color="{DynamicResource SystemAccentColorDark1}"/>
+      <GradientStop Offset="1.0" Color="{DynamicResource ControlStrokeColorDefault}"/>
+    </LinearGradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+  <SolidColorBrush x:Key="TemporaryTextFillColorDisabled" Color="#5C010101"/>
+
+  <!--  Control-specific resources  -->
+  <Thickness x:Key="TextControlBorderThemeThickness">1</Thickness>
+  <Thickness x:Key="TextControlBorderThemeThicknessFocused">1,1,1,2</Thickness>
+  <Thickness x:Key="TextControlThemePadding">10,5,6,6</Thickness>
+
+  <!--  Control-specific resources  -->
+  <x:Double x:Key="AutoSuggestBoxIconFontSize">12</x:Double>
+  <ControlTheme x:Key="TextBoxDeleteButtonStyle" TargetType="Button">
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <!--
+          Note: TextControlButtonBackground isn't defined anywhere so
+          replaced Background with Transparent
+        -->
+        <Border
+          Name="ButtonLayoutGrid"
+          Margin="{DynamicResource TextBoxInnerButtonMargin}"
+          Background="Transparent"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <ui:SymbolIcon
+            Name="Glyph"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="{StaticResource TextBoxIconFontSize}"
+            Foreground="{TemplateBinding Foreground}"
+            Symbol="Dismiss"/>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:pointerover">
+      <Style Selector="^ /template/ Border#ButtonLayoutGrid">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ ui|SymbolIcon#Glyph">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:pressed">
+      <Style Selector="^ /template/ Border#ButtonLayoutGrid">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ ui|SymbolIcon#Glyph">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:disabled /template/ Border#ButtonLayoutGrid">
+      <Setter Property="Opacity" Value="0"/>
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="TextBoxPasswordButtonStyle" TargetType="ToggleButton">
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <!--
+          Note: TextControlButtonBackground isn't defined anywhere so
+          replaced Background with Transparent
+        -->
+        <Border
+          Name="ButtonLayoutGrid"
+          Margin="{DynamicResource TextBoxInnerButtonMargin}"
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <PathIcon
+            Name="Icon"
+            Width="12"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Data="{StaticResource View}"
+            Foreground="{TemplateBinding Foreground}"/>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^[IsChecked=True] /template/ PathIcon#Icon">
+      <Setter Property="Data" Value="{StaticResource Hide}"/>
+    </Style>
+
+    <Style Selector="^:pointerover">
+      <Style Selector="^ /template/ Border#ButtonLayoutGrid">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ ui|FontIcon#Glyph">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:pressed">
+      <Style Selector="^ /template/ Border#ButtonLayoutGrid">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
+      </Style>
+    </Style>
+
+    <!--
+      In WinUI Password Box, this isn't a toggle button and the password is only
+      visible if the button is pressed. To mimic this, we'll dim the foreground
+      of the glyph when checked so there is a distinct visual state
+    -->
+    <!-- <Style Selector="^:checked /template/ ui|FontIcon#Glyph"> -->
+    <!--   <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/> -->
+    <!-- </Style> -->
+    <!-- <Style Selector="^:checked:pressed /template/ ui|FontIcon#Glyph"> -->
+    <!--   <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/> -->
+    <!-- </Style> -->
+
+    <Style Selector="^:disabled /template/ Border#ButtonLayoutGrid">
+      <Setter Property="Opacity" Value="0"/>
+    </Style>
+  </ControlTheme>
+
+  <ControlTheme x:Key="{x:Type TextBox}" TargetType="TextBox">
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+    <Setter Property="CaretBrush" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource TextControlElevationBorderBrush}"/>
+    <Setter Property="SelectionBrush" Value="{DynamicResource AccentFillColorSelectedTextBackgroundBrush}"/>
+    <Setter Property="SelectionForegroundBrush" Value="{DynamicResource TextOnAccentFillColorSelectedTextBrush}"/>
+    <Setter Property="VerticalAlignment" Value="Top"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource TextControlBorderThemeThickness}"/>
+    <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
+    <Setter Property="MinHeight" Value="{DynamicResource TextControlThemeMinHeight}"/>
+    <Setter Property="MinWidth" Value="{DynamicResource TextControlThemeMinWidth}"/>
+    <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}"/>
+    <Setter Property="FocusAdorner" Value="{x:Null}"/>
+    <Setter Property="ContextFlyout" Value="{StaticResource DefaultTextBoxContextFlyout}"/>
+    <Setter Property="ScrollViewer.IsScrollChainingEnabled" Value="True"/>
+    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <DataValidationErrors>
+          <Panel>
+            <Border
+              Name="PART_BorderElement"
+              MinWidth="{TemplateBinding MinWidth}"
+              MinHeight="{TemplateBinding MinHeight}"
+              Background="{TemplateBinding Background}"
+              BorderBrush="{TemplateBinding BorderBrush}"
+              BorderThickness="{TemplateBinding BorderThickness}"
+              CornerRadius="{TemplateBinding CornerRadius}"/>
+
+            <Border Margin="{TemplateBinding BorderThickness}">
+              <Grid ColumnDefinitions="Auto,*,Auto">
+                <ContentPresenter
+                  Grid.Column="0"
+                  Grid.ColumnSpan="1"
+                  Content="{TemplateBinding InnerLeftContent}"/>
+                <DockPanel
+                  x:Name="PART_InnerDockPanel"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="1"
+                  Margin="{TemplateBinding Padding}"
+                  Cursor="IBeam">
+                  <TextBlock
+                    Name="PART_FloatingPlaceholder"
+                    DockPanel.Dock="Top"
+                    FontSize="{TemplateBinding FontSize}"
+                    Foreground="{DynamicResource SystemAccentColor}"
+                    IsVisible="False"
+                    Text="{TemplateBinding Watermark}"/>
+                  <ui:SmoothScrollViewer
+                    AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}"
+                    HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+                    IsScrollChainingEnabled="{TemplateBinding (ScrollViewer.IsScrollChainingEnabled)}"
+                    VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}">
+                    <Panel>
+                      <TextBlock
+                        Name="PART_Placeholder"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                        Text="{TemplateBinding Watermark}"
+                        TextAlignment="{TemplateBinding TextAlignment}"
+                        TextWrapping="{TemplateBinding TextWrapping}">
+                        <TextBlock.IsVisible>
+                          <MultiBinding Converter="{x:Static BoolConverters.And}">
+                            <Binding
+                              Converter="{x:Static StringConverters.IsNullOrEmpty}"
+                              ElementName="PART_TextPresenter"
+                              Path="PreeditText"/>
+                            <Binding
+                              Converter="{x:Static StringConverters.IsNullOrEmpty}"
+                              Path="Text"
+                              RelativeSource="{RelativeSource TemplatedParent}"/>
+                          </MultiBinding>
+                        </TextBlock.IsVisible>
+                      </TextBlock>
+                      <TextPresenter
+                        Name="PART_TextPresenter"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        CaretBrush="{TemplateBinding CaretBrush}"
+                        CaretIndex="{TemplateBinding CaretIndex}"
+                        LetterSpacing="{TemplateBinding LetterSpacing}"
+                        LineHeight="{TemplateBinding LineHeight}"
+                        PasswordChar="{TemplateBinding PasswordChar}"
+                        RevealPassword="{TemplateBinding RevealPassword}"
+                        SelectionBrush="{TemplateBinding SelectionBrush}"
+                        SelectionEnd="{TemplateBinding SelectionEnd}"
+                        SelectionForegroundBrush="{TemplateBinding SelectionForegroundBrush}"
+                        SelectionStart="{TemplateBinding SelectionStart}"
+                        Text="{TemplateBinding Text,
+                                               Mode=TwoWay}"
+                        TextAlignment="{TemplateBinding TextAlignment}"
+                        TextWrapping="{TemplateBinding TextWrapping}"/>
+                    </Panel>
+                  </ui:SmoothScrollViewer>
+                </DockPanel>
+                <ContentPresenter
+                  Grid.Column="2"
+                  Grid.ColumnSpan="1"
+                  Content="{TemplateBinding InnerRightContent}"/>
+              </Grid>
+            </Border>
+          </Panel>
+        </DataValidationErrors>
+      </ControlTemplate>
+    </Setter>
+
+    <!--  Disabled State  -->
+    <Style Selector="^:disabled">
+      <Setter Property="Foreground" Value="{DynamicResource TemporaryTextFillColorDisabled}"/>
+
+      <Style Selector="^ /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ TextBlock#PART_Placeholder, ^ /template/ TextBlock#PART_FloatingPlaceholder">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+      </Style>
+    </Style>
+
+    <!--  PointerOver State  -->
+    <Style Selector="^:pointerover">
+      <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+
+      <Style Selector="^ /template/ Border#PART_BorderElement">
+        <Setter Property="BorderBrush" Value="{DynamicResource TextControlElevationBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ TextBlock#PART_Placeholder">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+      </Style>
+    </Style>
+
+    <!--  Focused State  -->
+    <Style Selector="^:focus">
+      <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+
+      <Style Selector="^ /template/ TextBlock#PART_Placeholder">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorInputActiveBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TextControlElevationBorderFocusedBrush}"/>
+        <Setter Property="BorderThickness" Value="{DynamicResource TextControlBorderThemeThicknessFocused}"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:error /template/ Border#PART_BorderElement">
+      <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorCriticalBrush}"/>
+    </Style>
+
+    <Style Selector="^[UseFloatingPlaceholder=true]:not(:empty) /template/ TextBlock#PART_FloatingPlaceholder">
+      <Setter Property="IsVisible" Value="True"/>
+    </Style>
+
+    <Style Selector="^.Password[AcceptsReturn=False][IsReadOnly=False]:not(TextBox:empty)">
+      <Setter Property="InnerRightContent">
+        <Template>
+          <ToggleButton
+            Width="30"
+            Padding="{StaticResource HelperButtonThemePadding}"
+            VerticalAlignment="Stretch"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            CornerRadius="{DynamicResource ControlCornerRadius}"
+            Focusable="False"
+            FontSize="{TemplateBinding FontSize}"
+            IsChecked="{Binding $parent[TextBox].RevealPassword, Mode=TwoWay}"
+            IsTabStop="False"
+            Theme="{StaticResource TextBoxPasswordButtonStyle}"/>
+        </Template>
+      </Setter>
+    </Style>
+
+    <Style Selector="^.Clear[AcceptsReturn=False][IsReadOnly=False]:focus:not(TextBox:empty)">
+      <Setter Property="InnerRightContent">
+        <Template>
+          <Button
+            Width="30"
+            Padding="{StaticResource HelperButtonThemePadding}"
+            VerticalAlignment="Stretch"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            Command="{Binding $parent[TextBox].Clear}"
+            CornerRadius="{DynamicResource ControlCornerRadius}"
+            Focusable="False"
+            FontSize="{TemplateBinding FontSize}"
+            IsTabStop="False"
+            Theme="{StaticResource TextBoxDeleteButtonStyle}"/>
+        </Template>
+      </Setter>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

@@ -68,5 +68,9 @@
       <DependentUpon>P5.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\ViewPage\SettingCardPage.axaml.cs">
+      <DependentUpon>SettingCardPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

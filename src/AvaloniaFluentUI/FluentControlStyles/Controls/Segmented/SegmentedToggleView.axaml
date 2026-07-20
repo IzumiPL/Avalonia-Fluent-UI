@@ -1,0 +1,89 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
+
+  <ControlTheme x:Key="{x:Type ui:SegmentedToggleView}" TargetType="ui:SegmentedToggleView">
+    <Setter Property="HorizontalAlignment" Value="Left"/>
+    <Setter Property="Orientation" Value="Horizontal"/>
+    <Setter Property="Background" Value="{DynamicResource SegmentedBackgroundBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="CornerRadius" Value="5"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Name="Border"
+          Width="{TemplateBinding Width}"
+          Height="{TemplateBinding Height}"
+          Padding="{TemplateBinding Padding}"
+          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+          VerticalAlignment="{TemplateBinding VerticalAlignment}"
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <ui:SingleDirectionScrollViewer
+            Name="PART_ScrollViewer"
+            Margin="0"
+            Padding="0"
+            VerticalAlignment="Stretch"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            BorderThickness="0"
+            Orientation="{TemplateBinding Orientation}">
+            <Grid Name="PART_HeadersArea">
+              <ItemsPresenter
+                Name="PART_ItemsPresenter"
+                ItemsPanel="{TemplateBinding ItemsPanel}"
+                ZIndex="10"/>
+              <ui:SelectionIndicator
+                Name="PART_SelectedIndicator"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="{DynamicResource SystemAccentColor}"
+                CornerRadius="4"/>
+            </Grid>
+          </ui:SingleDirectionScrollViewer>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^">
+      <Setter Property="ItemsPanel">
+        <ItemsPanelTemplate>
+          <VirtualizingStackPanel Orientation="{TemplateBinding Orientation}"/>
+        </ItemsPanelTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="^ /template/ ui|SelectionIndicator#PART_SelectedIndicator">
+      <Setter Property="RenderTransformOrigin" Value="50%, 50%"/>
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Width" Duration="0:0:0.114"/>
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="^[Orientation=Horizontal]">
+      <Setter Property="Padding" Value="0"/>
+      <Setter Property="VerticalAlignment" Value="Top"/>
+
+      <Style Selector="^ /template/ ui|SingleDirectionScrollViewer#PART_ScrollViewer">
+        <Setter Property="HorizontalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^[Orientation=Vertical]">
+      <Setter Property="Padding" Value="4 2"/>
+      <Setter Property="VerticalAlignment" Value="Stretch"/>
+
+      <Style Selector="^ /template/ ui|SingleDirectionScrollViewer#PART_ScrollViewer">
+        <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+      </Style>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

@@ -386,6 +386,7 @@
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TreeView]}" Tag="TreeView"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CarouselView]}" Tag="CarouselView"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Card]}" Tag="Card"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SettingCard]}" Tag="SettingCard"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Avatar]}" Tag="AvatarView"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FileDropPicker]}" Tag="FileDropPicker"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[WizardView]}" Tag="WizardView"/>

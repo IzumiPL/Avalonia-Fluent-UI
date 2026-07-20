@@ -107,6 +107,7 @@ public partial class MainWindowViewModel : ViewModelBase
             { "TreeView", () => new TreeViewPageViewModel() },
             { "CarouselView", () => new CarouselViewPageViewModel() },
             { "Card", () => new CardPageViewModel() },
+            { "SettingCard", () => new SettingCardPageViewModel() },
             { "AvatarView", () => new AvatarViewPageViewModel() },
             { "FileDropPicker", () => new FilesDropPickerPageViewModel() },
             { "WizardView", () => new WizardPageViewModel() },

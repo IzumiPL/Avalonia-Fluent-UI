@@ -29,7 +29,7 @@ internal unsafe class Win32WindowManager
 
         SetWindowLongPtrW(Hwnd, GWLP_WNDPROC, _wndProc);
 
-        var ps = Application.Current.PlatformSettings;
+        var ps = Application.Current?.PlatformSettings;
         ps.ColorValuesChanged += OnPlatformColorValuesChanged;
         _window.Closed += WindowOnClosed;
     }
@@ -108,7 +108,7 @@ internal unsafe class Win32WindowManager
         }
     }
 
-    private void OnPlatformColorValuesChanged(object sender, PlatformColorValues e)
+    private void OnPlatformColorValuesChanged(object? sender, PlatformColorValues e)
     {
         // We need to override Avalonia's default setting of this to always keep AppWindow
         // in dark mode, which matches what windows do on Win 10/11, regardless of the actual
@@ -116,9 +116,9 @@ internal unsafe class Win32WindowManager
         Win32Interop.ApplyTheme(Hwnd, true);
     }
     
-    private void WindowOnClosed(object sender, EventArgs e)
+    private void WindowOnClosed(object? sender, EventArgs e)
     {
-        var ps = Application.Current.PlatformSettings;
+        var ps = Application.Current?.PlatformSettings;
         ps.ColorValuesChanged -= OnPlatformColorValuesChanged;
         _window.Closed -= WindowOnClosed;
     }

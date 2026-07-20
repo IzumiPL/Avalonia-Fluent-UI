@@ -38,12 +38,12 @@
 
   <Grid
     Margin="10,50,10,8"
-    ColumnDefinitions="*, Auto"
     ColumnSpacing=""
-    RowDefinitions="Auto, Auto, *">
+    RowDefinitions="Auto, Auto, Auto, Auto, *"
+    RowSpacing="12">
+
     <ui:SegmentedView
       Grid.Row="0"
-      Grid.ColumnSpan="2"
       HorizontalAlignment="Center"
       ItemsSource="{Binding SegmentedItems}"
       SelectedIndex="{Binding CurrentIndex}"
@@ -51,17 +51,34 @@
 
     <ui:SegmentedToggleView
       Grid.Row="1"
-      Grid.ColumnSpan="2"
       HorizontalAlignment="Center"
       ItemsSource="{Binding SegmentedItems}"
+      Orientation="{Binding CurrentOrientation}"
       SelectedIndex="{Binding CurrentIndex}"
       SelectedItem="{Binding CurrentItem}"/>
 
-    <ui:StackContent
+    <ui:SegmentedToggleView
       Grid.Row="2"
-      Grid.Column="0"
-      Content="{Binding CurrentViewModel}"/>
-    <StackPanel Grid.Row="1" Grid.Column="1">
+      HorizontalAlignment="Center"
+      ItemsSource="{Binding SegmentedIconItems}"
+      Orientation="{Binding CurrentOrientation}"
+      SelectedIndex="{Binding CurrentIndex}">
+      <ui:SegmentedToggleView.ItemTemplate>
+        <DataTemplate>
+          <PathIcon Data="{Binding}"/>
+        </DataTemplate>
+      </ui:SegmentedToggleView.ItemTemplate>
+    </ui:SegmentedToggleView>
+
+    <ui:SegmentedToggleView
+      Grid.Row="3"
+      HorizontalAlignment="Center"
+      ItemsSource="{Binding SegmentedItems}"
+      Orientation="Vertical"
+      SelectedIndex="{Binding CurrentIndex}"
+      SelectedItem="{Binding CurrentItem}"/>
+
+    <StackPanel Grid.Row="4" Spacing="6">
       <ComboBox
         MinWidth="100"
         HorizontalAlignment="Stretch"
@@ -72,6 +89,11 @@
         HorizontalAlignment="Stretch"
         ItemsSource="{Binding SegmentedItems}"
         SelectedItem="{Binding CurrentItem}"/>
+      <ComboBox
+        MinWidth="100"
+        HorizontalAlignment="Stretch"
+        ItemsSource="{Binding Orientations}"
+        SelectedIndex="{Binding CurrentOrientation}"/>
     </StackPanel>
   </Grid>
 

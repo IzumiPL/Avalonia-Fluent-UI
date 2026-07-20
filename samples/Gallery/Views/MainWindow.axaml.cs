@@ -9,6 +9,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
@@ -28,12 +29,25 @@ namespace Gallery.Views;
 
 public class MainWindowSplashScreen : IApplicationSplashScreen
 {
-    public string AppName => "Avalonia Fluent UI Gallery";
-    public IImage AppIcon => new Bitmap(AssetLoader.Open(new Uri("avares://Gallery/Assets/app.ico")));
-    public object SplashScreenContent => null;
-    public Task RunTasks(CancellationToken cancellationToken)
+    public object SplashScreenContent => new Image
     {
-        return Task.Delay(600, cancellationToken);
+        Source = new Bitmap(AssetLoader.Open(new Uri("avares://Gallery/Assets/app.ico"))),
+        HorizontalAlignment = HorizontalAlignment.Center,
+        VerticalAlignment = VerticalAlignment.Center,
+        Width = 128,
+        Height = 128
+    };
+    public async Task RunTasks(CancellationToken cancellationToken)
+    {
+        await Task.Delay(1500, cancellationToken);
+        Action.Invoke();
+    }
+    
+    public Action Action { get; }
+
+    public MainWindowSplashScreen(Action action)
+    {
+        Action = action;
     }
 
     public int MinimumShowTime => 1500;
@@ -46,7 +60,8 @@ public partial class MainWindow : FluentWindow
     public MainWindow()
     {
         Application.Current.Resources["NavigationViewContentMargin"] = new Thickness(0, 55, 0, 0);
-        SplashScreen = new MainWindowSplashScreen();
+        TitleBarIsVisible = false;
+        SplashScreen = new MainWindowSplashScreen(() => TitleBarIsVisible = true);
         InitializeComponent();
         
         RegisterMessages();
