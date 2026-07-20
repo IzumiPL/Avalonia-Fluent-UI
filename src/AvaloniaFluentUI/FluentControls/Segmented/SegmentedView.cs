@@ -1,31 +1,33 @@
 using System;
 using Avalonia;
+using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
-using Avalonia.Controls.Shapes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
+using Avalonia.Styling;
 
 namespace AvaloniaFluentUI.Controls;
 
-[TemplatePart(Name = PART_SELECTED_INDICATOR, Type = typeof(Rectangle))]
+[TemplatePart(Name = PART_SELECTED_INDICATOR, Type = typeof(SelectionIndicator))]
 [TemplatePart(Name = PART_HEADERS_ARES, Type = typeof(Panel))]
 public class SegmentedView : SelectingItemsControl
 {
-    protected Rectangle? _selectedIndicator;
+    protected SelectionIndicator? _selectedIndicator;
     protected Panel? _headersArea;
     
     private const string PART_SELECTED_INDICATOR = "PART_SelectedIndicator";
     private const string PART_HEADERS_ARES = "PART_HeadersArea";
 
-    protected override bool NeedsContainerOverride(object item, int index, out object recycleKey)
+    protected override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
         => NeedsContainer<SegmentedItem>(item, out recycleKey);
 
-    protected override Control CreateContainerForItemOverride(object item, int index, object recycleKey)
+    protected override Control CreateContainerForItemOverride(object? item, int index, object? ecycleKey)
         => new SegmentedItem();
 
-    protected override void PrepareContainerForItemOverride(Control container, object item, int index)
+    protected override void PrepareContainerForItemOverride(Control container, object? item, int index)
     {
         base.PrepareContainerForItemOverride(container, item, index);
         if (container is SegmentedItem segItem && segItem.Content == null)
@@ -38,7 +40,7 @@ public class SegmentedView : SelectingItemsControl
     {
         base.OnApplyTemplate(e);
         
-        _selectedIndicator = e.NameScope.Find<Rectangle>(PART_SELECTED_INDICATOR);
+        _selectedIndicator = e.NameScope.Find<SelectionIndicator>(PART_SELECTED_INDICATOR);
         _headersArea = e.NameScope.Find<Panel>(PART_HEADERS_ARES);
     }
 
@@ -69,6 +71,42 @@ public class SegmentedView : SelectingItemsControl
         }
     }
 
+    protected TranslateTransform _transform = new TranslateTransform();
+
+    protected async virtual void RunSliderAnimation(Point position)
+    {
+        if (_selectedIndicator == null) { return; }
+
+        _selectedIndicator.RenderTransform = _transform;
+
+        var animation = new Animation
+        {
+            Duration = TimeSpan.FromMilliseconds(150),
+            FillMode = FillMode.Forward,
+            Children =
+            {
+                new KeyFrame
+                {
+                    Cue = new Cue(0d),
+                    Setters = 
+                    {
+                        new Setter(TranslateTransform.XProperty, _transform.X)
+                    }
+                },
+                new KeyFrame
+                {
+                    Cue = new Cue(1d),
+                    Setters =
+                    {
+                        new Setter(TranslateTransform.XProperty, position.X)
+                    }
+                }
+            }
+        };
+
+        await animation.RunAsync(_selectedIndicator);
+    }
+
     protected virtual void UpdateSelectedIndicatorPosition()
     {
         if (_selectedIndicator == null || _headersArea == null)
@@ -87,17 +125,19 @@ public class SegmentedView : SelectingItemsControl
             _selectedIndicator.IsVisible = false;
             return;
         }
-        // container.BringIntoView();
         _selectedIndicator.IsVisible = true;
 
         var transform = container.TransformToVisual(_headersArea);
         if (transform.HasValue)
         {
             var width = container.Bounds.Width;
+            var height = container.Bounds.Height;
             var indicatorWidth = width / 3;
-            var position = transform.Value.Transform(new Point(0, 0));
-            _selectedIndicator.Margin = new Thickness(position.X + (width - indicatorWidth) / 2, 0, 0, 0);
-            _selectedIndicator.Width = indicatorWidth;
+            
+            RunSliderAnimation(transform.Value.Transform(new Point(0, 0)));
+            _selectedIndicator.Width = width;
+            _selectedIndicator.Height = height;
+            _selectedIndicator.IndicatorWidth = indicatorWidth;
         }
     }
 }
