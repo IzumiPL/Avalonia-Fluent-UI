@@ -2,9 +2,6 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:controls="using:Avalonia.Controls"
-  xmlns:converters="using:Avalonia.Controls.Converters"
-  xmlns:globalization="clr-namespace:System.Globalization;assembly=mscorlib"
-  xmlns:pc="clr-namespace:Avalonia.Controls.Primitives.Converters;assembly=Avalonia.Controls.ColorPicker"
   xmlns:primitives="using:Avalonia.Controls.Primitives"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   x:CompileBindings="True">
@@ -16,8 +13,8 @@
     <!--  Alpha position should match CSS (and default slider order) instead of XAML/WinUI  -->
     <Setter Property="HexInputAlphaPosition" Value="Trailing"/>
     <Setter Property="Height" Value="32"/>
-    <Setter Property="Width" Value="64"/>
-    <Setter Property="MinWidth" Value="64"/>
+    <Setter Property="Width" Value="60"/>
+    <Setter Property="MinWidth" Value="60"/>
     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
     <Setter Property="VerticalContentAlignment" Value="Stretch"/>
     <Setter Property="Content">
@@ -25,20 +22,24 @@
         <!--  Preview color  -->
         <Panel>
           <Border
-            Margin="1,1,0,1"
+            Height="24"
+            MinWidth="24"
+            MinHeight="24"
+            Margin="4,2,0,2"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Background="{StaticResource ColorControlCheckeredBackgroundBrush}"
-            CornerRadius="{TemplateBinding CornerRadius,
-                                           Converter={StaticResource LeftCornerRadiusFilterConverter}}"/>
+            CornerRadius="{TemplateBinding CornerRadius}"/>
           <Border
-            Margin="1,1,0,1"
+            Height="24"
+            MinWidth="24"
+            MinHeight="24"
+            Margin="4,2,0,2"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Background="{TemplateBinding HsvColor,
                                          Converter={StaticResource ToBrushConverter}}"
-            CornerRadius="{TemplateBinding CornerRadius,
-                                           Converter={StaticResource LeftCornerRadiusFilterConverter}}"/>
+            CornerRadius="{TemplateBinding CornerRadius}"/>
         </Panel>
       </Template>
     </Setter>
@@ -216,9 +217,12 @@
                       <ListBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type Color}">
                           <Border
+                            Width="50"
+                            Height="50"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             AutomationProperties.Name="{Binding Converter={StaticResource ColorToDisplayNameConverter}}"
+                            CornerRadius="4"
                             ToolTip.Tip="{Binding Converter={StaticResource ColorToDisplayNameConverter}}">
                             <Border.Background>
                               <SolidColorBrush Color="{Binding}"/>
@@ -228,7 +232,11 @@
                       </ListBox.ItemTemplate>
                       <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
-                          <UniformGrid Columns="{Binding $parent[ColorView].PaletteColumnCount}"/>
+                          <UniformGrid
+                            HorizontalAlignment="Center"
+                            ColumnSpacing="2"
+                            Columns="{Binding $parent[ColorView].PaletteColumnCount}"
+                            RowSpacing="2"/>
                         </ItemsPanelTemplate>
                       </ListBox.ItemsPanel>
                     </ListBox>

@@ -70,36 +70,24 @@
             CornerRadius="{TemplateBinding CornerRadius}"/>
           <Rectangle
             x:Name="BorderRectangle"
+            Width="51"
+            Height="51"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             IsHitTestVisible="False"
-            StrokeThickness="3"/>
+            RadiusX="4"
+            RadiusY="4"
+            StrokeThickness="2"/>
         </Grid>
       </ControlTemplate>
     </Setter>
 
-    <Style Selector="^ /template/ Rectangle#BorderRectangle">
-      <Setter Property="Stroke" Value="{DynamicResource SystemControlHighlightListAccentLowBrush}"/>
-      <Setter Property="Opacity" Value="0"/>
-    </Style>
-
     <Style x:DataType="Color" Selector="^:pointerover /template/ Rectangle#BorderRectangle">
-      <Setter Property="Stroke" Value="{Binding Converter={StaticResource ContrastBrushConverter}}"/>
-      <Setter Property="Opacity" Value="0.5"/>
+      <Setter Property="Stroke" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
     </Style>
 
     <Style x:DataType="Color" Selector="^:selected /template/ Rectangle#BorderRectangle">
-      <!--
-        The below and above lines really should be:
-        'Value="{Binding Converter={StaticResource ContrastBrushConverter}, ConverterParameter={DynamicResource TextFillColorPrimaryBrush}}"'
-        However, DynamicResource and Binding is not currently supported in Avalonia for converter parameters.
-        This means certain colors with transparency less than 50% may have a selection border that is difficult
-        to see over top of the default control/window background. Since palettes do not usually have transparency
-        it is considered better to disable this functionality rather than work around it with a multi-value
-        converter. This should be revisited if Avalonia supports the above code in the future.
-      -->
-      <Setter Property="Stroke" Value="{Binding Converter={StaticResource ContrastBrushConverter}}"/>
-      <Setter Property="Opacity" Value="1"/>
+      <Setter Property="Stroke" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
     </Style>
   </ControlTheme>
 
@@ -364,9 +352,12 @@
                 <ListBox.ItemTemplate>
                   <DataTemplate DataType="{x:Type Color}">
                     <Border
+                      Width="50"
+                      Height="50"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
                       AutomationProperties.Name="{Binding Converter={StaticResource ColorToDisplayNameConverter}}"
+                      CornerRadius="4"
                       ToolTip.Tip="{Binding Converter={StaticResource ColorToDisplayNameConverter}}">
                       <Border.Background>
                         <SolidColorBrush Color="{Binding}"/>
@@ -376,7 +367,11 @@
                 </ListBox.ItemTemplate>
                 <ListBox.ItemsPanel>
                   <ItemsPanelTemplate>
-                    <UniformGrid Columns="{Binding $parent[ColorView].PaletteColumnCount}"/>
+                    <UniformGrid
+                      HorizontalAlignment="Center"
+                      ColumnSpacing="2"
+                      Columns="{Binding $parent[ColorView].PaletteColumnCount}"
+                      RowSpacing="2"/>
                   </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
               </ListBox>
