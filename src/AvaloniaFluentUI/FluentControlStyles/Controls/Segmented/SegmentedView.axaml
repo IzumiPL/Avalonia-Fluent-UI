@@ -29,16 +29,19 @@
             HorizontalScrollBarVisibility="Hidden"
             VerticalScrollBarVisibility="Disabled">
             <Panel Name="PART_HeadersArea">
-              <ItemsPresenter Name="PART_ItemsPresenter" ItemsPanel="{TemplateBinding ItemsPanel}"/>
-              <Rectangle
+              <ItemsPresenter
+                Name="PART_ItemsPresenter"
+                ItemsPanel="{TemplateBinding ItemsPanel}"
+                ZIndex="1"/>
+              <ui:SelectionIndicator
                 Name="PART_SelectedIndicator"
                 Height="3"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
-                Fill="{DynamicResource AccentFillColorDefaultBrush}"
-                IsVisible="False"
-                RadiusX="2"
-                RadiusY="2"/>
+                VerticalAlignment="Top"
+                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                CornerRadius="4"
+                IndicatorBrush="{DynamicResource SystemAccentColor}"
+                ZIndex="0"/>
             </Panel>
           </ui:SingleDirectionScrollViewer>
         </Border>
@@ -53,12 +56,12 @@
       </Setter>
     </Style>
 
-    <Style Selector="^ /template/ Rectangle#PART_SelectedIndicator">
+    <Style Selector="^ /template/ ui|SelectionIndicator#PART_SelectedIndicator">
       <Setter Property="RenderTransformOrigin" Value="50%, 50%"/>
       <Setter Property="Transitions">
         <Transitions>
-          <ThicknessTransition Property="Margin" Duration="0:0:0.15"/>
-          <DoubleTransition Property="Width" Duration="0:0:0.20"/>
+          <DoubleTransition Property="Width" Duration="0:0:0.114"/>
+          <DoubleTransition Property="IndicatorWidth" Duration="0:0:0.114"/>
         </Transitions>
       </Setter>
     </Style>
@@ -107,13 +110,12 @@
         </Transitions>
       </Setter>
 
-      <Style Selector="^:pointerover">
+      <Style Selector="^[IsSelected=False]:pointerover">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
       </Style>
 
       <Style Selector="^:selected">
-        <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
@@ -125,16 +127,14 @@
 
     <Style Selector="^.Toggle">
       <Setter Property="BorderThickness" Value="0"/>
-      <Setter Property="Margin" Value="2"/>
+      <Setter Property="Margin" Value="0, 0"/>
 
-      <Style Selector="^:pointerover">
+      <Style Selector="^[IsSelected=False]:pointerover">
         <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
       </Style>
 
       <Style Selector="^:selected">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="Foreground" Value="#FFFFFF"/>
       </Style>
 

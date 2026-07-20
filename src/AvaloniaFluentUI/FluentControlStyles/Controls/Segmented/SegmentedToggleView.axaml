@@ -37,15 +37,12 @@
                 Name="PART_ItemsPresenter"
                 ItemsPanel="{TemplateBinding ItemsPanel}"
                 ZIndex="10"/>
-              <Rectangle
+              <ui:SelectionIndicator
                 Name="PART_SelectedIndicator"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Fill="{DynamicResource AccentFillColorDefaultBrush}"
-                IsVisible="False"
-                RadiusX="6"
-                RadiusY="6"
-                ZIndex="0"/>
+                Background="{DynamicResource SystemAccentColor}"
+                CornerRadius="4"/>
             </Grid>
           </ui:SingleDirectionScrollViewer>
         </Border>
@@ -60,13 +57,14 @@
       </Setter>
     </Style>
 
-    <!-- <Style Selector="^ /template/ Border#PART_HeaderBorder"> -->
-    <!--   <Setter Property="Grid.ColumnSpan" Value="2"/> -->
-    <!-- </Style> -->
-    <!-- <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter"> -->
-    <!--   <Setter Property="Grid.Row" Value="1"/> -->
-    <!--   <Setter Property="Grid.ColumnSpan" Value="2"/> -->
-    <!-- </Style> -->
+    <Style Selector="^ /template/ ui|SelectionIndicator#PART_SelectedIndicator">
+      <Setter Property="RenderTransformOrigin" Value="50%, 50%"/>
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Width" Duration="0:0:0.114"/>
+        </Transitions>
+      </Setter>
+    </Style>
 
     <Style Selector="^[Orientation=Horizontal]">
       <Setter Property="Padding" Value="0"/>
@@ -75,16 +73,6 @@
       <Style Selector="^ /template/ ui|SingleDirectionScrollViewer#PART_ScrollViewer">
         <Setter Property="HorizontalScrollBarVisibility" Value="Hidden"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Disabled"/>
-      </Style>
-
-      <Style Selector="^ /template/ Rectangle#PART_SelectedIndicator">
-        <Setter Property="RenderTransformOrigin" Value="50%, 50%"/>
-        <Setter Property="Transitions">
-          <Transitions>
-            <ThicknessTransition Property="Margin" Duration="0:0:0.15"/>
-            <DoubleTransition Property="Width" Duration="0:0:0.168"/>
-          </Transitions>
-        </Setter>
       </Style>
     </Style>
 
@@ -96,26 +84,6 @@
         <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
         <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
       </Style>
-
-      <Style Selector="^ /template/ Rectangle#PART_SelectedIndicator">
-        <Setter Property="RenderTransformOrigin" Value="50%, 50%"/>
-        <Setter Property="Transitions">
-          <Transitions>
-            <ThicknessTransition Property="Margin" Duration="0:0:0.15"/>
-          </Transitions>
-        </Setter>
-      </Style>
     </Style>
-
-    <!-- <Style Selector="^ /template/ Rectangle#PART_SelectedIndicator"> -->
-    <!-- <Setter Property="RenderTransformOrigin" Value="50%, 50%"/> -->
-    <!-- <Setter Property="Transitions"> -->
-    <!-- <Transitions> -->
-    <!-- <ThicknessTransition Property="Margin" Duration="0:0:0.15"/> -->
-    <!-- <DoubleTransition Property="Width" Duration="0:0:0.168"/> -->
-    <!-- </Transitions> -->
-    <!-- </Setter> -->
-    <!-- </Style> -->
-
   </ControlTheme>
 </ResourceDictionary>
