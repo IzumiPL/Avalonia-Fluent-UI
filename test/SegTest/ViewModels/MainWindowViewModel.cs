@@ -1,4 +1,7 @@
 ﻿using System;
+using Avalonia.Layout;
+using Avalonia.Media;
+using AvaloniaFluentUI.Icons;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace SegTest.ViewModels;
@@ -14,6 +17,21 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [ObservableProperty]
     private int _currentIndex;
+
+    [ObservableProperty]
+    private Orientation _currentOrientation = Orientation.Horizontal;
+
+    public Orientation[] Orientations => [Orientation.Horizontal, Orientation.Vertical];
+    public Geometry[] SegmentedIconItems => 
+    [
+        FluentIcon.Home,
+        FluentIcon.GitHub,
+        FluentIcon.Music,
+        FluentIcon.Video,
+        FluentIcon.Code,
+        FluentIcon.Edit,
+        FluentIcon.Setting
+    ];
 
     partial void OnCurrentItemChanged(object value)
     {
