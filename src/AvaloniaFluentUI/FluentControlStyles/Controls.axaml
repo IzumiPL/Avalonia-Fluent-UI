@@ -171,6 +171,7 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/TextBox/OutlinedTextBox.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/Card.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/GradientCard.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/SettingCard.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/GroupHeaderCard.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Card/ExpanderSettingCard/ExpanderSettingCard.axaml"/>
