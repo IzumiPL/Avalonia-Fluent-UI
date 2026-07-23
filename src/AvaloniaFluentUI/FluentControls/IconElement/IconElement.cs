@@ -17,13 +17,13 @@ public class IconElement : Control
     /// <summary>
     /// Defines the <see cref="Foreground"/> property
     /// </summary>
-    public static readonly AttachedProperty<IBrush> ForegroundProperty =
+    public static readonly AttachedProperty<IBrush?> ForegroundProperty =
         TextElement.ForegroundProperty.AddOwner<IconElement>();
 
     /// <summary>
     /// Gets or sets a brush that describes the foreground color.
     /// </summary>
-    public IBrush Foreground
+    public IBrush? Foreground
     {
         get => GetValue(ForegroundProperty);
         set => SetValue(ForegroundProperty, value);

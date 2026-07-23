@@ -12,7 +12,7 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class FluentIconElement : IconElement
 {
-    private static readonly IconElementConverter s_converter = new();
+    private static readonly IconElementConverter _iconElementConverter = new();
 
     /// <summary>
     /// Defines the <see cref="Source"/> property.
@@ -75,9 +75,9 @@ public class FluentIconElement : IconElement
             icon = new FluentPathIcon { Data = geometry };
         }
         // Use the existing converter for all other types
-        else if (s_converter.CanConvertFrom(value.GetType()))
+        else if (_iconElementConverter.CanConvertFrom(value.GetType()))
         {
-            icon = s_converter.ConvertFrom(value) as IconElement;
+            icon = _iconElementConverter.ConvertFrom(value) as IconElement;
         }
 
         if (icon != null)

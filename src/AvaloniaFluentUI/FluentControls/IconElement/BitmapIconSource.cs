@@ -93,6 +93,6 @@ public class BitmapIconSource : IconSource, IDisposable
         OnBitmapChanged?.Invoke(this, null);
     }
 
-    protected internal SKBitmap _bitmap;
+    protected internal SKBitmap? _bitmap;
     private Size _originalSize;
 }
