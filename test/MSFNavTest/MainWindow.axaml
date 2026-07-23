@@ -2,21 +2,24 @@
   x:Class="MSFNavTest.MainWindow"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ct="clr-namespace:MSFNavTest.Controls"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:primitives="clr-namespace:AvaloniaFluentUI.Controls.Primitives;assembly=AvaloniaFluentUI"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:viewModel="clr-namespace:MSFNavTest.ViewModels"
   xmlns:wnd="clr-namespace:AvaloniaFluentUI.Windowing;assembly=AvaloniaFluentUI"
   Title="Frameless Window"
   d:DesignHeight="450"
   d:DesignWidth="800"
+  x:DataType="viewModel:MainWindowViewModel"
   Icon="C:\Projects\C#\Avalonia-Fluent-UI\samples\Gallery\Assets\app.ico"
   TitleBarMargin="50 0 0 0"
   mc:Ignorable="d">
 
   <wnd:FluentWindow.TitleBarContent>
-    <Grid ColumnDefinitions="*, Auto, Auto, Auto">
+    <Grid ColumnDefinitions="*, Auto, Auto, Auto, Auto">
       <ui:SearchTextBox
         Name="SearchTextBox"
         Grid.Column="0"
@@ -90,6 +93,13 @@
         Height="45"
         Classes="Transparent"
         Content="{x:Static fi:FluentIcon.Pin}"/>
+      <ui:ToolButton
+        Grid.Column="4"
+        Width="46"
+        Height="45"
+        Classes="Transparent"
+        Click="OnToggleTheme"
+        Content="{x:Static fi:FluentIcon.Constract}"/>
     </Grid>
   </wnd:FluentWindow.TitleBarContent>
 
@@ -222,24 +232,95 @@
             <MenuItem Header="选择全部" InputGesture="Ctrl+A"/>
           </ui:FluentContextMenu>
         </ui:StackContent.ContextMenu>
+        <ScrollViewer>
+          <StackPanel Orientation="Vertical" Spacing="12">
+            <ct:Pager NumberOfPages="24"/>
 
-        <ui:ElevatedCard
-          Width="328"
-          Height="328"
-          Padding="0"
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          ClipToBounds="True"
-          PointerReleased="OnPointerRelease">
-          <ui:ElevatedCard.ContextMenu>
-            <ui:FluentContextMenu>
-              <MenuItem MinWidth="168" Header="ElevatedCard"/>
-              <MenuItem MinWidth="168" Header="Enter Changed"/>
-              <MenuItem MinWidth="168" Header="Up Moving"/>
-            </ui:FluentContextMenu>
-          </ui:ElevatedCard.ContextMenu>
-          <Image Source="avares://MSFNavTest/Assets/avatar.jpg" Stretch="Uniform"/>
-        </ui:ElevatedCard>
+            <ct:ImageLabel
+              Name="ImageLabel"
+              Width="888"
+              Height="666"
+              ContextRequested="OnContextRequested"
+              CornerRadius="8"
+              Source="C:\Users\Administrator\OneDrive\Pictures\2.png"/>
+            <ct:ImageLabel
+              Width="888"
+              Height="666"
+              CornerRadius="8"
+              DelegateText="你好 世界!"
+              Source="C:\Users\Administrator\OneDrive\Pictures\Background\SomeACG\114570354_p0.jpg"/>
+            <ct:ImageLabel
+              Width="888"
+              Height="666"
+              CornerRadius="8"
+              DelegateText="Hello World!&#10;Hello Avalonia!&#10;Hello CSharp"
+              Source="C:\Users\Administrator\OneDrive\Pictures\Background\SomeACG\Desktop\13.jpg"/>
+            <ct:ImageLabel
+              Width="1024"
+              Height="678"
+              CornerRadius="8"
+              DelegateText="🥰&#10;硝子酱一级棒卡哇伊"
+              InterpolationMode="HighQuality"
+              Source="C:\Users\Administrator\OneDrive\Pictures\Background\SomeACG\Desktop\6.png"
+              TextElement.FontSize="48"/>
+
+            <TableView
+              CanUserResizeColumns="False"
+              IsTextSearchEnabled="True"
+              ItemsSource="{Binding UserData}">
+              <TableView.Columns>
+                <TableViewColumn HorizontalContentAlignment="Center" Binding="{Binding Name}"/>
+                <TableViewColumn HorizontalContentAlignment="Center" Binding="{Binding Age}"/>
+                <TableViewColumn HorizontalContentAlignment="Center" Binding="{Binding Gender}"/>
+                <TableViewColumn HorizontalContentAlignment="Center" Binding="{Binding Password}"/>
+                <TableViewColumn HorizontalContentAlignment="Center" Binding="{Binding Email}"/>
+                <TableViewColumn HorizontalContentAlignment="Center">
+                  <TableViewColumn.CellTemplate>
+                    <DataTemplate>
+                      <CheckBox IsChecked="{Binding IsAdmin}"/>
+                    </DataTemplate>
+                  </TableViewColumn.CellTemplate>
+                </TableViewColumn>
+              </TableView.Columns>
+            </TableView>
+
+            <TableView
+              MaxHeight="328"
+              Margin="24"
+              Classes="Striped"
+              ItemsSource="{Binding UserData}">
+              <TableView.Columns>
+                <TableViewColumn
+                  HorizontalContentAlignment="Center"
+                  Binding="{Binding Name}"
+                  Header="姓名"/>
+                <TableViewColumn
+                  HorizontalContentAlignment="Center"
+                  Binding="{Binding Age}"
+                  Header="年龄"/>
+                <TableViewColumn
+                  HorizontalContentAlignment="Center"
+                  Binding="{Binding Gender}"
+                  Header="性别"/>
+                <TableViewColumn
+                  HorizontalContentAlignment="Center"
+                  Binding="{Binding Password}"
+                  Header="密码"/>
+                <TableViewColumn
+                  HorizontalContentAlignment="Center"
+                  Binding="{Binding Email}"
+                  Header="邮箱"/>
+                <TableViewColumn HorizontalContentAlignment="Center" Header="是管理员">
+                  <TableViewColumn.CellTemplate>
+                    <DataTemplate>
+                      <CheckBox IsChecked="{Binding IsAdmin}"/>
+                    </DataTemplate>
+                  </TableViewColumn.CellTemplate>
+                </TableViewColumn>
+              </TableView.Columns>
+            </TableView>
+          </StackPanel>
+        </ScrollViewer>
       </ui:StackContent>
     </ui:NavigationView.Content>
   </ui:NavigationView>

@@ -26,7 +26,7 @@
 
   <ControlTheme x:Key="{x:Type TableViewColumnHeader}" TargetType="TableViewColumnHeader">
     <Setter Property="FontWeight" Value="SemiBold"/>
-    <Setter Property="Padding" Value="6 8"/>
+    <Setter Property="Padding" Value="0 6"/>
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="ClipToBounds" Value="False"/>

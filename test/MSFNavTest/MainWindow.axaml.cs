@@ -4,11 +4,13 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using AvaloniaFluentUI.Controls;
+using AvaloniaFluentUI.Styling;
 using AvaloniaFluentUI.Windowing;
 
 namespace MSFNavTest;
@@ -20,6 +22,8 @@ public partial class MainWindow : FluentWindow
         InitializeComponent();
         TitleBarIsVisible = false;
         SplashScreen = new MainWindowSplashScreen(() => TitleBarIsVisible = true);
+
+        ImageLabel.DelegateText = "Hello World!\nHello Avalonia!\nHello CSharp";
 
         Application.Current.Resources["NavigationViewContentGridCornerRadius"] = new CornerRadius(0);
 
@@ -63,6 +67,26 @@ public partial class MainWindow : FluentWindow
     private void OnPointerRelease(object? sender, PointerReleasedEventArgs e)
     {
         e.Handled = true; 
+    }
+
+    private void OnToggleTheme(object? sender, RoutedEventArgs e)
+    {
+        AvaloniaFluentTheme.Instance.ToggleTheme();
+    }
+
+    private void OnImageLabelPointerRelease(object? sender, PointerReleasedEventArgs e)
+    {
+        e.Handled = true;
+    }
+
+    private void OnImageLabelPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        e.Handled = true;
+    }
+
+    private void OnContextRequested(object? sender, ContextRequestedEventArgs e)
+    {
+        e.Handled = true;
     }
 }
 

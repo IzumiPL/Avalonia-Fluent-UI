@@ -24,8 +24,4 @@
   <ItemGroup>
     <ProjectReference Include="../../src/AvaloniaFluentUI/AvaloniaFluentUI.csproj"/>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
 </Project>
