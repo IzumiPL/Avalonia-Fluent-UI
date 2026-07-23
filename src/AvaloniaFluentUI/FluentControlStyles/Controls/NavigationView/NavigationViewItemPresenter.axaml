@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:converters="clr-namespace:AvaloniaFluentUI.Converters"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:uip="using:AvaloniaFluentUI.Controls.Primitives"
   x:CompileBindings="True">
@@ -12,6 +13,8 @@
       </StackPanel>
     </Border>
   </Design.PreviewWith>
+
+  <converters:AddConverter x:Key="AddConverter"/>
 
   <ControlTheme x:Key="{x:Type uip:NavigationViewItemPresenter}" TargetType="uip:NavigationViewItemPresenter">
     <!--<Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />-->
@@ -58,18 +61,34 @@
                 for Foreground
                 Thinking this is something with the new styling system but not entirely sure yet
               -->
-              <Border Name="IconColumn">
-                <Viewbox
-                  Name="IconBox"
-                  Width="{DynamicResource NavigationViewItemOnLeftIconBoxWidth}"
-                  Height="{DynamicResource NavigationViewItemOnLeftIconBoxHeight}"
-                  Margin="{DynamicResource NavigationViewItemOnLeftIconBoxMargin}"
-                  HorizontalAlignment="Center">
-                  <ContentPresenter
-                    Name="Icon"
-                    Content="{Binding TemplateSettings.Icon, RelativeSource={RelativeSource TemplatedParent}}"
-                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                </Viewbox>
+              <Border
+                Name="IconColumn"
+                Width="{TemplateBinding SmallerIconSize}"
+                IsVisible="{Binding IconSource, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static ObjectConverters.IsNotNull}}">
+                <ui:FluentIconElement
+                  Name="Icon"
+                  Width="{TemplateBinding IconSize}"
+                  Height="{TemplateBinding IconSize}"
+                  Margin="16,0,0,0"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                  Source="{TemplateBinding IconSource}"
+                  TextElement.FontFamily="{DynamicResource SymbolThemeFontFamily}"
+                  TextElement.FontSize="{Binding IconSize, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource AddConverter}, ConverterParameter=5}"/>
+                <!--  Foreground="{}"  -->
+                <!--  <Viewbox  -->
+                <!--  Name="IconBox"  -->
+                <!--  Width="{DynamicResource NavigationViewItemOnLeftIconBoxWidth}"  -->
+                <!--  Height="{DynamicResource NavigationViewItemOnLeftIconBoxHeight}"  -->
+                <!--  Margin="{DynamicResource NavigationViewItemOnLeftIconBoxMargin}"  -->
+                <!--  HorizontalAlignment="Center">  -->
+                <!--  <ContentPresenter  -->
+                <!--  Name="Icon"  -->
+                <!--  Content="{Binding TemplateSettings.Icon, RelativeSource={RelativeSource TemplatedParent}}"  -->
+                <!--  Foreground="{DynamicResource TextFillColorPrimaryBrush}"  -->
+                <!--  />  -->
+                <!-- </Viewbox> -->
               </Border>
 
               <ContentPresenter
@@ -119,15 +138,15 @@
     </Setter>
 
     <!--  Bindings in control templates still apply with local value  -->
-    <Style Selector="^ /template/ Border#IconColumn">
-      <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.SmallerIconWidth}"/>
-    </Style>
+    <!-- <Style Selector="^ /template/ Border#IconColumn"> -->
+    <!-- <Setter Property="Width" Value="{TemplateBinding }"/> -->
+    <!-- </Style> -->
 
     <Style Selector="^:pointerover">
       <Style Selector="^ /template/ Border#LayoutRoot">
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
       </Style>
-      <Style Selector="^ /template/ ContentPresenter#Icon">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -139,7 +158,7 @@
       <Style Selector="^ /template/ Border#LayoutRoot">
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
       </Style>
-      <Style Selector="^ /template/ ContentPresenter#Icon">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -151,7 +170,7 @@
       <Style Selector="^ /template/ Border#LayoutRoot">
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
       </Style>
-      <Style Selector="^ /template/ ContentPresenter#Icon">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -162,7 +181,7 @@
         <Style Selector="^ /template/ Border#LayoutRoot">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ ContentPresenter#Icon">
+        <Style Selector="^ /template/ ui|FluentIconElement#Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -174,7 +193,7 @@
         <Style Selector="^ /template/ Border#LayoutRoot">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ ContentPresenter#Icon">
+        <Style Selector="^ /template/ ui|FluentIconElement#Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -188,7 +207,7 @@
     </Style>
 
     <Style Selector="^:iconcollapsed">
-      <Style Selector="^ /template/ Viewbox#IconBox">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="IsVisible" Value="False"/>
       </Style>
       <Style Selector="^ /template/ Border#IconColumn">
@@ -256,17 +275,29 @@
                 for Foreground
                 Thinking this is something with the new styling system but not entirely sure yet
               -->
-              <Viewbox
-                Name="IconBox"
-                Height="20"
+
+              <ui:FluentIconElement
+                Name="Icon"
+                Width="{TemplateBinding IconSize}"
+                Height="{TemplateBinding IconSize}"
                 Margin="16,0,0,0"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-                <ContentPresenter
-                  Name="Icon"
-                  Content="{Binding TemplateSettings.Icon, RelativeSource={RelativeSource TemplatedParent}}"
-                  Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-              </Viewbox>
+                VerticalAlignment="Center"
+                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                Source="{TemplateBinding IconSource}"
+                TextElement.FontFamily="{DynamicResource SymbolThemeFontFamily}"
+                TextElement.FontSize="{Binding IconSize, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource AddConverter}, ConverterParameter=5}"/>
+              <!--  <Viewbox  -->
+              <!--  Name="IconBox"  -->
+              <!--  Height="20"  -->
+              <!--  Margin="16,0,0,0"  -->
+              <!--  HorizontalAlignment="Center"  -->
+              <!--  VerticalAlignment="Center">  -->
+              <!--  <ContentPresenter  -->
+              <!--  Name="Icon"  -->
+              <!--  Content="{Binding TemplateSettings.Icon, RelativeSource={RelativeSource TemplatedParent}}"  -->
+              <!--  Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>  -->
+              <!-- </Viewbox> -->
 
               <ContentPresenter
                 Name="ContentPresenter"
@@ -334,7 +365,7 @@
       <Style Selector="^ /template/ Border#LayoutRoot">
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
       </Style>
-      <Style Selector="^ /template/ ContentPresenter#Icon">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -348,7 +379,7 @@
       <Style Selector="^ /template/ Border#LayoutRoot">
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
       </Style>
-      <Style Selector="^ /template/ ContentPresenter#Icon">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -363,7 +394,7 @@
       <Style Selector="^ /template/ Border#LayoutRoot">
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
       </Style>
-      <Style Selector="^ /template/ ContentPresenter#Icon">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -377,7 +408,7 @@
         <Style Selector="^ /template/ Border#LayoutRoot">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
         </Style>
-        <Style Selector="^ /template/ ContentPresenter#Icon">
+        <Style Selector="^ /template/ ui|FluentIconElement#Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -392,7 +423,7 @@
         <Style Selector="^ /template/ Border#LayoutRoot">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
         </Style>
-        <Style Selector="^ /template/ ContentPresenter#Icon">
+        <Style Selector="^ /template/ ui|FluentIconElement#Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/>
         </Style>
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -402,7 +433,7 @@
     </Style>
 
     <Style Selector="^:disabled">
-      <Style Selector="^ /template/ ContentPresenter#Icon">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -428,7 +459,7 @@
     </Style>
 
     <Style Selector="^:contentonly">
-      <Style Selector="^ /template/ Viewbox#IconBox">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="IsVisible" Value="False"/>
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -487,18 +518,30 @@
                 for Foreground
                 Thinking this is something with the new styling system but not entirely sure yet
               -->
-              <Viewbox
-                Name="IconBox"
-                Width="20"
-                Height="20"
+
+              <ui:FluentIconElement
+                Name="Icon"
+                Width="{TemplateBinding IconSize}"
+                Height="{TemplateBinding IconSize}"
                 Margin="16,0,0,0"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-                <ContentPresenter
-                  Name="Icon"
-                  Content="{Binding TemplateSettings.Icon, RelativeSource={RelativeSource TemplatedParent}}"
-                  Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-              </Viewbox>
+                VerticalAlignment="Center"
+                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                Source="{TemplateBinding IconSource}"
+                TextElement.FontFamily="{DynamicResource SymbolThemeFontFamily}"
+                TextElement.FontSize="{Binding IconSize, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource AddConverter}, ConverterParameter=5}"/>
+              <!--  <Viewbox  -->
+              <!--  Name="IconBox"  -->
+              <!--  Width="20"  -->
+              <!--  Height="20"  -->
+              <!--  Margin="16,0,0,0"  -->
+              <!--  HorizontalAlignment="Center"  -->
+              <!--  VerticalAlignment="Center">  -->
+              <!--  <ContentPresenter  -->
+              <!--  Name="Icon"  -->
+              <!--  Content="{Binding TemplateSettings.Icon, RelativeSource={RelativeSource TemplatedParent}}"  -->
+              <!--  Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>  -->
+              <!-- </Viewbox> -->
 
               <ContentPresenter
                 Name="ContentPresenter"
@@ -547,7 +590,7 @@
       <Style Selector="^ /template/ Border#LayoutRoot">
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
       </Style>
-      <Style Selector="^ /template/ ContentPresenter#Icon">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -559,7 +602,7 @@
       <Style Selector="^ /template/ Border#LayoutRoot">
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
       </Style>
-      <Style Selector="^ /template/ ContentPresenter#Icon">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -571,7 +614,7 @@
       <Style Selector="^ /template/ Border#LayoutRoot">
         <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
       </Style>
-      <Style Selector="^ /template/ ContentPresenter#Icon">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -582,7 +625,7 @@
         <Style Selector="^ /template/ Border#LayoutRoot">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ ContentPresenter#Icon">
+        <Style Selector="^ /template/ ui|FluentIconElement#Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -594,7 +637,7 @@
         <Style Selector="^ /template/ Border#LayoutRoot">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ ContentPresenter#Icon">
+        <Style Selector="^ /template/ ui|FluentIconElement#Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -604,7 +647,7 @@
     </Style>
 
     <Style Selector="^:disabled">
-      <Style Selector="^ /template/ ContentPresenter#Icon">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -615,7 +658,7 @@
     <!--  IconOnLeft  -->
     <!--  IconOnly  -->
     <Style Selector="^:contentonly">
-      <Style Selector="^ /template/ Viewbox#IconBox">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="IsVisible" Value="False"/>
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
@@ -676,14 +719,25 @@
                 </ContentPresenter.Styles>
               </ContentPresenter>
 
-              <Viewbox
-                Name="IconBox"
-                Width="24"
-                Height="24"
+              <ui:FluentIconElement
+                Name="Icon"
+                Width="{TemplateBinding IconSize}"
+                Height="{TemplateBinding IconSize}"
+                Margin="0,0,0,0"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center">
-                <ContentPresenter Name="Icon" Content="{Binding TemplateSettings.Icon, RelativeSource={RelativeSource TemplatedParent}}"/>
-              </Viewbox>
+                VerticalAlignment="Center"
+                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                Source="{TemplateBinding IconSource}"
+                TextElement.FontFamily="{DynamicResource SymbolThemeFontFamily}"
+                TextElement.FontSize="{Binding IconSize, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource AddConverter}, ConverterParameter=7}"/>
+              <!--  <Viewbox  -->
+              <!--  Name="IconBox"  -->
+              <!--  Width="24"  -->
+              <!--  Height="24"  -->
+              <!--  HorizontalAlignment="Center"  -->
+              <!--  VerticalAlignment="Center">  -->
+              <!-- <ContentPresenter Name="Icon" Content="{Binding TemplateSettings.Icon, RelativeSource={RelativeSource TemplatedParent}}"/> -->
+              <!-- </Viewbox> -->
             </DockPanel>
 
             <ContentPresenter
@@ -701,7 +755,7 @@
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
-      <Style Selector="^ /template/ ContentPresenter#Icon">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
       </Style>
     </Style>
@@ -710,7 +764,7 @@
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
       </Style>
-      <Style Selector="^ /template/ ContentPresenter#Icon">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
       </Style>
     </Style>
@@ -719,7 +773,7 @@
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
         <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}"/>
       </Style>
-      <Style Selector="^ /template/ ContentPresenter#Icon">
+      <Style Selector="^ /template/ ui|FluentIconElement#Icon">
         <Setter Property="Foreground" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
       </Style>
     </Style>

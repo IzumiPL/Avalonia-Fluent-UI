@@ -23,14 +23,8 @@ public partial class NavigationViewItemPresenter : ContentControl
     /// <summary>
     /// Defines the <see cref="IconSource"/> property
     /// </summary>
-    public static readonly StyledProperty<IconSource> IconSourceProperty =
-        AvaloniaProperty.Register<NavigationViewItem, IconSource>(nameof(IconSource));
-
-    /// <summary>
-    /// Defines the <see cref="TemplateSettings"/> property
-    /// </summary>
-    public static readonly StyledProperty<NavigationViewItemPresenterTemplateSettings> TemplateSettingsProperty =
-        AvaloniaProperty.Register<NavigationViewItemPresenter, NavigationViewItemPresenterTemplateSettings>(nameof(TemplateSettings));
+    public static readonly StyledProperty<object?> IconSourceProperty =
+        AvaloniaProperty.Register<NavigationViewItem, object?>(nameof(IconSource));
 
     /// <summary>
     /// Defines the <see cref="InfoBadge"/> property
@@ -38,22 +32,31 @@ public partial class NavigationViewItemPresenter : ContentControl
     public static readonly StyledProperty<InfoBadge> InfoBadgeProperty =
         NavigationViewItem.InfoBadgeProperty.AddOwner<NavigationViewItemPresenter>();
 
-    /// <summary>
-    /// Gets or sets the icon in a NavigationView item.
-    /// </summary>
-    public IconSource IconSource
+    public static readonly StyledProperty<double> IconSizeProperty =
+        AvaloniaProperty.Register<NavigationViewItemPresenter, double>(nameof(IconSize), 16);
+
+    public static readonly StyledProperty<double> SmallerIconSizeProperty =
+        AvaloniaProperty.Register<NavigationViewItemPresenter, double>(nameof(SmallerIconSize));
+
+    public double SmallerIconSize
     {
-        get => GetValue(IconSourceProperty);
-        set => SetValue(IconSourceProperty, value);
+        get => GetValue(SmallerIconSizeProperty);
+        set => SetValue(SmallerIconSizeProperty, value);
+    }
+
+    public double IconSize
+    {
+        get => GetValue(IconSizeProperty);
+        set => SetValue(IconSizeProperty, value);
     }
 
     /// <summary>
-    /// Gets the template settings used in the NavigationViewItemPresenter
+    /// Gets or sets the icon in a NavigationView item.
     /// </summary>
-    public NavigationViewItemPresenterTemplateSettings TemplateSettings
+    public object? IconSource
     {
-        get => GetValue(TemplateSettingsProperty);
-        internal set => SetValue(TemplateSettingsProperty, value);
+        get => GetValue(IconSourceProperty);
+        set => SetValue(IconSourceProperty, value);
     }
 
     /// <summary>
@@ -84,23 +87,8 @@ public partial class NavigationViewItemPresenter : ContentControl
     private const string s_pcNotClosedCompactTop = ":notclosedcompacttop";
     private const string s_pcExpanded = ":expanded";
     
-    public NavigationViewItemPresenter()
-    {
-        TemplateSettings = new NavigationViewItemPresenterTemplateSettings();
-    }
-
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
-        // HACK: Bug in Viewbox doesn't disconnect its child when its removed from the tree
-        //       causing a crash when switching pane mode. Force disconnect the icon and 
-        //       reapply it after applying the template.
-        var ts = TemplateSettings;
-        var icoSrc = IconSource;
-        if (icoSrc != null)
-        {
-            ts.Icon = null;
-        }
-
         base.OnApplyTemplate(e);
 
         _selectionIndicator = e.NameScope.Find<Border>(s_tpSelectionIndicator);
@@ -133,22 +121,6 @@ public partial class NavigationViewItemPresenter : ContentControl
         }
 
         UpdateMargin();
-
-        // HACK
-        if (icoSrc != null)
-        {
-            ts.Icon = IconHelpers.CreateFromUnknown(icoSrc);
-        }
-    }
-
-    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
-    {
-        base.OnPropertyChanged(change);
-
-        if (change.Property == IconSourceProperty)
-        {
-            TemplateSettings.Icon = IconHelpers.CreateFromUnknown(change.GetNewValue<IconSource>());
-        }
     }
 
     protected override void OnPointerPressed(PointerPressedEventArgs e)
@@ -202,8 +174,8 @@ public partial class NavigationViewItemPresenter : ContentControl
 
         if (update)
         {
-            TemplateSettings.IconWidth = len;
-            TemplateSettings.SmallerIconWidth = len - 8;
+            // IconSize = len;
+            SmallerIconSize = len - 24;
         }
     }
 
@@ -221,10 +193,10 @@ public partial class NavigationViewItemPresenter : ContentControl
         PseudoClasses.Set(s_pcNotClosedCompactTop, !isClosedCompact && topLevel);
     }
 
-    private Panel _contentGrid;
-    private Panel _expandCollapseChevron;
-    private Control _selectionIndicator;
-    private ContentPresenter _infoBadgePresenter;
+    private Panel? _contentGrid;
+    private Panel? _expandCollapseChevron;
+    private Control? _selectionIndicator;
+    private ContentPresenter? _infoBadgePresenter;
     private double _compactPaneLengthValue = 40;
     private double _leftIndentation;
 }
