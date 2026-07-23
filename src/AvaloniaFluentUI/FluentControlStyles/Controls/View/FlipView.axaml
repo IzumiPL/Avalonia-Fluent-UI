@@ -109,8 +109,6 @@
     <Setter Property="CornerRadius" Value="8"/>
     <Setter Property="ClipToBounds" Value="True"/>
     <Setter Property="Height" Value="520"/>
-    <Setter Property="ImageInterpolationMode" Value="MediumQuality"/>
-    <Setter Property="Stretch" Value="UniformToFill"/>
 
     <Setter Property="Template">
       <ControlTemplate>
@@ -128,15 +126,19 @@
             ClipToBounds="{TemplateBinding ClipToBounds}"
             CornerRadius="{TemplateBinding CornerRadius}">
             <Panel>
-              <Image
+              <ui:ImageLabel
                 Name="PART_CurrentImage"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                InterpolationMode="{TemplateBinding InterpolationMode}"
                 Stretch="{TemplateBinding Stretch}"/>
-              <Image
+              <ui:ImageLabel
                 Name="PART_NextImage"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                InterpolationMode="{TemplateBinding InterpolationMode}"
                 IsVisible="False"
                 Stretch="{TemplateBinding Stretch}"/>
             </Panel>

@@ -23,8 +23,8 @@ using AvaloniaFluentUI.Controls.Enums;
 
 namespace AvaloniaFluentUI.Controls;
 
-[TemplatePart(PART_CURRENT_IMAGE, typeof(Image))]
-[TemplatePart(PART_NEXT_IMAGE, typeof(Image))]
+[TemplatePart(PART_CURRENT_IMAGE, typeof(ImageLabel))]
+[TemplatePart(PART_NEXT_IMAGE, typeof(ImageLabel))]
 [TemplatePart(PART_PREVIOUS_BUTTON, typeof(Button))]
 [TemplatePart(PART_NEXT_BUTTON, typeof(Button))]
 public class FlipView : TemplatedControl
@@ -35,17 +35,17 @@ public class FlipView : TemplatedControl
     public static readonly StyledProperty<int> SelectedIndexProperty =
         AvaloniaProperty.Register<FlipView, int>(nameof(SelectedIndex), -1);
 
-    public static readonly StyledProperty<BitmapInterpolationMode> ImageInterpolationModeProperty =
-        AvaloniaProperty.Register<FlipView, BitmapInterpolationMode>(nameof(ImageInterpolationMode), BitmapInterpolationMode.MediumQuality);
+    public static readonly StyledProperty<BitmapInterpolationMode> InterpolationModeProperty =
+        ImageLabel.InterpolationModeProperty.AddOwner<FlipView>();
 
     public static readonly StyledProperty<Stretch> StretchProperty =
-        AvaloniaProperty.Register<FlipView, Stretch>(nameof(Stretch), Stretch.UniformToFill);
+        ImageLabel.StretchProperty.AddOwner<FlipView>();
 
     public static readonly StyledProperty<int> DecodeToHeightProperty =
-        AvaloniaProperty.Register<FlipView, int>(nameof(DecodeToHeight), 1080);
+        ImageLabel.DecodePixelHeightProperty.AddOwner<FlipView>();
 
     public static readonly StyledProperty<int> DecodeToWidthProperty =
-        AvaloniaProperty.Register<FlipView, int>(nameof(DecodeToWidth));
+        ImageLabel.DecodePixelWidthProperty.AddOwner<FlipView>();
     
     public static readonly StyledProperty<double> IntervalProperty =
         AvaloniaProperty.Register<FlipView, double>(nameof(Interval), 1500, validate: value => value >= 600);
@@ -110,10 +110,10 @@ public class FlipView : TemplatedControl
         set => SetValue(StretchProperty, value);
     }
     
-    public BitmapInterpolationMode ImageInterpolationMode
+    public BitmapInterpolationMode InterpolationMode
     {
-        get => GetValue(ImageInterpolationModeProperty);
-        set => SetValue(ImageInterpolationModeProperty, value);
+        get => GetValue(InterpolationModeProperty);
+        set => SetValue(InterpolationModeProperty, value);
     }
 
     public IEnumerable<string>? ImageSource
@@ -133,10 +133,16 @@ public class FlipView : TemplatedControl
         get => GetValue(ItemCountProperty);
         private set => SetValue(ItemCountProperty, value);
     }
+
+    static FlipView()
+    {
+        StretchProperty.OverrideDefaultValue<FlipView>(Stretch.UniformToFill);
+        DecodeToHeightProperty.OverrideDefaultValue<FlipView>(328);
+    }
     
     private bool _isRunning;
-    private Image? _currentImage;
-    private Image? _nextImage;
+    private ImageLabel? _currentImage;
+    private ImageLabel? _nextImage;
     private Button? _previousButton;
     private Button? _nextButton;
 
@@ -165,8 +171,8 @@ public class FlipView : TemplatedControl
         _previousButton?.Click -= OnPreviousButtonClick;
         _nextButton?.Click -= OnNextButtonClick;
 
-        _currentImage = e.NameScope.Find<Image>(PART_CURRENT_IMAGE);
-        _nextImage = e.NameScope.Find<Image>(PART_NEXT_IMAGE);
+        _currentImage = e.NameScope.Find<ImageLabel>(PART_CURRENT_IMAGE);
+        _nextImage = e.NameScope.Find<ImageLabel>(PART_NEXT_IMAGE);
         _previousButton = e.NameScope.Find<Button>(PART_PREVIOUS_BUTTON);
         _nextButton = e.NameScope.Find<Button>(PART_NEXT_BUTTON);
 
@@ -345,10 +351,6 @@ public class FlipView : TemplatedControl
             if (IsPointerOver) { UpdateButtonVisibility(); }
             RunSliderAnimationAsync(_items[nv], nv, nv > ov);
         }
-        else if (change.Property == ImageInterpolationModeProperty)
-        {
-            HandleImageInterpolationModeChanged(change.GetNewValue<BitmapInterpolationMode>());
-        }
         else if (change.Property == IsAutoPlayProperty)
         {
             HandleAutoPlayChanged(change.GetNewValue<bool>());
@@ -356,15 +358,6 @@ public class FlipView : TemplatedControl
         else if (change.Property == IntervalProperty)
         {
             HandleIntervalChanged();
-        }
-    }
-
-    private void HandleImageInterpolationModeChanged(BitmapInterpolationMode mode)
-    {
-        if (_currentImage != null && _nextImage != null)
-        {
-            RenderOptions.SetBitmapInterpolationMode(_currentImage, mode);
-            RenderOptions.SetBitmapInterpolationMode(_nextImage, mode);
         }
     }
 

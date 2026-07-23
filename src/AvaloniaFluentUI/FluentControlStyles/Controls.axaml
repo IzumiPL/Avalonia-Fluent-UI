@@ -152,7 +152,7 @@
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Slider/ToolTipSlider.axaml"/>
         <!-- <MergeResourceInclude Source="/FluentControlStyles/Controls/Pager/PipsPager.axaml"/> -->
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FlipViewStyle.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FlipView.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/View/WizardView.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/View/Avatar.axaml"/>
