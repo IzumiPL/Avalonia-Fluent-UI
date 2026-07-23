@@ -1802,4 +1802,28 @@
   <data name="FT" xml:space="preserve">
     <value>ファイルやフォルダを右クリックすると、実行中のプロセスが表示されます</value>
   </data>
+  <data name="Media" xml:space="preserve">
+    <value>メディア</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>写真</value>
+  </data>
+  <data name="SelectImage" xml:space="preserve">
+    <value>画像を選択してください</value>
+  </data>
+  <data name="StretchingMethod" xml:space="preserve">
+    <value>ストレッチ方法</value>
+  </data>
+  <data name="BlendMode" xml:space="preserve">
+    <value>ハイブリッドモード</value>
+  </data>
+  <data name="InterpolationMode" xml:space="preserve">
+    <value>補間モード</value>
+  </data>
+  <data name="ScaleToSpecifiedWidth" xml:space="preserve">
+    <value>幅のスケール</value>
+  </data>
+  <data name="ZoomToSpecifiedHeight" xml:space="preserve">
+    <value>高さのスケール</value>
+  </data>
 </root>

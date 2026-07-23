@@ -24,6 +24,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public string BasicInput => LocalizationService.Instance.GetString("BasicInput");
     public string DialogAndPopup => LocalizationService.Instance.GetString("DialogAndPopup");
     public string Layout => LocalizationService.Instance.GetString("Layout");
+    public string Media => LocalizationService.Instance.GetString("Media");
     public string Navigation => LocalizationService.Instance.GetString("Navigation");
     public string Text => LocalizationService.Instance.GetString("Text");
     public string View => LocalizationService.Instance.GetString("View");
@@ -90,6 +91,8 @@ public partial class MainWindowViewModel : ViewModelBase
             { "Border", () => new BorderPageViewModel() },
             { "Panel", () => new PanelPageViewModel() },
             
+            { "Media", () => new MediaViewModel() },
+            
             { "Navigation", () => new NavigationViewModel() },
             { "NavigationView", () => new NavigationViewPageViewModel() },
             { "Tabs", () => new TabsPageViewModel() },
@@ -143,6 +146,7 @@ public partial class MainWindowViewModel : ViewModelBase
         OnPropertyChanged(nameof(BasicInput));
         OnPropertyChanged(nameof(DialogAndPopup));
         OnPropertyChanged(nameof(Layout));
+        OnPropertyChanged(nameof(Media));
         OnPropertyChanged(nameof(Navigation));
         OnPropertyChanged(nameof(Text));
         OnPropertyChanged(nameof(View));

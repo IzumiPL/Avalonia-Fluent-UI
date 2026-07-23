@@ -72,5 +72,9 @@
       <DependentUpon>SettingCardPage.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\MediaView.axaml.cs">
+      <DependentUpon>MediaView.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

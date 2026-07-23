@@ -1,0 +1,169 @@
+<ui:ViewBase
+  x:Class="Gallery.Views.MediaView"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:models="clr-namespace:Gallery.Models"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignHeight="450"
+  d:DesignWidth="800"
+  x:DataType="viewModel:MediaViewModel"
+  mc:Ignorable="d">
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Image]}">
+      <!--  0  -->
+      <Grid
+        Margin="0,0,8,0"
+        ColumnDefinitions="Auto, *"
+        ColumnSpacing="24">
+        <fui:ImageLabel
+          Name="ImageLabel"
+          Grid.Column="0"
+          Width="{Binding ImageLabelWidthFormat}"
+          Height="{Binding ImageLabelHeightFormat}"
+          BlendMode="{Binding ImageLabelBlendMode}"
+          CornerRadius="{Binding ImageLabelCornerRadiusFormat}"
+          DecodePixelHeight="{Binding ImageLabelDecodeHeight}"
+          DecodePixelWidth="{Binding ImageLabelDecodeWidth}"
+          DelegateText="{Binding ImageLabelDelegate}"
+          InterpolationMode="{Binding ImageLabelInterpolationMode}"
+          Source="avares://Gallery/Assets/Images/bg.jpg"
+          Stretch="{Binding ImageStretch}"/>
+        <ui:Card Grid.Column="1">
+          <Grid
+            ColumnDefinitions="Auto, *"
+            ColumnSpacing="8"
+            RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+            RowSpacing="6">
+
+            <TextBlock
+              Grid.Row="0"
+              Grid.ColumnSpan="2"
+              FontWeight="Bold"
+              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <Button
+              Grid.Row="1"
+              Grid.ColumnSpan="2"
+              HorizontalAlignment="Stretch"
+              Classes="Accent"
+              Click="OnSelectedImage"
+              Content="{locale:Localization SelectImage}"/>
+
+            <TextBlock
+              Grid.Row="2"
+              Grid.Column="0"
+              Text="{locale:Localization Width}"/>
+            <NumericUpDown
+              Grid.Row="2"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              Maximum="2000"
+              Minimum="-1"
+              Value="{Binding ImageLabelWidth}"/>
+
+            <TextBlock
+              Grid.Row="3"
+              Grid.Column="0"
+              Text="{locale:Localization Height}"/>
+            <NumericUpDown
+              Grid.Row="3"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              Maximum="1400"
+              Minimum="-1"
+              Value="{Binding ImageLabelHeight}"/>
+
+            <TextBlock
+              Grid.Row="4"
+              Grid.Column="0"
+              Text="{locale:Localization StretchingMethod}"/>
+            <ComboBox
+              Grid.Row="4"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding Stretchs}"
+              SelectedItem="{Binding ImageStretch}"/>
+
+            <TextBlock
+              Grid.Row="5"
+              Grid.Column="0"
+              Text="{locale:Localization Radius}"/>
+            <NumericUpDown
+              Grid.Row="5"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              Maximum="512"
+              Minimum="0"
+              Value="{Binding ImageLabelCornerRadius}"/>
+
+            <TextBlock
+              Grid.Row="6"
+              Grid.Column="0"
+              Text="{locale:Localization BlendMode}"/>
+            <ComboBox
+              Grid.Row="6"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding ImageLabelBlendModes}"
+              SelectedItem="{Binding ImageLabelBlendMode}"/>
+
+            <TextBlock
+              Grid.Row="7"
+              Grid.Column="0"
+              Text="{locale:Localization InterpolationMode}"/>
+            <ComboBox
+              Grid.Row="7"
+              Grid.Column="1"
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding ImageLabelInterpolationModes}"
+              SelectedItem="{Binding ImageLabelInterpolationMode}"/>
+
+            <TextBlock
+              Grid.Row="8"
+              Grid.Column="0"
+              Text="{locale:Localization ScaleToSpecifiedWidth}"/>
+            <NumericUpDown
+              Grid.Row="8"
+              Grid.Column="1"
+              MinHeight="12"
+              MaxHeight="2560"
+              HorizontalAlignment="Stretch"
+              Value="{Binding ImageLabelDecodeWidth}"/>
+
+            <TextBlock
+              Grid.Row="9"
+              Grid.Column="0"
+              Text="{locale:Localization ZoomToSpecifiedHeight}"/>
+            <NumericUpDown
+              Grid.Row="9"
+              Grid.Column="1"
+              MinHeight="12"
+              MaxHeight="1600"
+              HorizontalAlignment="Stretch"
+              Value="{Binding ImageLabelDecodeHeight}"/>
+
+            <TextBlock
+              Grid.Row="10"
+              Grid.Column="0"
+              Text="Delegate"/>
+            <TextBox
+              Grid.Row="10"
+              Grid.Column="1"
+              MinHeight="12"
+              MaxHeight="1600"
+              HorizontalAlignment="Stretch"
+              Classes="Clear"
+              Text="{Binding ImageLabelDelegate}"/>
+          </Grid>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>
