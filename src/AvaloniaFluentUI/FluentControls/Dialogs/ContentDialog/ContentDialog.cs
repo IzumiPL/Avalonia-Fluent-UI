@@ -8,7 +8,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
-using Avalonia.Controls.Templates;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Logging;
@@ -28,13 +27,13 @@ namespace AvaloniaFluentUI.Controls;
 [TemplatePart(s_tpPrimaryButton, typeof(Button))]
 [TemplatePart(s_tpSecondaryButton, typeof(Button))]
 [TemplatePart(s_tpCloseButton, typeof(Button))]
-public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
+public class ContentDialog : ContentControl, ICustomKeyboardNavigation
 {
     /// <summary>
     /// Defines the <see cref="CloseButtonCommand"/> property
     /// </summary>
-    public static readonly StyledProperty<ICommand> CloseButtonCommandProperty =
-        AvaloniaProperty.Register<ContentDialog, ICommand>(nameof(CloseButtonCommand));
+    public static readonly StyledProperty<ICommand?> CloseButtonCommandProperty =
+        AvaloniaProperty.Register<ContentDialog, ICommand?>(nameof(CloseButtonCommand));
 
     /// <summary>
     /// Defines the <see cref="CloseButtonCommandParameter"/> property
@@ -52,7 +51,7 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
     /// Defines the <see cref="DefaultButton"/> property
     /// </summary>
     public static readonly StyledProperty<ContentDialogButton> DefaultButtonProperty =
-        AvaloniaProperty.Register<ContentDialog, ContentDialogButton>(nameof(DefaultButton), ContentDialogButton.None);
+        AvaloniaProperty.Register<ContentDialog, ContentDialogButton>(nameof(DefaultButton));
 
     /// <summary>
     /// Defines the <see cref="IsPrimaryButtonEnabled"/> property
@@ -69,8 +68,8 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
     /// <summary>
     /// Defines the <see cref="PrimaryButtonCommand"/> property
     /// </summary>
-    public static readonly StyledProperty<ICommand> PrimaryButtonCommandProperty =
-        AvaloniaProperty.Register<ContentDialog, ICommand>(nameof(PrimaryButtonCommand));
+    public static readonly StyledProperty<ICommand?> PrimaryButtonCommandProperty =
+        AvaloniaProperty.Register<ContentDialog, ICommand?>(nameof(PrimaryButtonCommand));
 
     /// <summary>
     /// Defines the <see cref="PrimaryButtonCommandParameter"/> property
@@ -87,8 +86,8 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
     /// <summary>
     /// Defines the <see cref="SecondaryButtonCommand"/> property
     /// </summary>
-    public static readonly StyledProperty<ICommand> SecondaryButtonCommandProperty =
-        AvaloniaProperty.Register<ContentDialog, ICommand>(nameof(SecondaryButtonCommand));
+    public static readonly StyledProperty<ICommand?> SecondaryButtonCommandProperty =
+        AvaloniaProperty.Register<ContentDialog, ICommand?>(nameof(SecondaryButtonCommand));
 
     /// <summary>
     /// Defines the <see cref="SecondaryButtonCommandParameter"/> property
@@ -135,7 +134,7 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
     /// <summary>
     /// Gets or sets the command to invoke when the close button is tapped.
     /// </summary>
-    public ICommand CloseButtonCommand
+    public ICommand? CloseButtonCommand
     {
         get => GetValue(CloseButtonCommandProperty);
         set => SetValue(CloseButtonCommandProperty, value);
@@ -189,7 +188,7 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
     /// <summary>
     /// Gets or sets the command to invoke when the primary button is tapped.
     /// </summary>
-    public ICommand PrimaryButtonCommand
+    public ICommand? PrimaryButtonCommand
     {
         get => GetValue(PrimaryButtonCommandProperty);
         set => SetValue(PrimaryButtonCommandProperty, value);
@@ -216,7 +215,7 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
     /// <summary>
     /// Gets or sets the command to invoke when the secondary button is tapped.
     /// </summary>
-    public ICommand SecondaryButtonCommand
+    public ICommand? SecondaryButtonCommand
     {
         get => GetValue(SecondaryButtonCommandProperty);
         set => SetValue(SecondaryButtonCommandProperty, value);
@@ -263,37 +262,37 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
     /// <summary>
     /// Occurs before the dialog is opened
     /// </summary>
-    public event TypedEventHandler<ContentDialog, EventArgs> Opening;
+    public event TypedEventHandler<ContentDialog, EventArgs>? Opening;
 
     /// <summary>
     /// Occurs after the dialog is opened.
     /// </summary>
-    public event TypedEventHandler<ContentDialog, EventArgs> Opened;
+    public event TypedEventHandler<ContentDialog, EventArgs>? Opened;
 
     /// <summary>
     /// Occurs after the dialog starts to close, but before it is closed and before the Closed event occurs.
     /// </summary>
-    public event TypedEventHandler<ContentDialog, ContentDialogClosingEventArgs> Closing;
+    public event TypedEventHandler<ContentDialog, ContentDialogClosingEventArgs>? Closing;
 
     /// <summary>
     /// Occurs after the dialog is closed.
     /// </summary>
-    public event TypedEventHandler<ContentDialog, ContentDialogClosedEventArgs> Closed;
+    public event TypedEventHandler<ContentDialog, ContentDialogClosedEventArgs>? Closed;
 
     /// <summary>
     /// Occurs after the primary button has been tapped.
     /// </summary>
-    public event TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> PrimaryButtonClick;
+    public event TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs>? PrimaryButtonClick;
 
     /// <summary>
     /// Occurs after the secondary button has been tapped.
     /// </summary>
-    public event TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> SecondaryButtonClick;
+    public event TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs>? SecondaryButtonClick;
 
     /// <summary>
     /// Occurs after the close button has been tapped.
     /// </summary>
-    public event TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs> CloseButtonClick;
+    public event TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs>? CloseButtonClick;
     
     private const string s_tpPrimaryButton = "PrimaryButton";
     private const string s_tpSecondaryButton = "SecondaryButton";
@@ -310,24 +309,22 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
-    {
-        if (_primaryButton != null)
-            _primaryButton.Click -= OnButtonClick;
-        if (_secondaryButton != null)
-            _secondaryButton.Click -= OnButtonClick;
-        if (_closeButton != null)
-            _closeButton.Click -= OnButtonClick;
+    { 
+        _primaryButton?.Click -= OnButtonClick;
+        _secondaryButton?.Click -= OnButtonClick; 
+        _closeButton?.Click -= OnButtonClick;
 
         base.OnApplyTemplate(e);
 
         _primaryButton = e.NameScope.Get<Button>(s_tpPrimaryButton);
-        _primaryButton.Click += OnButtonClick;
         _secondaryButton = e.NameScope.Get<Button>(s_tpSecondaryButton);
-        _secondaryButton.Click += OnButtonClick;
         _closeButton = e.NameScope.Get<Button>(s_tpCloseButton);
-        _closeButton.Click += OnButtonClick;
-    }
 
+        _primaryButton.Click += OnButtonClick;
+        _secondaryButton.Click += OnButtonClick;
+        _closeButton.Click += OnButtonClick; 
+    }
+    
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
@@ -351,7 +348,7 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
         base.OnKeyDown(e);
 
         // See OnKeyUp for reasoning
-        if (!e.Handled && (e.Key == Key.Enter || e.Key == Key.Escape))
+        if (!e.Handled && e.Key == Key.Escape)
         {
             _hotkeyDownVisual = e.Source as Visual;
         }
@@ -370,7 +367,7 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
         // (Avalonia related issue #9626) and will immediately close the dialog
         // We store the source of the key down and if it doesn't match, or hasn't been set yet, we ignore
         // this key up event so we don't inadvertantly close the dialog
-        if ((e.Key == Key.Enter || e.Key == Key.Escape) && (_hotkeyDownVisual == null || _hotkeyDownVisual != (Visual)e.Source))
+        if (e.Key == Key.Escape && (_hotkeyDownVisual == null || _hotkeyDownVisual != (Visual)e.Source))
         {
             base.OnKeyUp(e);
             return;
@@ -471,7 +468,7 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
 
         _host.Content = this;
 
-        OverlayLayer ol = null;
+        OverlayLayer? ol = null;
 
         if (topLevel != null)
         {
@@ -638,9 +635,6 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
     // Internal only for UnitTests
     internal void SetupDialog()
     {
-        if (_primaryButton == null)
-            throw new InvalidOperationException("Attempted to setup ContentDialog but the template has not been applied yet.");
-
         PseudoClasses.Set(PC_PRMIARY, !string.IsNullOrEmpty(PrimaryButtonText));
         PseudoClasses.Set(PC_SECONDARY, !string.IsNullOrEmpty(SecondaryButtonText));
         PseudoClasses.Set(PC_COLSE, !string.IsNullOrEmpty(CloseButtonText));
@@ -649,6 +643,9 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
         switch (DefaultButton)
         {
             case ContentDialogButton.Primary:
+                if (_primaryButton == null)
+                    throw new InvalidOperationException("Attempted to setup ContentDialog but the template has not been applied yet.");
+                
                 if (!_primaryButton.IsVisible)
                 {
 #if DEBUG
@@ -659,8 +656,8 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
                 }
 
                 _primaryButton.Classes.Add(SharedPseudoclasses.s_cAccent);
-                _secondaryButton.Classes.Remove(SharedPseudoclasses.s_cAccent);
-                _closeButton.Classes.Remove(SharedPseudoclasses.s_cAccent);
+                _secondaryButton?.Classes.Remove(SharedPseudoclasses.s_cAccent);
+                _closeButton?.Classes.Remove(SharedPseudoclasses.s_cAccent);
 
                 _primaryButton.Focus();
 #if DEBUG
@@ -671,6 +668,9 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
                 break;
 
             case ContentDialogButton.Secondary:
+                if (_secondaryButton == null)
+                    throw new InvalidOperationException("Attempted to setup ContentDialog but the template has not been applied yet.");
+                
                 if (!_secondaryButton.IsVisible)
                 {
 #if DEBUG
@@ -681,8 +681,8 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
                 }
 
                 _secondaryButton.Classes.Add(SharedPseudoclasses.s_cAccent);
-                _primaryButton.Classes.Remove(SharedPseudoclasses.s_cAccent);
-                _closeButton.Classes.Remove(SharedPseudoclasses.s_cAccent);
+                _primaryButton?.Classes.Remove(SharedPseudoclasses.s_cAccent);
+                _closeButton?.Classes.Remove(SharedPseudoclasses.s_cAccent);
 
                 _secondaryButton.Focus();
 #if DEBUG
@@ -692,6 +692,9 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
                 break;
 
             case ContentDialogButton.Close:
+                if (_closeButton== null)
+                    throw new InvalidOperationException("Attempted to setup ContentDialog but the template has not been applied yet.");
+                
                 if (!_closeButton.IsVisible)
                 {
 #if DEBUG
@@ -702,8 +705,8 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
                 }
 
                 _closeButton.Classes.Add(SharedPseudoclasses.s_cAccent);
-                _primaryButton.Classes.Remove(SharedPseudoclasses.s_cAccent);
-                _secondaryButton.Classes.Remove(SharedPseudoclasses.s_cAccent);
+                _primaryButton?.Classes.Remove(SharedPseudoclasses.s_cAccent);
+                _secondaryButton?.Classes.Remove(SharedPseudoclasses.s_cAccent);
 
                 _closeButton.Focus();
 #if DEBUG
@@ -713,16 +716,16 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
                 break;
 
             default:
-                _closeButton.Classes.Remove(SharedPseudoclasses.s_cAccent);
-                _primaryButton.Classes.Remove(SharedPseudoclasses.s_cAccent);
-                _secondaryButton.Classes.Remove(SharedPseudoclasses.s_cAccent);
+                _closeButton?.Classes.Remove(SharedPseudoclasses.s_cAccent);
+                _primaryButton?.Classes.Remove(SharedPseudoclasses.s_cAccent);
+                _secondaryButton?.Classes.Remove(SharedPseudoclasses.s_cAccent);
 
                 // If no default button is set, try to find a suitable first focus item. If none exist, focus the
                 // ContentDialog itself to pull focus away from the main visual tree so weird things don't happen
                 // The latter shouldn't happen in 99% of cases as either something in the user content will be able
                 // to take focus OR there should always be at least one button which can take focus
-                var manager = TopLevel.GetTopLevel(this).FocusManager;
-                var next = manager.FindNextElement(NavigationDirection.Next, new FindNextElementOptions { SearchRoot = this });
+                var manager = TopLevel.GetTopLevel(this)?.FocusManager;
+                var next = manager?.FindNextElement(NavigationDirection.Next, new FindNextElementOptions { SearchRoot = this });
                 next?.Focus();
 
 #if DEBUG
@@ -801,7 +804,7 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
         _tcs.TrySetResult(_result);
     }
 
-    private void OnButtonClick(object sender, RoutedEventArgs e)
+    private void OnButtonClick(object? sender, RoutedEventArgs? e)
     {
         // v2 - No longer disabling the dialog during a deferral so we need to make sure that if
         //      multiple requests to close come in, we don't handle them
@@ -867,11 +870,11 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
 
     private void OnFullSizedDesiredChanged(AvaloniaPropertyChangedEventArgs e)
     {
-        bool newVal = (bool)e.NewValue;
+        bool newVal = e.GetNewValue<bool>();
         PseudoClasses.Set(PC_FULL_SIZE, newVal);
     }
 
-    public (bool handled, IInputElement next) GetNext(IInputElement element, NavigationDirection direction)
+    public (bool handled, IInputElement? next) GetNext(IInputElement element, NavigationDirection direction)
     {
         var children = this.GetVisualDescendants().OfType<IInputElement>()
             .Where(x => KeyboardNavigation.GetIsTabStop((InputElement)x) && x.Focusable &&
@@ -880,7 +883,7 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
         if (children.Count == 0)
             return (false, null);
 
-        var current = TopLevel.GetTopLevel(this).FocusManager.GetFocusedElement();
+        var current = TopLevel.GetTopLevel(this)?.FocusManager.GetFocusedElement();
         if (current == null)
             return (false, null);
 
@@ -922,7 +925,7 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
         return (false, null);
     }
 
-    private void DialogLoaded(object sender, RoutedEventArgs args)
+    private void DialogLoaded(object? sender, RoutedEventArgs args)
     {
         Loaded -= DialogLoaded;
 
@@ -938,15 +941,15 @@ public partial class ContentDialog : ContentControl, ICustomKeyboardNavigation
 
     // Store the last element focused before showing the dialog, so we can
     // restore it when it closes
-    private IInputElement _lastFocus;
-    private Control _originalHost;
+    private IInputElement? _lastFocus;
+    private Control? _originalHost;
     private int _originalHostIndex;
-    private DialogHost _host;
+    private DialogHost? _host;
     private ContentDialogResult _result;
     private TaskCompletionSource<ContentDialogResult> _tcs;
     private Button? _primaryButton;
     private Button? _secondaryButton;
     private Button? _closeButton;
     private bool _hasDeferralActive;
-    private Visual _hotkeyDownVisual;
+    private Visual? _hotkeyDownVisual;
 }
