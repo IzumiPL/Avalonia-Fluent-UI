@@ -5,14 +5,13 @@ using Avalonia.Automation;
 using Avalonia.Automation.Peers;
 using Avalonia.Controls;
 using Avalonia.Controls.Automation.Peers;
-using Avalonia.Controls.Documents;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
-using Avalonia.Media.TextFormatting;
 using Avalonia.Metadata;
 using Avalonia.Platform;
 
 namespace AvaloniaFluentUI.Controls;
+
 
 public class ImageLabel : Control
 {
@@ -48,9 +47,6 @@ public class ImageLabel : Control
     public static readonly StyledProperty<BitmapInterpolationMode> InterpolationModeProperty =
         AvaloniaProperty.Register<ImageLabel, BitmapInterpolationMode>(nameof(InterpolationMode), BitmapInterpolationMode.HighQuality);
 
-    public static readonly StyledProperty<string?> DelegateTextProperty =
-        AvaloniaProperty.Register<ImageLabel, string?>(nameof(DelegateText));
-
     public static readonly StyledProperty<int> DecodePixelWidthProperty =
         AvaloniaProperty.Register<ImageLabel, int>(nameof(DecodePixelWidth));
 
@@ -61,12 +57,6 @@ public class ImageLabel : Control
     {
         get => GetValue(InterpolationModeProperty);
         set => SetValue(InterpolationModeProperty, value);
-    }
-
-    public string? DelegateText
-    {
-        get => GetValue(DelegateTextProperty);
-        set => SetValue(DelegateTextProperty, value);
     }
 
     public int DecodePixelHeight
@@ -131,17 +121,19 @@ public class ImageLabel : Control
     }
     
     private IImage? Image { get; set; }
+    private IImageLabelDelegate? Delegate { get; set; }
     
     static ImageLabel()
     {
-        AffectsRender<ImageLabel>(StretchProperty, StretchDirectionProperty, BlendModeProperty, CornerRadiusProperty, InterpolationModeProperty, DelegateTextProperty);
+        AffectsRender<ImageLabel>(StretchProperty, StretchDirectionProperty, BlendModeProperty, CornerRadiusProperty, InterpolationModeProperty);
         AffectsMeasure<ImageLabel>(SourceProperty, StretchProperty, StretchDirectionProperty);
         AutomationProperties.ControlTypeOverrideProperty.OverrideDefaultValue<ImageLabel>(AutomationControlType.Image);
     }
     
-    public ImageLabel()
+    public void SetImageLabelDelegate(IImageLabelDelegate? imageDelegate)
     {
-        TextElement.SetFontSize(this, 24);
+        Delegate = imageDelegate;
+        InvalidateVisual();
     }
 
     private IImage? LoadImage()
@@ -230,33 +222,10 @@ public class ImageLabel : Control
             }
         }
 
-        if (!String.IsNullOrWhiteSpace(DelegateText))
+        if (Delegate != null)
         {
-            // Delegate
-           DrawDelegate(context); 
+            Delegate.Render(context, Bounds, CornerRadius);
         }
-    }
-
-    private void DrawDelegate(DrawingContext context)
-    {
-        // Delegate
-        var rect = new Rect(0, 0, Bounds.Width / 2, Bounds.Height);
-        var destRect = new RoundedRect(rect, CornerRadius.TopLeft, 0, 0, CornerRadius.BottomLeft); 
-        context.DrawRectangle(new SolidColorBrush(Color.FromArgb(80, 255, 255, 255)), null, destRect);
-        
-        var layout = new TextLayout(
-            text: DelegateText,
-            typeface: Typeface.Default,
-            fontSize: TextElement.GetFontSize(this),
-            foreground: Brushes.Black,  
-            textWrapping: TextWrapping.WrapWithOverflow,
-            textTrimming: TextTrimming.CharacterEllipsis,
-            textAlignment: TextAlignment.Center,
-            maxWidth: rect.Width - 24);
-        
-        // 居中绘制 
-        var point = new Point(0, (Bounds.Height - layout.Height) / 2);
-        layout.Draw(context, point);
     }
 
     /// <summary>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -46,34 +45,49 @@ public class FlipView : TemplatedControl
 
     public static readonly StyledProperty<int> DecodeToWidthProperty =
         ImageLabel.DecodePixelWidthProperty.AddOwner<FlipView>();
-    
+
     public static readonly StyledProperty<double> IntervalProperty =
         AvaloniaProperty.Register<FlipView, double>(nameof(Interval), 1500, validate: value => value >= 600);
 
     public static readonly StyledProperty<bool> IsAutoPlayProperty =
         AvaloniaProperty.Register<FlipView, bool>(nameof(IsAutoPlay));
-    
+
     public static readonly StyledProperty<int> ItemCountProperty =
         AvaloniaProperty.Register<FlipView, int>(nameof(ItemCount));
 
     public static readonly StyledProperty<FlipOrientation> OrientationProperty =
-        AvaloniaProperty.Register<FlipView, FlipOrientation>(nameof(Orientation), FlipOrientation.Horizontal);
+        AvaloniaProperty.Register<FlipView, FlipOrientation>(nameof(Orientation));
 
     public static readonly StyledProperty<int> MaxVisiblePipsProperty =
         AvaloniaProperty.Register<FlipView, int>(nameof(MaxVisiblePips), 8);
 
+    public static readonly StyledProperty<bool> PipsPagerIsVisibleProperty =
+        AvaloniaProperty.Register<FlipView, bool>(nameof(PipsPagerIsVisible), true);
+
+    public bool PipsPagerIsVisible
+    {
+        get => GetValue(PipsPagerIsVisibleProperty);
+        set => SetValue(PipsPagerIsVisibleProperty, value);
+    }
+
+    /// <summary>
+    /// 底部圆点最大显示数量,默认最大显示8个
+    /// </summary>
     public int MaxVisiblePips
     {
         get => GetValue(MaxVisiblePipsProperty);
         set => SetValue(MaxVisiblePipsProperty, value);
     }
 
+    /// <summary>
+    /// 轮播方向
+    /// </summary>
     public FlipOrientation Orientation
     {
         get => GetValue(OrientationProperty);
         set => SetValue(OrientationProperty, value);
     }
-    
+
     /// <summary>
     /// 最小间隔 400
     /// </summary>
@@ -96,7 +110,7 @@ public class FlipView : TemplatedControl
     }
 
     /// <summary>
-    /// 默认缩放到高度 1080, 小于0不缩放
+    /// 默认缩放到高度 800, 小于0不缩放
     /// </summary>
     public int DecodeToHeight
     {
@@ -109,13 +123,16 @@ public class FlipView : TemplatedControl
         get => GetValue(StretchProperty);
         set => SetValue(StretchProperty, value);
     }
-    
+
     public BitmapInterpolationMode InterpolationMode
     {
         get => GetValue(InterpolationModeProperty);
         set => SetValue(InterpolationModeProperty, value);
     }
 
+    /// <summary>
+    /// 图片路径
+    /// </summary>
     public IEnumerable<string>? ImageSource
     {
         get => GetValue(ImageSourceProperty);
@@ -137,7 +154,7 @@ public class FlipView : TemplatedControl
     static FlipView()
     {
         StretchProperty.OverrideDefaultValue<FlipView>(Stretch.UniformToFill);
-        DecodeToHeightProperty.OverrideDefaultValue<FlipView>(328);
+        DecodeToHeightProperty.OverrideDefaultValue<FlipView>(800);
     }
     
     private bool _isRunning;
@@ -164,6 +181,30 @@ public class FlipView : TemplatedControl
     public TimeSpan BackwardDuration { get; set; } = TimeSpan.FromMilliseconds(360);
     public Easing SlideInEasing { get; set; } = new CubicEaseOut();
     public Easing SlideOutEasing { get; set; } = new LinearEasing();
+    
+    private IList<IImageLabelDelegate?>? Delegates { get; set; }
+
+    private bool HasDelegate() => Delegates != null && Delegates.Count == ItemCount;
+    
+    /// <summary>
+    /// 设置当前图片的绘制代理
+    /// </summary>
+    /// <param name="delegates"></param>
+    public void SetImageDelegates(IList<IImageLabelDelegate?>? delegates)
+    {
+        Delegates = delegates;
+        if (Delegates == null)
+        {
+            // 代理不为为Null则清空当前代理状态
+            _currentImage?.SetImageLabelDelegate(null);
+            _nextImage?.SetImageLabelDelegate(null);
+        }
+        else if (HasDelegate())
+        {
+            // 不为空就给当前图片设置代理
+            _currentImage?.SetImageLabelDelegate(Delegates[SelectedIndex]);
+        }
+    }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
@@ -200,6 +241,7 @@ public class FlipView : TemplatedControl
             return;
         }
 
+        // 自动播放到最后一个则返回到第一个
         if (SelectedIndex >= ItemCount -1)
         {
             SelectedIndex = 0;
@@ -219,6 +261,10 @@ public class FlipView : TemplatedControl
         HideButtons();
     }
 
+    /// <summary>
+    /// 只有附加到了视觉树上才启用自动播放
+    /// </summary>
+    /// <param name="value"></param>
     private void HandleAutoPlayChanged(bool value)
     {
         if (value && this.IsAttachedToVisualTree() && IsEnabled)
@@ -240,21 +286,27 @@ public class FlipView : TemplatedControl
         if (IsAutoPlay) { Start(); }
     }
 
+    /// <summary>
+    /// 更新上一张,下一张按钮显示状态
+    /// </summary>
     private void UpdateButtonVisibility()
-    {
-        if (_previousButton != null) { _previousButton.IsVisible = ItemCount > 0 && SelectedIndex > 0; }
-        if (_nextButton != null) { _nextButton.IsVisible = ItemCount > 0 && SelectedIndex < ItemCount - 1; }
+    { 
+        _previousButton?.IsVisible = ItemCount > 0 && SelectedIndex > 0;
+        _nextButton?.IsVisible = ItemCount > 0 && SelectedIndex < ItemCount - 1;
     }
 
     private void HideButtons()
     {
-        if (_previousButton != null) { _previousButton.IsVisible = false; }
-        if (_nextButton != null) { _nextButton.IsVisible = false; }
+        _previousButton?.IsVisible = false; 
+        _nextButton?.IsVisible = false;
     }
 
+    /// <summary>
+    /// 只有在图片数量大于 1, 且附加到视觉书上才会自动播放
+    /// </summary>
     public void Start()
     {
-        if (ItemCount < -1 || !this.IsAttachedToVisualTree()) { return; }
+        if (ItemCount < 1 || !this.IsAttachedToVisualTree()) { return; }
 
         IsAutoPlay = true;
         _autoPlayTimer.Start();
@@ -292,6 +344,7 @@ public class FlipView : TemplatedControl
         _disposeCts = new CancellationTokenSource();
         var token = _disposeCts.Token;
         
+        // 延迟释放,防止快速切换页面导致崩溃
         Dispatcher.UIThread.Post(() =>
         {
             if (token.IsCancellationRequested) { return; }
@@ -305,10 +358,7 @@ public class FlipView : TemplatedControl
     { 
         _currentImage?.Source = null; 
         _nextImage?.Source = null; 
-        // SelectedIndex = -1;
-#if DEBUG
-        Debug.WriteLine("Dispose Image");
-#endif
+
         foreach (var bitmap in _items) 
         { 
             bitmap.Dispose();
@@ -371,10 +421,6 @@ public class FlipView : TemplatedControl
             return;
         }
 
-#if DEBUG
-        Debug.WriteLine("Reload Image");
-#endif
-
         ItemCount = imagePaths.Count;
         if (SelectedIndex >= ItemCount || SelectedIndex < 0)
         {
@@ -385,25 +431,27 @@ public class FlipView : TemplatedControl
         imagePaths.RemoveAt(SelectedIndex);
         var cb = LoadBitMap(path, DecodeToHeight, DecodeToWidth);
 
+        IImageLabelDelegate? dg = null;
+        if (HasDelegate())
+        {
+            dg = Delegates![SelectedIndex];
+        }
+        
         Dispatcher.UIThread.Post(() =>
         {
             _currentImage?.Source = cb;
-            Debug.WriteLine(_currentImage);
+            if (dg != null)
+            {
+                _currentImage?.SetImageLabelDelegate(dg);
+            }
         }, DispatcherPriority.Render);
         
         await foreach (var bitmap in LoadImagesAsync(imagePaths))
         {
             _items.Add(bitmap);
-#if DEBUG
-            Debug.WriteLine("Load Image: " + bitmap);
-#endif
         }
+        
         _items.Insert(SelectedIndex, cb);
-
-#if DEBUG
-        Debug.WriteLine("Current Index: " + SelectedIndex);
-        Debug.WriteLine("Is Auto Play: " + IsAutoPlay);
-#endif
         
         ResetTransform();
         if (IsAutoPlay) Start();
@@ -417,7 +465,7 @@ public class FlipView : TemplatedControl
             int dw = DecodeToWidth;
             Bitmap? bitmap = null;
             
-            await Task.Run(() => { bitmap = LoadBitMap(path, dh, dw); });
+            await Task.Run(() => { bitmap = LoadBitMap(path, dw, dh); });
 
             if (bitmap != null)
             {
@@ -426,41 +474,36 @@ public class FlipView : TemplatedControl
         }
     }
 
-    private Bitmap LoadBitMap(string path, int dh = 0, int dw = 0)
+    private Bitmap? LoadBitMap(string path, int dh = 0, int dw = 0)
     {
         try
         {
             if (path.StartsWith("avares://"))
             {
                 using var stream = AssetLoader.Open(new Uri(path));
-                if (dh > 0)
-                {
-                    return Bitmap.DecodeToHeight(stream, dh);
-                }
-                if (dw > 0)
-                {
-                    return Bitmap.DecodeToWidth(stream, dw); 
-                }
-                return new Bitmap(stream);
+                return DecodeBitmap(stream, dw, dh);
             }
             else
             {
                 using var stream = new FileStream(path, FileMode.Open, FileAccess.Read);
-                if (dh > 0)
-                {
-                    return Bitmap.DecodeToHeight(stream, dh);
-                }
-                if (dw > 0)
-                {
-                    return Bitmap.DecodeToWidth(stream, dw);
-                }
-                return new Bitmap(stream);
+                return DecodeBitmap(stream, dw, dh);
             }
         }
         catch (FileNotFoundException e)
         {
             return null;
         }
+    }
+    
+    private Bitmap DecodeBitmap(Stream stream, int dw, int dh)
+    {
+        if (dw > 0)
+            return Bitmap.DecodeToWidth(stream, dw);
+
+        if (dh > 0)
+            return Bitmap.DecodeToHeight(stream, dh);
+
+        return new Bitmap(stream);
     }
 
     protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
@@ -496,6 +539,16 @@ public class FlipView : TemplatedControl
         }
 
         if (_currentImage == null || _nextImage == null) { return; }
+
+        IImageLabelDelegate? nd = null;
+        if (HasDelegate())
+        {
+            nd = Delegates![targetIndex];
+            if (nd != null)
+            {
+                _nextImage.SetImageLabelDelegate(nd);
+            }
+        }
 
         _cancelAnimationCts?.Cancel();
         _cancelAnimationCts = new CancellationTokenSource();
@@ -552,6 +605,12 @@ public class FlipView : TemplatedControl
             await Task.WhenAll(
                 currentAnimation.RunAsync(_currentImage, token),
                 nextAnimation.RunAsync(_nextImage, token));
+
+            if (HasDelegate())
+            {
+                _nextImage.SetImageLabelDelegate(null);
+                _currentImage.SetImageLabelDelegate(nd);
+            }
         }
         catch (OperationCanceledException)
         {
@@ -572,6 +631,9 @@ public class FlipView : TemplatedControl
         }
     }
 
+    /// <summary>
+    /// 重置坐标位置
+    /// </summary>
     private void ResetTransform()
     {
         _currentTransform.X = 0;
