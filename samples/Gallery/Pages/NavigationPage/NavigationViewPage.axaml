@@ -111,6 +111,7 @@
               Grid.Row="1"
               Grid.Column="1"
               HorizontalAlignment="Stretch"
+              IsEnabled="False"
               ItemsSource="{Binding DisplayModes}"
               SelectedItem="{Binding CurrentDisplayMode}"/>
 

@@ -27,7 +27,10 @@ public partial class MediaView : ViewBase
                 {
                     Title = "选择图片",
                     AllowMultiple = false,
-                    FileTypeFilter = [new FilePickerFileType("选择图片文件") { Patterns = ["*.*", "*.png", "*.jpg", "*.webp"]}]
+                    FileTypeFilter = [
+                    new FilePickerFileType("图片文件") { Patterns = ["*.png", "*.jpg", "*.webp"] },
+                    new FilePickerFileType("所有文件") { Patterns = ["*.*"] }
+                    ]
                 });
 
             if (values.Count > 0)

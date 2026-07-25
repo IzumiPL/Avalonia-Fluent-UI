@@ -21,7 +21,7 @@
       <!--  0  -->
       <Grid
         Margin="0,0,8,0"
-        ColumnDefinitions="Auto, *"
+        ColumnDefinitions="*, Auto"
         ColumnSpacing="24">
         <fui:ImageLabel
           Name="ImageLabel"
@@ -32,11 +32,13 @@
           CornerRadius="{Binding ImageLabelCornerRadiusFormat}"
           DecodePixelHeight="{Binding ImageLabelDecodeHeight}"
           DecodePixelWidth="{Binding ImageLabelDecodeWidth}"
-          DelegateText="{Binding ImageLabelDelegate}"
           InterpolationMode="{Binding ImageLabelInterpolationMode}"
           Source="avares://Gallery/Assets/Images/bg.jpg"
           Stretch="{Binding ImageStretch}"/>
-        <ui:Card Grid.Column="1">
+        <ui:Card
+          Grid.Column="1"
+          MaxWidth="520"
+          HorizontalAlignment="Right">
           <Grid
             ColumnDefinitions="Auto, *"
             ColumnSpacing="8"
@@ -160,6 +162,7 @@
               MaxHeight="1600"
               HorizontalAlignment="Stretch"
               Classes="Clear"
+              IsEnabled="False"
               Text="{Binding ImageLabelDelegate}"/>
           </Grid>
         </ui:Card>

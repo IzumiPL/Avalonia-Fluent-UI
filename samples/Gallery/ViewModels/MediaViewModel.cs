@@ -71,7 +71,7 @@ public partial class MediaViewModel : ViewModelBase
     private double _imageLabelDecodeWidth = 0;
 
     [ObservableProperty]
-    private double _imageLabelDecodeHeight = 1024;
+    private double _imageLabelDecodeHeight = 0;
 
     [ObservableProperty]
     private string? _imageLabelDelegate = null;

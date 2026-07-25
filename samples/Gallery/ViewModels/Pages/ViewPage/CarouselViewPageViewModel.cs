@@ -82,6 +82,12 @@ public partial class CarouselViewPageViewModel : ViewModelBase
 
     public int[] FlipViewMaxVisiblePipsItems => [1, 2, 3, 4, 5, 6];
 
+    [ObservableProperty]
+    private int _flipViewSelectedIndex = 0;
+
+    [ObservableProperty]
+    private bool _flipViewPipsPagerIsVisible = true;
+
     private void OnCarouselAutoPlay(object? sender, EventArgs e)
     {
         if (CarouselCurrentIndex == CarouselAllCount - 1)
