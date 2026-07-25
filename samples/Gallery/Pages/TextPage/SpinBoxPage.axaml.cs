@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Input;
 using AvaloniaFluentUI.Controls;
@@ -8,6 +9,8 @@ namespace Gallery.Pages;
 
 public partial class SpinBoxPage : ViewBase
 {
+    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Pages/TextPage/SpinBoxPage.axaml"); 
+    
     private int value = 1;
     
     public SpinBoxPage() : base("NumberBox")

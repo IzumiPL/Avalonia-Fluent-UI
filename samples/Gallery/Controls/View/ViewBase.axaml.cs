@@ -19,6 +19,8 @@ public class ViewBase : ContentControl
 {
     protected  Dictionary<string, CodeCard> CodeCards { get; set; }
     private string Page { get; }
+
+    public virtual Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/tree/master/samples/Gallery");
     
     public ViewBase(string page)
     {
@@ -65,12 +67,15 @@ public class ViewBase : ContentControl
 
     private void OnDocumentButtonClicked(object? sender, RoutedEventArgs e)
     {
-        UrlHelpers.OpenUrl("https://docs.mikuas.top/");
+        UrlHelpers.OpenUrl(new Uri("https://docs.mikuas.top/"), TopLevel.GetTopLevel(this));
     }
 
     private void OnSourceCodeButtonClicked(object? sender, RoutedEventArgs e)
     {
-        UrlHelpers.OpenUrl("https://github.com/HiyorinI/AvaloniaFluentUI.git");
+        if (Uri != null)
+        {
+            UrlHelpers.OpenUrl(Uri, TopLevel.GetTopLevel(this));
+        }
     }
 
     private void OnToggleThemeClicked(object? sender, RoutedEventArgs e) => AvaloniaFluentTheme.Instance.ToggleTheme();

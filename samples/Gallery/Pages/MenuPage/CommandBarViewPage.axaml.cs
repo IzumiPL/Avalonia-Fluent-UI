@@ -17,6 +17,8 @@ namespace Gallery.Pages;
 
 public partial class CommandBarViewPage : ViewBase
 {
+    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Pages/MenuPage/CommandBarViewPage.axaml"); 
+    
     private Bitmap? _bitmap = null;
     
     public CommandBarViewPage() : base("CommandBar")

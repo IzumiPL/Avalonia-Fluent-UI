@@ -33,6 +33,8 @@
       <!-- <FontFamily x:Key="DefaultFontFamily">avares://Gallery/Assets/Fonts/JetBrainsMonoNerdFont-Regular.ttf#JetBrainsMono NF Regular</FontFamily> -->
       <!-- <FontFamily x:Key="DefaultFontFamily">avares://Gallery/Assets/Fonts/MiSans-Regular.otf#MiSans</FontFamily> -->
       <!-- <FontFamily x:Key="DefaultFontFamily">avares://Gallery/Assets/Fonts/HarmonyOS_Sans_SC_Regular.ttf#HarmonyOS Sans SC</FontFamily> -->
+      <!-- <FontFamily x:Key="DefaultFontFamily">avares://Gallery/Assets/Fonts/ZenMaruGothic-Medium.ttf#Zen Maru Gothic Medium</FontFamily> -->
+      <!-- <FontFamily x:Key="DefaultFontFamily">avares://Gallery/Assets/Fonts/Microsoft YaHei.ttf#微软雅黑</FontFamily> -->
       <!-- <FontFamily x:Key="DefaultFontFamily">avares://Gallery/Assets/Fonts/#</FontFamily> -->
       <!-- <FontFamily x:Key="DefaultFontFamily">avares://Gallery/Assets/Fonts/#</FontFamily> -->
       <ResourceDictionary.MergedDictionaries>

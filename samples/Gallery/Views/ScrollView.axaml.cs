@@ -17,6 +17,8 @@ public partial class ScrollView : ViewBase
         InitializeComponent();
     }
 
+    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Views/ScrollView.axaml");
+
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnAttachedToVisualTree(e);

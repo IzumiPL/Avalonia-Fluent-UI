@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -44,6 +45,8 @@ public class FlipViewImageDelegate(string text, string? content = null, IBrush? 
 
 public partial class CarouselViewPage : ViewBase
 {
+    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Pages/ViewPage/CarouselViewPage.axaml"); 
+    
     private IImageLabelDelegate[] _flipViewImageDelegates;
     
     public CarouselViewPage() : base("CarouselView")

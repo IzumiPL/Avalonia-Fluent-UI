@@ -10,6 +10,8 @@ namespace Gallery.Pages;
 
 public partial class FlyoutPage : ViewBase
 {
+    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Pages/DialogAndPopupPage/FlyoutPage.axaml"); 
+
     public FlyoutPage() : base("Flyout")
     {
         InitializeComponent();

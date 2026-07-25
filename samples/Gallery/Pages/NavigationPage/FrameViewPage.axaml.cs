@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using System;
+using Avalonia.Controls;
 using AvaloniaFluentUI.Media.Animation;
 using Gallery.Controls;
 
@@ -6,6 +7,8 @@ namespace Gallery.Pages;
 
 public partial class FrameViewPage : ViewBase
 {
+    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Pages/NavigationPage/FrameViewPage.axaml"); 
+    
     public FrameViewPage()
     {
         InitializeComponent();

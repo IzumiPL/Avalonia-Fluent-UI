@@ -61,7 +61,7 @@ public class ConfigService
                 IsCustomAccentColor = false,
                 IsWindowEffectEnabled = true,
                 IsEnabledBackgroundImage = false,
-                WindowEffect = "Mica",
+                WindowEffect = "Null",
                 Language = "zh-CN"
             };
 

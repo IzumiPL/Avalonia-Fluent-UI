@@ -13,9 +13,9 @@ public partial class MediaView : ViewBase
     public MediaView()
     {
         InitializeComponent();
-        
-        
     }
+
+    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Views/MainView.axaml");
 
     private async void OnSelectedImage(object? sender, RoutedEventArgs e)
     {

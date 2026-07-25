@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Avalonia.Input;
 using AvaloniaFluentUI.Controls;
 using AvaloniaFluentUI.Locale;
@@ -8,6 +9,8 @@ namespace Gallery.Pages;
 
 public partial class TextBoxPage : ViewBase
 {
+    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Pages/TextPage/TextBoxPage.axaml"); 
+    
     public TextBoxPage() :  base("TextBox")
     {
         InitializeComponent();
