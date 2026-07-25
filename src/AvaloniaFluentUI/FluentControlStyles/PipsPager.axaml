@@ -91,7 +91,7 @@
     </Style>
 
     <Style Selector="^:disabled">
-      <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+      <!-- <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/> -->
       <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
     </Style>
   </ControlTheme>

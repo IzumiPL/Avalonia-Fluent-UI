@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using AvaloniaFluentUI.Locale;
 
 namespace AvaloniaFluentUI.Controls;
@@ -55,21 +55,29 @@ public class ShortcutKeyPicker : PickerButton
             ContentHeight = 360,
         };
 
-        dialog.KeyDown += OnShortcutKeyDown;
+        dialog.AddHandler(KeyDownEvent, OnShortcutKeyDown, RoutingStrategies.Tunnel, true);
+        dialog.AddHandler(KeyUpEvent, OnShortcutKeyUp, RoutingStrategies.Tunnel, true);
         dialog.SecondaryButtonClick += OnResetShortcutKey;
         dialog.PrimaryButtonClick += OnAcceptShortcutKey;
         
         _shortcutKeyPanel.Keys = Keys;
-        await dialog.ShowAsync();
 
-        if (_shortcutKeyPanel.Parent is ContentControl cc)
+        try
         {
-            cc.Content = null;
+            await dialog.ShowAsync();
         }
-        
-        dialog.KeyDown -= OnShortcutKeyDown;
-        dialog.SecondaryButtonClick -= OnResetShortcutKey;
-        dialog.PrimaryButtonClick -= OnAcceptShortcutKey;
+        finally
+        {
+            if (_shortcutKeyPanel.Parent is ContentControl cc)
+            {
+                cc.Content = null;
+            }
+
+            dialog.RemoveHandler(KeyDownEvent, OnShortcutKeyDown);
+            dialog.RemoveHandler(KeyUpEvent, OnShortcutKeyUp);
+            dialog.SecondaryButtonClick -= OnResetShortcutKey;
+            dialog.PrimaryButtonClick -= OnAcceptShortcutKey;
+        }
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -106,8 +114,10 @@ public class ShortcutKeyPicker : PickerButton
         _inputKeyGesture = new KeyGesture(e.Key, e.KeyModifiers); 
         _shortcutKeyPanel.Keys = FormatGesture(_inputKeyGesture);
         
-        e.Handled = true;
+        e.Handled = e.Key != Key.Escape;
     }
+
+    private void OnShortcutKeyUp(object? sender, KeyEventArgs e) { e.Handled = e.Key != Key.Escape; }
 
     private static bool IsModifierKey(Key key)
     {

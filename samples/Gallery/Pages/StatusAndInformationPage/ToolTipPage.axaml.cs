@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AvaloniaFluentUI.Controls;
 using Gallery.Controls;
 
@@ -6,6 +7,8 @@ namespace Gallery.Pages;
 
 public partial class ToolTipPage : ViewBase 
 {
+    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Pages/StatusAndInformationPage/ToolTipPage.axaml"); 
+    
     public ToolTipPage() : base("ToolTip")
     {
         InitializeComponent();

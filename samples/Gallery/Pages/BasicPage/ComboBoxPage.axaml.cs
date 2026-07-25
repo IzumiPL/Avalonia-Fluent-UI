@@ -7,8 +7,10 @@ using Gallery.Controls;
 
 namespace Gallery.Pages;
 
-public partial class ComboBoxPage : ViewBase 
+public partial class ComboBoxPage : ViewBase
 {
+    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Pages/BasicPage/ComboBoxPage.axaml"); 
+
     public ComboBoxPage() : base("ComboBox")
     {
         InitializeComponent();

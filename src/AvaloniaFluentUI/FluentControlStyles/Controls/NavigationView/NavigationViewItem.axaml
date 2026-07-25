@@ -48,6 +48,7 @@
             Content="{TemplateBinding Content}"
             ContentTemplate="{TemplateBinding ContentTemplate}"
             Foreground="{TemplateBinding Foreground}"
+            IconSize="{TemplateBinding IconSize}"
             IconSource="{TemplateBinding IconSource}"
             InfoBadge="{TemplateBinding InfoBadge}"
             TemplatedControl.IsTemplateFocusTarget="True"/>
@@ -84,6 +85,7 @@
     </Style>
 
     <Style Selector="^.MSNavigationViewItem">
+      <Setter Property="IconSize" Value="22"/>
       <Style Selector="^ /template/ uip|NavigationViewItemPresenter">
         <Setter Property="Theme" Value="{StaticResource MSNavigationViewItemPresenterStyle}"/>
       </Style>

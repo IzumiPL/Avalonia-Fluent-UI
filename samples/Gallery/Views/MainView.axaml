@@ -206,6 +206,10 @@
           </fui:NavigationViewItem.MenuItems>
         </fui:NavigationViewItem>
         <fui:NavigationViewItem
+          Content="{Binding Media}"
+          IconSource="M3.429 22.857q-0.696 0-1.321-0.268t-1.098-0.741-0.741-1.098-0.268-1.321v-16q0-0.696 0.268-1.321t0.741-1.098 1.098-0.741 1.321-0.268h16q0.696 0 1.321 0.268t1.098 0.741 0.741 1.098 0.268 1.321v1.339l-2.286 0.768v-2.107q0-0.464-0.339-0.804t-0.803-0.339h-16q-0.464 0-0.804 0.339t-0.339 0.804v16q0 0.464 0.339 0.803t0.804 0.339h7.768q0.232 0 0.232 0.232 0 0.161-0.143 0.214-0.804 0.357-1.446 0.759t-1.232 1.080h-5.179zM6.857 6.857h-2.286v-2.286h2.286v2.286zM18.286 6.857h-2.286v-2.286h2.286v2.286zM9.143 27.429v-0.089q0-0.893 0.366-1.705t0.982-1.429 1.429-0.982 1.705-0.366q0.643 0 1.232 0.143t1.143 0.464v-12.768q0-0.571 0.33-1.009t0.848-0.616l12.571-4.196q0.268-0.089 0.536-0.089 0.714 0 1.214 0.5t0.5 1.214v18.732q0 0.929-0.375 1.741t-1 1.42-1.455 0.964-1.741 0.357q-0.946 0-1.777-0.366t-1.447-0.982-0.982-1.446-0.366-1.777q0-0.911 0.357-1.741t0.964-1.455 1.42-1 1.741-0.375q0.643 0 1.232 0.143t1.143 0.464v-8.161l-11.428 3.804v10.696q0 0.929-0.375 1.741t-1 1.42-1.455 0.964-1.741 0.357q-0.946 0-1.777-0.366t-1.446-0.982-0.982-1.446-0.366-1.777zM18.286 11.107v3.304l11.428-3.804v-3.304l-11.428 3.804zM6.857 13.714h-2.286v-4.571h2.286v4.571zM6.857 18.286h-2.286v-2.286h2.286v2.286zM29.714 25.143q0-0.464-0.179-0.884t-0.491-0.732-0.732-0.491-0.884-0.178q-0.482 0-0.893 0.178t-0.723 0.491-0.491 0.723-0.179 0.893 0.179 0.902 0.482 0.723 0.723 0.482 0.902 0.179 0.893-0.179 0.723-0.491 0.491-0.723 0.179-0.893zM16 27.429q0-0.464-0.179-0.884t-0.491-0.732-0.732-0.491-0.884-0.179q-0.482 0-0.893 0.179t-0.723 0.491-0.491 0.723-0.179 0.893 0.179 0.902 0.482 0.723 0.723 0.482 0.902 0.179 0.893-0.179 0.723-0.491 0.491-0.723 0.179-0.893z"
+          Tag="Media"/>
+        <fui:NavigationViewItem
           Content="{Binding Navigation}"
           IconSource="M1 25h30l0.379 0.074 0.324 0.223 0.223 0.324 0.074 0.379-0.074 0.379-0.223 0.324-0.324 0.223-0.379 0.074h-30l-0.379-0.074-0.324-0.223-0.223-0.324-0.074-0.379 0.074-0.379 0.223-0.324 0.324-0.223 0.379-0.074zM1 15h30l0.379 0.074 0.324 0.223 0.223 0.324 0.074 0.379-0.074 0.379-0.223 0.324-0.324 0.223-0.379 0.074h-30l-0.379-0.074-0.324-0.223-0.223-0.324-0.074-0.379 0.074-0.379 0.223-0.324 0.324-0.223 0.379-0.074zM1 5h30l0.379 0.074 0.324 0.223 0.223 0.324 0.074 0.379-0.074 0.379-0.223 0.324-0.324 0.223-0.379 0.074h-30l-0.379-0.074-0.324-0.223-0.223-0.324-0.074-0.379 0.074-0.379 0.223-0.324 0.324-0.223 0.379-0.074z"
           Tag="Navigation">
@@ -236,6 +240,7 @@
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TreeView]}" Tag="TreeView"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CarouselView]}" Tag="CarouselView"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Card]}" Tag="Card"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SettingCard]}" Tag="SettingCard"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Avatar]}" Tag="AvatarView"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FileDropPicker]}" Tag="FileDropPicker"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[WizardView]}" Tag="WizardView"/>

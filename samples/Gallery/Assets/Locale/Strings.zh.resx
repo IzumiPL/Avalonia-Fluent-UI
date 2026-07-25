@@ -1802,4 +1802,28 @@
   <data name="FT" xml:space="preserve">
     <value>右击文件或文件夹以显示正在运行的进程</value>
   </data>
+  <data name="Media" xml:space="preserve">
+    <value>媒体</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>图片</value>
+  </data>
+  <data name="SelectImage" xml:space="preserve">
+    <value>选择图片</value>
+  </data>
+  <data name="StretchingMethod" xml:space="preserve">
+    <value>拉伸方式</value>
+  </data>
+  <data name="BlendMode" xml:space="preserve">
+    <value>混合模式</value>
+  </data>
+  <data name="InterpolationMode" xml:space="preserve">
+    <value>插值模式</value>
+  </data>
+  <data name="ScaleToSpecifiedWidth" xml:space="preserve">
+    <value>缩放到指定宽度</value>
+  </data>
+  <data name="ZoomToSpecifiedHeight" xml:space="preserve">
+    <value>缩放指定高度</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -13,6 +14,8 @@ namespace Gallery.Pages;
 
 public partial class WizardPage : InfoBarHostViewBase 
 {
+    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Pages/ViewPage/WizardPage.axaml"); 
+    
     private PopupInfoBarManager PopupInfoBarManager => InfoBarHost.GetManager<PopupInfoBarManager>();
     
     public WizardPage()

@@ -1767,7 +1767,7 @@
     <value>Duration (ms)</value>
   </data>
   <data name="SetInfoBarRadius" xml:space="preserve">
-    <value>Set the rounded corner radians</value>
+    <value>Set the radius of the fillet</value>
   </data>
   <data name="BI_TransparentComboBox" xml:space="preserve">
     <value>Transparent Background ComboBox</value>
@@ -1801,5 +1801,29 @@
   </data>
   <data name="FT" xml:space="preserve">
     <value>Right-click a file or folder to display the running process</value>
+  </data>
+  <data name="Media" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="SelectImage" xml:space="preserve">
+    <value>Select Image</value>
+  </data>
+  <data name="StretchingMethod" xml:space="preserve">
+    <value>Stretching Method</value>
+  </data>
+  <data name="BlendMode" xml:space="preserve">
+    <value>Blend Mode</value>
+  </data>
+  <data name="InterpolationMode" xml:space="preserve">
+    <value>Interpolation Mode</value>
+  </data>
+  <data name="ScaleToSpecifiedWidth" xml:space="preserve">
+    <value>Scale To Width</value>
+  </data>
+  <data name="ZoomToSpecifiedHeight" xml:space="preserve">
+    <value>Scale To Height</value>
   </data>
 </root>

@@ -24,6 +24,7 @@ using Avalonia.Controls.Templates;
 using Avalonia.Styling;
 using Avalonia.VisualTree;
 using AvaloniaFluentUI.Core;
+using AvaloniaFluentUI.Icons;
 using AvaloniaFluentUI.Media.Animation;
 using AvaloniaFluentUI.Locale;
 
@@ -1414,8 +1415,6 @@ public partial class NavigationView : HeaderedContentControl
     private bool _tabKeyPrecedesFocusChange;
 
     private bool _initialNonForcedModeUpdate = true;
-
-    private static readonly SymbolIconSource _settingsIconSource = new SymbolIconSource { Symbol = Symbol.Settings };
 
     private const int _backButtonHeight = 40;
     private const int _backButtonWidth = 40;
@@ -5101,7 +5100,7 @@ public partial class NavigationView : HeaderedContentControl
         if (_settingsItem == null)
             return;
 
-        _settingsItem.IconSource = _settingsIconSource;
+        _settingsItem.IconSource = FluentIcon.Setting;
 
         var localizedSettingsName = LocalizationService.Instance.GetString(SR_SettingsButtonName);
 

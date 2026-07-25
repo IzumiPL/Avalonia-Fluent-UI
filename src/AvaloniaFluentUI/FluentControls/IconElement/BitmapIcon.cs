@@ -205,7 +205,7 @@ public partial class BitmapIcon : IconElement
         _bis = null;
     }
 
-    private void OnLinkedBitmapIconSourceChanged(object sender, object e)
+    private void OnLinkedBitmapIconSourceChanged(object? sender, object e)
     {
         Dispose();
         _bitmap = _bis._bitmap;
@@ -213,8 +213,8 @@ public partial class BitmapIcon : IconElement
         InvalidateCachedBitmap();
     }
 
-    private BitmapIconSource _bis;
-    protected SKBitmap _bitmap;
+    private BitmapIconSource? _bis;
+    protected SKBitmap? _bitmap;
     private Size _originalSize;
-    private Bitmap _cachedAvBitmap;
+    private Bitmap? _cachedAvBitmap;
 }

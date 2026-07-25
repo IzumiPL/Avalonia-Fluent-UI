@@ -92,7 +92,6 @@
     <Style Selector="^:disabled">
       <Style Selector="^ /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
       </Style>
 
       <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
@@ -109,8 +108,6 @@
     <Setter Property="CornerRadius" Value="8"/>
     <Setter Property="ClipToBounds" Value="True"/>
     <Setter Property="Height" Value="520"/>
-    <Setter Property="ImageInterpolationMode" Value="MediumQuality"/>
-    <Setter Property="Stretch" Value="UniformToFill"/>
 
     <Setter Property="Template">
       <ControlTemplate>
@@ -128,15 +125,19 @@
             ClipToBounds="{TemplateBinding ClipToBounds}"
             CornerRadius="{TemplateBinding CornerRadius}">
             <Panel>
-              <Image
+              <ui:ImageLabel
                 Name="PART_CurrentImage"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                InterpolationMode="{TemplateBinding InterpolationMode}"
                 Stretch="{TemplateBinding Stretch}"/>
-              <Image
+              <ui:ImageLabel
                 Name="PART_NextImage"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                InterpolationMode="{TemplateBinding InterpolationMode}"
                 IsVisible="False"
                 Stretch="{TemplateBinding Stretch}"/>
             </Panel>
@@ -175,22 +176,10 @@
             VerticalAlignment="Bottom"
             Background="Transparent"
             BorderThickness="0"
+            IsVisible="{TemplateBinding PipsPagerIsVisible}"
             MaxVisiblePips="{TemplateBinding MaxVisiblePips}"
             NumberOfPages="{TemplateBinding ItemCount}"
             SelectedPageIndex="{Binding SelectedIndex, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
-
-          <!--  <ui:PipsPager  -->
-          <!--  Name="PART_PipsPager"  -->
-          <!--  Grid.Row="1"  -->
-          <!--  MinWidth="128"  -->
-          <!--  MaxWidth="256"  -->
-          <!--  HorizontalAlignment="Center"  -->
-          <!--  VerticalAlignment="Bottom"  -->
-          <!--  Background="Transparent"  -->
-          <!--  BorderThickness="0"  -->
-          <!--  ItemsSource="{TemplateBinding ImageSource}"  -->
-          <!--  ScrollViewer.BringIntoViewOnFocusChange="False"  -->
-          <!--  SelectedIndex="{Binding SelectedIndex, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>  -->
         </Grid>
       </ControlTemplate>
     </Setter>

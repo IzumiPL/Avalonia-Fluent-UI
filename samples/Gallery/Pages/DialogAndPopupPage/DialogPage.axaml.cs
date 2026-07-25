@@ -12,7 +12,9 @@ namespace Gallery.Pages;
 public partial class DialogPage : ViewBase
 {
     private ColorDialog ColorDialog { get; } = new ColorDialog { Color = Colors.DeepPink };
-    
+
+    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Pages/DialogAndPopupPage/DialogPage.axaml"); 
+
     public DialogPage() : base("Dialog")
     {
         InitializeComponent();

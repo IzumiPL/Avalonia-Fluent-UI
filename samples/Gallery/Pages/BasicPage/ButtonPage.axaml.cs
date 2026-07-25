@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Gallery.Controls;
 
 namespace Gallery.Pages;
 
 public partial class ButtonPage : ViewBase 
 {
+    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Pages/BasicPage/ButtonPage.axaml"); 
+
     public ButtonPage() : base("Button")
     {
         InitializeComponent();

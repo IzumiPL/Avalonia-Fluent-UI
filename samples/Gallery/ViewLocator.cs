@@ -41,6 +41,8 @@ public class ViewLocator : IDataTemplate
         _factory[typeof(BorderPageViewModel)] = () => new BorderPage();
         _factory[typeof(PanelPageViewModel)] = () => new PanelPage();
         
+        _factory[typeof(MediaViewModel)] = () => new MediaView();
+        
         _factory[typeof(NavigationViewModel)] = () => new NavigationView();
         _factory[typeof(NavigationViewPageViewModel)] = () => new NavigationViewPage();
         _factory[typeof(TabsPageViewModel)] = () => new TabsPage();

@@ -86,8 +86,8 @@
     <ui:CodeCard Name="FlipViewCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FlipView]}">
       <Grid ColumnDefinitions="*, Auto">
         <fui:FlipView
-          Height="400"
-          HorizontalAlignment="Stretch"
+          Name="FlipView"
+          HorizontalAlignment="Left"
           VerticalAlignment="Stretch"
           DecodeToHeight="800"
           ImageSource="{Binding FlipViewItems}"
@@ -95,7 +95,8 @@
           IsAutoPlay="{Binding FlipViewIsAutoPlay, Mode=TwoWay}"
           MaxVisiblePips="{Binding FlipViewMaxVisiblePips}"
           Orientation="{Binding CurrentFlipOrientation}"
-          SelectedIndex="0"/>
+          PipsPagerIsVisible="{Binding FlipViewPipsPagerIsVisible}"
+          SelectedIndex="{Binding FlipViewSelectedIndex, Mode=TwoWay}"/>
         <ui:Card
           Grid.Column="1"
           Width="256"
@@ -104,7 +105,7 @@
           <Grid
             ColumnDefinitions="Auto, *"
             ColumnSpacing="5"
-            RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+            RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
             RowSpacing="6">
             <TextBlock
               Grid.Row="0"
@@ -159,6 +160,17 @@
               HorizontalAlignment="Stretch"
               ItemsSource="{Binding FlipViewMaxVisiblePipsItems}"
               SelectedItem="{Binding FlipViewMaxVisiblePips}"/>
+
+            <CheckBox
+              Grid.Row="5"
+              Grid.ColumnSpan="2"
+              Content="显示底部圆点"
+              IsChecked="{Binding FlipViewPipsPagerIsVisible}"/>
+            <CheckBox
+              Grid.Row="6"
+              Grid.ColumnSpan="2"
+              Content="显示自定义绘制代理"
+              IsCheckedChanged="OnEnabledFlipViewImageDelegate"/>
           </Grid>
         </ui:Card>
       </Grid>

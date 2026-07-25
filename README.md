@@ -4,7 +4,7 @@
   Avalonia-Fluent-UI
 </h1>
 <p align="center">
-适用于Avalonia应用的现代流畅设计UI, 在<a href="https://github.com/amwx/FluentAvalonia.git">FluentAvalonia</a>的基础上修改的,增加了一些控件
+A modern, smooth design UI for Avalonia applications, modified based on<a href="https://github.com/amwx/FluentAvalonia.git">FluentAvalonia</a>, with some added controls
 </p>
 
 <div align="center">
@@ -14,37 +14,42 @@
 [![NuGet](https://img.shields.io/nuget/v/AvaloniaFluentUI?color=%236A5ACD&label=AvaloniaFluentUI%20%28nuget%29)](https://www.nuget.org/packages/AvaloniaFluentUI/)
 </div>
 
+<p align="center">
+English | <a href="README_zh_CN.md">简体中文</a>
+</p>
+
 ![gallery](README.png)
 
 > [!Note]
 > 
-> 如需使用最新的功能,请克隆本仓库构建
+> If you want to use the latest features, please clone this repository and build
 
-## 安装🚀
+## Install🚀
 ```shell
 dotnet add package AvaloniaFluentUI --version 2.0.3
 ```
 
 > [!Warning]
 > 
-> 当前库为Avalonia12版本
+> The current library is Avalonia12 version
 > 
-> 如果需要使用Avalonia11版本,请切换至[Avalonia-11.3.12](https://github.com/IzumiPL/Avalonia-Fluent-UI/tree/avalonia-11.3.12)分支
+> If you need to use Avalonia 11, switch to the [Avalonia-11.3.12](https://github.com/IzumiPL/Avalonia-Fluent-UI/tree/avalonia-11.3.12))branch
 
-## 运行示例▶️
-克隆仓库后就可以运行 samples 目录下的示例程序, 也可以通过[Release](https://github.com/IzumiPL/Avalonia-Fluent-UI/releases)页面下载
+## Run the example▶️
+After cloning the repository, you can run the sample program in the samples directory, which can also be downloaded from the [Release](https://github.com/IzumiPL/Avalonia-Fluent-UI/releases)page
+
 ```shell
 cd samples/Gallery.Desktop
 dotnet run -c Release
 ```
-## 文档
-想了解更多关于 Avalonia-Fluent-UI 的信息？请阅读以下内容。[帮助文档](https://docs.mikuas.top)👈
+## Document
+Want to learn more about Avalonia-Fluent-UI? Please read the following. [Help Document](https://docs.mikuas.top)👈
 
-## 许可证📄
-#### AvaloniaFluentUI 使用 [MIT](LICENSE) 许可证授权非商用项目。
+## License📄
+#### AvaloniaFluentUI uses the [MIT](LICENSE) license to authorize non-commercial projects.
 
-特此授予任何人免费获得本软件及相关文档文件（以下简称“软件”）的许可，允许其不受限制地处理本软件，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或出售本软件的副本，并允许向其提供本软件的人员这样做，但须遵守以下条件：
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-上述版权声明和本许可声明应包含在软件的所有副本或实质性部分中。
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-本软件按“原样”提供，不提供任何形式的明示或暗示的保证，包括但不限于适销性、特定用途适用性和不侵权保证。在任何情况下，作者或版权所有者均不对任何索赔、损害或其他责任承担责任，无论该责任是因合同、侵权或其他原因引起的，也无论该责任是因本软件或其使用或交易而引起的。
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

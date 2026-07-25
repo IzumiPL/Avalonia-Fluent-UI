@@ -10,6 +10,8 @@ namespace Gallery.Pages;
 
 public partial class ShortcutKeyPickerPage : ViewBase
 {
+    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Pages/DialogAndPopupPage/ShortcutKeyPickerPage.axaml"); 
+    
     public ShortcutKeyPickerPage()
     {
         InitializeComponent();

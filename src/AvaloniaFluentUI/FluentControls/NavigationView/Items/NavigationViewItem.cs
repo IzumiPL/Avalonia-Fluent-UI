@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Collections;
@@ -48,8 +47,11 @@ public partial class NavigationViewItem : NavigationViewItemBase
     /// <summary>
     /// Defines the <see cref="IconSource"/> property
     /// </summary>
-    public static readonly StyledProperty<IconSource> IconSourceProperty =
-        AvaloniaProperty.Register<NavigationViewItem, IconSource>(nameof(IconSource));
+    public static readonly StyledProperty<object?> IconSourceProperty =
+        AvaloniaProperty.Register<NavigationViewItem, object?>(nameof(IconSource));
+
+    public static readonly StyledProperty<double> IconSizeProperty =
+        AvaloniaProperty.Register<NavigationViewItem, double>(nameof(IconSize), 16);
 
     /// <summary>
     /// Defines the <see cref="IsChildSelected"/> property
@@ -117,7 +119,7 @@ public partial class NavigationViewItem : NavigationViewItemBase
     /// <summary>
     /// Gets or sets the icon to show next to the menu item text.
     /// </summary>
-    public IconSource IconSource
+    public object? IconSource
     {
         get => GetValue(IconSourceProperty);
         set => SetValue(IconSourceProperty, value);
@@ -145,6 +147,12 @@ public partial class NavigationViewItem : NavigationViewItemBase
                 OnIsExpandedPropertyChanged();
             }
         }
+    }
+    
+    public double IconSize
+    {
+        get => GetValue(IconSizeProperty);
+        set => SetValue(IconSizeProperty, value);
     }
 
     /// <summary>
@@ -404,7 +412,7 @@ public partial class NavigationViewItem : NavigationViewItemBase
         }
     }
 
-    private void OnItemsSourceViewChanged(object sender, NotifyCollectionChangedEventArgs args)
+    private void OnItemsSourceViewChanged(object? sender, NotifyCollectionChangedEventArgs args)
     {
         UpdateVisualStateForChevron();
     }
@@ -764,13 +772,13 @@ public partial class NavigationViewItem : NavigationViewItemBase
         }
     }
 
-    internal void OnExpandCollapseChevronTapped(object sender, RoutedEventArgs args)
+    internal void OnExpandCollapseChevronTapped(object? sender, RoutedEventArgs args)
     {
         IsExpanded = !IsExpanded;
         args.Handled = true;
     }
 
-    private void OnFlyoutClosing(object sender, CancelEventArgs args)
+    private void OnFlyoutClosing(object? sender, CancelEventArgs args)
     {
         IsExpanded = false;
     }
@@ -838,7 +846,7 @@ public partial class NavigationViewItem : NavigationViewItemBase
         UpdateIsClosedCompact();
     }
 
-    private void HandleLoaded(object sender, RoutedEventArgs args)
+    private void HandleLoaded(object? sender, RoutedEventArgs args)
     {
         if (GetSplitView is SplitView sv)
         {
@@ -889,12 +897,12 @@ public partial class NavigationViewItem : NavigationViewItemBase
         }
     }
 
-    private CompositeDisposable _splitViewRevokers;
-    private NavigationViewItemPresenter _presenter;
-    private object _suggestedToolTipContent;
-    private ItemsRepeater _repeater;
-    private Panel _flyoutContentGrid;
-    private Grid _rootGrid;
+    private CompositeDisposable? _splitViewRevokers;
+    private NavigationViewItemPresenter? _presenter;
+    private object? _suggestedToolTipContent;
+    private ItemsRepeater? _repeater;
+    private Panel? _flyoutContentGrid;
+    private Grid? _rootGrid;
 
     private bool _isClosedCompact;
     private bool _appliedTemplate;
