@@ -92,7 +92,6 @@
     <Style Selector="^:disabled">
       <Style Selector="^ /template/ Border#PART_Border">
         <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
       </Style>
 
       <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
@@ -177,22 +176,10 @@
             VerticalAlignment="Bottom"
             Background="Transparent"
             BorderThickness="0"
+            IsVisible="{TemplateBinding PipsPagerIsVisible}"
             MaxVisiblePips="{TemplateBinding MaxVisiblePips}"
             NumberOfPages="{TemplateBinding ItemCount}"
             SelectedPageIndex="{Binding SelectedIndex, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
-
-          <!--  <ui:PipsPager  -->
-          <!--  Name="PART_PipsPager"  -->
-          <!--  Grid.Row="1"  -->
-          <!--  MinWidth="128"  -->
-          <!--  MaxWidth="256"  -->
-          <!--  HorizontalAlignment="Center"  -->
-          <!--  VerticalAlignment="Bottom"  -->
-          <!--  Background="Transparent"  -->
-          <!--  BorderThickness="0"  -->
-          <!--  ItemsSource="{TemplateBinding ImageSource}"  -->
-          <!--  ScrollViewer.BringIntoViewOnFocusChange="False"  -->
-          <!--  SelectedIndex="{Binding SelectedIndex, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>  -->
         </Grid>
       </ControlTemplate>
     </Setter>
