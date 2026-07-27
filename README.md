@@ -4,7 +4,7 @@
   Avalonia-Fluent-UI
 </h1>
 <p align="center">
-A modern, smooth design UI for Avalonia applications, modified based on<a href="https://github.com/amwx/FluentAvalonia.git">FluentAvalonia</a>, with some added controls
+A modern, smooth design UI for Avalonia applications, modified based on <a href="https://github.com/amwx/FluentAvalonia.git">FluentAvalonia</a>, with some added controls
 </p>
 
 <div align="center">
@@ -33,10 +33,10 @@ dotnet add package AvaloniaFluentUI --version 2.0.3
 > 
 > The current library is Avalonia12 version
 > 
-> If you need to use Avalonia 11, switch to the [Avalonia-11.3.12](https://github.com/IzumiPL/Avalonia-Fluent-UI/tree/avalonia-11.3.12))branch
+> If you need to use Avalonia 11, switch to the [Avalonia-11.3.12](https://github.com/IzumiPL/Avalonia-Fluent-UI/tree/avalonia-11.3.12) branch
 
 ## Run the example▶️
-After cloning the repository, you can run the sample program in the samples directory, which can also be downloaded from the [Release](https://github.com/IzumiPL/Avalonia-Fluent-UI/releases)page
+After cloning the repository, you can run the sample program in the samples directory, which can also be downloaded from the [Release](https://github.com/IzumiPL/Avalonia-Fluent-UI/releases) page
 
 ```shell
 cd samples/Gallery.Desktop
