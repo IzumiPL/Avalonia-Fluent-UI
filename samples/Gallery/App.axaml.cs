@@ -36,15 +36,13 @@ public class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        Console.WriteLine(LocalizationService.Instance.GetString("SV_ThemeColorDescription"));
         var config = ConfigService.LoadConfig();
-        Console.WriteLine($"Loaded Language: {config?.Language}");
-        LocalizationService.Instance.SetCulture(config?.Language);
-        Console.WriteLine($"Set Language: {LocalizationService.Instance.CurrentLanguage}");
+        if (config != null)
+        {
+            LocalizationService.Instance.SetCulture(config.Language);
+        }
         InitializeCulture();
 
-        Console.WriteLine(LocalizationService.Instance.GetString("SV_ThemeColorDescription"));
-        
         try
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)

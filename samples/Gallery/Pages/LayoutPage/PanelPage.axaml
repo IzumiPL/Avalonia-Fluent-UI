@@ -66,10 +66,7 @@
               Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Reset]}"/>
           </Grid>
         </Expander>
-        <Expander
-          Grid.Row="1"
-          Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_AppTheme]}"
-          Theme="{StaticResource ExpanderWinUIAnimationStyle}">
+        <fui:FluentExpander Grid.Row="1" Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_AppTheme]}">
           <StackPanel
             Margin="10"
             HorizontalAlignment="Left"
@@ -78,7 +75,7 @@
             <RadioButton Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Dark]}"/>
             <RadioButton Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_FollowSystem]}"/>
           </StackPanel>
-        </Expander>
+        </fui:FluentExpander>
       </Grid>
     </ui:CodeCard>
 

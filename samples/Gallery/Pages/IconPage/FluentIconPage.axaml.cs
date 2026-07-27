@@ -35,7 +35,7 @@ public partial class FluentIconPage : UserControl
         
         Dispatcher.UIThread.InvokeAsync(async () =>
         {
-            await Task.Delay(200);
+            await Task.Delay(100);
             await LoadIconsAsync();
         }, DispatcherPriority.Loaded);
     }
@@ -54,7 +54,7 @@ public partial class FluentIconPage : UserControl
                 _allCards.Add(iconCard);
             }
 
-            await Task.Delay(1);
+            await Task.Delay(16);
         }
     }
 

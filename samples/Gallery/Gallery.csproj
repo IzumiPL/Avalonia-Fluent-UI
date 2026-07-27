@@ -2,6 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <Authors>Izumi</Authors>
+    <Version>2.0.4</Version>
     <AssemblyName>Gallery</AssemblyName>
     <RootNamespace>Gallery</RootNamespace>
     <ApplicationIcon>Assets/app.ico</ApplicationIcon>

@@ -1,12 +1,9 @@
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Text.Json;
 using Avalonia;
-using Avalonia.Media;
 using Avalonia.Styling;
-using AvaloniaFluentUI.Styling;
 using Gallery.Models;
 
 namespace Gallery.Services;
@@ -24,33 +21,15 @@ public class ConfigService
     {
         try
         {
-#if DEBUG
-            Debug.WriteLine("BaseDirectory: " + AppContext.BaseDirectory);
-            Debug.WriteLine("CurrentDirectory: " + Environment.CurrentDirectory);
-            Debug.WriteLine("FullPath: " + Path.GetFullPath(AppConfigPath));
-#endif
-
             Directory.CreateDirectory(ConfigDir);
             var json = JsonSerializer.Serialize(config, ConfigJsonContext.Default.AppConfig);
             File.WriteAllText(AppConfigPath, json, Encoding.UTF8);
         }
-        catch (Exception e)
-        {
-#if DEBUG
-            Debug.WriteLine("Write Failed");
-            Debug.WriteLine(e);
-#endif
-        }
+        catch (Exception e) { }
     }
 
     public static AppConfig? LoadConfig()
     {
-#if DEBUG
-        Debug.WriteLine("BaseDirectory: " + AppContext.BaseDirectory);
-        Debug.WriteLine("CurrentDirectory: " + Environment.CurrentDirectory);
-        Debug.WriteLine("FullPath: " + Path.GetFullPath(AppConfigPath));
-#endif
-
         Directory.CreateDirectory(ConfigDir);
 
         if (!File.Exists(AppConfigPath))
@@ -62,28 +41,24 @@ public class ConfigService
                 IsWindowEffectEnabled = true,
                 IsEnabledBackgroundImage = false,
                 WindowEffect = "Null",
-                Language = "zh-CN"
+                Language = "zh-CN",
+                BackgroundImagePath = null
             };
 
-            Console.WriteLine("Config File Not Exists, Return Of Create");
             return config;
         }
 
-        string file = File.ReadAllText(AppConfigPath);
-        var loaded = JsonSerializer.Deserialize(file, ConfigJsonContext.Default.AppConfig);
-
-        if (loaded != null)
+        try
         {
-            Application.Current?.RequestedThemeVariant = loaded.Theme switch
-            {
-                "Light" => ThemeVariant.Light,
-                "Dark" => ThemeVariant.Dark,
-                _ => ThemeVariant.Default
-            };
-        }
+            string file = File.ReadAllText(AppConfigPath);
+            var loaded = JsonSerializer.Deserialize(file, ConfigJsonContext.Default.AppConfig);
 
-        Console.WriteLine("Config File Loaded");
-        return loaded;
+            return loaded;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 
     public static bool IsDarkTheme() => Application.Current?.RequestedThemeVariant == ThemeVariant.Dark;

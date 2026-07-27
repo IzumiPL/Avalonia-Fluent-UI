@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using Avalonia;
 using Avalonia.Media;
 using AvaloniaFluentUI.Locale;
@@ -135,6 +136,7 @@ public partial class MainWindowViewModel : ViewModelBase
         
         _config = config;
         CurrentViewModel = _viewModels["Home"];
+        AutoCompleteBoxItems = _viewModelFactories.Keys.ToArray();
 
         LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
     }
@@ -193,6 +195,8 @@ public partial class MainWindowViewModel : ViewModelBase
     public int[] BorderWidthItems => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] ;
 
     public Thickness BorderWidth => new Thickness(SelectedBorderWidthItem);
+    
+    public string[] AutoCompleteBoxItems { get; }
 
     [RelayCommand]
     private void ToggleTheme() => AvaloniaFluentTheme.Instance.ToggleTheme(); 
