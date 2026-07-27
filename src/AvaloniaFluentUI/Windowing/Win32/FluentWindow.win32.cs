@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using AvaloniaFluentUI.Controls.Interop;
+using AvaloniaFluentUI.Helpers;
 
 namespace AvaloniaFluentUI.Windowing;
 

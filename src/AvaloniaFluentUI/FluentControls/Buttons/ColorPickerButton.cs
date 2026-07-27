@@ -43,8 +43,6 @@ public class ColorPickerButton : PickerButton
         set => SetValue(CommandParameterProperty, value);
     }
 
-    private readonly ColorDialog _colorDialog = new();
-    
     public event EventHandler<Color>? ColorChanged;
 
     static ColorPickerButton()
