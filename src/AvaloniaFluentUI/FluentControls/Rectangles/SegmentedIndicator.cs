@@ -24,24 +24,36 @@ public class SelectionIndicator : Control
     public static readonly StyledProperty<CornerRadius> CornerRadiusProperty =
         Border.CornerRadiusProperty.AddOwner<SelectionIndicator>();
 
+    /// <summary>
+    /// 设置或获取当前的背景色
+    /// </summary>
     public IBrush? Background
     {
         get => GetValue(BackgroundProperty);
         set => SetValue(BackgroundProperty, value);
     }
 
+    /// <summary>
+    /// 设置或获取当前底部指示器的背景色
+    /// </summary>
     public IBrush? IndicatorBrush
     {
         get => GetValue(IndicatorBrushProperty);
         set => SetValue(IndicatorBrushProperty, value);
     }
 
+    /// <summary>
+    /// 设置或获取底部指示器的宽度
+    /// </summary>
     public double IndicatorWidth
     {
         get => GetValue(IndicatorWidthProperty);
         set => SetValue(IndicatorWidthProperty, value);
     }
 
+    /// <summary>
+    /// 设置或获取底部指示器的高度
+    /// </summary>
     public double IndicatorHeight
     {
         get => GetValue(IndicatorHeightProperty);

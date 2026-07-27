@@ -7,7 +7,7 @@ namespace AvaloniaFluentUI.Controls.Input;
 /// </summary>
 public class CanExecuteRequestedEventArgs : EventArgs
 {
-    internal CanExecuteRequestedEventArgs(object param)
+    internal CanExecuteRequestedEventArgs(object? param)
     {
         Parameter = param;
     }
@@ -20,5 +20,5 @@ public class CanExecuteRequestedEventArgs : EventArgs
     /// <summary>
     /// Gets the command parameter passed into the CanExecute method that raised this event.
     /// </summary>
-    public object Parameter { get; }
+    public object? Parameter { get; }
 }

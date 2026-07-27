@@ -18,8 +18,7 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 // [PseudoClasses(s_pcFooterBottom, SharedPseudoclasses.s_pcFooter, s_pcContent, s_pcDescription)]
 [PseudoClasses(PC_PRESSED)]
-
-public partial class ExpanderSettingCardItem : HeaderedContentControl, ICommandSource
+public class ExpanderSettingCardItem : HeaderedContentControl, ICommandSource
 {
     public static readonly StyledProperty<string?> DescriptionProperty =
         AvaloniaProperty.Register<ExpanderSettingCardItem, string?>(nameof(Description));
@@ -273,6 +272,6 @@ public partial class ExpanderSettingCardItem : HeaderedContentControl, ICommandS
 
     private bool _commandCanExecute = true;
     private bool _isPressed;
-    private IDisposable _adaptiveWidthDisposable;
+    private IDisposable? _adaptiveWidthDisposable;
     private double _adaptiveWidthTrigger = 460;
 }

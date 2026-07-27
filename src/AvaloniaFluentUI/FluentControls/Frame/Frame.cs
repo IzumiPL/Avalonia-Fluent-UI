@@ -763,7 +763,7 @@ public partial class Frame : ContentControl
             mode, entry.NavigationTransitionInfo, entry.Parameter, entry.SourcePageType));
     }
 
-    private void OnForwardStackChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void OnForwardStackChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         int oldCount = (_forwardStack.Count - (e.NewItems?.Count ?? 0) + (e.OldItems?.Count ?? 0));
 
@@ -772,7 +772,7 @@ public partial class Frame : ContentControl
         RaisePropertyChanged(CanGoForwardProperty, oldForward, newForward);
     }
 
-    private void OnBackStackChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void OnBackStackChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         int oldCount = (_backStack.Count - (e.NewItems?.Count ?? 0) + (e.OldItems?.Count ?? 0));
 
@@ -822,7 +822,7 @@ public partial class Frame : ContentControl
         return Activator.CreateInstance(pageType) as Control;
     }
 
-    private Control CheckCacheAndGetPage(Type srcPageType = null, object target = null)
+    private Control? CheckCacheAndGetPage(Type? srcPageType = null, object? target = null)
     {
         if (CacheSize == 0)
             return null;
@@ -877,7 +877,7 @@ public partial class Frame : ContentControl
         }
     }
 
-    private void SetContentAndAnimate(PageStackEntry entry)
+    private void SetContentAndAnimate(PageStackEntry? entry)
     {
         if (entry == null)
             return;
@@ -902,7 +902,7 @@ public partial class Frame : ContentControl
         }
     }
 
-    private void OnTopLevelBackRequested(object sender, RoutedEventArgs e)
+    private void OnTopLevelBackRequested(object? sender, RoutedEventArgs e)
     {
         if (!e.Handled && IsNavigationStackEnabled && CanGoBack)
         {
@@ -923,8 +923,8 @@ public partial class Frame : ContentControl
         _registeredPages[typeof(T)] = () => new T();
     }
 
-    private CancellationTokenSource _cts;
-    private ContentPresenter _presenter;
+    private CancellationTokenSource? _cts;
+    private ContentPresenter? _presenter;
     //private readonly List<(Type pageSrcType, Control page)> _cache = new List<(Type, Control)>(10);
     private readonly List<NavigationCacheItem> _pageCache = new List<NavigationCacheItem>(10);
     private bool _isNavigating = false;

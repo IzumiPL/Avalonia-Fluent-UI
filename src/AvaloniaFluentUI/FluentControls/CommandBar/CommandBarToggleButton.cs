@@ -6,6 +6,7 @@ using Avalonia.LogicalTree;
 using Avalonia.Controls.Presenters;
 using AvaloniaFluentUI.Core;
 using AvaloniaFluentUI.Controls.Input;
+using AvaloniaFluentUI.Helpers;
 
 namespace AvaloniaFluentUI.Controls;
 

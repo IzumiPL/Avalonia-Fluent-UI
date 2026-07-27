@@ -89,10 +89,10 @@ public class NavigationViewItemSeparator : NavigationViewItemBase
         }
     }
 
-    private CompositeDisposable _splitViewRevokers;
+    private CompositeDisposable? _splitViewRevokers;
     private bool _appliedTemplate;
     private bool _isClosedCompact;
-    private Panel _rootGrid;
+    private Panel? _rootGrid;
 
     private const string s_tpRootGrid = "RootGrid";
 

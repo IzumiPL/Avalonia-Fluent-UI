@@ -11,15 +11,18 @@ public class FileDropPicker : FolderDropPicker
 {
    public static readonly StyledProperty<IReadOnlyList<FilePickerFileType>> FileTypeFilterProperty =
         AvaloniaProperty.Register<FileDropPicker, IReadOnlyList<FilePickerFileType>>(nameof(FileTypeFilter),
-            defaultValue: [new FilePickerFileType("所有文件") { Patterns = ["*.*" ] }]);
+            defaultValue: [new FilePickerFileType("所有文件") { Patterns = [ "*.*" ] }]);
 
+   /// <summary>
+   /// 设置选择对话框的文件类型过滤器
+   /// </summary>
     public IReadOnlyList<FilePickerFileType> FileTypeFilter
     {
         get => GetValue(FileTypeFilterProperty);
         set => SetValue(FileTypeFilterProperty, value);
     }
 
-    protected override async Task<IReadOnlyList<string>> OpenSelectionDialog()
+    protected override async Task<IReadOnlyList<string>?> OpenSelectionDialog()
     {
         var toplevel =  TopLevel.GetTopLevel(this);
         if (toplevel != null)

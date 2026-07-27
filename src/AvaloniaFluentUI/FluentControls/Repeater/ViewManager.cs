@@ -173,10 +173,6 @@ internal class ViewManager
             var clearedIndex = vi.Index;
             MoveFocusFromClearedIndex(clearedIndex);
         }
-
-#if DEBUG && REPEATER_TRACE
-        Log.Debug("Element Cleared");
-#endif
     }
 
     private void MoveFocusFromClearedIndex(int clearedIndex)
@@ -893,7 +889,7 @@ internal class ViewManager
         }
     }
 
-    private void OnFocusChanged(object _, RoutedEventArgs __)
+    private void OnFocusChanged(object? _, RoutedEventArgs __)
     {
         UpdateFocusedElement();
     }
@@ -929,7 +925,7 @@ internal class ViewManager
     private readonly List<PinnedElementInfo> _pinnedPool;
     private readonly UniqueIdElementPool _resetPool;
 
-    private Control _lastFocusedElement;
+    private Control? _lastFocusedElement;
     private bool _isDataSourceStableResetPending;
 
     private Phaser _phaser;

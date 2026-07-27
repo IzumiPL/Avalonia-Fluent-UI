@@ -87,8 +87,8 @@ public class NavigationViewItemHeader : NavigationViewItemBase
         _rootGrid.Margin = new Thickness(newLeft, oldMargin.Top, oldMargin.Right, oldMargin.Bottom);
     }
 
-    private IDisposable _splitViewRevokers;
-    private Grid _rootGrid;
+    private IDisposable? _splitViewRevokers;
+    private Grid? _rootGrid;
     private bool _isClosedCompact;
 
     private const string s_tpRootGrid = "RootGrid";

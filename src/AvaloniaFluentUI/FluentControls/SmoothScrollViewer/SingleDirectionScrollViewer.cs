@@ -9,6 +9,9 @@ public class SingleDirectionScrollViewer : SmoothScrollViewer
     public static readonly StyledProperty<Orientation> OrientationProperty =
         AvaloniaProperty.Register<SingleDirectionScrollViewer, Orientation>(nameof(Orientation));
 
+    /// <summary>
+    /// 设置或获取单向滚动的方向
+    /// </summary>
     public Orientation Orientation
     {
         get => GetValue(OrientationProperty);

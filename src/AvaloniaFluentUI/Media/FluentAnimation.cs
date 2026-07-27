@@ -11,7 +11,7 @@ namespace AvaloniaFluentUI.Media.Animation;
 
 public class FluentAnimation
 {
-    private static CancellationTokenSource _cancellationTokenSource;
+    private static CancellationTokenSource? _cancellationTokenSource;
     
     /// <summary>
     /// 对控件的指定属性执行渐变动画

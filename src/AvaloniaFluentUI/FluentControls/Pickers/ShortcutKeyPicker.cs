@@ -16,6 +16,9 @@ public class ShortcutKeyPicker : PickerButton
     public static readonly StyledProperty<IEnumerable<string>> KeysProperty =
         AvaloniaProperty.Register<ShortcutKeyPicker, IEnumerable<string>>(nameof(Keys));
 
+    /// <summary>
+    /// 获取或设置当前默认的快捷键, 点击重置则会设置为此值
+    /// </summary>
     public KeyGesture? DefaultKeyGesture { get; set; }
 
     public IEnumerable<string> Keys
@@ -24,6 +27,9 @@ public class ShortcutKeyPicker : PickerButton
         private set => SetValue(KeysProperty, value);
     }
     
+    /// <summary>
+    /// 设置或获取当前的快捷键
+    /// </summary>
     public KeyGesture? KeyGesture
     {
         get => GetValue(KeyGestureProperty);
@@ -119,7 +125,12 @@ public class ShortcutKeyPicker : PickerButton
 
     private void OnShortcutKeyUp(object? sender, KeyEventArgs e) { e.Handled = e.Key != Key.Escape; }
 
-    private static bool IsModifierKey(Key key)
+    /// <summary>
+    /// 获取当前按下的键是否为功能键
+    /// </summary>
+    /// <param name="key">按下的键</param>
+    /// <returns></returns>
+    public static bool IsModifierKey(Key key)
     {
         return key is
             Key.LeftCtrl or
@@ -132,7 +143,12 @@ public class ShortcutKeyPicker : PickerButton
             Key.RWin;
     }
 
-    private static bool IsStandaloneShortcut(Key key)
+    /// <summary>
+    /// 获取当前按下的键是否为独立的快捷键
+    /// </summary>
+    /// <param name="key">按下的键</param>
+    /// <returns></returns>
+    public static bool IsStandaloneShortcut(Key key)
     {
         return key switch
         {
@@ -152,7 +168,12 @@ public class ShortcutKeyPicker : PickerButton
         };
     }
     
-    private static IEnumerable<string> FormatGesture(KeyGesture gesture)
+    /// <summary>
+    /// 获取格式化的快捷键
+    /// </summary>
+    /// <param name="gesture">快捷键</param>
+    /// <returns></returns>
+    public static IEnumerable<string> FormatGesture(KeyGesture gesture)
     {
         List<string> parts = [];
 

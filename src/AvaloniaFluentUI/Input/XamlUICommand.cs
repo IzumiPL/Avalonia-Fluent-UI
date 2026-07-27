@@ -10,13 +10,13 @@ namespace AvaloniaFluentUI.Controls.Input;
 /// Provides a base class for defining the command behavior of an interactive UI element that 
 /// performs an action when invoked (such as sending an email, deleting an item, or submitting a form).
 /// </summary>
-public partial class XamlUICommand : AvaloniaObject, ICommand
+public class XamlUICommand : AvaloniaObject, ICommand
 {
    /// <summary>
     /// Defines the <see cref="Command"/> property
     /// </summary>
-    public static readonly StyledProperty<ICommand> CommandProperty =
-        AvaloniaProperty.Register<XamlUICommand, ICommand>(nameof(Command));
+    public static readonly StyledProperty<ICommand?> CommandProperty =
+        AvaloniaProperty.Register<XamlUICommand, ICommand?>(nameof(Command));
 
     /// <summary>
     /// Defines the <see cref="Description"/> property
@@ -27,14 +27,14 @@ public partial class XamlUICommand : AvaloniaObject, ICommand
     /// <summary>
     /// Defines the <see cref="IconSource"/> property
     /// </summary>
-    public static readonly StyledProperty<IconSource> IconSourceProperty =
-        AvaloniaProperty.Register<XamlUICommand, IconSource>(nameof(IconSource));
+    public static readonly StyledProperty<IconSource?> IconSourceProperty =
+        AvaloniaProperty.Register<XamlUICommand, IconSource?>(nameof(IconSource));
 
     /// <summary>
     /// Defines the <see cref="HotKey"/> property
     /// </summary>
-    public static readonly StyledProperty<KeyGesture> HotKeyProperty =
-        AvaloniaProperty.Register<XamlUICommand, KeyGesture>(nameof(HotKey));
+    public static readonly StyledProperty<KeyGesture?> HotKeyProperty =
+        AvaloniaProperty.Register<XamlUICommand, KeyGesture?>(nameof(HotKey));
 
     /// <summary>
     /// Defines the <see cref="Label"/> property
@@ -46,7 +46,7 @@ public partial class XamlUICommand : AvaloniaObject, ICommand
     /// Gets or sets the command behavior of an interactive UI element that performs an action when invoked, 
     /// such as sending an email, deleting an item, or submitting a form.
     /// </summary>
-    public ICommand Command
+    public ICommand? Command
     {
         get => GetValue(CommandProperty);
         set => SetValue(CommandProperty, value);
@@ -64,7 +64,7 @@ public partial class XamlUICommand : AvaloniaObject, ICommand
     /// <summary>
     /// Gets or sets an IconSource for this element.
     /// </summary>
-    public IconSource IconSource
+    public IconSource? IconSource
     {
         get => GetValue(IconSourceProperty);
         set => SetValue(IconSourceProperty, value);
@@ -73,7 +73,7 @@ public partial class XamlUICommand : AvaloniaObject, ICommand
     /// <summary>
     /// Gets or sets a KeyGesture used to invoke this XamlUICommand
     /// </summary>
-    public KeyGesture HotKey
+    public KeyGesture? HotKey
     {
         get => GetValue(HotKeyProperty);
         set => SetValue(HotKeyProperty, value);
@@ -91,21 +91,21 @@ public partial class XamlUICommand : AvaloniaObject, ICommand
     /// <summary>
     /// Occurs whenever something happens that affects whether the command can execute.
     /// </summary>
-    public event EventHandler CanExecuteChanged;
+    public event EventHandler? CanExecuteChanged;
 
     /// <summary>
     /// Occurs when a CanExecute call is made.
     /// </summary>
-    public event TypedEventHandler<XamlUICommand, CanExecuteRequestedEventArgs> CanExecuteRequested;
+    public event TypedEventHandler<XamlUICommand, CanExecuteRequestedEventArgs>? CanExecuteRequested;
 
     /// <summary>
     /// Occurs when an Execute call is made.
     /// </summary>
-    public event TypedEventHandler<XamlUICommand, ExecuteRequestedEventArgs> ExecuteRequested; 
+    public event TypedEventHandler<XamlUICommand, ExecuteRequestedEventArgs>? ExecuteRequested; 
     
     public void NotifyCanExecuteChanged() => CanExecuteChanged?.Invoke(this, null);
 
-    public bool CanExecute(object param)
+    public bool CanExecute(object? param)
     {
         bool canExec = false;
 
@@ -125,7 +125,7 @@ public partial class XamlUICommand : AvaloniaObject, ICommand
         return canExec;
     }
 
-    public void Execute(object param)
+    public void Execute(object? param)
     {
         var args = new ExecuteRequestedEventArgs(param);
 

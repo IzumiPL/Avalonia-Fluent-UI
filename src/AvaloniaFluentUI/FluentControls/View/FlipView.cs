@@ -22,6 +22,9 @@ using AvaloniaFluentUI.Controls.Enums;
 
 namespace AvaloniaFluentUI.Controls;
 
+/// <summary>
+/// 图片轮播视图
+/// </summary>
 [TemplatePart(PART_CURRENT_IMAGE, typeof(ImageLabel))]
 [TemplatePart(PART_NEXT_IMAGE, typeof(ImageLabel))]
 [TemplatePart(PART_PREVIOUS_BUTTON, typeof(Button))]
@@ -64,6 +67,9 @@ public class FlipView : TemplatedControl
     public static readonly StyledProperty<bool> PipsPagerIsVisibleProperty =
         AvaloniaProperty.Register<FlipView, bool>(nameof(PipsPagerIsVisible), true);
 
+    /// <summary>
+    /// 获取或设置底部圆点是否显示
+    /// </summary>
     public bool PipsPagerIsVisible
     {
         get => GetValue(PipsPagerIsVisibleProperty);
@@ -71,7 +77,7 @@ public class FlipView : TemplatedControl
     }
 
     /// <summary>
-    /// 底部圆点最大显示数量,默认最大显示8个
+    /// 获取底部圆点最大显示数量,默认最大显示<c>8</c>个
     /// </summary>
     public int MaxVisiblePips
     {
@@ -80,7 +86,7 @@ public class FlipView : TemplatedControl
     }
 
     /// <summary>
-    /// 轮播方向
+    /// 获取或设置当前轮播方向
     /// </summary>
     public FlipOrientation Orientation
     {
@@ -89,7 +95,7 @@ public class FlipView : TemplatedControl
     }
 
     /// <summary>
-    /// 最小间隔 400
+    /// 获取或设置自动播放间隔(ms) 最小间隔 <c>600</c>, 默认间隔<c>1500</c>
     /// </summary>
     public double Interval
     {
@@ -97,6 +103,9 @@ public class FlipView : TemplatedControl
         set => SetValue(IntervalProperty, value);
     }
 
+    /// <summary>
+    /// 获取或设置当前是否是自动播放
+    /// </summary>
     public bool IsAutoPlay
     {
         get => GetValue(IsAutoPlayProperty);
@@ -118,12 +127,15 @@ public class FlipView : TemplatedControl
         set => SetValue(DecodeToHeightProperty, value);
     }
 
+    /// <summary>
+    /// 获取或设置图片拉伸方式
+    /// </summary>
     public Stretch Stretch
     {
         get => GetValue(StretchProperty);
         set => SetValue(StretchProperty, value);
     }
-
+    
     public BitmapInterpolationMode InterpolationMode
     {
         get => GetValue(InterpolationModeProperty);
@@ -312,6 +324,9 @@ public class FlipView : TemplatedControl
         _autoPlayTimer.Start();
     }
 
+    /// <summary>
+    /// 暂停播放
+    /// </summary>
     public void Stop()
     {
         IsAutoPlay = false;
@@ -643,6 +658,9 @@ public class FlipView : TemplatedControl
         _nextTransform.Y = 0;
     }
 
+    /// <summary>
+    /// 下一张图片
+    /// </summary>
     public void Next()
     {
         if (_isRunning || SelectedIndex >= ItemCount - 1)
@@ -653,6 +671,9 @@ public class FlipView : TemplatedControl
         SelectedIndex++;
     }
 
+    /// <summary>
+    /// 上一张图片
+    /// </summary>
     public void Previous()
     {
         if (_isRunning || SelectedIndex <= 0) 

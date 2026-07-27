@@ -399,7 +399,7 @@ public partial class TaskDialog : ContentControl
         }       
     }
 
-    private void OnKeyDownPreview(object sender, KeyEventArgs e)
+    private void OnKeyDownPreview(object? sender, KeyEventArgs e)
     {
         if (e.Key == Key.Escape)
         {
@@ -706,7 +706,7 @@ public partial class TaskDialog : ContentControl
         }
     }
 
-    private void OnButtonClick(object sender, RoutedEventArgs e)
+    private void OnButtonClick(object? sender, RoutedEventArgs e)
     {
         if (_hasDeferralActive)
             return;
@@ -746,7 +746,7 @@ public partial class TaskDialog : ContentControl
         });
     }
 
-    private void MoreDetailsButtonClick(object sender, RoutedEventArgs e)
+    private void MoreDetailsButtonClick(object? sender, RoutedEventArgs e)
     {
         IsFooterExpanded = !IsFooterExpanded;
     }
@@ -913,16 +913,16 @@ public partial class TaskDialog : ContentControl
 
     private ItemsControl _buttonsHost;
     private ItemsControl _commandsHost;
-    private ProgressBar _progressBar;
-    private Button _moreDetailsButton;
+    private ProgressBar? _progressBar;
+    private Button? _moreDetailsButton;
 
     private TaskDialogProgressState _currentProgressState = TaskDialogProgressState.Normal;
 
-    private Button _defaultButton;
+    private Button? _defaultButton;
 
-    public Control _xamlOwner;
+    public Control? _xamlOwner;
     private int _xamlOwnerChildIndex;
-    private Control _host;
+    private Control? _host;
     private TaskCompletionSource<object> _tcs;
     internal bool _hasDeferralActive = false;
 

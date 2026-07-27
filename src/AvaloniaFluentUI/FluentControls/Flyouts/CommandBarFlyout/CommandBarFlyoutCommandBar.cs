@@ -336,11 +336,11 @@ public class CommandBarFlyoutCommandBar : CommandBar
         _owningFlyout = f;
     }
     
-    private List<Control> _horizontallyAccessibleControls;
-    private List<Control> _verticallyAccessibleControls;
+    private List<Control>? _horizontallyAccessibleControls;
+    private List<Control>? _verticallyAccessibleControls;
 
-    private Button _moreButton;
-    private CommandBarFlyout _owningFlyout;
+    private Button? _moreButton;
+    private CommandBarFlyout? _owningFlyout;
 
     private const string s_tpMoreButton = "MoreButton";
 }

@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using Avalonia;
 using Avalonia.Input;
-using AvaloniaFluentUI.Controls;
 using AvaloniaFluentUI.Locale;
 
 namespace AvaloniaFluentUI.Controls.Input;
@@ -23,7 +22,7 @@ public class StandardUICommand : XamlUICommand
         LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
     }
 
-    private void OnLanguageChanged(object sender, PropertyChangedEventArgs e)
+    private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
     {
         SetupCommand();
     }

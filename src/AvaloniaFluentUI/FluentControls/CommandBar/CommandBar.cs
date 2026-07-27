@@ -178,9 +178,6 @@ public partial class CommandBar : ContentControl
     /// </summary>
     public event TypedEventHandler<CommandBar, EventArgs> Closing;
 
-    // TODO:
-    //public event TypedEventHandler<CommandBar, DynamicOverflowItemsChangingEventArgs> DynamicOverflowItemsChanging;
-
     private IAvaloniaList<ICommandBarElement> _primaryCommands;
     private IAvaloniaList<ICommandBarElement> _secondaryCommands;
 
@@ -206,8 +203,8 @@ public partial class CommandBar : ContentControl
         PrimaryCommands = new AvaloniaList<ICommandBarElement>();
         SecondaryCommands = new AvaloniaList<ICommandBarElement>();
 
-        _primaryCommands.CollectionChanged += OnPrimaryCommandsChanged;
-        _secondaryCommands.CollectionChanged += OnSecondaryCommandsChanged;
+        _primaryCommands?.CollectionChanged += OnPrimaryCommandsChanged;
+        _secondaryCommands?.CollectionChanged += OnSecondaryCommandsChanged;
 
         // Don't initialize the actual item lists here, we'll do that as needed
 
@@ -450,7 +447,7 @@ public partial class CommandBar : ContentControl
         }
     }
 
-    private void OnPrimaryCommandsChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void OnPrimaryCommandsChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (!_appliedTemplate)
             return;
@@ -534,7 +531,7 @@ SetState:
         InvalidateMeasure();
     }
 
-    private void OnSecondaryCommandsChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void OnSecondaryCommandsChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (!_appliedTemplate)
             return;
@@ -608,7 +605,7 @@ SetState:
                 }
             }
 
-            _primaryItemsHost.ItemsSource = _primaryItems;
+            _primaryItemsHost?.ItemsSource = _primaryItems;
         }
 
         if (_secondaryCommands.Count > 0 || IsDynamicOverflowEnabled)
@@ -629,7 +626,7 @@ SetState:
         PseudoClasses.Set(s_pcSecondaryOnly, _primaryCommands.Count == 0 && _secondaryCommands.Count > 0);
     }
 
-    private void PrimaryItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void PrimaryItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         var pos = DefaultLabelPosition;
 
@@ -683,16 +680,16 @@ SetState:
         _numInOverflow = 0;
     }
 
-    private void OnMoreButtonClick(object sender, RoutedEventArgs e)
+    private void OnMoreButtonClick(object? sender, RoutedEventArgs e)
     {
         IsOpen = !IsOpen;
     }
 
-    private IList<ICommandBarElement> GetNextItemsToOverflow()
+    private IList<ICommandBarElement>? GetNextItemsToOverflow()
     {
         if (_hasOrderedOverflow > 0)
         {
-            if (_primaryItems.Count == 0)
+            if (_primaryItems?.Count == 0)
                 return null;
 
             // TODO: Don't loop over this multiple times...
@@ -727,7 +724,7 @@ SetState:
         }
         else
         {
-            if (_primaryItems.Count == 0)
+            if (_primaryItems?.Count == 0)
                 return null;
 
             return new[] { _primaryItems[_primaryItems.Count - 1] };
@@ -736,7 +733,7 @@ SetState:
 
     private IList<ICommandBarElement> GetReturnToPrimaryItems()
     {
-        if (_overflowItems[_numInOverflow - 1].DynamicOverflowOrder == 0)
+        if (_overflowItems?[_numInOverflow - 1].DynamicOverflowOrder == 0)
             return new[] { _overflowItems[_numInOverflow - 1] };
 
         int currentGroup = _overflowItems[_numInOverflow - 1].DynamicOverflowOrder;
@@ -785,18 +782,18 @@ SetState:
     // These are the actual lists sent to the Items Controls
     // We don't want to move items in the actual lists to not
     // interfere with what user specified
-    private AvaloniaList<ICommandBarElement> _primaryItems;
-    private AvaloniaList<ICommandBarElement> _overflowItems;
+    private AvaloniaList<ICommandBarElement>? _primaryItems;
+    private AvaloniaList<ICommandBarElement>? _overflowItems;
 
-    private ItemsControl _primaryItemsHost;
+    private ItemsControl? _primaryItemsHost;
     private CommandBarOverflowPresenter _overflowItemsHost;
-    private ContentControl _contentHost;
-    private Button _moreButton;
+    private ContentControl? _contentHost;
+    private Button? _moreButton;
 
-    private CommandBarSeparator _overflowSeparator;
+    private CommandBarSeparator? _overflowSeparator;
 
     private int _hasOrderedOverflow = 0;
-    private Dictionary<ICommandBarElement, double> _widthCache;
+    private Dictionary<ICommandBarElement, double>? _widthCache;
     private int _numInOverflow = 0;
     private double _minRecoverWidth;
 }

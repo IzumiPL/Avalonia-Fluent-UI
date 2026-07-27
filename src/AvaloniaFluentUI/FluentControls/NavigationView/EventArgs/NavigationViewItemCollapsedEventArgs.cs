@@ -37,6 +37,6 @@ public class NavigationViewItemCollapsedEventArgs : EventArgs
     /// </summary>
     public NavigationViewItemBase CollapsedItemContainer { get; internal set; }
 
-    private object _collapsedItem;
-    private NavigationView _navigationView;
+    private object? _collapsedItem;
+    private NavigationView? _navigationView;
 }

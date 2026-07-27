@@ -12,7 +12,7 @@ public interface IApplicationSplashScreen
     /// <summary>
     /// Specifies custom content to be shown during the SplashScreen
     /// </summary>
-    object SplashScreenContent { get; }
+    object? SplashScreenContent { get; }
 
     /// <summary>
     /// Called by AppWindow to run necessary background tasks during the splashscreen

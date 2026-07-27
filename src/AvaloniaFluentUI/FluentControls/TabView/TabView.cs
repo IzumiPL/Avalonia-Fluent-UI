@@ -759,7 +759,7 @@ public partial class TabView : TemplatedControl
         //UpdateListViewItemContainerTransitions();
     }
 
-    private void OnListViewGettingFocus(object sender, FocusChangingEventArgs args)
+    private void OnListViewGettingFocus(object? sender, FocusChangingEventArgs args)
     {
         // TabViewItems overlap each other by one pixel in order to get the desired visuals for the separator.
         // This causes problems with 2d focus navigation. Because the items overlap, pressing Down or Up from a
@@ -895,12 +895,12 @@ public partial class TabView : TemplatedControl
         }
     }
 
-    private void OnAddButtonClick(object sender, RoutedEventArgs args)
+    private void OnAddButtonClick(object? sender, RoutedEventArgs args)
     {
         AddTabButtonClick?.Invoke(this, args);
     }
 
-    private void OnLoaded(object sender, RoutedEventArgs args)
+    private void OnLoaded(object? sender, RoutedEventArgs args)
     {
         UpdateTabContent();
         // UpdateTabViewWithTearOutList();
@@ -908,12 +908,12 @@ public partial class TabView : TemplatedControl
         // UpdateNonClientRegion();
     }
 
-    private void OnUnloaded(object sender, RoutedEventArgs args)
+    private void OnUnloaded(object? sender, RoutedEventArgs args)
     {
         // UpdateTabViewWithTearOutList();
     }
 
-    private void OnListViewLoaded(object sender, RoutedEventArgs args)
+    private void OnListViewLoaded(object? sender, RoutedEventArgs args)
     {
         var lv = _listView;
 
@@ -1008,7 +1008,7 @@ public partial class TabView : TemplatedControl
         // UpdateNonClientRegion();
     }
 
-    private void OnTabStripPointerLeave(object sender, PointerEventArgs e)
+    private void OnTabStripPointerLeave(object? sender, PointerEventArgs e)
     {
         _pointerInTabstrip = false;
         if (_updateTabWidthOnPointerLeave)
@@ -1024,12 +1024,12 @@ public partial class TabView : TemplatedControl
         }
     }
 
-    private void OnTabStripPointerEnter(object sender, PointerEventArgs e)
+    private void OnTabStripPointerEnter(object? sender, PointerEventArgs e)
     {
         _pointerInTabstrip = true;
     }
 
-    private void OnScrollViewerLoaded(object sender, RoutedEventArgs args)
+    private void OnScrollViewerLoaded(object? sender, RoutedEventArgs args)
     {
         var buttons = _scrollViewer.GetTemplateChildren()
             .Where(x => x is RepeatButton);
@@ -1057,7 +1057,7 @@ public partial class TabView : TemplatedControl
         UpdateTabWidths();
     }
 
-    private void OnScrollViewerViewChanged(object sender, ScrollChangedEventArgs args)
+    private void OnScrollViewerViewChanged(object? sender, ScrollChangedEventArgs args)
     {
         UpdateScrollViewerDecreaseAndIncreaseButtonsViewState();
 
@@ -1093,7 +1093,7 @@ public partial class TabView : TemplatedControl
         }
     }
 
-    private void OnItemsPresenterSizeChanged(object sender, SizeChangedEventArgs args)
+    private void OnItemsPresenterSizeChanged(object? sender, SizeChangedEventArgs args)
     {
         if (!_updateTabWidthOnPointerLeave)
         {
@@ -1105,7 +1105,7 @@ public partial class TabView : TemplatedControl
         }
     }
 
-    private void HandleTabContainerGridSizeChangedForVerticalTabView(object sender, SizeChangedEventArgs e)
+    private void HandleTabContainerGridSizeChangedForVerticalTabView(object? sender, SizeChangedEventArgs e)
     {
         UpdateTabWidths();
     }
@@ -1201,7 +1201,7 @@ public partial class TabView : TemplatedControl
         UpdateBottomBorderLineVisualStates();
     }
 
-    private void OnListViewSelectionChanged(object sender, SelectionChangedEventArgs args)
+    private void OnListViewSelectionChanged(object? sender, SelectionChangedEventArgs args)
     {
         // If we're currently switching TabLocation, ignore this selected item change
         // because it just got set to -1. We'll set it back to the correct index
@@ -1220,7 +1220,7 @@ public partial class TabView : TemplatedControl
         SelectionChanged?.Invoke(this, args);
     }
 
-    private void OnListViewSizeChanged(object sender, SizeChangedEventArgs args)
+    private void OnListViewSizeChanged(object? sender, SizeChangedEventArgs args)
     {
         // UpdateNonClientRegion();
     }
@@ -1248,7 +1248,7 @@ public partial class TabView : TemplatedControl
         return tab;
     }
 
-    private void OnListViewDragItemsStarting(object sender, DragItemsStartingEventArgs args)
+    private void OnListViewDragItemsStarting(object? sender, DragItemsStartingEventArgs args)
     {
         // _isItemBeingDragged = true;
 
@@ -1259,12 +1259,12 @@ public partial class TabView : TemplatedControl
         UpdateBottomBorderLineVisualStates();
     }
 
-    private void OnListViewDragOver(object sender, DragEventArgs args)
+    private void OnListViewDragOver(object? sender, DragEventArgs args)
     {
         TabStripDragOver?.Invoke(this, args);
     }
 
-    private void OnListViewDrop(object sender, DragEventArgs args)
+    private void OnListViewDrop(object? sender, DragEventArgs args)
     {
         if (!args.Handled)
         {
@@ -1274,7 +1274,7 @@ public partial class TabView : TemplatedControl
         UpdateIsItemDraggedOver(false);
     }
 
-    private void OnListViewDragEnter(object sender, DragEventArgs args)
+    private void OnListViewDragEnter(object? sender, DragEventArgs args)
     {
         foreach (var item in TabItems)
         {
@@ -1288,12 +1288,12 @@ public partial class TabView : TemplatedControl
         UpdateIsItemDraggedOver(true);
     }
 
-    private void OnListViewDragLeave(object sender, DragEventArgs args)
+    private void OnListViewDragLeave(object? sender, DragEventArgs args)
     {
         UpdateIsItemDraggedOver(false);
     }
 
-    private void OnListViewDragItemsCompleted(object sender, DragItemsCompletedEventArgs args)
+    private void OnListViewDragItemsCompleted(object? sender, DragItemsCompletedEventArgs args)
     {
         // _isItemBeingDragged = false;
 
@@ -1727,7 +1727,7 @@ public partial class TabView : TemplatedControl
     public object ItemFromContainer(Control container) =>
         _listView?.ItemFromContainer(container);
 
-    private void OnPaneResizeHandlePointerPressed(object sender, PointerPressedEventArgs e)
+    private void OnPaneResizeHandlePointerPressed(object? sender, PointerPressedEventArgs e)
     {
         if (e.Handled)
             return;
@@ -1740,7 +1740,7 @@ public partial class TabView : TemplatedControl
         }
     }
 
-    private void OnPaneResizeHandlePointerMoved(object sender, PointerEventArgs e)
+    private void OnPaneResizeHandlePointerMoved(object? sender, PointerEventArgs e)
     {
         if (e.Handled)
             return;
@@ -1774,7 +1774,7 @@ public partial class TabView : TemplatedControl
         }
     }
 
-    private void OnPaneResizeHandlePointerReleased(object sender, PointerReleasedEventArgs e)
+    private void OnPaneResizeHandlePointerReleased(object? sender, PointerReleasedEventArgs e)
     {
         if (e.Handled)
             return;
@@ -1790,7 +1790,7 @@ public partial class TabView : TemplatedControl
         }
     }
 
-    private void OnPaneResizeHandlePointerCaptureLost(object sender, PointerCaptureLostEventArgs e)
+    private void OnPaneResizeHandlePointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
     {
         if (e.Handled)
             return;
@@ -1967,7 +1967,7 @@ public partial class TabView : TemplatedControl
         }
     }
 
-    private void OnAddButtonKeyDown(object sender, KeyEventArgs args)
+    private void OnAddButtonKeyDown(object? sender, KeyEventArgs args)
     {
         var ab = _addButton;
         if (args.Key == Key.Right)
@@ -2130,21 +2130,21 @@ public partial class TabView : TemplatedControl
     private bool _updateTabWidthOnPointerLeave = false;
     private bool _pointerInTabstrip = false;
 
-    private ColumnDefinition _leftContentColumn;
-    private ColumnDefinition _tabColumn;
-    private ColumnDefinition _addButtonColumn;
-    private ColumnDefinition _rightContentColumn;
+    private ColumnDefinition? _leftContentColumn;
+    private ColumnDefinition? _tabColumn;
+    private ColumnDefinition? _addButtonColumn;
+    private ColumnDefinition? _rightContentColumn;
 
-    private TabViewListView _listView;
-    private ContentPresenter _tabContentPresenter;
-    private ContentPresenter _rightContentPresenter;
-    private Grid _tabContainerGrid;
-    private ScrollViewer _scrollViewer;
-    private RepeatButton _scrollDecreaseButton;
-    private RepeatButton _scrollIncreaseButton;
-    private Button _addButton;
-    private ItemsPresenter _itemsPresenter;
-    private Border _verticalPaneResizeHandle;
+    private TabViewListView? _listView;
+    private ContentPresenter? _tabContentPresenter;
+    private ContentPresenter? _rightContentPresenter;
+    private Grid? _tabContainerGrid;
+    private ScrollViewer? _scrollViewer;
+    private RepeatButton? _scrollDecreaseButton;
+    private RepeatButton? _scrollIncreaseButton;
+    private Button? _addButton;
+    private ItemsPresenter? _itemsPresenter;
+    private Border? _verticalPaneResizeHandle;
     //private SplitView _splitView;
 
     private bool _isDraggingPane;
@@ -2180,16 +2180,16 @@ public partial class TabView : TemplatedControl
             ExecuteHandler = execute;
         }
 
-        event EventHandler ICommand.CanExecuteChanged
+        event EventHandler? ICommand.CanExecuteChanged
         {
             add { }
             remove { }
         }
 
         public Action<object> ExecuteHandler { get; }
-        public bool CanExecute(object parameter) => true;
+        public bool CanExecute(object? parameter) => true;
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
             ExecuteHandler.Invoke(parameter);
         }

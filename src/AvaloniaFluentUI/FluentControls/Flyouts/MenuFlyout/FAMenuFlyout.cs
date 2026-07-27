@@ -26,19 +26,19 @@ public class FAMenuFlyout : PopupFlyoutBase
     /// <summary>
     /// Defines the <see cref="Items"/> property
     /// </summary>
-    public static readonly StyledProperty<IEnumerable> ItemsSourceProperty =
+    public static readonly StyledProperty<IEnumerable?> ItemsSourceProperty =
         ItemsControl.ItemsSourceProperty.AddOwner<FAMenuFlyout>();
 
     /// <summary>
     /// Defines the <see cref="ItemTemplate"/> property
     /// </summary>
-    public static readonly StyledProperty<IDataTemplate> ItemTemplateProperty =
+    public static readonly StyledProperty<IDataTemplate?> ItemTemplateProperty =
         ItemsControl.ItemTemplateProperty.AddOwner<FAMenuFlyout>();
 
     /// <summary>
     /// Defines the <see cref="ItemContainerTheme"/> property
     /// </summary>
-    public static readonly StyledProperty<ControlTheme> ItemContainerThemeProperty =
+    public static readonly StyledProperty<ControlTheme?> ItemContainerThemeProperty =
         ItemsControl.ItemContainerThemeProperty.AddOwner<ControlTheme>();
 
     /// <summary>
@@ -60,7 +60,7 @@ public class FAMenuFlyout : PopupFlyoutBase
     /// <summary>
     /// Gets or sets the items of the MenuFlyout
     /// </summary>
-    public IEnumerable ItemsSource
+    public IEnumerable? ItemsSource
     {
         get => GetValue(ItemsSourceProperty);
         set => SetValue(ItemsSourceProperty, value);
@@ -69,7 +69,7 @@ public class FAMenuFlyout : PopupFlyoutBase
     /// <summary>
     /// Gets or sets the template used for the items
     /// </summary>
-    public IDataTemplate ItemTemplate
+    public IDataTemplate? ItemTemplate
     {
         get => GetValue(ItemTemplateProperty);
         set => SetValue(ItemTemplateProperty, value);
@@ -78,7 +78,7 @@ public class FAMenuFlyout : PopupFlyoutBase
     /// <summary>
     /// Gets or sets the <see cref="ControlTheme"/> to apply for the items
     /// </summary>
-    public ControlTheme ItemContainerTheme
+    public ControlTheme? ItemContainerTheme
     {
         get => GetValue(ItemContainerThemeProperty);
         set => SetValue(ItemContainerThemeProperty, value);
@@ -177,60 +177,12 @@ public class FAMenuFlyout : PopupFlyoutBase
         presenter.Classes.AddRange(classes);
     }
 
-    private void ItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+    private void ItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
     {
         if (ItemsSource != null)
         {
             throw new InvalidOperationException("Cannot edit Items when ItemsSource is set.");
         }
-        //if (!IsOpen)
-        //{
-        //    // If the flyout isn't open we'll just trigger a refresh when the flyout next opens
-        //    // We can't add now b/c we don't have way to resolve item template (possibly)
-        //    _itemsInternal?.Clear();
-        //    return;
-        //}
-
-        //var presenter = Popup.Child as FAMenuFlyoutPresenter;
-        //var template = ItemTemplate;
-        //switch (args.Action)
-        //{
-        //    case NotifyCollectionChangedAction.Add:
-        //        Add(args.NewItems, args.NewStartingIndex);
-        //        break;
-
-        //    case NotifyCollectionChangedAction.Remove:
-        //        Remove(args.OldStartingIndex, args.OldItems.Count);
-        //        break;
-
-        //    case NotifyCollectionChangedAction.Reset:
-        //        _itemsInternal.Clear();
-        //        if (args.NewItems != null)
-        //        {
-        //            Add(args.NewItems, args.NewStartingIndex);
-        //        }                
-        //        break;
-
-        //    case NotifyCollectionChangedAction.Replace:
-        //    case NotifyCollectionChangedAction.Move:
-        //        Remove(args.OldStartingIndex, args.OldItems.Count);
-        //        Add(args.NewItems, args.NewStartingIndex);
-        //        break;
-        //}
-
-        //void Add(IList items, int startIndex)
-        //{
-        //    for (int i = 0, idx = startIndex; i < items.Count; i++, idx++)
-        //    {
-        //        var item = items[i];
-        //        _itemsInternal.Insert(idx, CreateContainer(item, presenter.FindDataTemplate(item, template)));
-        //    }
-        //}
-
-        //void Remove(int index, int count)
-        //{
-        //    _itemsInternal.RemoveRange(index, count);
-        //}
     }
 
    

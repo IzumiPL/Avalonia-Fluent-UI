@@ -21,6 +21,7 @@ using Avalonia.VisualTree;
 using AvaloniaFluentUI.Core;
 using AvaloniaFluentUI.Core.Attributes;
 using AvaloniaFluentUI.Locale;
+using AvaloniaFluentUI.Helpers;
 using Path = Avalonia.Controls.Shapes.Path;
 
 namespace AvaloniaFluentUI.Controls;
@@ -66,8 +67,8 @@ public partial class TeachingTip : ContentControl
     /// <summary>
     /// Defines the <see cref="Target"/> property
     /// </summary>
-    public static readonly StyledProperty<Control> TargetProperty =
-        AvaloniaProperty.Register<TeachingTip, Control>(nameof(Target));
+    public static readonly StyledProperty<Control?> TargetProperty =
+        AvaloniaProperty.Register<TeachingTip, Control?>(nameof(Target));
 
     /// <summary>
     /// Defines the <see cref="TailVisibility"/> property
@@ -202,7 +203,7 @@ public partial class TeachingTip : ContentControl
     /// <summary>
     /// Gets or sets the target for a teaching tip to position itself relative to and point at with its tail.
     /// </summary>
-    public Control Target
+    public Control? Target
     {
         get => GetValue(TargetProperty);
         set => SetValue(TargetProperty, value);
@@ -1348,20 +1349,6 @@ public partial class TeachingTip : ContentControl
 
     private void UpdateButtonsState()
     {
-        // WinUI:
-        // if (actionContent && closeContent)
-        //    BothButtonsVisible, FooterCloseButton
-        // else if (actionContent && isLightDismiss)
-        //    ActionButtonVisible, FooterCloseButton
-        // else if (actionContent)
-        //    ActionButtonVisible, HeaderCloseButton
-        // else if (closeContent)
-        //    CloseButtonVisible, FooterCloseButton
-        // else if (isLightDismiss)
-        //    NoButtonsVisible, FooterCloseButton
-        // else
-        //    NoButtonsVisible, HeaderCloseButton
-
         // We use pseudoclass combination here, so :actionButton:closeButton = BothButtonsVisible VSM state
         // NoButtonsVisible VSM state is the default state here
 
@@ -1811,19 +1798,19 @@ public partial class TeachingTip : ContentControl
         SetPopupAutomationProperties();
     }
 
-    private void OnCloseButtonClicked(object sender, RoutedEventArgs e)
+    private void OnCloseButtonClicked(object? sender, RoutedEventArgs e)
     {
         CloseButtonClick?.Invoke(this, EventArgs.Empty);
         _lastCloseReason = TeachingTipCloseReason.CloseButton;
         IsOpen = false;
     }
 
-    private void OnActionButtonClicked(object sender, RoutedEventArgs e)
+    private void OnActionButtonClicked(object? sender, RoutedEventArgs e)
     {
         ActionButtonClick?.Invoke(this, EventArgs.Empty);
     }
 
-    private void OnPopupOpened(object sender, EventArgs args)
+    private void OnPopupOpened(object? sender, EventArgs args)
     {
         var xamlRoot = TopLevel.GetTopLevel(this);
         if (xamlRoot != null)
@@ -1836,22 +1823,6 @@ public partial class TeachingTip : ContentControl
 
             if (ControlAutomationPeer.FromElement(this) is TeachingTipAutomationPeer p)
             {
-                //var notificationString = Application.Current.Name;
-                //var local = FALocalizationHelper.Instance;
-
-                //if (!string.IsNullOrEmpty(notificationString))
-                //{
-                //    notificationString =
-                //        $"{local.GetLocalizedStringResource(SR_TeachingTipNotification)} {notificationString} " +
-                //        $"{AutomationProperties.GetName(_popup)}";
-                //}
-                //else
-                //{
-                //    notificationString =
-                //        $"{local.GetLocalizedStringResource(SR_TeachingTipNotificationWithoutAppName)} " +
-                //        $"{AutomationProperties.GetName(_popup)}";
-                //}
-
                 p.RaiseWindowOpenedEvent(/*notificationString*/);
             }
         }
@@ -1863,7 +1834,7 @@ public partial class TeachingTip : ContentControl
         }
     }
 
-    private void OnPopupClosed(object sender, EventArgs args)
+    private void OnPopupClosed(object? sender, EventArgs args)
     {
         _xamlRootChangedRevoker?.Dispose();
 
@@ -1892,13 +1863,13 @@ public partial class TeachingTip : ContentControl
         }
     }
 
-    private void ClosePopupOnUnloadEvent(object sender, RoutedEventArgs e)
+    private void ClosePopupOnUnloadEvent(object? sender, RoutedEventArgs e)
     {
         IsOpen = false;
         ClosePopup();
     }
 
-    private void OnLightDismissIndicatorPopupClosed(object sender, EventArgs e)
+    private void OnLightDismissIndicatorPopupClosed(object? sender, EventArgs e)
     {
         if (IsOpen)
         {
@@ -2739,7 +2710,7 @@ public partial class TeachingTip : ContentControl
 
     // Skip EstablishShadows
 
-    private void TrySetCenterPoint(Control element, double x, double y)
+    private void TrySetCenterPoint(Control? element, double x, double y)
     {
         if (element == null)
             return;
@@ -2754,29 +2725,23 @@ public partial class TeachingTip : ContentControl
     private IDisposable _xamlRootChangedRevoker;
 
     private Border _container;
-    private Popup _popup;
-    private Popup _lightDismissIndicatorPopup;
-    // [Unused]  private ContentControl _popupContentControl;
+    private Popup? _popup;
+    private Popup? _lightDismissIndicatorPopup;
 
-    private Control _rootElement;
-    private Grid _tailOcclusionGrid;
-    private Grid _contentRootGrid;
-    private Grid _nonHeroContentRootGrid;
-    private Border _heroContentBorder;
-    private Button _actionButton;
-    private Button _alternateCloseButton;
-    private Button _closeButton;
-    private Path _tailPolygon;
-    // [Unused] private Grid _tailEdgeBorder;
-    // [Unused] private Control _titleTextBlock;
-    // [Unused] private Control _subTitleTextBlock;
+    private Control? _rootElement;
+    private Grid? _tailOcclusionGrid;
+    private Grid? _contentRootGrid;
+    private Grid? _nonHeroContentRootGrid;
+    private Border? _heroContentBorder;
+    private Button? _actionButton;
+    private Button? _alternateCloseButton;
+    private Button? _closeButton;
+    private Path? _tailPolygon;
 
-    private IInputElement _previouslyFocusedElement;
+    private IInputElement? _previouslyFocusedElement;
 
-    private KeyFrameAnimation _expandAnimation;
-    private KeyFrameAnimation _contractAnimation;
-    // [Unused] private KeyFrameAnimation _expandElevationAnimation;
-    // [Unused] private KeyFrameAnimation _contractElevationAnimation;
+    private KeyFrameAnimation? _expandAnimation;
+    private KeyFrameAnimation? _contractAnimation;
     private IEasing _expandEasingFunction;
     private IEasing _contractEasingFunction;
     private readonly ScopedBatchHelper _scopedBatch = new ScopedBatchHelper();
@@ -2800,21 +2765,7 @@ public partial class TeachingTip : ContentControl
     private bool _isExpandAnimationPlaying;
     private bool _isContractAnimationPlaying;
 
-    // [Unused] private bool _hasF6BeenInvoked;
-
-    // [Unused] private bool _useTextWindowBounds;
-    // [Unused] private Rect _testWindowBoundsInCoreWindowSpace;
-    // [Unused] private bool _useTestScreenBounds;
-    // [Unused] private Rect _testScreenBoundsInCoreWindowSpace;
-
-    // [Unused] private bool _tipShouldHaveShadow = true;
-
-    // [Unused] private bool _tipFollowsTarget;
     private bool _returnTopForOutOfWindowPlacement = true;
-
-    // [Unused] private float _contentElevation = 32f;
-    // [Unused] private float _tailElevation = 0f;
-    // [Unused] private bool _tailShadowTargetsShadowTarget;
 
     private TimeSpan _expandAnimationDuration = TimeSpan.FromMilliseconds(300);
     private TimeSpan _contractAnimationDuration = TimeSpan.FromMilliseconds(200);
@@ -2822,7 +2773,7 @@ public partial class TeachingTip : ContentControl
     private TeachingTipCloseReason _lastCloseReason = TeachingTipCloseReason.Programmatic;
 
     private bool _isIdle = true;
-    private Control _target;
+    private Control? _target;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private double TailLongSideActualLength() =>
@@ -2935,7 +2886,6 @@ public partial class TeachingTip : ContentControl
     private Thickness RightEdgePlacementTopLeftHighlightMargin(double width, double height) =>
         new Thickness(TopLeftCornerRadius() - 2f, 1, TopRightCornerRadius() - 1f, 0);
 
-
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static double UntargetedTipFarPlacementOffset(double farWindowCoordinateInCoreWindowSpace, double tipSize, double offset) =>
         farWindowCoordinateInCoreWindowSpace - (tipSize + s_untargetedTipWindowEdgeMargin + offset);
@@ -2949,22 +2899,13 @@ public partial class TeachingTip : ContentControl
     private static double UntargetedTipNearPlacementOffset(double nearWindowCoordinateInCoreWindowSpace, double offset) =>
         s_untargetedTipWindowEdgeMargin + nearWindowCoordinateInCoreWindowSpace + offset;
 
-
     private static readonly string s_ScaleTargetName = "Scale";
-   // [Unused] private static readonly string s_translationTargetName = "Translation";
-
-    // [Unused] private static readonly string s_teachingTipHighlightBrushName = "TeachingTipTopHighlightBrush";
 
     //It is possible this should be exposed as a property, but you can adjust what it does with margin.
     private static readonly float s_untargetedTipWindowEdgeMargin = 24;
     private static readonly float s_defaultTipHeightAndWidth = 320;
 
-    //Ideally this would be computed from layout but it is difficult to do.
     private static readonly float s_tailOcclusionAmount = 2;
-
-    // These will just use the s_pc[] naming, but preserve these for reference from upstream
-    // private static readonly string s_TitleTextVisibleStateName = ":showTitle";
-    // private static readonly string s_SubTitleTextVisibleStateName = ":showSubtitle";
 
     private class ScopedBatchHelper
     {
@@ -2980,13 +2921,13 @@ public partial class TeachingTip : ContentControl
             _timer.Start();
         }
 
-        private void Tick(object sender, EventArgs args)
+        private void Tick(object? sender, EventArgs args)
         {
             _timer.Stop();
             Completed?.Invoke();
             Completed = null;
         }
 
-        private DispatcherTimer _timer;
+        private DispatcherTimer? _timer;
     }
 }
