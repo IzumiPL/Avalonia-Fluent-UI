@@ -14,7 +14,7 @@
 *.userprefs
 
 /samples/Gallery/Assets/Fonts/
-/test/Test/**
+/test/
 
 # Build results
 [Dd]ebug/
