@@ -15,7 +15,7 @@ public class FluentPopup : Avalonia.Controls.Primitives.Popup
         get => GetValue(OffSetProperty);
         set => SetValue(OffSetProperty, value);
     }
-    
+
     public FluentPopup()
     {
         VerticalOffset = -2;

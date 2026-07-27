@@ -29,7 +29,7 @@ namespace AvaloniaFluentUI.Controls;
 [TemplatePart(s_tpNVIPresenter, typeof(NavigationViewItemPresenter))]
 [TemplatePart(s_tpNVIRootGrid, typeof(Grid))]
 [TemplatePart(s_tpNVIMenuItemsHost, typeof(ItemsRepeater))]
-public partial class NavigationViewItem : NavigationViewItemBase
+public class NavigationViewItem : NavigationViewItemBase
 {
     /// <summary>
     /// Defines the <see cref="CompactPaneLength"/> property

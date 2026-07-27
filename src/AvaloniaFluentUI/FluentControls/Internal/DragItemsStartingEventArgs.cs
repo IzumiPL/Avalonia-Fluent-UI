@@ -20,10 +20,10 @@ public class DragItemsStartingEventArgs : EventArgs
     /// <summary>
     /// Gets the data payload associated with an items drag action
     /// </summary>
-    public DataPackage Data { get; internal init; }
+    public DataPackage? Data { get; internal init; }
 
     /// <summary>
     /// Gets the loosely typed collection of objects that are selected for the item drag action.
     /// </summary>
-    public IList<object> Items { get; internal init; }
+    public IList<object>? Items { get; internal init; }
 }

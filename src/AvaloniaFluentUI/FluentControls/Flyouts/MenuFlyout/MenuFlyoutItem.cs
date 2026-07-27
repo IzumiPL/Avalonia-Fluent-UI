@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Avalonia.Controls.Metadata;
 using AvaloniaFluentUI.Core;
 using AvaloniaFluentUI.Controls.Input;
+using AvaloniaFluentUI.Helpers;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -33,19 +34,19 @@ public partial class MenuFlyoutItem : MenuFlyoutItemBase, ICommandSource
     /// <summary>
     /// Defines the <see cref="Command"/> property
     /// </summary>
-    public static readonly StyledProperty<ICommand> CommandProperty =
+    public static readonly StyledProperty<ICommand?> CommandProperty =
         Button.CommandProperty.AddOwner<MenuFlyoutItem>();
 
     /// <summary>
     /// Defines the <see cref="CommandParameter"/> property
     /// </summary>
-    public static readonly StyledProperty<object> CommandParameterProperty =
+    public static readonly StyledProperty<object?> CommandParameterProperty =
         Button.CommandParameterProperty.AddOwner<MenuFlyoutItem>();
 
     /// <summary>
     /// Defines the <see cref="HotKey"/> property
     /// </summary>
-    public static readonly StyledProperty<KeyGesture> HotKeyProperty =
+    public static readonly StyledProperty<KeyGesture?> HotKeyProperty =
         Button.HotKeyProperty.AddOwner<MenuFlyoutItem>();
 
     /// <summary>
@@ -81,7 +82,7 @@ public partial class MenuFlyoutItem : MenuFlyoutItemBase, ICommandSource
     /// <summary>
     /// Gets or sets the KeyGesture that should invoke this MenuFlyoutItem
     /// </summary>
-    public KeyGesture HotKey
+    public KeyGesture? HotKey
     {
         get => GetValue(HotKeyProperty);
         set => SetValue(HotKeyProperty, value);
@@ -104,7 +105,7 @@ public partial class MenuFlyoutItem : MenuFlyoutItemBase, ICommandSource
     /// <summary>
     /// Gets or sets the command to invoke when the item is pressed.
     /// </summary>
-    public ICommand Command
+    public ICommand? Command
     {
         get => GetValue(CommandProperty);
         set => SetValue(CommandProperty, value);
@@ -113,7 +114,7 @@ public partial class MenuFlyoutItem : MenuFlyoutItemBase, ICommandSource
     /// <summary>
     /// Gets or sets the parameter to pass to the <see cref="Command"/> property.
     /// </summary>
-    public object CommandParameter
+    public object? CommandParameter
     {
         get => GetValue(CommandParameterProperty);
         set => SetValue(CommandParameterProperty, value);
@@ -303,7 +304,7 @@ public partial class MenuFlyoutItem : MenuFlyoutItemBase, ICommandSource
         OnClick();
     }
 
-    private void CanExecuteChanged(object sender, EventArgs e)
+    private void CanExecuteChanged(object? sender, EventArgs e)
     {
         var canExec = Command == null || Command.CanExecute(CommandParameter);
 
@@ -314,8 +315,8 @@ public partial class MenuFlyoutItem : MenuFlyoutItemBase, ICommandSource
         }
     }
 
-    void ICommandSource.CanExecuteChanged(object sender, EventArgs e) => CanExecuteChanged(sender, e);
+    void ICommandSource.CanExecuteChanged(object? sender, EventArgs e) => CanExecuteChanged(sender, e);
 
     private bool _canExecute = true;
-    private KeyGesture _hotkey;
+    private KeyGesture? _hotkey;
 }

@@ -171,8 +171,8 @@ public partial class NumberBox : TemplatedControl
     /// <summary>
     /// Defines the <see cref="SimpleNumberFormat"/> property
     /// </summary>
-    public static readonly StyledProperty<string> SimpleNumberFormatProperty =
-        AvaloniaProperty.Register<NumberBox, string>(nameof(SimpleNumberFormat));
+    public static readonly StyledProperty<string?> SimpleNumberFormatProperty =
+        AvaloniaProperty.Register<NumberBox, string?>(nameof(SimpleNumberFormat));
 
     /// <summary>
     /// Defines the <see cref="InnerLeftContent"/> property
@@ -273,7 +273,7 @@ public partial class NumberBox : TemplatedControl
     /// <remarks>
     /// This property cannot be used if <see cref="NumberFormatter"/> is also in use
     /// </remarks>
-    public string SimpleNumberFormat
+    public string? SimpleNumberFormat
     {
         get => GetValue(SimpleNumberFormatProperty);
         set => SetValue(SimpleNumberFormatProperty, value);
@@ -375,7 +375,7 @@ public partial class NumberBox : TemplatedControl
     /// </summary>
     public event TypedEventHandler<NumberBox, NumberBoxValueChangedEventArgs>? ValueChanged;
 
-    public string _text = null;
+    public string? _text = null;
 
     private const string DOWN_SPIN_BUTTON = "DownSpinButton";
     private const string POPUP_DOWN_SPIN_BUTTON = "PopupDownSpinButton";

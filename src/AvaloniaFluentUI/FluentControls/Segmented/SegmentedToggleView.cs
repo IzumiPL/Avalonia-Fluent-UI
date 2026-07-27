@@ -13,6 +13,9 @@ public class SegmentedToggleView : SegmentedView
     public static readonly StyledProperty<Orientation> OrientationProperty =
         AvaloniaProperty.Register<SegmentedToggleView, Orientation>(nameof(Orientation));
 
+    /// <summary>
+    /// 设置或获取当前的显示方向
+    /// </summary>
     public Orientation Orientation
     {
         get => GetValue(OrientationProperty);

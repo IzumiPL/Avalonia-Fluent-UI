@@ -28,7 +28,7 @@ public sealed class DataPackage : IDataTransfer, IAsyncDataTransfer
         _dt.Add(DataTransferItem.CreateText(text));
     }
 
-    public string GetText()
+    public string? GetText()
     {
         return _dt.TryGetText();
     }
@@ -41,7 +41,7 @@ public sealed class DataPackage : IDataTransfer, IAsyncDataTransfer
         }
     }
 
-    public IReadOnlyList<IStorageItem> GetStorageItems()
+    public IReadOnlyList<IStorageItem>? GetStorageItems()
     {
         return _dt.TryGetFiles();
     }

@@ -35,7 +35,7 @@ public sealed class TabViewItemAutomationPeer : ListItemAutomationPeer, ISelecti
 
     bool ISelectionItemProvider.IsSelected => (Owner as TabViewItem)?.IsSelected ?? false;
 
-    ISelectionProvider ISelectionItemProvider.SelectionContainer
+    ISelectionProvider? ISelectionItemProvider.SelectionContainer
     {
         get
         {
@@ -64,7 +64,7 @@ public sealed class TabViewItemAutomationPeer : ListItemAutomationPeer, ISelecti
             tvi.IsSelected = true;
     }
 
-    private TabView GetParentTabView()
+    private TabView? GetParentTabView()
     {
         if (Owner is TabViewItem tvi)
         {

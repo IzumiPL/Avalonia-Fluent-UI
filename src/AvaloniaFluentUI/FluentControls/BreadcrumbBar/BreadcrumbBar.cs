@@ -38,13 +38,13 @@ public class BreadcrumbBar : TemplatedControl
     /// <summary>
     /// Defines the <see cref="ItemsSource"/> property
     /// </summary>
-    public static readonly StyledProperty<IEnumerable> ItemsSourceProperty =
+    public static readonly StyledProperty<IEnumerable?> ItemsSourceProperty =
         ItemsControl.ItemsSourceProperty.AddOwner<BreadcrumbBar>();
 
     /// <summary>
     /// Defines the <see cref="ItemTemplate"/> property
     /// </summary>
-    public static readonly StyledProperty<IDataTemplate> ItemTemplateProperty =
+    public static readonly StyledProperty<IDataTemplate?> ItemTemplateProperty =
         ItemsControl.ItemTemplateProperty.AddOwner<BreadcrumbBar>();
 
     /// <summary>
@@ -56,7 +56,7 @@ public class BreadcrumbBar : TemplatedControl
     /// <summary>
     /// Gets or sets an object source used to generate the content of the BreadcrumbBar.
     /// </summary>
-    public IEnumerable ItemsSource
+    public IEnumerable? ItemsSource
     {
         get => GetValue(ItemsSourceProperty);
         set => SetValue(ItemsSourceProperty, value);
@@ -65,7 +65,7 @@ public class BreadcrumbBar : TemplatedControl
     /// <summary>
     /// Gets or sets the data template for the BreadcrumbBarItem.
     /// </summary>
-    public IDataTemplate ItemTemplate
+    public IDataTemplate? ItemTemplate
     {
         get => GetValue(ItemTemplateProperty);
         set => SetValue(ItemTemplateProperty, value);
@@ -125,7 +125,7 @@ public class BreadcrumbBar : TemplatedControl
         }
     }
 
-    private void OnBreadcrumbBarItemsRepeaterLoaded(object sender, RoutedEventArgs e)
+    private void OnBreadcrumbBarItemsRepeaterLoaded(object? sender, RoutedEventArgs e)
     {
         if (_itemsRepeater != null)
             OnBreadcrumbBarItemsSourceCollectionChanged(null, null);
@@ -134,7 +134,7 @@ public class BreadcrumbBar : TemplatedControl
     private void UpdateItemTemplate()
     {
         var template = ItemTemplate;
-        _itemsRepeaterElementFactory.UserElementFactory(template);
+        _itemsRepeaterElementFactory?.UserElementFactory(template);
     }
 
     private void UpdateEllipsisBreadcrumbBarItemDropDownItemTemplate()
@@ -168,7 +168,7 @@ public class BreadcrumbBar : TemplatedControl
         }
     }
 
-    private void OnBreadcrumbBarItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void OnBreadcrumbBarItemsSourceCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (_itemsRepeater != null)
         {
@@ -350,7 +350,7 @@ public class BreadcrumbBar : TemplatedControl
         }
     }
 
-    private void OnGettingFocus(object sender, FocusChangingEventArgs args)
+    private void OnGettingFocus(object? sender, FocusChangingEventArgs args)
     {
         if (_itemsRepeater is ItemsRepeater repeater)
         {
@@ -488,7 +488,7 @@ public class BreadcrumbBar : TemplatedControl
         return options;
     }
 
-    private void OnChildPreviewKeyDown(object sender, KeyEventArgs args)
+    private void OnChildPreviewKeyDown(object? sender, KeyEventArgs args)
     {
         bool flowDirectionIsLtr = FlowDirection == FlowDirection.LeftToRight;
         bool keyIsLeft = args.Key == Key.Left;
@@ -530,18 +530,16 @@ public class BreadcrumbBar : TemplatedControl
         _breadcrumbItemsSourceView?.CollectionChanged -= OnBreadcrumbBarItemsSourceCollectionChanged;
     }
 
-    private ItemsSourceView _breadcrumbItemsSourceView;
-    private BreadcrumbIterable _itemsIterable;
+    private ItemsSourceView? _breadcrumbItemsSourceView;
+    private BreadcrumbIterable? _itemsIterable;
 
-    private ItemsRepeater _itemsRepeater;
-    private BreadcrumbElementFactory _itemsRepeaterElementFactory;
-    private BreadcrumbLayout _itemsRepeaterLayout;
+    private ItemsRepeater? _itemsRepeater;
+    private BreadcrumbElementFactory? _itemsRepeaterElementFactory;
+    private BreadcrumbLayout? _itemsRepeaterLayout;
 
-    private BreadcrumbBarItem _ellipsisBreadcrumBarItem;
-    private BreadcrumbBarItem _lastBreadcrumbBarItem;
+    private BreadcrumbBarItem? _ellipsisBreadcrumBarItem;
+    private BreadcrumbBarItem? _lastBreadcrumbBarItem;
     private int _focusedIndex;
 
     private const string s_tpItemsRepeater = "PART_ItemsRepeater";
-
-    private const string SR_AutomationNameEllipsisBreadcrumbBarItem = "AutomationNameEllipsisBreadcrumbBarItem";
 }

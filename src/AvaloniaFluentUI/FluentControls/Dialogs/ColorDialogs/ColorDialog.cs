@@ -32,7 +32,7 @@ public class ColorDialog : ContentDialog
         LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
     }
 
-    private void OnLanguageChanged(object sender, PropertyChangedEventArgs e)
+    private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
     {
         SetText();
     }

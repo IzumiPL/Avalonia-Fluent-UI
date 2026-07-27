@@ -266,7 +266,7 @@ internal class ViewportManager
         }
     }
 
-    private void OnLayoutUpdated(object sender, EventArgs e)
+    private void OnLayoutUpdated(object? sender, EventArgs e)
     {
         _layoutUpdatedRevoker = false;
         _owner.LayoutUpdated -= OnLayoutUpdated;
@@ -281,11 +281,6 @@ internal class ViewportManager
 
         if (_pendingViewportShift.X != 0 && _pendingViewportShift.Y != 0)
         {
-#if DEBUG && REPEATER_TRACE
-            Log.Debug("{Layout}: Layout updated with pending shift {Shift} - invalidating measure",
-                GetLayoutId(), _pendingViewportShift);
-#endif
-
             _unshiftableShift = new Point(
                 _unshiftableShift.X + _pendingViewportShift.X,
                 _unshiftableShift.Y + _pendingViewportShift.Y);
@@ -418,13 +413,8 @@ internal class ViewportManager
             _owner.InvalidateMeasure();
     }
 
-    private void OnEffectiveViewportChanged(object sender, EffectiveViewportChangedEventArgs args)
+    private void OnEffectiveViewportChanged(object? sender, EffectiveViewportChangedEventArgs args)
     {
-#if DEBUG && REPEATER_TRACE
-        Debug.Assert(!_managingViewportDisabled);
-        Log.Debug("{Layout}: EffectiveViewportChanged event callback", GetLayoutId());
-#endif 
-
         UpdateViewport(args.EffectiveViewport);
 
         _pendingViewportShift = default;
@@ -546,9 +536,6 @@ internal class ViewportManager
             // We invalidate measure instead of just invalidating arrange because
             // we don't invalidate measure in UpdateViewport if the view is changing to
             // avoid layout cycles.
-#if DEBUG && REPEATER_TRACE
-            Log.Debug("{Layout}: Invalidating measure due to viewport change", GetLayoutId());
-#endif
             _owner.InvalidateMeasure();
         }
     }
@@ -557,11 +544,11 @@ internal class ViewportManager
 
     private ItemsRepeater _owner;
     private bool _ensuredScroller;
-    private IScrollAnchorProvider _scroller;
-    private Control _makeAnchorElement;
+    private IScrollAnchorProvider? _scroller;
+    private Control? _makeAnchorElement;
     private bool _isAnchorOutsideRealizedRange;
 
-    private Action _cacheBuildAction;
+    private Action? _cacheBuildAction;
 
     private Rect _visibleWindow;
     private Rect _layoutExtent;

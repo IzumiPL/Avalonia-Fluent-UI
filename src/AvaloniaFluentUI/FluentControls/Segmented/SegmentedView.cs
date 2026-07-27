@@ -18,6 +18,8 @@ public class SegmentedView : SelectingItemsControl
     protected SelectionIndicator? _selectedIndicator;
     protected Panel? _headersArea;
     
+    protected TranslateTransform _transform = new TranslateTransform();
+    
     private const string PART_SELECTED_INDICATOR = "PART_SelectedIndicator";
     private const string PART_HEADERS_ARES = "PART_HeadersArea";
 
@@ -70,9 +72,7 @@ public class SegmentedView : SelectingItemsControl
             }
         }
     }
-
-    protected TranslateTransform _transform = new TranslateTransform();
-
+    
     protected async virtual void RunSliderAnimation(Point position)
     {
         if (_selectedIndicator == null) { return; }
@@ -147,6 +147,9 @@ public class SegmentedItem : ContentControl
     public static readonly StyledProperty<bool> IsSelectedProperty =
         SelectingItemsControl.IsSelectedProperty.AddOwner<SegmentedItem>();
 
+    /// <summary>
+    /// 设置或获取当前项是否选中
+    /// </summary>
     public bool IsSelected
     {
         get => GetValue(IsSelectedProperty);

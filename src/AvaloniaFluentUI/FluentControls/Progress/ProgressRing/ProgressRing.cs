@@ -97,7 +97,7 @@ public class ProgressRing : RangeBase
         }
     }
 
-    private ProgressRingAnimatedVisual _animatedVisualSource;
+    private ProgressRingAnimatedVisual? _animatedVisualSource;
 
     private const string _tpAnimatedVisual = "AnimatedVisual";
 }

@@ -16,7 +16,7 @@ using Avalonia.Utilities;
 using Avalonia.VisualTree;
 using AvaloniaFluentUI.Core;
 using AvaloniaFluentUI.Controls.Internal;
-using AvaloniaFluentUI.Locale;
+using AvaloniaFluentUI.Helpers;
 using Path = Avalonia.Controls.Shapes.Path;
 
 namespace AvaloniaFluentUI.Controls;
@@ -34,13 +34,13 @@ public partial class TabViewItem : SelectorItem
      /// <summary>
     /// Defines the <see cref="Header"/> property
     /// </summary>
-    public static readonly StyledProperty<object> HeaderProperty =
+    public static readonly StyledProperty<object?> HeaderProperty =
         HeaderedContentControl.HeaderProperty.AddOwner<TabViewItem>();
 
     /// <summary>
     /// Defines the <see cref="HeaderTemplate"/> property
     /// </summary>
-    public static readonly StyledProperty<IDataTemplate> HeaderTemplateProperty =
+    public static readonly StyledProperty<IDataTemplate?> HeaderTemplateProperty =
         HeaderedContentControl.HeaderTemplateProperty.AddOwner<TabViewItem>();
 
     /// <summary>
@@ -64,7 +64,7 @@ public partial class TabViewItem : SelectorItem
     /// <summary>
     /// Gets or sets the content that appears inside the tabstrip to represent the tab
     /// </summary>
-    public object Header
+    public object? Header
     {
         get => GetValue(HeaderProperty);
         set => SetValue(HeaderProperty, value);
@@ -73,7 +73,7 @@ public partial class TabViewItem : SelectorItem
     /// <summary>
     /// Gets or sets the IDataTemplate used to display the <see cref="Header"/> content
     /// </summary>
-    public IDataTemplate HeaderTemplate
+    public IDataTemplate? HeaderTemplate
     {
         get => GetValue(HeaderTemplateProperty);
         set => SetValue(HeaderTemplateProperty, value);
@@ -596,7 +596,7 @@ public partial class TabViewItem : SelectorItem
         CloseRequested?.Invoke(this, args);
     }
 
-    private void OnCloseButtonClick(object sender, RoutedEventArgs e)
+    private void OnCloseButtonClick(object? sender, RoutedEventArgs e)
     {
         RequestClose();
     }
@@ -673,7 +673,7 @@ public partial class TabViewItem : SelectorItem
         });
     }
 
-    private void OnSelectedBackgroundPathSizeChanged(object sender, SizeChangedEventArgs e)
+    private void OnSelectedBackgroundPathSizeChanged(object? sender, SizeChangedEventArgs e)
     {
         // This was added upstream in WinUI to avoid a small gap that sometimes appeared underneath the
         // tabviewitem. I never saw it in FA, but I'll keep this around
@@ -699,13 +699,13 @@ public partial class TabViewItem : SelectorItem
         }
     }
 
-    private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+    private void OnSizeChanged(object? sender, SizeChangedEventArgs e)
     {
         // WinUI #6748
         Dispatcher.UIThread.Post(() => UpdateTabGeometry());
     }
 
-    private void OnLoaded(object sender, RoutedEventArgs e)
+    private void OnLoaded(object? sender, RoutedEventArgs e)
     {
         if (ParentTabView is TabView tv)
         {
@@ -713,12 +713,12 @@ public partial class TabViewItem : SelectorItem
         }
     }
 
-    private Button _closeButton;
-    private ContentPresenter _headerContentPresenter;
+    private Button? _closeButton;
+    private ContentPresenter? _headerContentPresenter;
     private TabViewWidthMode _tabViewWidthMode = TabViewWidthMode.Equal;
     private TabViewCloseButtonOverlayMode _closeButtonOverlayMode = TabViewCloseButtonOverlayMode.Auto;
-    private CompositeDisposable _tabDragRevoker;
-    private Path _selectedBackgroundPath;
+    private CompositeDisposable? _tabDragRevoker;
+    private Path? _selectedBackgroundPath;
     private TabViewTabStripLocation _location;
 
     private bool _hasPointerCapture = false;

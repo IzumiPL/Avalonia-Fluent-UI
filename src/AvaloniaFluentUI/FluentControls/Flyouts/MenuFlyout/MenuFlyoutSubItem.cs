@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Specialized;
 using Avalonia;
 using Avalonia.Collections;
 using Avalonia.Controls;
@@ -6,12 +8,11 @@ using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.VisualTree;
-using System.Collections;
-using System.Collections.Specialized;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Templates;
 using Avalonia.Metadata;
 using Avalonia.Styling;
+using AvaloniaFluentUI.Helpers;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -36,19 +37,19 @@ public partial class MenuFlyoutSubItem : MenuFlyoutItemBase
     /// <summary>
     /// Defines the <see cref="Items"/> property
     /// </summary>
-    public static readonly StyledProperty<IEnumerable> ItemsSourceProperty =
+    public static readonly StyledProperty<IEnumerable?> ItemsSourceProperty =
         ItemsControl.ItemsSourceProperty.AddOwner<MenuFlyoutSubItem>();
 
     /// <summary>
     /// Defines the <see cref="ItemTemplate"/> property
     /// </summary>
-    public static readonly StyledProperty<IDataTemplate> ItemTemplateProperty =
+    public static readonly StyledProperty<IDataTemplate?> ItemTemplateProperty =
         ItemsControl.ItemTemplateProperty.AddOwner<MenuFlyoutSubItem>();
 
     /// <summary>
     /// Defines the <see cref="ItemContainerTheme"/> property
     /// </summary>
-    public static readonly StyledProperty<ControlTheme> ItemContainerThemeProperty =
+    public static readonly StyledProperty<ControlTheme?> ItemContainerThemeProperty =
         ItemsControl.ItemContainerThemeProperty.AddOwner<ControlTheme>();
 
     /// <summary>
@@ -89,13 +90,13 @@ public partial class MenuFlyoutSubItem : MenuFlyoutItemBase
     /// <summary>
     /// Gets or sets the collection used to generate the content of the sub-menu.
     /// </summary>
-    public IEnumerable ItemsSource
+    public IEnumerable? ItemsSource
     {
         get => GetValue(ItemsSourceProperty);
         set => SetValue(ItemsSourceProperty, value);
     }
 
-    public IDataTemplate ItemTemplate
+    public IDataTemplate? ItemTemplate
     {
         get => GetValue(ItemTemplateProperty);
         set => SetValue(ItemTemplateProperty, value);
@@ -104,7 +105,7 @@ public partial class MenuFlyoutSubItem : MenuFlyoutItemBase
     /// <summary>
     /// Gets or sets the <see cref="ControlTheme"/> to apply for the items
     /// </summary>
-    public ControlTheme ItemContainerTheme
+    public ControlTheme? ItemContainerTheme
     {
         get => GetValue(ItemContainerThemeProperty);
         set => SetValue(ItemContainerThemeProperty, value);
@@ -238,17 +239,17 @@ public partial class MenuFlyoutSubItem : MenuFlyoutItemBase
         }
     }
 
-    private void OnPopupOpen(object sender, EventArgs e)
+    private void OnPopupOpen(object? sender, EventArgs e)
     {
         PseudoClasses.Set(s_pcSubmenuOpen, true);
     }
 
-    private void OnPopupClose(object sender, EventArgs e)
+    private void OnPopupClose(object? sender, EventArgs e)
     {
         PseudoClasses.Set(s_pcSubmenuOpen, false);
     }
 
-    private void ItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void ItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {  
         if (ItemsSource != null)
         {
@@ -256,6 +257,6 @@ public partial class MenuFlyoutSubItem : MenuFlyoutItemBase
         }
     }
 
-    private Popup _subMenu;
-    private FAMenuFlyoutPresenter _presenter;
+    private Popup? _subMenu;
+    private FAMenuFlyoutPresenter? _presenter;
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using Avalonia.Controls;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -72,7 +71,7 @@ internal class TopNavigationViewDataProvider : SplitDataSourceBase<object, Navig
         _dataChangedCallback = dataChangedCallback;
     }
 
-    public override int IndexOf(object value)
+    public override int IndexOf(object? value)
     {
         if (_dataSource != null)
         {
@@ -96,7 +95,7 @@ internal class TopNavigationViewDataProvider : SplitDataSourceBase<object, Navig
         return index;
     }
 
-    public override object GetAt(int index)
+    public override object? GetAt(int index)
     {
         if (_dataSource != null)
         {
@@ -373,8 +372,8 @@ internal class TopNavigationViewDataProvider : SplitDataSourceBase<object, Navig
 
 
 
-    private Action<NotifyCollectionChangedEventArgs> _dataChangedCallback;
+    private Action<NotifyCollectionChangedEventArgs>? _dataChangedCallback;
     private IEnumerable _rawDataSource;
-    private Avalonia.Controls.ItemsSourceView _dataSource;
+    private Avalonia.Controls.ItemsSourceView? _dataSource;
     private double _overflowButtonCachedWidth;
 }

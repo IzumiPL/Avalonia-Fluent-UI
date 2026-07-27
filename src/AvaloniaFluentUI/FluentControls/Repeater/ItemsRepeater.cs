@@ -44,7 +44,7 @@ public partial class ItemsRepeater : Panel
     /// <summary>
     /// Defines the <see cref="VerticalCacheLength"/> property
     /// </summary>
-    public static readonly StyledProperty<IDataTemplate> ItemTemplateProperty =
+    public static readonly StyledProperty<IDataTemplate?> ItemTemplateProperty =
         ItemsControl.ItemTemplateProperty.AddOwner<ItemsRepeater>();
 
     /// <summary>
@@ -93,7 +93,7 @@ public partial class ItemsRepeater : Panel
     /// Gets or sets the template used to display each item.
     /// </summary>
     [InheritDataTypeFromItems(nameof(ItemsSource))]
-    public IDataTemplate ItemTemplate
+    public IDataTemplate? ItemTemplate
     {
         get => GetValue(ItemTemplateProperty);
         set => SetValue(ItemTemplateProperty, value);
@@ -149,22 +149,22 @@ public partial class ItemsRepeater : Panel
     /// <summary>
     /// Occurs each time an element is prepared for use.
     /// </summary>
-    public event TypedEventHandler<ItemsRepeater, ItemsRepeaterElementPreparedEventArgs> ElementPrepared;
+    public event TypedEventHandler<ItemsRepeater, ItemsRepeaterElementPreparedEventArgs>? ElementPrepared;
 
     /// <summary>
     /// Occurs each time an element is cleared and made available to be re-used.
     /// </summary>
-    public event TypedEventHandler<ItemsRepeater, ItemsRepeaterElementClearingEventArgs> ElementClearing;
+    public event TypedEventHandler<ItemsRepeater, ItemsRepeaterElementClearingEventArgs>? ElementClearing;
 
     /// <summary>
     /// Occurs for each realized UIElement when the index for the item it represents has changed.
     /// </summary>
-    public event TypedEventHandler<ItemsRepeater, ItemsRepeaterElementIndexChangedEventArgs> ElementIndexChanged;
+    public event TypedEventHandler<ItemsRepeater, ItemsRepeaterElementIndexChangedEventArgs>? ElementIndexChanged;
 
     /// <summary>
     /// Occurs when container content is changing, used for Phased rendering
     /// </summary>
-    public event TypedEventHandler<ItemsRepeater, ContainerContentChangingEventArgs> ContainerContentChanging;
+    public event TypedEventHandler<ItemsRepeater, ContainerContentChangingEventArgs>? ContainerContentChanging;
 
     internal static readonly AttachedProperty<VirtualizationInfo> VirtualizationInfoProperty =
         AvaloniaProperty.RegisterAttached<ItemsRepeater, Control, VirtualizationInfo>("VirtualizationInfo");
@@ -578,12 +578,12 @@ public partial class ItemsRepeater : Panel
     private IEnumerable<Control> GetChildrenInTabFocusOrder() =>
         CreateChildrenInTabFocusOrderIterable();
 
-    private void OnBringIntoViewRequested(object sender, RequestBringIntoViewEventArgs args)
+    private void OnBringIntoViewRequested(object? sender, RequestBringIntoViewEventArgs args)
     {
         _viewportManager.OnBringIntoViewRequested(args);
     }
 
-    private void OnRepeaterLoaded(object sender, RoutedEventArgs e)
+    private void OnRepeaterLoaded(object? sender, RoutedEventArgs e)
     {
         // If we skipped an unload event, reset the scrollers now and invalidate measure so that we get a new
         // layout pass during which we will hookup new scrollers.
@@ -595,7 +595,7 @@ public partial class ItemsRepeater : Panel
         ++_loadedCounter;
     }
 
-    private void OnRepeaterUnloaded(object sender, RoutedEventArgs e)
+    private void OnRepeaterUnloaded(object? sender, RoutedEventArgs e)
     {
         _stackLayoutMeasureCounter = 0;
         ++_unloadedCounter;
@@ -607,7 +607,7 @@ public partial class ItemsRepeater : Panel
         }
     }
 
-    private void OnLayoutUpdated(object sender, EventArgs e)
+    private void OnLayoutUpdated(object? sender, EventArgs e)
     { 
         // Now that the layout has settled, reset the measure counter to detect the next potential StackLayout layout cycle.
         _stackLayoutMeasureCounter = 0;
@@ -726,7 +726,7 @@ public partial class ItemsRepeater : Panel
         InvalidateMeasure();
     }
 
-    private void OnLayoutChanged(Layout oldValue, Layout newValue)
+    private void OnLayoutChanged(Layout? oldValue, Layout? newValue)
     {
         bool isInitialSetup = !_wasLayoutChangedCalled;
         _wasLayoutChangedCalled = true;
@@ -791,7 +791,7 @@ public partial class ItemsRepeater : Panel
         _transitionManager.OnTransitionProviderChanged(newValue);
     }
 
-    private void OnItemsSourceViewChanged(object sender, NotifyCollectionChangedEventArgs args)
+    private void OnItemsSourceViewChanged(object? sender, NotifyCollectionChangedEventArgs args)
     {
         if (_isLayoutInProgress)
             throw new InvalidOperationException("Changes in data source are not allowed during layout.");
@@ -941,10 +941,3 @@ public partial class ItemsRepeater : Panel
     // EnsureDefaultLayoutState does not trigger a second call after the control's creation.
     private bool _wasLayoutChangedCalled;
 }
-
-// I think this is something special for WinRT/C++, we'll just use
-// IElementFactory directly
-//public interface IElementFactoryShim : IElementFactory
-//{
-
-//}

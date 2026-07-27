@@ -94,7 +94,7 @@ public class NavigationViewItemBase : ListBoxItem
 
     protected virtual void OnNavigationViewItemBaseIsSelectedChanged() { }
 
-    private void OnNavItemBaseLoaded(object sender, RoutedEventArgs e)
+    private void OnNavItemBaseLoaded(object? sender, RoutedEventArgs e)
     {
         if (_navView == null)
         {
@@ -105,7 +105,7 @@ public class NavigationViewItemBase : ListBoxItem
     // (WinUI) TODO: Constant is a temporary measure. Potentially expose using TemplateSettings.
     protected readonly int _itemIndentation = 31;
 
-    private WeakReference<NavigationView> _navView;
+    private WeakReference<NavigationView>? _navView;
     private int _depth;
     private NavigationViewRepeaterPosition _position;
 }

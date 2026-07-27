@@ -61,7 +61,7 @@ internal static class IEnumerableExtensions
     /// <param name="items"></param>
     /// <param name="reqIndex"></param>
     /// <returns></returns>
-    public static object ElementAt(this IEnumerable items, int reqIndex)
+    public static object? ElementAt(this IEnumerable items, int reqIndex)
     {
         if (items.Count() == 0)
             return null;

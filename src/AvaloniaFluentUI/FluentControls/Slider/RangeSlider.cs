@@ -8,7 +8,6 @@ using Avalonia.Controls.Shapes;
 using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Threading;
-using Avalonia.Utilities;
 using AvaloniaFluentUI.Core;
 
 namespace AvaloniaFluentUI.Controls;
@@ -66,7 +65,6 @@ public partial class RangeSlider : TemplatedControl
     /// </summary>
     public static readonly StyledProperty<double> MinimumRangeProperty = 
         AvaloniaProperty.Register<RangeSlider, double>(nameof(MinimumRange), defaultValue: 0d);
-    
 
     /// <summary>
     /// Defines the <see cref="ShowValueToolTip"/> property
@@ -160,17 +158,17 @@ public partial class RangeSlider : TemplatedControl
     /// <summary>
     /// Fired when a thumb drag begins
     /// </summary>
-    public event EventHandler<VectorEventArgs> ThumbDragStarted;
+    public event EventHandler<VectorEventArgs>? ThumbDragStarted;
 
     /// <summary>
     /// Fired when a thumb drag completes
     /// </summary>
-    public event EventHandler<VectorEventArgs> ThumbDragCompleted;
+    public event EventHandler<VectorEventArgs>? ThumbDragCompleted;
 
     /// <summary>
     /// Fired when either RangeStart or RangeEnd is changed
     /// </summary>
-    public event EventHandler<RangeChangedEventArgs> ValueChanged;
+    public event EventHandler<RangeChangedEventArgs>? ValueChanged;
 
     private const string s_tpActiveRectangle = "ActiveRectangle";
     private const string s_tpMinThumb = "MinThumb";
@@ -357,7 +355,7 @@ public partial class RangeSlider : TemplatedControl
         ValueChanged?.Invoke(this, e);
     }
 
-    private void MinThumbDragDelta(object sender, VectorEventArgs e)
+    private void MinThumbDragDelta(object? sender, VectorEventArgs e)
     {
         _absolutePosition += e.Vector.X;
 
@@ -382,7 +380,7 @@ public partial class RangeSlider : TemplatedControl
         }
     }
 
-    private void MaxThumbDragDelta(object sender, VectorEventArgs e)
+    private void MaxThumbDragDelta(object? sender, VectorEventArgs e)
     {
         _absolutePosition += e.Vector.X;
 
@@ -407,21 +405,21 @@ public partial class RangeSlider : TemplatedControl
         }
     }
 
-    private void MinThumbDragStarted(object sender, VectorEventArgs e)
+    private void MinThumbDragStarted(object? sender, VectorEventArgs e)
     {
         _isDraggingStart = true;
         OnThumbDragStarted(e);
         HandleThumbDragStarted(_minThumb);
     }
 
-    private void MaxThumbDragStarted(object sender, VectorEventArgs e)
+    private void MaxThumbDragStarted(object? sender, VectorEventArgs e)
     {
         _isDraggingEnd = true;
         OnThumbDragStarted(e);
         HandleThumbDragStarted(_maxThumb);
     }
 
-    private void HandleThumbDragCompleted(object sender, VectorEventArgs e)
+    private void HandleThumbDragCompleted(object? sender, VectorEventArgs e)
     {
         _isDraggingStart = _isDraggingEnd = false;
         OnThumbDragCompleted(e);
@@ -464,7 +462,7 @@ public partial class RangeSlider : TemplatedControl
         }
     }
 
-    private void MinThumbKeyDown(object sender, KeyEventArgs e)
+    private void MinThumbKeyDown(object? sender, KeyEventArgs e)
     {
         switch (e.Key)
         {
@@ -488,7 +486,7 @@ public partial class RangeSlider : TemplatedControl
         }
     }
 
-    private void MaxThumbKeyDown(object sender, KeyEventArgs e)
+    private void MaxThumbKeyDown(object? sender, KeyEventArgs e)
     {
         switch (e.Key)
         {
@@ -525,7 +523,7 @@ public partial class RangeSlider : TemplatedControl
         }
     }
 
-    private void ThumbKeyUp(object sender, KeyEventArgs e)
+    private void ThumbKeyUp(object? sender, KeyEventArgs e)
     {
         switch (e.Key)
         {
@@ -546,7 +544,7 @@ public partial class RangeSlider : TemplatedControl
         }
     }
 
-    private void ContainerCanvasPointerExited(object sender, PointerEventArgs e)
+    private void ContainerCanvasPointerExited(object? sender, PointerEventArgs e)
     {
         var position = e.GetCurrentPoint(_containerCanvas).Position;
 
@@ -570,7 +568,7 @@ public partial class RangeSlider : TemplatedControl
         }
     }
 
-    private void ContainerCanvasPointerReleased(object sender, PointerReleasedEventArgs e)
+    private void ContainerCanvasPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
         _pointerManipulatingBoth = false;
         var position = e.GetCurrentPoint(_containerCanvas).Position.X;
@@ -603,7 +601,7 @@ public partial class RangeSlider : TemplatedControl
         SyncThumbs();
     }
 
-    private void ContainerCanvasPointerMoved(object sender, PointerEventArgs e)
+    private void ContainerCanvasPointerMoved(object? sender, PointerEventArgs e)
     {
         var position = e.GetCurrentPoint(_containerCanvas).Position.X;
         if (_pointerManipulatingBoth)
@@ -656,7 +654,7 @@ public partial class RangeSlider : TemplatedControl
         }
     }
 
-    private void ContainerCanvasPointerPressed(object sender, PointerPressedEventArgs e)
+    private void ContainerCanvasPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         var position = e.GetCurrentPoint(_containerCanvas).Position.X;
 
@@ -831,7 +829,7 @@ public partial class RangeSlider : TemplatedControl
         _activeRectangle.Width = Math.Max(0, Canvas.GetLeft(_maxThumb) - Canvas.GetLeft(_minThumb));
     }
 
-    private void ContainerCanvasSizeChanged(object sender, SizeChangedEventArgs e)
+    private void ContainerCanvasSizeChanged(object? sender, SizeChangedEventArgs e)
     {
         SyncThumbs();
     }
@@ -886,8 +884,8 @@ public partial class RangeSlider : TemplatedControl
     private bool _pointerManipulatingMax;
     private bool _pointerManipulatingBoth;
     private double _absolutePosition;
-    private Control _toolTip;
-    private TextBlock _toolTipText;
+    private Control? _toolTip;
+    private TextBlock? _toolTipText;
     private const double Epsilon = 0.01;
     private bool _isDraggingStart;
     private bool _isDraggingEnd;

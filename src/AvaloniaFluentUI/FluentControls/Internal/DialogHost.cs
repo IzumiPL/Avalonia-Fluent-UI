@@ -96,18 +96,6 @@ public class DialogHost : ContentControl
         e.Handled = true;
     }
 
-    // TODO: This is a temporary fix for https://github.com/amwx/AvaloniaFluentUI/issues/110
-    // TODO: In long term we need to find a final fix for this
-    // protected override void OnKeyDown(KeyEventArgs e)
-    // {
-    //     e.Handled = true;
-    // }
-    //
-    // protected override void OnKeyUp(KeyEventArgs e)
-    // {
-    //     e.Handled = true;
-    // }
-
     private void OnRootBoundsChanged()
     {
         InvalidateMeasure();

@@ -53,7 +53,7 @@ internal class CollectionViewGroup : ICollectionViewGroup
         (GroupItems as INotifyCollectionChanged).CollectionChanged += OnGroupItemsCollectionChanged;
     }
 
-    protected virtual void OnGroupItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+    protected virtual void OnGroupItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
     {
         _owner.GroupItemsChanged(this, args);
     }
@@ -175,7 +175,7 @@ internal class SpecializedCollectionViewGroup : CollectionViewGroup, IComparer<o
         _ignoreNotify = false;
     }
 
-    protected override void OnGroupItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+    protected override void OnGroupItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
     {
         switch (args.Action)
         {
@@ -241,7 +241,7 @@ internal class SpecializedCollectionViewGroup : CollectionViewGroup, IComparer<o
         }
     }
 
-    private void ItemOnPropertyChanged(object item, PropertyChangedEventArgs args)
+    private void ItemOnPropertyChanged(object? item, PropertyChangedEventArgs args)
     {
         if (!_owner.IsLiveShapingEnabled)
             return;
@@ -516,10 +516,10 @@ internal class CollectionWrapper : IAvaloniaList<object>, IList // IList for INC
 
     public bool IsReadOnly => _collection is ICollection<object> col && col.IsReadOnly;
 
-    public event NotifyCollectionChangedEventHandler CollectionChanged;
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event NotifyCollectionChangedEventHandler? CollectionChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
-    private void OnBackingCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void OnBackingCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         CollectionChanged?.Invoke(this, e);
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
@@ -685,16 +685,16 @@ internal class CollectionWrapper : IAvaloniaList<object>, IList // IList for INC
         Clear();
     }
 
-    bool IList.Contains(object value) =>
+    bool IList.Contains(object? value) =>
         Contains(value);
 
-    int IList.IndexOf(object value) =>
+    int IList.IndexOf(object? value) =>
         IndexOf(value);
 
-    void IList.Insert(int index, object value) =>
+    void IList.Insert(int index, object? value) =>
         Insert(index, value);
 
-    void IList.Remove(object value) =>
+    void IList.Remove(object? value) =>
         Remove(value);
 
     void IList.RemoveAt(int index) =>

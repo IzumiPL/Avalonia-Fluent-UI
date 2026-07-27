@@ -99,16 +99,6 @@ public class TextCommandBarFlyout : CommandBarFlyout
             }
         }
 
-        // No RichTextBox yet, so skipping this - Bold/Italic/Underline not supported yet
-        //void addRichEditButtonToCommandsIfPresent(TextControlButtons buttonType, 
-        //	IList<ICommandBarElement> commandsList, bool getIsChecked)
-        //{
-        //	if ((buttonsToAdd & buttonType) != TextControlButtons.None)
-        //	{
-        //		//TODO
-        //	}
-        //}
-
         // We don't have proofing flyouts, so skip that
 
         // We don't have FlyoutBase.InputDevicePrefersPrimaryCommands
@@ -118,11 +108,6 @@ public class TextCommandBarFlyout : CommandBarFlyout
         addButtonToCommandsIfPresent(TextControlButtons.Copy, SecondaryCommands);
         addButtonToCommandsIfPresent(TextControlButtons.Paste, SecondaryCommands);
         
-        //TODO: the bool arg
-        //addRichEditButtonToCommandsIfPresent(TextControlButtons.Bold, PrimaryCommands, false);
-        //addRichEditButtonToCommandsIfPresent(TextControlButtons.Italic, PrimaryCommands, false);
-        //addRichEditButtonToCommandsIfPresent(TextControlButtons.Underline, PrimaryCommands, false);
-
         addButtonToCommandsIfPresent(TextControlButtons.Undo, SecondaryCommands);
         addButtonToCommandsIfPresent(TextControlButtons.Redo, SecondaryCommands);
         addButtonToCommandsIfPresent(TextControlButtons.SelectAll, SecondaryCommands);

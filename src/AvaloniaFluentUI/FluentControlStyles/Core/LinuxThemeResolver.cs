@@ -208,7 +208,7 @@ internal static class LinuxThemeResolver
         return name.Contains("LXQt") ? DesktopEnvironment.LXQt : DesktopEnvironment.Other;
     }
 
-    private static string _config;
+    private static string? _config;
 
     private static readonly DesktopEnvironment _desktopEnvironment = GetDesktopEnvironment();
 

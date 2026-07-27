@@ -418,7 +418,7 @@ public class ContentDialog : ContentControl, ICustomKeyboardNavigation
     /// <summary>
     /// Begins an asynchronous operation to show the dialog using the specified window
     /// </summary>
-    public Task<ContentDialogResult> ShowAsync(Window w) => ShowAsyncCoreForTopLevel(w);
+    public Task<ContentDialogResult> ShowAsync(Window window) => ShowAsyncCoreForTopLevel(window);
 
     /// <summary>
     /// Begins an asynchronous operation to show the dialog using the specified top level
@@ -426,7 +426,7 @@ public class ContentDialog : ContentControl, ICustomKeyboardNavigation
     /// <remarks>
     /// Use this when an ApplicationLifetime is unavailable (such as in headless unit tests)
     /// </remarks>
-    public Task<ContentDialogResult> ShowAsync(TopLevel tl) => ShowAsyncCoreForTopLevel(tl);
+    public Task<ContentDialogResult> ShowAsync(TopLevel? topLevel) => ShowAsyncCoreForTopLevel(topLevel);
 
     /// <summary>
     /// Shows the content dialog on the specified window asynchronously.
@@ -437,7 +437,7 @@ public class ContentDialog : ContentControl, ICustomKeyboardNavigation
     private Task<ContentDialogResult> ShowAsyncCore(Window window, ContentDialogPlacement placement = ContentDialogPlacement.Popup) =>
         ShowAsyncCoreForTopLevel((TopLevel)window);
 
-    private async Task<ContentDialogResult> ShowAsyncCoreForTopLevel(TopLevel topLevel)
+    private async Task<ContentDialogResult> ShowAsyncCoreForTopLevel(TopLevel? topLevel)
     {
         _tcs = new TaskCompletionSource<ContentDialogResult>();
 

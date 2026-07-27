@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
+using AvaloniaFluentUI.Helpers;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -68,5 +69,5 @@ public class IconSourceElement : IconElement
         return LayoutHelper.ArrangeChild(_child, finalSize, new Thickness());
     }
 
-    private Control _child;
+    private Control? _child;
 }

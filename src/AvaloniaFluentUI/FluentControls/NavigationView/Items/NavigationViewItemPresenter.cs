@@ -18,7 +18,7 @@ namespace AvaloniaFluentUI.Controls.Primitives;
 [PseudoClasses(SharedPseudoclasses.s_pcChevronOpen, SharedPseudoclasses.s_pcChevronClosed, SharedPseudoclasses.s_pcChevronHidden)]
 [PseudoClasses(SharedPseudoclasses.s_pcIconLeft, SharedPseudoclasses.s_pcIconOnly, SharedPseudoclasses.s_pcContentOnly)]
 [PseudoClasses(SharedPseudoclasses.s_pcPressed)]
-public partial class NavigationViewItemPresenter : ContentControl
+public class NavigationViewItemPresenter : ContentControl
 {
     /// <summary>
     /// Defines the <see cref="IconSource"/> property

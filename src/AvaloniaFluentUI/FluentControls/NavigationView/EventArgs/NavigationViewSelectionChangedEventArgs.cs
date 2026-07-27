@@ -11,12 +11,12 @@ public class NavigationViewSelectionChangedEventArgs : EventArgs
     /// <summary>
     /// Gets the newly selected menu item.
     /// </summary>
-    public object SelectedItem { get; internal set; }
+    public object? SelectedItem { get; internal set; }
 
     /// <summary>
     /// Gets the container for the selected item.
     /// </summary>
-    public NavigationViewItemBase SelectedItemContainer { get; internal set; }
+    public NavigationViewItemBase? SelectedItemContainer { get; internal set; }
 
     /// <summary>
     /// Gets a value that indicates whether the SelectedItem is the menu item for Settings.
@@ -26,5 +26,5 @@ public class NavigationViewSelectionChangedEventArgs : EventArgs
     /// <summary>
     /// Gets the navigation transition recommended for the direction of the navigation.
     /// </summary>
-    public NavigationTransitionInfo RecommendedNavigationTransitionInfo { get; internal set; }
+    public NavigationTransitionInfo? RecommendedNavigationTransitionInfo { get; internal set; }
 }
