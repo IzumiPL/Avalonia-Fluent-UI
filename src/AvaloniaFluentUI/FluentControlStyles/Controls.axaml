@@ -78,6 +78,7 @@
 
         <!--  Avalonia Fluent UI Controls  -->
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Frame.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Expander/FluentExpander.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Tip/InfoBadge.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/InfoBar/InfoBar.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Spinner/NumberBox.axaml"/>
