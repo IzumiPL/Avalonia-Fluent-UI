@@ -80,6 +80,8 @@
   <SolidColorBrush x:Key="PopupControlBackgroundSecondaryBrush" Color="{StaticResource PopupControlColorSecondary}"/>
   <SolidColorBrush x:Key="ControlBackgroundHighBrush" Color="{StaticResource ControlBackgroundHigh}"/>
 
+  <SolidColorBrush x:Key="ControlFillAttentionBackgroundBrush" Color="{StaticResource SystemFillColorSolidAttentionBackground}"/>
+
   <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="{StaticResource TextFillColorPrimary}"/>
   <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="{StaticResource TextFillColorSecondary}"/>
   <SolidColorBrush x:Key="TextFillColorTertiaryBrush" Color="{StaticResource TextFillColorTertiary}"/>
