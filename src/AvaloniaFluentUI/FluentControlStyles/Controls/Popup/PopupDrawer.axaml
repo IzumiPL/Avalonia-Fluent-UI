@@ -9,7 +9,7 @@
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
     <Setter Property="VerticalAlignment" Value="Stretch"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
-    <Setter Property="Padding" Value="10"/>
+    <Setter Property="Padding" Value="0"/>
     <Setter Property="BorderThickness" Value="0"/>
     <Setter Property="CornerRadius" Value="0"/>
 
@@ -40,8 +40,8 @@
             <Panel>
               <ui:ToolButton
                 Name="PART_CloseButton"
-                Width="24"
-                Height="24"
+                Width="36"
+                Height="36"
                 Margin="10,10,10,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
@@ -50,7 +50,8 @@
                 Cursor="Hand"
                 Foreground="{TemplateBinding Foreground}"
                 IconHeight="10"
-                IconWidth="10"/>
+                IconWidth="10"
+                IsVisible="{TemplateBinding CloseButtonIsVisible}"/>
 
               <ContentPresenter
                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"

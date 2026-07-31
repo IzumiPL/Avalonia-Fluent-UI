@@ -44,6 +44,21 @@ public class PopupDrawer : ContentControl
         AvaloniaProperty.Register<PopupDrawer, bool>(nameof(IsLightDismissEnabled), true);
 
     /// <summary>
+    ///     Defines the <see cref="CloseButtonIsVisible" /> property.
+    /// </summary>
+    public static readonly StyledProperty<bool> CloseButtonIsVisibleProperty =
+        AvaloniaProperty.Register<PopupDrawer, bool>(nameof(CloseButtonIsVisible), true);
+
+    /// <summary>
+    /// 获取或设置关闭按钮是否可见
+    /// </summary>
+    public bool CloseButtonIsVisible
+    {
+        get => GetValue(CloseButtonIsVisibleProperty);
+        set => SetValue(CloseButtonIsVisibleProperty, value);
+    }
+
+    /// <summary>
     /// <para>设置或获取点击外部是否关闭抽屉, 默认点击外部可关闭</para>
     /// <para>在<c>True</c>的状态下无法点击除Drawer区域的其他区域, 为<c>False</c>则可以点击外部区域</para>
     /// </summary>
