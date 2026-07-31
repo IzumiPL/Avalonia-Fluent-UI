@@ -8,7 +8,7 @@
     <ApplicationTitle>Gallery</ApplicationTitle>
     <ApplicationId>com.izumi.gallery</ApplicationId>
     <ApplicationVersion>114</ApplicationVersion>
-    <ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
+    <ApplicationDisplayVersion>2.0.4</ApplicationDisplayVersion>
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <NoWarn>CA1416;CA1422</NoWarn>

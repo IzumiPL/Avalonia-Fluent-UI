@@ -1,4 +1,5 @@
 ﻿using Avalonia;
+using AvaloniaFluentUI.Locale;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Gallery.Extensions;
@@ -7,7 +8,7 @@ namespace Gallery.ViewModels;
 
 public partial class PopupDrawerPageViewModel : ViewModelBase
 {
-    public override string Title => "弹出控件";
+    public override string Title => LocalizationService.Instance.GetString("PopupControl");
 
     public int[] RadiusItems => [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24];
 

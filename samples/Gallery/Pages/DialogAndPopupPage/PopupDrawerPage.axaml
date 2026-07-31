@@ -74,7 +74,7 @@
         HorizontalScrollBarVisibility="Disabled"
         VerticalScrollBarVisibility="Visible">
         <StackPanel Spacing="50">
-          <ui:CodeCard Title="弹出抽屉控件">
+          <ui:CodeCard Title="{location:Localization PopupDrawer}">
             <Grid
               VerticalAlignment="Center"
               ColumnDefinitions="Auto, Auto, Auto, Auto, *"
@@ -82,23 +82,23 @@
               <Button
                 Grid.Column="0"
                 Command="{Binding ToggleDrawerCommand}"
-                CommandParameter="Top"
-                Content="顶部"/>
+                CommandParameter="Left"
+                Content="{location:Localization Left}"/>
               <Button
                 Grid.Column="1"
                 Command="{Binding ToggleDrawerCommand}"
-                CommandParameter="Left"
-                Content="左侧"/>
+                CommandParameter="Top"
+                Content="{location:Localization Top}"/>
               <Button
                 Grid.Column="2"
                 Command="{Binding ToggleDrawerCommand}"
                 CommandParameter="Right"
-                Content="右侧"/>
+                Content="{location:Localization Right}"/>
               <Button
                 Grid.Column="3"
                 Command="{Binding ToggleDrawerCommand}"
                 CommandParameter="Bottom"
-                Content="底部"/>
+                Content="{location:Localization Bottom}"/>
 
               <fui:ToolButton
                 Grid.Column="4"
