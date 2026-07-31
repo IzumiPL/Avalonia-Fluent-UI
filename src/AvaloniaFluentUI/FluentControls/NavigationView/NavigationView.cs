@@ -69,7 +69,7 @@ namespace AvaloniaFluentUI.Controls;
 [TemplatePart(s_tpMenuItemsScrollViewer, typeof(SmoothScrollViewer))]
 [TemplatePart(s_tpFooterItemsScrollViewer, typeof(SmoothScrollViewer))]
 [TemplatePart(s_tpItemsContainerGrid, typeof(Control))]
-public partial class NavigationView : HeaderedContentControl
+public class NavigationView : HeaderedContentControl
 {
     /// <summary>
     /// Defines the <see cref="AlwaysShowHeader"/> property
@@ -80,8 +80,8 @@ public partial class NavigationView : HeaderedContentControl
     /// <summary>
     /// Defines the <see cref="AutoCompleteBox"/> property
     /// </summary>
-    public static readonly StyledProperty<Control> AutoCompleteBoxProperty =
-        AvaloniaProperty.Register<NavigationView, Control>(nameof(AutoCompleteBox));
+    public static readonly StyledProperty<Control?> AutoCompleteBoxProperty =
+        AvaloniaProperty.Register<NavigationView, Control?>(nameof(AutoCompleteBox));
 
     /// <summary>
     /// Defines the <see cref="CompactModeThresholdWidth"/> property
@@ -145,7 +145,7 @@ public partial class NavigationView : HeaderedContentControl
     /// Defines the <see cref="IsBackEnabled"/> property
     /// </summary>
     public static readonly StyledProperty<bool> IsBackEnabledProperty =
-        AvaloniaProperty.Register<NavigationView, bool>(nameof(IsBackEnabled), false);
+        AvaloniaProperty.Register<NavigationView, bool>(nameof(IsBackEnabled));
 
     /// <summary>
     /// Defines the <see cref="IsPaneOpen"/> property
@@ -221,8 +221,7 @@ public partial class NavigationView : HeaderedContentControl
     /// Defines the <see cref="PaneDisplayMode"/> property
     /// </summary>
     public static readonly StyledProperty<NavigationViewPaneDisplayMode> PaneDisplayModeProperty =
-        AvaloniaProperty.Register<NavigationView, NavigationViewPaneDisplayMode>(nameof(PaneDisplayMode),
-            NavigationViewPaneDisplayMode.Auto);
+        AvaloniaProperty.Register<NavigationView, NavigationViewPaneDisplayMode>(nameof(PaneDisplayMode));
 
     /// <summary>
     /// Defines the <see cref="PaneFooter"/> property
@@ -245,7 +244,7 @@ public partial class NavigationView : HeaderedContentControl
     /// <summary>
     /// Defines the <see cref="SelectedItem"/> property
     /// </summary>
-    public static readonly DirectProperty<NavigationView, object> SelectedItemProperty =
+    public static readonly DirectProperty<NavigationView, object?> SelectedItemProperty =
         SelectingItemsControl.SelectedItemProperty.AddOwner<NavigationView>(x => x.SelectedItem, 
             (x, v) => x.SelectedItem = v, 
             defaultBindingMode: Avalonia.Data.BindingMode.TwoWay);
@@ -304,7 +303,7 @@ public partial class NavigationView : HeaderedContentControl
     /// <summary>
     /// Gets or sets an <see cref="Avalonia.Controls.AutoCompleteBox"/> to be displayed in the NavigationView.
     /// </summary>
-    public Control AutoCompleteBox
+    public Control? AutoCompleteBox
     {
         get => GetValue(AutoCompleteBoxProperty);
         set => SetValue(AutoCompleteBoxProperty, value);
@@ -537,7 +536,7 @@ public partial class NavigationView : HeaderedContentControl
     /// <summary>
     /// Gets or sets the selected item.
     /// </summary>
-    public object SelectedItem
+    public object? SelectedItem
     {
         get => _selectedItem;
         set
@@ -649,7 +648,7 @@ public partial class NavigationView : HeaderedContentControl
     internal static readonly AttachedProperty<CompositeDisposable> NavigationViewItemBaseRevokersProperty =
         AvaloniaProperty.RegisterAttached<NavigationView, NavigationViewItemBase, CompositeDisposable>("NavigationViewItemBaseRevokers");
 
-    private object _selectedItem;
+    private object? _selectedItem;
     private IList<object> _menuItems;
     private IList<object> _footerMenuItems;
     private NavigationViewDisplayMode _displayMode = NavigationViewDisplayMode.Minimal;
@@ -706,7 +705,7 @@ public partial class NavigationView : HeaderedContentControl
     private const string s_resPaneToggleButtonHeight = "PaneToggleButtonHeight";
    
     //Con't logic for pane arrow key navigation
-    private bool VerifyInPane(Visual focus, Visual parent)
+    private bool VerifyInPane(Visual focus, Visual? parent)
     {
         if (parent == null)
             return false;
@@ -962,7 +961,7 @@ public partial class NavigationView : HeaderedContentControl
     private NavigationViewItemBase NavigationViewItemBaseOrSettingsContentFromData(object data)
         => GetContainerForData<NavigationViewItemBase>(data);
 
-    private NavigationViewItem NavigationViewItemOrSettingsContentFromData(object data)
+    private NavigationViewItem? NavigationViewItemOrSettingsContentFromData(object data)
         => GetContainerForData<NavigationViewItem>(data);
 
 
@@ -1122,7 +1121,7 @@ public partial class NavigationView : HeaderedContentControl
         return selItemCont == nvib;
     }
 
-    internal NavigationViewItem GetSelectedContainer()
+    internal NavigationViewItem? GetSelectedContainer()
     {
         if (SelectedItem == null)
             return null;
@@ -1142,7 +1141,7 @@ public partial class NavigationView : HeaderedContentControl
         return nvi.MenuItems.Count > 0 ? nvi.MenuItems : nvi.MenuItemsSource;
     }
 
-    private ItemsRepeater GetChildRepeaterForIndexPath(IndexPath ip)
+    private ItemsRepeater? GetChildRepeaterForIndexPath(IndexPath ip)
     {
         if (GetContainerForIndexPath(ip) is NavigationViewItem nvi)
         {
@@ -1299,38 +1298,38 @@ public partial class NavigationView : HeaderedContentControl
     internal SplitView GetSplitView => _splitView;
 
     //Template Items
-    private Button _paneToggleButton;
-    private SplitView _splitView;
-    private RowDefinition _itemsContainerRow;
-    private ScrollViewer _menuItemsScrollViewer;
-    private ScrollViewer _footerItemsScrollViewer;
-    private Grid _paneContentGrid;
+    private Button? _paneToggleButton;
+    private SplitView? _splitView;
+    private RowDefinition? _itemsContainerRow;
+    private ScrollViewer? _menuItemsScrollViewer;
+    private ScrollViewer? _footerItemsScrollViewer;
+    private Grid? _paneContentGrid;
     //private ColumnDefinition _paneToggleButtonIconGridColumn;
-    private Control _paneTitleHolderFrameworkElement;
-    private Control _paneTitleFrameworkElement;
+    private Control? _paneTitleHolderFrameworkElement;
+    private Control? _paneTitleFrameworkElement;
     //private IControl _visualItemsSeparator;
-    private Button _paneSearchButton;
-    private Button _backButton;
-    private Button _closeButton;
-    private ItemsRepeater _leftNavRepeater;
-    private ItemsRepeater _topNavRepeater;
-    private ItemsRepeater _leftNavFooterMenuRepeater;
-    private ItemsRepeater _topNavFooterMenuRepeater;
-    private Button _topNavOverflowButton;
-    private ItemsRepeater _topNavRepeaterOverflowView;
-    private Grid _topNavGrid;
-    private Border _topNavContentOverlayAreaGrid;
-    private Control _itemsContainer;
+    private Button? _paneSearchButton;
+    private Button? _backButton;
+    private Button? _closeButton;
+    private ItemsRepeater? _leftNavRepeater;
+    private ItemsRepeater? _topNavRepeater;
+    private ItemsRepeater? _leftNavFooterMenuRepeater;
+    private ItemsRepeater? _topNavFooterMenuRepeater;
+    private Button? _topNavOverflowButton;
+    private ItemsRepeater? _topNavRepeaterOverflowView;
+    private Grid? _topNavGrid;
+    private Border? _topNavContentOverlayAreaGrid;
+    private Control? _itemsContainer;
 
     //Indicator animations
-    private Control _prevIndicator;
-    private Control _nextIndicator;
-    private Control _activeIndicator;
+    private Control? _prevIndicator;
+    private Control? _nextIndicator;
+    private Control? _activeIndicator;
     private object _lastSelectedItemPendingAnimationInTopNav;
 
     //private IControl _togglePaneTopPadding;
     //private IControl _contentPaneTopPadding;
-    private Control _contentLeftPadding;
+    private Control? _contentLeftPadding;
 
     //Titlebar
 
@@ -1351,12 +1350,12 @@ public partial class NavigationView : HeaderedContentControl
     private ColumnDefinition _paneHeaderToggleButtonColumn;
     private RowDefinition _paneHeaderContentBorderRow;
 
-    private NavigationViewItem _lastItemExpandedIntoFlyout;
+    private NavigationViewItem? _lastItemExpandedIntoFlyout;
 
-    private IDisposable _splitViewRevokers;
-    private IDisposable _sizeChangedRevoker;
-    private IDisposable _paneTitleHolderRevoker;
-    private IDisposable _itemsContainerSizeRevoker;
+    private IDisposable? _splitViewRevokers;
+    private IDisposable? _sizeChangedRevoker;
+    private IDisposable? _paneTitleHolderRevoker;
+    private IDisposable? _itemsContainerSizeRevoker;
 
     bool _wasForceClosed;
     bool _isClosedCompact;
@@ -1418,10 +1417,7 @@ public partial class NavigationView : HeaderedContentControl
 
     private const int _backButtonHeight = 40;
     private const int _backButtonWidth = 40;
-    private const int _paneToggleButtonHeight = 40;
-    private const int _paneToggleButtonWidth = 40;
     private const int _backButtonRowDefinition = 1;
-    private const float paneElevationTranslationZ = 32;
     private const int c_toggleButtonHeightWithNoBackButton = 56;
 
     private const int _mainMenuBlockIndex = 0;
@@ -1444,11 +1440,6 @@ public partial class NavigationView : HeaderedContentControl
     
     public NavigationView()
     {
-        //PseudoClasses.Add(":autosuggestcollapsed");
-        //PseudoClasses.Add(":headercollapsed");
-        //PseudoClasses.Add(":backbuttoncollapsed");
-        //PseudoClasses.Add(":expanded");
-
         TemplateSettings = new NavigationViewTemplateSettings();
 
         _sizeChangedRevoker = this.GetObservable(BoundsProperty).Subscribe(OnSizeChanged);
@@ -1483,7 +1474,7 @@ public partial class NavigationView : HeaderedContentControl
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void OnLanguageChanged(object sender, PropertyChangedEventArgs e)
+    private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
     {
         try
         {
@@ -1966,7 +1957,7 @@ public partial class NavigationView : HeaderedContentControl
         return new NavigationViewAutomationPeer(this);
     }
 
-    private void OnLayoutUpdated(object sender, EventArgs e)
+    private void OnLayoutUpdated(object? sender, EventArgs e)
     {
         // We only need to handle once after MeasureOverride, so revoke the token.
         this.LayoutUpdated -= OnLayoutUpdated;
@@ -1987,7 +1978,7 @@ public partial class NavigationView : HeaderedContentControl
         }
     }
 
-    private void OnNavViewLoaded(object sender, RoutedEventArgs e)
+    private void OnNavViewLoaded(object? sender, RoutedEventArgs e)
     {
         if (_updateVisualStateForDisplayModeFromOnLoaded)
         {
@@ -2007,7 +1998,7 @@ public partial class NavigationView : HeaderedContentControl
     //////// ITEMS REPEATER RELATED ////////////
     ///////////////////////////////////////////
 
-    private void OnRepeaterLoaded(object sender, RoutedEventArgs args)
+    private void OnRepeaterLoaded(object? sender, RoutedEventArgs args)
     {
         var item = SelectedItem;
         if (item != null && !IsSelectionSuppressed(item))
@@ -2320,7 +2311,7 @@ public partial class NavigationView : HeaderedContentControl
         }
     }
 
-    private void OnRepeaterGettingFocus(object sender, FocusChangingEventArgs e)
+    private void OnRepeaterGettingFocus(object? sender, FocusChangingEventArgs e)
     {
         // if focus change was invoked by tab key
         // and there is selected item in ItemsRepeater that gatting focus
@@ -2379,7 +2370,7 @@ public partial class NavigationView : HeaderedContentControl
     //////// PROPERTY CHANGED HANDLERS ////////////
     //////////////////////////////////////////////
 
-    private void OnMenuItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void OnMenuItemsSourceCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (!IsTopNavigationView)
         {
@@ -2390,7 +2381,7 @@ public partial class NavigationView : HeaderedContentControl
         }
     }
 
-    private void OnFooterItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void OnFooterItemsSourceCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         UpdateFooterRepeaterItemsSource(false /*sourceCollectionReset*/, true /*sourceCollectionChanged*/);
 
@@ -2398,7 +2389,7 @@ public partial class NavigationView : HeaderedContentControl
         UpdatePaneLayout();
     }
 
-    private void OnOverflowItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+    private void OnOverflowItemsSourceCollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
     {
         if (_topNavRepeaterOverflowView != null && _topNavRepeaterOverflowView.ItemsSourceView != null &&
             _topNavRepeaterOverflowView.ItemsSourceView.Count == 0)
@@ -2501,7 +2492,7 @@ public partial class NavigationView : HeaderedContentControl
     //////// SELECTION & SELECTION MODEL RELATED ////////////
     ////////////////////////////////////////////////////////
 
-    private void OnSelectionModelChildrenRequested(object sender, SelectionModelChildrenRequestedEventArgs e)
+    private void OnSelectionModelChildrenRequested(object? sender, SelectionModelChildrenRequestedEventArgs e)
     {
         //TODO Rewrite SelectionModel as it is in WinUI to get rid of Observables...
 
@@ -2524,7 +2515,7 @@ public partial class NavigationView : HeaderedContentControl
         }
     }
 
-    private void OnSelectionModelSelectionChanged(object sender, SelectionModelSelectionChangedEventArgs e)
+    private void OnSelectionModelSelectionChanged(object? sender, SelectionModelSelectionChangedEventArgs e)
     {
         var selItem = _selectionModel.SelectedItem;
 
@@ -3296,7 +3287,7 @@ public partial class NavigationView : HeaderedContentControl
         }
     }
 
-    private void OnNavigationViewItemGotFocus(object sender, FocusChangedEventArgs e)
+    private void OnNavigationViewItemGotFocus(object? sender, FocusChangedEventArgs e)
     {
         var nvi = (NavigationViewItem)sender;
 
@@ -3328,7 +3319,7 @@ public partial class NavigationView : HeaderedContentControl
         }
     }
 
-    private void OnNavigationViewItemKeyDown(object sender, KeyEventArgs args)
+    private void OnNavigationViewItemKeyDown(object? sender, KeyEventArgs args)
     {
         if (args.Key == Key.Enter || args.Key == Key.Space)
         {
@@ -3503,7 +3494,7 @@ public partial class NavigationView : HeaderedContentControl
         }
     }
 
-    private Control GetFirstFocusableElement(ItemsRepeater ir)
+    private Control? GetFirstFocusableElement(ItemsRepeater ir)
     {
         if (ir == null)
             return null;
@@ -3526,7 +3517,7 @@ public partial class NavigationView : HeaderedContentControl
         return null;
     }
 
-    private Control GetLastFocusableElement(ItemsRepeater ir)
+    private Control? GetLastFocusableElement(ItemsRepeater ir)
     {
         if (ir == null)
             return null;
@@ -3548,7 +3539,7 @@ public partial class NavigationView : HeaderedContentControl
         return null;
     }
 
-    private void OnNavigationViewItemTapped(object sender, RoutedEventArgs e)
+    private void OnNavigationViewItemTapped(object? sender, RoutedEventArgs e)
     {
         var nvi = (NavigationViewItem)sender;
         OnNavigationViewItemInvoked(nvi);
@@ -3642,7 +3633,7 @@ public partial class NavigationView : HeaderedContentControl
         ItemCollapsed?.Invoke(this, ea);
     }
 
-    private void OnSelectedItemLayoutUpdated(object sender, EventArgs args)
+    private void OnSelectedItemLayoutUpdated(object? sender, EventArgs args)
     {
         if (_isSelectionChangedPending)
         {
@@ -3666,10 +3657,7 @@ public partial class NavigationView : HeaderedContentControl
         }
     }
 
-
-
-
-
+    
     ///////////////////////////////////////
     //////// LEFT NAV RELATED ////////////
     /////////////////////////////////////
@@ -4247,9 +4235,6 @@ public partial class NavigationView : HeaderedContentControl
     }
 
 
-
-
-
     ////////////////////////////////////////
     //////// SPLITVIEW RELATED ////////////
     //////////////////////////////////////
@@ -4263,7 +4248,7 @@ public partial class NavigationView : HeaderedContentControl
         }
     }
 
-    private void OnSplitViewPaneClosed(object sender, RoutedEventArgs e)
+    private void OnSplitViewPaneClosed(object? sender, RoutedEventArgs e)
     {
         if (e.Source != _splitView)
             return;
@@ -4271,7 +4256,7 @@ public partial class NavigationView : HeaderedContentControl
         PaneClosed?.Invoke(this, EventArgs.Empty);
     }
 
-    private void OnSplitViewPaneClosing(object sender, CancelRoutedEventArgs e)
+    private void OnSplitViewPaneClosing(object? sender, CancelRoutedEventArgs e)
     {
         if (e.Source != _splitView)
             return;
@@ -4308,7 +4293,7 @@ public partial class NavigationView : HeaderedContentControl
         }
     }
 
-    private void OnSplitViewPaneOpened(object sender, RoutedEventArgs e)
+    private void OnSplitViewPaneOpened(object? sender, RoutedEventArgs e)
     {
         if (e.Source != _splitView)
             return;
@@ -4316,7 +4301,7 @@ public partial class NavigationView : HeaderedContentControl
         PaneOpened?.Invoke(this, EventArgs.Empty);
     }
 
-    private void OnSplitViewPaneOpening(object sender, RoutedEventArgs e)
+    private void OnSplitViewPaneOpening(object? sender, RoutedEventArgs e)
     {
         if (e.Source != _splitView)
             return;
@@ -4328,15 +4313,13 @@ public partial class NavigationView : HeaderedContentControl
 
         PaneOpening?.Invoke(this, EventArgs.Empty);
     }
-
-    
     
 
     ///////////////////////////////////
     //////// PANE BUTTONS ////////////
     /////////////////////////////////
 
-    private void OnPaneToggleButtonClick(object sender, RoutedEventArgs e)
+    private void OnPaneToggleButtonClick(object? sender, RoutedEventArgs e)
     {
         if (IsPaneOpen)
         {
@@ -4350,7 +4333,7 @@ public partial class NavigationView : HeaderedContentControl
         }
     }
 
-    private void OnPaneSearchButtonClick(object sender, RoutedEventArgs e)
+    private void OnPaneSearchButtonClick(object? sender, RoutedEventArgs e)
     {
         _wasForceClosed = false;
         OpenPane();
@@ -4361,7 +4344,7 @@ public partial class NavigationView : HeaderedContentControl
         }
     }
 
-    private void OnBackButtonClicked(object sender, RoutedEventArgs e)
+    private void OnBackButtonClicked(object? sender, RoutedEventArgs e)
     {
         var ea = new NavigationViewBackRequestedEventArgs();
         BackRequested?.Invoke(this, ea);
@@ -4715,7 +4698,7 @@ public partial class NavigationView : HeaderedContentControl
 
     // Please clear the field m_lastSelectedItemPendingAnimationInTopNav when calling this method to prevent garbage value and incorrect animation
     // when the layout is invalidated as it's called in OnLayoutUpdated.
-    private void AnimateSelectionChanged(object nextItem)
+    private void AnimateSelectionChanged(object? nextItem)
     {
         // If we are delaying animation due to item movement in top nav overflow or
         // the template is not applied, dont do anything
@@ -5015,7 +4998,7 @@ public partial class NavigationView : HeaderedContentControl
         _nextIndicator = null;
     }
 
-    private void ResetElementAnimationProperties(Control element, double desiredOpacity)
+    private void ResetElementAnimationProperties(Control? element, double desiredOpacity)
     {
         if (element != null)
         {
@@ -5029,7 +5012,7 @@ public partial class NavigationView : HeaderedContentControl
         }
     }
         
-    private Control FindSelectionIndicator(object item)
+    private Control FindSelectionIndicator(object? item)
     {
         if (item != null)
         {
@@ -5202,7 +5185,7 @@ public partial class NavigationView : HeaderedContentControl
         }
     }
 
-    private Action SetPaneTitleFrameworkElementParent(ContentControl parent, Control paneTitle, bool shouldNotContainPaneTitle)
+    private Action SetPaneTitleFrameworkElementParent(ContentControl? parent, Control paneTitle, bool shouldNotContainPaneTitle)
     {
         if (parent != null)
         {
@@ -5246,7 +5229,7 @@ public partial class NavigationView : HeaderedContentControl
         _topNavOverflowButton?.Flyout?.Hide();
     }
 
-    private void OnFlyoutClosing(object sender, CancelEventArgs args)
+    private void OnFlyoutClosing(object? sender, CancelEventArgs args)
     {
         // If the user selected an parent item in the overflow flyout then the item has not been moved to top primary yet.
         // So we need to move it.
@@ -5758,7 +5741,7 @@ public partial class NavigationView : HeaderedContentControl
         return cont as NavigationViewItemBase;
     }
 
-    private IEnumerable GetChildrenForItemInIndexPath(IndexPath ip, bool forceRealize)
+    private IEnumerable? GetChildrenForItemInIndexPath(IndexPath ip, bool forceRealize)
     {
         if (ip != IndexPath.Unselected && ip.GetSize() > 1)
         {
@@ -5772,7 +5755,7 @@ public partial class NavigationView : HeaderedContentControl
         return null;
     }
 
-    private IEnumerable GetChildrenForItemInIndexPath(Control first, IndexPath ip, bool forceRealize)
+    private IEnumerable? GetChildrenForItemInIndexPath(Control first, IndexPath ip, bool forceRealize)
     {
         var container = first;
         bool shouldRecycle = false;
@@ -5854,21 +5837,9 @@ public partial class NavigationView : HeaderedContentControl
 
     private void SetPaneToggleButtonAutomationName()
     {
-        // TODO: Automation
-        string navigationName;
-        if (IsPaneOpen)
-        {
-            navigationName = LocalizationService.Instance.GetString(SR_NavigationButtonOpenName);
-        }
-        else
-        {
-            navigationName = LocalizationService.Instance.GetString(SR_NavigationButtonClosedName);
-        }
-
-
         if (_paneToggleButton != null)
         {
-            ToolTip.SetTip(_paneToggleButton, navigationName);
+            ToolTip.SetTip(_paneToggleButton, LocalizationService.Instance.GetString(IsPaneOpen ? SR_NavigationButtonOpenName : SR_NavigationButtonClosedName));
         }
     }
 

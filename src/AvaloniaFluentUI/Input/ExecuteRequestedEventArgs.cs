@@ -7,7 +7,7 @@ namespace AvaloniaFluentUI.Controls.Input;
 /// </summary>
 public class ExecuteRequestedEventArgs : EventArgs
 {
-    internal ExecuteRequestedEventArgs(object param)
+    internal ExecuteRequestedEventArgs(object? param)
     {
         Parameter = param;
     }
@@ -15,5 +15,5 @@ public class ExecuteRequestedEventArgs : EventArgs
     /// <summary>
     /// Gets the command parameter passed into the Execute method that raised this event.
     /// </summary>
-    public object Parameter { get; }
+    public object? Parameter { get; }
 }

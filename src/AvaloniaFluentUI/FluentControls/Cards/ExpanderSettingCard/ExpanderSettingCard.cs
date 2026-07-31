@@ -19,7 +19,7 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 [PseudoClasses(PC_DESCRIPTION)]
 [TemplatePart(PART_EXPANDER, typeof(Expander))]
-public partial class ExpanderSettingCard : HeaderedItemsControl, ICommandSource
+public class ExpanderSettingCard : HeaderedItemsControl, ICommandSource
 {
     /// <summary>
     /// Defines the <see cref="IsExpanded"/> property
@@ -271,5 +271,5 @@ public partial class ExpanderSettingCard : HeaderedItemsControl, ICommandSource
 
     private bool _commandCanExecute = true;
     private Expander? _expander;
-    private ToggleButton _expanderToggleButton;
+    private ToggleButton? _expanderToggleButton;
 }

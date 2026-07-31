@@ -34,13 +34,13 @@ public class CommandBarOverflowPresenter : ItemsControl
         }
     }
 
-    protected override bool NeedsContainerOverride(object item, int index, out object recycleKey)
+    protected override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
     {
         recycleKey = null;
         return !(item is ICommandBarElement);
     }
 
-    private void ItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void ItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         switch (e.Action)
         {

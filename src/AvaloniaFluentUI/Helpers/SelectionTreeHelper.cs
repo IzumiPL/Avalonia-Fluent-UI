@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AvaloniaFluentUI.Controls;
 
-namespace AvaloniaFluentUI.Controls;
+namespace AvaloniaFluentUI.Helpers;
 
 internal static class SelectionTreeHelper
 {

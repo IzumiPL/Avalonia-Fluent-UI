@@ -7,6 +7,9 @@ using Avalonia.Media.TextFormatting;
 
 namespace AvaloniaFluentUI.Controls;
 
+/// <summary>
+/// 头像
+/// </summary>
 public class Avatar : Control
 {
     public static readonly StyledProperty<IImage?> SourceProperty =
@@ -30,6 +33,9 @@ public class Avatar : Control
     public static readonly StyledProperty<bool> IsCircularProperty =
         AvaloniaProperty.Register<Avatar, bool>(nameof(IsCircular));
 
+    /// <summary>
+    /// 设置或获取当前是否为圆角
+    /// </summary>
     public bool IsCircular
     {
         get => GetValue(IsCircularProperty);
@@ -40,19 +46,28 @@ public class Avatar : Control
     {
         AffectsRender<Avatar>(SourceProperty, TextProperty, BackgroundProperty, ForegroundProperty, CornerRadiusProperty, RenderModeProperty, IsCircularProperty);
     }
-
+    
+    /// <summary>
+    /// 设置或获取图片, 显示优先级高于<see cref="Text"/>
+    /// </summary>
     public IImage? Source
     {
         get => GetValue(SourceProperty);
         set => SetValue(SourceProperty, value);
     }
 
+    /// <summary>
+    /// 设置或获取当前的文本, 只显示第一个文本
+    /// </summary>
     public string? Text
     {
         get => GetValue(TextProperty);
         set => SetValue(TextProperty, value);
     }
 
+    /// <summary>
+    /// 设置或获取当前圆角弧度, 设置了<see cref="IsCircular"/>则无效
+    /// </summary>
     public CornerRadius CornerRadius
     {
         get => GetValue(CornerRadiusProperty);

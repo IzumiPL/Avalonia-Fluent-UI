@@ -7,6 +7,7 @@ using Avalonia.Controls.Primitives;
 using Avalonia.LogicalTree;
 using AvaloniaFluentUI.Core;
 using AvaloniaFluentUI.Controls.Input;
+using AvaloniaFluentUI.Helpers;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -237,12 +238,12 @@ public partial class CommandBarButton : Button, ICommandBarElement
         return base.RegisterContentPresenter(presenter);
     }
 
-    private void OnFlyoutOpened(object sender, EventArgs e)
+    private void OnFlyoutOpened(object? sender, EventArgs e)
     {
         PseudoClasses.Set(s_pcSubmenuOpen, true);
     }
 
-    private void OnFlyoutClosed(object sender, EventArgs e)
+    private void OnFlyoutClosed(object? sender, EventArgs e)
     {
         PseudoClasses.Set(s_pcSubmenuOpen, false);
     }

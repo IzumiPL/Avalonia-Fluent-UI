@@ -130,10 +130,10 @@ public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollec
 
     internal BindingBase ItemsBinding => _itemsBinding;
 
-    public event EventHandler<object> CurrentChanged;
-    public event CurrentChangingEventHandler CurrentChanging;
-    public event NotifyCollectionChangedEventHandler CollectionChanged;
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event EventHandler<object>? CurrentChanged;
+    public event CurrentChangingEventHandler? CurrentChanging;
+    public event NotifyCollectionChangedEventHandler? CollectionChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public bool MoveCurrentTo(object item) =>
         MoveCurrentToPosition(IndexOf(item));
@@ -170,7 +170,7 @@ public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollec
         return true;
     }
 
-    public int IndexOf(object item)
+    public int IndexOf(object? item)
     {
         int index = 0;
         for (int i = 0; i < CollectionGroups.Count; i++)
@@ -300,7 +300,7 @@ public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollec
         }
     }
 
-    private void OnBackingCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+    private void OnBackingCollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
     {
         bool isSpecialized = _hasSortOrFilter;
         var groups = CollectionGroups;
@@ -631,7 +631,7 @@ public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollec
         _filterProperties.Clear();
     }
 
-    private void OnSortDescriptionsChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void OnSortDescriptionsChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (DeferCounter > 0)
             return;

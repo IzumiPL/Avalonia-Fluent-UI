@@ -102,6 +102,6 @@ public class SymbolIcon : IconElement
            FontSize, Foreground, TextAlignment.Left);
     }
 
-    private TextLayout _textLayout;
+    private TextLayout? _textLayout;
     private static FontFamily _symbolFontFamily;
 }

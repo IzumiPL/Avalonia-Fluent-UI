@@ -92,12 +92,31 @@
 
   <view:FluentWindow.TitleBarContent>
     <Grid ColumnDefinitions="*, Auto, Auto, Auto">
-      <fui:SearchTextBox
+      <!--  <fui:SearchTextBox  -->
+      <!--  Width="256"  -->
+      <!--  Margin="0,10,0,0"  -->
+      <!--  HorizontalAlignment="Center"  -->
+      <!--  VerticalAlignment="Top"  -->
+      <!--  PlaceholderText="{Binding SearchWatermark}"/>  -->
+      <AutoCompleteBox
+        Name="AutoCompleteBox"
         Width="256"
         Margin="0,10,0,0"
         HorizontalAlignment="Center"
         VerticalAlignment="Top"
-        PlaceholderText="{Binding SearchWatermark}"/>
+        FilterMode="Contains"
+        ItemsSource="{Binding AutoCompleteBoxItems}"
+        PlaceholderText="{Binding SearchWatermark}"
+        SelectionChanged="OnAutoCompleteBoxSelectionChanged">
+        <AutoCompleteBox.InnerRightContent>
+          <PathIcon
+            Width="12"
+            Height="12"
+            Margin="0,0,10,0"
+            Data="{x:Static fi:FluentIcon.Search}"/>
+        </AutoCompleteBox.InnerRightContent>
+
+      </AutoCompleteBox>
 
       <fui:ToolButton
         Name="SettingButton"
@@ -344,6 +363,7 @@
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Dialog]}" Tag="Dialog"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Flyout]}" Tag="Flyout"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ShortcutKeyPicker]}" Tag="ShortcutKeyPanel"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[PopupDrawer]}" Tag="PopupDrawer"/>
           </fui:NavigationViewItem.MenuItems>
         </fui:NavigationViewItem>
         <fui:NavigationViewItem

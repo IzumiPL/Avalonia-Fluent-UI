@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
 using AvaloniaFluentUI.Core;
+using AvaloniaFluentUI.Helpers;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -130,7 +131,7 @@ public partial class InfoBadge : TemplatedControl
         }
     }
 
-    private void HandleSizeChanged(object sender, SizeChangedEventArgs args)
+    private void HandleSizeChanged(object? sender, SizeChangedEventArgs args)
     {
         var cornerRadiusValue = args.NewSize.Height * 0.5;
         if (!IsSet(CornerRadiusProperty))

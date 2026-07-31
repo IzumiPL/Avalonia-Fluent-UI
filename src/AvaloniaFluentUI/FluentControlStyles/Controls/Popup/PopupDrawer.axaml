@@ -1,0 +1,97 @@
+<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
+
+  <ControlTheme x:Key="{x:Type ui:PopupDrawer}" TargetType="ui:PopupDrawer">
+    <Setter Property="Background" Value="{DynamicResource ControlFillAttentionBackgroundBrush}"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="Padding" Value="0"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="CornerRadius" Value="0"/>
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel
+          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+          VerticalAlignment="{TemplateBinding VerticalAlignment}"
+          ZIndex="9999">
+          <Border
+            Name="PART_HitTestArea"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Background="Transparent"
+            IsHitTestVisible="{TemplateBinding IsLightDismissEnabled}"
+            IsVisible="False"/>
+          <Border
+            Name="PART_ContentHost"
+            Width="{TemplateBinding DrawerWidth}"
+            Height="{TemplateBinding DrawerHeight}"
+            Padding="{TemplateBinding Padding}"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            BoxShadow="0 0 24 2 #40000000"
+            CornerRadius="{TemplateBinding CornerRadius}"
+            IsVisible="{TemplateBinding IsOpen}">
+            <Panel>
+              <ui:ToolButton
+                Name="PART_CloseButton"
+                Width="36"
+                Height="36"
+                Margin="10,10,10,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Classes="Transparent"
+                Content="{x:Static fi:FluentIcon.Close}"
+                Cursor="Hand"
+                Foreground="{TemplateBinding Foreground}"
+                IconHeight="10"
+                IconWidth="10"
+                IsVisible="{TemplateBinding CloseButtonIsVisible}"/>
+
+              <ContentPresenter
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                Content="{TemplateBinding Content}"
+                ContentTemplate="{TemplateBinding ContentTemplate}"/>
+            </Panel>
+          </Border>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:left /template/ Border#PART_ContentHost">
+      <Setter Property="HorizontalAlignment" Value="Left"/>
+      <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+
+    <Style Selector="^:right /template/ Border#PART_ContentHost">
+      <Setter Property="HorizontalAlignment" Value="Right"/>
+      <Setter Property="VerticalAlignment" Value="Stretch"/>
+    </Style>
+
+    <Style Selector="^:top">
+      <Setter Property="DrawerHeight" Value="256"/>
+      <Setter Property="DrawerWidth" Value="NaN"/>
+
+      <Style Selector="^ /template/ Border#PART_ContentHost">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^:bottom">
+      <Setter Property="DrawerHeight" Value="256"/>
+      <Setter Property="DrawerWidth" Value="NaN"/>
+
+      <Style Selector="^ /template/ Border#PART_ContentHost">
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      </Style>
+    </Style>
+  </ControlTheme>
+</ResourceDictionary>

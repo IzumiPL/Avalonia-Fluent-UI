@@ -61,7 +61,7 @@
         <MergeResourceInclude Source="/FluentControlStyles/PathIcon.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/HyperlinkButton.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/FocusAdorner.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Sepasrator.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Separator.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/TableView/TableView.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/PipsPager.axaml"/>
@@ -78,6 +78,7 @@
 
         <!--  Avalonia Fluent UI Controls  -->
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Frame.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Expander/FluentExpander.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Tip/InfoBadge.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/InfoBar/InfoBar.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Spinner/NumberBox.axaml"/>
@@ -115,23 +116,18 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/TaskDialog/TaskDialogButton.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/TaskDialog/TaskDialogCommand.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FluentColorView.axaml"/>
-
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Tip/TeachingTip.axaml"/>
-
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Windowing/FluentWindow.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Slider/RangeSlider.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FluentColorView.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Tip/TeachingTip.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Popup/PopupDrawer.axaml"/>
 
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Slider/RangeSlider.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Progress/ProgressRing.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Progress/FilledProgressBar.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/BreadcrumbBar/BreadcrumbBar.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/BreadcrumbBar/BreadcrumbBarItem.axaml"/>
-
-        <!--
-          ////
-        -->
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/SmoothScrollViewer/SmoothScrollViewer.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/SmoothScrollViewer/SmoothScrollSnapViewer.axaml"/>

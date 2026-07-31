@@ -12,10 +12,9 @@
     </Border>
   </Design.PreviewWith>
 
-
-
   <!--  Control-specific resources  -->
   <Thickness x:Key="HyperlinkButtonBorderThemeThickness">1</Thickness>
+
   <ControlTheme x:Key="{x:Type HyperlinkButton}" TargetType="HyperlinkButton">
     <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
     <Setter Property="Foreground" Value="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
@@ -31,7 +30,7 @@
     <Setter Property="Template">
       <ControlTemplate>
         <ContentPresenter
-          Name="ContentPresenter"
+          Name="PART_ContentPresenter"
           Padding="{TemplateBinding Padding}"
           HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -51,21 +50,34 @@
       </ControlTemplate>
     </Setter>
 
-    <Style Selector="^:pointerover /template/ ContentPresenter#ContentPresenter">
+    <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
       <Setter Property="Foreground" Value="{DynamicResource AccentTextFillColorSecondaryBrush}"/>
       <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
       <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
     </Style>
-    <Style Selector="^:pressed /template/ ContentPresenter#ContentPresenter">
+    <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
       <Setter Property="Foreground" Value="{DynamicResource AccentTextFillColorTertiaryBrush}"/>
       <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
       <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
     </Style>
-    <Style Selector="^:disabled /template/ ContentPresenter#ContentPresenter">
+    <Style Selector="^:disabled /template/ ContentPresenter#PART_ContentPresenter">
       <Setter Property="Foreground" Value="{DynamicResource AccentTextFillColorDisabledBrush}"/>
       <Setter Property="Background" Value="{DynamicResource SubtleFillColorDisabledBrush}"/>
       <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
     </Style>
-  </ControlTheme>
 
+    <Style Selector="^:visited">
+      <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource SystemControlHighlightListAccentLowBrush}"/>
+      </Style>
+
+      <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource SystemControlHighlightListAccentVeryHighBrush}"/>
+      </Style>
+
+      <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}"/>
+      </Style>
+    </Style>
+  </ControlTheme>
 </ResourceDictionary>

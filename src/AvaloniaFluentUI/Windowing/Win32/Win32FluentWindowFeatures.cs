@@ -1,7 +1,7 @@
 ﻿using System;
 using Avalonia.Logging;
 using Avalonia.Media;
-using AvaloniaFluentUI.Controls.Interop;
+using AvaloniaFluentUI.Helpers;
 using AvaloniaFluentUI.Controls.Interop.Win32;
 using AvaloniaFluentUI.Controls.Interop.WinRT;
 using static AvaloniaFluentUI.Controls.Interop.Win32Interop;

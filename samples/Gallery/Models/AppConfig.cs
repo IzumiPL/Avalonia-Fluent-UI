@@ -11,6 +11,7 @@ public class AppConfig
     public string WindowEffect { get; set; } = "";
     public bool IsEnabledBackgroundImage { get; set; }
     public string Language { get; set; } = "";
+    public string? BackgroundImagePath { get; set; }
 }
 
 [JsonSerializable(typeof(AppConfig))]

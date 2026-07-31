@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-using Avalonia.Controls;
+using AvaloniaFluentUI.Helpers;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -122,7 +122,7 @@ internal class SelectionModel : INotifyPropertyChanged, IDisposable
         }
     }
 
-    public object SelectedItem
+    public object? SelectedItem
     {
         get
         {
@@ -254,9 +254,9 @@ internal class SelectionModel : INotifyPropertyChanged, IDisposable
 
     internal SelectionNode SharedLeafNode { get; private set; }
 
-    public event EventHandler<SelectionModelChildrenRequestedEventArgs> ChildrenRequested;
-    public event EventHandler<SelectionModelSelectionChangedEventArgs> SelectionChanged;
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event EventHandler<SelectionModelChildrenRequestedEventArgs>? ChildrenRequested;
+    public event EventHandler<SelectionModelSelectionChangedEventArgs>? SelectionChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public void SetAnchorIndex(int index) => AnchorIndex = new IndexPath(index);
 
@@ -701,11 +701,11 @@ internal class SelectionModel : INotifyPropertyChanged, IDisposable
 
     private SelectionNode _rootNode;
     private bool _singleSelect;
-    private IReadOnlyList<IndexPath> _selectedIndicesCached;
-    private IReadOnlyList<object> _selectedItemsCached;
+    private IReadOnlyList<IndexPath>? _selectedIndicesCached;
+    private IReadOnlyList<object>? _selectedItemsCached;
 
-    private SelectionModelChildrenRequestedEventArgs _childrenRequestedEventArgs;
-    private SelectionModelSelectionChangedEventArgs _selectionChangedEventArgs;
+    private SelectionModelChildrenRequestedEventArgs? _childrenRequestedEventArgs;
+    private SelectionModelSelectionChangedEventArgs? _selectionChangedEventArgs;
 }
 
 

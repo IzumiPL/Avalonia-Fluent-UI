@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls.Documents;
 using Avalonia.Data;
+using AvaloniaFluentUI.Controls;
 using AvaloniaFluentUI.Core;
 
-namespace AvaloniaFluentUI.Controls;
+namespace AvaloniaFluentUI.Helpers;
 
 public static class IconHelpers
 {
@@ -172,5 +173,5 @@ public static class IconHelpers
         _customConverters.Add(typeOfIconSource, factory);
     }
 
-    private static Dictionary<Type, Func<IconSource, IconElement>> _customConverters;
+    private static Dictionary<Type, Func<IconSource, IconElement>>? _customConverters;
 }

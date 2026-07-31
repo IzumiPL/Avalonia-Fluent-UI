@@ -400,7 +400,7 @@ public sealed class TabViewListView : ListBox
         _liveReorderHelper?.ClearContainerBoundsCache(true);
     }
 
-    private void OnListViewDragOver(object sender, DragEventArgs e)
+    private void OnListViewDragOver(object? sender, DragEventArgs e)
     {
         // OLE DragDrop seems to fire on a Timer which means we get a constant stream
         // of DragOver events. WinRT DnD doesn't do this. The issue is in the live reorder
@@ -470,7 +470,7 @@ public sealed class TabViewListView : ListBox
     }
 
     // This is actually DragLeave for us
-    private void OnParentDragEnter(object sender, DragEventArgs e)
+    private void OnParentDragEnter(object? sender, DragEventArgs e)
     {
         if (_isDragWithinTabStrip)
         {
@@ -488,7 +488,7 @@ public sealed class TabViewListView : ListBox
         }        
     }
 
-    private void OnListViewDrop(object sender, DragEventArgs e)
+    private void OnListViewDrop(object? sender, DragEventArgs e)
     {
         if (e.Handled)
             return;
@@ -837,7 +837,7 @@ public sealed class TabViewListView : ListBox
         PseudoClasses.Set(s_pcRightShort, SelectedIndex == ItemsView.Count - 1);
     }
 
-    private void OnItemsChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void OnItemsChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         var tv = this.FindAncestorOfType<TabView>();
         tv?.OnItemsChanged(e);
@@ -849,7 +849,7 @@ public sealed class TabViewListView : ListBox
         UISettings.GetSystemDragSize(scaling, out _cxDrag, out _cyDrag);
     }
 
-    private TabViewItem _dragItem;
+    private TabViewItem? _dragItem;
     private int _dragIndex = -1;
     private bool _isDragItemFocused;
     private bool _isDragItemSelected;
@@ -859,12 +859,12 @@ public sealed class TabViewListView : ListBox
     private Point? _initialPoint;
     private double _cxDrag = double.NaN;
     private double _cyDrag = double.NaN;
-    private Control _parent;
+    private Control? _parent;
     private bool _isDragWithinTabStrip;
     // True if there is a drag drop operation started by this listview
     private bool _isDraggingOverSelf;
 
-    private LiveReorderHelper _liveReorderHelper;    
+    private LiveReorderHelper? _liveReorderHelper;    
     private Point? _lastDragOverPoint;
 
     // For 12.0/v3 - Avalonia has decided to make the decision that the lowest common denominator
@@ -874,7 +874,7 @@ public sealed class TabViewListView : ListBox
     // And you guessed it, freakin' Wayland
     private PointerPressedEventArgs _initArgs;
     
-    private DispatcherTimer _scrollTimer;
+    private DispatcherTimer? _scrollTimer;
     private Vector _currentAutoPanVelocity;
 
     private const string s_tpScrollViewer = "ScrollViewer";

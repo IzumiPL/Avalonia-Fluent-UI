@@ -17,6 +17,9 @@ public class ToolTipSlider : Slider
     public static readonly StyledProperty<string> FormatProperty =
         AvaloniaProperty.Register<ToolTipSlider, string>(nameof(Format), defaultValue: "0");
 
+    /// <summary>
+    /// 设置或获取当前提示的格式化格式
+    /// </summary>
     public string Format
     {
         get => GetValue(FormatProperty);

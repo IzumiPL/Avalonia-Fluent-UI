@@ -36,6 +36,6 @@ public class NavigationViewItemExpandingEventArgs : EventArgs
     /// </summary>
     public NavigationViewItemBase ExpandingItemContainer { get; internal set; }
 
-    private NavigationView _navigationView;
-    private object _expandingItem;
+    private NavigationView? _navigationView;
+    private object? _expandingItem;
 }

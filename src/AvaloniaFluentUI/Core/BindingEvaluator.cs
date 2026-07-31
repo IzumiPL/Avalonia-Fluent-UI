@@ -67,6 +67,6 @@ internal sealed class BindingEvaluator<T> : StyledElement, IDisposable
         return evaluator;
     }
 
-    private BindingExpressionBase _expression;
-    private BindingBase _lastBinding;
+    private BindingExpressionBase? _expression;
+    private BindingBase? _lastBinding;
 }

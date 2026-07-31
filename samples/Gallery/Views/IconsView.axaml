@@ -93,7 +93,7 @@
         Grid.Row="1"
         FontSize="12"
         Foreground="Gray"
-        Text="avaloniafluentui.ui.control"/>
+        Text="avaloniafluentui.controls"/>
       <Grid
         Grid.Row="2"
         ColumnDefinitions="Auto, Auto, *, Auto, Auto, Auto"

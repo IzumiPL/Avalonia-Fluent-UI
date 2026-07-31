@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
@@ -61,6 +62,13 @@ public class ViewBase : ContentControl
         _toggleThemeButton?.Click += OnToggleThemeClicked;
        _documentButton?.Click += OnDocumentButtonClicked;
        _sourceCodeButton?.Click += OnSourceCodeButtonClicked;
+
+
+       if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime)
+       {
+           _scrollViewer?.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
+           _scrollViewer?.MaxWidth = 720;
+       }
         
         base.OnApplyTemplate(e);
     }

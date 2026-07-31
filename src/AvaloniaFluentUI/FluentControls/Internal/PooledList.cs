@@ -1330,7 +1330,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
     [NonSerialized]
     private ArrayPool<T> _pool;
     [NonSerialized]
-    private object _syncRoot;
+    private object? _syncRoot;
 
     private T[] _items; // Do not rename (binary serialization)
     private int _size; // Do not rename (binary serialization)

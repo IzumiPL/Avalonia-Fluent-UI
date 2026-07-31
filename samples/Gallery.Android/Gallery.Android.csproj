@@ -31,8 +31,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Gallery\Gallery.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resources\drawable\" />
-  </ItemGroup>
 </Project>

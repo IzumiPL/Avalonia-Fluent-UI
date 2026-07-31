@@ -355,7 +355,7 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
         }
     }
 
-    private void SourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+    private void SourceCollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
     {
         if (_hasFilterOrSort)
         {
@@ -403,7 +403,7 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
         }
     }
 
-    private void OnSortDescriptionsChanged(object sender, NotifyCollectionChangedEventArgs args)
+    private void OnSortDescriptionsChanged(object? sender, NotifyCollectionChangedEventArgs args)
     {
         if (_deferCounter > 0)
             return;
@@ -411,7 +411,7 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
         HandleSortChanged();
     }
 
-    private void ItemOnPropertyChanged(object item, PropertyChangedEventArgs args)
+    private void ItemOnPropertyChanged(object? item, PropertyChangedEventArgs args)
     {
         if (!IsLiveShapingEnabled)
             return;
@@ -764,8 +764,8 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
     private IEnumerable _source;
     private ItemsSourceView _sourceView;
     private List<object> _view;
-    private HashSet<string> _filterProperties;
+    private HashSet<string>? _filterProperties;
     private int _deferCounter;
-    private static BindingEvaluator<object> _bindingHelper;
+    private static BindingEvaluator<object>? _bindingHelper;
     private bool _hasFilterOrSort;
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Controls;
@@ -17,6 +18,9 @@ public class SegmentedView : SelectingItemsControl
 {
     protected SelectionIndicator? _selectedIndicator;
     protected Panel? _headersArea;
+
+    protected CancellationTokenSource? _cts;
+    protected TranslateTransform _transform = new TranslateTransform();
     
     private const string PART_SELECTED_INDICATOR = "PART_SelectedIndicator";
     private const string PART_HEADERS_ARES = "PART_HeadersArea";
@@ -70,13 +74,13 @@ public class SegmentedView : SelectingItemsControl
             }
         }
     }
-
-    protected TranslateTransform _transform = new TranslateTransform();
-
+    
     protected async virtual void RunSliderAnimation(Point position)
     {
         if (_selectedIndicator == null) { return; }
 
+        _cts?.Cancel();
+        _cts = new CancellationTokenSource();
         _selectedIndicator.RenderTransform = _transform;
 
         var animation = new Animation
@@ -104,7 +108,7 @@ public class SegmentedView : SelectingItemsControl
             }
         };
 
-        await animation.RunAsync(_selectedIndicator);
+        await animation.RunAsync(_selectedIndicator, _cts.Token);
     }
 
     protected virtual void UpdateSelectedIndicatorPosition()
@@ -147,6 +151,9 @@ public class SegmentedItem : ContentControl
     public static readonly StyledProperty<bool> IsSelectedProperty =
         SelectingItemsControl.IsSelectedProperty.AddOwner<SegmentedItem>();
 
+    /// <summary>
+    /// 设置或获取当前项是否选中
+    /// </summary>
     public bool IsSelected
     {
         get => GetValue(IsSelectedProperty);

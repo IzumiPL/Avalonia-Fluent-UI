@@ -34,7 +34,7 @@ public partial class AvaloniaFluentTheme : Styles, IResourceProvider
         MergedDictionaries.CollectionChanged += MergedDictionariesCollectionChanged;
         Init();
 
-        Application.Current.PropertyChanged += OnCurrentThemePropertyChanged;
+        Application.Current?.PropertyChanged += OnCurrentThemePropertyChanged;
     }
 
     private void OnCurrentThemePropertyChanged(object sender, AvaloniaPropertyChangedEventArgs e)
@@ -223,8 +223,8 @@ public partial class AvaloniaFluentTheme : Styles, IResourceProvider
         // PlatformSettings on the Application should be immutable so we can store them here
         if (_platformSettings == null)
         {
-            _platformSettings = Application.Current.PlatformSettings;
-            _platformSettings.ColorValuesChanged += OnPlatformColorValuesChanged;
+            _platformSettings = Application.Current?.PlatformSettings;
+            _platformSettings?.ColorValuesChanged += OnPlatformColorValuesChanged;
         }
                         
         if (OperatingSystem.IsWindows())
@@ -255,12 +255,12 @@ public partial class AvaloniaFluentTheme : Styles, IResourceProvider
         // The Resolve...Settings will return null if PreferSystemTheme is false
         if (theme != null)
         {
-            Application.Current.RequestedThemeVariant = theme;
+            Application.Current?.RequestedThemeVariant = theme;
             ThemeChanged?.Invoke(this, theme);
         }
     }
 
-    private void OnPlatformColorValuesChanged(object sender, PlatformColorValues e)
+    private void OnPlatformColorValuesChanged(object? sender, PlatformColorValues e)
     {
         if (PreferSystemTheme)
         {
@@ -276,7 +276,7 @@ public partial class AvaloniaFluentTheme : Styles, IResourceProvider
                     ThemeVariant.Light : ThemeVariant.Dark;
             }
 
-            Application.Current.RequestedThemeVariant = theme;
+            Application.Current?.RequestedThemeVariant = theme;
             ThemeChanged?.Invoke(this, theme);
         }
 
@@ -555,7 +555,7 @@ public partial class AvaloniaFluentTheme : Styles, IResourceProvider
         ThemeColorChanged?.Invoke(this, accent);
     }
 
-    private void MergedDictionariesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void MergedDictionariesCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         if (e.OldItems != null)
         {
@@ -578,7 +578,7 @@ public partial class AvaloniaFluentTheme : Styles, IResourceProvider
     private Color? _customAccentColor;
     private bool _preferSystemTheme;
     private bool _preferUserAccentColor;
-    private ResourceDictionary _accentColorsDictionary;
+    private ResourceDictionary? _accentColorsDictionary;
     private IPlatformSettings _platformSettings;
 
     public const string Light = "Light";

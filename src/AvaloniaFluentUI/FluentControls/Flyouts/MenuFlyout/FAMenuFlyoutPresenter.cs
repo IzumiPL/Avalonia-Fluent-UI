@@ -23,13 +23,13 @@ public class FAMenuFlyoutPresenter : ItemsControl
 
     internal AvaloniaObject InternalParent { get; set; }
 
-    protected override bool NeedsContainerOverride(object item, int index, out object recycleKey)
+    protected override bool NeedsContainerOverride(object? item, int index, out object recycleKey)
     {
         recycleKey = typeof(MenuFlyoutItem);
         return !(item is MenuFlyoutItemBase);
     }
 
-    protected override Control CreateContainerForItemOverride(object item, int index, object recycleKey)
+    protected override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
     {
         var cont = this.FindDataTemplate(item, ItemTemplate)?.Build(item);
 
@@ -45,7 +45,7 @@ public class FAMenuFlyoutPresenter : ItemsControl
         };
     }
 
-    protected override void PrepareContainerForItemOverride(Control element, object item, int index)
+    protected override void PrepareContainerForItemOverride(Control element, object? item, int index)
     {
         var mfib = element as MenuFlyoutItemBase;
 
@@ -404,9 +404,9 @@ public class FAMenuFlyoutPresenter : ItemsControl
         }
     }
 
-    private MenuFlyoutItemBase _openingItem;
-    private MenuFlyoutSubItem _openedItem;
-    private IDisposable _closingCancelDisp;
+    private MenuFlyoutItemBase? _openingItem;
+    private MenuFlyoutSubItem? _openedItem;
+    private IDisposable? _closingCancelDisp;
 
     private int _iconCount = 0;
     private int _toggleCount = 0;

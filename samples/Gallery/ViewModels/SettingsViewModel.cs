@@ -18,6 +18,8 @@ namespace Gallery.ViewModels;
 public partial class SettingsViewModel : ViewModelBase
 {
     public override string Title => LocalizationService.Instance.GetString("Settings");
+
+    public string? BackgroundImagePath { get; set; } = null;
     
     public SettingsViewModel(AppConfig? config)
     {
@@ -77,11 +79,9 @@ public partial class SettingsViewModel : ViewModelBase
                 CurrentEffect = "Null";
                 IsEnabledWindowEffect = false;
             }
-            
-            
+
+            BackgroundImagePath = config.BackgroundImagePath;
             IsEnabledBackgroundImage = config.IsEnabledBackgroundImage;
-            
-            Console.WriteLine("Loaded Settings");
         }
     }
 
@@ -170,8 +170,6 @@ public partial class SettingsViewModel : ViewModelBase
             CurrentEffect = effect;
             IsEnabledWindowEffect = !effect.Equals("Null");
             WeakReferenceMessenger.Default.Send(new EnabledWindowEffectMessage(IsEnabledWindowEffect, effect));
-
-            Console.WriteLine("Effect: " + effect + $"IsEnabledWindowEffect: {IsEnabledWindowEffect}");
         }
     }
 
@@ -206,6 +204,6 @@ public partial class SettingsViewModel : ViewModelBase
             IsEnabledWindowEffect = false;
             CurrentEffect = "Null";
         }
-        WeakReferenceMessenger.Default.Send(new EnabledBackgroundImageMessage(value));
+        WeakReferenceMessenger.Default.Send(new EnabledBackgroundImageMessage(value, BackgroundImagePath));
     }
 }

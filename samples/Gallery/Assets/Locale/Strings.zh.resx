@@ -1826,4 +1826,31 @@
   <data name="ZoomToSpecifiedHeight" xml:space="preserve">
     <value>缩放指定高度</value>
   </data>
+  <data name="PopupDrawer" xml:space="preserve">
+    <value>弹出抽屉</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>标题</value>
+  </data>
+  <data name="NoNewMessage" xml:space="preserve">
+    <value>没有新通知</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="PanelHeight" xml:space="preserve">
+    <value>面板高度</value>
+  </data>
+  <data name="PanelWidth" xml:space="preserve">
+    <value>面板宽度</value>
+  </data>
+  <data name="IsShowSimultaneously" xml:space="preserve">
+    <value>可同时显示</value>
+  </data>
+  <data name="IsLightDismissEnabled" xml:space="preserve">
+    <value>点击外部关闭</value>
+  </data>
+  <data name="CloseButtonIsVisible" xml:space="preserve">
+    <value>关闭按钮可见</value>
+  </data>
 </root>

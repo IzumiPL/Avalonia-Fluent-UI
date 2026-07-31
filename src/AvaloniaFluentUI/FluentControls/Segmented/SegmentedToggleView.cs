@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Controls;
@@ -13,6 +14,9 @@ public class SegmentedToggleView : SegmentedView
     public static readonly StyledProperty<Orientation> OrientationProperty =
         AvaloniaProperty.Register<SegmentedToggleView, Orientation>(nameof(Orientation));
 
+    /// <summary>
+    /// 设置或获取当前的显示方向
+    /// </summary>
     public Orientation Orientation
     {
         get => GetValue(OrientationProperty);
@@ -54,6 +58,8 @@ public class SegmentedToggleView : SegmentedView
     {
         if (_selectedIndicator == null) { return; }
 
+        _cts?.Cancel();
+        _cts = new CancellationTokenSource();
         _selectedIndicator.RenderTransform = _transform;
 
         AvaloniaProperty property;
@@ -97,7 +103,7 @@ public class SegmentedToggleView : SegmentedView
             }
         };
 
-        await animation.RunAsync(_selectedIndicator);
+        await animation.RunAsync(_selectedIndicator, _cts.Token);
     }
 
     protected override void UpdateSelectedIndicatorPosition()

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AvaloniaFluentUI.Controls.Interop;
+namespace AvaloniaFluentUI.Helpers;
 
 /// <summary>
 /// Helper alowed to detect OS - keeping the IsWindows11 helper method here, all other

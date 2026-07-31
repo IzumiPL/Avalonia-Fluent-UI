@@ -18,6 +18,9 @@ public class LocalizationService : INotifyPropertyChanged
 {
     private readonly List<ResourceManager> _resourceManagers = new();
 
+    /// <summary>
+    /// 获取当前程序默认语言区域
+    /// </summary>
     public static CultureInfo DefaultCultureInfo { get; } = new("en-US");
 
     private LocalizationService()

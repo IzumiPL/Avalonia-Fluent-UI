@@ -24,7 +24,7 @@ public class FolderDropPicker : TemplatedControl
     
     public static readonly StyledProperty<string?> SuggestedStartLocationProperty =
         AvaloniaProperty.Register<FolderDropPicker, string?>(nameof(SuggestedStartLocation), defaultValue: null);
-
+    
     public static readonly StyledProperty<bool> SelectedButtonIsVisibleProperty =
         AvaloniaProperty.Register<FolderDropPicker, bool>(nameof(SelectedButtonIsVisible), defaultValue: true);
 
@@ -34,48 +34,72 @@ public class FolderDropPicker : TemplatedControl
     public static readonly StyledProperty<string> OrTextProperty =
         AvaloniaProperty.Register<FolderDropPicker, string>(nameof(OrText));
 
+    /// <summary>
+    /// 设置或获取<c>Or</c>的显示文本
+    /// </summary>
     public string OrText
     {
         get => GetValue(OrTextProperty);
         set => SetValue(OrTextProperty, value);
     }
     
+    /// <summary>
+    /// 设置或获取<c>Header</c>的显示文本
+    /// </summary>
     public string Header
     {
         get => GetValue(HeaderProperty);
         set => SetValue(HeaderProperty, value);
     }
 
+    /// <summary>
+    /// 获取或设置选择按钮是否可见
+    /// </summary>
     public bool SelectedButtonIsVisible
     {
         get => GetValue(SelectedButtonIsVisibleProperty);
         set => SetValue(SelectedButtonIsVisibleProperty, value);
     }
 
+    /// <summary>
+    /// 获取或设置选择对话框默认起始路径
+    /// </summary>
     public string? SuggestedStartLocation
     {
         get => GetValue(SuggestedStartLocationProperty);
         set => SetValue(SuggestedStartLocationProperty, value);
     }
 
+    /// <summary>
+    /// 获取或设置选择对话框默认标题
+    /// </summary>
     public string SelectionTitle
     {
         get => GetValue(SelectionTitleProperty);
         set => SetValue(SelectionTitleProperty, value);
     }
     
+    /// <summary>
+    /// 获取或设置选择对话框是否支持多选
+    /// </summary>
     public bool AllowMultiple
     {
         get => GetValue(AllowMultipleProperty);
         set => SetValue(AllowMultipleProperty, value);
     }
 
+    /// <summary>
+    /// 只有在选择或拖动结束后触发
+    /// </summary>
     public ICommand? Command
     {
         get => GetValue(CommandProperty);
         set => SetValue(CommandProperty, value);
     }
 
+    /// <summary>
+    /// 拖拽结束后触发
+    /// </summary>
     public event EventHandler<DroppedEventArgs>? Dropped;
 
     private Button? _selectedButton;
@@ -120,7 +144,7 @@ public class FolderDropPicker : TemplatedControl
         OnSelectedClicked(null, null);
     }
 
-    protected virtual async Task<IReadOnlyList<string>> OpenSelectionDialog()
+    protected virtual async Task<IReadOnlyList<string>?> OpenSelectionDialog()
     {
         var toplevel = TopLevel.GetTopLevel(this);
         if (toplevel != null)

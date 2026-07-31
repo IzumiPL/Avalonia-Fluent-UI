@@ -48,7 +48,7 @@ internal class SplashScreenContext
 
 public class AppSplashScreen : TemplatedControl
 {
-    public IApplicationSplashScreen SplashScreen { get; set; }
+    public IApplicationSplashScreen? SplashScreen { get; set; }
 
     /// <inheritdoc/>
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)

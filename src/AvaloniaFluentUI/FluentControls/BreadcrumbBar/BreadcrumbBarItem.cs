@@ -596,15 +596,15 @@ public class BreadcrumbBarItem : ContentControl
     private bool _isEllipsisItem;
     private bool _isLastItem;
     private bool _allowClickOnLastItem;
-    private Flyout _ellipsisFlyout;
-    private Button _button;
+    private Flyout? _ellipsisFlyout;
+    private Button? _button;
 
-    private WeakReference<BreadcrumbBar> _parentBreadcrumb;
-    private ItemsRepeater _ellipsisItemsRepeater;
-    private IDataTemplate _ellipsisDropDownItemDataTemplate;
-    private BreadcrumbElementFactory _ellipsisElementFactory;
+    private WeakReference<BreadcrumbBar>? _parentBreadcrumb;
+    private ItemsRepeater? _ellipsisItemsRepeater;
+    private IDataTemplate? _ellipsisDropDownItemDataTemplate;
+    private BreadcrumbElementFactory? _ellipsisElementFactory;
 
-    private BreadcrumbBarItem _ellipsisItem;
+    private BreadcrumbBarItem? _ellipsisItem;
     private int _index;
 
     private bool _isPressed;
@@ -615,7 +615,6 @@ public class BreadcrumbBarItem : ContentControl
     private const string s_itemButtonPartName = "PART_ItemButton";
     private const string s_itemEllipsisFlyoutPartName = "PART_EllipsisFlyout";
 
-    //private const string s_ellipsisFlyoutAutomationName = "EllisisFlyout";
     private const string s_ellipsisItemsRepeaterAutomationName = "EllipsisItemsRepeater";
 
     private const string s_pcInline = ":inline";

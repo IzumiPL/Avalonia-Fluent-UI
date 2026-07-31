@@ -84,5 +84,5 @@ internal class BreadcrumbElementFactory : ElementFactory
         }
     }
 
-    private IElementFactory _itemTemplateWrapper;
+    private IElementFactory? _itemTemplateWrapper;
 }

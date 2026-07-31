@@ -229,7 +229,7 @@ public class CommandBarFlyout : PopupFlyoutBase
         _commandBar.IsOpen = false;
     }
 
-    private void OnCommandBarButtonInSecondaryCommandsClick(object sender, RoutedEventArgs e)
+    private void OnCommandBarButtonInSecondaryCommandsClick(object? sender, RoutedEventArgs e)
     {
         HideCore(false);
     }

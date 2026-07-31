@@ -25,9 +25,9 @@ public class RadioMenuFlyoutItem : MenuFlyoutItem
     /// <summary>
     /// Defines the <see cref="GroupName"/> property
     /// </summary>
-    public static readonly StyledProperty<string> GroupNameProperty =
+    public static readonly StyledProperty<string?> GroupNameProperty =
         RadioButton.GroupNameProperty.AddOwner<RadioMenuFlyoutItem>(
-            new StyledPropertyMetadata<string>(
+            new StyledPropertyMetadata<string?>(
                 coerce: (_, x) => x ?? string.Empty));
 
     /// <summary>
@@ -40,7 +40,7 @@ public class RadioMenuFlyoutItem : MenuFlyoutItem
     /// <summary>
     /// Gets or sets the name that specifies which RadioMenuFlyoutItem controls are mutually exclusive.
     /// </summary>
-    public string GroupName
+    public string? GroupName
     {
         get => GetValue(GroupNameProperty);
         set => SetValue(GroupNameProperty, value);

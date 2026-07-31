@@ -98,7 +98,7 @@
   </ControlTheme>
 
   <!--  Expander  -->
-  <ControlTheme x:Key="SettingsExpanderExpanderStyle" TargetType="Expander">
+  <ControlTheme x:Key="SettingsExpanderStyle" TargetType="ui:FluentExpander">
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="MinWidth" Value="0"/>
     <Setter Property="MinHeight" Value="{DynamicResource ExpanderSettingCardMinHeight}"/>
@@ -109,42 +109,36 @@
       <ControlTemplate>
         <StackPanel>
           <ToggleButton
-            Name="ToggleButton"
             MinHeight="{TemplateBinding MinHeight}"
             Content="{TemplateBinding Header}"
             IsChecked="{TemplateBinding IsExpanded,
                                         Mode=TwoWay}"
             IsEnabled="{TemplateBinding IsEnabled}"
             Theme="{StaticResource SettingsExpanderToggleButtonStyle}"/>
-
           <Border Name="ExpanderContentClip" ClipToBounds="True">
             <Border
-              Name="ExpanderContent"
+              Name="PART_ExpanderContent"
+              MinWidth="{TemplateBinding MinWidth}"
+              MinHeight="{DynamicResource FluentExpanderContentMinHeight}"
               Background="{TemplateBinding Background}"
               BackgroundSizing="InnerBorderEdge"
               BorderBrush="{TemplateBinding BorderBrush}"
               BorderThickness="{TemplateBinding BorderThickness}"
               CornerRadius="{TemplateBinding CornerRadius,
-                                             Converter={StaticResource BottomCornerRadiusFilterConverter}}"
-              IsVisible="False">
+                                             Converter={StaticResource BottomCornerRadiusFilterConverter}}">
               <ContentPresenter
                 Name="PART_ContentPresenter"
-                Margin="{TemplateBinding Padding}"
+                Margin="0"
+                Padding="{TemplateBinding Padding}"
                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                ClipToBounds="True"
                 Content="{TemplateBinding Content}"
-                ContentTemplate="{TemplateBinding ContentTemplate}"
-                IsVisible="{TemplateBinding IsExpanded}"/>
+                ContentTemplate="{TemplateBinding ContentTemplate}"/>
             </Border>
           </Border>
         </StackPanel>
       </ControlTemplate>
     </Setter>
-
-    <Style Selector="^:expanded /template/ Border#ExpanderContent">
-      <Setter Property="IsVisible" Value="True"/>
-    </Style>
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type ui:ExpanderSettingCard}" TargetType="ui:ExpanderSettingCard">
@@ -161,12 +155,12 @@
     </Setter>
     <Setter Property="Template">
       <ControlTemplate>
-        <Expander
+        <ui:FluentExpander
           Name="PART_Expander"
           IsExpanded="{TemplateBinding IsExpanded,
                                        Mode=TwoWay}"
-          Theme="{StaticResource SettingsExpanderExpanderStyle}">
-          <Expander.Header>
+          Theme="{StaticResource SettingsExpanderStyle}">
+          <ui:FluentExpander.Header>
             <Border
               Name="ContentHost"
               Padding="{TemplateBinding Padding}"
@@ -218,10 +212,10 @@
                   ContentTemplate="{TemplateBinding FooterTemplate}"/>
               </Grid>
             </Border>
-          </Expander.Header>
+          </ui:FluentExpander.Header>
 
           <ItemsPresenter ItemsPanel="{TemplateBinding ItemsPanel}"/>
-        </Expander>
+        </ui:FluentExpander>
       </ControlTemplate>
     </Setter>
 
@@ -244,20 +238,6 @@
 
     <Style Selector="^:empty /template/ ItemsPresenter#ItemsHost">
       <Setter Property="IsVisible" Value="False"/>
-    </Style>
-
-    <Style Selector="^ /template/ Expander#PART_Expander">
-      <Setter Property="ui:ExpanderExt.ExpanderAnimationType" Value="FluentV2"/>
-    </Style>
-
-    <Style Selector="^.NoExpanderAnimation">
-      <Style Selector="^:empty /template/ ItemsPresenter#ItemsHost">
-        <Setter Property="IsVisible" Value="False"/>
-      </Style>
-
-      <Style Selector="^ /template/ Expander#PART_Expander">
-        <Setter Property="ui:ExpanderExt.ExpanderAnimationType" Value="{x:Null}"/>
-      </Style>
     </Style>
   </ControlTheme>
 </ResourceDictionary>

@@ -194,6 +194,7 @@
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Dialog]}" Tag="Dialog"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Flyout]}" Tag="Flyout"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ShortcutKeyPicker]}" Tag="ShortcutKeyPanel"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[PopupDrawer]}" Tag="PopupDrawer"/>
           </fui:NavigationViewItem.MenuItems>
         </fui:NavigationViewItem>
         <fui:NavigationViewItem

@@ -33,6 +33,9 @@ public class FluentColorView : TemplatedControl
     public static readonly StyledProperty<string> HexTextProperty =
         AvaloniaProperty.Register<FluentColorView, string>(nameof(HexText), "FF00BFFF");
 
+    /// <summary>
+    /// 获取或设置当前选中的颜色
+    /// </summary>
     public Color Color
     {
         get => GetValue(ColorProperty);
@@ -44,7 +47,7 @@ public class FluentColorView : TemplatedControl
         get => GetValue(HsvColorProperty);
         set => SetValue(HsvColorProperty, value);
     }
-
+    
     public IBrush OriginalColor
     {
         get => GetValue(OriginalColorProperty);
@@ -57,6 +60,9 @@ public class FluentColorView : TemplatedControl
         set => SetValue(NewColorProperty, value);
     }
 
+    /// <summary>
+    /// 获取或设置当前颜色的16进制文本,不包含#
+    /// </summary>
     public string HexText
     {
         get => GetValue(HexTextProperty);

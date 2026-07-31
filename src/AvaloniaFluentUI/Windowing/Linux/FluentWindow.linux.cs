@@ -10,7 +10,11 @@ namespace AvaloniaFluentUI.Windowing;
 public partial class FluentWindow
 {
     private MenuFlyout? _systemMenu;
-    private const int ResizeBorderThickness = 8;
+    private Border? _windowBorder;
+    /// <summary>
+    /// 可改变大小的范围
+    /// </summary>
+    private const int RESIZE_BORDER_THICKNESS = 8;
 
     [Flags]
     private enum ResizeDirection
@@ -30,6 +34,7 @@ public partial class FluentWindow
     private void InitializeLinuxPlatform()
     {
         IsLinux = true;
+        // TODO: 构建右键标题栏默认行为, 虽然没什么用😛
         BuildSystemMenu();
     }
 
@@ -47,13 +52,13 @@ public partial class FluentWindow
         sizeItem.IsEnabled = false;
 
         var minItem = new MenuItem { Header = "最小化(_N)" };
-        minItem.Click += (_, _) => WindowState = WindowState.Minimized;
+        minItem.Click += OnMinimizeButtonClicked;
 
         var maxItem = new MenuItem { Header = "最大化(_X)" };
-        maxItem.Click += (_, _) => WindowState = WindowState.Maximized;
+        maxItem.Click += OnMaximizeButtonClicked;
 
         var closeItem = new MenuItem { Header = "关闭(_C)" };
-        closeItem.Click += (_, _) => Close();
+        closeItem.Click += OnCloseButtonClicked;
         closeItem.InputGesture = new KeyGesture(Key.F4, KeyModifiers.Alt);
 
         _systemMenu.Items.Add(restoreItem);
@@ -74,6 +79,9 @@ public partial class FluentWindow
 
         if (_windowBorder != null)
         {
+            _windowBorder.PointerPressed -= OnResizePointerPressed;
+            _windowBorder.PointerMoved -= OnResizePointerMoved;
+            
             _windowBorder.PointerPressed += OnResizePointerPressed;
             _windowBorder.PointerMoved += OnResizePointerMoved;
         }
@@ -89,14 +97,14 @@ public partial class FluentWindow
         var bounds = ClientSize;
         var direction = ResizeDirection.None;
 
-        if (pos.X < ResizeBorderThickness)
+        if (pos.X < RESIZE_BORDER_THICKNESS)
             direction |= ResizeDirection.Left;
-        else if (pos.X > bounds.Width - ResizeBorderThickness)
+        else if (pos.X > bounds.Width - RESIZE_BORDER_THICKNESS)
             direction |= ResizeDirection.Right;
 
-        if (pos.Y < ResizeBorderThickness)
+        if (pos.Y < RESIZE_BORDER_THICKNESS)
             direction |= ResizeDirection.Top;
-        else if (pos.Y > bounds.Height - ResizeBorderThickness)
+        else if (pos.Y > bounds.Height - RESIZE_BORDER_THICKNESS)
             direction |= ResizeDirection.Bottom;
 
         return direction;

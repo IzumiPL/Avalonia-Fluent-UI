@@ -7,6 +7,9 @@ using Avalonia.Interactivity;
 
 namespace AvaloniaFluentUI.Controls;
 
+/// <summary>
+/// 向导视图
+/// </summary>
 [TemplatePart(Name = PART_BACK_BUTTON, Type = typeof(Button))]
 [TemplatePart(Name = PART_NEXT_BUTTON, Type = typeof(Button))]
 public class WizardView : Carousel
@@ -17,12 +20,18 @@ public class WizardView : Carousel
     public static readonly StyledProperty<bool> NextButtonIsVisibleProperty =
         AvaloniaProperty.Register<WizardView, bool>(nameof(NextButtonIsVisible), true);
 
+    /// <summary>
+    /// 获取或设置下一步按钮是否显示
+    /// </summary>
     public bool NextButtonIsVisible
     {
         get => GetValue(NextButtonIsVisibleProperty);
         set => SetValue(NextButtonIsVisibleProperty, value);
     }
-
+    
+    /// <summary>
+    /// 获取或设置上一步按钮是否显示
+    /// </summary>
     public bool BackButtonIsVisible
     {
         get => GetValue(BackButtonIsVisibleProperty);
@@ -32,10 +41,24 @@ public class WizardView : Carousel
     private Button? _backButton;
     private Button? _nextButton;
     
+    /// <summary>
+    /// 当用户点击下一步时触发
+    /// </summary>
     public event EventHandler<WizardNextingEventArgs>? Nexting;
+    
+    /// <summary>
+    /// 当用户点击并进入下一步时触发
+    /// </summary>
     public event EventHandler? Nexted;
 
+    /// <summary>
+    /// 当用户点击完成时触发 
+    /// </summary>
     public event EventHandler<WizardFinishingEventArgs>? Finishing;
+    
+    /// <summary>
+    /// 当用户点击完成且未被阻止时触发
+    /// </summary>
     public event EventHandler? Finished;
     
     private const string PART_BACK_BUTTON = "PART_BackButton";

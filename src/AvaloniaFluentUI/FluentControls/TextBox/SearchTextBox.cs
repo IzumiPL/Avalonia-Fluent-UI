@@ -9,6 +9,9 @@ using Avalonia.Interactivity;
 
 namespace AvaloniaFluentUI.Controls;
 
+/// <summary>
+/// 带搜索按钮的输入框
+/// </summary>
 [TemplatePart(Name = PART_SEARCH_BUTTON, Type = typeof(Button))]
 public class SearchTextBox : TextBox
 {
@@ -18,20 +21,30 @@ public class SearchTextBox : TextBox
     public static readonly StyledProperty<bool> IsReturnSearchProperty =
         AvaloniaProperty.Register<SearchTextBox, bool>(nameof(IsReturnSearch));
 
+    /// <summary>
+    /// 设置或获取是否启用回车搜索
+    /// </summary>
     public bool IsReturnSearch
     {
         get => GetValue(IsReturnSearchProperty);
         set => SetValue(IsReturnSearchProperty, value);
     }
 
+    /// <summary>
+    /// 搜索时触发, 接收的参数是<c>搜索的内容</c>
+    /// </summary>
     public ICommand SearchCommand
     {
         get => GetValue(SearchCommandProperty);
         set => SetValue(SearchCommandProperty, value);
     }
     
-    private Button _searchButton;
-    public event Action<string> OnSearchTriggered;
+    private Button? _searchButton;
+    
+    /// <summary>
+    /// 搜索时触发
+    /// </summary>
+    public event Action<string?>? OnSearchTriggered;
     
     private const string PART_SEARCH_BUTTON = "PART_SearchButton";
 
@@ -53,7 +66,7 @@ public class SearchTextBox : TextBox
         }
     }
 
-    private void OnSearchButtonKeyDown(object sender, KeyEventArgs e)
+    private void OnSearchButtonKeyDown(object? sender, KeyEventArgs e)
     {
         if (IsReturnSearch && e.Key == Key.Enter)
         {
@@ -61,7 +74,7 @@ public class SearchTextBox : TextBox
         }
     }
 
-    private void OnSearchButtonClick(object sender, RoutedEventArgs e)
+    private void OnSearchButtonClick(object? sender, RoutedEventArgs e)
     {
         OnSearchTriggered?.Invoke(this.Text);
     }

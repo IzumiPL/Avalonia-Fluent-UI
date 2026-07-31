@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
@@ -18,6 +20,7 @@ using AvaloniaFluentUI.Icons;
 using AvaloniaFluentUI.Locale;
 using AvaloniaFluentUI.Styling;
 using AvaloniaFluentUI.Windowing;
+using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Gallery.Messages;
 using Gallery.Messages.MainWindowMessages;
@@ -59,7 +62,7 @@ public partial class MainWindow : FluentWindow
     
     public MainWindow()
     {
-        Application.Current.Resources["NavigationViewContentMargin"] = new Thickness(0, 55, 0, 0);
+        Application.Current?.Resources["NavigationViewContentMargin"] = new Thickness(0, 55, 0, 0);
         TitleBarIsVisible = false;
         SplashScreen = new MainWindowSplashScreen(() => TitleBarIsVisible = true);
         InitializeComponent();
@@ -67,19 +70,30 @@ public partial class MainWindow : FluentWindow
         RegisterMessages();
         Loaded += OnLoaded;
         
+        KeyBindings.Add(
+            new KeyBinding
+            {
+                Gesture = new KeyGesture(Key.F, KeyModifiers.Control),
+                Command = new RelayCommand(() => AutoCompleteBox.Focus())
+            }
+            );
+        
         ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("Pin"));
-        LocalizationService.Instance.PropertyChanged += (_, _) =>
-        {
-            if (PinButton.Tag!.ToString() == "isTopmost")
-            {
-                ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("UnPin"));
-            }
-            else
-            {
-                ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("Pin"));
-            }
-        };
+        LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
     }
+
+    private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (PinButton.Tag!.ToString() == "isTopmost")
+        {
+            ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("UnPin"));
+        }
+        else
+        {
+            ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("Pin"));
+        }
+    }
+
 
     private void RegisterMessages()
     {
@@ -97,7 +111,16 @@ public partial class MainWindow : FluentWindow
     {
         if (message.IsVisible)
         {
-            if (_backgroundImage == null)
+            if (message.Path != null)
+            {
+                using var stream = File.OpenRead(message.Path);
+                _backgroundImage = Bitmap.DecodeToHeight(stream, 1024);
+                BackgroundImage.Source = _backgroundImage;
+                
+                EnabledAcrylicBlue(false);
+                EnabledMica(false);
+            }
+            else if (_backgroundImage == null)
             {
                 _backgroundImage = LoadImageResource();
                 BackgroundImage.Source = _backgroundImage;
@@ -181,7 +204,8 @@ public partial class MainWindow : FluentWindow
                     IsWindowEffectEnabled = svm.IsEnabledWindowEffect,
                     WindowEffect = svm.CurrentEffect,
                     IsEnabledBackgroundImage = svm.IsEnabledBackgroundImage,
-                    Language = svm.CurrentLanguage
+                    Language = svm.CurrentLanguage,
+                    BackgroundImagePath = svm.BackgroundImagePath
                 };
                 if (svm.IsCustomColor)
                 {
@@ -214,10 +238,20 @@ public partial class MainWindow : FluentWindow
         {
             bool visible = viewModel.SettingsViewModel.IsEnabledBackgroundImage;
             BackgroundImage.IsVisible = visible;
-
+            
             if (visible)
             {
-                _backgroundImage = LoadImageResource(); 
+                var path = viewModel.SettingsViewModel.BackgroundImagePath;
+                if (path != null)
+                {
+                    using var stream = File.OpenRead(path);
+                    _backgroundImage = Bitmap.DecodeToHeight(stream, 1080);
+                }
+                else
+                {
+                    _backgroundImage = LoadImageResource();
+                }
+
                 BackgroundImage.Source = _backgroundImage;
             }
 
@@ -236,8 +270,6 @@ public partial class MainWindow : FluentWindow
         }
     }
     
-    
-
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
@@ -295,6 +327,16 @@ public partial class MainWindow : FluentWindow
         if (!IsWindows11)
         {
             BorderBrush = new SolidColorBrush(c);
+        }
+    }
+
+    private void OnAutoCompleteBoxSelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (DataContext is MainWindowViewModel mv && e.AddedItems.Count > 0)
+        {
+            var page = e.AddedItems[0];
+            mv.TogglePageCommand?.Execute(page);
+            OnJumpToControl(null, new JumpToControlMessage(page.ToString(), null));
         }
     }
 }
