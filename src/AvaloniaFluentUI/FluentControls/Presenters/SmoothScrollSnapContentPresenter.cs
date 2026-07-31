@@ -1,5 +1,4 @@
 using System;
-using System.Reflection;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Input;
@@ -7,34 +6,19 @@ using Avalonia.Layout;
 
 namespace AvaloniaFluentUI.Controls;
 
-
 public class SmoothScrollSnapContentPresenter : SmoothScrollContentPresenter
 {
-    private const double MaxDelta = 600;
-
-    /// <summary>
-    /// Detects item height from the content's ItemHeight property (e.g. DateTimePickerPanel).
-    /// Returns 0 if not found.
-    /// </summary>
-    private double DetectItemHeight()
-    {
-        var child = Child;
-        if (child == null) return 0;
-
-        var prop = child.GetType().GetProperty("ItemHeight", BindingFlags.Public | BindingFlags.Instance);
-        if (prop != null && prop.PropertyType == typeof(double))
-        {
-            return (double)prop.GetValue(child);
-        }
-        return 0;
-    }
+    // TODO: 使用反射获取ItemHeight在Aot模式下不可用,展示用固定值解决
+    public double ItemHeight { get; set; } = 40;
+    
+    private const double MAX_DELTA = 600;
 
     protected override async Task Scroll(Orientation orientation)
     {
         // Cap delta before base scroll runs
         SetCurrentValue(OffsetProperty, Offset); // ensure Offset is up-to-date
 
-        double itemHeight = DetectItemHeight();
+        double itemHeight = ItemHeight;
         bool useSnap = itemHeight > 0;
         bool snapping = false;
 
@@ -98,7 +82,7 @@ public class SmoothScrollSnapContentPresenter : SmoothScrollContentPresenter
         else
         {
             // No snap points detected, fall back to base behavior
-            _remainDelta = Math.Clamp(_remainDelta, -MaxDelta, MaxDelta);
+            _remainDelta = Math.Clamp(_remainDelta, -MAX_DELTA, MAX_DELTA);
             await base.Scroll(orientation);
         }
     }
@@ -106,7 +90,7 @@ public class SmoothScrollSnapContentPresenter : SmoothScrollContentPresenter
     protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
     {
         _remainDelta += -e.Delta.Y * 60;
-        _remainDelta = Math.Clamp(_remainDelta, -MaxDelta, MaxDelta);
+        _remainDelta = Math.Clamp(_remainDelta, -MAX_DELTA, MAX_DELTA);
         var direction = e.KeyModifiers.HasFlag(KeyModifiers.Alt) ? Orientation.Horizontal : Orientation.Vertical;
         if (!_isRunning) { _ = Scroll(direction); }
 
