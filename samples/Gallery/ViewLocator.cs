@@ -36,6 +36,7 @@ public class ViewLocator : IDataTemplate
         _factory[typeof(DialogPageViewModel)] = () => new DialogPage();
         _factory[typeof(FlyoutPageViewModel)] = () => new FlyoutPage();
         _factory[typeof(ShortcutKeyPickerPageViewModel)] = () => new ShortcutKeyPickerPage();
+        _factory[typeof(PopupDrawerPageViewModel)] = () => new PopupDrawerPage();
         
         _factory[typeof(LayoutViewModel)] = () => new LayoutView();
         _factory[typeof(BorderPageViewModel)] = () => new BorderPage();

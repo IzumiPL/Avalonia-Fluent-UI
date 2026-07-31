@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
@@ -74,6 +75,8 @@ public partial class WizardPage : InfoBarHostViewBase
 
     private void OnShowWizardWindow(object? sender, RoutedEventArgs _)
     {
+        if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime) { return; }
+        
         var p2 = new P2();
         var p3 = new P3();
         var p4 = new P4();

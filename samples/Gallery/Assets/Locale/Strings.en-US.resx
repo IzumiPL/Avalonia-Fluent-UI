@@ -1826,4 +1826,31 @@
   <data name="ZoomToSpecifiedHeight" xml:space="preserve">
     <value>Scale To Height</value>
   </data>
+  <data name="PopupDrawer" xml:space="preserve">
+    <value>Popup Drawer</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="NoNewMessage" xml:space="preserve">
+    <value>No new notifications</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="PanelHeight" xml:space="preserve">
+    <value>Panel Height</value>
+  </data>
+  <data name="PanelWidth" xml:space="preserve">
+    <value>Panel Width</value>
+  </data>
+  <data name="IsShowSimultaneously" xml:space="preserve">
+    <value>Is Show Simultaneously</value>
+  </data>
+  <data name="IsLightDismissEnabled" xml:space="preserve">
+    <value>Click outside to close</value>
+  </data>
+  <data name="CloseButtonIsVisible" xml:space="preserve">
+    <value>Close Button Is Visible</value>
+  </data>
 </root>

@@ -32,15 +32,6 @@ public class CodeCard : ContentControl
         set => SetValue(TitleProperty, value);
     }
 
-    public static readonly StyledProperty<string> UrlProperty =
-        AvaloniaProperty.Register<CodeCard, string>(nameof(Url), defaultValue: "https://github.com/HiyorinI/AvaloniaFluentUI.git");
-
-    public string Url
-    {
-        get => GetValue(UrlProperty);
-        set => SetValue(UrlProperty, value);
-    }
-
     private Border? _border;
     private const string PART_BORDER = "PART_CodeContentBorder";
 
@@ -57,7 +48,7 @@ public class CodeCard : ContentControl
 
     private void OnSourceCodeContentPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
-        UrlHelpers.OpenUrl(Url);
+        UrlHelpers.OpenUrl("https://github.com/IzumiPL/Avalonia-Fluent-UI.git");
     }
 
     public double CodeContentHeight

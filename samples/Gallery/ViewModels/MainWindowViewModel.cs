@@ -87,6 +87,7 @@ public partial class MainWindowViewModel : ViewModelBase
             { "Dialog", () => new DialogPageViewModel() },
             { "Flyout", () => new FlyoutPageViewModel() },
             { "ShortcutKeyPanel", () => new ShortcutKeyPickerPageViewModel() },
+            { "PopupDrawer", () => new PopupDrawerPageViewModel() },
             
             { "Layout", () => new LayoutViewModel() },
             { "Border", () => new BorderPageViewModel() },

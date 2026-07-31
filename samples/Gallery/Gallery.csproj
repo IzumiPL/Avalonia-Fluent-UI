@@ -78,5 +78,9 @@
       <DependentUpon>MediaView.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\DialogAndPopupPage\PopupDrawerPage.axaml.cs">
+      <DependentUpon>PopupDrawerPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
