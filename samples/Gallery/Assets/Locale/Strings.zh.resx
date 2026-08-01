@@ -1868,4 +1868,22 @@
   <data name="Bottom" xml:space="preserve">
     <value>底部</value>
   </data>
+  <data name="PopupControl" xml:space="preserve">
+    <value>弹出控件</value>
+  </data>
+  <data name="Top" xml:space="preserve">
+    <value>顶部</value>
+  </data>
+  <data name="Left" xml:space="preserve">
+    <value>左侧</value>
+  </data>
+  <data name="Right" xml:space="preserve">
+    <value>右侧</value>
+  </data>
+  <data name="Bottom" xml:space="preserve">
+    <value>底部</value>
+  </data>
+  <data name="MT_Sort" xml:space="preserve">
+    <value>排序</value>
+  </data>
 </root>

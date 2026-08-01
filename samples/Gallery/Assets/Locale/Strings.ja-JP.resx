@@ -1868,4 +1868,22 @@
   <data name="Bottom" xml:space="preserve">
     <value>下部</value>
   </data>
+  <data name="PopupControl" xml:space="preserve">
+    <value>コントロールをポップアップ</value>
+  </data>
+  <data name="Top" xml:space="preserve">
+    <value>トップ</value>
+  </data>
+  <data name="Left" xml:space="preserve">
+    <value>左側に</value>
+  </data>
+  <data name="Right" xml:space="preserve">
+    <value>右側</value>
+  </data>
+  <data name="Bottom" xml:space="preserve">
+    <value>下部</value>
+  </data>
+  <data name="MT_Sort" xml:space="preserve">
+    <value>ソーティング</value>
+  </data>
 </root>
