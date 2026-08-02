@@ -1,158 +1,158 @@
-﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
-                    x:CompileBindings="True">
-    <Design.PreviewWith>
-        <Border Padding="20">
-            <StackPanel Spacing="5">
-                <ui:InfoBadge Value="1" />
-                <ui:InfoBadge>
-                    <ui:InfoBadge.IconSource>
-                        <ui:SymbolIconSource Symbol="Add" />
-                    </ui:InfoBadge.IconSource>
-                </ui:InfoBadge>
-                <ui:InfoBadge>
-                    <ui:InfoBadge.IconSource>
-                        <ui:FontIconSource Glyph="A" />
-                    </ui:InfoBadge.IconSource>
-                </ui:InfoBadge>
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  x:CompileBindings="True">
+  <Design.PreviewWith/>
 
-                <ui:InfoBadge Classes="Attention Dot"/>
-                <ui:InfoBadge Classes="Attention" Value="10" />
-                <ui:InfoBadge Classes="Attention Icon" />
+  <!--  Control-specific resources  -->
+  <x:Double x:Key="InfoBadgeMinHeight">4</x:Double>
+  <x:Double x:Key="InfoBadgeMinWidth">4</x:Double>
+  <x:Double x:Key="InfoBadgeMaxHeight">16</x:Double>
+  <x:Double x:Key="InfoBadgeValueFontSize">11</x:Double>
+  <x:Double x:Key="InfoBadgeIconHeight">9</x:Double>
+  <x:Double x:Key="InfoBadgeIconWidth">12</x:Double>
+  <Thickness x:Key="InfoBadgePadding">0,0,0,0</Thickness>
+  <Thickness x:Key="IconInfoBadgeFontIconMargin">4,0,4,2</Thickness>
+  <Thickness x:Key="ValueInfoBadgeTextMargin">4,1,4,2</Thickness>
+  <Thickness x:Key="IconInfoBadgeIconMargin">4,4,4,4</Thickness>
 
-                <ui:InfoBadge Classes="Informational Dot" />
-                <ui:InfoBadge Classes="Informational" Value="10" />
-                <ui:InfoBadge Classes="Informational Icon" />
+  <ControlTheme x:Key="{x:Type ui:InfoBadge}" TargetType="ui:InfoBadge">
+    <Setter Property="MinHeight" Value="{DynamicResource InfoBadgeMinHeight}"/>
+    <Setter Property="MinWidth" Value="{DynamicResource InfoBadgeMinWidth}"/>
+    <Setter Property="MaxHeight" Value="{DynamicResource InfoBadgeMaxHeight}"/>
+    <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+    <Setter Property="Padding" Value="{DynamicResource InfoBadgePadding}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Name="RootGrid"
+          Padding="{TemplateBinding Padding}"
+          Background="{TemplateBinding Background}"
+          CornerRadius="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.InfoBadgeCornerRadius}">
+          <Panel>
+            <TextBlock
+              Name="ValueTextBlock"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              FontSize="{DynamicResource InfoBadgeValueFontSize}"
+              IsVisible="False"
+              Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Value, Mode=OneWay}"/>
 
-                <ui:InfoBadge Classes="Success Dot" />
-                <ui:InfoBadge Classes="Success" Value="10" />
-                <ui:InfoBadge Classes="Success Icon" />
-
-                <ui:InfoBadge Classes="Caution Dot" />
-                <ui:InfoBadge Classes="Caution" Value="10" />
-                <ui:InfoBadge Classes="Caution Icon" />
-
-                <ui:InfoBadge Classes="Critical Dot" />
-                <ui:InfoBadge Classes="Critical" Value="10" />
-                <ui:InfoBadge Classes="Critical Icon" />
-            </StackPanel>
+            <ui:FluentIconElement
+              Name="IconElement"
+              Width="16"
+              Height="16"
+              IsVisible="False"
+              Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.IconElement}"/>
+          </Panel>
         </Border>
-    </Design.PreviewWith>
+      </ControlTemplate>
+    </Setter>
+
+    <Style Selector="^:icon /template/ ui|FluentIconElement#IconElement">
+      <Setter Property="IsVisible" Value="True"/>
+      <Setter Property="Margin" Value="{DynamicResource IconInfoBadgeIconMargin}"/>
+    </Style>
+    <Style Selector="^:fonticon /template/ ui|FluentIconElement#IconElement">
+      <Setter Property="IsVisible" Value="True"/>
+      <Setter Property="Margin" Value="{DynamicResource IconInfoBadgeFontIconMargin}"/>
+    </Style>
+
+    <Style Selector="^:value /template/ TextBlock#ValueTextBlock">
+      <Setter Property="IsVisible" Value="True"/>
+      <Setter Property="Margin" Value="{DynamicResource ValueInfoBadgeTextMargin}"/>
+    </Style>
 
 
-    <ControlTheme x:Key="{x:Type ui:InfoBadge}" TargetType="ui:InfoBadge">
-        <Setter Property="MinHeight" Value="{DynamicResource InfoBadgeMinHeight}"/>
-        <Setter Property="MinWidth" Value="{DynamicResource InfoBadgeMinWidth}"/>
-        <Setter Property="MaxHeight" Value="{DynamicResource InfoBadgeMaxHeight}"/>
-        <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
-        <Setter Property="Padding" Value="{DynamicResource InfoBadgePadding}"/>
-        <Setter Property="Template">
-            <ControlTemplate>
-                <Border Name="RootGrid"
-                        Background="{TemplateBinding Background}"
-                        CornerRadius="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.InfoBadgeCornerRadius}"
-                        Padding="{TemplateBinding Padding}">
-                    <Panel>
-                        <TextBlock Name="ValueTextBlock"
-                                   Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Value, Mode=OneWay}"
-                                   FontSize="{DynamicResource InfoBadgeValueFontSize}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   IsVisible="False"/>
+    <Style Selector="^.Attention">
+      <Setter Property="Background" Value="{DynamicResource SystemFillColorAttentionBrush}"/>
 
-                        <Viewbox Name="IconPresenter" 
-                                 HorizontalAlignment="Center" 
-                                 VerticalAlignment="Stretch"
-                                 IsVisible="False">
-                            <ContentPresenter Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.IconElement}" />
-                        </Viewbox>
-                    </Panel>
-                </Border>
-            </ControlTemplate>
+      <Style Selector="^.Icon">
+        <Setter Property="Width" Value="16"/>
+        <Setter Property="Height" Value="16"/>
+        <Setter Property="IconSource">
+          <ui:FontIconSource
+            FontFamily="{StaticResource SymbolThemeFontFamily}"
+            FontSize="10"
+            Glyph="&#x0069;"/>
         </Setter>
-
-        <Style Selector="^:icon /template/ Viewbox#IconPresenter">
-            <Setter Property="IsVisible" Value="True" />
-            <Setter Property="Margin" Value="{DynamicResource IconInfoBadgeIconMargin}" />
-        </Style>
-        <Style Selector="^:fonticon /template/ Viewbox#IconPresenter">
-            <Setter Property="IsVisible" Value="True" />
-            <Setter Property="Margin" Value="{DynamicResource IconInfoBadgeFontIconMargin}" />
-        </Style>
-
-        <Style Selector="^:value /template/ TextBlock#ValueTextBlock">
-            <Setter Property="IsVisible" Value="True" />
-            <Setter Property="Margin" Value="{DynamicResource ValueInfoBadgeTextMargin}" />
-        </Style>
+      </Style>
+    </Style>
 
 
-        <Style Selector="^.Attention">
-            <Setter Property="Background" Value="{DynamicResource SystemFillColorAttentionBrush}" />
-        </Style>
-        <Style Selector="^.Attention.Dot">
-        </Style>
-        <Style Selector="^.Attention.Icon">
-            <Setter Property="Padding" Value="0 4 0 2" />
-            <Setter Property="IconSource">
-                <ui:FontIconSource Glyph="&#xEA38;" FontFamily="{StaticResource SymbolThemeFontFamily}" />
-            </Setter>
-        </Style>
+    <Style Selector="^.Information">
+      <Setter Property="Background" Value="{DynamicResource SystemFillColorSolidNeutralBrush}"/>
+
+      <Style Selector="^.Icon">
+        <Setter Property="Width" Value="16"/>
+        <Setter Property="Height" Value="16"/>
+        <Setter Property="IconSource">
+          <ui:FontIconSource
+            FontFamily="{StaticResource SymbolThemeFontFamily}"
+            FontSize="10"
+            Glyph="&#x0069;"/>
+        </Setter>
+      </Style>
+    </Style>
 
 
-        <Style Selector="^.Informational">
-            <Setter Property="Background" Value="{DynamicResource SystemFillColorSolidNeutralBrush}" />
-        </Style>
-        <Style Selector="^.Informational.Dot">
-        </Style>
-        <!-- This Icon does not exist in FluentIcons so we'll just take the informational icon & render upsidedown -->
-        <Style Selector="^.Informational.Icon">
-            <!--<Setter Property="Padding" Value="0 4 0 2" />-->
-            <Setter Property="RenderTransform" Value="rotate(180deg)" />
-            <Setter Property="IconSource">
-                <!--<ui:FontIconSource Glyph="&#xF4A5;" FontFamily="{StaticResource SymbolThemeFontFamily}" />-->
-                <ui:SymbolIconSource Symbol="ImportantFilled"/>
-            </Setter>
+    <Style Selector="^.Success">
+      <Setter Property="Background" Value="{DynamicResource SystemFillColorSuccessBrush}"/>
+
+      <Style Selector="^.Icon">
+        <Setter Property="Width" Value="16"/>
+        <Setter Property="Height" Value="16"/>
+
+        <Style Selector="^ /template/ ui|FluentIconElement#IconElement">
+          <Setter Property="Margin" Value="4 2"/>
         </Style>
 
+        <Setter Property="IconSource">
+          <ui:FontIconSource
+            FontFamily="{StaticResource SymbolThemeFontFamily}"
+            FontSize="10"
+            Glyph="&#xE10B;"/>
+        </Setter>
+      </Style>
+    </Style>
 
-        <Style Selector="^.Success">
-            <Setter Property="Background" Value="{DynamicResource SystemFillColorSuccessBrush}" />
-        </Style>
-        <Style Selector="^.Success.Dot">
-        </Style>
-        <Style Selector="^.Success.Icon">
-            <Setter Property="IconSource">
-                <Setter.Value>
-                    <ui:SymbolIconSource Symbol="Checkmark" />
-                </Setter.Value>
-            </Setter>
-        </Style>
+    <Style Selector="^.Warning">
+      <Setter Property="Background" Value="{DynamicResource SystemFillColorCautionBrush}"/>
 
-        <Style Selector="^.Caution">
-            <Setter Property="Background" Value="{DynamicResource SystemFillColorCautionBrush}" />
-        </Style>
-        <Style Selector="^.Caution.Dot">
-        </Style>
-        <Style Selector="^.Caution.Icon">
-            <Setter Property="IconSource">
-                <ui:SymbolIconSource Symbol="ImportantFilled" />
-            </Setter>
-        </Style>
+      <Style Selector="^.Icon">
+        <Setter Property="Width" Value="16"/>
+        <Setter Property="Height" Value="16"/>
+
+        <Setter Property="IconSource">
+          <ui:FontIconSource
+            FontFamily="{StaticResource SymbolThemeFontFamily}"
+            FontSize="10"
+            Glyph="&#x0021;"/>
+        </Setter>
+      </Style>
+    </Style>
 
 
-        <Style Selector="^.Critical">
-            <Setter Property="Background" Value="{DynamicResource SystemFillColorCriticalBrush}" />
-        </Style>
-        <Style Selector="^.Critical.Dot">
-        </Style>
-        <Style Selector="^.Critical.Icon">
-            <Setter Property="IconSource">
-                <ui:SymbolIconSource Symbol="Dismiss" />
-            </Setter>
+    <Style Selector="^.Error">
+      <Setter Property="Background" Value="{DynamicResource SystemFillColorCriticalBrush}"/>
+
+      <Style Selector="^.Icon">
+        <Setter Property="Width" Value="16"/>
+        <Setter Property="Height" Value="16"/>
+
+        <Style Selector="^ /template/ ui|FluentIconElement#IconElement">
+          <Setter Property="Margin" Value="4 2"/>
         </Style>
 
-    </ControlTheme>
-
+        <Setter Property="IconSource">
+          <ui:FontIconSource
+            FontFamily="{StaticResource SymbolThemeFontFamily}"
+            FontSize="10"
+            Glyph="&#xE10A;"/>
+        </Setter>
+      </Style>
+    </Style>
+  </ControlTheme>
 </ResourceDictionary>
