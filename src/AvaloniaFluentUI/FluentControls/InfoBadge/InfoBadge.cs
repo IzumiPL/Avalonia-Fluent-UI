@@ -12,7 +12,7 @@ namespace AvaloniaFluentUI.Controls;
 /// Represents a control for indicating notifications, alerts, new content, 
 /// or to attract focus to an area within an app.
 /// </summary>
-[PseudoClasses(s_pcValue, s_pcFontIcon, SharedPseudoclasses.s_pcIcon, s_pcDot)]
+[PseudoClasses(s_pcValue, s_pcFontIcon, SharedPseudoclasses.s_pcIcon)]
 public partial class InfoBadge : TemplatedControl
 {
     /// <summary>
@@ -63,7 +63,6 @@ public partial class InfoBadge : TemplatedControl
 
     private const string s_pcValue = ":value";
     private const string s_pcFontIcon = ":fonticon";
-    private const string s_pcDot = ":dot";
     
     public InfoBadge()
     {
@@ -106,10 +105,8 @@ public partial class InfoBadge : TemplatedControl
         if (!String.IsNullOrWhiteSpace(Value))
         {
             PseudoClasses.Set(s_pcValue, true);
-
             PseudoClasses.Set(s_pcFontIcon, false);
             PseudoClasses.Set(SharedPseudoclasses.s_pcIcon, false);
-            PseudoClasses.Set(s_pcDot, false);
         }
         else if (icoSource != null)
         {
@@ -119,12 +116,9 @@ public partial class InfoBadge : TemplatedControl
             PseudoClasses.Set(SharedPseudoclasses.s_pcIcon, icoSource is not FontIconSource);
 
             PseudoClasses.Set(s_pcValue, false);
-            PseudoClasses.Set(s_pcDot, false);
         }
         else
         {
-            PseudoClasses.Set(s_pcDot, true);
-
             PseudoClasses.Set(s_pcValue, false);
             PseudoClasses.Set(s_pcFontIcon, false);
             PseudoClasses.Set(SharedPseudoclasses.s_pcIcon, false);
