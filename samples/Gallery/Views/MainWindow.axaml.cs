@@ -255,6 +255,7 @@ public partial class MainWindow : FluentWindow
                 BackgroundImage.Source = _backgroundImage;
             }
 
+            SettingButton.IsEnabled = !IsWindows11;
             if (!IsWindows11)
             {
                 Bind(BorderThicknessProperty, new Binding(nameof(viewModel.BorderWidth)));

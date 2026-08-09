@@ -1886,4 +1886,28 @@
   <data name="MT_Sort" xml:space="preserve">
     <value>ソーティング</value>
   </data>
+  <data name="SelectBackgroundImage" xml:space="preserve">
+    <value>背景画像を選択してください</value>
+  </data>
+  <data name="HelpDesc" xml:space="preserve">
+    <value>新機能を発見し、Avalonia-Fluent-UIの使い方のヒントを学びましょう</value>
+  </data>
+  <data name="OpenHelpPage" xml:space="preserve">
+    <value>ヘルプページを開く</value>
+  </data>
+  <data name="ProFeedBack" xml:space="preserve">
+    <value>フィードバックを提供しましょう</value>
+  </data>
+  <data name="ProFeedBackDesc" xml:space="preserve">
+    <value>フィードバックを提供してAvalonia-Fluent-UIの変更を手伝ってください</value>
+  </data>
+  <data name="AboutDesc" xml:space="preserve">
+    <value>Copyright 2024、Izumi、現行バージョン2.0.4</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>最新情報の確認</value>
+  </data>
+  <data name="TimeLine" xml:space="preserve">
+    <value>タイムライン</value>
+  </data>
 </root>

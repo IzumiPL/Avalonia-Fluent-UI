@@ -154,7 +154,7 @@
           <Button
             Classes="Transparent"
             Click="OnShowSelectBgImageDialog"
-            Content="选择背景图"
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SelectBackgroundImage]}"
             IsEnabled="{Binding IsEnabledBackgroundImage}"/>
         </fui:ExpanderSettingCard>
 
@@ -162,31 +162,32 @@
           Margin="0,16,0,0"
           Classes="SubTitle"
           FontWeight="Normal"
-          Text="关于"/>
+          Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_About]}"/>
         <fui:SettingCard
-          Description="发现新功能并了解有关 Avalonia-Fluent-UI 的使用技巧"
-          Header="帮助"
+          Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[HelpDesc]}"
+          Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Help]}"
           IconSource="{x:Static fi:FluentIcon.Help}">
+          <!--  Classes="Transparent"  -->
           <Button
-            Classes="Transparent"
             Click="OnHelpClicked"
-            Content="打开帮助页面"
-            Foreground="{DynamicResource SystemAccentColor}"/>
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[OpenHelpPage]}"
+            Foreground="{DynamicResource SystemAccentColor}"
+            Theme="{StaticResource AccentForegroundButton}"/>
         </fui:SettingCard>
         <fui:SettingCard
-          Description="通过提供反馈帮助我们改变 Avalonia-Fluent-UI"
-          Header="提供反馈"
+          Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ProFeedBackDesc]}"
+          Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ProFeedBack]}"
           IconSource="{x:Static fi:FluentIcon.Feedback}">
           <Button
             Classes="Accent"
             Click="OnSendFeedbackClicked"
-            Content="提供反馈"/>
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ProFeedBack]}"/>
         </fui:SettingCard>
         <fui:SettingCard
-          Description="版权所有 2024, Izumi, 当前版本 2.0.4"
-          Header="关于"
+          Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[AboutDesc]}"
+          Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_About]}"
           IconSource="{x:Static fi:FluentIcon.Info}">
-          <Button Classes="Accent" Content="检查更新"/>
+          <Button Classes="Accent" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CheckForUpdates]}"/>
         </fui:SettingCard>
       </StackPanel>
     </fui:SmoothScrollViewer>

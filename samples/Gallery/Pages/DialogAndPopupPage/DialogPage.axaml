@@ -59,7 +59,10 @@
     </ui:CodeCard>
 
     <ui:CodeCard Name="TaskDialogCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_TaskDialog]}">
-      <Button Click="OnShowTaskDialog" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ShowTaskDialog]}"/>
+      <Button
+        Click="OnShowTaskDialog"
+        Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ShowTaskDialog]}"
+        IsEnabled="False"/>
     </ui:CodeCard>
   </StackPanel>
 </ui:ViewBase>

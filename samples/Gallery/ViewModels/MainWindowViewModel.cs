@@ -116,6 +116,7 @@ public partial class MainWindowViewModel : ViewModelBase
             { "AvatarView", () => new AvatarViewPageViewModel() },
             { "FileDropPicker", () => new FilesDropPickerPageViewModel() },
             { "WizardView", () => new WizardPageViewModel() },
+            { "TimeLine", () => new TimeLinePageViewModel() },
             
             { "Scroll", () => new ScrollViewModel() },
             

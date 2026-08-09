@@ -16,7 +16,7 @@ public partial class FlyoutPageViewModel : ViewModelBase
     private bool _fluentFlyoutIsOpen;
 
     [ObservableProperty]
-    private PlacementMode _flyoutPlacement = PlacementMode.Top;
+    private PlacementMode _flyoutPlacement = PlacementMode.Right;
 
     [ObservableProperty]
     private PlacementMode[] _flyoutPlacements =
@@ -41,7 +41,7 @@ public partial class FlyoutPageViewModel : ViewModelBase
     private bool _teachingTipIsOpen;
 
     [ObservableProperty]
-    private TeachingTipPlacementMode _teachingTipPlacement = TeachingTipPlacementMode.Top;
+    private TeachingTipPlacementMode _teachingTipPlacement = TeachingTipPlacementMode.Right;
 
     public TeachingTipPlacementMode[] TeachingTipPlacements => 
     [ 
