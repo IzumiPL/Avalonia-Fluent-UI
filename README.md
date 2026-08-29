@@ -15,6 +15,7 @@ A modern, smooth design UI for Avalonia applications, modified based on <a href=
 [![MIT](https://img.shields.io/badge/License-MIT-blue?color=#4ec820)](LICENSE)
 [![Avalonia](https://img.shields.io/badge/Avalonia-blue?color=%238b44ac)](https://avaloniaui.net/)
 [![NuGet](https://img.shields.io/nuget/v/AvaloniaFluentUI?color=%236A5ACD&label=AvaloniaFluentUI%20%28nuget%29)](https://www.nuget.org/packages/AvaloniaFluentUI/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/AvaloniaFluentUI?color=#4ec820abel=Downloads)](https://www.nuget.org/packages/AvaloniaFluentUI/)
 </div>
 
 <p align="center">
@@ -50,7 +51,7 @@ Want to learn more about Avalonia-Fluent-UI? Please read the following. [Help Do
 
 ## License📄
 
-This project is licensed under the [MIT License](LICENSE).
+Avalonia-Fluent-UI is licensed under the [MIT License](LICENSE).
 
 ## Support❤️ 
 

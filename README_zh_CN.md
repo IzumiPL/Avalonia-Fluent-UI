@@ -1,5 +1,5 @@
 ﻿<p align="center">
-  < img width="18%" align="center" src="Assets/Fluent.png" alt="logo">
+  <img width="18%" align="center" src="Assets/Fluent.png" alt="logo">
 </p >
 <p align="center">
 </p>
@@ -15,6 +15,7 @@
 [![MIT](https://img.shields.io/badge/License-MIT-blue?color=#4ec820)](LICENSE)
 [![Avalonia](https://img.shields.io/badge/Avalonia-blue?color=%238b44ac)](https://avaloniaui.net/)
 [![NuGet](https://img.shields.io/nuget/v/AvaloniaFluentUI?color=%236A5ACD&label=AvaloniaFluentUI%20%28nuget%29)](https://www.nuget.org/packages/AvaloniaFluentUI/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/AvaloniaFluentUI?color=#4ec820abel=Downloads)](https://www.nuget.org/packages/AvaloniaFluentUI/)
 </div>
 
 <p align="center">
@@ -49,7 +50,7 @@ dotnet run -c Release
 
 ## 许可证📄
 
-该项目使用 [MIT License](LICENSE) 许可证授权非商用项目。
+Avalonia-Fluent-UI使用 [MIT License](LICENSE) 许可授权。
 
 ## 支持❤️ 
 
