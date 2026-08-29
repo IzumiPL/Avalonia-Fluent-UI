@@ -70,7 +70,7 @@
               Margin="0,4,0,0"
               Padding="{DynamicResource AutoSuggestListMargin}"
               Background="{DynamicResource AcrylicBackgroundFillColorDefaultBrush}"
-              BorderBrush="{DynamicResource ControlBorderHighBrush}"
+              BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
               BorderThickness="1"
               CornerRadius="{DynamicResource OverlayCornerRadius}">
               <ListBox
