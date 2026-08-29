@@ -355,7 +355,9 @@ public class FlipView : TemplatedControl
         _autoPlayTimer.Stop();
 
         _cancelAnimationCts?.Cancel();
+        _cancelAnimationCts?.Dispose();
         _disposeCts?.Cancel();
+        _disposeCts?.Dispose();
         _disposeCts = new CancellationTokenSource();
         var token = _disposeCts.Token;
         
@@ -566,6 +568,7 @@ public class FlipView : TemplatedControl
         }
 
         _cancelAnimationCts?.Cancel();
+        _cancelAnimationCts?.Dispose();
         _cancelAnimationCts = new CancellationTokenSource();
         var token = _cancelAnimationCts.Token;
 
