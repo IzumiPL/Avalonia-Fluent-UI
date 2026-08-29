@@ -7,7 +7,7 @@
   Avalonia-Fluent-UI
 </h1>
 <p align="center">
-A modern, smooth design UI for Avalonia applications, modified based on <a href="https://github.com/amwx/FluentAvalonia.git">FluentAvalonia</a>, with some added controls
+适用于Avalonia应用的现代流畅设计UI, 在<a href="https://github.com/amwx/FluentAvalonia.git">FluentAvalonia</a>的基础上修改的,增加了一些控件
 </p>
 
 <div align="center">
@@ -19,33 +19,33 @@ A modern, smooth design UI for Avalonia applications, modified based on <a href=
 </div>
 
 <p align="center">
-English | <a href="README_zh_CN.md">简体中文</a>
+<a href="README.md">English</a> | 简体中文 
 </p>
 
 ![gallery](README.png)
 
 > [!Warning]
 >
-> If you need to use the 'Avalonia11' version, please clone this repository build; 'Nuget' will no longer provide updates for 'Avalonia11'
+> 如需使用`Avalonia11`版本,请克隆本仓库构建, `Nuget`不会再提供 `Avalonia11` 版本的更新
 
-## Run the example▶️
-After cloning the repository, you can run the sample program in the samples directory, which can also be downloaded from the [Release](https://github.com/IzumiPL/Avalonia-Fluent-UI/releases) page
-
+## 运行示例▶️
+克隆仓库后就可以运行 samples 目录下的示例程序, 也可以通过[Release](https://github.com/IzumiPL/Avalonia-Fluent-UI/releases)页面下载
 ```shell
 cd samples/Gallery.Desktop
 dotnet run -c Release
 ```
-## Document
-Want to learn more about Avalonia-Fluent-UI? Please read the following. [Help Document](https://docs.mikuas.top)👈
+## 文档
+想了解更多关于 Avalonia-Fluent-UI 的信息？请阅读以下内容。[帮助文档](https://docs.mikuas.top)👈
 
-## License📄
+## 许可证📄
 
-Avalonia-Fluent-UI is licensed under the [MIT License](LICENSE).
+Avalonia-Fluent-UI使用 [MIT License](LICENSE) 许可授权。
 
-## Support❤️
+## 支持❤️
 
-If you like this project, you can invite the author for a cup of cola.
+如果你喜欢此项目，可以请作者喝杯可乐.
 
-|                               WeChat                                |                                Alipay                                 |
+|                                微信                                 |                                支付宝                                 |
 |:-------------------------------------------------------------------:|:---------------------------------------------------------------------:|
 | <img src="./Assets/wechat.jpg" alt="微信" height="200" width="200"> | <img src="./Assets/alipay.jpg" alt="支付宝" height="200" width="200"> |
+
