@@ -181,7 +181,7 @@
             </Border>
           </VisualLayerManager>
 
-          <ui:InfoBarHost Name="InfoBarHost"/>
+          <ui:InfoBarHost Name="InfoBarHost" Margin="0,60,0,0"/>
         </Panel>
       </ControlTemplate>
     </Setter>
