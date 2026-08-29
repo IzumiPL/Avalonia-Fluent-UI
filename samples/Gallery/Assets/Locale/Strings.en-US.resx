@@ -1868,4 +1868,64 @@
   <data name="Bottom" xml:space="preserve">
     <value>Bottom</value>
   </data>
+  <data name="PopupControl" xml:space="preserve">
+    <value>Popup Control</value>
+  </data>
+  <data name="Top" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="Left" xml:space="preserve">
+    <value>Left</value>
+  </data>
+  <data name="Right" xml:space="preserve">
+    <value>Right</value>
+  </data>
+  <data name="Bottom" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="MT_Sort" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="SelectBackgroundImage" xml:space="preserve">
+    <value>Select Background Image</value>
+  </data>
+  <data name="HelpDesc" xml:space="preserve">
+    <value>Discover new features and learn tips for using Avalonia-Fluent-UI</value>
+  </data>
+  <data name="OpenHelpPage" xml:space="preserve">
+    <value>Open the help page</value>
+  </data>
+  <data name="ProFeedBack" xml:space="preserve">
+    <value>Provide Feedback</value>
+  </data>
+  <data name="ProFeedBackDesc" xml:space="preserve">
+    <value>Help us change Avalonia-Fluent-UI by providing feedback</value>
+  </data>
+  <data name="AboutDesc" xml:space="preserve">
+    <value>Copyright 2024, Izumi, current version 2.0.4</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>Check For Updates</value>
+  </data>
+  <data name="TimeLine" xml:space="preserve">
+    <value>Time Line</value>
+  </data>
+  <data name="LabelBox" xml:space="preserve">
+    <value>Label Box</value>
+  </data>
+  <data name="IsPaneOpen" xml:space="preserve">
+    <value>Is Pane Open</value>
+  </data>
+  <data name="PaneOpenLength" xml:space="preserve">
+    <value>Pane Open Length: </value>
+  </data>
+  <data name="PanePlacement" xml:space="preserve">
+    <value>Pane Placement:  </value>
+  </data>
+  <data name="DisplayMode" xml:space="preserve">
+    <value>Display Mode: </value>
+  </data>
+  <data name="CompactPaneLength" xml:space="preserve">
+    <value>Compact Pane Length: </value>
+  </data>
 </root>

@@ -10,9 +10,9 @@ public partial class IconsViewModel : ViewModelBase
     public override string Title => LocalizationService.Instance.GetString("Icon");
 
     [ObservableProperty]
-    private SegmentedItem _currentItem;
+    private SegmentedToggleItem _currentItem;
 
-    partial void OnCurrentItemChanged(SegmentedItem value)
+    partial void OnCurrentItemChanged(SegmentedToggleItem value)
     {
         ToggleView($"{value.Tag}");
     }

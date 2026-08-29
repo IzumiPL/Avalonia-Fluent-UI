@@ -116,6 +116,7 @@ public partial class MainWindowViewModel : ViewModelBase
             { "AvatarView", () => new AvatarViewPageViewModel() },
             { "FileDropPicker", () => new FilesDropPickerPageViewModel() },
             { "WizardView", () => new WizardPageViewModel() },
+            { "TimeLine", () => new TimeLinePageViewModel() },
             
             { "Scroll", () => new ScrollViewModel() },
             
@@ -191,7 +192,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(BorderWidth))]
-    private int _selectedBorderWidthItem = 2;
+    private int _selectedBorderWidthItem = 1;
     
     public int[] BorderWidthItems => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] ;
 

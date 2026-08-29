@@ -1,0 +1,95 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.TimeLinePage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:TimeLinePageViewModel"
+  mc:Ignorable="d">
+
+  <ui:ViewBase.Styles>
+    <Style Selector="TextBlock">
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+  </ui:ViewBase.Styles>
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Title="{Binding Title}">
+      <fui:TimeLine
+        Width="666"
+        Padding="15"
+        HorizontalAlignment="Left">
+        <fui:TimeLineItem>
+          <fui:TimeLineItem.Header>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <fui:InfoBadge Classes="Success Icon"/>
+              <TextBlock VerticalAlignment="Center" Text="已完成"/>
+            </StackPanel>
+          </fui:TimeLineItem.Header>
+          <fui:Card>
+            <Panel>
+              <fui:InfoBadge HorizontalAlignment="Left" Classes="Success Icon"/>
+              <TextBlock
+                Margin="32,0,0,0"
+                VerticalAlignment="Center"
+                Text="全军出🐔, 誓死保卫鸽鸽🏀!!"
+                TextDecorations="Strikethrough"/>
+            </Panel>
+          </fui:Card>
+        </fui:TimeLineItem>
+        <fui:TimeLineItem>
+          <fui:TimeLineItem.Header>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <fui:InfoBadge Classes="Attention Icon"/>
+              <TextBlock VerticalAlignment="Center" Text="今日安排"/>
+            </StackPanel>
+          </fui:TimeLineItem.Header>
+          <StackPanel Orientation="Vertical" Spacing="6">
+            <fui:Card>
+              <Panel>
+                <fui:InfoBadge HorizontalAlignment="Left" Classes="Warning Icon"/>
+                <TextBlock
+                  Margin="32,0,0,0"
+                  VerticalAlignment="Center"
+                  Text="上传我家 aiko 的 MV『シアリセ』"/>
+              </Panel>
+            </fui:Card>
+            <fui:Card>
+              <Panel>
+                <fui:InfoBadge HorizontalAlignment="Left" Classes="Warning Icon"/>
+                <TextBlock
+                  Margin="32,0,0,0"
+                  VerticalAlignment="Center"
+                  Text="下载我家 aiko 的『荒れた唇は恋を失くす』"/>
+              </Panel>
+            </fui:Card>
+          </StackPanel>
+        </fui:TimeLineItem>
+        <fui:TimeLineItem>
+          <fui:TimeLineItem.Header>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <fui:InfoBadge Classes="Error Icon"/>
+              <TextBlock VerticalAlignment="Center" Text="代办事项"/>
+            </StackPanel>
+          </fui:TimeLineItem.Header>
+          <fui:Card>
+            <Panel>
+              <fui:InfoBadge HorizontalAlignment="Left" Classes="Error Icon"/>
+              <TextBlock
+                Margin="32,0,0,0"
+                VerticalAlignment="Center"
+                Text="单曲循环我家 aiko 的新歌「星の降る日に」"/>
+            </Panel>
+          </fui:Card>
+        </fui:TimeLineItem>
+      </fui:TimeLine>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

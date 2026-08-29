@@ -14,7 +14,7 @@
     <PackageReference Include="Avalonia.Desktop"/>
   </ItemGroup>
 
-  <PropertyGroup>
+ <PropertyGroup>
     <PublishAot>true</PublishAot>
     <PublishTrimmed>true</PublishTrimmed>      <!-- 裁剪未使用的程序集，减小发布体积 -->
     <TrimMode>partial</TrimMode>                  <!-- 裁剪模式：full 为最激进，移除所有未使用的代码  partial -->

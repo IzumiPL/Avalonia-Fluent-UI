@@ -1,0 +1,41 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
+
+  <ControlTheme x:Key="{x:Type ui:TimeLineItem}" TargetType="ui:TimeLineItem">
+    <Setter Property="Padding" Value="0 12"/>
+
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid ColumnDefinitions="30,*" RowDefinitions="Auto, *">
+          <ContentPresenter
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Left"
+            Content="{TemplateBinding Header}"
+            ContentTemplate="{TemplateBinding HeaderTemplate}"/>
+
+          <Rectangle
+            Grid.Row="1"
+            Grid.Column="0"
+            Width="1.5"
+            Margin="8"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Stretch"
+            Fill="#80808080"/>
+
+          <ContentPresenter
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="{TemplateBinding Padding}"
+            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+            Content="{TemplateBinding Content}"
+            ContentTemplate="{TemplateBinding ContentTemplate}"/>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>
+

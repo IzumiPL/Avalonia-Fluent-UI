@@ -8,6 +8,8 @@
     <Setter Property="VerticalAlignment" Value="Top"/>
     <Setter Property="Background" Value="{DynamicResource SegmentedBackgroundBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
+    <Setter Property="SelectionIndicatorBackground" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+    <Setter Property="SelectionIndicatorBrush" Value="{DynamicResource SystemAccentColor}"/>
     <Setter Property="BorderThickness" Value="1"/>
     <Setter Property="CornerRadius" Value="5"/>
     <Setter Property="Template">
@@ -21,6 +23,7 @@
           BorderThickness="{TemplateBinding BorderThickness}"
           CornerRadius="{TemplateBinding CornerRadius}">
           <ui:SingleDirectionScrollViewer
+            Name="PART_ScrollViewer"
             Margin="0"
             Padding="0"
             Background="Transparent"
@@ -38,9 +41,9 @@
                 Height="3"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Background="{DynamicResource ControlFillColorDefaultBrush}"
-                CornerRadius="4"
-                IndicatorBrush="{DynamicResource SystemAccentColor}"
+                Background="{TemplateBinding SelectionIndicatorBackground}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                IndicatorBrush="{TemplateBinding SelectionIndicatorBrush}"
                 ZIndex="0"/>
             </Panel>
           </ui:SingleDirectionScrollViewer>
@@ -51,7 +54,8 @@
     <Style Selector="^">
       <Setter Property="ItemsPanel">
         <ItemsPanelTemplate>
-          <VirtualizingStackPanel Orientation="Horizontal"/>
+          <StackPanel Orientation="Horizontal"/>
+          <!-- <VirtualizingStackPanel Orientation="Horizontal"/> -->
         </ItemsPanelTemplate>
       </Setter>
     </Style>
@@ -118,24 +122,6 @@
       <Style Selector="^:selected">
         <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefault}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-      </Style>
-
-      <Style Selector="^:disabled">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
-      </Style>
-    </Style>
-
-    <Style Selector="^.Toggle">
-      <Setter Property="BorderThickness" Value="0"/>
-      <Setter Property="Margin" Value="0, 0"/>
-
-      <Style Selector="^[IsSelected=False]:pointerover">
-        <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-      </Style>
-
-      <Style Selector="^:selected">
-        <Setter Property="Foreground" Value="#FFFFFF"/>
       </Style>
 
       <Style Selector="^:disabled">

@@ -17,6 +17,7 @@ public partial class TextViewModel : ViewModelBase
         TextItemSource = ButtonItemModel.CreateList(
             ("TextBlock", "TextBlock", "TextBlock", "Text block, used to display text"),
             ("TextBox", "TextBox", "TextBox", "Text input box"),
+            ("AutoSuggestBox", "AutoSuggestBox", "TextBox", "A control to provide suggestions as a user is typing."),
             ("PasswordBox", "PasswordBox", "TextBox", "Password input box, which can be turned on and off to display the password"),
             ("NumberBox", "NumberBox", "NumberBox", "Numeric input box that can be fine-tuned")
         );

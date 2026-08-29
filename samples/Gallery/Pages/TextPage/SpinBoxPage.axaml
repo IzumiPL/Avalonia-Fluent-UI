@@ -48,6 +48,10 @@
       </Grid>
     </ui:CodeCard>
 
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_NumberBox]}">
+      <NumericUpDown Maximum="255" Minimum="0"/>
+    </ui:CodeCard>
+
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_ButtonSpinner]}">
       <Grid ColumnDefinitions="*, Auto">
         <ButtonSpinner

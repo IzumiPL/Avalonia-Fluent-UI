@@ -13,9 +13,45 @@ using Avalonia.Styling;
 namespace AvaloniaFluentUI.Controls;
 
 [TemplatePart(Name = PART_SELECTED_INDICATOR, Type = typeof(SelectionIndicator))]
-[TemplatePart(Name = PART_HEADERS_ARES, Type = typeof(Panel))]
+[TemplatePart(Name = PART_HEADERS_AREA, Type = typeof(Panel))]
 public class SegmentedView : SelectingItemsControl
 {
+    /// <summary>
+    ///     Defines the <see cref="SelectionIndicatorBackground" /> property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> SelectionIndicatorBackgroundProperty =
+        AvaloniaProperty.Register<SegmentedView, IBrush?>(nameof(SelectionIndicatorBackground));
+
+    /// <summary>
+    ///     Defines the <see cref="SelectionIndicatorBrush" /> property.
+    /// </summary>
+    public static readonly StyledProperty<IBrush?> SelectionIndicatorBrushProperty =
+        AvaloniaProperty.Register<SegmentedView, IBrush?>(nameof(SelectionIndicatorBrush));
+
+    /// <summary>
+    ///     Defines the <see cref="SelectionIndicatorWidthIsFixed" /> property.
+    /// </summary>
+    public static readonly StyledProperty<bool> SelectionIndicatorWidthIsFixedProperty =
+        AvaloniaProperty.Register<SegmentedView, bool>(nameof(SelectionIndicatorWidthIsFixed));
+
+    public bool SelectionIndicatorWidthIsFixed
+    {
+        get => GetValue(SelectionIndicatorWidthIsFixedProperty);
+        set => SetValue(SelectionIndicatorWidthIsFixedProperty, value);
+    }
+
+    public IBrush? SelectionIndicatorBrush
+    {
+        get => GetValue(SelectionIndicatorBrushProperty);
+        set => SetValue(SelectionIndicatorBrushProperty, value);
+    }
+    
+    public IBrush? SelectionIndicatorBackground
+    {
+        get => GetValue(SelectionIndicatorBackgroundProperty);
+        set => SetValue(SelectionIndicatorBackgroundProperty, value);
+    }
+    
     protected SelectionIndicator? _selectedIndicator;
     protected Panel? _headersArea;
 
@@ -23,7 +59,7 @@ public class SegmentedView : SelectingItemsControl
     protected TranslateTransform _transform = new TranslateTransform();
     
     private const string PART_SELECTED_INDICATOR = "PART_SelectedIndicator";
-    private const string PART_HEADERS_ARES = "PART_HeadersArea";
+    private const string PART_HEADERS_AREA = "PART_HeadersArea";
 
     protected override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
         => NeedsContainer<SegmentedItem>(item, out recycleKey);
@@ -45,8 +81,16 @@ public class SegmentedView : SelectingItemsControl
         base.OnApplyTemplate(e);
         
         _selectedIndicator = e.NameScope.Find<SelectionIndicator>(PART_SELECTED_INDICATOR);
-        _headersArea = e.NameScope.Find<Panel>(PART_HEADERS_ARES);
+        _headersArea = e.NameScope.Find<Panel>(PART_HEADERS_AREA);
+
+        if (e.NameScope.Find<SingleDirectionScrollViewer>("PART_ScrollViewer") is {} scroller)
+        {
+            scroller.RemoveHandler(RequestBringIntoViewEvent, OnScrollViewerRequestBringIntoViewEventChanged);
+            scroller.AddHandler(RequestBringIntoViewEvent, OnScrollViewerRequestBringIntoViewEventChanged);
+        }
     }
+
+    private void OnScrollViewerRequestBringIntoViewEventChanged(object? sender, RequestBringIntoViewEventArgs e) => e.Handled = true;
 
     protected override void OnLoaded(RoutedEventArgs e)
     {
@@ -59,12 +103,13 @@ public class SegmentedView : SelectingItemsControl
         base.OnPropertyChanged(change);
         if (change.Property == SelectedItemProperty)
         {
-            SyncContainerSelection(change.NewValue);
+            // SyncContainerSelection(change.NewValue);
+            // Avalonia.Threading.Dispatcher.UIThread.Post(UpdateSelectedIndicatorPosition);
             UpdateSelectedIndicatorPosition();
         }
     }
 
-    private void SyncContainerSelection(object selectedItem)
+    protected virtual void SyncContainerSelection(object? selectedItem)
     {
         foreach (var item in Items)
         {
@@ -136,12 +181,14 @@ public class SegmentedView : SelectingItemsControl
         {
             var width = container.Bounds.Width;
             var height = container.Bounds.Height;
-            var indicatorWidth = width / 3;
             
             RunSliderAnimation(transform.Value.Transform(new Point(0, 0)));
             _selectedIndicator.Width = width;
             _selectedIndicator.Height = height;
-            _selectedIndicator.IndicatorWidth = indicatorWidth;
+            if (!SelectionIndicatorWidthIsFixed)
+            {
+                _selectedIndicator.IndicatorWidth = width / 3;
+            }
         }
     }
 }

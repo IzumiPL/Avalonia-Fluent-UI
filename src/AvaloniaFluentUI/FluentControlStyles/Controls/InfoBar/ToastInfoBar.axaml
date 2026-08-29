@@ -19,7 +19,7 @@
           MinHeight="45"
           MaxWidth="{TemplateBinding MaxWidth}"
           MaxHeight="{TemplateBinding MaxHeight}"
-          Margin="8"
+          Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
           Background="{TemplateBinding Background}"
           BorderBrush="{TemplateBinding BorderBrush}"
           BorderThickness="{TemplateBinding BorderThickness}"

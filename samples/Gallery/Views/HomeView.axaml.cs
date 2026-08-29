@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
@@ -118,20 +119,21 @@ public partial class HomeView : UserControl
 //     }
     private void OnGettingStartedClicked(object? sender, RoutedEventArgs e)
     {
-        UrlHelpers.OpenUrl("https://github.com/HiyorinI/AvaloniaFluentUI.git");
+        UrlHelpers.OpenUrl(new Uri("https://github.com/HiyorinI/AvaloniaFluentUI.git"), TopLevel.GetTopLevel(this));
     }
 
     private void OnGitHubRepoClicked(object? sender, RoutedEventArgs e)
     {
-        UrlHelpers.OpenUrl("https://github.com/HiyorinI/AvaloniaFluentUI.git");
+        UrlHelpers.OpenUrl(new Uri("https://github.com/HiyorinI/AvaloniaFluentUI.git"), TopLevel.GetTopLevel(this));
     }
 
     private void OnCodeSamplesClicked(object? sender, RoutedEventArgs e)
     {
-        UrlHelpers.OpenUrl("https://github.com/HiyorinI/AvaloniaFluentUI/tree/master/samples/Gallery");
+        UrlHelpers.OpenUrl(new Uri("https://github.com/HiyorinI/AvaloniaFluentUI/tree/master/samples/Gallery"), TopLevel.GetTopLevel(this));
     }
 
     private void OnSendFeedBackClicked(object? sender, RoutedEventArgs e)
     {
+        UrlHelpers.OpenUrl(new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/issues/new"), TopLevel.GetTopLevel(this));
     }
 }

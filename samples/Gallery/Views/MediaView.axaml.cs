@@ -10,9 +10,14 @@ namespace Gallery.Views;
 
 public partial class MediaView : ViewBase 
 {
-    public MediaView()
+    public MediaView() : base("Media")
     {
         InitializeComponent();
+
+        CodeCards = new Dictionary<string, CodeCard>()
+        {
+            { "Image", ImageCard }
+        };
     }
 
     public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Views/MainView.axaml");

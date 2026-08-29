@@ -255,6 +255,7 @@ public partial class MainWindow : FluentWindow
                 BackgroundImage.Source = _backgroundImage;
             }
 
+            SettingButton.IsEnabled = !IsWindows11;
             if (!IsWindows11)
             {
                 Bind(BorderThicknessProperty, new Binding(nameof(viewModel.BorderWidth)));
@@ -268,6 +269,16 @@ public partial class MainWindow : FluentWindow
                 };
             }
         }
+        
+        InitializeInfoBarHost();
+    }
+
+    private void InitializeInfoBarHost()
+    {
+        InfoBarHost.RegisterManager<PopupInfoBarManager>();
+        InfoBarHost.RegisterManager<ToastInfoBarManager>();
+        InfoBarService.PopupInfoBarManager = InfoBarHost.GetManager<PopupInfoBarManager>();
+        InfoBarService.ToastInfoBarManager = InfoBarHost.GetManager<ToastInfoBarManager>();
     }
     
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)

@@ -46,6 +46,7 @@ public class ViewBase : ContentControl
     private Button? _toggleThemeButton;
     private Button? _documentButton;
     private Button? _sourceCodeButton;
+    private Button? _sendFeedbackButton;
     private SmoothScrollViewer? _scrollViewer;
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -53,16 +54,18 @@ public class ViewBase : ContentControl
         _toggleThemeButton?.Click -= OnToggleThemeClicked;
         _documentButton?.Click -= OnDocumentButtonClicked;
         _sourceCodeButton?.Click -= OnSourceCodeButtonClicked;
+        _sendFeedbackButton?.Click -= OnSendFeedbackButtonClicked;
         
         _toggleThemeButton = e.NameScope.Find<Button>("ToggleThemeButton");
         _scrollViewer = e.NameScope.Find<SmoothScrollViewer>("SmoothScrollViewer");
         _documentButton = e.NameScope.Find<Button>("DocumentButton")!;
         _sourceCodeButton = e.NameScope.Find<Button>("SourceCodeButton")!;
+        _sendFeedbackButton = e.NameScope.Find<Button>("SendFeedbackButton");
 
         _toggleThemeButton?.Click += OnToggleThemeClicked;
        _documentButton?.Click += OnDocumentButtonClicked;
        _sourceCodeButton?.Click += OnSourceCodeButtonClicked;
-
+       _sendFeedbackButton?.Click += OnSendFeedbackButtonClicked;
 
        if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime)
        {
@@ -71,6 +74,11 @@ public class ViewBase : ContentControl
        }
         
         base.OnApplyTemplate(e);
+    }
+
+    private void OnSendFeedbackButtonClicked(object? sender, RoutedEventArgs e)
+    {
+        UrlHelpers.OpenUrl(new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/issues/new"), TopLevel.GetTopLevel(this));
     }
 
     private void OnDocumentButtonClicked(object? sender, RoutedEventArgs e)

@@ -35,7 +35,7 @@
   <avconv:CornerRadiusFilterConverter x:Key="BottomCornerRadiusFilterConverter" Filter="BottomLeft, BottomRight"/>
   <avconv:CornerRadiusFilterConverter x:Key="LeftCornerRadiusFilterConverter" Filter="TopLeft, BottomLeft"/>
   <avconv:PlatformKeyGestureConverter x:Key="KeyGestureConverter"/>
-  <converts:ColorToBrushConv x:Key="ColorBrushConv"/>
+  <converts:ColorToBrushConverter x:Key="ColorBrushConv"/>
 
   <converts:CornerRadiusAdjustConverter x:Key="KeepTopCornerRadiusConverter"/>
   <converts:CornerRadiusAdjustConverter

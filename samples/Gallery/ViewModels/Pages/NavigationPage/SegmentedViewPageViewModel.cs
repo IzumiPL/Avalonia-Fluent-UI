@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using Avalonia.Media;
+﻿using Avalonia.Media;
 using AvaloniaFluentUI.Controls;
 using AvaloniaFluentUI.Icons;
 using AvaloniaFluentUI.Locale;
@@ -31,12 +30,12 @@ public partial class SegmentedViewPageViewModel : ViewModelBase
     public double IconSegmentedViewWidthFormat => IconSegmentedViewWidth.ToDoubleOrNan();
 
     [ObservableProperty]
-    private object _segmentedToggleSelectedItem;
+    private object? _segmentedToggleSelectedItem;
     
     [ObservableProperty]
     private string _segmentedSelectedItemFormat = "Null";
 
-    partial void OnSegmentedToggleSelectedItemChanged(object value)
+    partial void OnSegmentedToggleSelectedItemChanged(object? value)
     {
         if (value is SegmentedItem item)
         {
@@ -45,12 +44,12 @@ public partial class SegmentedViewPageViewModel : ViewModelBase
     }
 
     [ObservableProperty]
-    private object _segmentedSelectedItem;
+    private object? _segmentedSelectedItem;
 
     [ObservableProperty]
     private string _selectedItemFormat = "Null";
 
-    partial void OnSegmentedSelectedItemChanged(object value)
+    partial void OnSegmentedSelectedItemChanged(object? value)
     {
         if (value is SegmentedItem item)
         {

@@ -19,6 +19,7 @@
   <ItemGroup>
     <PackageReference Include="Avalonia" />
     <PackageReference Include="AvaloniaUI.DiagnosticsSupport">
+<!--    <PackageReference Include="Avalonia.Diagnostics">-->
       <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
@@ -80,6 +81,10 @@
     </Compile>
     <Compile Update="Pages\DialogAndPopupPage\PopupDrawerPage.axaml.cs">
       <DependentUpon>PopupDrawerPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ViewPage\TimeLinePage.axaml.cs">
+      <DependentUpon>TimeLinePage.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

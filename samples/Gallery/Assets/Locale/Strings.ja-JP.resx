@@ -1868,4 +1868,64 @@
   <data name="Bottom" xml:space="preserve">
     <value>下部</value>
   </data>
+  <data name="PopupControl" xml:space="preserve">
+    <value>コントロールをポップアップ</value>
+  </data>
+  <data name="Top" xml:space="preserve">
+    <value>トップ</value>
+  </data>
+  <data name="Left" xml:space="preserve">
+    <value>左側に</value>
+  </data>
+  <data name="Right" xml:space="preserve">
+    <value>右側</value>
+  </data>
+  <data name="Bottom" xml:space="preserve">
+    <value>下部</value>
+  </data>
+  <data name="MT_Sort" xml:space="preserve">
+    <value>ソーティング</value>
+  </data>
+  <data name="SelectBackgroundImage" xml:space="preserve">
+    <value>背景画像を選択してください</value>
+  </data>
+  <data name="HelpDesc" xml:space="preserve">
+    <value>新機能を発見し、Avalonia-Fluent-UIの使い方のヒントを学びましょう</value>
+  </data>
+  <data name="OpenHelpPage" xml:space="preserve">
+    <value>ヘルプページを開く</value>
+  </data>
+  <data name="ProFeedBack" xml:space="preserve">
+    <value>フィードバックを提供しましょう</value>
+  </data>
+  <data name="ProFeedBackDesc" xml:space="preserve">
+    <value>フィードバックを提供してAvalonia-Fluent-UIの変更を手伝ってください</value>
+  </data>
+  <data name="AboutDesc" xml:space="preserve">
+    <value>Copyright 2024、Izumi、現行バージョン2.0.4</value>
+  </data>
+  <data name="CheckForUpdates" xml:space="preserve">
+    <value>最新情報の確認</value>
+  </data>
+  <data name="TimeLine" xml:space="preserve">
+    <value>タイムライン</value>
+  </data>
+  <data name="LabelBox" xml:space="preserve">
+    <value>タグ入力ボックス</value>
+  </data>
+  <data name="IsPaneOpen" xml:space="preserve">
+    <value>パネルは展開されました</value>
+  </data>
+  <data name="PaneOpenLength" xml:space="preserve">
+    <value>パネル展開の長さ: </value>
+  </data>
+  <data name="PanePlacement" xml:space="preserve">
+    <value>ガラスの配置: </value>
+  </data>
+  <data name="DisplayMode" xml:space="preserve">
+    <value>表示モード:</value>
+  </data>
+  <data name="CompactPaneLength" xml:space="preserve">
+    <value>コンパクトなガラス長: </value>
+  </data>
 </root>

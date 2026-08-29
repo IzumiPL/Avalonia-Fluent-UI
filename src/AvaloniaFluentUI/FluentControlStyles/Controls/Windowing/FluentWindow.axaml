@@ -181,7 +181,7 @@
             </Border>
           </VisualLayerManager>
 
-          <ui:InfoBarHost Name="InfoBarHost"/>
+          <ui:InfoBarHost Name="InfoBarHost" Margin="0,60,0,0"/>
         </Panel>
       </ControlTemplate>
     </Setter>
@@ -222,7 +222,7 @@
     </Style>
 
     <Style Selector="^:isNotWin11">
-      <Setter Property="BorderThickness" Value="1.5"/>
+      <Setter Property="BorderThickness" Value="1"/>
       <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBrush}"/>
 
       <Style Selector="^[WindowState=Maximized],     ^[WindowState=FullScreen]">

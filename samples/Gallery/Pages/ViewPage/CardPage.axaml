@@ -173,42 +173,61 @@
     </ui:CodeCard>
 
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[GradientCard]}">
-      <fui:GradientCard>
-        <fui:GradientCard.GradientStops>
-          <GradientStop Offset="0.0" Color="#4d9bf6ff"/>
-          <GradientStop Offset="1.0" Color="#4dffc6ff"/>
-        </fui:GradientCard.GradientStops>
-        <Grid
-          ColumnDefinitions="Auto, *, Auto"
-          ColumnSpacing="8"
-          RowDefinitions="Auto, Auto"
-          RowSpacing="6">
-          <PathIcon
-            Grid.Row="0"
-            Grid.Column="0"
-            VerticalAlignment="Top"
-            Data="{x:Static fi:FluentIcon.Document}"/>
-          <TextBlock
-            Grid.Row="0"
-            Grid.Column="1"
-            Text="File Locksmith"/>
-          <TextBlock
-            Grid.Row="1"
-            Grid.ColumnSpan="3"
-            FontSize="12"
-            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-            Text="{locale:Localization FT}"/>
+      <Grid
+        ColumnDefinitions="*, Auto"
+        ColumnSpacing="18"
+        RowDefinitions="Auto, Auto"
+        RowSpacing="6">
+        <fui:GradientCard Grid.RowSpan="2">
+          <fui:GradientCard.GradientStops>
+            <GradientStop Offset="0.0" Color="{Binding #L.Color}"/>
+            <GradientStop Offset="1.0" Color="{Binding #R.Color}"/>
+          </fui:GradientCard.GradientStops>
+          <Grid
+            ColumnDefinitions="Auto, *, Auto"
+            ColumnSpacing="8"
+            RowDefinitions="Auto, Auto"
+            RowSpacing="6">
+            <PathIcon
+              Grid.Row="0"
+              Grid.Column="0"
+              VerticalAlignment="Top"
+              Data="{x:Static fi:FluentIcon.Document}"/>
+            <TextBlock
+              Grid.Row="0"
+              Grid.Column="1"
+              Text="File Locksmith"/>
+            <TextBlock
+              Grid.Row="1"
+              Grid.ColumnSpan="3"
+              FontSize="12"
+              Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+              Text="{locale:Localization FT}"/>
 
-          <ToggleSwitch
-            Grid.RowSpan="2"
-            Grid.ColumnSpan="3"
-            Margin="0,-12,-18,0"
-            HorizontalAlignment="Right"
-            VerticalContentAlignment="Top"
-            OffContent=""
-            OnContent=""/>
-        </Grid>
-      </fui:GradientCard>
+            <ToggleSwitch
+              Grid.RowSpan="2"
+              Grid.ColumnSpan="3"
+              Margin="0,-12,-18,0"
+              HorizontalAlignment="Right"
+              VerticalContentAlignment="Top"
+              OffContent=""
+              OnContent=""/>
+          </Grid>
+        </fui:GradientCard>
+
+        <fui:ColorPickerButton
+          Name="L"
+          Grid.Row="0"
+          Grid.Column="1"
+          VerticalAlignment="Top"
+          Color="#4D9BF6FF"/>
+        <fui:ColorPickerButton
+          Name="R"
+          Grid.Row="1"
+          Grid.Column="1"
+          VerticalAlignment="Top"
+          Color="#4DFFC6FF"/>
+      </Grid>
     </ui:CodeCard>
   </StackPanel>
 </ui:ViewBase>
