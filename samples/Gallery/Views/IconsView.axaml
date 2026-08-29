@@ -127,12 +127,29 @@
       Grid.Row="1"
       HorizontalAlignment="Stretch"
       SelectedItem="{Binding CurrentItem, Mode=TwoWay}">
-      <fui:SegmentedItem
+      <fui:SegmentedToggleView.Styles>
+        <Style Selector="fui|SegmentedToggleItem">
+          <Setter Property="Padding" Value="24 8"/>
+        </Style>
+
+        <Style Selector="fui|SegmentedToggleItem:pointerover[IsSelected=False]">
+          <Setter Property="Background" Value="Transparent"/>
+          <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+        </Style>
+
+        <Style Selector="fui|SegmentedToggleView">
+          <Setter Property="CornerRadius" Value="28"/>
+          <Setter Property="Background" Value="Transparent"/>
+          <Setter Property="Padding" Value="12"/>
+          <Setter Property="SelectionIndicatorBackground" Value="{DynamicResource SystemAccentColor}"/>
+        </Style>
+      </fui:SegmentedToggleView.Styles>
+      <fui:SegmentedToggleItem
         Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FluentIcon]}"
         IsSelected="True"
         Tag="FluentIcon"/>
-      <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FontIcon]}" Tag="FontIcon"/>
-      <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SymbolIcon]}" Tag="SymbolIcon"/>
+      <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FontIcon]}" Tag="FontIcon"/>
+      <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SymbolIcon]}" Tag="SymbolIcon"/>
     </fui:SegmentedToggleView>
     <fui:StackContent Grid.Row="2" Content="{Binding CurrentViewModel}"/>
   </Grid>

@@ -23,7 +23,7 @@ public partial class LayoutViewModel : ViewModelBase
         LayoutItemSource = ButtonItemModel.CreateList(
             ("Border", "Border", "Border", "Simple border layout"),
             ("Canvas", "Canvas", "Border", "Can draw any shape canvas control"),
-            ("SplitView", "SplitView","", "split view layout"),
+            ("SplitView", "SplitView","Panel", "split view layout"),
             ("Grid", "Grid", "Panel", "A grid layout"),
             ("RelativePanel", "RelativePanel", "Panel", "Relative panel, control relative layout"),
             ("StackPanel", "StackPanel", "Panel", "A stackPanel layout"),

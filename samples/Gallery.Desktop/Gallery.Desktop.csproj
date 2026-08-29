@@ -14,13 +14,13 @@
     <PackageReference Include="Avalonia.Desktop"/>
   </ItemGroup>
 
-<!--  <PropertyGroup Condition="'$(Configuration)'=='Release'">-->
-<!--    <PublishAot>true</PublishAot>-->
-<!--    <PublishTrimmed>true</PublishTrimmed>      &lt;!&ndash; 裁剪未使用的程序集，减小发布体积 &ndash;&gt;-->
-<!--    <TrimMode>partial</TrimMode>               &lt;!&ndash; 裁剪模式：full 为最激进，移除所有未使用的代码  partial &ndash;&gt;-->
-<!--    <StripSymbols>true</StripSymbols>          &lt;!&ndash; 剥离调试符号文件(.pdb)，进一步减小体积 &ndash;&gt;-->
-<!--    <DebuggerSupport>false</DebuggerSupport>   &lt;!&ndash; 禁用调试支持，移除调试相关代码 &ndash;&gt;-->
-<!--  </PropertyGroup>-->
+ <PropertyGroup>
+    <PublishAot>true</PublishAot>
+    <PublishTrimmed>true</PublishTrimmed>      <!-- 裁剪未使用的程序集，减小发布体积 -->
+    <TrimMode>partial</TrimMode>                  <!-- 裁剪模式：full 为最激进，移除所有未使用的代码  partial -->
+    <StripSymbols>true</StripSymbols>          <!-- 剥离调试符号文件(.pdb)，进一步减小体积 -->
+    <DebuggerSupport>false</DebuggerSupport>   <!-- 禁用调试支持，移除调试相关代码 -->
+  </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Gallery\Gallery.csproj"/>

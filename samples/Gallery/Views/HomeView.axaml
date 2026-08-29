@@ -25,7 +25,7 @@
     VerticalAlignment="Stretch"
     HorizontalScrollBarVisibility="Disabled"
     Offset="{Binding ScrollViewerOffset, Mode=TwoWay}">
-    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
       <Border Grid.Row="0" Padding="35">
         <Border.Background>
           <ImageBrush Source="avares://Gallery/Assets/Images/header.png" Stretch="Fill"/>
@@ -176,6 +176,18 @@
         Command="{Binding GotoCommand}"
         ItemsSource="{Binding ViewItemSource}"
         Tag="View"/>
+
+      <!--  Media  -->
+      <TextBlock
+        Grid.Row="19"
+        Margin="35,35,0,8"
+        Classes="Title"
+        Text="{Binding Media}"/>
+      <ui:ButtonItemsPanel
+        Grid.Row="20"
+        Command="{Binding GotoCommand}"
+        ItemsSource="{Binding MediaItemSource}"
+        Tag="Media"/>
     </Grid>
   </fui:SmoothScrollViewer>
 </UserControl>

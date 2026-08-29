@@ -57,7 +57,7 @@ public partial class HomeViewModel : ViewModelBase
         LayoutItemSource = ButtonItemModel.CreateList(
             ("Border", "Border", "Border", "Simple border layout"),
             ("Canvas", "Canvas", "Border", "Can draw any shape canvas control"),
-            ("SplitView", "SplitView","", "split view layout"),
+            ("SplitView", "SplitView","Panel", "split view layout"),
             ("Grid", "Grid", "Panel", "A grid layout"),
             ("RelativePanel", "RelativePanel", "Panel", "Relative panel, control relative layout"),
             ("StackPanel", "StackPanel", "Panel", "A stackPanel layout"),
@@ -88,6 +88,7 @@ public partial class HomeViewModel : ViewModelBase
         TextItemSource = ButtonItemModel.CreateList(
             ("TextBlock", "TextBlock", "TextBlock", "Text block, used to display text"),
             ("TextBox", "TextBox", "TextBox", "Text input box"),
+            ("AutoSuggestBox", "AutoSuggestBox", "TextBox", "A control to provide suggestions as a user is typing."),
             ("PasswordBox", "PasswordBox", "TextBox", "Password input box, which can be turned on and off to display the password"),
             ("NumberBox", "NumberBox", "NumberBox", "Numeric input box that can be fine-tuned")
         );
@@ -97,6 +98,10 @@ public partial class HomeViewModel : ViewModelBase
             ("PageTransition", "PageTransition", "CarouselView", "Page switching control with animation"),
             ("ListBox", "ListBox", "List", "List box, can display multiple items"),
             ("TreeView", "TreeView", "TreeView", "A tree view")
+        );
+
+        MediaItemSource = ButtonItemModel.CreateList(
+            ("Image", "Image", "Media", "A control to display image content.")
         );
     }
 
@@ -133,6 +138,7 @@ public partial class HomeViewModel : ViewModelBase
     public List<ButtonItemModel> StatusAndInformationItemSource { get; }
     public List<ButtonItemModel> TextItemSource { get; }
     public List<ButtonItemModel> ViewItemSource { get; }
+    public List<ButtonItemModel> MediaItemSource { get; }
 
     // Localized string properties
     public string GettingStartedTitle => LocalizationService.Instance.GetString("GettingStarted");
@@ -152,7 +158,8 @@ public partial class HomeViewModel : ViewModelBase
     public string SectionStatusAndInformation => LocalizationService.Instance.GetString("Section_StatusAndInformation");
     public string SectionText => LocalizationService.Instance.GetString("Section_Text");
     public string SectionView => LocalizationService.Instance.GetString("Section_View");
-    
+    public string Media => LocalizationService.Instance.GetString("Media");
+
     private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
     {
         OnPropertyChanged(nameof(GettingStartedTitle));
@@ -172,5 +179,6 @@ public partial class HomeViewModel : ViewModelBase
         OnPropertyChanged(nameof(SectionStatusAndInformation));
         OnPropertyChanged(nameof(SectionText));
         OnPropertyChanged(nameof(SectionView));
+        OnPropertyChanged(nameof(Media));
     }
 }

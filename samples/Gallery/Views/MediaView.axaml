@@ -17,7 +17,7 @@
   mc:Ignorable="d">
 
   <StackPanel Spacing="50">
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Image]}">
+    <ui:CodeCard Name="ImageCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Image]}">
       <!--  0  -->
       <Grid
         Margin="0,0,8,0"

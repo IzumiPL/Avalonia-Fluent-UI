@@ -1910,4 +1910,22 @@
   <data name="TimeLine" xml:space="preserve">
     <value>Time Line</value>
   </data>
+  <data name="LabelBox" xml:space="preserve">
+    <value>Label Box</value>
+  </data>
+  <data name="IsPaneOpen" xml:space="preserve">
+    <value>Is Pane Open</value>
+  </data>
+  <data name="PaneOpenLength" xml:space="preserve">
+    <value>Pane Open Length: </value>
+  </data>
+  <data name="PanePlacement" xml:space="preserve">
+    <value>Pane Placement:  </value>
+  </data>
+  <data name="DisplayMode" xml:space="preserve">
+    <value>Display Mode: </value>
+  </data>
+  <data name="CompactPaneLength" xml:space="preserve">
+    <value>Compact Pane Length: </value>
+  </data>
 </root>

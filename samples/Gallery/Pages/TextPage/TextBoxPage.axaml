@@ -30,7 +30,7 @@
     <!--  AutoCompleteBox  -->
     <!--  如果Text需要嵌套{}  -->
     <!--  Text="{}{This is literal text, not a markup extension}"  -->
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_AutoCompleteBox]}">
+    <ui:CodeCard Name="AutoSuggestBoxCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_AutoCompleteBox]}">
       <Grid ColumnDefinitions="*, Auto">
         <AutoCompleteBox
           Grid.Column="0"
@@ -157,7 +157,7 @@
       </Grid>
     </ui:CodeCard>
 
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TV_SearchBox]}">
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LabelBox]}">
       <Grid ColumnDefinitions="*, Auto">
         <fui:LabelTextBox
           MinWidth="168"

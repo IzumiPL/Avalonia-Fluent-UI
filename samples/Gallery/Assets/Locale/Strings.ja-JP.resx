@@ -1910,4 +1910,22 @@
   <data name="TimeLine" xml:space="preserve">
     <value>タイムライン</value>
   </data>
+  <data name="LabelBox" xml:space="preserve">
+    <value>タグ入力ボックス</value>
+  </data>
+  <data name="IsPaneOpen" xml:space="preserve">
+    <value>パネルは展開されました</value>
+  </data>
+  <data name="PaneOpenLength" xml:space="preserve">
+    <value>パネル展開の長さ: </value>
+  </data>
+  <data name="PanePlacement" xml:space="preserve">
+    <value>ガラスの配置: </value>
+  </data>
+  <data name="DisplayMode" xml:space="preserve">
+    <value>表示モード:</value>
+  </data>
+  <data name="CompactPaneLength" xml:space="preserve">
+    <value>コンパクトなガラス長: </value>
+  </data>
 </root>

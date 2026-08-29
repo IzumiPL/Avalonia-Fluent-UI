@@ -3,9 +3,11 @@ using System.Diagnostics;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
+using AvaloniaFluentUI.Controls;
 using CommunityToolkit.Mvvm.Messaging;
 using Gallery.Helpers;
 using Gallery.Messages.MainWindowMessages;
+using Gallery.Services;
 using Gallery.ViewModels;
 
 namespace Gallery.Views;
@@ -56,5 +58,10 @@ public partial class SettingsView : UserControl
     private void OnSendFeedbackClicked(object? sender, RoutedEventArgs e)
     {
         UrlHelpers.OpenUrl(new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/issues/new"), TopLevel.GetTopLevel(this));
+    }
+
+    private void OnCheckForUpdateClicked(object? sender, RoutedEventArgs e)
+    {
+        // InfoBarService.PopupInfoBarManager.Information("检查更新", "暂时没有可用的更新!", InfoBarPosition.TopRight, true);
     }
 }

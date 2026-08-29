@@ -48,6 +48,37 @@ public partial class PanelPageViewModel : ViewModelBase
     public double DockTopHeight => InputDockTopHeight.ToDoubleOrZero();
 
     [ObservableProperty]
+    private double _splitViewCompactPaneLength = 48;
+
+    public SplitViewDisplayMode[] SplitViewDisplayModes =>
+    [
+        SplitViewDisplayMode.Inline,
+        SplitViewDisplayMode.Overlay, 
+        SplitViewDisplayMode.CompactInline,
+        SplitViewDisplayMode.CompactOverlay
+    ];
+
+    public SplitViewPanePlacement[] SplitViewPanePlacements =>
+    [
+        SplitViewPanePlacement.Top,
+        SplitViewPanePlacement.Left,
+        SplitViewPanePlacement.Right,
+        SplitViewPanePlacement.Bottom
+    ];
+
+    [ObservableProperty]
+    private SplitViewDisplayMode _splitViewDisplayMode = SplitViewDisplayMode.Overlay;
+
+    [ObservableProperty]
+    private SplitViewPanePlacement _splitViewPanePlacement = Avalonia.Controls.SplitViewPanePlacement.Left;
+
+    [ObservableProperty]
+    private double _splitViewPaneOpenLength = 320;
+
+    [ObservableProperty]
+    private bool _splitViewIsPanelOpen;
+
+    [ObservableProperty]
     private Orientation _stackPanelOrientation = Orientation.Vertical;
 
     [ObservableProperty]

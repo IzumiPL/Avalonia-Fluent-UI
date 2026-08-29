@@ -1910,4 +1910,22 @@
   <data name="TimeLine" xml:space="preserve">
     <value>时间线</value>
   </data>
+  <data name="LabelBox" xml:space="preserve">
+    <value>标签输入框</value>
+  </data>
+  <data name="IsPaneOpen" xml:space="preserve">
+    <value>面板已展开</value>
+  </data>
+  <data name="PaneOpenLength" xml:space="preserve">
+    <value>面板展开长度: </value>
+  </data>
+  <data name="PanePlacement" xml:space="preserve">
+    <value>面板展开位置: </value>
+  </data>
+  <data name="DisplayMode" xml:space="preserve">
+    <value>显示模式: </value>
+  </data>
+  <data name="CompactPaneLength" xml:space="preserve">
+    <value>紧凑面板长度: </value>
+  </data>
 </root>

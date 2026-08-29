@@ -18,6 +18,7 @@ public partial class TextBoxPage : ViewBase
         CodeCards = new Dictionary<string, CodeCard>()
         {
             {"TextBox", TextBoxCard},
+            {"AutoSuggestBox", AutoSuggestBoxCard},
             {"PasswordBox", PasswordBoxCard},
         };
     }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Shapes;
 using Avalonia.Interactivity;
 using Avalonia.Media;
@@ -23,11 +25,17 @@ public partial class PanelPage : ViewBase
             {"Grid", GridCard},
             {"RelativePanel", RelativePanelCard},
             {"StackPanel", StackPanelCard},
-            {"Expander", ExpanderCard}
+            {"Expander", ExpanderCard},
+            {"SplitView", SplitViewCard}
         };
         
         InitWrapPanel();
         InitUniformGridPanel();
+
+        if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime single)
+        {
+            MaxWidth = 1500;
+        }
     }
     
     private void InitUniformGridPanel()

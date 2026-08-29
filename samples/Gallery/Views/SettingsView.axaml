@@ -187,7 +187,10 @@
           Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[AboutDesc]}"
           Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_About]}"
           IconSource="{x:Static fi:FluentIcon.Info}">
-          <Button Classes="Accent" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CheckForUpdates]}"/>
+          <Button
+            Classes="Accent"
+            Click="OnCheckForUpdateClicked"
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CheckForUpdates]}"/>
         </fui:SettingCard>
       </StackPanel>
     </fui:SmoothScrollViewer>
