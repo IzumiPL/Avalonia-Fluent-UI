@@ -84,6 +84,7 @@
               Orientation="Horizontal">
               <RepeatButton
                 Name="PART_IncreaseButton"
+                Height="24"
                 Margin="4"
                 VerticalContentAlignment="Center"
                 Content="&#xE70E;"
@@ -93,6 +94,7 @@
 
               <RepeatButton
                 Name="PART_DecreaseButton"
+                Height="24"
                 Margin="0,4,4,4"
                 VerticalContentAlignment="Center"
                 Content="&#xE70D;"
@@ -206,13 +208,16 @@
     </Style>
   </ControlTheme>
 
+  <x:Double x:Key="NumericUpDownMinWidth">128</x:Double>
+  <x:Double x:Key="NumericUpDownMinHeight">32</x:Double>
+
   <ControlTheme x:Key="{x:Type NumericUpDown}" TargetType="NumericUpDown">
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource TextControlBorderThemeThickness}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource TextControlElevationBorderBrush}"/>
-    <Setter Property="MinHeight" Value="{DynamicResource TextControlThemeMinHeight}"/>
-    <Setter Property="MinWidth" Value="{DynamicResource TextControlThemeMinWidth}"/>
+    <Setter Property="MinHeight" Value="{DynamicResource NumericUpDownMinHeight}"/>
+    <Setter Property="MinWidth" Value="{DynamicResource NumericUpDownMinWidth}"/>
     <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
     <Setter Property="Padding" Value="{DynamicResource TextControlThemePadding}"/>
     <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
