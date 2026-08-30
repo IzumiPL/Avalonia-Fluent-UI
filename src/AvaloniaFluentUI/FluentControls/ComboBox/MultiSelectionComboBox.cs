@@ -139,7 +139,8 @@ public class MultiSelectionComboBox : TemplatedControl
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
-        if (_multiSelectionPopup != null && e.Source is not SmoothScrollContentPresenter)
+        // if (_multiSelectionPopup != null && e.Source is not SmoothScrollContentPresenter)
+        if (_multiSelectionPopup != null)
         {
             _multiSelectionPopup.Width = Bounds.Width;
             _multiSelectionPopup.IsOpen = true;
