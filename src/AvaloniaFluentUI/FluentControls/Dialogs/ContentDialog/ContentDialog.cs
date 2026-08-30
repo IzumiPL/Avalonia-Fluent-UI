@@ -114,10 +114,10 @@ public class ContentDialog : ContentControl, ICustomKeyboardNavigation
         AvaloniaProperty.Register<ContentDialog, bool>(nameof(FullSizeDesired));
 
     public static readonly StyledProperty<double> ContentWidthProperty =
-        AvaloniaProperty.Register<ContentDialog, double>(nameof(ContentWidth), defaultValue: Double.NaN);
+        AvaloniaProperty.Register<ContentDialog, double>(nameof(ContentWidth), defaultValue: double.NaN);
 
     public static readonly StyledProperty<double> ContentHeightProperty =
-        AvaloniaProperty.Register<ContentDialog, double>(nameof(ContentHeight), defaultValue: Double.NaN);
+        AvaloniaProperty.Register<ContentDialog, double>(nameof(ContentHeight), defaultValue: double.NaN);
 
     public double ContentHeight
     {
@@ -476,7 +476,7 @@ public class ContentDialog : ContentControl, ICustomKeyboardNavigation
         }
         else
         {
-            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime al)
+            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime al)
             {
                 var windows = al.Windows;
                 for (int i = 0; i < windows.Count; i++)

@@ -123,7 +123,7 @@ public static class IconHelpers
         return ii;
     }
 
-    internal static IconElement CreateFromUnknown(IconSource src)
+    internal static IconElement? CreateFromUnknown(IconSource src)
     {
         if (src is BitmapIconSource bis)
         {

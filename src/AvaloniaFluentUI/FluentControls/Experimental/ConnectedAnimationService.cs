@@ -40,7 +40,7 @@ public class ConnectedAnimationService
         return service;
     }
 
-    public ConnectedAnimation GetAnimation(string key)
+    public ConnectedAnimation? GetAnimation(string key)
     {
         if (_animations.TryGetValue(key, out var animation))
         {

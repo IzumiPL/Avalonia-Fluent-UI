@@ -129,5 +129,5 @@ public class FluentIconElement : IconElement
         return LayoutHelper.ArrangeChild(_child, finalSize, new Thickness());
     }
 
-    private Control _child;
+    private Control? _child;
 }

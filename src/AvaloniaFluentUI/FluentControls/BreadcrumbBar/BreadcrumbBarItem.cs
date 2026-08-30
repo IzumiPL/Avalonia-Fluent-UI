@@ -177,7 +177,7 @@ public class BreadcrumbBarItem : ContentControl
         }
     }
 
-    private void ProcessPointerCanceled(PointerEventArgs args, IPointer p = null)
+    private void ProcessPointerCanceled(PointerEventArgs args, IPointer? p = null)
     {
         if (IgnorePointerId(args?.Pointer ?? p))
         {
@@ -194,7 +194,7 @@ public class BreadcrumbBarItem : ContentControl
         _trackedPointerId = 0;
     }
 
-    private void OnButtonLoadedEvent(object sender, RoutedEventArgs e)
+    private void OnButtonLoadedEvent(object? sender, RoutedEventArgs e)
     {
         _button.Loaded -= OnButtonLoadedEvent;
 
@@ -247,7 +247,7 @@ public class BreadcrumbBarItem : ContentControl
         UpdateItemTypeVisualState();
     }
 
-    internal void RaiseItemClickedEvent(object content, int index)
+    internal void RaiseItemClickedEvent(object? content, int index)
     {
         if (_parentBreadcrumb.TryGetTarget(out var target))
         {
@@ -255,7 +255,7 @@ public class BreadcrumbBarItem : ContentControl
         }
     }
 
-    private void OnBreadcrumbBarItemClick(object sender, RoutedEventArgs e)
+    private void OnBreadcrumbBarItemClick(object? sender, RoutedEventArgs e)
     {
         RaiseItemClickedEvent(Content, _index - 1);
     }
@@ -380,7 +380,7 @@ public class BreadcrumbBarItem : ContentControl
         pc.Set(s_pcLastItem, _isLastItem && !_allowClickOnLastItem);
     }
 
-    private void OnEllipsisItemClick(object sender, RoutedEventArgs e)
+    private void OnEllipsisItemClick(object? sender, RoutedEventArgs e)
     {
         if (_parentBreadcrumb.TryGetTarget(out var target))
         {
@@ -391,7 +391,7 @@ public class BreadcrumbBarItem : ContentControl
 
             if (_ellipsisDropDownItemDataTemplate != null)
             {
-                _ellipsisElementFactory.UserElementFactory(_ellipsisDropDownItemDataTemplate);
+                _ellipsisElementFactory?.UserElementFactory(_ellipsisDropDownItemDataTemplate);
             }
 
             if (_ellipsisItemsRepeater != null)
@@ -490,7 +490,7 @@ public class BreadcrumbBarItem : ContentControl
         _ellipsisItem = ellipsisItem;
     }
 
-    internal void OnClickEvent(object sender, RoutedEventArgs args)
+    internal void OnClickEvent(object? sender, RoutedEventArgs args)
     {
         if (_isEllipsisDropDownItem)
         {

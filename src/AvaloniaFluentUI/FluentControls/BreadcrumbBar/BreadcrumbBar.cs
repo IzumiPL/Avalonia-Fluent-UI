@@ -83,7 +83,7 @@ public class BreadcrumbBar : TemplatedControl
     /// <summary>
     /// Occurs when an item is clicked in the BreadcrumbBar.
     /// </summary>
-    public event TypedEventHandler<BreadcrumbBar, BreadcrumbBarItemClickedEventArgs> ItemClicked;
+    public event TypedEventHandler<BreadcrumbBar, BreadcrumbBarItemClickedEventArgs>? ItemClicked;
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
@@ -209,7 +209,7 @@ public class BreadcrumbBar : TemplatedControl
         }
     }
 
-    private void UpdateLastElement(BreadcrumbBarItem newLastItem)
+    private void UpdateLastElement(BreadcrumbBarItem? newLastItem)
     {
         // If the element is the last element in the array,
         // then we reset the visual properties for the previous
@@ -283,7 +283,7 @@ public class BreadcrumbBar : TemplatedControl
             item.ResetVisualProperties();
     }
 
-    internal void RaiseItemClickedEvent(object content, in int index)
+    internal void RaiseItemClickedEvent(object? content, in int index)
     {
         if (ItemClicked != null)
         {
@@ -500,18 +500,14 @@ public class BreadcrumbBar : TemplatedControl
             if (MoveFocusNext())
             {
                 args.Handled = true;
-                return;
             }
-            // Gamepad
         }
         else if ((flowDirectionIsLtr && keyIsLeft) || (!flowDirectionIsLtr && keyIsRight))
         {
             if (MoveFocusPrevious())
             {
                 args.Handled = true;
-                return;
             }
-            // Gamepad
         }
     }
 

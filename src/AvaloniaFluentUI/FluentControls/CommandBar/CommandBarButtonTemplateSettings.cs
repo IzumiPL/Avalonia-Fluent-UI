@@ -11,7 +11,7 @@ public class CommandBarButtonTemplateSettings : AvaloniaObject
     /// Defines the <see cref="Icon"/> property
     /// </summary>
     public static readonly StyledProperty<IconElement> IconProperty =
-        MenuFlyoutItemTemplateSettings.IconProperty.AddOwner<CommandBarButtonTemplateSettings>();
+        AvaloniaProperty.Register<CommandBarButtonTemplateSettings, IconElement>(nameof(Icon));
 
     /// <summary>
     /// Gets the Icon for the CommandBarButton

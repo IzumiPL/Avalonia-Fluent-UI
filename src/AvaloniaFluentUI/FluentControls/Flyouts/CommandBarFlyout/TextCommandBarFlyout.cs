@@ -253,7 +253,6 @@ public class TextCommandBarFlyout : CommandBarFlyout
             }
             catch
             {
-                // TODO: probably should log the error if one is thrown, but don't fail b/c of it
                 // Clipboard errors do happen
             }
 
@@ -317,7 +316,6 @@ public class TextCommandBarFlyout : CommandBarFlyout
             }
             catch
             {
-                // TODO: probably should log the error if one is thrown, but don't fail b/c of it
                 // Clipboard errors do happen
             }
 
@@ -327,15 +325,6 @@ public class TextCommandBarFlyout : CommandBarFlyout
             }
         }           
     }
-
-    private void ExecuteBoldCommand()
-    { }
-
-    private void ExecuteItalicCommand()
-    { }
-
-    private void ExecuteUnderlineCommand()
-    { }
 
     private void ExecuteUndoCommand()
     {

@@ -25,7 +25,7 @@ namespace AvaloniaFluentUI.Controls;
 [PseudoClasses(s_pcLabelBottom, s_pcLabelRight, s_pcLabelCollapsed)]
 [PseudoClasses(s_pcPrimaryOnly, s_pcSecondaryOnly)]
 [PseudoClasses(SharedPseudoclasses.s_pcOpen)]
-public partial class CommandBar : ContentControl
+public class CommandBar : ContentControl
 {
     /// <summary>
     /// Define the <see cref="IsOpen"/> property

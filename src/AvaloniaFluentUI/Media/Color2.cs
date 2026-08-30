@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Avalonia.Media;
 using System.ComponentModel;
 using System.Globalization;
-using AvaloniaFluentUI.Core;
 
 namespace AvaloniaFluentUI.Media;
 
@@ -1042,44 +1041,6 @@ public struct Color2 : IEquatable<Color2>
         return FromUInt(c.ToUInt32());
     }
 
-    public static bool AreColorsClose(Color2 col1, Color2 col2, float tolerance = 0.03f)
-    {
-        return false;
-        //switch (col1._cType)
-        //{
-        //	case ColorType.RGB:
-        //		{
-        //			if (col2._cType != ColorType.RGB)
-        //				col2 = col2.ToRGB();
-
-        //			if (MathF.Abs(col2._c1 - col1._c1) < tolerance)
-        //				return true;
-
-        //			if (MathF.Abs(col2._c2 - col1._c2) < tolerance)
-        //				return true;
-
-        //			if (MathF.Abs(col2._c3 - col1._c3) < tolerance)
-        //				return true;
-        //		}
-        //		break;
-
-        //	case ColorType.HSV:
-
-        //		break;
-
-        //	case ColorType.HSL:
-
-        //		break;
-
-        //	case ColorType.CMYK:
-
-        //		break;
-
-        //	default:
-        //		return false;
-        //}
-    }
-
     /// <summary>
     /// Creates an RGB <see cref="Color2"/> from the specified R,G,B values. The alpha is set to 255
     /// </summary>
@@ -1794,17 +1755,17 @@ internal enum KnownColor : uint
 /// </summary>
 public class Color2ToColorConverter : TypeConverter
 {
-    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
     {
         return sourceType == typeof(Color);
     }
 
-    public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+    public override bool CanConvertTo(ITypeDescriptorContext? context, Type? destinationType)
     {
         return destinationType == typeof(Color);
     }
 
-    public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
     {
         if (value is Color c)
         {
@@ -1813,7 +1774,7 @@ public class Color2ToColorConverter : TypeConverter
         return base.ConvertFrom(context, culture, value);
     }
 
-    public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+    public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
     {
         if (value is Color2 c)
         {

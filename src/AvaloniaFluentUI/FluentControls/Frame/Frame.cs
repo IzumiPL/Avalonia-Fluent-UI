@@ -24,7 +24,7 @@ namespace AvaloniaFluentUI.Controls;
 /// and maintains a navigation history to support forward and backward navigation.
 /// </summary>
 [TemplatePart(s_tpContentPresenter, typeof(ContentPresenter))]
-public partial class Frame : ContentControl
+public class Frame : ContentControl
 {
     /// <summary>
     /// Defines the <see cref="SourcePageType"/> property
