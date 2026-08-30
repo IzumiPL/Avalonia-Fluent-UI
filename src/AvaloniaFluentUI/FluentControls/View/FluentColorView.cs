@@ -34,6 +34,30 @@ public class FluentColorView : TemplatedControl
         AvaloniaProperty.Register<FluentColorView, string>(nameof(HexText), "FF00BFFF");
 
     /// <summary>
+    ///     Defines the <see cref="ColorSpectrumShape" /> property.
+    /// </summary>
+    public static readonly StyledProperty<ColorSpectrumShape> ColorSpectrumShapeProperty =
+        AvaloniaProperty.Register<FluentColorView, ColorSpectrumShape>(nameof(ColorSpectrumShape));
+
+    public ColorSpectrumShape ColorSpectrumShape
+    {
+        get => GetValue(ColorSpectrumShapeProperty);
+        set => SetValue(ColorSpectrumShapeProperty, value);
+    }
+
+    /// <summary>
+    ///     Defines the <see cref="IsAlphaVisible" /> property.
+    /// </summary>
+    public static readonly StyledProperty<bool> IsAlphaVisibleProperty =
+        AvaloniaProperty.Register<FluentColorView, bool>(nameof(IsAlphaVisible), true);
+
+    public bool IsAlphaVisible
+    {
+        get => GetValue(IsAlphaVisibleProperty);
+        set => SetValue(IsAlphaVisibleProperty, value);
+    }
+
+    /// <summary>
     /// 获取或设置当前选中的颜色
     /// </summary>
     public Color Color
