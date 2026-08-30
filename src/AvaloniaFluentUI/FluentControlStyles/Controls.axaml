@@ -83,13 +83,6 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/InfoBar/InfoBar.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Spinner/NumberBox.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/MenuFlyoutPresenter.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/MenuFlyoutItem.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/MenuFlyoutSubItem.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/ToggleMenuFlyoutItem.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/RadioMenuFlyoutItem.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/MenuFlyout/MenuFlyoutSeparator.axaml"/>
-
         <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBar.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarButton.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/CommandBar/CommandBarToggleButton.axaml"/>
