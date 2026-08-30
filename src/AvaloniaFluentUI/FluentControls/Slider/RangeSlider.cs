@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
@@ -12,53 +11,51 @@ using AvaloniaFluentUI.Core;
 
 namespace AvaloniaFluentUI.Controls;
 
-[TemplatePart(s_tpActiveRectangle, typeof(Rectangle))]
-[TemplatePart(s_tpMinThumb, typeof(Thumb))]
-[TemplatePart(s_tpMaxThumb, typeof(Thumb))]
-[TemplatePart(s_tpContainerCanvas, typeof(Canvas))]
-[TemplatePart(s_tpToolTipText, typeof(TextBlock))]
-public partial class RangeSlider : TemplatedControl
+[TemplatePart(Name = PART_MIN_THUMB,        Type = typeof(Thumb))]
+[TemplatePart(Name = PART_MAX_THUMB,        Type = typeof(Thumb))]
+[TemplatePart(Name = PART_POPUP_MIN,        Type = typeof(Popup))]
+[TemplatePart(Name = PART_POPUP_MAX,        Type = typeof(Popup))]
+[TemplatePart(Name = CONTAINER_CANVAS,      Type = typeof(Canvas))]
+[TemplatePart(Name = PART_ACTIVE_RECTANGLE, Type = typeof(Rectangle))]
+[TemplatePart(Name = PART_TOOLTIP_TEXT_MIN, Type = typeof(TextBlock))]
+[TemplatePart(Name = PART_TOOLTIP_TEXT_MAX, Type = typeof(TextBlock))]
+public class RangeSlider : TemplatedControl
 {
     /// <summary>
     /// Defines the <see cref="Minimum"/> property
     /// </summary>
     public static readonly StyledProperty<double> MinimumProperty = 
-        RangeBase.MinimumProperty.AddOwner<RangeSlider>(
-            new StyledPropertyMetadata<double>(0d));
+        RangeBase.MinimumProperty.AddOwner<RangeSlider>(new StyledPropertyMetadata<double>(0d));
 
     /// <summary>
     /// Defines the <see cref="Maximum"/> property
     /// </summary>
     public static readonly StyledProperty<double> MaximumProperty = 
-        RangeBase.MaximumProperty.AddOwner<RangeSlider>(
-            new StyledPropertyMetadata<double>(100d));
+        RangeBase.MaximumProperty.AddOwner<RangeSlider>(new StyledPropertyMetadata<double>(100d));
 
     /// <summary>
     /// Defines the <see cref="RangeStart"/> property
     /// </summary>
     public static readonly StyledProperty<double> RangeStartProperty = 
-        AvaloniaProperty.Register<RangeSlider, double>(nameof(RangeStart),
-            defaultValue: 0, defaultBindingMode: BindingMode.TwoWay);
+        AvaloniaProperty.Register<RangeSlider, double>(nameof(RangeStart), defaultValue: 0, defaultBindingMode: BindingMode.TwoWay);
 
     /// <summary>
     /// Defines the <see cref="RangeEnd"/> property
     /// </summary>
     public static readonly StyledProperty<double> RangeEndProperty = 
-        AvaloniaProperty.Register<RangeSlider, double>(nameof(RangeEnd), 
-            defaultValue: 100, defaultBindingMode: BindingMode.TwoWay);
+        AvaloniaProperty.Register<RangeSlider, double>(nameof(RangeEnd), defaultValue: 100, defaultBindingMode: BindingMode.TwoWay);
 
     /// <summary>
     /// Defines the <see cref="StepFrequency"/> property
     /// </summary>
     public static readonly StyledProperty<double> StepFrequencyProperty = 
-        AvaloniaProperty.Register<RangeSlider, double>(nameof(StepFrequency), 
-            defaultValue: 1);
+        AvaloniaProperty.Register<RangeSlider, double>(nameof(StepFrequency), defaultValue: 1);
 
     /// <summary>
     /// Defines the <see cref="ToolTipStringFormat"/> property
     /// </summary>
     public static readonly StyledProperty<string> ToolTipStringFormatProperty =
-        AvaloniaProperty.Register<RangeSlider, string>(nameof(ToolTipStringFormat));
+        AvaloniaProperty.Register<RangeSlider, string>(nameof(ToolTipStringFormat), "0.##");
 
     /// <summary>
     /// Defines the <see cref="MinimumRange"/> property
@@ -150,10 +147,9 @@ public partial class RangeSlider : TemplatedControl
         get => GetValue(ShowValueToolTipProperty);
         set => SetValue(ShowValueToolTipProperty, value);
     }
-
-
+    
     // Internal for UnitTests
-    internal double DragWidth => _containerCanvas.Bounds.Width - _maxThumb.Bounds.Width;
+    internal double DragWidth => (_containerCanvas != null && _maxThumb != null) ? _containerCanvas.Bounds.Width - _maxThumb.Bounds.Width : 0;
 
     /// <summary>
     /// Fired when a thumb drag begins
@@ -169,13 +165,44 @@ public partial class RangeSlider : TemplatedControl
     /// Fired when either RangeStart or RangeEnd is changed
     /// </summary>
     public event EventHandler<RangeChangedEventArgs>? ValueChanged;
-
-    private const string s_tpActiveRectangle = "ActiveRectangle";
-    private const string s_tpMinThumb = "MinThumb";
-    private const string s_tpMaxThumb = "MaxThumb";
-    private const string s_tpContainerCanvas = "ContainerCanvas";
-    private const string s_tpToolTipText = "ToolTipText";
     
+    private Rectangle? _activeRectangle;
+    private Thumb? _minThumb;
+    private Thumb? _maxThumb;
+    private Canvas? _containerCanvas;
+    private double _oldValue;
+    private bool _valuesAssigned;
+    private bool _minSet;
+    private bool _maxSet;
+    private bool _pointerManipulatingMin;
+    private bool _pointerManipulatingMax;
+    private bool _pointerManipulatingBoth;
+    private double _absolutePosition;
+    private Popup? _minPopup;
+    private Popup? _maxPopup;
+    private TextBlock? _minToolTipText;
+    private TextBlock? _maxToolTipText;
+    private const double Epsilon = 0.01;
+    private bool _isDraggingStart;
+    private bool _isDraggingEnd;
+    private bool _isDrag;
+    private readonly DispatcherTimer _closeToolTipTimer = new DispatcherTimer();
+
+    private const string PART_ACTIVE_RECTANGLE = "PART_ActiveRectangle";
+    private const string PART_MIN_THUMB = "PART_MinThumb";
+    private const string PART_MAX_THUMB = "PART_MaxThumb";
+    private const string CONTAINER_CANVAS = "ContainerCanvas";
+    private const string PART_POPUP_MIN = "PART_PopupMin";
+    private const string PART_POPUP_MAX = "PART_PopupMax";
+    private const string PART_TOOLTIP_TEXT_MIN = "PART_ToolTipTextMin";
+    private const string PART_TOOLTIP_TEXT_MAX = "PART_ToolTipTextMax";
+
+    public RangeSlider()
+    {
+        _closeToolTipTimer.Interval = TimeSpan.FromMilliseconds(200);
+        _closeToolTipTimer.Tick += ClosePopup;
+    }
+
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
@@ -256,7 +283,7 @@ public partial class RangeSlider : TemplatedControl
             if (RangeEnd < newV)
                 RangeEnd = newV;
 
-            if (newV != oldV)
+            if (!newV.Equals(oldV))
                 SyncThumbs();
         }
         else if (change.Property == MaximumProperty)
@@ -275,12 +302,62 @@ public partial class RangeSlider : TemplatedControl
             if (RangeStart > newV)
                 RangeStart = newV;
 
-            if (newV != oldV)
+            if (!newV.Equals(oldV))
                 SyncThumbs();
         }
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+    {
+        UnsubscribeEvents();
+        base.OnApplyTemplate(e);
+
+        VerifyValues();
+        _valuesAssigned = true;
+
+        _activeRectangle = e.NameScope.Get<Rectangle>(PART_ACTIVE_RECTANGLE);
+        _minThumb = e.NameScope.Get<Thumb>(PART_MIN_THUMB);
+        _maxThumb = e.NameScope.Get<Thumb>(PART_MAX_THUMB);
+        _containerCanvas = e.NameScope.Get<Canvas>(CONTAINER_CANVAS);
+        _minPopup = e.NameScope.Find<Popup>(PART_POPUP_MIN);
+        _maxPopup = e.NameScope.Find<Popup>(PART_POPUP_MAX);
+        _minToolTipText = e.NameScope.Find<TextBlock>(PART_TOOLTIP_TEXT_MIN);
+        _maxToolTipText = e.NameScope.Find<TextBlock>(PART_TOOLTIP_TEXT_MAX);
+
+        SubscribeEvents();
+    }
+
+    private void SubscribeEvents()
+    {
+        if (_minThumb != null)
+        {
+            _minThumb.DragCompleted += HandleThumbDragCompleted;
+            _minThumb.DragDelta += MinThumbDragDelta;
+            _minThumb.DragStarted += MinThumbDragStarted;
+            _minThumb.KeyDown += MinThumbKeyDown;
+            _minThumb.KeyUp += ThumbKeyUp;
+        }
+
+        if (_maxThumb != null)
+        {
+            _maxThumb.DragCompleted += HandleThumbDragCompleted;
+            _maxThumb.DragDelta += MaxThumbDragDelta;
+            _maxThumb.DragStarted += MaxThumbDragStarted;
+            _maxThumb.KeyDown += MaxThumbKeyDown;
+            _maxThumb.KeyUp += ThumbKeyUp;
+        }
+
+        if (_containerCanvas != null)
+        {
+            _containerCanvas.SizeChanged += ContainerCanvasSizeChanged;
+            _containerCanvas.PointerPressed += ContainerCanvasPointerPressed;
+            _containerCanvas.PointerMoved += ContainerCanvasPointerMoved;
+            _containerCanvas.PointerReleased += ContainerCanvasPointerReleased;
+            _containerCanvas.PointerExited += ContainerCanvasPointerExited;
+        }
+    }
+
+    private void UnsubscribeEvents()
     {
         if (_minThumb != null)
         {
@@ -289,55 +366,26 @@ public partial class RangeSlider : TemplatedControl
             _minThumb.DragStarted -= MinThumbDragStarted;
             _minThumb.KeyDown -= MinThumbKeyDown;
             _minThumb.KeyUp -= ThumbKeyUp;
+        }
 
+        if (_maxThumb != null)
+        {
             _maxThumb.DragCompleted -= HandleThumbDragCompleted;
             _maxThumb.DragDelta -= MaxThumbDragDelta;
             _maxThumb.DragStarted -= MaxThumbDragStarted;
             _maxThumb.KeyDown -= MaxThumbKeyDown;
             _maxThumb.KeyUp -= ThumbKeyUp;
-
+        }
+        
+        if (_containerCanvas != null)
+        { 
             _containerCanvas.SizeChanged -= ContainerCanvasSizeChanged;
             _containerCanvas.PointerPressed -= ContainerCanvasPointerPressed;
             _containerCanvas.PointerMoved -= ContainerCanvasPointerMoved;
             _containerCanvas.PointerReleased -= ContainerCanvasPointerReleased;
             _containerCanvas.PointerExited -= ContainerCanvasPointerExited;
         }
-
-        base.OnApplyTemplate(e);
-
-        VerifyValues();
-        _valuesAssigned = true;
-
-        _activeRectangle = e.NameScope.Get<Rectangle>(s_tpActiveRectangle);
-        _minThumb = e.NameScope.Get<Thumb>(s_tpMinThumb);
-        _maxThumb = e.NameScope.Get<Thumb>(s_tpMaxThumb);
-        _containerCanvas = e.NameScope.Get<Canvas>(s_tpContainerCanvas);
-        _toolTip = e.NameScope.Find<Control>("ToolTip");
-        _toolTipText = e.NameScope.Find<TextBlock>(s_tpToolTipText);
-
-        if (_toolTip != null)
-        {
-            if (_toolTip.Parent is Panel p)
-                p.Children.Remove(_toolTip);
-        }
-
-        _minThumb.DragCompleted += HandleThumbDragCompleted;
-        _minThumb.DragDelta += MinThumbDragDelta;
-        _minThumb.DragStarted += MinThumbDragStarted;
-        _minThumb.KeyDown += MinThumbKeyDown;
-        _minThumb.KeyUp += ThumbKeyUp;
-
-        _maxThumb.DragCompleted += HandleThumbDragCompleted;
-        _maxThumb.DragDelta += MaxThumbDragDelta;
-        _maxThumb.DragStarted += MaxThumbDragStarted;
-        _maxThumb.KeyDown += MaxThumbKeyDown;
-        _maxThumb.KeyUp += ThumbKeyUp;
-
-        _containerCanvas.SizeChanged += ContainerCanvasSizeChanged;
-        _containerCanvas.PointerPressed += ContainerCanvasPointerPressed;
-        _containerCanvas.PointerMoved += ContainerCanvasPointerMoved;
-        _containerCanvas.PointerReleased += ContainerCanvasPointerReleased;
-        _containerCanvas.PointerExited += ContainerCanvasPointerExited;
+        
     }
 
     protected virtual void OnThumbDragStarted(VectorEventArgs e)
@@ -357,6 +405,8 @@ public partial class RangeSlider : TemplatedControl
 
     private void MinThumbDragDelta(object? sender, VectorEventArgs e)
     {
+        if (_minThumb == null) { return; }
+
         _absolutePosition += e.Vector.X;
 
         var oldStart = RangeStart;
@@ -374,14 +424,13 @@ public partial class RangeSlider : TemplatedControl
             RangeStart = newStart;
         }
 
-        if (_toolTipText != null)
-        {
-            UpdateToolTipText(RangeStart);
-        }
+        UpdateToolTipTexts();
     }
 
     private void MaxThumbDragDelta(object? sender, VectorEventArgs e)
     {
+        if (_maxThumb == null) { return; }
+        
         _absolutePosition += e.Vector.X;
 
         var oldEnd = RangeEnd;
@@ -399,10 +448,7 @@ public partial class RangeSlider : TemplatedControl
             RangeEnd = newEnd;
         }
 
-        if (_toolTipText != null)
-        {
-            UpdateToolTipText(RangeEnd);
-        }
+        UpdateToolTipTexts();
     }
 
     private void MinThumbDragStarted(object? sender, VectorEventArgs e)
@@ -421,16 +467,17 @@ public partial class RangeSlider : TemplatedControl
 
     private void HandleThumbDragCompleted(object? sender, VectorEventArgs e)
     {
-        _isDraggingStart = _isDraggingEnd = false;
-        OnThumbDragCompleted(e);
-        OnValueChanged(sender.Equals(_minThumb) ? 
-            new RangeChangedEventArgs(_oldValue, RangeStart, RangeSelectorProperty.RangeStartValue) : 
-            new RangeChangedEventArgs(_oldValue, RangeEnd, RangeSelectorProperty.RangeEndValue));
-        SyncThumbs();
-
-        if (_toolTip != null)
+        if (sender != null)
         {
-            SetToolTipAt(sender as Thumb, false);
+            _isDraggingStart = _isDraggingEnd = false;
+            _isDrag = false;
+            OnThumbDragCompleted(e);
+            OnValueChanged(sender.Equals(_minThumb) ?
+                new RangeChangedEventArgs(_oldValue, RangeStart, RangeSelectorProperty.RangeStartValue) :
+                new RangeChangedEventArgs(_oldValue, RangeEnd, RangeSelectorProperty.RangeEndValue));
+            SyncThumbs();
+
+            RestartCloseToolTipTimer();
         }
     }
 
@@ -444,22 +491,20 @@ public partial class RangeSlider : TemplatedControl
         return Minimum + ((nextPos / DragWidth) * (Maximum - Minimum));
     }
 
-    private void HandleThumbDragStarted(Thumb thumb)
+    private void HandleThumbDragStarted(Thumb? thumb)
     {
+        if (thumb == null) { return; }
+        
         var useMin = thumb == _minThumb;
         var otherThumb = useMin ? _maxThumb : _minThumb;
 
         _absolutePosition = Canvas.GetLeft(thumb);
         thumb.ZIndex = 10;
-        otherThumb.ZIndex = 0;
-        _oldValue = RangeStart;
+        otherThumb?.ZIndex = 0;
+        _oldValue = useMin ? RangeStart : RangeEnd;
 
-        if (_toolTipText != null && _toolTip != null)
-        {
-            SetToolTipAt(thumb, true);
-
-            UpdateToolTipText(useMin ? RangeStart : RangeEnd);
-        }
+        _isDrag = true;
+        ShowToolTips();
     }
 
     private void MinThumbKeyDown(object? sender, KeyEventArgs e)
@@ -468,19 +513,15 @@ public partial class RangeSlider : TemplatedControl
         {
             case Key.Left:
                 RangeStart -= StepFrequency;
-                SyncThumbs(fromMinKeyDown: true);
-
-                SetToolTipAt(_minThumb, true);
-
+                _isDrag = true;
+                ShowToolTips();
                 e.Handled = true;
                 break;
 
             case Key.Right:
                 RangeStart += StepFrequency;
-                SyncThumbs(fromMinKeyDown: true);
-
-                SetToolTipAt(_minThumb, true);
-
+                _isDrag = true;
+                ShowToolTips();
                 e.Handled = true;
                 break;
         }
@@ -492,32 +533,14 @@ public partial class RangeSlider : TemplatedControl
         {
             case Key.Left:
                 RangeEnd -= StepFrequency;
-                SyncThumbs(fromMaxKeyDown: true);
-
-                if (!ToolTip.GetIsOpen(_maxThumb))
-                {
-                    UnParentToolTip(_toolTip);
-                    ToolTip.SetTip(_maxThumb, _toolTip);
-                    ToolTip.SetIsOpen(_maxThumb, true);
-                    ToolTip.SetPlacement(_maxThumb, PlacementMode.Top);
-                    ToolTip.SetVerticalOffset(_maxThumb, -_containerCanvas.Bounds.Height);
-                }
-
+                _isDrag = true;
+                ShowToolTips();
                 e.Handled = true;
                 break;
             case Key.Right:
                 RangeEnd += StepFrequency;
-                SyncThumbs(fromMaxKeyDown: true);
-
-                if (!ToolTip.GetIsOpen(_maxThumb))
-                {
-                    UnParentToolTip(_toolTip);
-                    ToolTip.SetTip(_maxThumb, _toolTip);
-                    ToolTip.SetIsOpen(_maxThumb, true);
-                    ToolTip.SetPlacement(_maxThumb, PlacementMode.Top);
-                    ToolTip.SetVerticalOffset(_maxThumb, -_containerCanvas.Bounds.Height);
-                }
-
+                _isDrag = true;
+                ShowToolTips();
                 e.Handled = true;
                 break;
         }
@@ -525,27 +548,19 @@ public partial class RangeSlider : TemplatedControl
 
     private void ThumbKeyUp(object? sender, KeyEventArgs e)
     {
-        switch (e.Key)
+        if (e.Key == Key.Left || e.Key == Key.Right)
         {
-            case Key.Left:
-            case Key.Right:
-                if (_toolTip != null)
-                {
-                    _keyTimer.Debounce(() =>
-                    {
-                        SetToolTipAt(_minThumb, false);
-                        SetToolTipAt(_maxThumb, false);
-
-                    }, TimeSpan.FromSeconds(1));
-                }
-
-                e.Handled = true;
-                break;
+            _isDrag = false; 
+            RestartCloseToolTipTimer();
+            
+            e.Handled = true;
         }
     }
 
     private void ContainerCanvasPointerExited(object? sender, PointerEventArgs e)
     {
+        if (_containerCanvas == null) { return; }
+        
         var position = e.GetCurrentPoint(_containerCanvas).Position;
 
         // Bug in Avalonia.InputElement.PointerExited // https://github.com/avaloniaui/avalonia/issues/20520
@@ -574,27 +589,19 @@ public partial class RangeSlider : TemplatedControl
         var position = e.GetCurrentPoint(_containerCanvas).Position.X;
         var normalizedPosition = ((position / DragWidth) * (Maximum - Minimum)) + Minimum;
 
-        if (_toolTip != null)
-        {
-            var thumb = _pointerManipulatingMax ? _maxThumb : _pointerManipulatingMin ? _minThumb : null;
-            if (thumb == null)
-                return; // Should never happen, but just in case
-
-            ToolTip.SetIsOpen(thumb, false);
-            UnParentToolTip(_toolTip);
-            ToolTip.SetTip(thumb, null);
-        }
+        _isDrag = false;
+        RestartCloseToolTipTimer();
 
         if (_pointerManipulatingMin)
         {
             _pointerManipulatingMin = false;
-            _containerCanvas.IsHitTestVisible = true;
+            _containerCanvas?.IsHitTestVisible = true;
             OnValueChanged(new RangeChangedEventArgs(RangeStart, normalizedPosition, RangeSelectorProperty.RangeStartValue));
         }
         else if (_pointerManipulatingMax)
         {
             _pointerManipulatingMax = false;
-            _containerCanvas.IsHitTestVisible = true;
+            _containerCanvas?.IsHitTestVisible = true;
             OnValueChanged(new RangeChangedEventArgs(RangeEnd, normalizedPosition, RangeSelectorProperty.RangeEndValue));
         }
 
@@ -633,32 +640,36 @@ public partial class RangeSlider : TemplatedControl
                     delta = min - rs;
             }
 
-            
+
             RangeStart += delta;
             RangeEnd += delta;
             _absolutePosition = position;
+            UpdateToolTipTexts();
             return;
         }
-                
+
         var normalizedPosition = ((position / DragWidth) * (Maximum - Minimum)) + Minimum;
-         
+        if (_minThumb == null || _maxThumb == null) { return; }
+
         if (_pointerManipulatingMin && normalizedPosition < RangeEnd)
         {
             RangeStart = DragThumb(_minThumb, 0, Canvas.GetLeft(_maxThumb), position);
-            UpdateToolTipText(RangeStart);
+            UpdateToolTipTexts();
         }
         else if (_pointerManipulatingMax && normalizedPosition > RangeStart)
         {
             RangeEnd = DragThumb(_maxThumb, Canvas.GetLeft(_minThumb), DragWidth, position);
-            UpdateToolTipText(RangeEnd);
+            UpdateToolTipTexts();
         }
     }
 
     private void ContainerCanvasPointerPressed(object? sender, PointerPressedEventArgs e)
     {
+        if (!e.GetCurrentPoint(this).Properties.IsLeftButtonPressed) { return; }
+        
         var position = e.GetCurrentPoint(_containerCanvas).Position.X;
 
-        var mods = Application.Current.PlatformSettings.HotkeyConfiguration.CommandModifiers;
+        var mods = Application.Current?.PlatformSettings?.HotkeyConfiguration.CommandModifiers;
         if (mods == KeyModifiers.None)
             mods = KeyModifiers.Control;
 
@@ -666,6 +677,8 @@ public partial class RangeSlider : TemplatedControl
         {
             _pointerManipulatingBoth = true;
             _absolutePosition = position;
+            _isDrag = true;
+            ShowToolTips();
             return;
         }
 
@@ -689,12 +702,16 @@ public partial class RangeSlider : TemplatedControl
         SyncThumbs();
     }
 
-    private void UpdateToolTipText(double newValue)
+    private void UpdateToolTipTexts()
     {
-        if (_toolTipText != null)
+        var format = ToolTipStringFormat;
+        if (_minToolTipText != null)
         {
-            var format = ToolTipStringFormat ?? "0.##";
-            _toolTipText.Text = newValue.ToString(format);
+            _minToolTipText.Text = RangeStart.ToString(format);
+        }
+        if (_maxToolTipText != null)
+        {
+            _maxToolTipText.Text = RangeEnd.ToString(format);
         }
     }
 
@@ -706,7 +723,7 @@ public partial class RangeSlider : TemplatedControl
             Maximum = Maximum;
         }
 
-        if (Minimum == Maximum)
+        if (Minimum.Equals(Maximum))
         {
             Maximum += Epsilon;
         }
@@ -775,12 +792,9 @@ public partial class RangeSlider : TemplatedControl
         }
     }
 
-    private void SyncThumbs(bool fromMinKeyDown = false, bool fromMaxKeyDown = false)
+    private void SyncThumbs()
     {
-        if (_containerCanvas == null)
-        {
-            return;
-        }
+        if (_containerCanvas == null || _minThumb == null  || _maxThumb == null) { return; }
 
         var relativeLeft = ((RangeStart - Minimum) / (Maximum - Minimum)) * DragWidth;
         var relativeRight = ((RangeEnd - Minimum) / (Maximum - Minimum)) * DragWidth;
@@ -801,27 +815,12 @@ public partial class RangeSlider : TemplatedControl
         Canvas.SetTop(_minThumb, y);
         Canvas.SetTop(_maxThumb, y);
 
-        if (fromMinKeyDown || fromMaxKeyDown)
-        {
-            DragThumb(
-                fromMinKeyDown ? _minThumb : _maxThumb,
-                fromMinKeyDown ? 0 : Canvas.GetLeft(_minThumb),
-                fromMinKeyDown ? Canvas.GetLeft(_maxThumb) : DragWidth,
-                fromMinKeyDown ? relativeLeft : relativeRight);
-            
-            if (_toolTipText != null)
-            {
-                UpdateToolTipText(fromMinKeyDown ? RangeStart : RangeEnd);
-            }
-        }
-
         SyncActiveRectangle();
     }
 
     private void SyncActiveRectangle()
     {
-        if (_containerCanvas == null || _minThumb == null || _maxThumb == null)
-            return;
+        if (_containerCanvas == null || _minThumb == null || _maxThumb == null|| _activeRectangle == null) { return; }
 
         var relativeLeft = Canvas.GetLeft(_minThumb);
         Canvas.SetLeft(_activeRectangle, relativeLeft);
@@ -834,117 +833,38 @@ public partial class RangeSlider : TemplatedControl
         SyncThumbs();
     }
 
-    private void SetToolTipAt(Thumb thumb, bool open)
+    private void ShowToolTips()
     {
+        if (_minPopup == null || _maxPopup == null)
+            return;
+
         if (!ShowValueToolTip)
             return;
 
-        if (open && !ToolTip.GetIsOpen(thumb))
-        {
-            UnParentToolTip(_toolTip);
-            ToolTip.SetTip(thumb, _toolTip);
-            ToolTip.SetIsOpen(thumb, true);
-            ToolTip.SetPlacement(thumb, PlacementMode.Top);
-            ToolTip.SetVerticalOffset(thumb, -_containerCanvas.Bounds.Height + 10);
-        }
-        else if (!open)
-        {
-            ToolTip.SetIsOpen(thumb, false);
-            UnParentToolTip(_toolTip);
-            ToolTip.SetTip(thumb, null);
-        }
+        _minPopup.PlacementTarget = _minThumb;
+        _minPopup.Placement = PlacementMode.Top;
+        _minPopup.VerticalOffset = -12;
+        _maxPopup.PlacementTarget = _maxThumb;
+        _maxPopup.Placement = PlacementMode.Top;
+        _maxPopup.VerticalOffset = -12;
+        UpdateToolTipTexts();
+        _minPopup.IsOpen = true;
+        _maxPopup.IsOpen = true;
     }
 
-    private static void UnParentToolTip(Control c)
+    private void RestartCloseToolTipTimer()
     {
-        if (c.Parent is Panel p)
-        {
-            p.Children.Remove(c);
-        }
-        else if (c.Parent is ContentControl cc)
-        {
-            cc.Content = null;
-        }
-        else if (c.Parent is Decorator d)
-        {
-            d.Child = null;
-        }
+        _closeToolTipTimer.Stop();
+        _closeToolTipTimer.Start();
     }
 
-
-    private Rectangle _activeRectangle;
-    private Thumb _minThumb;
-    private Thumb _maxThumb;
-    private Canvas _containerCanvas;
-    private double _oldValue;
-    private bool _valuesAssigned;
-    private bool _minSet;
-    private bool _maxSet;
-    private bool _pointerManipulatingMin;
-    private bool _pointerManipulatingMax;
-    private bool _pointerManipulatingBoth;
-    private double _absolutePosition;
-    private Control? _toolTip;
-    private TextBlock? _toolTipText;
-    private const double Epsilon = 0.01;
-    private bool _isDraggingStart;
-    private bool _isDraggingEnd;
-    private readonly DispatcherTimer _keyTimer = new DispatcherTimer();
-}
-
-// Copied from WinUI Community Toolkit - only for RangeSlider at this time
-// Extension classes can't be nested so its out here as an internal class =(
-internal static class DispatcherTimerExtensions
-{
-    public static void Debounce(this DispatcherTimer timer, Action action, TimeSpan interval, bool immediate = false)
+    private void ClosePopup(object? sender, EventArgs e)
     {
-        // Check and stop any existing timer
-        var timeout = timer.IsEnabled;
-        if (timeout)
-        {
-            timer.Stop();
-        }
+        if (_minPopup == null || _maxPopup == null || _isDrag)
+            return;
 
-        // Reset timer parameters
-        timer.Tick -= TimerTick;
-        timer.Interval = interval;
-
-        if (immediate)
-        {
-            // If we're in immediate mode then we only execute if the timer wasn't running beforehand
-            if (!timeout)
-            {
-                action.Invoke();
-            }
-        }
-        else
-        {
-            // If we're not in immediate mode, then we'll execute when the current timer expires.
-            timer.Tick += TimerTick;
-
-            // Store/Update function
-            _debounceInstances.AddOrUpdate(timer, action, (k, v) => action);
-        }
-
-        // Start the timer to keep track of the last call here.
-        timer.Start();
+        _minPopup.IsOpen = false;
+        _maxPopup.IsOpen = false;
+        _closeToolTipTimer.Stop();
     }
-
-    private static void TimerTick(object sender, object e)
-    {
-        // This event is only registered/run if we weren't in immediate mode above
-        if (sender is DispatcherTimer timer)
-        {
-            timer.Tick -= TimerTick;
-            timer.Stop();
-
-            if (_debounceInstances.TryRemove(timer, out Action action))
-            {
-                action?.Invoke();
-            }
-        }
-    }
-
-    private static ConcurrentDictionary<DispatcherTimer, Action> _debounceInstances = new ConcurrentDictionary<DispatcherTimer, Action>();
-
 }
