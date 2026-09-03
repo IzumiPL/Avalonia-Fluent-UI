@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Input;
 using Avalonia.Layout;
 
 namespace AvaloniaFluentUI.Controls;
 
-public class SingleDirectionScrollContentPresenter : Avalonia.Controls.Presenters.ScrollContentPresenter
+public class SingleDirectionScrollContentPresenter : SmoothScrollContentPresenter 
 {
     public static readonly StyledProperty<Orientation> OrientationProperty =
         AvaloniaProperty.Register<SingleDirectionScrollContentPresenter, Orientation>(nameof(Orientation));
@@ -17,45 +16,31 @@ public class SingleDirectionScrollContentPresenter : Avalonia.Controls.Presenter
         set => SetValue(OrientationProperty, value);
     }
     
-    private double _remainDelta;
-    private bool _isRunning;
-
-    private async Task Scroll()
-    {
-        _isRunning = true;
-    
-        while (Math.Abs(_remainDelta) > 0.5)
-        {
-            double delta = _remainDelta * 0.25;
-            _remainDelta -= delta;
-            Vector vector;
-            if (Orientation == Orientation.Horizontal)
-            {
-                double target = Offset.X + delta;
-                double max = Math.Max(0, Extent.Width - Viewport.Width);
-                vector = Offset.WithX(Math.Clamp(target, 0, max));
-            }
-            else
-            {
-                double target = Offset.Y + delta;
-                double max = Math.Max(0, Extent.Height - Viewport.Height);
-                vector = Offset.WithY(Math.Clamp(target, 0, max));
-            }
-    
-            SetCurrentValue(OffsetProperty, vector);
-    
-            await Task.Delay(8);
-        }
-    
-        _remainDelta = 0;
-        _isRunning = false;
-    }
-
     protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
     {
-        _remainDelta += -e.Delta.Y * 60;
-        if (!_isRunning) { _=Scroll();}
+        double step = -e.Delta.Y * SCROLL_STEP;
 
+        if (_cts == null)
+        {
+            _targetOffset = Offset;
+        }
+
+        double max;
+        double target;
+        if (Orientation == Orientation.Horizontal)
+        {
+            max = Math.Max(0, Extent.Width - Viewport.Width);
+            target = Math.Clamp(_targetOffset.X + step, 0, max);
+            _targetOffset = _targetOffset.WithX(target);
+        }
+        else
+        {
+            max = Math.Max(0, Extent.Height - Viewport.Height);
+            target = Math.Clamp(_targetOffset.Y + step, 0, max);
+            _targetOffset = _targetOffset.WithY(target);
+        }
+            
+        _ = ScrollToAsync(_targetOffset);
         e.Handled = true;
     }
 }

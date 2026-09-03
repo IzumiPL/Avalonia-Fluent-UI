@@ -1,55 +1,81 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Animation;
+using Avalonia.Animation.Easings;
 using Avalonia.Input;
-using Avalonia.Layout;
+using Avalonia.Styling;
 
 namespace AvaloniaFluentUI.Controls;
 
-
 public class SmoothScrollContentPresenter : Avalonia.Controls.Presenters.ScrollContentPresenter
 {
-    protected double _remainDelta;
-    protected bool _isRunning;
+    protected Vector _targetOffset;
+    protected CancellationTokenSource? _cts;
 
-    protected virtual async Task Scroll(Orientation orientation)
+    protected const double SCROLL_STEP = 60;
+
+    public async Task ScrollToAsync(Vector target)
     {
-        _isRunning = true;
+        _cts?.Cancel();
+        _cts?.Dispose();
+        _cts = new CancellationTokenSource();
 
-        while (Math.Abs(_remainDelta) > 0.5)
+        var anim = new Animation
         {
-            double delta = _remainDelta * 0.25;
-            _remainDelta -= delta;
-            Vector vector;
-            if (orientation == Orientation.Horizontal)
+            Duration = TimeSpan.FromMilliseconds(150),
+            Easing = new QuadraticEaseOut(),
+            Children =
             {
-                double target = Offset.X + delta;
-                double max = Math.Max(0, Extent.Width - Viewport.Width);
-                vector = Offset.WithX(Math.Clamp(target, 0, max));
-            }
-            else
-            {
-                double target = Offset.Y + delta;
-                double max = Math.Max(0, Extent.Height - Viewport.Height);
-                vector = Offset.WithY(Math.Clamp(target, 0, max));
-            }
+                new KeyFrame
+                {
+                    Cue = new Cue(1.0),
+                    Setters = { new Setter(OffsetProperty, target) },
+                },
+            },
+        };
 
-            SetCurrentValue(OffsetProperty, vector);
-
-            await Task.Delay(8);
+        try
+        {
+            await anim.RunAsync(this, _cts.Token);
         }
-
-        _remainDelta = 0;
-        _isRunning = false;
+        finally
+        {
+            if (!_cts.IsCancellationRequested)
+            {
+                _cts = null;
+            }
+        }
     }
 
     protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
     {
-        _remainDelta += -e.Delta.Y * 60;
-        var direction = e.KeyModifiers.HasFlag(KeyModifiers.Alt) ? Orientation.Horizontal : Orientation.Vertical;
-        if (!_isRunning) { _=Scroll(direction);}
+        double step = -e.Delta.Y * SCROLL_STEP;
 
+        if (_cts == null)
+        {
+            _targetOffset = Offset;
+        }
+
+        double max;
+        double target;
+        var horizontal = e.KeyModifiers.HasFlag(KeyModifiers.Alt);
+
+        if (horizontal)
+        {
+            max = Math.Max(0, Extent.Width - Viewport.Width);
+            target = Math.Clamp(_targetOffset.X + step, 0, max);
+            _targetOffset = _targetOffset.WithX(target);
+        }
+        else
+        {
+            max = Math.Max(0, Extent.Height - Viewport.Height);
+            target = Math.Clamp(_targetOffset.Y + step, 0, max);
+            _targetOffset = _targetOffset.WithY(target);
+        }
+        
+        _ = ScrollToAsync(_targetOffset);
         e.Handled = true;
-        // base.OnPointerWheelChanged(e);
     }
 }
