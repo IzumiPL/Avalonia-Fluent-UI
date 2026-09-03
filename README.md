@@ -30,7 +30,7 @@ English | <a href="README_zh_CN.md">简体中文</a>
 
 ## Install🚀
 ```shell
-dotnet add package AvaloniaFluentUI --version 2.0.3
+dotnet add package AvaloniaFluentUI --version 2.0.4
 ```
 
 > [!Warning]
