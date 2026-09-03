@@ -95,8 +95,9 @@ public class SegmentedToggleView : SegmentedView
         
         var animation = new Animation
         {
-            Duration = TimeSpan.FromMilliseconds(150),
+            Duration = AnimationDuration,
             FillMode = FillMode.Forward,
+            Easing = AnimationEasing,
             Children =
             {
                 new KeyFrame

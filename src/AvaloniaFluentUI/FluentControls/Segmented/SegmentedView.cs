@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Avalonia;
 using Avalonia.Animation;
+using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
@@ -12,8 +13,8 @@ using Avalonia.Styling;
 
 namespace AvaloniaFluentUI.Controls;
 
-[TemplatePart(Name = PART_SELECTED_INDICATOR, Type = typeof(SelectionIndicator))]
-[TemplatePart(Name = PART_HEADERS_AREA, Type = typeof(Panel))]
+[TemplatePart(Name = PART_HEADERS_AREA,         Type = typeof(Panel))]
+[TemplatePart(Name = PART_SELECTED_INDICATOR,   Type = typeof(SelectionIndicator))]
 public class SegmentedView : SelectingItemsControl
 {
     /// <summary>
@@ -61,6 +62,9 @@ public class SegmentedView : SelectingItemsControl
     private const string PART_SELECTED_INDICATOR = "PART_SelectedIndicator";
     private const string PART_HEADERS_AREA = "PART_HeadersArea";
 
+    public TimeSpan AnimationDuration { get; set; } = TimeSpan.FromMilliseconds(150);
+    public Easing AnimationEasing { get; set; } = new CubicEaseOut();
+
     protected override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
         => NeedsContainer<SegmentedItem>(item, out recycleKey);
 
@@ -103,8 +107,6 @@ public class SegmentedView : SelectingItemsControl
         base.OnPropertyChanged(change);
         if (change.Property == SelectedItemProperty)
         {
-            // SyncContainerSelection(change.NewValue);
-            // Avalonia.Threading.Dispatcher.UIThread.Post(UpdateSelectedIndicatorPosition);
             UpdateSelectedIndicatorPosition();
         }
     }
@@ -130,8 +132,9 @@ public class SegmentedView : SelectingItemsControl
 
         var animation = new Animation
         {
-            Duration = TimeSpan.FromMilliseconds(150),
+            Duration = AnimationDuration,
             FillMode = FillMode.Forward,
+            Easing = AnimationEasing,
             Children =
             {
                 new KeyFrame
