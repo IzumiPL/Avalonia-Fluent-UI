@@ -165,7 +165,7 @@
             Placement="RightEdgeAlignedTop"
             WindowManagerAddShadowHint="False">
             <Border
-              Margin="6"
+              Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
               BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
               CornerRadius="{DynamicResource OverlayCornerRadius}">
               <Border
