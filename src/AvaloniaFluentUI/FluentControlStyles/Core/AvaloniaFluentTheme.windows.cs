@@ -11,19 +11,15 @@ namespace AvaloniaFluentUI.Styling;
 
 public partial class AvaloniaFluentTheme
 {
-    private ThemeVariant ResolveWindowsSystemSettings(IPlatformSettings platformSettings)
+    private ThemeVariant? ResolveWindowsSystemSettings(IPlatformSettings? platformSettings)
     {
-        ThemeVariant theme = null;
+        ThemeVariant? theme = null;
         if (PreferSystemTheme)
         {
             theme = GetThemeFromIPlatformSettings(platformSettings);
         }
 
-        if (CustomAccentColor != null)
-        {
-            LoadCustomAccentColor();
-        }
-        else if (PreferUserAccentColor)
+        if (PreferUserAccentColor)
         {
             try
             {
@@ -34,11 +30,11 @@ public partial class AvaloniaFluentTheme
                 Logger.TryGet(LogEventLevel.Information, "AvaloniaFluentTheme")?
                         .Log("AvaloniaFluentTheme", "Unable to create instance of ComObject IUISettings");
                 LoadDefaultAccentColor();
-            }            
+            }
         }
         else
         {
-            LoadDefaultAccentColor();
+            LoadAccentColor();
         }
 
         return theme;
@@ -74,7 +70,7 @@ public partial class AvaloniaFluentTheme
     /// <param name="window">The window to force</param>
     /// <param name="theme">The theme to use, or null to use the current RequestedTheme</param>
     /// <exception cref="ArgumentNullException">If window is null</exception>
-    public void ForceWin32WindowToTheme(Window window, ThemeVariant theme = null)
+    public void ForceWin32WindowToTheme(Window window, ThemeVariant? theme = null)
     {
         if (window == null)
             throw new ArgumentNullException(nameof(window));
@@ -89,7 +85,7 @@ public partial class AvaloniaFluentTheme
         catch
         {
             Logger.TryGet(LogEventLevel.Information, "AvaloniaFluentTheme")?
-                        .Log("AvaloniaFluentTheme", "Unable to set window to theme.");
+                .Log("AvaloniaFluentTheme", "Unable to set window to theme.");
         }
     }
 }
