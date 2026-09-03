@@ -1,29 +1,30 @@
 <ResourceDictionary
+  x:CompileBindings="True"
   xmlns="https://github.com/avaloniaui"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:converters="clr-namespace:AvaloniaFluentUI.Converters"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
-  x:CompileBindings="True">
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <Design.PreviewWith>
     <Border Padding="50">
       <StackPanel Spacing="5">
         <ComboBox>
-          <ComboBoxItem Content="Item1"/>
-          <ComboBoxItem Content="Item2"/>
-          <ComboBoxItem Content="Item3"/>
+          <ComboBoxItem Content="Item1" />
+          <ComboBoxItem Content="Item2" />
+          <ComboBoxItem Content="Item3" />
         </ComboBox>
         <ComboBox PlaceholderText="Placeholder">
-          <ComboBoxItem Content="Item1"/>
-          <ComboBoxItem Content="Item2"/>
-          <ComboBoxItem Content="Item3"/>
+          <ComboBoxItem Content="Item1" />
+          <ComboBoxItem Content="Item2" />
+          <ComboBoxItem Content="Item3" />
         </ComboBox>
 
-        <ComboBox IsEnabled="False"/>
+        <ComboBox IsEnabled="False" />
 
-        <Border Height="1" Background="Gray"/>
+        <Border Background="Gray" Height="1" />
 
-        <ComboBoxItem Content="Item1"/>
+        <ComboBoxItem Content="Item1" />
 
-        <Rectangle Theme="{StaticResource ComboBoxItemPill}"/>
+        <Rectangle Theme="{StaticResource ComboBoxItemPill}" />
       </StackPanel>
     </Border>
   </Design.PreviewWith>
@@ -62,57 +63,54 @@
 
   <Thickness x:Key="ComboBoxViewerPadding">0 0 8 0</Thickness>
 
-
-  <!--  Control-specific resources  -->
-
-  <SolidColorBrush x:Key="ComboBoxDropDownGlyphForegroundFocusedPressed" Color="{StaticResource TextFillColorSecondaryBrush}"/>
-  <ControlTheme x:Key="ComboBoxItemPill" TargetType="Rectangle">
-    <Setter Property="HorizontalAlignment" Value="Left"/>
-    <Setter Property="Height" Value="{StaticResource ComboBoxItemPillHeight}"/>
-    <Setter Property="Width" Value="{StaticResource ComboBoxItemPillWidth}"/>
-    <Setter Property="Fill" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
-    <Setter Property="RadiusX" Value="{DynamicResource ComboBoxItemPillCornerRadius}"/>
-    <Setter Property="RadiusY" Value="{DynamicResource ComboBoxItemPillCornerRadius}"/>
+  <SolidColorBrush Color="{StaticResource TextFillColorSecondaryBrush}" x:Key="ComboBoxDropDownGlyphForegroundFocusedPressed" />
+  <ControlTheme TargetType="Rectangle" x:Key="ComboBoxItemPill">
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="Height" Value="{StaticResource ComboBoxItemPillHeight}" />
+    <Setter Property="Width" Value="{StaticResource ComboBoxItemPillWidth}" />
+    <Setter Property="Fill" Value="{DynamicResource AccentFillColorDefaultBrush}" />
+    <Setter Property="RadiusX" Value="{DynamicResource ComboBoxItemPillCornerRadius}" />
+    <Setter Property="RadiusY" Value="{DynamicResource ComboBoxItemPillCornerRadius}" />
   </ControlTheme>
 
-  <ControlTheme x:Key="{x:Type ComboBox}" TargetType="ComboBox">
-    <Setter Property="Padding" Value="{DynamicResource ComboBoxPadding}"/>
-    <Setter Property="Margin" Value="2 0"/>
-    <Setter Property="MaxDropDownHeight" Value="504"/>
-    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}"/>
-    <Setter Property="BorderThickness" Value="{DynamicResource ComboBoxBorderThemeThickness}"/>
-    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-    <Setter Property="HorizontalAlignment" Value="Left"/>
-    <Setter Property="VerticalAlignment" Value="Top"/>
-    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
-    <Setter Property="PlaceholderForeground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+  <ControlTheme TargetType="ComboBox" x:Key="{x:Type ComboBox}">
+    <Setter Property="Padding" Value="{DynamicResource ComboBoxPadding}" />
+    <Setter Property="Margin" Value="2 0" />
+    <Setter Property="MaxDropDownHeight" Value="504" />
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ComboBoxBorderThemeThickness}" />
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+    <Setter Property="HorizontalAlignment" Value="Left" />
+    <Setter Property="VerticalAlignment" Value="Top" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+    <Setter Property="PlaceholderForeground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
     <Setter Property="Template">
       <ControlTemplate>
         <DataValidationErrors>
           <Grid ColumnDefinitions="*,32">
 
             <Border
-              Name="Background"
-              Grid.Column="0"
-              Grid.ColumnSpan="2"
-              MinWidth="{DynamicResource ComboBoxThemeMinWidth}"
               Background="{TemplateBinding Background}"
               BorderBrush="{TemplateBinding BorderBrush}"
               BorderThickness="{TemplateBinding BorderThickness}"
-              CornerRadius="{TemplateBinding CornerRadius}"/>
-
-            <Border
-              Name="HighlightBackground"
+              CornerRadius="{TemplateBinding CornerRadius}"
               Grid.Column="0"
               Grid.ColumnSpan="2"
+              MinWidth="{DynamicResource ComboBoxThemeMinWidth}"
+              Name="Background" />
+
+            <Border
               Background="{DynamicResource ControlFillColorDefaultBrush}"
               BorderBrush="{DynamicResource FocusStrokeColorOuterBrush}"
               BorderThickness="{DynamicResource ComboBoxBackgroundBorderThicknessFocused}"
-              Opacity="0"/>
+              Grid.Column="0"
+              Grid.ColumnSpan="2"
+              Name="HighlightBackground"
+              Opacity="0" />
 
             <!--  <Border  -->
             <!--  Name="Pill"  -->
@@ -121,119 +119,119 @@
             <!--  Opacity="0"/>  -->
 
             <TextBlock
-              x:Name="PlaceholderTextBlock"
-              Grid.Column="0"
-              Margin="{TemplateBinding Padding}"
-              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
               Foreground="{TemplateBinding PlaceholderForeground}"
-              Text="{TemplateBinding PlaceholderText}">
+              Grid.Column="0"
+              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+              Margin="{TemplateBinding Padding}"
+              Text="{TemplateBinding PlaceholderText}"
+              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+              x:Name="PlaceholderTextBlock">
               <TextBlock.IsVisible>
                 <MultiBinding Converter="{x:Static BoolConverters.And}">
                   <Binding
                     Converter="{x:Static ObjectConverters.IsNull}"
                     Path="SelectionBoxItem"
-                    RelativeSource="{RelativeSource TemplatedParent}"/>
-                  <Binding Path="!IsEditable" RelativeSource="{RelativeSource TemplatedParent}"/>
+                    RelativeSource="{RelativeSource TemplatedParent}" />
+                  <Binding Path="!IsEditable" RelativeSource="{RelativeSource TemplatedParent}" />
                 </MultiBinding>
               </TextBlock.IsVisible>
             </TextBlock>
 
             <ContentPresenter
-              Name="ContentPresenter"
-              Grid.Column="0"
-              Margin="{TemplateBinding Padding}"
-              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
               Content="{TemplateBinding SelectionBoxItem}"
-              ContentTemplate="{TemplateBinding ItemTemplate}"/>
+              ContentTemplate="{TemplateBinding ItemTemplate}"
+              Grid.Column="0"
+              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+              Margin="{TemplateBinding Padding}"
+              Name="ContentPresenter"
+              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
 
             <TextBox
-              Name="PART_EditableTextBox"
-              Grid.Column="0"
-              MinHeight="32"
-              Margin="0"
-              Padding="{TemplateBinding Padding}"
-              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
               Background="Transparent"
               BorderThickness="0"
               Foreground="{TemplateBinding Foreground}"
+              Grid.Column="0"
+              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
               IsVisible="{TemplateBinding IsEditable}"
+              Margin="0"
+              MinHeight="32"
+              Name="PART_EditableTextBox"
+              Padding="{TemplateBinding Padding}"
               PlaceholderText="{TemplateBinding PlaceholderText}"
               Text="{TemplateBinding Text,
-                                     Mode=TwoWay}">
+                                     Mode=TwoWay}"
+              VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
               <TextBox.Resources>
                 <Thickness x:Key="TextControlBorderThemeThicknessFocused">0</Thickness>
               </TextBox.Resources>
               <TextBox.Styles>
                 <Style Selector="TextBox:focus">
-                  <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+                  <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
 
                   <Style Selector="^ /template/ TextBlock#PART_Placeholder">
-                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/>
+                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}" />
                   </Style>
 
                   <Style Selector="^ /template/ Border#PART_BorderElement">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="BorderBrush" Value="Transparent"/>
-                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="BorderBrush" Value="Transparent" />
+                    <Setter Property="BorderThickness" Value="0" />
                   </Style>
                 </Style>
               </TextBox.Styles>
             </TextBox>
 
             <Border
-              Name="DropDownOverlay"
-              Grid.Column="1"
-              Width="30"
-              Margin="-4,4,4,4"
-              HorizontalAlignment="Right"
               Background="Transparent"
-              IsVisible="False"/>
+              Grid.Column="1"
+              HorizontalAlignment="Right"
+              IsVisible="False"
+              Margin="-4,4,4,4"
+              Name="DropDownOverlay"
+              Width="30" />
 
             <ui:FontIcon
-              Name="DropDownGlyph"
-              Grid.Row="1"
-              Grid.Column="1"
-              MinHeight="{DynamicResource ComboBoxMinHeight}"
-              Margin="0,0,10,0"
-              HorizontalAlignment="Right"
-              VerticalAlignment="Center"
               FontFamily="{DynamicResource SymbolThemeFontFamily}"
               FontSize="15"
               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
               Glyph="&#xE70D;"
-              IsHitTestVisible="False"/>
+              Grid.Column="1"
+              Grid.Row="1"
+              HorizontalAlignment="Right"
+              IsHitTestVisible="False"
+              Margin="0,0,10,0"
+              MinHeight="{DynamicResource ComboBoxMinHeight}"
+              Name="DropDownGlyph"
+              VerticalAlignment="Center" />
 
             <ui:FluentPopup
-              Name="PART_Popup"
-              MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
-              MaxHeight="{TemplateBinding MaxDropDownHeight}"
               InheritsTransform="True"
               IsLightDismissEnabled="True"
               IsOpen="{TemplateBinding IsDropDownOpen,
                                        Mode=TwoWay}"
+              MaxHeight="{TemplateBinding MaxDropDownHeight}"
+              MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource AddConverter}, ConverterParameter=12}"
+              Name="PART_Popup"
               PlacementTarget="Background"
               WindowManagerAddShadowHint="False">
               <Border
-                Name="PopupBorder"
-                Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
-                Padding="{DynamicResource ComboBoxDropdownBorderPadding}"
-                HorizontalAlignment="Stretch"
                 Background="{DynamicResource AcrylicInAppFillColorDefaultBrush}"
                 BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
                 BorderThickness="{DynamicResource ComboBoxDropdownBorderThickness}"
                 BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
-                CornerRadius="{DynamicResource OverlayCornerRadius}">
+                CornerRadius="{DynamicResource OverlayCornerRadius}"
+                HorizontalAlignment="Stretch"
+                Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
+                Name="PopupBorder"
+                Padding="{DynamicResource ComboBoxDropdownBorderPadding}">
                 <ui:SmoothScrollViewer
                   HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                   IsDeferredScrollingEnabled="{TemplateBinding (ScrollViewer.IsDeferredScrollingEnabled)}"
                   VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
                   <ItemsPresenter
-                    Name="PART_ItemsPresenter"
+                    ItemsPanel="{TemplateBinding ItemsPanel}"
                     Margin="{DynamicResource ComboBoxDropdownContentMargin}"
-                    ItemsPanel="{TemplateBinding ItemsPanel}"/>
+                    Name="PART_ItemsPresenter" />
                 </ui:SmoothScrollViewer>
               </Border>
             </ui:FluentPopup>
@@ -243,60 +241,60 @@
     </Setter>
 
     <Style Selector="^ /template/ ui|FontIcon#DropDownGlyph">
-      <Setter Property="RenderTransformOrigin" Value="50%, 100%"/>
+      <Setter Property="RenderTransformOrigin" Value="50%, 100%" />
       <Setter Property="Transitions">
         <Transitions>
           <TransformOperationsTransition
+            Duration="0:0:0.15"
             Easing="CubicEaseOut"
-            Property="RenderTransform"
-            Duration="0:0:0.15"/>
+            Property="RenderTransform" />
         </Transitions>
       </Setter>
     </Style>
 
     <Style Selector="^:pointerover">
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
       </Style>
       <Style Selector="^ /template/ TextBlock#PlaceholderTextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
       </Style>
       <Style Selector="^ /template/ Border#Background">
-        <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
       </Style>
     </Style>
 
     <Style Selector="^:pressed">
       <Style Selector="^ /template/ TextBlock#PlaceholderTextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}" />
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
       </Style>
       <Style Selector="^ /template/ Border#Background">
-        <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
       </Style>
 
       <Style Selector="^ /template/ ui|FontIcon#DropDownGlyph">
-        <Setter Property="RenderTransform" Value="scale(1.0, 0.85)"/>
+        <Setter Property="RenderTransform" Value="scale(1.0, 0.85)" />
       </Style>
     </Style>
 
     <Style Selector="^:disabled">
       <Style Selector="^ /template/ TextBlock#PlaceholderTextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
       </Style>
       <Style Selector="^ /template/ Border#Background">
-        <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
       </Style>
       <Style Selector="^ /template/ ui|FontIcon#DropDownGlyph">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
       </Style>
     </Style>
 
@@ -305,71 +303,71 @@
       <!-- <Setter Property="Opacity" Value="1"/> -->
       <!-- </Style> -->
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
       </Style>
       <Style Selector="^ /template/ TextBlock#PlaceholderTextBlock">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
       </Style>
       <Style Selector="^ /template/ ui|FontIcon#DropDownGlyph">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
       </Style>
     </Style>
 
     <Style Selector="^:error /template/ Border#Background">
-      <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorCriticalBrush}"/>
+      <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorCriticalBrush}" />
     </Style>
 
     <Style Selector="^.Transparent">
-      <Setter Property="Background" Value="Transparent"/>
-      <Setter Property="BorderBrush" Value="Transparent"/>
-      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="BorderBrush" Value="Transparent" />
+      <Setter Property="BorderThickness" Value="0" />
     </Style>
   </ControlTheme>
 
-  <ControlTheme x:Key="{x:Type ComboBoxItem}" TargetType="ComboBoxItem">
-    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
-    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-    <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
-    <Setter Property="Padding" Value="{DynamicResource ComboBoxItemThemePadding}"/>
-    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+  <ControlTheme TargetType="ComboBoxItem" x:Key="{x:Type ComboBoxItem}">
+    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+    <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}" />
+    <Setter Property="Padding" Value="{DynamicResource ComboBoxItemThemePadding}" />
+    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     <Setter Property="FocusAdorner">
       <FocusAdornerTemplate>
         <Border
-          Margin="-3"
           BorderBrush="{DynamicResource SystemControlFocusVisualPrimaryBrush}"
-          BorderThickness="{DynamicResource SystemControlFocusVisualPrimaryThickness}">
-          <Border BorderBrush="{DynamicResource SystemControlFocusVisualSecondaryBrush}" BorderThickness="{DynamicResource SystemControlFocusVisualSecondaryThickness}"/>
+          BorderThickness="{DynamicResource SystemControlFocusVisualPrimaryThickness}"
+          Margin="-3">
+          <Border BorderBrush="{DynamicResource SystemControlFocusVisualSecondaryBrush}" BorderThickness="{DynamicResource SystemControlFocusVisualSecondaryThickness}" />
         </Border>
       </FocusAdornerTemplate>
     </Setter>
     <Setter Property="Template">
       <ControlTemplate>
         <Border
-          Name="LayoutRoot"
-          Margin="5,2,5,2"
           Background="{TemplateBinding Background}"
           BorderBrush="{TemplateBinding BorderBrush}"
           BorderThickness="{TemplateBinding BorderThickness}"
           CornerRadius="{TemplateBinding CornerRadius}"
+          Margin="5,2,5,2"
+          Name="LayoutRoot"
           TemplatedControl.IsTemplateFocusTarget="True">
           <Panel>
             <Rectangle
               Name="Pill"
               Opacity="0"
-              Theme="{StaticResource ComboBoxItemPill}"/>
+              Theme="{StaticResource ComboBoxItemPill}" />
 
             <ContentPresenter
-              Name="ContentPresenter"
-              Margin="{TemplateBinding Padding}"
-              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
               Background="{x:Null}"
               BorderBrush="{x:Null}"
               BorderThickness="0"
               Content="{TemplateBinding Content}"
               ContentTemplate="{TemplateBinding ContentTemplate}"
               CornerRadius="{TemplateBinding CornerRadius}"
-              Foreground="{TemplateBinding Foreground}"/>
+              Foreground="{TemplateBinding Foreground}"
+              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+              Margin="{TemplateBinding Padding}"
+              Name="ContentPresenter"
+              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
           </Panel>
 
         </Border>
@@ -378,44 +376,44 @@
 
     <Style Selector="^:pointerover">
       <Style Selector="^ /template/ Border#LayoutRoot">
-        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
       </Style>
     </Style>
 
     <Style Selector="^:pressed">
       <Style Selector="^ /template/ Border#LayoutRoot">
-        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
       </Style>
     </Style>
 
     <Style Selector="^:disabled">
       <Style Selector="^ /template/ Border#LayoutRoot">
-        <Setter Property="Background" Value="{DynamicResource SubtleFillColorDisabledBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorDisabledBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorDisabledBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorDisabledBrush}" />
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
       </Style>
     </Style>
 
     <Style Selector="^:selected">
       <Style Selector="^ /template/ Rectangle#Pill">
-        <Setter Property="Opacity" Value="1"/>
+        <Setter Property="Opacity" Value="1" />
       </Style>
       <Style Selector="^ /template/ Border#LayoutRoot">
-        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
       </Style>
     </Style>
 
@@ -423,41 +421,41 @@
 
     <Style Selector="^:selected:disabled">
       <Style Selector="^ /template/ Rectangle#Pill">
-        <Setter Property="Opacity" Value="1"/>
+        <Setter Property="Opacity" Value="1" />
       </Style>
       <Style Selector="^ /template/ Border#LayoutRoot">
-        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
       </Style>
     </Style>
 
     <Style Selector="^:selected:pointerover">
       <Style Selector="^ /template/ Rectangle#Pill">
-        <Setter Property="Opacity" Value="1"/>
+        <Setter Property="Opacity" Value="1" />
       </Style>
       <Style Selector="^ /template/ Border#LayoutRoot">
-        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTertiaryBrush}" />
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
       </Style>
     </Style>
 
     <Style Selector="^:selected:pressed">
       <Style Selector="^ /template/ Rectangle#Pill">
-        <Setter Property="Opacity" Value="1"/>
-        <Setter Property="RenderTransform" Value="scaleY(0.625)"/>
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="RenderTransform" Value="scaleY(0.625)" />
       </Style>
       <Style Selector="^ /template/ Border#LayoutRoot">
-        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
       </Style>
       <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
-        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
       </Style>
     </Style>
 
