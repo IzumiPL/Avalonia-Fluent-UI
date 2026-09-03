@@ -1,187 +1,184 @@
 <ResourceDictionary
   xmlns="https://github.com/avaloniaui"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls"
-  xmlns:wnd="clr-namespace:AvaloniaFluentUI.Windowing">
+  xmlns:wnd="clr-namespace:AvaloniaFluentUI.Windowing"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-  <ControlTheme x:Key="{x:Type wnd:AppSplashScreen}" TargetType="wnd:AppSplashScreen">
-    <Setter Property="Background" Value="{DynamicResource LayerFillColorBrush}"/>
-    <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+  <ControlTheme TargetType="wnd:AppSplashScreen" x:Key="{x:Type wnd:AppSplashScreen}">
+    <Setter Property="Background" Value="{DynamicResource LayerFillColorBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
     <Setter Property="Template">
       <ControlTemplate>
         <ContentPresenter
-          Name="ContentHost"
+          Background="{TemplateBinding Background}"
           HorizontalAlignment="Stretch"
-          VerticalAlignment="Stretch"
           HorizontalContentAlignment="Stretch"
-          VerticalContentAlignment="Stretch"
-          Background="{TemplateBinding Background}"/>
+          Name="ContentHost"
+          VerticalAlignment="Stretch"
+          VerticalContentAlignment="Stretch" />
       </ControlTemplate>
     </Setter>
   </ControlTheme>
 
-  <ControlTheme x:Key="FluentWindowDecorations" TargetType="WindowDrawnDecorations">
-    <Setter Property="DefaultTitleBarHeight" Value="45"/>
+  <ControlTheme TargetType="WindowDrawnDecorations" x:Key="FluentWindowDecorations">
+    <Setter Property="DefaultTitleBarHeight" Value="45" />
     <Setter Property="Template">
       <WindowDrawnDecorationsTemplate>
         <WindowDrawnDecorationsContent>
           <WindowDrawnDecorationsContent.Underlay>
             <Panel Name="PART_UnderlayWrapper">
               <Border
-                Name="PART_WindowBorder"
                 Background="Transparent"
                 BorderBrush="{DynamicResource AccentFillColorDefaultBrush}"
                 BorderThickness="{TemplateBinding FrameThickness}"
-                IsHitTestVisible="False"/>
+                IsHitTestVisible="False"
+                Name="PART_WindowBorder" />
               <!--  Titlebar: background, title text, and drag area live in underlay  -->
               <Panel
-                Name="PART_TitleBar"
-                Height="{TemplateBinding TitleBarHeight}"
-                VerticalAlignment="Top"
                 Background="Transparent"
+                Height="{TemplateBinding TitleBarHeight}"
                 IsVisible="{TemplateBinding HasTitleBar}"
-                WindowDecorationProperties.ElementRole="TitleBar"/>
+                Name="PART_TitleBar"
+                VerticalAlignment="Top"
+                WindowDecorationProperties.ElementRole="TitleBar" />
             </Panel>
           </WindowDrawnDecorationsContent.Underlay>
 
-          <WindowDrawnDecorationsContent.Overlay/>
+          <WindowDrawnDecorationsContent.Overlay />
 
-          <WindowDrawnDecorationsContent.FullscreenPopover/>
+          <WindowDrawnDecorationsContent.FullscreenPopover />
 
         </WindowDrawnDecorationsContent>
       </WindowDrawnDecorationsTemplate>
     </Setter>
   </ControlTheme>
 
-  <ControlTheme x:Key="{x:Type wnd:FluentWindow}" TargetType="wnd:FluentWindow">
-    <Setter Property="TransparencyBackgroundFallback" Value="{DynamicResource ApplicationPageBackgroundThemeBrush}"/>
-    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-    <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}"/>
-    <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}"/>
-    <Setter Property="Background" Value="{DynamicResource ApplicationPageBackgroundThemeBrush}"/>
-    <Setter Property="WindowDecorationsTheme" Value="{StaticResource FluentWindowDecorations}"/>
-    <Setter Property="ExtendClientAreaToDecorationsHint" Value="True"/>
-    <Setter Property="ExtendClientAreaTitleBarHeightHint" Value="-1"/>
-    <Setter Property="WindowDecorations" Value="{OnPlatform BorderOnly, Windows=Full, Linux=None, x:TypeArguments=WindowDecorations}"/>
+  <ControlTheme TargetType="wnd:FluentWindow" x:Key="{x:Type wnd:FluentWindow}">
+    <Setter Property="TransparencyBackgroundFallback" Value="{DynamicResource ApplicationPageBackgroundThemeBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+    <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+    <Setter Property="FontFamily" Value="{DynamicResource DefaultFontFamily}" />
+    <Setter Property="Background" Value="{DynamicResource ApplicationPageBackgroundThemeBrush}" />
+    <Setter Property="WindowDecorationsTheme" Value="{StaticResource FluentWindowDecorations}" />
+    <Setter Property="ClipToBounds" Value="True" />
+    <Setter Property="CornerRadius" Value="8" />
+    <Setter Property="ExtendClientAreaToDecorationsHint" Value="True" />
+    <Setter Property="ExtendClientAreaTitleBarHeightHint" Value="-1" />
+    <Setter Property="WindowDecorations" Value="{OnPlatform BorderOnly, Windows=Full, Linux=None, x:TypeArguments=WindowDecorations}" />
 
     <Setter Property="Template">
       <ControlTemplate>
         <Panel>
           <VisualLayerManager Name="PART_VisualLayerManager">
             <Border
-              Name="RootBorder"
-              Padding="{TemplateBinding Padding}"
               Background="{TemplateBinding Background}"
               BorderBrush="{TemplateBinding BorderBrush}"
               BorderThickness="{TemplateBinding BorderThickness}"
-              ClipToBounds="True"
-              CornerRadius="8">
+              ClipToBounds="{TemplateBinding ClipToBounds}"
+              CornerRadius="{TemplateBinding CornerRadius}"
+              Name="RootBorder"
+              Padding="{TemplateBinding Padding}">
               <!--  BorderBrush="{DynamicResource ControlStrokeColorDefault}"  -->
               <Panel>
                 <Grid
-                  Name="PART_DefaultTitleBar"
-                  Height="{TemplateBinding TitleBarHeight}"
-                  Margin="{TemplateBinding TitleBarMargin}"
-                  VerticalAlignment="Top"
                   Background="#01000000"
                   ColumnDefinitions="Auto, Auto, *"
+                  Height="{TemplateBinding TitleBarHeight}"
                   IsVisible="{TemplateBinding TitleBarIsVisible}"
+                  Margin="{TemplateBinding TitleBarMargin}"
+                  Name="PART_DefaultTitleBar"
                   TextElement.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                  VerticalAlignment="Top"
                   WindowDecorationProperties.ElementRole="TitleBar"
                   ZIndex="99">
 
                   <Image
-                    Name="Icon"
                     Grid.Column="0"
-                    Width="{TemplateBinding IconSize}"
                     Height="{TemplateBinding IconSize}"
-                    Margin="10,0,0,0"
                     HorizontalAlignment="Left"
+                    Margin="10,0,0,0"
+                    Name="Icon"
+                    Source="{TemplateBinding Icon}"
                     VerticalAlignment="Center"
-                    Source="{TemplateBinding Icon}"/>
+                    Width="{TemplateBinding IconSize}" />
 
                   <TextBlock
-                    Name="TitleText"
-                    Grid.Column="1"
-                    Margin="8,0,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
                     FontSize="12"
-                    Text="{TemplateBinding Title}"/>
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    Margin="8,0,0,0"
+                    Name="TitleText"
+                    Text="{TemplateBinding Title}"
+                    VerticalAlignment="Center" />
 
                   <ContentPresenter
-                    Name="TitleBarContentPresenter"
-                    Grid.Column="2"
-                    Margin="{TemplateBinding TitleBarContentMargin}"
-                    VerticalAlignment="Center"
                     Content="{TemplateBinding TitleBarContent}"
                     ContentTemplate="{TemplateBinding TitleBarContentTemplate}"
+                    Grid.Column="2"
                     IsVisible="{TemplateBinding TitleBarContentIsVisible}"
-                    WindowDecorationProperties.ElementRole="DecorationsElement"/>
+                    Margin="{TemplateBinding TitleBarContentMargin}"
+                    Name="TitleBarContentPresenter"
+                    VerticalAlignment="Center"
+                    WindowDecorationProperties.ElementRole="DecorationsElement" />
                 </Grid>
 
                 <ContentPresenter
-                  Name="PART_ContentPresenter"
-                  HorizontalAlignment="Stretch"
-                  VerticalAlignment="Stretch"
                   ClipToBounds="False"
                   Content="{TemplateBinding Content}"
-                  ContentTemplate="{TemplateBinding ContentTemplate}"/>
+                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                  HorizontalAlignment="Stretch"
+                  Name="PART_ContentPresenter"
+                  VerticalAlignment="Stretch" />
 
                 <!--  Overlay: only interactive caption buttons  -->
                 <Panel Name="PART_OverlayWrapper" ZIndex="999">
                   <!--  Title text lives in overlay so it renders above client content  -->
                   <StackPanel
-                    Name="PART_OverlayPanel"
                     Height="{TemplateBinding TitleBarHeight}"
                     HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
+                    Name="PART_OverlayPanel"
                     Orientation="Horizontal"
-                    TextElement.FontSize="10">
+                    TextElement.FontSize="10"
+                    VerticalAlignment="Top">
                     <Button
-                      Name="PART_MinimizeButton"
                       Classes="CaptionButton"
                       Classes.inactive="{Binding !$parent[wnd:FluentWindow].IsActive}"
                       Content="&#xE738;"
                       IsEnabled="{Binding $parent[wnd:FluentWindow].CanMinimize}"
                       IsVisible="{TemplateBinding MinButtonIsVisible}"
+                      Name="PART_MinimizeButton"
                       Theme="{StaticResource FluentDrawnCaptionButton}"
-                      WindowDecorationProperties.ElementRole="MinimizeButton"/>
+                      WindowDecorationProperties.ElementRole="MinimizeButton" />
 
                     <Button
-                      Name="PART_MaximizeButton"
                       Classes="CaptionButton"
                       Classes.inactive="{Binding !$parent[wnd:FluentWindow].IsActive}"
                       Content="&#xE739;"
                       IsEnabled="{Binding $parent[wnd:FluentWindow].CanMaximize}"
                       IsVisible="{TemplateBinding MaxButtonIsVisible}"
+                      Name="PART_MaximizeButton"
                       Theme="{StaticResource FluentDrawnCaptionButton}"
-                      WindowDecorationProperties.ElementRole="MaximizeButton"/>
+                      WindowDecorationProperties.ElementRole="MaximizeButton" />
 
                     <Button
-                      Name="PART_CloseButton"
                       Classes="Close CaptionButton"
                       Classes.inactive="{Binding !$parent[wnd:FluentWindow].IsActive}"
                       Content="&#xE711;"
+                      CornerRadius="0 6 0 0"
                       FontSize="16"
                       IsVisible="{TemplateBinding CloseButtonIsVisible}"
+                      Name="PART_CloseButton"
                       Theme="{StaticResource FluentDrawnCaptionButton}"
-                      WindowDecorationProperties.ElementRole="CloseButton">
-                      <Button.Styles>
-                        <Style Selector="Border">
-                          <Setter Property="CornerRadius" Value="0 6 0 0"/>
-                        </Style>
-                      </Button.Styles>
-                    </Button>
+                      WindowDecorationProperties.ElementRole="CloseButton" />
                   </StackPanel>
                 </Panel>
 
-                <wnd:AppSplashScreen Name="SplashHost" IsVisible="False"/>
+                <wnd:AppSplashScreen IsVisible="False" Name="SplashHost" />
               </Panel>
             </Border>
           </VisualLayerManager>
 
-          <ui:InfoBarHost Name="InfoBarHost" Margin="0,60,0,0"/>
+          <ui:InfoBarHost Margin="0,60,0,0" Name="InfoBarHost" />
         </Panel>
       </ControlTemplate>
     </Setter>
@@ -199,36 +196,46 @@
 
     <Style Selector="^[WindowState=Maximized],     ^[WindowState=FullScreen]">
       <Style Selector="^ /template/ Button#PART_MaximizeButton">
-        <Setter Property="Content" Value="&#xE923;"/>
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Content" Value="&#xE923;" />
+        <Setter Property="FontSize" Value="16" />
       </Style>
 
       <Style Selector="^ /template/ Border#RootBorder">
-        <Setter Property="CornerRadius" Value="0"/>
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="BorderThickness" Value="0" />
       </Style>
     </Style>
 
     <Style Selector="^[IsActive=False]">
       <Style Selector="^ /template/ Grid#DefaultTitleBar,       ^ /template/ TextBlock#TitleText">
-        <Setter Property="TextElement.Foreground" Value="Gray"/>
+        <Setter Property="TextElement.Foreground" Value="Gray" />
       </Style>
     </Style>
 
-    <Style Selector="^:splashOpen">
+    <Style Selector="^:splash-open">
       <Style Selector="^ /template/ wnd|AppSplashScreen#SplashHost">
-        <Setter Property="IsVisible" Value="True"/>
+        <Setter Property="IsVisible" Value="True" />
       </Style>
     </Style>
 
-    <Style Selector="^:isNotWin11">
-      <Setter Property="BorderThickness" Value="1"/>
-      <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBrush}"/>
+    <Style Selector="^:is-windows-10">
+      <!--  TODO: 在windows10上设置圆角边框会出现黑线, 暂未找到解决方法, 暂时退回直角边框, 后续找到解决方法再改回圆角!  -->
+      <Setter Property="CornerRadius" Value="0" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBrush}" />
+
+      <Style Selector="^ /template/ Button#PART_CloseButton">
+        <Setter Property="CornerRadius" Value="0" />
+      </Style>
+    </Style>
+
+    <Style Selector="^:is-not-windows">
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBrush}" />
 
       <Style Selector="^[WindowState=Maximized],     ^[WindowState=FullScreen]">
-        <Style Selector="^ /template/ Border#RootBorder">
-          <Setter Property="CornerRadius" Value="0"/>
-          <Setter Property="BorderThickness" Value="0"/>
+        <Style Selector="^ /template/ Button#PART_CloseButton">
+          <Setter Property="CornerRadius" Value="0" />
         </Style>
       </Style>
     </Style>

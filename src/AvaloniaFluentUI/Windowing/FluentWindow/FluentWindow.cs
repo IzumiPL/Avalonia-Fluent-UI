@@ -340,10 +340,10 @@ public partial class FluentWindow : Window
 
         PointerPressed += OnWindowPointerPressed;
         
-        if (!IsWindows11)
+        if (!IsWindows)
         {
-            PseudoClasses.Add(":isNotWin11");
-        } 
+            PseudoClasses.Add(":is-not-windows");
+        }
     }
 
     private void OnWindowPointerPressed(object? sender, PointerPressedEventArgs e)
@@ -465,7 +465,7 @@ public partial class FluentWindow : Window
     {
         if (_splashContext != null && !_splashContext.HasShownSplashScreen && !Design.IsDesignMode)
         {
-            PseudoClasses.Set(":splashOpen", true);
+            PseudoClasses.Set(":splash-open", true);
             var time = DateTime.Now;
 
             // n00b async/await mistake - need to await here, thansk to GH taj-ny for finding and fixing this
@@ -539,15 +539,13 @@ public partial class FluentWindow : Window
 
     private async void LoadApp()
     {
-        if (Presenter is not ContentPresenter cp)
-            return;
-
-        cp.IsVisible = true;
+        if (Presenter == null) { return; }
+        
+        Presenter.IsVisible = true;
 
         // Taking this out, it's causing flickering of the content after the splash fade animation
         // Another regression in the animation system for 11.0...
         //using var disp = cp.SetValue(OpacityProperty, 0d, Avalonia.Data.BindingPriority.Animation);
-
         var aniSplash = new Animation
         {
             Duration = TimeSpan.FromMilliseconds(250),
@@ -574,7 +572,7 @@ public partial class FluentWindow : Window
             }
         };
 
-        var aniCP = new Animation
+        var aniContent = new Animation
         {
             Duration = TimeSpan.FromMilliseconds(167),
             Children =
@@ -599,10 +597,12 @@ public partial class FluentWindow : Window
             }
         };
 
-        await Task.WhenAll(aniSplash.RunAsync(_splashContext.Host),
-            aniCP.RunAsync((Animatable)Presenter));
-
-        PseudoClasses.Set(":splashOpen", false);
-        _splashContext.HasShownSplashScreen = true;
+        if (_splashContext != null)
+        {
+            await Task.WhenAll(aniSplash.RunAsync(_splashContext.Host), aniContent.RunAsync(Presenter));
+            
+            PseudoClasses.Set(":splash-open", false); 
+            _splashContext.HasShownSplashScreen = true;
+        }
     }
 }

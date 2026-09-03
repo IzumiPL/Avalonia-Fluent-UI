@@ -13,7 +13,6 @@ public partial class FluentWindow
 #if DEBUG
         Debug.WriteLine("Is Window Platform");
 #endif
-        
         IsWindows = true;
         IsWindows11 = OSVersionHelper.IsWindows11();
 
@@ -21,6 +20,11 @@ public partial class FluentWindow
 
         Win32Interop.ApplyTheme(_win32Manager.Hwnd, true);
         PlatformFeatures = new Win32FluentWindowFeatures(this);
+
+        if (!IsWindows11)
+        {
+            PseudoClasses.Add(":is-windows-10");
+        }
     }
 
     private Win32WindowManager _win32Manager;
