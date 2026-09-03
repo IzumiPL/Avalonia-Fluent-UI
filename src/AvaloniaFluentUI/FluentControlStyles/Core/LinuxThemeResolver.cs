@@ -22,39 +22,48 @@ internal static class LinuxThemeResolver
             switch (_desktopEnvironment)
             {
                 case DesktopEnvironment.KDE:
-                    var match = new Regex("^AccentColor=(\\d+),(\\d+),(\\d+)$", RegexOptions.Multiline)
-                        .Match(_config);
+                    var match = new Regex("^AccentColor=(\\d+),(\\d+),(\\d+)$", RegexOptions.Multiline).Match(_config);
                     if (!match.Success)
                     {
                         // Accent color is from the current color scheme
-                        match = new Regex("^\\[Colors:Selection\\].*?BackgroundNormal=(\\d+),(\\d+),(\\d+)",
-                                RegexOptions.Multiline | RegexOptions.Singleline)
+                        match = new Regex(
+                            "^\\[Colors:Selection\\].*?BackgroundNormal=(\\d+),(\\d+),(\\d+)",
+                            RegexOptions.Multiline | RegexOptions.Singleline)
                             .Match(_config);
                     }
 
                     if (match.Success)
                     {
-                        aColor = Color2.FromRGB(byte.Parse(match.Groups[1].Value), byte.Parse(match.Groups[2].Value),
-                            byte.Parse(match.Groups[3].Value));
+                        aColor = Color2.FromRGB(
+                            byte.Parse(match.Groups[1].Value),
+                            byte.Parse(match.Groups[2].Value), 
+                            byte.Parse(match.Groups[3].Value)
+                            );
                     }
                     break;
                 case DesktopEnvironment.LXQt:
-                    match =
-                        new Regex("^highlight_color=#([\\da-f]{2})([\\da-f]{2})([\\da-f]{2})$", RegexOptions.Multiline)
-                            .Match(_config);
-                    if (match.Success)
-                    {
-                        aColor = Color2.FromRGB(Convert.ToByte(match.Groups[1].Value, 16),
-                            Convert.ToByte(match.Groups[2].Value, 16), Convert.ToByte(match.Groups[3].Value, 16));
-                    }
-                    break;
-                case DesktopEnvironment.LXDE:
-                    match = new Regex("selected_bg_color:#([\\da-f]{2}).{2}([\\da-f]{2}).{2}([\\da-f]{2}).{2}")
+                    match = new Regex(
+                        "^highlight_color=#([\\da-f]{2})([\\da-f]{2})([\\da-f]{2})$", 
+                        RegexOptions.Multiline)
                         .Match(_config);
                     if (match.Success)
                     {
-                        aColor = Color2.FromRGB(Convert.ToByte(match.Groups[1].Value, 16),
-                            Convert.ToByte(match.Groups[2].Value, 16), Convert.ToByte(match.Groups[3].Value, 16));
+                        aColor = Color2.FromRGB(
+                            Convert.ToByte(match.Groups[1].Value, 16), 
+                            Convert.ToByte(match.Groups[2].Value, 16),
+                            Convert.ToByte(match.Groups[3].Value, 16)
+                            );
+                    }
+                    break;
+                case DesktopEnvironment.LXDE:
+                    match = new Regex("selected_bg_color:#([\\da-f]{2}).{2}([\\da-f]{2}).{2}([\\da-f]{2}).{2}").Match(_config);
+                    if (match.Success)
+                    {
+                        aColor = Color2.FromRGB(
+                            Convert.ToByte(match.Groups[1].Value, 16),
+                            Convert.ToByte(match.Groups[2].Value, 16), 
+                            Convert.ToByte(match.Groups[3].Value, 16)
+                            );
                     }
                     break;
             }
@@ -76,8 +85,7 @@ internal static class LinuxThemeResolver
             {
                 case DesktopEnvironment.KDE:
                 {
-                    var match = new Regex("^ColorScheme=(.*)$", RegexOptions.Multiline)
-                        .Match(_config);
+                    var match = new Regex("^ColorScheme=(.*)$", RegexOptions.Multiline).Match(_config);
                     if (match.Success)
                     {
                         return GetThemeFromName(match.Groups[1].Value);
@@ -141,18 +149,21 @@ internal static class LinuxThemeResolver
             {
                 _config = File.ReadAllText(file);
             }
-            catch { }
+            catch
+            {
+                //
+            }
         }
     }
 
-    private static ThemeVariant GetThemeFromName(string name)
+    private static ThemeVariant GetThemeFromName(string? name)
     {
         return name != null && name.IndexOf("dark", StringComparison.OrdinalIgnoreCase) != -1
             ? ThemeVariant.Dark
             : ThemeVariant.Light;
     }
 
-    private static string ReadGsettingsKey(string schema, string key)
+    private static string? ReadGsettingsKey(string schema, string key)
     {
         var p = new Process
         {
