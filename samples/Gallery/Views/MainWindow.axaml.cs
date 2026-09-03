@@ -200,6 +200,7 @@ public partial class MainWindow : FluentWindow
                 var config = new AppConfig
                 {
                     IsCustomAccentColor = svm.IsCustomColor,
+                    IsFollowSystemAccentColor = svm.IsFollowSystemAccentColor,
                     Theme = AvaloniaFluentTheme.Instance.CurrentTheme.ToString(),
                     IsWindowEffectEnabled = svm.IsEnabledWindowEffect,
                     WindowEffect = svm.CurrentEffect,

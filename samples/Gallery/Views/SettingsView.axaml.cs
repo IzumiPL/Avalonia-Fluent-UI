@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using AvaloniaFluentUI.Controls;
@@ -20,6 +22,11 @@ public partial class SettingsView : UserControl
         Debug.WriteLine("SettingsView Init");
 #endif
         InitializeComponent();
+
+        if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime)
+        {
+            ScrollViewer.Padding = new Thickness(18, 24, 0, 0);
+        }
     }
 
     private async void OnShowSelectBgImageDialog(object? sender, RoutedEventArgs e)

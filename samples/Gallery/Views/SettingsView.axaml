@@ -36,6 +36,7 @@
       FontSize="32"
       Text="{Binding Title}"/>
     <fui:SmoothScrollViewer
+      Name="ScrollViewer"
       Grid.Row="1"
       Padding="18,24,24,0"
       HorizontalScrollBarVisibility="Auto">
@@ -115,6 +116,7 @@
                 Content="{Binding CustomColor}"
                 IsChecked="{Binding IsCustomColor}"/>
               <RadioButton Content="{Binding DefaultColor}" IsChecked="{Binding IsDefaultAccentColor}"/>
+              <RadioButton Content="{Binding FollowSystem}" IsChecked="{Binding IsFollowSystemAccentColor}"/>
             </StackPanel>
           </fui:ExpanderSettingCardItem>
           <fui:ExpanderSettingCardItem>

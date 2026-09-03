@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Text.Json;
@@ -13,9 +14,7 @@ public class ConfigService
     private static string ConfigDir => Path.Combine(AppContext.BaseDirectory, "Config");
     private static string AppConfigPath => Path.Combine(ConfigDir, "config.json");
 
-    static ConfigService()
-    {
-    }
+    static ConfigService() { }
 
     public static void SaveConfig(AppConfig config)
     {
@@ -25,7 +24,12 @@ public class ConfigService
             var json = JsonSerializer.Serialize(config, ConfigJsonContext.Default.AppConfig);
             File.WriteAllText(AppConfigPath, json, Encoding.UTF8);
         }
-        catch (Exception e) { }
+        catch (Exception e)
+        {
+#if DEBUG
+            Debug.WriteLine($"配置文件写入失败: {e.Message}");
+#endif
+        }
     }
 
     public static AppConfig? LoadConfig()
@@ -38,6 +42,7 @@ public class ConfigService
             {
                 Theme = "Default",
                 IsCustomAccentColor = false,
+                IsFollowSystemAccentColor = true,
                 IsWindowEffectEnabled = true,
                 IsEnabledBackgroundImage = false,
                 WindowEffect = "Null",

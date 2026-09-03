@@ -19,7 +19,7 @@ public partial class SettingsViewModel : ViewModelBase
 {
     public override string Title => LocalizationService.Instance.GetString("Settings");
 
-    public string? BackgroundImagePath { get; set; } = null;
+    public string? BackgroundImagePath { get; set; }
     
     public SettingsViewModel(AppConfig? config)
     {
@@ -62,7 +62,14 @@ public partial class SettingsViewModel : ViewModelBase
             {
                 IsCustomColor = true;
                 IsDefaultAccentColor = false;
+                IsFollowSystemAccentColor = false;
                 SelectedAccentColor = Color.Parse(config.CustomAccentColor);
+            }
+            else if (config.IsFollowSystemAccentColor)
+            {
+                IsCustomColor = false;
+                IsDefaultAccentColor = false;
+                IsFollowSystemAccentColor = true;
             }
             
             string effect = config.WindowEffect;
@@ -100,16 +107,24 @@ public partial class SettingsViewModel : ViewModelBase
     {
         if (value)
         {
-            AvaloniaFluentTheme.Instance.CustomAccentColor = null;
+            AvaloniaFluentTheme.Instance.AccentColor = Colors.DeepSkyBlue;
         }
     }
 
     [ObservableProperty]
-    private Color _selectedAccentColor = Colors.Transparent;
+    private bool _isFollowSystemAccentColor;
+
+    partial void OnIsFollowSystemAccentColorChanged(bool value)
+    { 
+        AvaloniaFluentTheme.Instance.PreferUserAccentColor = value ;
+    }
+
+    [ObservableProperty]
+    private Color _selectedAccentColor = Colors.DeepSkyBlue;
 
     partial void OnSelectedAccentColorChanged(Color value)
     {
-        AvaloniaFluentTheme.Instance.CustomAccentColor = value;
+        AvaloniaFluentTheme.Instance.AccentColor = value;
     }
 
     [RelayCommand]
@@ -189,7 +204,7 @@ public partial class SettingsViewModel : ViewModelBase
     {
         if (value)
         {
-            AvaloniaFluentTheme.Instance.CustomAccentColor = SelectedAccentColor;
+            AvaloniaFluentTheme.Instance.AccentColor = SelectedAccentColor;
         }
     }
 

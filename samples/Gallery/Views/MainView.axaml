@@ -280,7 +280,7 @@
       </fui:NavigationView.MenuItems>
 
       <fui:NavigationView.Content>
-        <fui:StackContent Margin="0,10,0,0" Content="{Binding CurrentViewModel}"/>
+        <fui:StackContent Content="{Binding CurrentViewModel}"/>
       </fui:NavigationView.Content>
     </fui:NavigationView>
   </Grid>
