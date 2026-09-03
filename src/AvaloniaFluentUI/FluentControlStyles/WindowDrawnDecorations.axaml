@@ -20,7 +20,7 @@
     <Setter Property="(WindowDecorationProperties.ElementRole)" Value="DecorationsElement"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <Border Background="{TemplateBinding Background}">
+        <Border Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
           <Viewbox Width="{TemplateBinding FontSize}" Height="{TemplateBinding FontSize}">
             <ui:FontIcon
               Name="ButtonIcon"
