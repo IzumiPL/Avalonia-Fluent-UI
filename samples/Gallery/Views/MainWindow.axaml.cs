@@ -351,4 +351,9 @@ public partial class MainWindow : FluentWindow
             OnJumpToControl(null, new JumpToControlMessage(page.ToString(), null));
         }
     }
+
+    private void OnBackClicked(object? sender, NavigationViewBackRequestedEventArgs e)
+    {
+        // StackContent.IsBack = true;
+    }
 }

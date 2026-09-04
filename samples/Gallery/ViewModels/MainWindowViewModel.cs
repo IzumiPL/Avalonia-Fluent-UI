@@ -200,6 +200,9 @@ public partial class MainWindowViewModel : ViewModelBase
     
     public string[] AutoCompleteBoxItems { get; }
 
+    [ObservableProperty]
+    private bool _isBack;
+
     [RelayCommand]
     private void ToggleTheme() => AvaloniaFluentTheme.Instance.ToggleTheme(); 
 
@@ -235,6 +238,8 @@ public partial class MainWindowViewModel : ViewModelBase
             }
         }
 
+
+        IsBack = false;
         CurrentViewModel = target;
         CanGoBack = _history.Count > 0;
 
@@ -246,16 +251,14 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand(CanExecute = nameof(CanGoBack))]
     private void GoBack()
     {
-        if (_history.Count <= 0)
-            return;
-
-        Console.WriteLine("Go Back");
+        if (_history.Count <= 0) { return; }
 
         var last = _history[^1];
         _history.RemoveAt(_history.Count - 1);
 
         if (GetOrCreateViewModel(last) is { } view)
         {
+            IsBack = true;
             CurrentViewModel = view; 
             
             Console.WriteLine($"Back, Tag: {last}, View: {view.Title}, Trigger Jump To ControlMessage");
