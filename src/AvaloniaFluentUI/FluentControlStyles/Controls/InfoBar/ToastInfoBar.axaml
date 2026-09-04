@@ -75,19 +75,19 @@
     </Setter>
 
     <Style Selector="^[Severity=Informational]">
-      <Setter Property="Background" Value="{DynamicResource InformationDefaultBrush}"/>
+      <Setter Property="Background" Value="{DynamicResource SystemFillColorNeutralBrush}"/>
     </Style>
 
     <Style Selector="^[Severity=Success]">
-      <Setter Property="Background" Value="{DynamicResource SuccessDefaultBrush}"/>
+      <Setter Property="Background" Value="{DynamicResource SystemFillColorSuccessBrush}"/>
     </Style>
 
     <Style Selector="^[Severity=Warning]">
-      <Setter Property="Background" Value="{DynamicResource WarningDefaultBrush}"/>
+      <Setter Property="Background" Value="{DynamicResource SystemFillColorCautionBrush}"/>
     </Style>
 
     <Style Selector="^[Severity=Error]">
-      <Setter Property="Background" Value="{DynamicResource ErrorDefaultBrush}"/>
+      <Setter Property="Background" Value="{DynamicResource SystemFillColorCriticalBrush}"/>
     </Style>
   </ControlTheme>
 </ResourceDictionary>

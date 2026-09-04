@@ -81,7 +81,7 @@
               <!--  BorderBrush="{DynamicResource ControlStrokeColorDefault}"  -->
               <Panel>
                 <Grid
-                  Background="#01000000"
+                  Background="Transparent"
                   ColumnDefinitions="Auto, Auto, *"
                   Height="{TemplateBinding TitleBarHeight}"
                   IsVisible="{TemplateBinding TitleBarIsVisible}"
@@ -208,7 +208,7 @@
 
     <Style Selector="^[IsActive=False]">
       <Style Selector="^ /template/ Grid#DefaultTitleBar,       ^ /template/ TextBlock#TitleText">
-        <Setter Property="TextElement.Foreground" Value="Gray" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
       </Style>
     </Style>
 

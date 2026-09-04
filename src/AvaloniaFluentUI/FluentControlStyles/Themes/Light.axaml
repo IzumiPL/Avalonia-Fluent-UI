@@ -55,12 +55,11 @@
   <Color x:Key="SolidBackgroundFillColorSecondary">#EEEEEE</Color>
   <Color x:Key="SolidBackgroundFillColorTertiary">#00F0F4F9</Color>
 
+  <Color x:Key="SystemFillColorNeutral">#72000000</Color>
   <Color x:Key="SystemFillColorSuccess">#0F7B0F</Color>
   <Color x:Key="SystemFillColorCaution">#9D5D00</Color>
-  <Color x:Key="SystemFillColorCritical">#D83F40</Color>
-  <Color x:Key="SystemFillColorNeutral">#787878</Color>
+  <Color x:Key="SystemFillColorCritical">#C42B1C</Color>
 
-  <Color x:Key="SystemFillColorSolidNeutral">#8A8A8A</Color>
   <Color x:Key="SystemFillColorAttentionBackground">#F6F6F6</Color>
   <Color x:Key="SystemFillColorSuccessBackground">#DFF6DD</Color>
   <Color x:Key="SystemFillColorCautionBackground">#FFF4CE</Color>
@@ -136,15 +135,16 @@
   <SolidColorBrush x:Key="CardBackgroundFillColorDefaultBrush" Color="{StaticResource LayerFillColor}"/>
   <SolidColorBrush x:Key="SmokeFillColorDefaultBrush" Color="{StaticResource SmokeFillColorDefault}"/>
   <SolidColorBrush x:Key="LayerFillColorBrush" Color="{StaticResource LayerFillColor}"/>
-  <!-- <SolidColorBrush x:Key="SolidBackgroundFillColorBaseBrush" Color="{StaticResource SystemFillColorSolidNeutralBackground}"/> -->
   <SolidColorBrush x:Key="SolidBackgroundFillColorBaseBrush" Color="{StaticResource PopupControlColorDefault}"/>
   <SolidColorBrush x:Key="SolidBackgroundFillColorSecondaryBrush" Color="{StaticResource SolidBackgroundFillColorSecondary}"/>
   <SolidColorBrush x:Key="SolidBackgroundFillColorTertiaryBrush" Color="{StaticResource SolidBackgroundFillColorTertiary}"/>
+
   <SolidColorBrush x:Key="SystemFillColorAttentionBrush" Color="{DynamicResource SystemAccentColor}"/>
   <SolidColorBrush x:Key="SystemFillColorSuccessBrush" Color="{StaticResource SystemFillColorSuccess}"/>
   <SolidColorBrush x:Key="SystemFillColorCautionBrush" Color="{StaticResource SystemFillColorCaution}"/>
   <SolidColorBrush x:Key="SystemFillColorCriticalBrush" Color="{StaticResource SystemFillColorCritical}"/>
-  <SolidColorBrush x:Key="SystemFillColorSolidNeutralBrush" Color="{StaticResource SystemFillColorSolidNeutral}"/>
+  <SolidColorBrush x:Key="SystemFillColorNeutralBrush" Color="{StaticResource SystemFillColorNeutral}"/>
+
   <SolidColorBrush x:Key="SystemFillColorAttentionBackgroundBrush" Color="{StaticResource SystemFillColorAttentionBackground}"/>
   <SolidColorBrush x:Key="SystemFillColorSuccessBackgroundBrush" Color="{StaticResource SystemFillColorSuccessBackground}"/>
   <SolidColorBrush x:Key="SystemFillColorCautionBackgroundBrush" Color="{StaticResource SystemFillColorCautionBackground}"/>
@@ -193,12 +193,6 @@
   <StaticResource x:Key="SystemControlFocusVisualSecondaryBrush" ResourceKey="FocusStrokeColorInnerBrush"/>
   <SolidColorBrush x:Key="AcrylicBackgroundFillColorDefaultBrush" Color="#F9F9F9"/>
   <SolidColorBrush x:Key="AcrylicInAppFillColorDefaultBrush" Color="#F9F9F9"/>
-
-  <SolidColorBrush x:Key="InformationDefaultBrush" Color="{StaticResource SystemFillColorNeutral}"/>
-  <SolidColorBrush x:Key="SuccessDefaultBrush" Color="{StaticResource SystemFillColorSuccess}"/>
-  <SolidColorBrush x:Key="AttentionDefaultBrush" Color="{StaticResource SystemAccentColor}"/>
-  <SolidColorBrush x:Key="WarningDefaultBrush" Color="{StaticResource SystemFillColorCaution}"/>
-  <SolidColorBrush x:Key="ErrorDefaultBrush" Color="{StaticResource SystemFillColorCritical}"/>
 
   <SolidColorBrush x:Key="FilledBackgroundPointerOver" Color="{StaticResource FilledPointerOver}"/>
   <SolidColorBrush x:Key="FilledBackgroundPressed" Color="{StaticResource FilledPressed}"/>

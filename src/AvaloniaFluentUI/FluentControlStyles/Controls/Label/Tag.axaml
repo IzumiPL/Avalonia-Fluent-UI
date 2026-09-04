@@ -53,27 +53,27 @@
 
     <!--  Information  -->
     <Style Selector="^.Information">
-      <Setter Property="Foreground" Value="{DynamicResource InformationDefaultBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource SystemFillColorNeutralBrush}"/>
     </Style>
 
     <!--  Success  -->
     <Style Selector="^.Success">
-      <Setter Property="Foreground" Value="{DynamicResource SuccessDefaultBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource SystemFillColorSuccessBrush}"/>
     </Style>
 
     <!--  Attention  -->
     <Style Selector="^.Attention">
-      <Setter Property="Foreground" Value="{DynamicResource AttentionDefaultBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource SystemFillColorAttentionBrush}"/>
     </Style>
 
     <!--  Warning  -->
     <Style Selector="^.Warning">
-      <Setter Property="Foreground" Value="{DynamicResource WarningDefaultBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCautionBrush}"/>
     </Style>
 
     <!--  Error  -->
     <Style Selector="^.Error">
-      <Setter Property="Foreground" Value="{DynamicResource ErrorDefaultBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCriticalBrush}"/>
     </Style>
   </ControlTheme>
 </ResourceDictionary>
