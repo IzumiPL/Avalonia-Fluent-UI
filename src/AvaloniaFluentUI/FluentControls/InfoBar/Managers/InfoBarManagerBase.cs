@@ -28,6 +28,8 @@ public abstract class InfoBarManagerBase<TControl> : IInfoBarManager where TCont
 
     public double Margin { get; set; } = 12;
 
+    public bool IsAutoResize { get; } = true;
+
     public void SetHost(InfoBarHost host)
     {
         _host?.SizeChanged -= OnHostSizeChanged;
@@ -62,6 +64,8 @@ public abstract class InfoBarManagerBase<TControl> : IInfoBarManager where TCont
 
     public void AdjustedSize()
     {
+        if (!IsAutoResize) { return; }
+        
         foreach (var items in _items.Values)
         {
             foreach (var bar in items)
@@ -202,13 +206,13 @@ public abstract class InfoBarManagerBase<TControl> : IInfoBarManager where TCont
 
         return position switch
         {
-            InfoBarPosition.Top => (x, y - bar.Bounds.Height - Spacing),          // Top
-            InfoBarPosition.TopLeft => (-bar.Bounds.Width, y),                    // TopLeft
-            InfoBarPosition.TopRight => (hostSize.Width, y),                      // TopRight
-            InfoBarPosition.Bottom => (x, y + bar.Bounds.Height + Spacing),       // Bottom
-            InfoBarPosition.BottomLeft => (-bar.Bounds.Width, y),                 // BottomLeft
-            InfoBarPosition.BottomRight => (hostSize.Width, y),                   // BottomRight
-            _ => (x, y),
+            InfoBarPosition.Top         => (x, y - bar.Bounds.Height - Spacing),        // Top
+            InfoBarPosition.TopLeft     => (-bar.Bounds.Width, y),                      // TopLeft
+            InfoBarPosition.TopRight    => (hostSize.Width, y),                         // TopRight
+            InfoBarPosition.Bottom      => (x, y + bar.Bounds.Height + Spacing),        // Bottom
+            InfoBarPosition.BottomLeft  => (-bar.Bounds.Width, y),                      // BottomLeft
+            InfoBarPosition.BottomRight => (hostSize.Width, y),                         // BottomRight
+            _                           => (x, y),
         };
     }
 
