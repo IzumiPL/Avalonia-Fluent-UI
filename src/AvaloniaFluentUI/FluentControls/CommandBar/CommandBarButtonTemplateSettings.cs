@@ -10,13 +10,13 @@ public class CommandBarButtonTemplateSettings : AvaloniaObject
     /// <summary>
     /// Defines the <see cref="Icon"/> property
     /// </summary>
-    public static readonly StyledProperty<IconElement> IconProperty =
-        AvaloniaProperty.Register<CommandBarButtonTemplateSettings, IconElement>(nameof(Icon));
+    public static readonly StyledProperty<IconElement?> IconProperty =
+        AvaloniaProperty.Register<CommandBarButtonTemplateSettings, IconElement?>(nameof(Icon));
 
     /// <summary>
     /// Gets the Icon for the CommandBarButton
     /// </summary>
-    public IconElement Icon
+    public IconElement? Icon
     {
         get => GetValue(IconProperty);
         internal set => SetValue(IconProperty, value);

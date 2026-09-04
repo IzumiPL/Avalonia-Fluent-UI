@@ -16,7 +16,7 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 
 [PseudoClasses(SharedPseudoclasses.s_pcIcon, SharedPseudoclasses.s_pcLabel, SharedPseudoclasses.s_pcCompact)]
-[PseudoClasses(SharedPseudoclasses.s_pcFlyout, s_pcSubmenuOpen, SharedPseudoclasses.s_pcOverflow)]
+[PseudoClasses(SharedPseudoclasses.s_pcFlyout, PC_SUBMENU_OPEN, SharedPseudoclasses.s_pcOverflow)]
 [PseudoClasses(SharedPseudoclasses.s_pcHotkey)]
 public class CommandBarButton : Button, ICommandBarElement
 {
@@ -30,14 +30,14 @@ public class CommandBarButton : Button, ICommandBarElement
     /// <summary>
     /// Defines the <see cref="IconSource"/> property
     /// </summary>
-    public static readonly StyledProperty<IconSource> IconSourceProperty =
-        AvaloniaProperty.Register<NavigationViewItem, IconSource>(nameof(IconSource));
+    public static readonly StyledProperty<IconSource?> IconSourceProperty =
+        AvaloniaProperty.Register<NavigationViewItem, IconSource?>(nameof(IconSource));
 
     /// <summary>
     /// Defines the <see cref="Label"/> property
     /// </summary>
-    public static readonly StyledProperty<string> LabelProperty =
-        AvaloniaProperty.Register<CommandBarButton, string>(nameof(Label));
+    public static readonly StyledProperty<string?> LabelProperty =
+        AvaloniaProperty.Register<CommandBarButton, string?>(nameof(Label));
 
     /// <summary>
     /// Defines the <see cref="DynamicOverflowOrder"/> property
@@ -85,7 +85,7 @@ public class CommandBarButton : Button, ICommandBarElement
     /// <summary>
     /// Gets or sets the graphic content of the app bar toggle button.
     /// </summary>
-    public IconSource IconSource
+    public IconSource? IconSource
     {
         get => GetValue(IconSourceProperty);
         set => SetValue(IconSourceProperty, value);
@@ -94,7 +94,7 @@ public class CommandBarButton : Button, ICommandBarElement
     /// <summary>
     /// Gets or sets the text description displayed on the app bar toggle button.
     /// </summary>
-    public string Label
+    public string? Label
     {
         get => GetValue(LabelProperty);
         set => SetValue(LabelProperty, value);
@@ -119,7 +119,7 @@ public class CommandBarButton : Button, ICommandBarElement
     private bool _isInOverflow;
     private int _dynamicOverflowOrder;
 
-    private const string s_pcSubmenuOpen = ":submenuopen";
+    private const string PC_SUBMENU_OPEN = ":submenuopen";
     
     /// <summary>
     /// Initializes a new instance of the <see cref="CommandBarButton"/> class.
@@ -147,24 +147,24 @@ public class CommandBarButton : Button, ICommandBarElement
         }
         else if (change.Property == FlyoutProperty)
         {
-            if (change.OldValue is FlyoutBase oldFB)
+            if (change.OldValue is FlyoutBase of)
             {
-                oldFB.Closed -= OnFlyoutClosed;
-                oldFB.Opened -= OnFlyoutOpened;
+                of.Closed -= OnFlyoutClosed;
+                of.Opened -= OnFlyoutOpened;
             }
 
-            if (change.NewValue is FlyoutBase newFB)
+            if (change.NewValue is FlyoutBase nf)
             {
-                newFB.Closed += OnFlyoutClosed;
-                newFB.Opened += OnFlyoutOpened;
+                nf.Closed += OnFlyoutClosed;
+                nf.Opened += OnFlyoutOpened;
 
                 PseudoClasses.Set(SharedPseudoclasses.s_pcFlyout, true);
-                PseudoClasses.Set(s_pcSubmenuOpen, newFB.IsOpen);
+                PseudoClasses.Set(PC_SUBMENU_OPEN, nf.IsOpen);
             }
             else
             {
                 PseudoClasses.Set(SharedPseudoclasses.s_pcFlyout, false);
-                PseudoClasses.Set(s_pcSubmenuOpen, false);
+                PseudoClasses.Set(PC_SUBMENU_OPEN, false);
             }
         }
         else if (change.Property == HotKeyProperty)
@@ -189,7 +189,7 @@ public class CommandBarButton : Button, ICommandBarElement
                     HotKey = null;
                 }
 
-                if (ToolTip.GetTip(this).ToString() == xamlComOld.Description)
+                if (ToolTip.GetTip(this)?.ToString() == xamlComOld.Description)
                 {
                     ToolTip.SetTip(this, null);
                 }
@@ -240,11 +240,11 @@ public class CommandBarButton : Button, ICommandBarElement
 
     private void OnFlyoutOpened(object? sender, EventArgs e)
     {
-        PseudoClasses.Set(s_pcSubmenuOpen, true);
+        PseudoClasses.Set(PC_SUBMENU_OPEN, true);
     }
 
     private void OnFlyoutClosed(object? sender, EventArgs e)
     {
-        PseudoClasses.Set(s_pcSubmenuOpen, false);
+        PseudoClasses.Set(PC_SUBMENU_OPEN, false);
     }
 }

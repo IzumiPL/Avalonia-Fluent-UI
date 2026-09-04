@@ -30,7 +30,7 @@ public enum IndexBasedLayoutOrientation
 /// </summary>
 public abstract class Layout : AvaloniaObject
 {    
-    internal string LayoutId { get; set; }
+    internal string? LayoutId { get; set; }
 
     /// <summary>
     /// 
@@ -40,12 +40,12 @@ public abstract class Layout : AvaloniaObject
     /// <summary>
     /// Occurs when the measurement state (layout) has been invalidated.
     /// </summary>
-    public event TypedEventHandler<Layout, EventArgs> MeasureInvalidated;
+    public event TypedEventHandler<Layout, EventArgs>? MeasureInvalidated;
 
     /// <summary>
     /// Occurs when the arrange state(layout) has been invalidated.
     /// </summary>
-    public event TypedEventHandler<Layout, EventArgs> ArrangeInvalidated;
+    public event TypedEventHandler<Layout, EventArgs>? ArrangeInvalidated;
 
     private static VirtualizingLayoutContext GetVirtualizingLayoutContext(LayoutContext context)
     {
@@ -172,18 +172,16 @@ public abstract class Layout : AvaloniaObject
     /// <summary>
     /// Invalidates the measurement state (layout) for all UIElement containers that reference this layout.
     /// </summary>
-    protected void InvalidateMeasure() =>
-        MeasureInvalidated?.Invoke(this, EventArgs.Empty);
+    protected void InvalidateMeasure() => MeasureInvalidated?.Invoke(this, EventArgs.Empty);
 
     /// <summary>
     /// Invalidates the arrange state (layout) for all UIElement containers that reference this layout. 
     /// After the invalidation, the UIElement will have its layout updated, which occurs asynchronously.
     /// </summary>
-    protected void InvalidateArrange() =>
-        ArrangeInvalidated?.Invoke(this, EventArgs.Empty);
+    protected void InvalidateArrange() => ArrangeInvalidated?.Invoke(this, EventArgs.Empty);
 
     /// <summary>
     /// 
     /// </summary>
-    protected internal virtual ItemCollectionTransitionProvider CreateDefaultItemTransitionProvider() => null;
+    protected internal virtual ItemCollectionTransitionProvider? CreateDefaultItemTransitionProvider() => null;
 }

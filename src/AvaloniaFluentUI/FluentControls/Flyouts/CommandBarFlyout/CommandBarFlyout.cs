@@ -16,6 +16,10 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class CommandBarFlyout : PopupFlyoutBase
 {
+    
+    protected CommandBarFlyoutCommandBar _commandBar;
+    protected FlyoutPresenter _presenter;
+    
     public CommandBarFlyout()
     {
         // TEMPORARY FIX...REVERT TO CREATEPRESENTER() WHEN NRE ISSUE FIXED
@@ -227,7 +231,4 @@ public class CommandBarFlyout : PopupFlyoutBase
     {
         HideCore(false);
     }
-
-    protected CommandBarFlyoutCommandBar _commandBar;
-    protected FlyoutPresenter _presenter;
 }

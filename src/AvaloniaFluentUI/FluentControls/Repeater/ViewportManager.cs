@@ -11,6 +11,51 @@ namespace AvaloniaFluentUI.Controls;
 
 internal class ViewportManager
 {
+    string GetLayoutId() => _owner?.Layout?.LayoutId ?? string.Empty;
+
+    private ItemsRepeater _owner;
+    private bool _ensuredScroller;
+    private IScrollAnchorProvider? _scroller;
+    private Control? _makeAnchorElement;
+    private bool _isAnchorOutsideRealizedRange;
+
+    private Action? _cacheBuildAction;
+
+    private Rect _visibleWindow;
+    private Rect _layoutExtent;
+    // This is the expected shift by the layout.
+    private Point _expectedViewportShift;
+    // This is what is pending and not been accounted for. 
+    // Sometimes the scrolling surface cannot service a shift (for example
+    // it is already at the top and cannot shift anymore.)
+    private Point _pendingViewportShift;
+    // Unshiftable shift amount that this view manager can
+    // handle on its own to fake it to the layout as if the shift
+    // actually happened. This can happen in cases where no scrollviewer
+    // in the parent chain can scroll in the shift direction.
+    private Point _unshiftableShift;
+
+    private double _maximumHorizontalCacheLength = 2;
+    private double _maximumVerticalCacheLength = 2;
+    private double _horizontalCacheBufferPerSide;
+    private double _verticalCacheBufferPerSide;
+
+    //private bool _isBringIntoViewInProgress = false;
+    // For non-virtualizing layouts, we do not need to keep
+    // updating viewports and invalidating measure often. So when
+    // a non virtualizing layout is used, we stop doing all that work.
+    private bool _managingViewportDisabled;
+
+    private bool _layoutUpdatedRevoker;
+    private bool _effectiveViewportChangedRevoker;
+    private bool _renderingToken;
+
+    // Pixel delta by which to inflate the cache buffer on each side.  Rather than fill the entire
+    // cache buffer all at once, we chunk the work to make the UI thread more responsive.  We inflate
+    // the cache buffer from 0 to a max value determined by the Maximum[Horizontal,Vertical]CacheLength
+    // properties.
+    private const double CacheBufferPerSideInflationPixelDelta = 40.0;
+    
     public ViewportManager(ItemsRepeater owner)
     {
         _owner = owner;
@@ -77,7 +122,7 @@ internal class ViewportManager
 
     public Rect LayoutExtent => _layoutExtent;
 
-    public Control MadeAnchor => _makeAnchorElement;
+    public Control? MadeAnchor => _makeAnchorElement;
 
     private bool HasScroller => _scroller != null;
         
@@ -539,49 +584,4 @@ internal class ViewportManager
             _owner.InvalidateMeasure();
         }
     }
-
-    string GetLayoutId() => _owner?.Layout?.LayoutId ?? string.Empty;
-
-    private ItemsRepeater _owner;
-    private bool _ensuredScroller;
-    private IScrollAnchorProvider? _scroller;
-    private Control? _makeAnchorElement;
-    private bool _isAnchorOutsideRealizedRange;
-
-    private Action? _cacheBuildAction;
-
-    private Rect _visibleWindow;
-    private Rect _layoutExtent;
-    // This is the expected shift by the layout.
-    private Point _expectedViewportShift;
-    // This is what is pending and not been accounted for. 
-    // Sometimes the scrolling surface cannot service a shift (for example
-    // it is already at the top and cannot shift anymore.)
-    private Point _pendingViewportShift;
-    // Unshiftable shift amount that this view manager can
-    // handle on its own to fake it to the layout as if the shift
-    // actually happened. This can happen in cases where no scrollviewer
-    // in the parent chain can scroll in the shift direction.
-    private Point _unshiftableShift;
-
-    private double _maximumHorizontalCacheLength = 2;
-    private double _maximumVerticalCacheLength = 2;
-    private double _horizontalCacheBufferPerSide;
-    private double _verticalCacheBufferPerSide;
-
-    //private bool _isBringIntoViewInProgress = false;
-    // For non-virtualizing layouts, we do not need to keep
-    // updating viewports and invalidating measure often. So when
-    // a non virtualizing layout is used, we stop doing all that work.
-    private bool _managingViewportDisabled;
-
-    private bool _layoutUpdatedRevoker;
-    private bool _effectiveViewportChangedRevoker;
-    private bool _renderingToken;
-
-    // Pixel delta by which to inflate the cache buffer on each side.  Rather than fill the entire
-    // cache buffer all at once, we chunk the work to make the UI thread more responsive.  We inflate
-    // the cache buffer from 0 to a max value determined by the Maximum[Horizontal,Vertical]CacheLength
-    // properties.
-    private const double CacheBufferPerSideInflationPixelDelta = 40.0;
 }

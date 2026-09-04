@@ -13,6 +13,11 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class StackLayout : VirtualizingLayout, IFlowLayoutAlgorithmDelegates, IOrientationBasedMeasures
 {
+    private double _itemSpacing;
+    // !!! WARNING !!!
+    // Any storage here needs to be related to layout configuration. 
+    // layout specific state needs to be stored in StackLayoutState.
+    
     public StackLayout()
     {
         LayoutId = "StackLayout";
@@ -66,7 +71,7 @@ public class StackLayout : VirtualizingLayout, IFlowLayoutAlgorithmDelegates, IO
     protected internal override void InitializeForContextCore(VirtualizingLayoutContext context)
     {
         var state = context.LayoutState;
-        StackLayoutState stackState = null;
+        StackLayoutState? stackState = null;
         if (state != null)
             stackState = GetAsStackState(state);
 
@@ -116,7 +121,7 @@ public class StackLayout : VirtualizingLayout, IFlowLayoutAlgorithmDelegates, IO
         return value;
     }
 
-    protected internal override void OnItemsChangedCore(VirtualizingLayoutContext context, object source, NotifyCollectionChangedEventArgs args)
+    protected internal override void OnItemsChangedCore(VirtualizingLayoutContext context, object? source, NotifyCollectionChangedEventArgs args)
     {
         if (context.LayoutState != null)
         {
@@ -143,7 +148,7 @@ public class StackLayout : VirtualizingLayout, IFlowLayoutAlgorithmDelegates, IO
             double realizationWindowOffsetInExtent = this.MajorStart(realizationRect) - this.MajorStart(lastExtent);
             double majorSize = this.MajorSize(lastExtent) == 0 ?
                 Math.Max(0, averageElementSize * itemsCount - _itemSpacing) : this.MajorSize(lastExtent);
-            if (itemsCount > 0 && this.MajorSize(realizationRect) >= 0 &&
+            if (this.MajorSize(realizationRect) >= 0 &&
                 // MajorSize = 0 will account for when a nested repeater is outside the realization rect but still being measured. Also,
                 // note that if we are measuring this repeater, then we are already realizing an element to figure out the size, so we could
                 // just keep that element alive. It also helps in XYFocus scenarios to have an element realized for XYFocus to find a candidate
@@ -160,7 +165,7 @@ public class StackLayout : VirtualizingLayout, IFlowLayoutAlgorithmDelegates, IO
         return new FlowLayoutAnchorInfo { Index = anchorIndex, Offset = offset };
     }
 
-    private Rect GetExtent(Size availableSize, VirtualizingLayoutContext context, Control firstRealized,
+    private Rect GetExtent(Size availableSize, VirtualizingLayoutContext context, Control? firstRealized,
         int firstRealizedItemIndex, Rect firstRealizedLayoutBounds, Control lastRealized,
         int lastRealizedItemIndex, Rect lastRealizedLayoutBounds)
     {
@@ -327,12 +332,5 @@ public class StackLayout : VirtualizingLayout, IFlowLayoutAlgorithmDelegates, IO
     private FlowLayoutAlgorithm GetFlowAlgorithm(VirtualizingLayoutContext context) =>
         GetAsStackState(context.LayoutState).FlowAlgorithm;
 
-    private StackLayoutState GetAsStackState(object state) =>
-        state as StackLayoutState;
-
-    private double _itemSpacing;
-
-    // !!! WARNING !!!
-    // Any storage here needs to be related to layout configuration. 
-    // layout specific state needs to be stored in StackLayoutState.
+    private StackLayoutState GetAsStackState(object? state) => state as StackLayoutState;
 }

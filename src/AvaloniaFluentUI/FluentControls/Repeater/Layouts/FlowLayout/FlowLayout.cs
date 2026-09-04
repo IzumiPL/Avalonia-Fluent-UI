@@ -26,10 +26,7 @@ public enum FlowLayoutLineAlignment
 
 public class FlowLayout : VirtualizingLayout, IOrientationBasedMeasures, IFlowLayoutAlgorithmDelegates
 {
-    public FlowLayout()
-    {
-
-    }
+    public FlowLayout() { }
 
     public static readonly StyledProperty<FlowLayoutLineAlignment> LineAlignmentProperty = 
         AvaloniaProperty.Register<FlowLayout, FlowLayoutLineAlignment>(nameof(LineAlignment), 
@@ -75,6 +72,11 @@ public class FlowLayout : VirtualizingLayout, IOrientationBasedMeasures, IFlowLa
         get => ScrollOrientation;
         set => ScrollOrientation = value;
     }
+    
+    private FlowLayoutAlgorithm.LineAlignment _lineAlignment = FlowLayoutAlgorithm.LineAlignment.Start;
+    private double _minColumnSpacing = 0.0;
+    private double _minRowSpacing = 0.0;
+    private Orientation _orientation = Orientation.Horizontal;
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs args)
     {
@@ -161,29 +163,24 @@ public class FlowLayout : VirtualizingLayout, IOrientationBasedMeasures, IFlowLa
 
     private void InvalidateLayout() => InvalidateMeasure();
 
-    FlowLayoutAlgorithm GetFlowAlgorithm(VirtualizingLayoutContext context) =>
-        GetAsFlowState(context.LayoutState).FlowAlgorithm;
+    FlowLayoutAlgorithm GetFlowAlgorithm(VirtualizingLayoutContext context) => GetAsFlowState(context.LayoutState).FlowAlgorithm;
 
     private bool DoesRealizationWindowOverlapExtent(Rect realizationWindow, Rect extent) =>
         this.MajorEnd(realizationWindow) >= this.MajorStart(extent) &&
         this.MajorStart(realizationWindow) <= this.MajorEnd(extent);
 
-    private double LineSpacing() =>
-        ScrollOrientation == ScrollOrientation.Vertical ? _minRowSpacing : _minColumnSpacing;
+    private double LineSpacing() => ScrollOrientation == ScrollOrientation.Vertical ? _minRowSpacing : _minColumnSpacing;
 
-    private double MinItemSpacing() =>
-        ScrollOrientation == ScrollOrientation.Vertical ? _minColumnSpacing : _minRowSpacing;
+    private double MinItemSpacing() => ScrollOrientation == ScrollOrientation.Vertical ? _minColumnSpacing : _minRowSpacing;
 
     // WinUI has these as separate methods and then has these call those, lets just skip that step
 
-    Size IFlowLayoutAlgorithmDelegates.Algorithm_GetMeasureSize(int index, Size availableSize, 
-        VirtualizingLayoutContext context)
+    Size IFlowLayoutAlgorithmDelegates.Algorithm_GetMeasureSize(int index, Size availableSize, VirtualizingLayoutContext context)
     {
         return availableSize;
     }
 
-    Size IFlowLayoutAlgorithmDelegates.Algorithm_GetProvisionalArrangeSize(int index, Size measureSize, 
-        Size desiredSize, VirtualizingLayoutContext context)
+    Size IFlowLayoutAlgorithmDelegates.Algorithm_GetProvisionalArrangeSize(int index, Size measureSize, Size desiredSize, VirtualizingLayoutContext context)
     {
         return desiredSize;
     }
@@ -193,8 +190,7 @@ public class FlowLayout : VirtualizingLayout, IOrientationBasedMeasures, IFlowLa
         return remainingSpace < 0;
     }
 
-    FlowLayoutAnchorInfo IFlowLayoutAlgorithmDelegates.Algorithm_GetAnchorForRealizationRect(Size availableSize, 
-        VirtualizingLayoutContext context)
+    FlowLayoutAnchorInfo IFlowLayoutAlgorithmDelegates.Algorithm_GetAnchorForRealizationRect(Size availableSize, VirtualizingLayoutContext context)
     {
         int anchorIndex = -1;
         double offset = double.NaN;
@@ -212,8 +208,7 @@ public class FlowLayout : VirtualizingLayout, IOrientationBasedMeasures, IFlowLa
             Debug.Assert(averageItemsPerLine != 0);
 
             double extentMajorSize = this.MajorSize(lastExtent) == 0 ? (itemsCount / averageItemsPerLine) * averageLineSize : this.MajorSize(lastExtent);
-            if (itemsCount > 0 &&
-                this.MajorSize(realizationRect) >0 &&
+            if (this.MajorSize(realizationRect) > 0 && 
                 DoesRealizationWindowOverlapExtent(realizationRect, this.MinorMajorRect(this.MinorStart(lastExtent), this.MajorStart(lastExtent), this.Minor(availableSize), extentMajorSize)))
             {
                 double realizationWindowStartWithExtent = this.MajorStart(realizationRect) - this.MajorStart(lastExtent);
@@ -229,8 +224,7 @@ public class FlowLayout : VirtualizingLayout, IOrientationBasedMeasures, IFlowLa
         return new FlowLayoutAnchorInfo { Index = anchorIndex, Offset = offset };
     }
 
-    FlowLayoutAnchorInfo IFlowLayoutAlgorithmDelegates.Algorithm_GetAnchorForTargetElement(int targetIndex, 
-        Size availableSize, VirtualizingLayoutContext context)
+    FlowLayoutAnchorInfo IFlowLayoutAlgorithmDelegates.Algorithm_GetAnchorForTargetElement(int targetIndex, Size availableSize, VirtualizingLayoutContext context)
     {
         double offset = double.NaN;
         int index = -1;
@@ -317,8 +311,7 @@ public class FlowLayout : VirtualizingLayout, IOrientationBasedMeasures, IFlowLa
     {
     }
 
-    void IFlowLayoutAlgorithmDelegates.Algorithm_OnLineArranged(int startIndex, int countInLine, double lineSize,
-        VirtualizingLayoutContext context)
+    void IFlowLayoutAlgorithmDelegates.Algorithm_OnLineArranged(int startIndex, int countInLine, double lineSize, VirtualizingLayoutContext context)
     {
         //REPEATER_TRACE_INFO(L"%*s: \tOnLineArranged startIndex:%d Count:%d LineHeight:%d \n",
         //winrt::get_self<VirtualizingLayoutContext>(context)->Indent(), LayoutId().data(), startIndex, countInLine, lineSize);
@@ -327,8 +320,7 @@ public class FlowLayout : VirtualizingLayout, IOrientationBasedMeasures, IFlowLa
         flowState.OnLineArranged(startIndex, countInLine, lineSize, context);
     }
 
-    private double GetAverageLineInfo(Size availableSize, VirtualizingLayoutContext context,
-        FlowLayoutState flowState, ref double avgCountInLine)
+    private double GetAverageLineInfo(Size availableSize, VirtualizingLayoutContext context, FlowLayoutState flowState, ref double avgCountInLine)
     {
         // default to 1 item per line with 0 size
         double avgLineSize = 0;
@@ -351,15 +343,4 @@ public class FlowLayout : VirtualizingLayout, IOrientationBasedMeasures, IFlowLa
 
         return avgLineSize;
     }
-
-    //internal void UpdateIndexBasedLayoutOrientation(Orientation orientation)
-    //{
-    //    SetIndexBasedLayoutOrientation(orientation == Orientation.Horizontal ?
-    //        IndexBasedLayoutOrientation.LeftToRight : IndexBasedLayoutOrientation.TopToBottom);
-    //}
-
-    private FlowLayoutAlgorithm.LineAlignment _lineAlignment = FlowLayoutAlgorithm.LineAlignment.Start;
-    private double _minColumnSpacing = 0.0;
-    private double _minRowSpacing = 0.0;
-    private Orientation _orientation = Orientation.Horizontal;
 }

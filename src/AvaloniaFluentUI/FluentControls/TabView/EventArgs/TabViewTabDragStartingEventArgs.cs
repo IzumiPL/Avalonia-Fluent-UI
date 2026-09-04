@@ -27,7 +27,7 @@ public class TabViewTabDragStartingEventArgs : EventArgs
     /// <summary>
     /// Gets the data payload associated with a drag action
     /// </summary>
-    public DataPackage Data => _innerArgs.Data;
+    public DataPackage? Data => _innerArgs.Data;
 
     /// <summary>
     /// Gets the item taht was selected for the drag action

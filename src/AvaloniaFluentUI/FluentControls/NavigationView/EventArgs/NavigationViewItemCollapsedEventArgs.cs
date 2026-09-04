@@ -15,7 +15,7 @@ public class NavigationViewItemCollapsedEventArgs : EventArgs
     /// <summary>
     /// Gets the object that has been collapsed after the NavigationViewItem.ItemCollapsed event.
     /// </summary>
-    public object CollapsedItem
+    public object? CollapsedItem
     {
         get
         {

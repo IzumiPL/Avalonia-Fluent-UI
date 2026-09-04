@@ -63,7 +63,7 @@ public class MultiSelectionComboBox : TemplatedControl
     public AvaloniaList<MultiSelectionComboBoxItem> Items => _items;
 
     private const string PC_PRESSED = ":pressed";
-    private const string PC_HAS_PLACEHOLDER = ":hasplaceholder";
+    private const string PC_HAS_PLACEHOLDER = ":has-placeholder";
     
     private const string PART_MULTI_SELECTION_POPUP = "PART_MultiSelectionPopup";
     private const string PART_MULTI_SELECTION_VIEW = "PART_MultiSelectionView";
@@ -94,7 +94,7 @@ public class MultiSelectionComboBox : TemplatedControl
             {
                 var value = item.Content ?? item;
                 data.Add(value);
-                if (item.IsSelected && !SelectedItems.Contains(value)) 
+                if (item.IsSelected && SelectedItems!.Contains(value)) 
                 {
                     SelectedItems.Add(value);
                 }

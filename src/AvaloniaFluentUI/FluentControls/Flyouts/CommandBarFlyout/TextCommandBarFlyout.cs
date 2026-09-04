@@ -17,6 +17,9 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class TextCommandBarFlyout : CommandBarFlyout
 {
+    private Dictionary<TextControlButtons, ICommandBarElement>? _buttons;
+    private WeakReference<Control?> _targetLocal;
+    
     public TextCommandBarFlyout()
     {
         Opening += (_, _) =>
@@ -26,7 +29,7 @@ public class TextCommandBarFlyout : CommandBarFlyout
 
         Opened += (_, _) =>
         {
-            _targetLocal = new WeakReference<Control>(Target);
+            _targetLocal = new WeakReference<Control?>(Target);
 
             // If there aren't any primary commands and we aren't opening expanded,
             // or if there are just no commands at all, then we'll have literally no UI to show. 
@@ -91,11 +94,11 @@ public class TextCommandBarFlyout : CommandBarFlyout
 
         var buttonsToAdd = GetButtonsToAdd();
 
-        void addButtonToCommandsIfPresent(TextControlButtons buttonType, IList<ICommandBarElement> commandsList)
+        void AddButtonToCommandsIfPresent(TextControlButtons buttonType, IList<ICommandBarElement> commandsList)
         {
             if ((buttonsToAdd & buttonType) != TextControlButtons.None)
             {
-                commandsList.Add(GetButton(buttonType));
+                commandsList.Add(GetButton(buttonType)!);
             }
         }
 
@@ -104,13 +107,13 @@ public class TextCommandBarFlyout : CommandBarFlyout
         // We don't have FlyoutBase.InputDevicePrefersPrimaryCommands
         // So we'll always load Cut/Copy/Paste into Secondary
         // TODO_v2: We can implement InputDevicePrefersPrimaryCommands - pretty much that's touch
-        addButtonToCommandsIfPresent(TextControlButtons.Cut, SecondaryCommands);
-        addButtonToCommandsIfPresent(TextControlButtons.Copy, SecondaryCommands);
-        addButtonToCommandsIfPresent(TextControlButtons.Paste, SecondaryCommands);
+        AddButtonToCommandsIfPresent(TextControlButtons.Cut, SecondaryCommands);
+        AddButtonToCommandsIfPresent(TextControlButtons.Copy, SecondaryCommands);
+        AddButtonToCommandsIfPresent(TextControlButtons.Paste, SecondaryCommands);
         
-        addButtonToCommandsIfPresent(TextControlButtons.Undo, SecondaryCommands);
-        addButtonToCommandsIfPresent(TextControlButtons.Redo, SecondaryCommands);
-        addButtonToCommandsIfPresent(TextControlButtons.SelectAll, SecondaryCommands);
+        AddButtonToCommandsIfPresent(TextControlButtons.Undo, SecondaryCommands);
+        AddButtonToCommandsIfPresent(TextControlButtons.Redo, SecondaryCommands);
+        AddButtonToCommandsIfPresent(TextControlButtons.SelectAll, SecondaryCommands);
         
         if (Popup.Child is { } presenter)
         {
@@ -215,9 +218,6 @@ public class TextCommandBarFlyout : CommandBarFlyout
         return buttonsToAdd;
     }
 
-    //private TextControlButtons GetRichEditBoxButtonsToAdd() { }
-    //private TextControlButtons GetRichTextBlockButtonsToAdd() { }
-
     private TextControlButtons GetPasswordBoxButtonsToAdd(TextBox textBox)
     {
         TextControlButtons toAdd = TextControlButtons.None;
@@ -237,7 +237,13 @@ public class TextCommandBarFlyout : CommandBarFlyout
 
     private bool IsButtonInPrimaryCommands(TextControlButtons button)
     {
-        return PrimaryCommands.Contains(GetButton(button));
+        var element = GetButton(button);
+        if (element != null)
+        {
+            return PrimaryCommands.Contains(element);
+        }
+
+        return false;
     }
 
     private void ExecuteCutCommand()
@@ -277,9 +283,9 @@ public class TextCommandBarFlyout : CommandBarFlyout
                 {
                     stb.Copy();
                 }
-                else if (target is TextBlock txtB)
+                else if (target is TextBlock textBlock)
                 {
-                    await TopLevel.GetTopLevel(Target).Clipboard.SetTextAsync(txtB.Text);
+                    await TopLevel.GetTopLevel(Target)?.Clipboard?.SetTextAsync(textBlock.Text);
                 }
             }
             catch
@@ -305,12 +311,16 @@ public class TextCommandBarFlyout : CommandBarFlyout
                 {
                     tb.Paste();
                 }
-                else if (target is TextBlock txtB)
+                else if (target is TextBlock textBlock)
                 {
-                    var txt = await ClipboardExtensions.TryGetTextAsync(TopLevel.GetTopLevel(target).Clipboard);
-                    if (txt != null)
+                    var clipboard =  TopLevel.GetTopLevel(target)?.Clipboard;
+                    if (clipboard != null)
                     {
-                        txtB.Text = txt;
+                        var text = await ClipboardExtensions.TryGetTextAsync(clipboard);
+                        if (text != null)
+                        {
+                            textBlock.Text = text;
+                        }
                     }
                 }
             }
@@ -369,7 +379,7 @@ public class TextCommandBarFlyout : CommandBarFlyout
         }
     }
 
-    private ICommandBarElement GetButton(TextControlButtons textControlButton)
+    private ICommandBarElement? GetButton(TextControlButtons textControlButton)
     {
         if (_buttons == null)
             _buttons = new Dictionary<TextControlButtons, ICommandBarElement>();
@@ -442,7 +452,4 @@ public class TextCommandBarFlyout : CommandBarFlyout
             }
         }
     }
-
-    private Dictionary<TextControlButtons, ICommandBarElement>? _buttons;
-    private WeakReference<Control> _targetLocal;
 }

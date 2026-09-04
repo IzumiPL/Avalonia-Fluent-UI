@@ -18,7 +18,7 @@ internal class VirtualLayoutContextAdapter : NonVirtualizingLayoutContext
         return _children;
     }
 
-    protected internal override object LayoutStateCore 
+    protected internal override object? LayoutStateCore 
     { 
         get => GetContext()?.LayoutStateCore;
         set
@@ -28,22 +28,24 @@ internal class VirtualLayoutContextAdapter : NonVirtualizingLayoutContext
         } 
     }
 
-    private VirtualizingLayoutContext GetContext() =>
+    private VirtualizingLayoutContext? GetContext() =>
         _virtualizingContext.TryGetTarget(out var target) ? target : null;
 
     private WeakReference<VirtualizingLayoutContext> _virtualizingContext;
-    private ChildrenCollection _children;
+    private ChildrenCollection _children; 
 
     // WinUI makes this Generic, but C# doesn't like the indexer getting a control
     // with returning a generic type
     private class ChildrenCollection : IReadOnlyList<Control>
     {
-        public ChildrenCollection(VirtualizingLayoutContext context)
+        private VirtualizingLayoutContext? _context;
+        
+        public ChildrenCollection(VirtualizingLayoutContext? context)
         {
             _context = context;
         }
 
-        public int Count => _context.ItemCount;
+        public int Count => _context?.ItemCount ?? 0;
 
         public Control this[int index]
         {
@@ -60,7 +62,5 @@ internal class VirtualLayoutContextAdapter : NonVirtualizingLayoutContext
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-        private VirtualizingLayoutContext _context;
     }
 }

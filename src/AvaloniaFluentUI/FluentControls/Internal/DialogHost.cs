@@ -101,5 +101,5 @@ public class DialogHost : ContentControl
         InvalidateMeasure();
     }
 
-    private IDisposable _rootBoundsWatcher;
+    private IDisposable? _rootBoundsWatcher;
 }

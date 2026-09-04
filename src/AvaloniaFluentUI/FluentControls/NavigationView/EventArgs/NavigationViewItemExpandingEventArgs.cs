@@ -15,7 +15,7 @@ public class NavigationViewItemExpandingEventArgs : EventArgs
     /// <summary>
     /// Gets the object that is expanding after the NavigationViewItem.Expanding event.
     /// </summary>
-    public object ExpandingItem
+    public object? ExpandingItem
     {
         get
         {

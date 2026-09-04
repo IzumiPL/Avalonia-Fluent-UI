@@ -123,7 +123,7 @@ public static class IconHelpers
         return ii;
     }
 
-    internal static IconElement? CreateFromUnknown(IconSource src)
+    internal static IconElement? CreateFromUnknown(IconSource? src)
     {
         if (src is BitmapIconSource bis)
         {
@@ -146,7 +146,7 @@ public static class IconHelpers
             return CreateImageIconFromImageIconSource(iis);
         }
 
-        if (_customConverters != null)
+        if (_customConverters != null && src != null)
         {
             var type = src.GetType();
             if (_customConverters.TryGetValue(type, out var value))

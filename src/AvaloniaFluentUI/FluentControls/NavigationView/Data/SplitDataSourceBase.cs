@@ -38,7 +38,7 @@ internal abstract class SplitDataSourceBase<T, TVectorID, AttachedDataType>
         }
     }
 
-    public SplitVector<T, TVectorID> GetVectorForItem(int index)
+    public SplitVector<T, TVectorID>? GetVectorForItem(int index)
     {
         if (index >= 0 && index < RawDataSize)
         {

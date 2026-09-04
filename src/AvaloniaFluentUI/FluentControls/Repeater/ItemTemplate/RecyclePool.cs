@@ -26,13 +26,13 @@ public class RecyclePool
     public void PutElement(Control element, string key) =>
         PutElementCore(element, key, null /* owner */);
 
-    public void PutElement(Control element, string key, Control owner) =>
+    public void PutElement(Control? element, string? key, Control? owner) =>
         PutElementCore(element, key, owner);
 
-    public Control TryGetElement(string key) =>
+    public Control? TryGetElement(string key) =>
         TryGetElementCore(key, null /*owner*/);
 
-    public Control TryGetElement(string key, Control owner) =>
+    public Control? TryGetElement(string key, Control? owner) =>
         TryGetElementCore(key, owner);
 
     protected virtual void PutElementCore(Control element, string key, Control owner)
@@ -53,7 +53,7 @@ public class RecyclePool
         }
     }
     
-    protected virtual Control TryGetElementCore(string key, Control owner)
+    protected virtual Control? TryGetElementCore(string key, Control owner)
     {
         if (_elements.TryGetValue(key, out var elements))
         {
@@ -99,10 +99,9 @@ public class RecyclePool
         return null;
     }
 
-    private void EnsureOwnerIsPanelOrNull(Control owner)
+    private void EnsureOwnerIsPanelOrNull(Control? owner)
     {
-        if (owner == null || (owner != null && owner is Panel))
-            return;
+        if (owner == null || owner is Panel) { return; }
 
         throw new InvalidOperationException("Owner must to be a Panel or null.");
     }
@@ -110,7 +109,7 @@ public class RecyclePool
 
     // RecyclePoolFactory.cpp
 
-    public static RecyclePool GetPoolInstance(IDataTemplate template)
+    public static RecyclePool? GetPoolInstance(IDataTemplate? template)
     {
         if (s_PoolInstance == null)
             s_PoolInstance = new Dictionary<IDataTemplate, RecyclePool>();
@@ -121,7 +120,7 @@ public class RecyclePool
         return null;
     }
 
-    public static void SetPoolInstance(IDataTemplate template, RecyclePool pool)
+    public static void SetPoolInstance(IDataTemplate? template, RecyclePool pool)
     {
         if (s_PoolInstance == null)
             s_PoolInstance = new Dictionary<IDataTemplate, RecyclePool>();
@@ -147,5 +146,5 @@ public class RecyclePool
 
     // WinUI stores this as a DependencyProperty on DataTemplate (attached), but since
     // we use IDataTemplate, we need a cache not tied to the property system
-    private static Dictionary<IDataTemplate, RecyclePool> s_PoolInstance;
+    private static Dictionary<IDataTemplate, RecyclePool>? s_PoolInstance;
 }

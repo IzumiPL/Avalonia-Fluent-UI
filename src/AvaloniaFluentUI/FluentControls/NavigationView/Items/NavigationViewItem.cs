@@ -19,16 +19,16 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// Represents the container for an item in a NavigationView control.
 /// </summary>
+[PseudoClasses(PC_SELECTED)]
+[PseudoClasses(PC_INFO_BADGE)]
+[PseudoClasses(PC_ICON_COLLAPSED)]
 [PseudoClasses(SharedPseudoclasses.s_pcLeftNav, SharedPseudoclasses.s_pcTopNav, SharedPseudoclasses.s_pcTopOverflow)]
 [PseudoClasses(SharedPseudoclasses.s_pcIconLeft, SharedPseudoclasses.s_pcIconOnly, SharedPseudoclasses.s_pcContentOnly)]
-[PseudoClasses(s_pcSelected)]
-[PseudoClasses(s_pcIconCollapsed)]
 [PseudoClasses(SharedPseudoclasses.s_pcChevronClosed, SharedPseudoclasses.s_pcChevronOpen, SharedPseudoclasses.s_pcChevronHidden)]
-[PseudoClasses(s_pcInfoBadge)]
-[TemplatePart(s_tpFlyoutContentGrid, typeof(Panel))]
-[TemplatePart(s_tpNVIPresenter, typeof(NavigationViewItemPresenter))]
-[TemplatePart(s_tpNVIRootGrid, typeof(Grid))]
-[TemplatePart(s_tpNVIMenuItemsHost, typeof(ItemsRepeater))]
+[TemplatePart(Name = FLYOUT_CONTENT_GRID,                   Type = typeof(Panel))]
+[TemplatePart(Name = NAVIGATION_VIEW_ITEM_ROOT_GRID,        Type = typeof(Grid))]
+[TemplatePart(Name = NAVIGATION_VIEW_ITEM_PRESENTER,        Type = typeof(NavigationViewItemPresenter))]
+[TemplatePart(Name = NAVIGATION_VIEW_ITEM_MENU_ITEMS_HOST,  Type = typeof(ItemsRepeater))]
 public class NavigationViewItem : NavigationViewItemBase
 {
     /// <summary>
@@ -70,13 +70,13 @@ public class NavigationViewItem : NavigationViewItemBase
     /// <summary>
     /// Defines the <see cref="MenuItems"/> property
     /// </summary>
-    public static readonly DirectProperty<NavigationViewItem, IList<object>> MenuItemsProperty =
+    public static readonly DirectProperty<NavigationViewItem, IList<object>?> MenuItemsProperty =
         NavigationView.MenuItemsProperty.AddOwner<NavigationViewItem>(x => x.MenuItems);
 
     /// <summary>
     /// Defines the <see cref="MenuItemsSource"/> property
     /// </summary>
-    public static readonly StyledProperty<IEnumerable> MenuItemsSourceProperty =
+    public static readonly StyledProperty<IEnumerable?> MenuItemsSourceProperty =
         NavigationView.MenuItemsSourceProperty.AddOwner<NavigationViewItem>();
 
     /// <summary>
@@ -89,8 +89,8 @@ public class NavigationViewItem : NavigationViewItemBase
     /// <summary>
     /// Defines the <see cref="InfoBadge"/> property
     /// </summary>
-    public static readonly StyledProperty<InfoBadge> InfoBadgeProperty =
-        AvaloniaProperty.Register<NavigationViewItem, InfoBadge>(nameof(InfoBadge));
+    public static readonly StyledProperty<InfoBadge?> InfoBadgeProperty =
+        AvaloniaProperty.Register<NavigationViewItem, InfoBadge?>(nameof(InfoBadge));
 
     /// <summary>
     /// Gets the CompactPaneLength of the NavigationView that hosts this item.
@@ -158,7 +158,7 @@ public class NavigationViewItem : NavigationViewItemBase
     /// <summary>
     /// Gets the collection of menu items displayed as children of the NavigationViewItem.
     /// </summary>
-    public IList<object> MenuItems
+    public IList<object>? MenuItems
     {
         get => _menuItems;
         private set => SetAndRaise(MenuItemsProperty, ref _menuItems, value);
@@ -167,7 +167,7 @@ public class NavigationViewItem : NavigationViewItemBase
     /// <summary>
     /// Gets or sets an object source used to generate the content of the NavigationViewItem submenu.
     /// </summary>
-    public IEnumerable MenuItemsSource
+    public IEnumerable? MenuItemsSource
     {
         get => GetValue(MenuItemsSourceProperty);
         set => SetValue(MenuItemsSourceProperty, value);
@@ -185,7 +185,7 @@ public class NavigationViewItem : NavigationViewItemBase
     /// <summary>
     /// Gets or sets the <see cref="InfoBadge"/> to display in the NavigationViewItem
     /// </summary>
-    public InfoBadge InfoBadge
+    public InfoBadge? InfoBadge
     {
         get => GetValue(InfoBadgeProperty);
         set => SetValue(InfoBadgeProperty, value);
@@ -193,14 +193,14 @@ public class NavigationViewItem : NavigationViewItemBase
 
     //HELPER PROPERTIES
 
-    internal Control SelectionIndicator => _presenter?.SelectionIndicator;
+    internal Control? SelectionIndicator => _presenter?.SelectionIndicator;
 
-    internal NavigationViewItemPresenter NVIPresenter => _presenter;
+    internal NavigationViewItemPresenter? NavigationViewItemPresenter => _presenter;
 
     private bool HasChildren =>
         (MenuItems != null && MenuItems.Count() > 0) ||
         (MenuItemsSource != null && _repeater != null &&
-        _repeater.ItemsSourceView != null &&
+        _repeater?.ItemsSourceView != null &&
         _repeater.ItemsSourceView.Count > 0) ||
         HasUnrealizedChildren;
 
@@ -218,13 +218,14 @@ public class NavigationViewItem : NavigationViewItemBase
         get
         {
             bool isPaneDisplayModeTop = true;
-            if (GetNavigationView is NavigationView nv)
+            var navigationView = GetNavigationView;
+            if (navigationView != null)
             {
                 // There is a delay between the NavigationViewPaneDisplayMode update and the 
                 // position property of NavigationViewItem being updated. This function gets called
                 // in that delay period, so we need to check the PaneDisplayMode as further verification
                 // of whether we are in Top mode or switching away from it.
-                isPaneDisplayModeTop = nv.PaneDisplayMode == NavigationViewPaneDisplayMode.Top;
+                isPaneDisplayModeTop = navigationView.PaneDisplayMode == NavigationViewPaneDisplayMode.Top;
             }
 
             return Position == NavigationViewRepeaterPosition.TopPrimary && isPaneDisplayModeTop;
@@ -235,22 +236,34 @@ public class NavigationViewItem : NavigationViewItemBase
 
     internal bool IsRepeaterVisible => _repeater?.IsVisible ?? false;
 
-    internal ItemsRepeater GetRepeater => _repeater;
+    internal ItemsRepeater? GetRepeater => _repeater;
 
     private bool _hasUnrealizedChildren;
     private bool _isChildSelected;
     private bool _isExpanded;
-    private IList<object> _menuItems;
+    private IList<object>? _menuItems;
     private bool _selectsOnInvoked = true;
+    
+    private CompositeDisposable? _splitViewRevokers;
+    private NavigationViewItemPresenter? _presenter;
+    private object? _suggestedToolTipContent;
+    private ItemsRepeater? _repeater;
+    private Panel? _flyoutContentGrid;
+    private Grid? _rootGrid;
 
-    private const string s_tpNVIPresenter = "NVIPresenter";
-    private const string s_tpNVIRootGrid = "NVIRootGrid";
-    private const string s_tpNVIMenuItemsHost = "NVIMenuItemsHost";
-    private const string s_tpFlyoutContentGrid = "FlyoutContentGrid";
+    private bool _isClosedCompact;
+    private bool _appliedTemplate;
+    private bool _isRepeaterParentedToFlyout;
+    private bool _restoreToExpandedState;
+
+    private const string NAVIGATION_VIEW_ITEM_PRESENTER = "NavigationViewItemPresenter";
+    private const string NAVIGATION_VIEW_ITEM_ROOT_GRID = "NavigationViewItemRootGrid";
+    private const string NAVIGATION_VIEW_ITEM_MENU_ITEMS_HOST = "NavigationViewItemMenuItemsHost";
+    private const string FLYOUT_CONTENT_GRID = "FlyoutContentGrid";
         
-    private const string s_pcSelected = ":selected";
-    private const string s_pcIconCollapsed = ":iconcollapsed";
-    private const string s_pcInfoBadge = ":infobadge";
+    private const string PC_SELECTED = ":selected";
+    private const string PC_ICON_COLLAPSED = ":iconcollapsed";
+    private const string PC_INFO_BADGE = ":infobadge";
     
     /// <summary>
     /// Create instance of <see cref="NavigationViewItem"/>.
@@ -303,9 +316,9 @@ public class NavigationViewItem : NavigationViewItemBase
 
         base.OnApplyTemplate(e);
 
-        _presenter = e.NameScope.Find<NavigationViewItemPresenter>(s_tpNVIPresenter);
+        _presenter = e.NameScope.Find<NavigationViewItemPresenter>(NAVIGATION_VIEW_ITEM_PRESENTER);
 
-        _rootGrid = e.NameScope.Find<Grid>(s_tpNVIRootGrid);
+        _rootGrid = e.NameScope.Find<Grid>(NAVIGATION_VIEW_ITEM_ROOT_GRID);
         if (_rootGrid != null)
         {
             var flyout = FlyoutBase.GetAttachedFlyout(_rootGrid) as PopupFlyoutBase;
@@ -338,10 +351,10 @@ public class NavigationViewItem : NavigationViewItemBase
         //var navView = GetNavigationView;
         if (navView != null)
         {
-            _repeater = e.NameScope.Find<ItemsRepeater>(s_tpNVIMenuItemsHost);
+            _repeater = e.NameScope.Find<ItemsRepeater>(NAVIGATION_VIEW_ITEM_MENU_ITEMS_HOST);
             if (_repeater != null)
             {
-                (_repeater.Layout as StackLayout).DisableVirtualization = true;
+                (_repeater.Layout as StackLayout)?.DisableVirtualization = true;
 
                 _repeater.ElementPrepared += navView.OnRepeaterElementPrepared;
                 _repeater.ElementClearing += navView.OnRepeaterElementClearing;
@@ -352,7 +365,7 @@ public class NavigationViewItem : NavigationViewItemBase
             UpdateRepeaterItemsSource();
         }
 
-        _flyoutContentGrid = e.NameScope.Find<Panel>(s_tpFlyoutContentGrid);
+        _flyoutContentGrid = e.NameScope.Find<Panel>(FLYOUT_CONTENT_GRID);
 
         _appliedTemplate = true;
 
@@ -484,9 +497,9 @@ public class NavigationViewItem : NavigationViewItemBase
         }
     }
 
-    private void SuggestedToolTipChanged(object newContent)
+    private void SuggestedToolTipChanged(object? newContent)
     {
-        object newToolTip = null;
+        object? newToolTip = null;
         if (newContent is string s)
         {
             newToolTip = s;
@@ -641,7 +654,7 @@ public class NavigationViewItem : NavigationViewItemBase
 
         if (_presenter != null)
         {
-            ((IPseudoClasses)_presenter.Classes).Set(s_pcSelected, IsSelected);
+            ((IPseudoClasses)_presenter.Classes).Set(PC_SELECTED, IsSelected);
         }
 
         UpdateVisualStateForNavigationViewPositionChange();
@@ -655,7 +668,7 @@ public class NavigationViewItem : NavigationViewItemBase
             {
                 //This is supposed to be for backwards compatibility with RS4-, but
                 //is apparently still used in the NVIPresenterWhenOnLeftPane style
-                ((IPseudoClasses)_presenter.Classes).Set(s_pcIconCollapsed, !showIcon);
+                ((IPseudoClasses)_presenter.Classes).Set(PC_ICON_COLLAPSED, !showIcon);
                 //Only using IconCollapsed, IconVisible is default
             }
         }
@@ -663,7 +676,7 @@ public class NavigationViewItem : NavigationViewItemBase
         {
             if (_presenter != null)
             {
-                ((IPseudoClasses)_presenter.Classes).Set(s_pcIconCollapsed, false);
+                ((IPseudoClasses)_presenter.Classes).Set(PC_ICON_COLLAPSED, false);
             }
         }
 
@@ -715,11 +728,20 @@ public class NavigationViewItem : NavigationViewItemBase
                     ReparentRepeater();
                 }
 
-                Dispatcher.UIThread.Post(() => FlyoutBase.ShowAttachedFlyout(_rootGrid));
+                Dispatcher.UIThread.Post(() =>
+                {
+                    if (_rootGrid != null)
+                    {
+                        FlyoutBase.ShowAttachedFlyout(_rootGrid);
+                    }
+                });
             }
             else
             {
-                FlyoutBase.GetAttachedFlyout(_rootGrid)?.Hide();
+                if (_rootGrid != null)
+                {
+                    FlyoutBase.GetAttachedFlyout(_rootGrid)?.Hide();
+                }
             }
         }
     }
@@ -730,16 +752,16 @@ public class NavigationViewItem : NavigationViewItemBase
         {
             if (ShouldRepeaterShowInFlyout && !_isRepeaterParentedToFlyout)
             {
-                _rootGrid.Children.Remove(_repeater);
-                _flyoutContentGrid.Children.Add(_repeater);
+                _rootGrid?.Children.Remove(_repeater);
+                _flyoutContentGrid?.Children.Add(_repeater);
                 _isRepeaterParentedToFlyout = true;
 
                 PropagateDepthToChildren(0);
             }
             else if (!ShouldRepeaterShowInFlyout && _isRepeaterParentedToFlyout)
             {
-                _flyoutContentGrid.Children.Remove(_repeater);
-                _rootGrid.Children.Add(_repeater);
+                _flyoutContentGrid?.Children.Remove(_repeater);
+                _rootGrid?.Children.Add(_repeater);
                 _isRepeaterParentedToFlyout = false;
 
                 PropagateDepthToChildren(1);
@@ -827,7 +849,7 @@ public class NavigationViewItem : NavigationViewItemBase
     private void UpdateVisualStateForInfoBadge()
     {
         if (_presenter != null)
-            ((IPseudoClasses)_presenter.Classes).Set(s_pcInfoBadge, InfoBadge != null);
+            ((IPseudoClasses)_presenter.Classes).Set(PC_INFO_BADGE, InfoBadge != null);
     }
 
     public override string ToString()
@@ -865,9 +887,10 @@ public class NavigationViewItem : NavigationViewItemBase
     {
         if (IsTopLevelItem)
         {
-            if (GetSplitView is SplitView sv)
+            var splitView = GetSplitView;
+            if (splitView != null)
             {
-                if (sv.IsPaneOpen)
+                if (splitView.IsPaneOpen)
                 {
                     RestoreExpandedState();
                 }
@@ -896,17 +919,4 @@ public class NavigationViewItem : NavigationViewItemBase
             _restoreToExpandedState = false;
         }
     }
-
-    private CompositeDisposable? _splitViewRevokers;
-    private NavigationViewItemPresenter? _presenter;
-    private object? _suggestedToolTipContent;
-    private ItemsRepeater? _repeater;
-    private Panel? _flyoutContentGrid;
-    private Grid? _rootGrid;
-
-    private bool _isClosedCompact;
-    private bool _appliedTemplate;
-    //private bool _hasKeyboardFocus;//TODO: needed?
-    private bool _isRepeaterParentedToFlyout;
-    private bool _restoreToExpandedState;
 }

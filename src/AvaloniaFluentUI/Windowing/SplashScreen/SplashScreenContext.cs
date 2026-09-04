@@ -29,21 +29,21 @@ internal class SplashScreenContext
 
     public async Task RunJobs()
     {
-        _splashCTS = new CancellationTokenSource();
-        await SplashScreen.RunTasks(_splashCTS.Token);
-        _splashCTS?.Dispose();
-        _splashCTS = null;
+        _splashCts = new CancellationTokenSource();
+        await SplashScreen.RunTasks(_splashCts.Token);
+        _splashCts?.Dispose();
+        _splashCts = null;
     }
 
     public void TryCancel()
     {
-        _splashCTS?.Cancel();
-        _splashCTS?.Dispose();
-        _splashCTS = null;
+        _splashCts?.Cancel();
+        _splashCts?.Dispose();
+        _splashCts = null;
     }
 
     private AppSplashScreen _splashHost;
-    private CancellationTokenSource _splashCTS;
+    private CancellationTokenSource? _splashCts;
 }
 
 public class AppSplashScreen : TemplatedControl
@@ -59,7 +59,7 @@ public class AppSplashScreen : TemplatedControl
         {
             // User set content has priority
             var cp = e.NameScope.Find<ContentPresenter>("ContentHost");
-            cp.Content = SplashScreen.SplashScreenContent;
+            cp?.Content = SplashScreen.SplashScreenContent;
         }
     }
 }

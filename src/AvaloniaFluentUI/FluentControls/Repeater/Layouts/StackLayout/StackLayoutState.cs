@@ -11,6 +11,9 @@ internal class StackLayoutState
     public double MaxArrangeBounds { get; private set; }
 
     public int TotalElementsMeasured { get; private set; }
+    
+    private double[]? _estimationBuffer;
+    private const int BufferSize = 100;
 
     public void InitializeForContext(VirtualizingLayoutContext context, IFlowLayoutAlgorithmDelegates callbacks)
     {
@@ -28,8 +31,7 @@ internal class StackLayoutState
 
     public void OnElementMeasured(int elementIndex, double majorSize, double minorSize)
     {
-        int estimationBufferIndex = elementIndex < BufferSize ? elementIndex :
-            elementIndex % BufferSize;
+        int estimationBufferIndex = elementIndex < BufferSize ? elementIndex : elementIndex % BufferSize;
         bool alreadyMeasured = _estimationBuffer[estimationBufferIndex] != 0;
         if (!alreadyMeasured)
         {
@@ -47,7 +49,4 @@ internal class StackLayoutState
     {
         MaxArrangeBounds = 0;
     }
-
-    private double[] _estimationBuffer;
-    private const int BufferSize = 100;
 }

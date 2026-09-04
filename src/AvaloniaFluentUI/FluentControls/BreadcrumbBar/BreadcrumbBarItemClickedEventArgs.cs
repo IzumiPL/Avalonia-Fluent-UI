@@ -7,7 +7,7 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class BreadcrumbBarItemClickedEventArgs : EventArgs
 {
-    internal BreadcrumbBarItemClickedEventArgs(int index, object item)
+    internal BreadcrumbBarItemClickedEventArgs(int index, object? item)
     {
         Index = index;
         Item = item;
@@ -21,5 +21,5 @@ public class BreadcrumbBarItemClickedEventArgs : EventArgs
     /// <summary>
     /// Gets the Content property value of the BreadcrumbBarItem that is clicked.
     /// </summary>
-    public object Item { get; }
+    public object? Item { get; }
 }

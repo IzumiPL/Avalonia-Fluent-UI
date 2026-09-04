@@ -196,7 +196,7 @@ internal class SelectionModel : INotifyPropertyChanged, IDisposable
         }
     }
 
-    public IReadOnlyList<IndexPath> SelectedIndices
+    public IReadOnlyList<IndexPath>? SelectedIndices
     {
         get
         {
@@ -252,7 +252,7 @@ internal class SelectionModel : INotifyPropertyChanged, IDisposable
         }
     }
 
-    internal SelectionNode SharedLeafNode { get; private set; }
+    internal SelectionNode? SharedLeafNode { get; private set; }
 
     public event EventHandler<SelectionModelChildrenRequestedEventArgs>? ChildrenRequested;
     public event EventHandler<SelectionModelSelectionChangedEventArgs>? SelectionChanged;
@@ -430,9 +430,9 @@ internal class SelectionModel : INotifyPropertyChanged, IDisposable
         OnSelectionChanged();
     }
 
-    internal object ResolvePath(object data, IndexPath dataIndexPath)
+    internal object? ResolvePath(object data, IndexPath dataIndexPath)
     {
-        object resolved = null;
+        object? resolved = null;
         // Raise ChildrenRequested event if there is a handler
         if (ChildrenRequested != null)
         {

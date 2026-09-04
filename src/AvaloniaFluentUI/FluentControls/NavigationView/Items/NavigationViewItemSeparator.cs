@@ -9,10 +9,21 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// Represents a line that separates menu items in a NavigationView.
 /// </summary>
-[PseudoClasses(s_pcHorizontal, s_pcHorizontalCompact, s_pcVertical)]
-[TemplatePart(s_tpRootGrid, typeof(Panel))]
+[PseudoClasses(PC_HORIZONTAL, PC_HORIZONTAL_COMPACT, PC_VERTICAL)]
+[TemplatePart(Name = ROOT_GRID, Type = typeof(Panel))]
 public class NavigationViewItemSeparator : NavigationViewItemBase
 {
+    private Panel? _rootGrid;
+    private bool _appliedTemplate;
+    private bool _isClosedCompact;
+    private CompositeDisposable? _splitViewRevokers;
+
+    private const string ROOT_GRID = "RootGrid";
+
+    private const string PC_HORIZONTAL = ":horizontal";
+    private const string PC_HORIZONTAL_COMPACT = ":horizontalcompact";
+    private const string PC_VERTICAL = ":vertical";
+    
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         _appliedTemplate = false;
@@ -21,7 +32,7 @@ public class NavigationViewItemSeparator : NavigationViewItemBase
 
         base.OnApplyTemplate(e);
 
-        _rootGrid = e.NameScope.Find<Panel>(s_tpRootGrid);
+        _rootGrid = e.NameScope.Find<Panel>(ROOT_GRID);
 
         var splitView = GetSplitView;
         if (splitView != null)
@@ -61,9 +72,9 @@ public class NavigationViewItemSeparator : NavigationViewItemBase
         //States: :horizontalcompact, :horizontal, :vertical
         bool isTop = Position == NavigationViewRepeaterPosition.TopFooter || Position == NavigationViewRepeaterPosition.TopPrimary;
 
-        PseudoClasses.Set(s_pcHorizontal, !isTop && !_isClosedCompact);
-        PseudoClasses.Set(s_pcHorizontalCompact, !isTop && _isClosedCompact);
-        PseudoClasses.Set(s_pcVertical, isTop);
+        PseudoClasses.Set(PC_HORIZONTAL, !isTop && !_isClosedCompact);
+        PseudoClasses.Set(PC_HORIZONTAL_COMPACT, !isTop && _isClosedCompact);
+        PseudoClasses.Set(PC_VERTICAL, isTop);
     }
 
     private void UpdateItemIndentation()
@@ -88,15 +99,4 @@ public class NavigationViewItemSeparator : NavigationViewItemBase
                 UpdateVisualState();
         }
     }
-
-    private CompositeDisposable? _splitViewRevokers;
-    private bool _appliedTemplate;
-    private bool _isClosedCompact;
-    private Panel? _rootGrid;
-
-    private const string s_tpRootGrid = "RootGrid";
-
-    private const string s_pcHorizontal = ":horizontal";
-    private const string s_pcHorizontalCompact = ":horizontalcompact";
-    private const string s_pcVertical = ":vertical";
 }

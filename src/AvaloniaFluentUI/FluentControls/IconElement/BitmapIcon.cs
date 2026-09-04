@@ -11,13 +11,13 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// Represents and icon that uses a bitmap as its content
 /// </summary>
-public partial class BitmapIcon : IconElement
+public class BitmapIcon : IconElement
 {
     /// <summary>
     /// Defines the <see cref="UriSource"/> property
     /// </summary>
-    public static readonly StyledProperty<Uri> UriSourceProperty =
-        AvaloniaProperty.Register<BitmapIcon, Uri>(nameof(UriSource));
+    public static readonly StyledProperty<Uri?> UriSourceProperty =
+        AvaloniaProperty.Register<BitmapIcon, Uri?>(nameof(UriSource));
 
     /// <summary>
     /// Defines the <see cref="ShowAsMonochrome"/> property
@@ -28,7 +28,7 @@ public partial class BitmapIcon : IconElement
     /// <summary>
     /// Gets or sets the Uniform Resource Identifier (URI) of the bitmap to use as the icon content.
     /// </summary>
-    public Uri UriSource
+    public Uri? UriSource
     {
         get => GetValue(UriSourceProperty);
         set => SetValue(UriSourceProperty, value);
@@ -42,6 +42,11 @@ public partial class BitmapIcon : IconElement
         get => GetValue(ShowAsMonochromeProperty);
         set => SetValue(ShowAsMonochromeProperty, value);
     }
+    
+    private BitmapIconSource? _bis;
+    protected SKBitmap? _bitmap;
+    private Size _originalSize;
+    private Bitmap? _cachedAvBitmap;
     
     public BitmapIcon()
     {
@@ -114,7 +119,7 @@ public partial class BitmapIcon : IconElement
         }
     }
 
-    private Bitmap GetCachedAvaloniaBitmap()
+    private Bitmap? GetCachedAvaloniaBitmap()
     {
         if (_cachedAvBitmap != null)
             return _cachedAvBitmap;
@@ -157,7 +162,7 @@ public partial class BitmapIcon : IconElement
         _cachedAvBitmap = null;
     }
 
-    private void CreateBitmap(Uri src)
+    private void CreateBitmap(Uri? src)
     {
         if (_bis != null)
             return;
@@ -178,7 +183,6 @@ public partial class BitmapIcon : IconElement
         _originalSize = new Size(_bitmap.Width, _bitmap.Height);
     }
 
-    /// <inheritdoc/>
     protected void Dispose()
     {
         InvalidateCachedBitmap();
@@ -205,16 +209,14 @@ public partial class BitmapIcon : IconElement
         _bis = null;
     }
 
-    private void OnLinkedBitmapIconSourceChanged(object? sender, object e)
+    private void OnLinkedBitmapIconSourceChanged(object? sender, object? e)
     {
         Dispose();
-        _bitmap = _bis._bitmap;
-        _originalSize = _bis.Size;
+        if (_bis != null)
+        {
+            _bitmap = _bis._bitmap;
+            _originalSize = _bis.Size;
+        }
         InvalidateCachedBitmap();
     }
-
-    private BitmapIconSource? _bis;
-    protected SKBitmap? _bitmap;
-    private Size _originalSize;
-    private Bitmap? _cachedAvBitmap;
 }

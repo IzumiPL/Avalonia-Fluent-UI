@@ -9,7 +9,7 @@ internal static class NumberBoxParser
 {
     public const string NUMBER_BOX_OPERATORS = "+-*/^";
 
-    public static IList<MathToken> GetTokens(ReadOnlySpan<char> input)
+    public static IList<MathToken>? GetTokens(ReadOnlySpan<char> input)
     {
         var tokens = new List<MathToken>();
 
@@ -102,7 +102,7 @@ internal static class NumberBoxParser
     }
 
     // Converts a list of tokens from infix format (e.g. "3 + 5") to postfix (e.g. "3 5 +")
-    public static IList<MathToken> ConvertInfixToPostfix(IList<MathToken> infixTokens)
+    public static IList<MathToken>? ConvertInfixToPostfix(IList<MathToken> infixTokens)
     {
         List<MathToken> postFixTokens = new List<MathToken>();
         Stack<MathToken> operatorTokens = new Stack<MathToken>();

@@ -14,6 +14,12 @@ namespace AvaloniaFluentUI.Controls.Experimental;
 
 public class ConnectedAnimation
 {
+    private ConnectedAnimationService _owningService;
+    private Visual _sourceElement;
+    private float _initialOpacity;
+    private Vector3 _initialOffset;
+    private Vector2 _initialSize;
+    
     internal ConnectedAnimation(Visual source, ConnectedAnimationService service)
     {
         Configuration = new GravityConnectedAnimationConfiguration();
@@ -51,7 +57,7 @@ public class ConnectedAnimation
         return TryStart(destination, null);
     }
 
-    public bool TryStart(Visual destination, IList<Visual> coordinatedVisuals)
+    public bool TryStart(Visual destination, IList<Visual>? coordinatedVisuals)
     {
         if (_sourceElement == destination)
             return false;
@@ -67,7 +73,7 @@ public class ConnectedAnimation
         return true;
     }
 
-    private void ConfigureConnectedAnimation(Visual destination, IList<Visual> coordinatedVisuals = null)
+    private void ConfigureConnectedAnimation(Visual destination, IList<Visual>? coordinatedVisuals = null)
     {
         var destVis = ElementComposition.GetElementVisual(destination);
         if (destVis == null)
@@ -204,10 +210,4 @@ public class ConnectedAnimation
 
         destVis.StartAnimationGroup(group);
     }
-
-    private ConnectedAnimationService _owningService;
-    private Visual _sourceElement;
-    private float _initialOpacity;
-    private Vector3 _initialOffset;
-    private Vector2 _initialSize;
 }

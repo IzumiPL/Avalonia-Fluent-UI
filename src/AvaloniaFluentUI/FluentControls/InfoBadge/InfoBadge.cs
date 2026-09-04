@@ -12,8 +12,8 @@ namespace AvaloniaFluentUI.Controls;
 /// Represents a control for indicating notifications, alerts, new content, 
 /// or to attract focus to an area within an app.
 /// </summary>
-[PseudoClasses(s_pcValue, s_pcFontIcon, SharedPseudoclasses.s_pcIcon)]
-public partial class InfoBadge : TemplatedControl
+[PseudoClasses(PC_VALUE, PC_FONT_ICON, SharedPseudoclasses.s_pcIcon)]
+public class InfoBadge : TemplatedControl
 {
     /// <summary>
     /// Defines the <see cref="Value"/> property
@@ -24,8 +24,8 @@ public partial class InfoBadge : TemplatedControl
     /// <summary>
     /// Defines the <see cref="IconSource"/> property
     /// </summary>
-    public static readonly StyledProperty<IconSource> IconSourceProperty =
-        AvaloniaProperty.Register<NavigationViewItem, IconSource>(nameof(IconSource));
+    public static readonly StyledProperty<IconSource?> IconSourceProperty =
+        AvaloniaProperty.Register<NavigationViewItem, IconSource?>(nameof(IconSource));
 
     /// <summary>
     /// Defines the <see cref="TemplateSettings"/> property
@@ -45,7 +45,7 @@ public partial class InfoBadge : TemplatedControl
     /// <summary>
     /// Gets or sets the icon to be used in an InfoBadge.
     /// </summary>
-    public IconSource IconSource
+    public IconSource? IconSource
     {
         get => GetValue(IconSourceProperty);
         set => SetValue(IconSourceProperty, value);
@@ -61,8 +61,8 @@ public partial class InfoBadge : TemplatedControl
         internal set => SetValue(TemplateSettingsProperty, value);
     }
 
-    private const string s_pcValue = ":value";
-    private const string s_pcFontIcon = ":fonticon";
+    private const string PC_VALUE = ":value";
+    private const string PC_FONT_ICON = ":fonticon";
     
     public InfoBadge()
     {
@@ -104,23 +104,23 @@ public partial class InfoBadge : TemplatedControl
         var icoSource = IconSource;
         if (!String.IsNullOrWhiteSpace(Value))
         {
-            PseudoClasses.Set(s_pcValue, true);
-            PseudoClasses.Set(s_pcFontIcon, false);
+            PseudoClasses.Set(PC_VALUE, true);
+            PseudoClasses.Set(PC_FONT_ICON, false);
             PseudoClasses.Set(SharedPseudoclasses.s_pcIcon, false);
         }
         else if (icoSource != null)
         {
             TemplateSettings.IconElement = IconHelpers.CreateFromUnknown(icoSource);
 
-            PseudoClasses.Set(s_pcFontIcon, icoSource is FontIconSource);
+            PseudoClasses.Set(PC_FONT_ICON, icoSource is FontIconSource);
             PseudoClasses.Set(SharedPseudoclasses.s_pcIcon, icoSource is not FontIconSource);
 
-            PseudoClasses.Set(s_pcValue, false);
+            PseudoClasses.Set(PC_VALUE, false);
         }
         else
         {
-            PseudoClasses.Set(s_pcValue, false);
-            PseudoClasses.Set(s_pcFontIcon, false);
+            PseudoClasses.Set(PC_VALUE, false);
+            PseudoClasses.Set(PC_FONT_ICON, false);
             PseudoClasses.Set(SharedPseudoclasses.s_pcIcon, false);
         }
     }

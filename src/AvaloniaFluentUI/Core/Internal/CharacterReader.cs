@@ -6,8 +6,7 @@ internal ref struct CharacterReader
 {
     private ReadOnlySpan<char> _s;
 
-    public CharacterReader(ReadOnlySpan<char> s)
-        : this()
+    public CharacterReader(ReadOnlySpan<char> s) : this()
     {
         _s = s;
     }

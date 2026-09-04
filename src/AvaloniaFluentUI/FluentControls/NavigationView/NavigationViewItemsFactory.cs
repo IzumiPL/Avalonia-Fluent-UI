@@ -104,7 +104,7 @@ internal class NavigationViewItemsFactory : ElementFactory
                     UnlinkElementFromParent(args);
                     args.Element = null;
 
-                    _navViewPool.Add(nvi);
+                    _navViewPool?.Add(nvi);
 
                     // Retrieve the proper element that requires recycling for a user defined item template
                     // and update the args correspondingly

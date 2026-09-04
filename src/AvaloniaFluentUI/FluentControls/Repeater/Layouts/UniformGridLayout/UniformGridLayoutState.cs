@@ -12,6 +12,11 @@ internal class UniformGridLayoutState
     public double EffectiveItemWidth => _effectiveItemWidth;
 
     public double EffectiveItemHeight => _effectiveItemHeight;
+    
+    private FlowLayoutAlgorithm? _flowAlgorithm;
+    private double _effectiveItemWidth;
+    private double _effectiveItemHeight;
+    private bool _isEffectiveSizeValid;
 
     public void InitializeForContext(VirtualizingLayoutContext context,
         IFlowLayoutAlgorithmDelegates callbacks)
@@ -23,7 +28,7 @@ internal class UniformGridLayoutState
 
     public void UninitializeForContext(VirtualizingLayoutContext context)
     {
-        _flowAlgorithm.UninitializeForContext(context);
+        _flowAlgorithm?.UninitializeForContext(context);
     }
 
     public void EnsureElementSize(Size availableSize, VirtualizingLayoutContext context,
@@ -39,7 +44,7 @@ internal class UniformGridLayoutState
         if (context.ItemCount > 0)
         {
             // If the first element is realized we don't need to get it from the context
-            if (_flowAlgorithm.GetElementIfRealized(0) is Control realizedElement)
+            if (_flowAlgorithm?.GetElementIfRealized(0) is Control realizedElement)
             {
                 // This is relatively cheap, when item 0 is realized, always use it to find the size. 
                 realizedElement.Measure(CalculateAvailableSize(
@@ -203,9 +208,4 @@ internal class UniformGridLayoutState
     {
         _isEffectiveSizeValid = false;
     }
-
-    private FlowLayoutAlgorithm _flowAlgorithm;
-    private double _effectiveItemWidth;
-    private double _effectiveItemHeight;
-    private bool _isEffectiveSizeValid;
 }

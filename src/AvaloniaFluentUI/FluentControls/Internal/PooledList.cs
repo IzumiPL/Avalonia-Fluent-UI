@@ -65,7 +65,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
     /// increased to DefaultCapacity, and then increased in multiples of two
     /// as required.
     /// </summary>
-    public PooledList(ClearMode clearMode, ArrayPool<T> customPool)
+    public PooledList(ClearMode clearMode, ArrayPool<T>? customPool)
     {
         _items = s_emptyArray;
         _pool = customPool ?? ArrayPool<T>.Shared;
@@ -126,7 +126,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
     /// initially empty, but will have room for the given number of elements
     /// before any reallocations are required.
     /// </summary>
-    public PooledList(int capacity, ClearMode clearMode, ArrayPool<T> customPool, bool sizeToCapacity)
+    public PooledList(int capacity, ClearMode clearMode, ArrayPool<T>? customPool, bool sizeToCapacity)
     {
         _pool = customPool ?? ArrayPool<T>.Shared;
         _clearOnFree = ShouldClear(clearMode);
@@ -204,7 +204,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
     /// size and capacity of the new list will both be equal to the size of the
     /// given collection.
     /// </summary>
-    public PooledList(ReadOnlySpan<T> span, ClearMode clearMode, ArrayPool<T> customPool)
+    public PooledList(ReadOnlySpan<T> span, ClearMode clearMode, ArrayPool<T>? customPool)
     {
         _pool = customPool ?? ArrayPool<T>.Shared;
         _clearOnFree = ShouldClear(clearMode);
@@ -248,7 +248,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
     /// size and capacity of the new list will both be equal to the size of the
     /// given collection.
     /// </summary>
-    public PooledList(IEnumerable<T> collection, ClearMode clearMode, ArrayPool<T> customPool)
+    public PooledList(IEnumerable<T> collection, ClearMode clearMode, ArrayPool<T>? customPool)
     {
         _pool = customPool ?? ArrayPool<T>.Shared;
         _clearOnFree = ShouldClear(clearMode);
@@ -375,7 +375,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
         }
     }
 
-    private static bool IsCompatibleObject(object value)
+    private static bool IsCompatibleObject(object? value)
     {
         // Non-null values are fine.  Only accept nulls if T is a class or Nullable<U>.
         // Note that default(T) is not equal to null for value types except when T is Nullable<U>. 
@@ -392,7 +392,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
         {
             try
             {
-                this[index] = (T)value!;
+                this[index] = (T)value;
             }
             catch
             {
@@ -432,7 +432,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
         _items[size] = item;
     }
 
-    int IList.Add(object item)
+    int IList.Add(object? item)
     {
         Add((T)item!);
 
@@ -506,7 +506,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
     /// the search value should be inserted into the list in order for the list
     /// to remain sorted.
     /// </para></remarks>
-    public int BinarySearch(int index, int count, T item, IComparer<T> comparer)
+    public int BinarySearch(int index, int count, T item, IComparer<T>? comparer)
     {
         return Array.BinarySearch(_items, index, count, item, comparer);
     }
@@ -562,7 +562,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
         return _size != 0 && IndexOf(item) != -1;
     }
 
-    bool IList.Contains(object item)
+    bool IList.Contains(object? item)
     {
         if (IsCompatibleObject(item))
         {
@@ -638,7 +638,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
     public bool Exists(Func<T, bool> match)
         => FindIndex(match) != -1;
 
-    public bool TryFind(Func<T, bool> match, out T result)
+    public bool TryFind(Func<T, bool> match, out T? result)
     {
         for (int i = 0; i < _size; i++)
         {
@@ -683,7 +683,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
         return -1;
     }
 
-    public bool TryFindLast(Func<T, bool> match, out T result)
+    public bool TryFindLast(Func<T, bool> match, out T? result)
     {
         for (int i = _size - 1; i >= 0; i--)
         {
@@ -785,7 +785,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
     public int IndexOf(T item)
         => Array.IndexOf(_items, item, 0, _size);
 
-    int IList.IndexOf(object item)
+    int IList.IndexOf(object? item)
     {
         if (IsCompatibleObject(item))
         {
@@ -847,7 +847,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
         _version++;
     }
 
-    void IList.Insert(int index, object item)
+    void IList.Insert(int index, object? item)
     {
         try
         {
@@ -1054,7 +1054,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
         return false;
     }
 
-    void IList.Remove(object item)
+    void IList.Remove(object? item)
     {
         if (IsCompatibleObject(item))
         {
@@ -1214,7 +1214,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
     /// 
     /// This method uses the Array.Sort method to sort the elements.
     /// </summary>
-    public void Sort(int index, int count, IComparer<T> comparer)
+    public void Sort(int index, int count, IComparer<T>? comparer)
     {
         if (index < 0)
             throw new ArgumentOutOfRangeException();
@@ -1373,7 +1373,7 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
 
         public T Current => _current!;
 
-        object IEnumerator.Current
+        object? IEnumerator.Current
         {
             get
             {
@@ -1390,19 +1390,19 @@ internal class PooledList<T> : IList<T>, IList, IDisposable
         private readonly PooledList<T> _list;
         private int _index;
         private readonly int _version;
-        private T _current;
+        private T? _current;
     }
 
-    private readonly struct Comparer : IComparer<T>
+    private readonly struct Comparer : IComparer<T?>
     {
-        public Comparer(Func<T, T, int> comparison)
+        public Comparer(Func<T?, T?, int> comparison)
         {
             _comparison = comparison;
         }
 
-        public int Compare(T x, T y) => _comparison(x, y);
+        public int Compare(T? x, T? y) => _comparison(x, y);
 
-        private readonly Func<T, T, int> _comparison;
+        private readonly Func<T?, T?, int> _comparison;
     }
 }
 

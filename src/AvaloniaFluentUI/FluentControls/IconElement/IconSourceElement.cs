@@ -38,7 +38,11 @@ public class IconSourceElement : IconElement
 
     private void OnIconSourceChanged(AvaloniaPropertyChangedEventArgs args)
     {
-        var newIcon = (IconSource)args.NewValue;
+        IconSource? newIcon = null;
+        if (args.NewValue != null)
+        {
+            newIcon = (IconSource)args.NewValue;
+        }
 
         if (_child != null)
         {

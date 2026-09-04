@@ -11,7 +11,7 @@ internal static class IEnumerableExtensions
     /// <summary>
     /// Gets the item count of the IEnumerable
     /// </summary>
-    public static int Count(this IEnumerable items)
+    public static int Count(this IEnumerable? items)
     {
         if (items == null)
             return 0;
@@ -29,7 +29,7 @@ internal static class IEnumerableExtensions
     /// <summary>
     /// Gets the index of an item from an IEnumerable
     /// </summary>
-    public static int IndexOf(this IEnumerable items, object item)
+    public static int IndexOf(this IEnumerable items, object? item)
     {
         var list = items as IList;
 
@@ -80,7 +80,7 @@ internal static class IEnumerableExtensions
     /// <summary>
     /// Checks of the IEnumerable contains the given item
     /// </summary>
-    public static bool Contains(this IEnumerable items, object item)
+    public static bool Contains(this IEnumerable items, object? item)
     {
         if (items is IList list)
         {

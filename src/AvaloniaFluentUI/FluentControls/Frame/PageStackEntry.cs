@@ -16,7 +16,7 @@ public class PageStackEntry
     /// <param name="sourcePageType">The type of page associated with the navigation entry, as a type reference</param>
     /// <param name="parameter">The navigation parameter associated with the navigation entry.</param>
     /// <param name="navigationTransitionInfo">Info about the animated transition associated with the navigation entry.</param>
-    public PageStackEntry(Type sourcePageType, object parameter, NavigationTransitionInfo navigationTransitionInfo)
+    public PageStackEntry(Type? sourcePageType, object? parameter, NavigationTransitionInfo? navigationTransitionInfo)
     {
         NavigationTransitionInfo = navigationTransitionInfo;
         SourcePageType = sourcePageType;
@@ -26,17 +26,17 @@ public class PageStackEntry
     /// <summary>
     /// Gets the type of page associated with this navigation entry.
     /// </summary>
-    public Type SourcePageType { get; set; }
+    public Type? SourcePageType { get; set; }
 
     /// <summary>
     /// Gets a value that indicates the animated transition associated with the navigation entry.
     /// </summary>
-    public NavigationTransitionInfo NavigationTransitionInfo { get; internal set; }
+    public NavigationTransitionInfo? NavigationTransitionInfo { get; internal set; }
 
     /// <summary>
     /// Gets the navigation parameter associated with this navigation entry.
     /// </summary>
-    public object Parameter { get; set; }
+    public object? Parameter { get; set; }
 
     /// <summary>
     /// Gets the navigation context used for this page when called from 
@@ -44,5 +44,5 @@ public class PageStackEntry
     /// </summary>
     public object Context { get; internal set; }
 
-    internal Control Instance { get; set; }
+    internal Control? Instance { get; set; }
 }

@@ -122,7 +122,7 @@ internal class FlowLayoutAlgorithm : IOrientationBasedMeasures
         }
     }
 
-    public void OnItemsSourceChanged(object source, NotifyCollectionChangedEventArgs args,
+    public void OnItemsSourceChanged(object? source, NotifyCollectionChangedEventArgs args,
         VirtualizingLayoutContext context)
     {
         _elementManager.DataSourceChanged(source, args);
@@ -673,8 +673,7 @@ internal class FlowLayoutAlgorithm : IOrientationBasedMeasures
                 }
             }
 
-            bounds = new Rect(bounds.X - _lastExtent.X, bounds.Y - _lastExtent.Y,
-                bounds.Width, bounds.Height);
+            bounds = new Rect(bounds.X - _lastExtent.X, bounds.Y - _lastExtent.Y, bounds.Width, bounds.Height);
 
             if (!isWrapping)
             {
@@ -693,15 +692,13 @@ internal class FlowLayoutAlgorithm : IOrientationBasedMeasures
         }
     }
 
-    private Rect RealizationRect() =>
-        IsVirtualizingContext() ? _context.RealizationRect :
-        new Rect(0, 0, double.PositiveInfinity, double.PositiveInfinity);
+    private Rect RealizationRect() => IsVirtualizingContext() && _context != null ? _context.RealizationRect : new Rect(0, 0, double.PositiveInfinity, double.PositiveInfinity);
 
     private void SetLayoutOrigin()
     {
         if (IsVirtualizingContext())
         {
-            _context.LayoutOrigin = _lastExtent.Position;
+            _context?.LayoutOrigin = _lastExtent.Position;
         }
         else
         {
@@ -711,7 +708,7 @@ internal class FlowLayoutAlgorithm : IOrientationBasedMeasures
         }
     }
 
-    internal Control GetElementIfRealized(int dataIndex)
+    internal Control? GetElementIfRealized(int dataIndex)
     {
         if (_elementManager.IsDataIndexRealized(dataIndex))
             return _elementManager.GetRealizedElement(dataIndex);
@@ -747,7 +744,7 @@ internal class FlowLayoutAlgorithm : IOrientationBasedMeasures
     private Size _lastAvailableSize;
     private double _lastItemSpacing;
     private bool _collectionChangePending;
-    private VirtualizingLayoutContext _context;
+    private VirtualizingLayoutContext? _context;
     private IFlowLayoutAlgorithmDelegates _algorithmCallbacks;
     private Rect _lastExtent;
     private int _firstRealizedDataIndexInsideRealizationWindow = -1;

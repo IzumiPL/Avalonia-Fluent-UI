@@ -14,9 +14,14 @@ namespace AvaloniaFluentUI.Controls;
 /// This class generally should not be used on your own and is meant for
 /// the template of a <see cref="CommandBar"/>
 /// </remarks>
-[PseudoClasses(s_pcIcons, s_pcToggle)]
+[PseudoClasses(PC_ICONS, PC_TOGGLE)]
 public class CommandBarOverflowPresenter : ItemsControl
 {
+    private int _hasIcons;
+    private int _hasToggle;
+    private const string PC_ICONS = ":icons";
+    private const string PC_TOGGLE = ":toggle";
+    
     public CommandBarOverflowPresenter()
     {
         ItemsView.CollectionChanged += ItemsCollectionChanged;
@@ -87,8 +92,10 @@ public class CommandBarOverflowPresenter : ItemsControl
         UpdateVisualState();
     }
 
-    private void RegisterItems(IList l)
+    private void RegisterItems(IList? l)
     {
+        if (l == null) { return; }
+        
         for (int i = 0; i < l.Count; i++)
         {
             if (l[i] is CommandBarButton cbb)
@@ -128,8 +135,8 @@ public class CommandBarOverflowPresenter : ItemsControl
                     _hasIcons--;
 
                 cbb.IsInOverflow = false;
-                ((IPseudoClasses)cbb.Classes).Set(s_pcIcons, false);
-                ((IPseudoClasses)cbb.Classes).Set(s_pcToggle, false);
+                ((IPseudoClasses)cbb.Classes).Set(PC_ICONS, false);
+                ((IPseudoClasses)cbb.Classes).Set(PC_TOGGLE, false);
             }
             else if (l[i] is CommandBarToggleButton cbtb)
             {
@@ -139,14 +146,14 @@ public class CommandBarOverflowPresenter : ItemsControl
                     _hasIcons--;
 
                 cbtb.IsInOverflow = false;
-                ((IPseudoClasses)cbtb.Classes).Set(s_pcIcons, false);
-                ((IPseudoClasses)cbtb.Classes).Set(s_pcToggle, false);
+                ((IPseudoClasses)cbtb.Classes).Set(PC_ICONS, false);
+                ((IPseudoClasses)cbtb.Classes).Set(PC_TOGGLE, false);
             }
             else if (l[i] is CommandBarElementContainer cont)
             {
                 cont.IsInOverflow = false;
-                ((IPseudoClasses)cont.Classes).Set(s_pcIcons, false);
-                ((IPseudoClasses)cont.Classes).Set(s_pcToggle, false);
+                ((IPseudoClasses)cont.Classes).Set(PC_ICONS, false);
+                ((IPseudoClasses)cont.Classes).Set(PC_TOGGLE, false);
             }
             else if (l[i] is CommandBarSeparator sep)
             {
@@ -165,14 +172,9 @@ public class CommandBarOverflowPresenter : ItemsControl
         {
             if (items[i] is Control c && c.Classes is IPseudoClasses pc)
             {
-                pc.Set(s_pcIcons, icon);
-                pc.Set(s_pcToggle, toggle);
+                pc.Set(PC_ICONS, icon);
+                pc.Set(PC_TOGGLE, toggle);
             }
         }
     }
-
-    private int _hasIcons;
-    private int _hasToggle;
-    private const string s_pcIcons = ":icons";
-    private const string s_pcToggle = ":toggle";
 }

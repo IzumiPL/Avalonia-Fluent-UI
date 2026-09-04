@@ -442,7 +442,7 @@ internal class SpecializedCollectionViewGroup : CollectionViewGroup, IComparer<o
         OnVectorChanged(args);
     }
 
-    int IComparer<object>.Compare(object x, object y)
+    int IComparer<object>.Compare(object? x, object? y)
     {
         var sortDesc = _owner.GetSortDescriptions();
         if (sortDesc != null)

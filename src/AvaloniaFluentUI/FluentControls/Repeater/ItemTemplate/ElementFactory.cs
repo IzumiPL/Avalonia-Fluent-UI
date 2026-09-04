@@ -30,7 +30,7 @@ public abstract class ElementFactory : IElementFactory
     /// </summary>
     protected abstract void RecycleElementCore(ElementFactoryRecycleArgs args);
 
-    Control ITemplate<object, Control>.Build(object param) => null;
+    Control? ITemplate<object?, Control?>.Build(object? param) => null;
 
-    bool IDataTemplate.Match(object data) => false;
+    bool IDataTemplate.Match(object? data) => false;
 }

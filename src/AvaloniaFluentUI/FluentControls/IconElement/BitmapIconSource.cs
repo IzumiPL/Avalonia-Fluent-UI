@@ -18,7 +18,7 @@ public class BitmapIconSource : IconSource, IDisposable
     /// <summary>
     /// Defines the <see cref="UriSource"/> property
     /// </summary>
-    public static readonly StyledProperty<Uri> UriSourceProperty =
+    public static readonly StyledProperty<Uri?> UriSourceProperty =
         BitmapIcon.UriSourceProperty.AddOwner<BitmapIconSource>();
 
     /// <summary>
@@ -30,7 +30,7 @@ public class BitmapIconSource : IconSource, IDisposable
     /// <summary>
     /// Gets or sets the Uniform Resource Identifier (URI) of the bitmap to use as the icon content.
     /// </summary>
-    public Uri UriSource
+    public Uri? UriSource
     {
         get => GetValue(UriSourceProperty);
         set => SetValue(UriSourceProperty, value);
@@ -47,7 +47,7 @@ public class BitmapIconSource : IconSource, IDisposable
 
     public Size Size => _originalSize;
 
-    public event EventHandler<object> OnBitmapChanged;
+    public event EventHandler<object>? OnBitmapChanged;
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
@@ -70,7 +70,7 @@ public class BitmapIconSource : IconSource, IDisposable
         _originalSize = default;
     }
 
-    private void CreateBitmap(Uri src)
+    private void CreateBitmap(Uri? src)
     {
         Dispose();
 

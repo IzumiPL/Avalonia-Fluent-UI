@@ -20,9 +20,22 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// The BreadcrumbBar control provides the direct path of pages or folders to the current location.
 /// </summary>
-[TemplatePart(Name = s_tpItemsRepeater, Type=typeof(ItemsRepeater))]
+[TemplatePart(Name = PART_ITEMS_REPEATER, Type = typeof(ItemsRepeater))]
 public class BreadcrumbBar : TemplatedControl
 {
+    private ItemsSourceView? _breadcrumbItemsSourceView;
+    private BreadcrumbIterable? _itemsIterable;
+
+    private ItemsRepeater? _itemsRepeater;
+    private BreadcrumbElementFactory? _itemsRepeaterElementFactory;
+    private BreadcrumbLayout? _itemsRepeaterLayout;
+
+    private BreadcrumbBarItem? _ellipsisBreadcrumBarItem;
+    private BreadcrumbBarItem? _lastBreadcrumbBarItem;
+    private int _focusedIndex;
+
+    private const string PART_ITEMS_REPEATER = "PART_ItemsRepeater";
+    
     public BreadcrumbBar()
     {
         _itemsRepeaterElementFactory = new BreadcrumbElementFactory();
@@ -91,7 +104,7 @@ public class BreadcrumbBar : TemplatedControl
 
         base.OnApplyTemplate(e);
 
-        var repeater = e.NameScope.Get<ItemsRepeater>(s_tpItemsRepeater);
+        var repeater = e.NameScope.Get<ItemsRepeater>(PART_ITEMS_REPEATER);
         repeater.Layout = _itemsRepeaterLayout;
         repeater.ItemTemplate = _itemsRepeaterElementFactory;
 
@@ -168,7 +181,7 @@ public class BreadcrumbBar : TemplatedControl
         }
     }
 
-    private void OnBreadcrumbBarItemsSourceCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    private void OnBreadcrumbBarItemsSourceCollectionChanged(object? sender, NotifyCollectionChangedEventArgs? e)
     {
         if (_itemsRepeater != null)
         {
@@ -192,9 +205,9 @@ public class BreadcrumbBar : TemplatedControl
         if (isv != null)
         {
             var itemCount = isv.Count;
-            if (_itemsRepeater is ItemsRepeater repeater)
+            if (_itemsRepeater != null)
             {
-                var newLastItem = repeater.TryGetElement(itemCount);
+                var newLastItem = _itemsRepeater.TryGetElement(itemCount);
                 UpdateLastElement(newLastItem as BreadcrumbBarItem);
             }
 
@@ -245,9 +258,9 @@ public class BreadcrumbBar : TemplatedControl
             }
             else
             {
-                if (_breadcrumbItemsSourceView is ItemsSourceView isv)
+                if (_breadcrumbItemsSourceView != null)
                 {
-                    var itemCount = isv.Count;
+                    var itemCount = _breadcrumbItemsSourceView.Count;
                     if (itemIndex == itemCount)
                     {
                         UpdateLastElement(item);
@@ -306,7 +319,7 @@ public class BreadcrumbBar : TemplatedControl
         return l;
     }
 
-    internal IEnumerable<object> HiddenElements()
+    internal IEnumerable<object>? HiddenElements()
     {
         if (_itemsRepeater != null && _itemsRepeaterLayout != null &&
             _itemsRepeaterLayout.EllipsisIsRendered)
@@ -319,7 +332,7 @@ public class BreadcrumbBar : TemplatedControl
 
     internal void ReIndexVisibleElementsForAccessibility()
     {
-        if (_itemsRepeater is ItemsRepeater repeater)
+        if (_itemsRepeater != null && _itemsRepeaterLayout != null)
         {
             var visibleCount = _itemsRepeaterLayout.GetVisibleItemsCount;
             bool isEllipsisRendered = _itemsRepeaterLayout.EllipsisIsRendered;
@@ -330,10 +343,10 @@ public class BreadcrumbBar : TemplatedControl
 
             // In order to make the ellipsis inaccessible to accessbility tools when it's hidden,
             // we set the accessibilityView to raw and restore it to content when it becomes visible.
-            if (_ellipsisBreadcrumBarItem is BreadcrumbBarItem ellipsisItem)
+            if (_ellipsisBreadcrumBarItem != null)
             {
                 var accView = isEllipsisRendered ? AccessibilityView.Content : AccessibilityView.Raw;
-                ellipsisItem.SetValue(AutomationProperties.AccessibilityViewProperty, accView);
+                _ellipsisBreadcrumBarItem.SetValue(AutomationProperties.AccessibilityViewProperty, accView);
             }
 
             // For every BreadcrumbBar item we set the index (starting from 1 for the root/highest-level item)
@@ -341,10 +354,11 @@ public class BreadcrumbBar : TemplatedControl
             // itemToIndex is the real index and it may differ from accessibilityIndex as we must only index the visible items
             for (int accIdx = 1, itemToIndex = firstItemToIndex; accIdx <= visibleCount; accIdx++, itemToIndex++)
             {
-                if (repeater.TryGetElement(itemToIndex) is Control c)
+                var control = _itemsRepeater.TryGetElement(itemToIndex);
+                if (control != null)
                 {
-                    c.SetValue(AutomationProperties.PositionInSetProperty, accIdx);
-                    c.SetValue(AutomationProperties.SizeOfSetProperty, visibleCount);
+                    control.SetValue(AutomationProperties.PositionInSetProperty, accIdx);
+                    control.SetValue(AutomationProperties.SizeOfSetProperty, visibleCount);
                 }
             }
         }
@@ -352,14 +366,14 @@ public class BreadcrumbBar : TemplatedControl
 
     private void OnGettingFocus(object? sender, FocusChangingEventArgs args)
     {
-        if (_itemsRepeater is ItemsRepeater repeater)
+        if (_itemsRepeater != null)
         {
             // WinUI checks args InputDevice for Keyboard
             if (args.NavigationMethod == NavigationMethod.Directional || args.NavigationMethod == NavigationMethod.Tab)
             {
-                var ctrl = Application.Current.PlatformSettings.HotkeyConfiguration.CommandModifiers;
+                var ctrl = Application.Current?.PlatformSettings?.HotkeyConfiguration.CommandModifiers;
                 var oldFocusedElement = args.OldFocusedElement;
-                if (oldFocusedElement == null || repeater != (oldFocusedElement as Visual)?.GetVisualParent())
+                if (oldFocusedElement == null || _itemsRepeater != (oldFocusedElement as Visual)?.GetVisualParent())
                 {
                     if (_itemsRepeaterLayout != null)
                     {
@@ -374,10 +388,11 @@ public class BreadcrumbBar : TemplatedControl
 
                         FocusElementAt(_focusedIndex);
                     }
-
-                    if (repeater.TryGetElement(_focusedIndex) is Control selectedItem)
+                    
+                    var control = _itemsRepeater.TryGetElement(_focusedIndex);
+                    if (control != null)
                     {
-                        if (args.TrySetNewFocusedElement(selectedItem))
+                        if (args.TrySetNewFocusedElement(control))
                         {
                             args.Handled = true;
                         }
@@ -388,7 +403,7 @@ public class BreadcrumbBar : TemplatedControl
                 {
                     if (args.NewFocusedElement is Control newFocus)
                     {
-                        FocusElementAt(repeater.GetElementIndex(newFocus));
+                        FocusElementAt(_itemsRepeater.GetElementIndex(newFocus));
                         args.Handled = true;
                     }
                 }
@@ -407,7 +422,7 @@ public class BreadcrumbBar : TemplatedControl
         var ir = _itemsRepeater;
         if (ir != null)
         {
-            var focusedElem = TopLevel.GetTopLevel(this)?.FocusManager?.GetFocusedElement();
+            var focusedElem = TopLevel.GetTopLevel(this)?.FocusManager.GetFocusedElement();
             if (focusedElem is Control element)
             {
                 var index = ir.GetElementIndex(element);
@@ -472,7 +487,10 @@ public class BreadcrumbBar : TemplatedControl
             if (ir != null)
             {
                 var layout = ir.Layout as BreadcrumbLayout;
-                movementNext = layout.FirstRenderedItemIndexAfterEllipsis;
+                if (layout != null)
+                {
+                    movementNext = layout.FirstRenderedItemIndexAfterEllipsis;
+                }
             }
         }
 
@@ -525,17 +543,4 @@ public class BreadcrumbBar : TemplatedControl
 
         _breadcrumbItemsSourceView?.CollectionChanged -= OnBreadcrumbBarItemsSourceCollectionChanged;
     }
-
-    private ItemsSourceView? _breadcrumbItemsSourceView;
-    private BreadcrumbIterable? _itemsIterable;
-
-    private ItemsRepeater? _itemsRepeater;
-    private BreadcrumbElementFactory? _itemsRepeaterElementFactory;
-    private BreadcrumbLayout? _itemsRepeaterLayout;
-
-    private BreadcrumbBarItem? _ellipsisBreadcrumBarItem;
-    private BreadcrumbBarItem? _lastBreadcrumbBarItem;
-    private int _focusedIndex;
-
-    private const string s_tpItemsRepeater = "PART_ItemsRepeater";
 }

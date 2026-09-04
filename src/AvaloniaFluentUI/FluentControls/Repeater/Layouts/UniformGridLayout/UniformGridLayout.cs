@@ -154,6 +154,17 @@ public class UniformGridLayout : VirtualizingLayout, IOrientationBasedMeasures, 
         get => ScrollOrientation;
         set => ScrollOrientation = value;
     }
+    
+    private double _minItemWidth = double.NaN;
+    private double _minItemHeight = double.NaN;
+    private double _minRowSpacing = 0;
+    private double _minColumnSpacing = 0;
+    private UniformGridLayoutItemsJustification _itemsJustification = UniformGridLayoutItemsJustification.Start;
+    private UniformGridLayoutItemsStretch _itemsStretch = UniformGridLayoutItemsStretch.None;
+    private int _maximumRowsOrColumns = int.MaxValue;
+    // !!! WARNING !!!
+    // Any storage here needs to be related to layout configuration.
+    // layout specific state needs to be stored in UniformGridLayoutState.
 
     protected internal override void InitializeForContextCore(VirtualizingLayoutContext context)
     {
@@ -255,23 +266,20 @@ public class UniformGridLayout : VirtualizingLayout, IOrientationBasedMeasures, 
         return value;
     }
 
-    protected internal override void OnItemsChangedCore(VirtualizingLayoutContext context, object source, 
-        NotifyCollectionChangedEventArgs args)
+    protected internal override void OnItemsChangedCore(VirtualizingLayoutContext context, object? source, NotifyCollectionChangedEventArgs args)
     {
         GetFlowAlgorithm(context).OnItemsSourceChanged(source, args, context);
         // Always invalidate layout to keep the view accurate.
         InvalidateLayout();
     }
 
-    Size IFlowLayoutAlgorithmDelegates.Algorithm_GetMeasureSize(int index, Size availableSize, 
-        VirtualizingLayoutContext context)
+    Size IFlowLayoutAlgorithmDelegates.Algorithm_GetMeasureSize(int index, Size availableSize, VirtualizingLayoutContext context)
     {
         var gridState = GetAsGridState(context.LayoutState);
         return new Size(gridState.EffectiveItemWidth, gridState.EffectiveItemHeight);
     }
 
-    Size IFlowLayoutAlgorithmDelegates.Algorithm_GetProvisionalArrangeSize(int index, Size measureSize, 
-        Size desiredSize, VirtualizingLayoutContext context)
+    Size IFlowLayoutAlgorithmDelegates.Algorithm_GetProvisionalArrangeSize(int index, Size measureSize, Size desiredSize, VirtualizingLayoutContext context)
     {
         var gridState = GetAsGridState(context.LayoutState);
         return new Size(gridState.EffectiveItemWidth, gridState.EffectiveItemHeight);
@@ -280,8 +288,7 @@ public class UniformGridLayout : VirtualizingLayout, IOrientationBasedMeasures, 
     bool IFlowLayoutAlgorithmDelegates.Algorithm_ShouldBreakLine(int index, double remainingSpace) =>
         remainingSpace < 0;
 
-    FlowLayoutAnchorInfo IFlowLayoutAlgorithmDelegates.Algorithm_GetAnchorForRealizationRect(Size availableSize, 
-        VirtualizingLayoutContext context)
+    FlowLayoutAnchorInfo IFlowLayoutAlgorithmDelegates.Algorithm_GetAnchorForRealizationRect(Size availableSize, VirtualizingLayoutContext context)
     {
         Rect bounds = new Rect(double.NaN, double.NaN, double.NaN, double.NaN);
         int anchorIndex = -1;
@@ -309,8 +316,7 @@ public class UniformGridLayout : VirtualizingLayout, IOrientationBasedMeasures, 
         return new FlowLayoutAnchorInfo { Index = anchorIndex, Offset = this.MajorStart(bounds) };
     }
 
-    FlowLayoutAnchorInfo IFlowLayoutAlgorithmDelegates.Algorithm_GetAnchorForTargetElement(int targetIndex,
-        Size availableSize, VirtualizingLayoutContext context)
+    FlowLayoutAnchorInfo IFlowLayoutAlgorithmDelegates.Algorithm_GetAnchorForTargetElement(int targetIndex, Size availableSize, VirtualizingLayoutContext context)
     {
         int index = -1;
         double offset = double.NaN;
@@ -329,7 +335,7 @@ public class UniformGridLayout : VirtualizingLayout, IOrientationBasedMeasures, 
     }
 
     Rect IFlowLayoutAlgorithmDelegates.Algorithm_GetExtent(Size availableSize, VirtualizingLayoutContext context,
-        Control firstRealized, int firstRealizedItemIndex, Rect firstRealizedLayoutBounds,
+        Control? firstRealized, int firstRealizedItemIndex, Rect firstRealizedLayoutBounds,
         Control lastRealized, int lastRealizedItemIndex, Rect lastRealiedLayoutBounds)
     {
         var extent = new Rect();
@@ -439,11 +445,9 @@ public class UniformGridLayout : VirtualizingLayout, IOrientationBasedMeasures, 
         return bounds;
     }
 
-    private UniformGridLayoutState GetAsGridState(object state) =>
-        state as UniformGridLayoutState;
+    private UniformGridLayoutState GetAsGridState(object? state) => state as UniformGridLayoutState;
 
-    private FlowLayoutAlgorithm GetFlowAlgorithm(VirtualizingLayoutContext context) =>
-        GetAsGridState(context.LayoutState).FlowAlgorithm;
+    private FlowLayoutAlgorithm GetFlowAlgorithm(VirtualizingLayoutContext context) => GetAsGridState(context.LayoutState).FlowAlgorithm;
 
     private void InvalidateLayout() => InvalidateMeasure();
 
@@ -452,16 +456,4 @@ public class UniformGridLayout : VirtualizingLayout, IOrientationBasedMeasures, 
         IndexBasedLayoutOrientation = orientation == Orientation.Horizontal ?
             IndexBasedLayoutOrientation.LeftToRight : IndexBasedLayoutOrientation.TopToBottom;
     }
-   
-
-    private double _minItemWidth = double.NaN;
-    private double _minItemHeight = double.NaN;
-    private double _minRowSpacing = 0;
-    private double _minColumnSpacing = 0;
-    private UniformGridLayoutItemsJustification _itemsJustification = UniformGridLayoutItemsJustification.Start;
-    private UniformGridLayoutItemsStretch _itemsStretch = UniformGridLayoutItemsStretch.None;
-    private int _maximumRowsOrColumns = int.MaxValue;
-    // !!! WARNING !!!
-    // Any storage here needs to be related to layout configuration.
-    // layout specific state needs to be stored in UniformGridLayoutState.
 }

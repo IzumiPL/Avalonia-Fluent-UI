@@ -2,7 +2,6 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
-using Avalonia.Platform;
 using Avalonia.Rendering.Composition;
 using Avalonia.Skia;
 using Avalonia.VisualTree;
@@ -23,24 +22,26 @@ public sealed class ProgressRingAnimatedVisual : Control
         base.OnAttachedToVisualTree(e);
 
         var parent = this.FindAncestorOfType<ProgressRing>();
-
-        bool indeterminate = parent.IsIndeterminate;
-        _handler = new CustomCompHandler(parent.Minimum, parent.Maximum, parent.Value,
-            parent.IsActive, parent.Background, parent.Foreground);
-
-        if (_sfc == null)
+        if (parent != null)
         {
-            var vis = ElementComposition.GetElementVisual(this);
-            var comp = vis.Compositor;
+            bool indeterminate = parent.IsIndeterminate;
+            _handler = new CustomCompHandler(parent.Minimum, parent.Maximum, parent.Value,
+                parent.IsActive, parent.Background, parent.Foreground);
 
-            _sfc = comp.CreateCustomVisual(_handler);
-            // The WinUI Animated Visual is 80x80
-            _sfc.Size = new Vector(80, 80);
+            if (_sfc == null)
+            {
+                var vis = ElementComposition.GetElementVisual(this);
+                var comp = vis.Compositor;
 
-            ElementComposition.SetElementChildVisual(this, _sfc);
+                _sfc = comp.CreateCustomVisual(_handler);
+                // The WinUI Animated Visual is 80x80
+                _sfc.Size = new Vector(80, 80);
+
+                ElementComposition.SetElementChildVisual(this, _sfc);
+            }
+
+            _sfc.SendHandlerMessage(new HandlerMessage(HandlerMessageType.Indeterminate, indeterminate));
         }
-
-        _sfc.SendHandlerMessage(new HandlerMessage(HandlerMessageType.Indeterminate, indeterminate));
     }
 
     protected override void OnSizeChanged(SizeChangedEventArgs e)
@@ -49,7 +50,7 @@ public sealed class ProgressRingAnimatedVisual : Control
         // The progress ring's aspect ratio is preserved, so we constrain to the smallest dimension we have
         var minSize = Math.Min(e.NewSize.Width, e.NewSize.Height);
         // The animated visual is 80x80, we scale the composition visual to scale up or down accordingly
-        _sfc.Scale = new Vector3D(minSize / 80, minSize / 80, 1);
+        _sfc?.Scale = new Vector3D(minSize / 80, minSize / 80, 1);
     }
 
     internal void SetMinimum(double min)
@@ -101,8 +102,8 @@ public sealed class ProgressRingAnimatedVisual : Control
         }
     }
 
-    private CustomCompHandler _handler;
-    private CompositionCustomVisual _sfc;
+    private CustomCompHandler? _handler;
+    private CompositionCustomVisual? _sfc;
 
     private enum HandlerMessageType
     {
@@ -130,8 +131,22 @@ public sealed class ProgressRingAnimatedVisual : Control
 
     private class CustomCompHandler : CompositionCustomVisualHandler
     {
+        private TimeSpan? _lastTime;
+        private float _duration = 2;
+        private readonly SKPaint _paint;
+        private readonly SKPath _path;
+        private readonly SKRect _visualBounds = new SKRect(10, 10, 70, 70);
+
+        private SKColor? _background;
+        private SKColor _foreground;
+        private float _min, _max, _value;
+        private bool _indeterminate;
+        private bool _active;
+        private bool _isAnimatingToValue;
+        private float _lastValue;
+        
         public CustomCompHandler(double minimum, double maximum, double value, bool isActive,
-            IBrush background, IBrush foreground)
+            IBrush? background, IBrush? foreground)
         {
             _min = (float)minimum;
             _max = (float)maximum;
@@ -363,19 +378,5 @@ public sealed class ProgressRingAnimatedVisual : Control
                 Invalidate();
             }
         }
-
-        private TimeSpan? _lastTime;
-        private float _duration = 2;
-        private readonly SKPaint _paint;
-        private readonly SKPath _path;
-        private readonly SKRect _visualBounds = new SKRect(10, 10, 70, 70);
-
-        private SKColor? _background;
-        private SKColor _foreground;
-        private float _min, _max, _value;
-        private bool _indeterminate;
-        private bool _active;
-        private bool _isAnimatingToValue;
-        private float _lastValue;
     }
 }

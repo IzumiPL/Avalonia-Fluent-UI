@@ -20,7 +20,7 @@ internal class LiveReorderHelper
         _owner = owner;
     }
 
-    public Panel ItemsPanelRoot => _owner.ItemsPanelRoot;
+    public Panel? ItemsPanelRoot => _owner.ItemsPanelRoot;
 
     public void ProcessLiveReorder(DragEventArgs args, int dragItemIndex)
     {
@@ -45,7 +45,7 @@ internal class LiveReorderHelper
         // AdjustDragPoint adjusts the coordinate for scrolling
         var dragPoint = AdjustDragPoint(args.GetPosition(_owner), _owner.Scroller.Offset, orientation);
         int draggedIndex = dragItemIndex;
-        int insertionIndex = -1;
+        // int insertionIndex = -1;
         int dragOverIndex = GetClosestElement(dragPoint);// IndexFromContainer(currentItem); // The raw item index under the pointer
         var previousDragOverIndex = _liveReorderIndices.draggedOverIndex;
         int itemsCount = _owner.ItemCount;
@@ -59,13 +59,13 @@ internal class LiveReorderHelper
         }
 
         // The estimated insertion index in the panel
-        insertionIndex = GetClosestElement(dragPoint, true /*requestingInsertionIndex*/);
+        int insertionIndex = GetClosestElement(dragPoint, true /*requestingInsertionIndex*/);
 
         if (draggedIndex == itemsCount && insertionIndex == itemsCount - 1)
         {
             // If we didn't start in this TabView, see if the index is actually the end or -1
             var spLastElement = _owner.ContainerFromIndex(insertionIndex);
-            if (spLastElement is TabViewItem tvi)
+            if (spLastElement is TabViewItem)
             {
                 if (IsInBottomHalf(args.GetPosition(spLastElement), new Rect(spLastElement.Bounds.Size), orientation.Value))
                 {
@@ -137,10 +137,10 @@ internal class LiveReorderHelper
         {
             if (item.destinationIndex != -1)
             {
-                var cont = _owner.ContainerFromIndex(item.sourceIndex);
-                if (cont is Control c)
+                var control = _owner.ContainerFromIndex(item.sourceIndex);
+                if (control != null)
                 {
-                    c.Arrange(item.sourceRect);
+                    control.Arrange(item.sourceRect);
                 }
             }
         }
@@ -171,12 +171,12 @@ internal class LiveReorderHelper
     {
         // This estimates the container index given the current pointer position
         var panel = ItemsPanelRoot;
-        if (panel is VirtualizingStackPanel vsp)
+        if (panel is VirtualizingStackPanel vsp && _cachedContainerBounds != null)
         {
             var firstRealized = _firstCachedContainerIndex;
             var lastRealized = firstRealized + _cachedContainerBounds.Count - 1;
             var orientation = vsp.Orientation;
-            var movedItems = _movedItems.AsSpan();
+            // var movedItems = _movedItems.AsSpan();
             int closestIndex = -1;
             double closestDist = double.PositiveInfinity;
             Rect closestItemRect = default;
@@ -229,7 +229,7 @@ internal class LiveReorderHelper
 
             return closestIndex;
         }
-        else if (panel is StackPanel sp)
+        else if (panel is StackPanel)
         {
             //var children = sp.Children;
             //var orientation = sp.Orientation;
@@ -282,8 +282,11 @@ internal class LiveReorderHelper
 
         EnsureLiveReorderTimer();
 
-        _liveReorderTimer.Interval = TimeSpan.FromMilliseconds(200);
-        _liveReorderTimer.Start();
+        if (_liveReorderTimer != null)
+        {
+            _liveReorderTimer.Interval = TimeSpan.FromMilliseconds(200);
+            _liveReorderTimer.Start();
+        }
     }
 
     private void EnsureLiveReorderTimer()
@@ -295,7 +298,7 @@ internal class LiveReorderHelper
         }
     }
 
-    private void LiveReorderTimerTickHandler(object sender, EventArgs e)
+    private void LiveReorderTimerTickHandler(object? sender, EventArgs e)
     {
         StopLiveReorderTimer();
 
@@ -320,8 +323,6 @@ internal class LiveReorderHelper
         int endIndex = _liveReorderIndices.draggedOverIndex;
         int increment = (startIndex < endIndex) ? 1 : -1;
 
-        // Debug.WriteLine($"GetNewMovedItems: {startIndex} -> {endIndex}");
-
         newItems.Clear();
         for (int i = startIndex; i != endIndex; i += increment)
         {
@@ -337,10 +338,7 @@ internal class LiveReorderHelper
 
         AddNewItemForLiveReorder(endIndex, endIndex - increment, newItems, _liveReorderIndices.itemsCount, this);
 
-        // Debug.WriteLine($"TotalNewItems: {newItems.Count}");
-
-        static void AddNewItemForLiveReorder(int sourceIndex, int targetIndex, IList<MovedItem> newItems,
-            int itemsCount, LiveReorderHelper host)
+        static void AddNewItemForLiveReorder(int sourceIndex, int targetIndex, IList<MovedItem> newItems, int itemsCount, LiveReorderHelper host)
         {
             Rect src = default;
             Rect target = default;
@@ -362,7 +360,7 @@ internal class LiveReorderHelper
         {
             // make sure we grab the original bounds. If virtualizing, translate
             // to index in our container cache
-            var adjIndex = host.ItemsPanelRoot is VirtualizingStackPanel vsp ?
+            var adjIndex = host.ItemsPanelRoot is VirtualizingStackPanel ?
                 index - host._firstCachedContainerIndex : index;
 
             if (adjIndex < 0 || adjIndex >= host._cachedContainerBounds.Count)
@@ -380,7 +378,7 @@ internal class LiveReorderHelper
         {
             var container = _owner.ContainerFromIndex(item.sourceIndex);
 
-            if (container is Control c)
+            if (container != null)
             {
                 if (areNewItems)
                 {
@@ -391,7 +389,7 @@ internal class LiveReorderHelper
                     rc = item.sourceRect;
                 }
 
-                c.Arrange(rc);
+                container.Arrange(rc);
             }
         }
     }
@@ -475,9 +473,9 @@ internal class LiveReorderHelper
 
     private readonly TabViewListView _owner;
     private LiveReorderIndices _liveReorderIndices = new LiveReorderIndices(-1, -1, -1);
-    private DispatcherTimer _liveReorderTimer;
+    private DispatcherTimer? _liveReorderTimer;
     private readonly MovedItems _movedItems = new MovedItems();
-    private List<Rect> _cachedContainerBounds;
+    private List<Rect>? _cachedContainerBounds;
     private int _firstCachedContainerIndex = -1;
 }
 

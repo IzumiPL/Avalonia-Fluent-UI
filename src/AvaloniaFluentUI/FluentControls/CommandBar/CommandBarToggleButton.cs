@@ -13,7 +13,7 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// Represents a button control that can switch states and be displayed in a CommandBar.
 /// </summary>
-public partial class CommandBarToggleButton : ToggleButton, ICommandBarElement
+public class CommandBarToggleButton : ToggleButton, ICommandBarElement
 {
     /// <summary>
     /// Defines the <see cref="IsInOverflow"/> property
@@ -25,14 +25,14 @@ public partial class CommandBarToggleButton : ToggleButton, ICommandBarElement
     /// <summary>
     /// Defines the <see cref="IconSource"/> property
     /// </summary>
-    public static readonly StyledProperty<IconSource> IconSourceProperty =
-        AvaloniaProperty.Register<NavigationViewItem, IconSource>(nameof(IconSource));
+    public static readonly StyledProperty<IconSource?> IconSourceProperty =
+        AvaloniaProperty.Register<NavigationViewItem, IconSource?>(nameof(IconSource));
 
     /// <summary>
     /// Defines the <see cref="Label"/> property
     /// </summary>
-    public static readonly StyledProperty<string> LabelProperty =
-        AvaloniaProperty.Register<CommandBarToggleButton, string>(nameof(Label));
+    public static readonly StyledProperty<string?> LabelProperty =
+        AvaloniaProperty.Register<CommandBarToggleButton, string?>(nameof(Label));
 
     /// <summary>
     /// Defines the <see cref="DynamicOverflowOrder"/> property
@@ -74,7 +74,7 @@ public partial class CommandBarToggleButton : ToggleButton, ICommandBarElement
     /// <summary>
     /// Gets or sets the graphic content of the command bar toggle button.
     /// </summary>
-    public IconSource IconSource
+    public IconSource? IconSource
     {
         get => GetValue(IconSourceProperty);
         set => SetValue(IconSourceProperty, value);
@@ -83,7 +83,7 @@ public partial class CommandBarToggleButton : ToggleButton, ICommandBarElement
     /// <summary>
     /// Gets or sets the text description displayed on the command bar toggle button.
     /// </summary>
-    public string Label
+    public string? Label
     {
         get => GetValue(LabelProperty);
         set => SetValue(LabelProperty, value);
@@ -149,7 +149,7 @@ public partial class CommandBarToggleButton : ToggleButton, ICommandBarElement
                     HotKey = null;
                 }
 
-                if (ToolTip.GetTip(this).ToString() == xamlComOld.Description)
+                if (ToolTip.GetTip(this)?.ToString() == xamlComOld.Description)
                 {
                     ToolTip.SetTip(this, null);
                 }

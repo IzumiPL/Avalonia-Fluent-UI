@@ -17,26 +17,25 @@ internal class RepeaterLayoutContext : VirtualizingLayoutContext
         return dataSource?.Count ?? 0;
     }
 
-    protected override Control GetOrCreateElementAtCore(int index, ElementRealizationOptions options)
+    protected override Control? GetOrCreateElementAtCore(int index, ElementRealizationOptions options)
     {
-        return GetOwner()?.GetElementImpl(index,
-            (options & ElementRealizationOptions.ForceCreate) == ElementRealizationOptions.ForceCreate,
-            (options & ElementRealizationOptions.SuppressAutoRecycle) == ElementRealizationOptions.SuppressAutoRecycle);
+        return GetOwner()?.GetElementImpl(index, (options & ElementRealizationOptions.ForceCreate) == ElementRealizationOptions.ForceCreate, (options & ElementRealizationOptions.SuppressAutoRecycle) == ElementRealizationOptions.SuppressAutoRecycle);
     }
 
-    protected internal override object LayoutStateCore
+    protected internal override object? LayoutStateCore
     {
         get => GetOwner()?.LayoutState;
         set
         {
-            if (GetOwner() is ItemsRepeater ir)
+            var owner = GetOwner();
+            if (owner != null)
             {
-                ir.LayoutState = value;
+                owner.LayoutState = value;
             }
         }
     }
 
-    protected override object GetItemAtCore(int index)
+    protected override object? GetItemAtCore(int index)
     {
         return GetOwner()?.ItemsSourceView?.GetAt(index);
     }
@@ -66,7 +65,7 @@ internal class RepeaterLayoutContext : VirtualizingLayoutContext
         int anchorIndex = -1;
         var repeater = GetOwner();
         var anchor = repeater?.SuggestedAnchor;
-        if (anchor != null)
+        if (anchor != null && repeater != null)
         {
             anchorIndex = repeater.GetElementIndex(anchor);
         }
@@ -74,16 +73,18 @@ internal class RepeaterLayoutContext : VirtualizingLayoutContext
         return anchorIndex;
     }
 
-    protected override Point LayoutOriginCore() =>
-        GetOwner()?.LayoutOrigin ?? default;
+    protected override Point LayoutOriginCore() => GetOwner()?.LayoutOrigin ?? default;
 
     protected override void LayoutOriginCore(Point value)
     {
-        if (GetOwner() is ItemsRepeater ir)
-            ir.LayoutOrigin = value;
+        var owner = GetOwner();
+        if (owner != null)
+        {
+            owner.LayoutOrigin = value;
+        }
     }
 
-    private ItemsRepeater GetOwner()
+    private ItemsRepeater? GetOwner()
     {
         if (_owner.TryGetTarget(out var target))
             return target;

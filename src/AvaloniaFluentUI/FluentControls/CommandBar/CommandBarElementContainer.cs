@@ -59,6 +59,9 @@ public class CommandBarElementContainer : ContentControl, ICommandBarElement
         get => _dynamicOverflowOrder;
         set => SetAndRaise(DynamicOverflowOrderProperty, ref _dynamicOverflowOrder, value);
     }
+    
+    private bool _isInOverflow;
+    private int _dynamicOverflowOrder;
 
     protected override bool RegisterContentPresenter(ContentPresenter presenter)
     {
@@ -67,7 +70,4 @@ public class CommandBarElementContainer : ContentControl, ICommandBarElement
 
         return base.RegisterContentPresenter(presenter);
     }
-
-    private bool _isInOverflow;
-    private int _dynamicOverflowOrder;
 }

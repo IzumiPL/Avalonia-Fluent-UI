@@ -15,13 +15,13 @@ public abstract class IconSource : AvaloniaObject
     /// <summary>
     /// Defines the <see cref="Foreground"/> property
     /// </summary>
-    public static readonly StyledProperty<IBrush> ForegroundProperty =
-        AvaloniaProperty.Register<IconSource, IBrush>(nameof(Foreground));
+    public static readonly StyledProperty<IBrush?> ForegroundProperty =
+        AvaloniaProperty.Register<IconSource, IBrush?>(nameof(Foreground));
 
     /// <summary>
     /// Gets or sets a brush that describes the foreground color.
     /// </summary>
-    public IBrush Foreground
+    public IBrush? Foreground
     {
         get => GetValue(ForegroundProperty);
         set => SetValue(ForegroundProperty, value);
@@ -65,19 +65,22 @@ public class IconSourceConverter : TypeConverter
             }
 
             //Try a PathIcon
-            if (FluentPathIcon.IsDataValid(val, out Geometry g))
+            if (FluentPathIcon.IsDataValid(val, out Geometry? g))
             {
                 return new PathIconSource() { Data = g };
             }
 
             try
             {
-                if (Uri.TryCreate(val, UriKind.RelativeOrAbsolute, out Uri result))
+                if (Uri.TryCreate(val, UriKind.RelativeOrAbsolute, out Uri? result))
                 {
                     return new BitmapIconSource() { UriSource = result };
                 }
             }
-            catch { }
+            catch
+            {
+                //
+            }
 
             //If we've reached this point, we'll make a FontIcon
             //Glyph can be anything (sort of), so we don't need to Try/Catch

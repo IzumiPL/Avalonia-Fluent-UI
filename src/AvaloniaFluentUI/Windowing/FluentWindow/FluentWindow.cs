@@ -4,7 +4,6 @@ using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
-using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
 using Avalonia.Input;
@@ -22,10 +21,10 @@ namespace AvaloniaFluentUI.Windowing;
 /// <summary>
 /// 支持 Windows, MacOS, Linux三大平台的流畅窗口
 /// </summary>
-[TemplatePart(Name = PART_DEFAULT_TITLE_BAR, Type =  typeof(Grid))]
-[TemplatePart(Name = PART_MINIMIZE_BUTTON, Type = typeof(Button))]
-[TemplatePart(Name = PART_MAXIMIZE_BUTTON, Type = typeof(Button))]
-[TemplatePart(Name = PART_CLOSE_BUTTON, Type = typeof(Button))]
+[TemplatePart(Name = PART_CLOSE_BUTTON,         Type = typeof(Button))]
+[TemplatePart(Name = PART_MINIMIZE_BUTTON,      Type = typeof(Button))]
+[TemplatePart(Name = PART_MAXIMIZE_BUTTON,      Type = typeof(Button))]
+[TemplatePart(Name = PART_DEFAULT_TITLE_BAR,    Type =  typeof(Grid))]
 public partial class FluentWindow : Window
 {
     /// <summary>

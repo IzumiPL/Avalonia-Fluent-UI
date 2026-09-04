@@ -26,25 +26,25 @@ using Path = Avalonia.Controls.Shapes.Path;
 
 namespace AvaloniaFluentUI.Controls;
 
-[PseudoClasses(s_pcLightDismiss)]
-[PseudoClasses(s_pcActionButton, s_pcCloseButton)]
-[PseudoClasses(s_pcContent, SharedPseudoclasses.s_pcIcon)]
-[PseudoClasses(s_pcFooterClose)]
-[PseudoClasses(s_pcHeroContentTop, s_pcHeroContentBottom)]
-[PseudoClasses(s_pcTop, s_pcBottom, s_pcLeft, s_pcRight, s_pcCenter)]
-[PseudoClasses(s_pcTopRight, s_pcTopLeft, s_pcBottomLeft, s_pcBottomRight)]
-[PseudoClasses(s_pcLeftTop, s_pcLeftBottom, s_pcRightTop, s_pcRightBottom)]
-[PseudoClasses(s_pcShowTitle, s_pcShowSubTitle)]
-[TemplatePart(s_tpContainer, typeof(Border))]
-[TemplatePart(s_tpTailOcclusionGrid, typeof(Grid))]
-[TemplatePart(s_tpContentRootGrid, typeof(Grid))]
-[TemplatePart(s_tpNonHeroContentRootGrid, typeof(Grid))]
-[TemplatePart(s_tpHeroContentBorder, typeof(Border))]
-[TemplatePart(s_tpActionButton, typeof(Button))]
-[TemplatePart(s_tpAlternateCloseButton, typeof(Button))]
-[TemplatePart(s_tpCloseButton, typeof(Button))]
-[TemplatePart(s_tpTailPolygon, typeof(Path))]
-public partial class TeachingTip : ContentControl
+[PseudoClasses(PC_FOOTER_CLOSE)]
+[PseudoClasses(PC_LIGHT_DISMISS)]
+[PseudoClasses(PC_SHOW_TITLE, PC_SHOW_SUB_TITLE)]
+[PseudoClasses(PC_ACTION_BUTTON, PC_CLOSE_BUTTON)]
+[PseudoClasses(PC_CONTENT, SharedPseudoclasses.s_pcIcon)]
+[PseudoClasses(PC_HERO_CONTENT_TOP, PC_HERO_CONTENT_BOTTOM)]
+[PseudoClasses(PC_TOP, PC_BOTTOM, PC_LEFT, PC_RIGHT, PC_CENTER)]
+[PseudoClasses(PC_TOP_RIGHT, PC_TOP_LEFT, PC_BOTTOM_LEFT, PC_BOTTOM_RIGHT)]
+[PseudoClasses(PC_LEFT_TOP, PC_LEFT_BOTTOM, PC_RIGHT_TOP, PC_RIGHT_BOTTOM)]
+[TemplatePart(Name = CONTAINER,                     Type = typeof(Border))]
+[TemplatePart(Name = TAIL_POLYGON,                  Type = typeof(Path))]
+[TemplatePart(Name = CLOSE_BUTTON,                  Type = typeof(Button))]
+[TemplatePart(Name = ACTION_BUTTON,                 Type = typeof(Button))]
+[TemplatePart(Name = CONTENT_ROOT_GRID,             Type = typeof(Grid))]
+[TemplatePart(Name = TAIL_OCCLUSION_GRID,           Type = typeof(Grid))]
+[TemplatePart(Name = HERO_CONTENT_BORDER,           Type = typeof(Border))]
+[TemplatePart(Name = ALTERNATE_CLOSE_BUTTON,        Type = typeof(Button))]
+[TemplatePart(Name = NON_HERO_CONTENT_ROOT_GRID,    Type = typeof(Grid))]
+public class TeachingTip : ContentControl
 {
     /// <summary>
     /// Defines the <see cref="Title"/> property
@@ -79,8 +79,8 @@ public partial class TeachingTip : ContentControl
     /// <summary>
     /// Defines the <see cref="ActionButtonContent"/> property
     /// </summary>
-    public static readonly StyledProperty<object> ActionButtonContentProperty =
-        AvaloniaProperty.Register<TeachingTip, object>(nameof(ActionButtonContent));
+    public static readonly StyledProperty<object?> ActionButtonContentProperty =
+        AvaloniaProperty.Register<TeachingTip, object?>(nameof(ActionButtonContent));
 
     /// <summary>
     /// Defines the <see cref="ActionButtonStyle"/> property
@@ -103,8 +103,8 @@ public partial class TeachingTip : ContentControl
     /// <summary>
     /// Defines the <see cref="CloseButtonContent"/> property
     /// </summary>
-    public static readonly StyledProperty<object> CloseButtonContentProperty =
-        AvaloniaProperty.Register<TeachingTip, object>(nameof(CloseButtonContent));
+    public static readonly StyledProperty<object?> CloseButtonContentProperty =
+        AvaloniaProperty.Register<TeachingTip, object?>(nameof(CloseButtonContent));
 
     /// <summary>
     /// Defines the <see cref="CloseButtonStyle"/> property
@@ -158,14 +158,14 @@ public partial class TeachingTip : ContentControl
     /// <summary>
     /// Defines the <see cref="HeroContent"/> property
     /// </summary>
-    public static readonly StyledProperty<Control> HeroContentProperty =
-        AvaloniaProperty.Register<TeachingTip, Control>(nameof(HeroContent));
+    public static readonly StyledProperty<Control?> HeroContentProperty =
+        AvaloniaProperty.Register<TeachingTip, Control?>(nameof(HeroContent));
 
     /// <summary>
     /// Defines the <see cref="IconSource"/> property
     /// </summary>
-    public static readonly StyledProperty<IconSource> IconSourceProperty =
-        AvaloniaProperty.Register<NavigationViewItem, IconSource>(nameof(IconSource));
+    public static readonly StyledProperty<IconSource?> IconSourceProperty =
+        AvaloniaProperty.Register<NavigationViewItem, IconSource?>(nameof(IconSource));
 
     /// <summary>
     /// Defines the <see cref="TemplateSettings"/> property
@@ -222,7 +222,7 @@ public partial class TeachingTip : ContentControl
     /// <summary>
     /// Gets or sets the text of the teaching tip's action button.
     /// </summary>
-    public object ActionButtonContent
+    public object? ActionButtonContent
     {
         get => GetValue(ActionButtonContentProperty);
         set => SetValue(ActionButtonContentProperty, value);
@@ -258,7 +258,7 @@ public partial class TeachingTip : ContentControl
     /// <summary>
     /// Gets or sets the content of the teaching tip's close button.
     /// </summary>
-    public object CloseButtonContent
+    public object? CloseButtonContent
     {
         get => GetValue(CloseButtonContentProperty);
         set => SetValue(CloseButtonContentProperty, value);
@@ -345,7 +345,7 @@ public partial class TeachingTip : ContentControl
     /// Border-to-border graphic content displayed in the header or footer
     /// of the teaching tip. Will appear opposite of the tail in targeted teaching tips unless otherwise set.
     /// </summary>
-    public Control HeroContent
+    public Control? HeroContent
     {
         get => GetValue(HeroContentProperty);
         set => SetValue(HeroContentProperty, value);
@@ -354,7 +354,7 @@ public partial class TeachingTip : ContentControl
     /// <summary>
     /// Gets or sets the graphic content to appear alongside the title and subtitle.
     /// </summary>
-    public IconSource IconSource
+    public IconSource? IconSource
     {
         get => GetValue(IconSourceProperty);
         set => SetValue(IconSourceProperty, value);
@@ -373,61 +373,61 @@ public partial class TeachingTip : ContentControl
     /// <summary>
     /// Occurs after the action button is clicked.
     /// </summary>
-    public event TypedEventHandler<TeachingTip, EventArgs> ActionButtonClick;
+    public event TypedEventHandler<TeachingTip, EventArgs>? ActionButtonClick;
 
     /// <summary>
     /// Occurs after the close button is clicked.
     /// </summary>
-    public event TypedEventHandler<TeachingTip, EventArgs> CloseButtonClick;
+    public event TypedEventHandler<TeachingTip, EventArgs>? CloseButtonClick;
 
     /// <summary>
     /// Occurs after the tip is closed.
     /// </summary>
-    public event TypedEventHandler<TeachingTip, TeachingTipClosingEventArgs> Closing;
+    public event TypedEventHandler<TeachingTip, TeachingTipClosingEventArgs>? Closing;
 
     /// <summary>
     /// Occurs just before the tip begins to close.
     /// </summary>
-    public event TypedEventHandler<TeachingTip, TeachingTipClosedEventArgs> Closed;
+    public event TypedEventHandler<TeachingTip, TeachingTipClosedEventArgs>? Closed;
     
     /// <summary>
     /// Occurs after the tip is opened
     /// </summary>
-    public event TypedEventHandler<TeachingTip, TeachingTipOpenedEventArgs> Opened;
+    public event TypedEventHandler<TeachingTip, TeachingTipOpenedEventArgs>? Opened;
 
-    private const string s_tpContainer = "Container";
-    private const string s_tpTailOcclusionGrid = "TailOcclusionGrid";
-    private const string s_tpContentRootGrid = "ContentRootGrid";
-    private const string s_tpNonHeroContentRootGrid = "NonHeroContentRootGrid";
-    private const string s_tpHeroContentBorder = "HeroContentBorder";
-    private const string s_tpActionButton = "ActionButton";
-    private const string s_tpAlternateCloseButton = "AlternateCloseButton";
-    private const string s_tpCloseButton = "CloseButton";
-    private const string s_tpTailPolygon = "TailPolygon";
+    private const string CONTAINER = "Container";
+    private const string TAIL_OCCLUSION_GRID = "TailOcclusionGrid";
+    private const string CONTENT_ROOT_GRID = "ContentRootGrid";
+    private const string NON_HERO_CONTENT_ROOT_GRID = "NonHeroContentRootGrid";
+    private const string HERO_CONTENT_BORDER = "HeroContentBorder";
+    private const string ACTION_BUTTON = "ActionButton";
+    private const string ALTERNATE_CLOSE_BUTTON = "AlternateCloseButton";
+    private const string CLOSE_BUTTON = "CloseButton";
+    private const string TAIL_POLYGON = "TailPolygon";
 
-    private const string s_pcContent = ":content";
-    private const string s_pcLightDismiss = ":lightDismiss";
-    private const string s_pcActionButton = ":actionButton";
-    private const string s_pcCloseButton = ":closeButton";
-    private const string s_pcFooterClose = ":footerClose";
-    private const string s_pcHeroContentTop = ":heroContentTop";
-    private const string s_pcHeroContentBottom = ":heroContentBottom";
-    private const string s_pcShowTitle = ":showTitle";
-    private const string s_pcShowSubTitle = ":showSubTitle";
+    private const string PC_CONTENT = ":content";
+    private const string PC_LIGHT_DISMISS = ":lightDismiss";
+    private const string PC_ACTION_BUTTON = ":actionButton";
+    private const string PC_CLOSE_BUTTON = ":closeButton";
+    private const string PC_FOOTER_CLOSE = ":footerClose";
+    private const string PC_HERO_CONTENT_TOP = ":heroContentTop";
+    private const string PC_HERO_CONTENT_BOTTOM = ":heroContentBottom";
+    private const string PC_SHOW_TITLE = ":showTitle";
+    private const string PC_SHOW_SUB_TITLE = ":showSubTitle";
 
-    private const string s_pcTop = ":top";
-    private const string s_pcLeft = ":left";
-    private const string s_pcRight = ":right";
-    private const string s_pcBottom = ":bottom";
-    private const string s_pcTopLeft = ":topLeft";
-    private const string s_pcTopRight = ":topRight";
-    private const string s_pcBottomLeft = ":bottomLeft";
-    private const string s_pcBottomRight = ":bottomRight";
-    private const string s_pcLeftTop = ":leftTop";
-    private const string s_pcRightTop = ":rightTop";
-    private const string s_pcLeftBottom = ":leftBottom";
-    private const string s_pcRightBottom = ":rightBottom";
-    private const string s_pcCenter = ":center";
+    private const string PC_TOP = ":top";
+    private const string PC_LEFT = ":left";
+    private const string PC_RIGHT = ":right";
+    private const string PC_BOTTOM = ":bottom";
+    private const string PC_TOP_LEFT = ":topLeft";
+    private const string PC_TOP_RIGHT = ":topRight";
+    private const string PC_BOTTOM_LEFT = ":bottomLeft";
+    private const string PC_BOTTOM_RIGHT = ":bottomRight";
+    private const string PC_LEFT_TOP = ":leftTop";
+    private const string PC_RIGHT_TOP = ":rightTop";
+    private const string PC_LEFT_BOTTOM = ":leftBottom";
+    private const string PC_RIGHT_BOTTOM = ":rightBottom";
+    private const string PC_CENTER = ":center";
     
     public TeachingTip()
     {
@@ -465,20 +465,20 @@ public partial class TeachingTip : ContentControl
 
         // All of these components are required, so we use Get instead of Find to throw
         // if not found and avoid null checks below
-        _container = e.NameScope.Get<Border>(s_tpContainer);
-        _rootElement = (Control)_container.Child;
-        _tailOcclusionGrid = e.NameScope.Get<Grid>(s_tpTailOcclusionGrid);
-        _contentRootGrid = e.NameScope.Get<Grid>(s_tpContentRootGrid);
-        _nonHeroContentRootGrid = e.NameScope.Get<Grid>(s_tpNonHeroContentRootGrid);
-        _heroContentBorder = e.NameScope.Get<Border>(s_tpHeroContentBorder);
-        _actionButton = e.NameScope.Get<Button>(s_tpActionButton);
-        _alternateCloseButton = e.NameScope.Get<Button>(s_tpAlternateCloseButton);
-        _closeButton = e.NameScope.Get<Button>(s_tpCloseButton);
+        _container = e.NameScope.Get<Border>(CONTAINER);
+        _rootElement = _container.Child;
+        _tailOcclusionGrid = e.NameScope.Get<Grid>(TAIL_OCCLUSION_GRID);
+        _contentRootGrid = e.NameScope.Get<Grid>(CONTENT_ROOT_GRID);
+        _nonHeroContentRootGrid = e.NameScope.Get<Grid>(NON_HERO_CONTENT_ROOT_GRID);
+        _heroContentBorder = e.NameScope.Get<Border>(HERO_CONTENT_BORDER);
+        _actionButton = e.NameScope.Get<Button>(ACTION_BUTTON);
+        _alternateCloseButton = e.NameScope.Get<Button>(ALTERNATE_CLOSE_BUTTON);
+        _closeButton = e.NameScope.Get<Button>(CLOSE_BUTTON);
         // This isn't used in Fluentv2
         // _tailEdgeBorder = e.NameScope.Get<Grid>("TailEdgeBorder");
-        _tailPolygon = e.NameScope.Get<Path>(s_tpTailPolygon);
-        ToggleVisibilityForEmptyContent(s_pcShowTitle, Title);
-        ToggleVisibilityForEmptyContent(s_pcShowSubTitle, Subtitle);
+        _tailPolygon = e.NameScope.Get<Path>(TAIL_POLYGON);
+        ToggleVisibilityForEmptyContent(PC_SHOW_TITLE, Title);
+        ToggleVisibilityForEmptyContent(PC_SHOW_SUB_TITLE, Subtitle);
 
         // We rip out the bulk of the template content and reparent it into a Popup. This allows declaring
         // the TeachingTip in Xaml without worrying about its parent and making sure it returns back in the
@@ -567,11 +567,11 @@ public partial class TeachingTip : ContentControl
         else if (change.Property == TitleProperty)
         {
             SetPopupAutomationProperties();
-            ToggleVisibilityForEmptyContent(s_pcShowTitle, change.GetNewValue<string>());
+            ToggleVisibilityForEmptyContent(PC_SHOW_TITLE, change.GetNewValue<string>());
         }
         else if (change.Property == SubtitleProperty)
         {
-            ToggleVisibilityForEmptyContent(s_pcShowSubTitle, change.GetNewValue<string>());
+            ToggleVisibilityForEmptyContent(PC_SHOW_SUB_TITLE, change.GetNewValue<string>());
         }
         else if (change.Property == ActionButtonContentProperty)
         {
@@ -585,7 +585,7 @@ public partial class TeachingTip : ContentControl
         }
         else if (change.Property == ContentProperty)
         {
-            PseudoClasses.Set(s_pcContent, change.NewValue != null);
+            PseudoClasses.Set(PC_CONTENT, change.NewValue != null);
         }
     }
 
@@ -597,7 +597,7 @@ public partial class TeachingTip : ContentControl
         return base.RegisterContentPresenter(presenter);
     }
 
-    private void UpdateButtonAutomationProperties(Button button, object obj)
+    private void UpdateButtonAutomationProperties(Button? button, object? obj)
     {
         if (button == null)
             return;
@@ -677,9 +677,9 @@ public partial class TeachingTip : ContentControl
         var height = _tailOcclusionGrid?.Bounds.Height ?? 0;
         var width = _tailOcclusionGrid?.Bounds.Width ?? 0;
 
-        getColumnWidths(_tailOcclusionGrid, out var firstColumnWidth, out var secondColumnWidth,
+        GetColumnWidths(_tailOcclusionGrid, out var firstColumnWidth, out var secondColumnWidth,
             out var nextToLastColumnWidth, out var lastColumnWidth);
-        getRowWidths(_tailOcclusionGrid, out var firstRowHeight, out var secondRowHeight,
+        GetRowWidths(_tailOcclusionGrid, out var firstRowHeight, out var secondRowHeight,
             out var nextToLastRowHeight, out var lastRowHeight);
 
         UpdateSizeBasedTemplateSettings();
@@ -791,12 +791,10 @@ public partial class TeachingTip : ContentControl
         return tipDoesNotFit;
 
 
-        static void getColumnWidths(Grid g, out double firstColumnWidth,
-            out double secondColumnWidth, out double nextToLastColumnWidth,
-            out double lastColumnWidth)
+        static void GetColumnWidths(Grid? g, out double firstColumnWidth, out double secondColumnWidth, out double nextToLastColumnWidth, out double lastColumnWidth)
         {
             firstColumnWidth = secondColumnWidth = nextToLastColumnWidth = lastColumnWidth = 0;
-            if (g == null || g.ColumnDefinitions == null)
+            if (g == null || g?.ColumnDefinitions == null)
                 return;
             var numColDefs = g.ColumnDefinitions.Count;
 
@@ -806,12 +804,10 @@ public partial class TeachingTip : ContentControl
             lastColumnWidth = numColDefs > 0 ? g.ColumnDefinitions[numColDefs - 1].ActualWidth : 0;
         }
 
-        static void getRowWidths(Grid g, out double firstRowHeight,
-            out double secondRowHeight, out double nextToLastRowHeight,
-            out double lastRowHeight)
+        static void GetRowWidths(Grid? g, out double firstRowHeight, out double secondRowHeight, out double nextToLastRowHeight, out double lastRowHeight)
         {
             firstRowHeight = secondRowHeight = nextToLastRowHeight = lastRowHeight = 0;
-            if (g == null || g.RowDefinitions == null)
+            if (g == null || g?.RowDefinitions == null)
                 return;
             var numColDefs = g.RowDefinitions.Count;
 
@@ -828,19 +824,19 @@ public partial class TeachingTip : ContentControl
             // differentiate between LeftTop and TopLeft visual states, for example
             if ((int)mode == -1) // Untargeted, remove all position pseudoclasses
             {                
-                PseudoClasses.Set(s_pcTop, false);
-                PseudoClasses.Set(s_pcBottom, false);
-                PseudoClasses.Set(s_pcLeft, false);
-                PseudoClasses.Set(s_pcRight, false);
-                PseudoClasses.Set(s_pcCenter, false);
-                PseudoClasses.Set(s_pcTopRight, false);
-                PseudoClasses.Set(s_pcTopLeft, false);
-                PseudoClasses.Set(s_pcBottomLeft, false);
-                PseudoClasses.Set(s_pcBottomRight, false);
-                PseudoClasses.Set(s_pcLeftTop, false);
-                PseudoClasses.Set(s_pcLeftBottom, false);
-                PseudoClasses.Set(s_pcRightBottom, false);
-                PseudoClasses.Set(s_pcRightTop, false);
+                PseudoClasses.Set(PC_TOP, false);
+                PseudoClasses.Set(PC_BOTTOM, false);
+                PseudoClasses.Set(PC_LEFT, false);
+                PseudoClasses.Set(PC_RIGHT, false);
+                PseudoClasses.Set(PC_CENTER, false);
+                PseudoClasses.Set(PC_TOP_RIGHT, false);
+                PseudoClasses.Set(PC_TOP_LEFT, false);
+                PseudoClasses.Set(PC_BOTTOM_LEFT, false);
+                PseudoClasses.Set(PC_BOTTOM_RIGHT, false);
+                PseudoClasses.Set(PC_LEFT_TOP, false);
+                PseudoClasses.Set(PC_LEFT_BOTTOM, false);
+                PseudoClasses.Set(PC_RIGHT_BOTTOM, false);
+                PseudoClasses.Set(PC_RIGHT_TOP, false);
                 return;
             }
 
@@ -848,235 +844,235 @@ public partial class TeachingTip : ContentControl
             {
                 case TeachingTipPlacementMode.Top:
                     {
-                        PseudoClasses.Set(s_pcTop, true);
-                        PseudoClasses.Set(s_pcBottom, false);
-                        PseudoClasses.Set(s_pcLeft, false);
-                        PseudoClasses.Set(s_pcRight, false);
-                        PseudoClasses.Set(s_pcCenter, false);
-                        PseudoClasses.Set(s_pcTopRight, false);
-                        PseudoClasses.Set(s_pcTopLeft, false);
-                        PseudoClasses.Set(s_pcBottomLeft, false);
-                        PseudoClasses.Set(s_pcBottomRight, false);
-                        PseudoClasses.Set(s_pcLeftTop, false);
-                        PseudoClasses.Set(s_pcLeftBottom, false);
-                        PseudoClasses.Set(s_pcRightBottom, false);
-                        PseudoClasses.Set(s_pcRightTop, false);
+                        PseudoClasses.Set(PC_TOP, true);
+                        PseudoClasses.Set(PC_BOTTOM, false);
+                        PseudoClasses.Set(PC_LEFT, false);
+                        PseudoClasses.Set(PC_RIGHT, false);
+                        PseudoClasses.Set(PC_CENTER, false);
+                        PseudoClasses.Set(PC_TOP_RIGHT, false);
+                        PseudoClasses.Set(PC_TOP_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_RIGHT, false);
+                        PseudoClasses.Set(PC_LEFT_TOP, false);
+                        PseudoClasses.Set(PC_LEFT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_TOP, false);
                     }
                     break;
 
                 case TeachingTipPlacementMode.Bottom:
                     {
-                        PseudoClasses.Set(s_pcTop, false);
-                        PseudoClasses.Set(s_pcBottom, true);
-                        PseudoClasses.Set(s_pcLeft, false);
-                        PseudoClasses.Set(s_pcRight, false);
-                        PseudoClasses.Set(s_pcCenter, false);
-                        PseudoClasses.Set(s_pcTopRight, false);
-                        PseudoClasses.Set(s_pcTopLeft, false);
-                        PseudoClasses.Set(s_pcBottomLeft, false);
-                        PseudoClasses.Set(s_pcBottomRight, false);
-                        PseudoClasses.Set(s_pcLeftTop, false);
-                        PseudoClasses.Set(s_pcLeftBottom, false);
-                        PseudoClasses.Set(s_pcRightBottom, false);
-                        PseudoClasses.Set(s_pcRightTop, false);
+                        PseudoClasses.Set(PC_TOP, false);
+                        PseudoClasses.Set(PC_BOTTOM, true);
+                        PseudoClasses.Set(PC_LEFT, false);
+                        PseudoClasses.Set(PC_RIGHT, false);
+                        PseudoClasses.Set(PC_CENTER, false);
+                        PseudoClasses.Set(PC_TOP_RIGHT, false);
+                        PseudoClasses.Set(PC_TOP_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_RIGHT, false);
+                        PseudoClasses.Set(PC_LEFT_TOP, false);
+                        PseudoClasses.Set(PC_LEFT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_TOP, false);
                     }
                     break;
 
                 case TeachingTipPlacementMode.Left:
                     {
-                        PseudoClasses.Set(s_pcTop, false);
-                        PseudoClasses.Set(s_pcBottom, false);
-                        PseudoClasses.Set(s_pcLeft, true);
-                        PseudoClasses.Set(s_pcRight, false);
-                        PseudoClasses.Set(s_pcCenter, false);
-                        PseudoClasses.Set(s_pcTopRight, false);
-                        PseudoClasses.Set(s_pcTopLeft, false);
-                        PseudoClasses.Set(s_pcBottomLeft, false);
-                        PseudoClasses.Set(s_pcBottomRight, false);
-                        PseudoClasses.Set(s_pcLeftTop, false);
-                        PseudoClasses.Set(s_pcLeftBottom, false);
-                        PseudoClasses.Set(s_pcRightBottom, false);
-                        PseudoClasses.Set(s_pcRightTop, false);
+                        PseudoClasses.Set(PC_TOP, false);
+                        PseudoClasses.Set(PC_BOTTOM, false);
+                        PseudoClasses.Set(PC_LEFT, true);
+                        PseudoClasses.Set(PC_RIGHT, false);
+                        PseudoClasses.Set(PC_CENTER, false);
+                        PseudoClasses.Set(PC_TOP_RIGHT, false);
+                        PseudoClasses.Set(PC_TOP_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_RIGHT, false);
+                        PseudoClasses.Set(PC_LEFT_TOP, false);
+                        PseudoClasses.Set(PC_LEFT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_TOP, false);
                     }
                     break;
 
                 case TeachingTipPlacementMode.Right:
                     {
-                        PseudoClasses.Set(s_pcTop, false);
-                        PseudoClasses.Set(s_pcBottom, false);
-                        PseudoClasses.Set(s_pcLeft, false);
-                        PseudoClasses.Set(s_pcRight, true);
-                        PseudoClasses.Set(s_pcCenter, false);
-                        PseudoClasses.Set(s_pcTopRight, false);
-                        PseudoClasses.Set(s_pcTopLeft, false);
-                        PseudoClasses.Set(s_pcBottomLeft, false);
-                        PseudoClasses.Set(s_pcBottomRight, false);
-                        PseudoClasses.Set(s_pcLeftTop, false);
-                        PseudoClasses.Set(s_pcLeftBottom, false);
-                        PseudoClasses.Set(s_pcRightBottom, false);
-                        PseudoClasses.Set(s_pcRightTop, false);
+                        PseudoClasses.Set(PC_TOP, false);
+                        PseudoClasses.Set(PC_BOTTOM, false);
+                        PseudoClasses.Set(PC_LEFT, false);
+                        PseudoClasses.Set(PC_RIGHT, true);
+                        PseudoClasses.Set(PC_CENTER, false);
+                        PseudoClasses.Set(PC_TOP_RIGHT, false);
+                        PseudoClasses.Set(PC_TOP_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_RIGHT, false);
+                        PseudoClasses.Set(PC_LEFT_TOP, false);
+                        PseudoClasses.Set(PC_LEFT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_TOP, false);
                     }
                     break;
 
                 case TeachingTipPlacementMode.TopRight:
                     {
-                        PseudoClasses.Set(s_pcTop, false);
-                        PseudoClasses.Set(s_pcBottom, false);
-                        PseudoClasses.Set(s_pcLeft, false);
-                        PseudoClasses.Set(s_pcRight, false);
-                        PseudoClasses.Set(s_pcCenter, false);
-                        PseudoClasses.Set(s_pcTopRight, true);
-                        PseudoClasses.Set(s_pcTopLeft, false);
-                        PseudoClasses.Set(s_pcBottomLeft, false);
-                        PseudoClasses.Set(s_pcBottomRight, false);
-                        PseudoClasses.Set(s_pcLeftTop, false);
-                        PseudoClasses.Set(s_pcLeftBottom, false);
-                        PseudoClasses.Set(s_pcRightBottom, false);
-                        PseudoClasses.Set(s_pcRightTop, false);
+                        PseudoClasses.Set(PC_TOP, false);
+                        PseudoClasses.Set(PC_BOTTOM, false);
+                        PseudoClasses.Set(PC_LEFT, false);
+                        PseudoClasses.Set(PC_RIGHT, false);
+                        PseudoClasses.Set(PC_CENTER, false);
+                        PseudoClasses.Set(PC_TOP_RIGHT, true);
+                        PseudoClasses.Set(PC_TOP_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_RIGHT, false);
+                        PseudoClasses.Set(PC_LEFT_TOP, false);
+                        PseudoClasses.Set(PC_LEFT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_TOP, false);
                     }
                     break;
 
                 case TeachingTipPlacementMode.TopLeft:
                     {
-                        PseudoClasses.Set(s_pcTop, false);
-                        PseudoClasses.Set(s_pcBottom, false);
-                        PseudoClasses.Set(s_pcLeft, false);
-                        PseudoClasses.Set(s_pcRight, false);
-                        PseudoClasses.Set(s_pcCenter, false);
-                        PseudoClasses.Set(s_pcTopRight, false);
-                        PseudoClasses.Set(s_pcTopLeft, true);
-                        PseudoClasses.Set(s_pcBottomLeft, false);
-                        PseudoClasses.Set(s_pcBottomRight, false);
-                        PseudoClasses.Set(s_pcLeftTop, false);
-                        PseudoClasses.Set(s_pcLeftBottom, false);
-                        PseudoClasses.Set(s_pcRightBottom, false);
-                        PseudoClasses.Set(s_pcRightTop, false);
+                        PseudoClasses.Set(PC_TOP, false);
+                        PseudoClasses.Set(PC_BOTTOM, false);
+                        PseudoClasses.Set(PC_LEFT, false);
+                        PseudoClasses.Set(PC_RIGHT, false);
+                        PseudoClasses.Set(PC_CENTER, false);
+                        PseudoClasses.Set(PC_TOP_RIGHT, false);
+                        PseudoClasses.Set(PC_TOP_LEFT, true);
+                        PseudoClasses.Set(PC_BOTTOM_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_RIGHT, false);
+                        PseudoClasses.Set(PC_LEFT_TOP, false);
+                        PseudoClasses.Set(PC_LEFT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_TOP, false);
                     }
                     break;
 
                 case TeachingTipPlacementMode.BottomRight:
                     {
-                        PseudoClasses.Set(s_pcTop, false);
-                        PseudoClasses.Set(s_pcBottom, false);
-                        PseudoClasses.Set(s_pcLeft, false);
-                        PseudoClasses.Set(s_pcRight, false);
-                        PseudoClasses.Set(s_pcCenter, false);
-                        PseudoClasses.Set(s_pcTopRight, false);
-                        PseudoClasses.Set(s_pcTopLeft, false);
-                        PseudoClasses.Set(s_pcBottomLeft, false);
-                        PseudoClasses.Set(s_pcBottomRight, true);
-                        PseudoClasses.Set(s_pcLeftTop, false);
-                        PseudoClasses.Set(s_pcLeftBottom, false);
-                        PseudoClasses.Set(s_pcRightBottom, false);
-                        PseudoClasses.Set(s_pcRightTop, false);
+                        PseudoClasses.Set(PC_TOP, false);
+                        PseudoClasses.Set(PC_BOTTOM, false);
+                        PseudoClasses.Set(PC_LEFT, false);
+                        PseudoClasses.Set(PC_RIGHT, false);
+                        PseudoClasses.Set(PC_CENTER, false);
+                        PseudoClasses.Set(PC_TOP_RIGHT, false);
+                        PseudoClasses.Set(PC_TOP_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_RIGHT, true);
+                        PseudoClasses.Set(PC_LEFT_TOP, false);
+                        PseudoClasses.Set(PC_LEFT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_TOP, false);
                     }
                     break;
 
                 case TeachingTipPlacementMode.BottomLeft:
                     {
-                        PseudoClasses.Set(s_pcTop, false);
-                        PseudoClasses.Set(s_pcBottom, false);
-                        PseudoClasses.Set(s_pcLeft, false);
-                        PseudoClasses.Set(s_pcRight, false);
-                        PseudoClasses.Set(s_pcCenter, false);
-                        PseudoClasses.Set(s_pcTopRight, false);
-                        PseudoClasses.Set(s_pcTopLeft, false);
-                        PseudoClasses.Set(s_pcBottomLeft, true);
-                        PseudoClasses.Set(s_pcBottomRight, false);
-                        PseudoClasses.Set(s_pcLeftTop, false);
-                        PseudoClasses.Set(s_pcLeftBottom, false);
-                        PseudoClasses.Set(s_pcRightBottom, false);
-                        PseudoClasses.Set(s_pcRightTop, false);
+                        PseudoClasses.Set(PC_TOP, false);
+                        PseudoClasses.Set(PC_BOTTOM, false);
+                        PseudoClasses.Set(PC_LEFT, false);
+                        PseudoClasses.Set(PC_RIGHT, false);
+                        PseudoClasses.Set(PC_CENTER, false);
+                        PseudoClasses.Set(PC_TOP_RIGHT, false);
+                        PseudoClasses.Set(PC_TOP_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_LEFT, true);
+                        PseudoClasses.Set(PC_BOTTOM_RIGHT, false);
+                        PseudoClasses.Set(PC_LEFT_TOP, false);
+                        PseudoClasses.Set(PC_LEFT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_TOP, false);
                     }
                     break;
 
                 case TeachingTipPlacementMode.LeftTop:
                     {
-                        PseudoClasses.Set(s_pcTop, false);
-                        PseudoClasses.Set(s_pcBottom, false);
-                        PseudoClasses.Set(s_pcLeft, false);
-                        PseudoClasses.Set(s_pcRight, false);
-                        PseudoClasses.Set(s_pcCenter, false);
-                        PseudoClasses.Set(s_pcTopRight, false);
-                        PseudoClasses.Set(s_pcTopLeft, false);
-                        PseudoClasses.Set(s_pcBottomLeft, false);
-                        PseudoClasses.Set(s_pcBottomRight, false);
-                        PseudoClasses.Set(s_pcLeftTop, true);
-                        PseudoClasses.Set(s_pcLeftBottom, false);
-                        PseudoClasses.Set(s_pcRightBottom, false);
-                        PseudoClasses.Set(s_pcRightTop, false);
+                        PseudoClasses.Set(PC_TOP, false);
+                        PseudoClasses.Set(PC_BOTTOM, false);
+                        PseudoClasses.Set(PC_LEFT, false);
+                        PseudoClasses.Set(PC_RIGHT, false);
+                        PseudoClasses.Set(PC_CENTER, false);
+                        PseudoClasses.Set(PC_TOP_RIGHT, false);
+                        PseudoClasses.Set(PC_TOP_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_RIGHT, false);
+                        PseudoClasses.Set(PC_LEFT_TOP, true);
+                        PseudoClasses.Set(PC_LEFT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_TOP, false);
                     }
                     break;
 
                 case TeachingTipPlacementMode.LeftBottom:
                     {
-                        PseudoClasses.Set(s_pcTop, false);
-                        PseudoClasses.Set(s_pcBottom, false);
-                        PseudoClasses.Set(s_pcLeft, false);
-                        PseudoClasses.Set(s_pcRight, false);
-                        PseudoClasses.Set(s_pcCenter, false);
-                        PseudoClasses.Set(s_pcTopRight, false);
-                        PseudoClasses.Set(s_pcTopLeft, false);
-                        PseudoClasses.Set(s_pcBottomLeft, false);
-                        PseudoClasses.Set(s_pcBottomRight, false);
-                        PseudoClasses.Set(s_pcLeftTop, false);
-                        PseudoClasses.Set(s_pcLeftBottom, true);
-                        PseudoClasses.Set(s_pcRightBottom, false);
-                        PseudoClasses.Set(s_pcRightTop, false);
+                        PseudoClasses.Set(PC_TOP, false);
+                        PseudoClasses.Set(PC_BOTTOM, false);
+                        PseudoClasses.Set(PC_LEFT, false);
+                        PseudoClasses.Set(PC_RIGHT, false);
+                        PseudoClasses.Set(PC_CENTER, false);
+                        PseudoClasses.Set(PC_TOP_RIGHT, false);
+                        PseudoClasses.Set(PC_TOP_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_RIGHT, false);
+                        PseudoClasses.Set(PC_LEFT_TOP, false);
+                        PseudoClasses.Set(PC_LEFT_BOTTOM, true);
+                        PseudoClasses.Set(PC_RIGHT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_TOP, false);
                     }
                     break;
 
                 case TeachingTipPlacementMode.RightTop:
                     {
-                        PseudoClasses.Set(s_pcTop, false);
-                        PseudoClasses.Set(s_pcBottom, false);
-                        PseudoClasses.Set(s_pcLeft, false);
-                        PseudoClasses.Set(s_pcRight, false);
-                        PseudoClasses.Set(s_pcCenter, false);
-                        PseudoClasses.Set(s_pcTopRight, false);
-                        PseudoClasses.Set(s_pcTopLeft, false);
-                        PseudoClasses.Set(s_pcBottomLeft, false);
-                        PseudoClasses.Set(s_pcBottomRight, false);
-                        PseudoClasses.Set(s_pcLeftTop, false);
-                        PseudoClasses.Set(s_pcLeftBottom, false);
-                        PseudoClasses.Set(s_pcRightBottom, false);
-                        PseudoClasses.Set(s_pcRightTop, true);
+                        PseudoClasses.Set(PC_TOP, false);
+                        PseudoClasses.Set(PC_BOTTOM, false);
+                        PseudoClasses.Set(PC_LEFT, false);
+                        PseudoClasses.Set(PC_RIGHT, false);
+                        PseudoClasses.Set(PC_CENTER, false);
+                        PseudoClasses.Set(PC_TOP_RIGHT, false);
+                        PseudoClasses.Set(PC_TOP_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_RIGHT, false);
+                        PseudoClasses.Set(PC_LEFT_TOP, false);
+                        PseudoClasses.Set(PC_LEFT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_TOP, true);
                     }
                     break;
 
                 case TeachingTipPlacementMode.RightBottom:
                     {
-                        PseudoClasses.Set(s_pcTop, false);
-                        PseudoClasses.Set(s_pcBottom, false);
-                        PseudoClasses.Set(s_pcLeft, false);
-                        PseudoClasses.Set(s_pcRight, false);
-                        PseudoClasses.Set(s_pcCenter, false);
-                        PseudoClasses.Set(s_pcTopRight, false);
-                        PseudoClasses.Set(s_pcTopLeft, false);
-                        PseudoClasses.Set(s_pcBottomLeft, false);
-                        PseudoClasses.Set(s_pcBottomRight, false);
-                        PseudoClasses.Set(s_pcLeftTop, false);
-                        PseudoClasses.Set(s_pcLeftBottom, false);
-                        PseudoClasses.Set(s_pcRightBottom, true);
-                        PseudoClasses.Set(s_pcRightTop, false);
+                        PseudoClasses.Set(PC_TOP, false);
+                        PseudoClasses.Set(PC_BOTTOM, false);
+                        PseudoClasses.Set(PC_LEFT, false);
+                        PseudoClasses.Set(PC_RIGHT, false);
+                        PseudoClasses.Set(PC_CENTER, false);
+                        PseudoClasses.Set(PC_TOP_RIGHT, false);
+                        PseudoClasses.Set(PC_TOP_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_RIGHT, false);
+                        PseudoClasses.Set(PC_LEFT_TOP, false);
+                        PseudoClasses.Set(PC_LEFT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_BOTTOM, true);
+                        PseudoClasses.Set(PC_RIGHT_TOP, false);
                     }
                     break;
 
                 case TeachingTipPlacementMode.Center:
                     {
-                        PseudoClasses.Set(s_pcTop, false);
-                        PseudoClasses.Set(s_pcBottom, false);
-                        PseudoClasses.Set(s_pcLeft, false);
-                        PseudoClasses.Set(s_pcRight, false);
-                        PseudoClasses.Set(s_pcCenter, true);
-                        PseudoClasses.Set(s_pcTopRight, false);
-                        PseudoClasses.Set(s_pcTopLeft, false);
-                        PseudoClasses.Set(s_pcBottomLeft, false);
-                        PseudoClasses.Set(s_pcBottomRight, false);
-                        PseudoClasses.Set(s_pcLeftTop, false);
-                        PseudoClasses.Set(s_pcLeftBottom, false);
-                        PseudoClasses.Set(s_pcRightBottom, false);
-                        PseudoClasses.Set(s_pcRightTop, false);
+                        PseudoClasses.Set(PC_TOP, false);
+                        PseudoClasses.Set(PC_BOTTOM, false);
+                        PseudoClasses.Set(PC_LEFT, false);
+                        PseudoClasses.Set(PC_RIGHT, false);
+                        PseudoClasses.Set(PC_CENTER, true);
+                        PseudoClasses.Set(PC_TOP_RIGHT, false);
+                        PseudoClasses.Set(PC_TOP_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_LEFT, false);
+                        PseudoClasses.Set(PC_BOTTOM_RIGHT, false);
+                        PseudoClasses.Set(PC_LEFT_TOP, false);
+                        PseudoClasses.Set(PC_LEFT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_BOTTOM, false);
+                        PseudoClasses.Set(PC_RIGHT_TOP, false);
                     }
                     break;
             }
@@ -1085,15 +1081,7 @@ public partial class TeachingTip : ContentControl
 
     private void PositionPopup()
     {
-        bool tipDoesNotFit = false;
-        if (_target != null)
-        {
-            tipDoesNotFit = PositionTargetedPopup();
-        }
-        else
-        {
-            tipDoesNotFit = PositionUntargetedPopup();
-        }
+        bool tipDoesNotFit = _target != null ? PositionTargetedPopup() : PositionUntargetedPopup();
 
         if (tipDoesNotFit)
         {
@@ -1356,11 +1344,11 @@ public partial class TeachingTip : ContentControl
         var closeContent = CloseButtonContent;
         var isLightDismiss = IsLightDismissEnabled;
 
-        PseudoClasses.Set(s_pcActionButton, actionContent != null);
-        PseudoClasses.Set(s_pcCloseButton, closeContent != null);
+        PseudoClasses.Set(PC_ACTION_BUTTON, actionContent != null);
+        PseudoClasses.Set(PC_CLOSE_BUTTON, closeContent != null);
 
         // HeaderCloseButton is the default state
-        PseudoClasses.Set(s_pcFooterClose, isLightDismiss || closeContent != null);
+        PseudoClasses.Set(PC_FOOTER_CLOSE, isLightDismiss || closeContent != null);
     }
 
     private void UpdateDynamicHeroContentPlacementToTop()
@@ -1373,8 +1361,8 @@ public partial class TeachingTip : ContentControl
 
     private void UpdateDynamicHeroContentPlacementToTopImpl()
     {
-        PseudoClasses.Set(s_pcHeroContentTop, true);
-        PseudoClasses.Set(s_pcHeroContentBottom, false);
+        PseudoClasses.Set(PC_HERO_CONTENT_TOP, true);
+        PseudoClasses.Set(PC_HERO_CONTENT_BOTTOM, false);
 
         if (_currentHeroContentEffectivePlacementMode != TeachingTipHeroContentPlacementMode.Top)
         {
@@ -1392,8 +1380,8 @@ public partial class TeachingTip : ContentControl
 
     private void UpdateDynamicHeroContentPlacementToBottomImpl()
     {
-        PseudoClasses.Set(s_pcHeroContentTop, false);
-        PseudoClasses.Set(s_pcHeroContentBottom, true);
+        PseudoClasses.Set(PC_HERO_CONTENT_TOP, false);
+        PseudoClasses.Set(PC_HERO_CONTENT_BOTTOM, true);
 
         if (_currentHeroContentEffectivePlacementMode != TeachingTipHeroContentPlacementMode.Bottom)
         {
@@ -1536,7 +1524,7 @@ public partial class TeachingTip : ContentControl
 
         if (VisualRoot != null)
         {
-            _acceleratorKeyActivatedRevoker = (TopLevel.GetTopLevel(this) as Interactive).AddDisposableHandler(KeyDownEvent, OnF6PreviewKeyDownClicked, RoutingStrategies.Tunnel);
+            _acceleratorKeyActivatedRevoker = (TopLevel.GetTopLevel(this)).AddDisposableHandler(KeyDownEvent, OnF6PreviewKeyDownClicked, RoutingStrategies.Tunnel);
         }
 
         // Make sure we are in the correct VSM state after ApplyTemplate and moving the template content from the Control to the Popup:
@@ -1604,19 +1592,12 @@ public partial class TeachingTip : ContentControl
 
     private void OnIconSourceChanged()
     {
-        var ts = TemplateSettings;
-        var ico = IconSource;
+        var templateSettings = TemplateSettings;
+        var icon = IconSource;
 
-        if (ico != null)
-        {
-            ts.IconElement = IconHelpers.CreateFromUnknown(ico);
-        }
-        else
-        {
-            ts.IconElement = null;
-        }
+        templateSettings.IconElement = icon != null ? IconHelpers.CreateFromUnknown(icon) : null;
 
-        PseudoClasses.Set(SharedPseudoclasses.s_pcIcon, ico != null);
+        PseudoClasses.Set(SharedPseudoclasses.s_pcIcon, icon != null);
     }
 
     private void OnPlacementMarginChanged()
@@ -1630,7 +1611,7 @@ public partial class TeachingTip : ContentControl
     private void OnIsLightDismissEnabledChanged()
     {
         bool ld = IsLightDismissEnabled;
-        PseudoClasses.Set(s_pcLightDismiss, ld);
+        PseudoClasses.Set(PC_LIGHT_DISMISS, ld);
 
         if (_popup != null)
         {
@@ -1695,7 +1676,7 @@ public partial class TeachingTip : ContentControl
         }
     }
 
-    private void OnContentSizeChanged(object sender, SizeChangedEventArgs args)
+    private void OnContentSizeChanged(object? sender, SizeChangedEventArgs args)
     {
         UpdateSizeBasedTemplateSettings();
         // Reset the currentEffectivePlacementMode so that the tail will be updated for the new size as well.
@@ -1710,13 +1691,13 @@ public partial class TeachingTip : ContentControl
         var height = (float)args.NewSize.Height;
         if (_expandAnimation != null)
         {
-            _expandAnimation.SetScalarParameter("Width", (float)width);
-            _expandAnimation.SetScalarParameter("Height", (float)height);
+            _expandAnimation.SetScalarParameter("Width", width);
+            _expandAnimation.SetScalarParameter("Height", height);
         }
         if (_contractAnimation != null)
         {
-            _contractAnimation.SetScalarParameter("Width", (float)width);
-            _contractAnimation.SetScalarParameter("Height", (float)height);
+            _contractAnimation.SetScalarParameter("Width", width);
+            _contractAnimation.SetScalarParameter("Height", height);
         }
     }
 
@@ -1730,7 +1711,7 @@ public partial class TeachingTip : ContentControl
 
     private bool HandleF6Clicked(bool fromPopup = false)
     {
-        bool hasFocusInSubtree()
+        bool HasFocusInSubtree()
         {
             if (_rootElement != null)
             {
@@ -1748,7 +1729,7 @@ public partial class TeachingTip : ContentControl
             return false;
         }
 
-        if (hasFocusInSubtree() && fromPopup)
+        if (HasFocusInSubtree() && fromPopup)
         {
             if (_previouslyFocusedElement != null)
             {
@@ -1758,7 +1739,7 @@ public partial class TeachingTip : ContentControl
                 return true;
             }
         }
-        else if (!hasFocusInSubtree() && !fromPopup)
+        else if (!HasFocusInSubtree() && !fromPopup)
         {
             var (firstButton, secondButton) = (_closeButton, _alternateCloseButton);
             Button f6Button = null;
@@ -1827,10 +1808,10 @@ public partial class TeachingTip : ContentControl
             }
         }
 
-        if (IsLightDismissEnabled)
+        if (IsLightDismissEnabled && _rootElement != null)
         {
             var focusable = FocusManager.FindFirstFocusableElement(_rootElement);
-            focusable?.Focus(NavigationMethod.Unspecified);
+            focusable?.Focus();
         }
     }
 
@@ -1853,7 +1834,7 @@ public partial class TeachingTip : ContentControl
         //To give the tip focus, then we return focus when the popup closes.
         if (_lastCloseReason == TeachingTipCloseReason.CloseButton)
         {
-            _previouslyFocusedElement?.Focus(NavigationMethod.Unspecified);
+            _previouslyFocusedElement?.Focus();
         }
         _previouslyFocusedElement = null;
 
@@ -2107,12 +2088,12 @@ public partial class TeachingTip : ContentControl
         }
     }
 
-    private void OnTargetLoaded(object sender, RoutedEventArgs args)
+    private void OnTargetLoaded(object? sender, RoutedEventArgs args)
     {
         RepositionPopup();
     }
 
-    private void OnTargetLayoutUpdated(object sender, EffectiveViewportChangedEventArgs e)
+    private void OnTargetLayoutUpdated(object? sender, EffectiveViewportChangedEventArgs e)
     {
         RepositionPopup();
     }
@@ -2133,16 +2114,16 @@ public partial class TeachingTip : ContentControl
         }
         else
         {
-            _expandAnimation.SetScalarParameter("Width", s_defaultTipHeightAndWidth);
-            _expandAnimation.SetScalarParameter("Height", s_defaultTipHeightAndWidth);
+            _expandAnimation.SetScalarParameter("Width", _defaultTipHeightAndWidth);
+            _expandAnimation.SetScalarParameter("Height", _defaultTipHeightAndWidth);
         }
         
         _expandEasingFunction = new SplineEasing(0.1, 0.9, 0.2, 1);
 
         _expandAnimation.InsertExpressionKeyFrame(0.0f, "Vector3(Min(0.01, 20.0 / Width), Min(0.01, 20.0 / Height), 1.0)");
-        (_expandAnimation as Vector3KeyFrameAnimation).InsertKeyFrame(1f, Vector3.One, _expandEasingFunction);
+        (_expandAnimation as Vector3KeyFrameAnimation)?.InsertKeyFrame(1f, Vector3.One, _expandEasingFunction);
         _expandAnimation.Duration = _expandAnimationDuration;
-        _expandAnimation.Target = s_ScaleTargetName;
+        _expandAnimation.Target = _scaleTargetName;
 
         // TODO: This doesn't work because "Translation" is not a valid Target in Avalonia (yet)
         // Also probably not needed since this is likely related to shadows - which we don't have
@@ -2172,14 +2153,14 @@ public partial class TeachingTip : ContentControl
         }
         else
         {
-            _contractAnimation.SetScalarParameter("Width", s_defaultTipHeightAndWidth);
-            _contractAnimation.SetScalarParameter("Height", s_defaultTipHeightAndWidth);
+            _contractAnimation.SetScalarParameter("Width", _defaultTipHeightAndWidth);
+            _contractAnimation.SetScalarParameter("Height", _defaultTipHeightAndWidth);
         }
 
-        (_contractAnimation as Vector3KeyFrameAnimation).InsertKeyFrame(0f, Vector3.One);
+        (_contractAnimation as Vector3KeyFrameAnimation)?.InsertKeyFrame(0f, Vector3.One);
         _contractAnimation.InsertExpressionKeyFrame(1.0f, "Vector3(20.0 / Width, 20.0 / Height, 1.0)", (Easing)_contractEasingFunction);        
         _contractAnimation.Duration = _contractAnimationDuration;
-        _contractAnimation.Target = s_ScaleTargetName;
+        _contractAnimation.Target = _scaleTargetName;
 
         // TODO: This doesn't seem to work, the expression is throwing an error - it doesn't like the 'f' in 0.01f
         // But like ExpandAnimation, we don't need this
@@ -2637,7 +2618,7 @@ public partial class TeachingTip : ContentControl
 
     private Rect GetWindowBounds()
     {
-        return new Rect((TopLevel.GetTopLevel(this) as Visual)?.Bounds.Size ?? default);
+        return new Rect((TopLevel.GetTopLevel(this))?.Bounds.Size ?? default);
     }
 
     private void GetPlacementFallbackOrder(TeachingTipPlacementMode preferredPlacement,
@@ -2719,10 +2700,10 @@ public partial class TeachingTip : ContentControl
         visual?.CenterPoint = new Vector3((float)x, (float)y, 1);
     }
 
-    private IDisposable _acceleratorKeyActivatedRevoker;
+    private IDisposable? _acceleratorKeyActivatedRevoker;
     // This doesn't appear to be needed anymore?
     //private EffectiveViewportRevoker _effectiveViewportChangedRevoker;
-    private IDisposable _xamlRootChangedRevoker;
+    private IDisposable? _xamlRootChangedRevoker;
 
     private Border _container;
     private Popup? _popup;
@@ -2781,7 +2762,7 @@ public partial class TeachingTip : ContentControl
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private double TailLongSideLength() =>
-        TailLongSideActualLength() - (2 * s_tailOcclusionAmount);
+        TailLongSideActualLength() - (2 * _tailOcclusionAmount);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private double TailShortSideLength() =>
@@ -2792,7 +2773,7 @@ public partial class TeachingTip : ContentControl
         if (_tailOcclusionGrid != null)
         {
             return _tailOcclusionGrid.ColumnDefinitions.Count > 1 ?
-                _tailOcclusionGrid.ColumnDefinitions[1].ActualWidth + s_tailOcclusionAmount
+                _tailOcclusionGrid.ColumnDefinitions[1].ActualWidth + _tailOcclusionAmount
                 : 0;
         }
 
@@ -2888,7 +2869,7 @@ public partial class TeachingTip : ContentControl
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static double UntargetedTipFarPlacementOffset(double farWindowCoordinateInCoreWindowSpace, double tipSize, double offset) =>
-        farWindowCoordinateInCoreWindowSpace - (tipSize + s_untargetedTipWindowEdgeMargin + offset);
+        farWindowCoordinateInCoreWindowSpace - (tipSize + _untargetedTipWindowEdgeMargin + offset);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static double UntargetedTipCenterPlacementOffset(double nearWindowCoordinateInCoreWindowSpace, double farWindowCoordinateInCoreWindowSpace,
@@ -2897,19 +2878,19 @@ public partial class TeachingTip : ContentControl
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static double UntargetedTipNearPlacementOffset(double nearWindowCoordinateInCoreWindowSpace, double offset) =>
-        s_untargetedTipWindowEdgeMargin + nearWindowCoordinateInCoreWindowSpace + offset;
+        _untargetedTipWindowEdgeMargin + nearWindowCoordinateInCoreWindowSpace + offset;
 
-    private static readonly string s_ScaleTargetName = "Scale";
+    private static readonly string _scaleTargetName = "Scale";
 
     //It is possible this should be exposed as a property, but you can adjust what it does with margin.
-    private static readonly float s_untargetedTipWindowEdgeMargin = 24;
-    private static readonly float s_defaultTipHeightAndWidth = 320;
+    private static readonly float _untargetedTipWindowEdgeMargin = 24;
+    private static readonly float _defaultTipHeightAndWidth = 320;
 
-    private static readonly float s_tailOcclusionAmount = 2;
+    private static readonly float _tailOcclusionAmount = 2;
 
     private class ScopedBatchHelper
     {
-        public Action Completed { get; set; }
+        public Action? Completed { get; set; }
 
         public void Start(TimeSpan duration)
         {
@@ -2923,7 +2904,7 @@ public partial class TeachingTip : ContentControl
 
         private void Tick(object? sender, EventArgs args)
         {
-            _timer.Stop();
+            _timer?.Stop();
             Completed?.Invoke();
             Completed = null;
         }

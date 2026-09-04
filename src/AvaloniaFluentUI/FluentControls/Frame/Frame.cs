@@ -23,7 +23,7 @@ namespace AvaloniaFluentUI.Controls;
 /// Displays <see cref="UserControl"/> instances (Pages in WinUI), supports navigation to new pages, 
 /// and maintains a navigation history to support forward and backward navigation.
 /// </summary>
-[TemplatePart(s_tpContentPresenter, typeof(ContentPresenter))]
+[TemplatePart(CONTENT_PRESENTER, typeof(ContentPresenter))]
 public class Frame : ContentControl
 {
     /// <summary>
@@ -38,7 +38,7 @@ public class Frame : ContentControl
     public static readonly StyledProperty<int> CacheSizeProperty =
         AvaloniaProperty.Register<Frame, int>(nameof(CacheSize),
             defaultValue: 10, 
-            coerce: (x, v) => v >= 0 ? v : 0);
+            coerce: (_, v) => v >= 0 ? v : 0);
 
     /// <summary>
     /// Defines the <see cref="BackStackDepth"/> property
@@ -64,8 +64,8 @@ public class Frame : ContentControl
     /// <summary>
     /// Defines the <see cref="CurrentSourcePageType"/> property
     /// </summary>
-    public static readonly DirectProperty<Frame, Type> CurrentSourcePageTypeProperty =
-        AvaloniaProperty.RegisterDirect<Frame, Type>(nameof(CurrentSourcePageType),
+    public static readonly DirectProperty<Frame, Type?> CurrentSourcePageTypeProperty =
+        AvaloniaProperty.RegisterDirect<Frame, Type?>(nameof(CurrentSourcePageType),
             x => x.CurrentSourcePageType);
 
     /// <summary>
@@ -135,7 +135,7 @@ public class Frame : ContentControl
     /// <summary>
     /// Gets a type reference for the content that is currently displayed.
     /// </summary>
-    public Type CurrentSourcePageType => Content?.GetType();
+    public Type? CurrentSourcePageType => Content?.GetType();
 
     /// <summary>
     /// Gets a collection of <see cref="PageStackEntry"/> instances representing the 
@@ -177,28 +177,28 @@ public class Frame : ContentControl
         set => SetAndRaise(NavigationPageFactoryProperty, ref _pageFactory, value);
     }
 
-    internal PageStackEntry CurrentEntry { get; set; }
+    internal PageStackEntry? CurrentEntry { get; set; }
 
     /// <summary>
     /// Occurs when the content that is being navigated to has been found and is available 
     /// from the Content property, although it may not have completed loading.
     /// </summary>
-    public event NavigatedEventHandler Navigated;
+    public event NavigatedEventHandler? Navigated;
 
     /// <summary>
     /// Occurs when a new navigation is requested.
     /// </summary>
-    public event NavigatingCancelEventHandler Navigating;
+    public event NavigatingCancelEventHandler? Navigating;
 
     /// <summary>
     /// Occurs when an error is raised while navigating to the requested content.
     /// </summary>
-    public event NavigationFailedEventHandler NavigationFailed;
+    public event NavigationFailedEventHandler? NavigationFailed;
 
     /// <summary>
     /// Occurs when a new navigation is requested while a current navigation is in progress.
     /// </summary>
-    public event NavigationStoppedEventHandler NavigationStopped;
+    public event NavigationStoppedEventHandler? NavigationStopped;
 
     /// <summary>
     /// Indicates to a page that it is being navigated away from. Takes the place of 
@@ -227,6 +227,16 @@ public class Frame : ContentControl
     private IList<PageStackEntry> _backStack;
     private IList<PageStackEntry> _forwardStack;
     private INavigationPageFactory _pageFactory;
+    
+    private CancellationTokenSource? _cts;
+    private ContentPresenter? _presenter;
+    //private readonly List<(Type pageSrcType, Control page)> _cache = new List<(Type, Control)>(10);
+    private readonly List<NavigationCacheItem> _pageCache = new List<NavigationCacheItem>(10);
+    private bool _isNavigating;
+    
+    private static readonly ConcurrentDictionary<Type, Func<Control>> _registeredPages = new();
+
+    private const string CONTENT_PRESENTER = "ContentPresenter";
     
     public Frame()
     {
@@ -274,7 +284,7 @@ public class Frame : ContentControl
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-        _presenter = e.NameScope.Find<ContentPresenter>(s_tpContentPresenter);
+        _presenter = e.NameScope.Find<ContentPresenter>(CONTENT_PRESENTER);
     }
 
     protected override bool RegisterContentPresenter(ContentPresenter presenter)
@@ -289,9 +299,10 @@ public class Frame : ContentControl
     {
         base.OnAttachedToVisualTree(e);
 
-        if (TopLevel.GetTopLevel(this) is TopLevel tl)
+        var toplevel = TopLevel.GetTopLevel(this);
+        if (toplevel != null)
         {
-            tl.BackRequested += OnTopLevelBackRequested;
+            toplevel.BackRequested += OnTopLevelBackRequested;
         }
     }
 
@@ -299,9 +310,10 @@ public class Frame : ContentControl
     {
         base.OnDetachedFromVisualTree(e);
 
-        if (TopLevel.GetTopLevel(this) is TopLevel tl)
+        var toplevel = TopLevel.GetTopLevel(this);
+        if (toplevel != null)
         {
-            tl.BackRequested -= OnTopLevelBackRequested;
+            toplevel.BackRequested -= OnTopLevelBackRequested;
         }
     }
 
@@ -315,7 +327,7 @@ public class Frame : ContentControl
     /// and specifies the animated transition to use.
     /// </summary>
     /// <param name="infoOverride">Info about the animated transition to use.</param>
-    public void GoBack(NavigationTransitionInfo infoOverride)
+    public void GoBack(NavigationTransitionInfo? infoOverride)
     {
         if (CanGoBack)
         {
@@ -380,7 +392,7 @@ public class Frame : ContentControl
     /// <param name="infoOverride">Info about the animated transition.</param>
     /// <returns><c>false</c> if a <see cref="NavigationFailed"/> event handler has set Handled to true; 
     /// otherwise, <c>true</c>.</returns>
-    public bool Navigate(Type sourcePageType, object parameter, NavigationTransitionInfo infoOverride)
+    public bool Navigate(Type sourcePageType, object? parameter, NavigationTransitionInfo? infoOverride)
     {
         return NavigateCore(new PageStackEntry(sourcePageType, parameter,
             infoOverride), NavigationMode.New);
@@ -399,7 +411,7 @@ public class Frame : ContentControl
     /// <returns><c>false</c> if a <see cref="NavigationFailed"/> event handler has set Handled to true; 
     /// otherwise, <c>true</c>.</returns>
     public bool NavigateToType(Type sourcePageType, object parameter, FrameNavigationOptions navOptions) =>
-        NavigateCore(new PageStackEntry(sourcePageType, parameter, navOptions?.TransitionInfoOverride),
+        NavigateCore(new PageStackEntry(sourcePageType, parameter, navOptions.TransitionInfoOverride),
             NavigationMode.New, navOptions);
 
     /// <summary>
@@ -414,7 +426,7 @@ public class Frame : ContentControl
     /// and what transition animation is used.</param>
     /// <returns><c>false</c> if a <see cref="NavigationFailed"/> event handler has set Handled to true or
     /// if <see cref="NavigationPageFactory" /> is not specified; otherwise, <c>true</c>.</returns>
-    public bool NavigateFromObject(object target, FrameNavigationOptions navOptions = null)
+    public bool NavigateFromObject(object target, FrameNavigationOptions? navOptions = null)
     {
         // Check the cache first to see if we have an existing page that matches
         // For this check we check by both type and object reference
@@ -458,11 +470,11 @@ public class Frame : ContentControl
 
         static void AppendEntry(StringBuilder sb, PageStackEntry entry)
         {
-            sb.Append(entry.SourcePageType.AssemblyQualifiedName);
+            sb.Append(entry.SourcePageType?.AssemblyQualifiedName);
             sb.Append('|');
             if (entry.Parameter != null)
             {
-                sb.Append(entry.Parameter.ToString());
+                sb.Append(entry.Parameter);
             }
             sb.AppendLine();
         }
@@ -609,7 +621,7 @@ public class Frame : ContentControl
         }
     }
 
-    private bool NavigateCore(PageStackEntry entry, NavigationMode mode, FrameNavigationOptions options = null)
+    private bool NavigateCore(PageStackEntry entry, NavigationMode mode, FrameNavigationOptions? options = null)
     {
         try
         {
@@ -629,7 +641,8 @@ public class Frame : ContentControl
             }
 
             // Tell the current page we want to navigate away from it
-            if (CurrentEntry?.Instance is Control oldPage)
+            var oldPage = CurrentEntry?.Instance;
+            if (oldPage != null)
             {
                 ea.RoutedEvent = NavigatingFromEvent;
                 oldPage.RaiseEvent(ea);
@@ -671,7 +684,7 @@ public class Frame : ContentControl
             var oldEntry = CurrentEntry;
             CurrentEntry = entry;
 
-            var navEA = new Navigation.NavigationEventArgs(
+            var navigationEventArgs = new Navigation.NavigationEventArgs(
                 CurrentEntry.Instance,
                 mode, entry.NavigationTransitionInfo,
                 entry.Parameter,
@@ -680,8 +693,8 @@ public class Frame : ContentControl
             // Old page is now unloaded, raise OnNavigatedFrom
             if (oldEntry != null)
             {
-                navEA.RoutedEvent = NavigatedFromEvent;
-                oldEntry.Instance.RaiseEvent(navEA);
+                navigationEventArgs.RoutedEvent = NavigatedFromEvent;
+                oldEntry.Instance?.RaiseEvent(navigationEventArgs);
             }
 
             SetContentAndAnimate(entry);
@@ -727,7 +740,7 @@ public class Frame : ContentControl
             SourcePageType = entry.SourcePageType;
             //CurrentSourcePageType = entry.SourcePageType;
 
-            Navigated?.Invoke(this, navEA);
+            Navigated?.Invoke(this, navigationEventArgs);
 
             // New Page is loaded, let's tell the page
             // Now posted to dispatcher to ensure page has loaded - enabling composition
@@ -736,8 +749,8 @@ public class Frame : ContentControl
             {
                 if (entry.Instance is Control newPage)
                 {
-                    navEA.RoutedEvent = NavigatedToEvent;
-                    newPage.RaiseEvent(navEA);
+                    navigationEventArgs.RoutedEvent = NavigatedToEvent;
+                    newPage.RaiseEvent(navigationEventArgs);
                 }
             }, DispatcherPriority.Render);
 
@@ -782,11 +795,11 @@ public class Frame : ContentControl
         RaisePropertyChanged(BackStackDepthProperty, oldCount, _backStack.Count);
     }
 
-    private Control CreatePageAndCacheIfNecessary(Type srcPageType)
+    private Control CreatePageAndCacheIfNecessary(Type? srcPageType)
     {
         if (CacheSize == 0)
         {
-            return NavigationPageFactory?.GetPage(srcPageType) ??
+            return NavigationPageFactory.GetPage(srcPageType) ??
                 CreatePageFromFactory(srcPageType);
         }
 
@@ -910,9 +923,7 @@ public class Frame : ContentControl
             e.Handled = true;
         }
     }
-
-    private static readonly ConcurrentDictionary<Type, Func<Control>> _registeredPages = new();
-
+    
     /// <summary>
     /// Registers a page type with a factory function, enabling AOT-compatible page creation.
     /// Must be called before navigation (e.g., in App startup).
@@ -923,17 +934,13 @@ public class Frame : ContentControl
         _registeredPages[typeof(T)] = () => new T();
     }
 
-    private CancellationTokenSource? _cts;
-    private ContentPresenter? _presenter;
-    //private readonly List<(Type pageSrcType, Control page)> _cache = new List<(Type, Control)>(10);
-    private readonly List<NavigationCacheItem> _pageCache = new List<NavigationCacheItem>(10);
-    private bool _isNavigating = false;
-
-    private const string s_tpContentPresenter = "ContentPresenter";
-
     private class NavigationCacheItem
     {
-        public NavigationCacheItem(Type pageType, object context, Control page)
+        public Type? PageSrcType;
+        public object? Context;
+        public Control? Page;
+        
+        public NavigationCacheItem(Type? pageType, object? context, Control? page)
         {
             if (pageType != null && context != null)
                 throw new InvalidOperationException("PageType and Context cannot both be set");
@@ -942,9 +949,5 @@ public class Frame : ContentControl
             Context = context;
             Page = page;
         }
-
-        public Type PageSrcType;
-        public object Context;
-        public Control Page;
     }
 }

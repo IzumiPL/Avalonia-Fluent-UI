@@ -38,7 +38,7 @@ internal class FlowLayoutState
         // If we do not have any estimation information, use the line for estimation. 
         // If we do have some estimation information, don't account for the last line which is quite likely
         // different from the rest of the lines and can throw off estimation.
-        if (_totalLinesMeasured == 0 || startIndex + countInLine != context.ItemCount)
+        if (_totalLinesMeasured == 0 || startIndex + countInLine != context.ItemCount && _lineSizeEstimationBuffer != null && _itemsPerLineEstimationBuffer != null)
         {
             int estimationBufferIndex = startIndex % _lineSizeEstimationBuffer.Length;
             bool alreadyMeasured = _lineSizeEstimationBuffer[estimationBufferIndex] != 0;
@@ -59,8 +59,8 @@ internal class FlowLayoutState
     }
 
     private readonly FlowLayoutAlgorithm _flowAlgorithm = new FlowLayoutAlgorithm();
-    private double[] _lineSizeEstimationBuffer;
-    private double[] _itemsPerLineEstimationBuffer;
+    private double[]? _lineSizeEstimationBuffer;
+    private double[]? _itemsPerLineEstimationBuffer;
     private double _totalLineSize;
     private int _totalLinesMeasured;
     private double _totalItemsPerLine;

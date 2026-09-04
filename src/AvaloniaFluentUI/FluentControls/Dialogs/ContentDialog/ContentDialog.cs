@@ -21,12 +21,12 @@ namespace AvaloniaFluentUI.Controls;
 /// Presents a asynchronous dialog to the user.
 /// </summary>
 
-[PseudoClasses(SharedPseudoclasses.s_pcHidden, SharedPseudoclasses.s_pcOpen)]
-[PseudoClasses(PC_PRMIARY, PC_SECONDARY, PC_COLSE)]
 [PseudoClasses(PC_FULL_SIZE)]
-[TemplatePart(s_tpPrimaryButton, typeof(Button))]
-[TemplatePart(s_tpSecondaryButton, typeof(Button))]
-[TemplatePart(s_tpCloseButton, typeof(Button))]
+[PseudoClasses(PC_PRMIARY, PC_SECONDARY, PC_COLSE)]
+[PseudoClasses(SharedPseudoclasses.s_pcHidden, SharedPseudoclasses.s_pcOpen)]
+[TemplatePart(Name = CLOSE_BUTTON,       Type = typeof(Button))]
+[TemplatePart(Name = PAIMARY_BUTTON,     Type = typeof(Button))]
+[TemplatePart(Name = SECONDARY_BUTTON,   Type = typeof(Button))]
 public class ContentDialog : ContentControl, ICustomKeyboardNavigation
 {
     /// <summary>
@@ -294,9 +294,23 @@ public class ContentDialog : ContentControl, ICustomKeyboardNavigation
     /// </summary>
     public event TypedEventHandler<ContentDialog, ContentDialogButtonClickEventArgs>? CloseButtonClick;
     
-    private const string s_tpPrimaryButton = "PrimaryButton";
-    private const string s_tpSecondaryButton = "SecondaryButton";
-    private const string s_tpCloseButton = "CloseButton";
+    // Store the last element focused before showing the dialog, so we can
+    // restore it when it closes
+    private IInputElement? _lastFocus;
+    private Control? _originalHost;
+    private int _originalHostIndex;
+    private DialogHost? _host;
+    private ContentDialogResult _result;
+    private TaskCompletionSource<ContentDialogResult> _tcs;
+    private Button? _primaryButton;
+    private Button? _secondaryButton;
+    private Button? _closeButton;
+    private bool _hasDeferralActive;
+    private Visual? _hotkeyDownVisual;
+    
+    private const string PAIMARY_BUTTON = "PrimaryButton";
+    private const string SECONDARY_BUTTON = "SecondaryButton";
+    private const string CLOSE_BUTTON = "CloseButton";
 
     private const string PC_PRMIARY = ":primary";
     private const string PC_SECONDARY = ":secondary";
@@ -316,9 +330,9 @@ public class ContentDialog : ContentControl, ICustomKeyboardNavigation
 
         base.OnApplyTemplate(e);
 
-        _primaryButton = e.NameScope.Get<Button>(s_tpPrimaryButton);
-        _secondaryButton = e.NameScope.Get<Button>(s_tpSecondaryButton);
-        _closeButton = e.NameScope.Get<Button>(s_tpCloseButton);
+        _primaryButton = e.NameScope.Get<Button>(PAIMARY_BUTTON);
+        _secondaryButton = e.NameScope.Get<Button>(SECONDARY_BUTTON);
+        _closeButton = e.NameScope.Get<Button>(CLOSE_BUTTON);
 
         _primaryButton.Click += OnButtonClick;
         _secondaryButton.Click += OnButtonClick;
@@ -468,7 +482,7 @@ public class ContentDialog : ContentControl, ICustomKeyboardNavigation
 
         _host.Content = this;
 
-        OverlayLayer? ol = null;
+        OverlayLayer? ol;
 
         if (topLevel != null)
         {
@@ -498,7 +512,7 @@ public class ContentDialog : ContentControl, ICustomKeyboardNavigation
 
                 ol = OverlayLayer.GetOverlayLayer(topLevel);
             }
-            else if (Application.Current.ApplicationLifetime is ISingleViewApplicationLifetime sl)
+            else if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime sl)
             {
                 topLevel = TopLevel.GetTopLevel(sl.MainView);
                 ol = OverlayLayer.GetOverlayLayer(sl.MainView);
@@ -513,7 +527,7 @@ public class ContentDialog : ContentControl, ICustomKeyboardNavigation
         if (ol == null)
             throw new InvalidOperationException("Unable to find OverlayLayer from given TopLevel");
 
-        _lastFocus = topLevel.FocusManager.GetFocusedElement();
+        _lastFocus = topLevel?.FocusManager.GetFocusedElement();
 
         ol.Children.Add(_host);
 
@@ -639,7 +653,6 @@ public class ContentDialog : ContentControl, ICustomKeyboardNavigation
         PseudoClasses.Set(PC_SECONDARY, !string.IsNullOrEmpty(SecondaryButtonText));
         PseudoClasses.Set(PC_COLSE, !string.IsNullOrEmpty(CloseButtonText));
 
-        var p = Presenter;
         switch (DefaultButton)
         {
             case ContentDialogButton.Primary:
@@ -938,18 +951,4 @@ public class ContentDialog : ContentControl, ICustomKeyboardNavigation
         // Now that we've fully initialized here, raise the Opened event
         OnOpened();
     }
-
-    // Store the last element focused before showing the dialog, so we can
-    // restore it when it closes
-    private IInputElement? _lastFocus;
-    private Control? _originalHost;
-    private int _originalHostIndex;
-    private DialogHost? _host;
-    private ContentDialogResult _result;
-    private TaskCompletionSource<ContentDialogResult> _tcs;
-    private Button? _primaryButton;
-    private Button? _secondaryButton;
-    private Button? _closeButton;
-    private bool _hasDeferralActive;
-    private Visual? _hotkeyDownVisual;
 }

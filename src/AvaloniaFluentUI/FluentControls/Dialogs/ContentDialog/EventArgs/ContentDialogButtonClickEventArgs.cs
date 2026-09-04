@@ -9,6 +9,9 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class ContentDialogButtonClickEventArgs : EventArgs
 {
+    private Deferral _deferral;
+    private int _deferralCount;
+    
     internal ContentDialogButtonClickEventArgs()
     {
 
@@ -53,7 +56,4 @@ public class ContentDialogButtonClickEventArgs : EventArgs
             _deferral.Complete();
         }
     }
-
-    private Deferral _deferral;
-    private int _deferralCount;
 }

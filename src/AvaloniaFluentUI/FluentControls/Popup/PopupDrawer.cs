@@ -13,9 +13,9 @@ using Avalonia.Styling;
 
 namespace AvaloniaFluentUI.Controls;
 
-[TemplatePart(Name = PART_CONTENT_HOST, Type = typeof(Border))]
-[TemplatePart(Name = PART_HIT_TEST_AREA, Type = typeof(Border))]
-[TemplatePart(Name = PART_CLOSE_BUTTON, Type = typeof(ToolButton))]
+[TemplatePart(Name = PART_CONTENT_HOST,     Type = typeof(Border))]
+[TemplatePart(Name = PART_CLOSE_BUTTON,     Type = typeof(ToolButton))]
+[TemplatePart(Name = PART_HIT_TEST_AREA,    Type = typeof(Border))]
 [PseudoClasses(":open", ":left", ":right", ":top", ":bottom")]
 public class PopupDrawer : ContentControl
 {

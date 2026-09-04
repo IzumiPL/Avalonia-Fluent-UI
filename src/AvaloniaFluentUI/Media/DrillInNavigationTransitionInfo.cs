@@ -42,8 +42,8 @@ public class DrillInNavigationTransitionInfo : NavigationTransitionInfo
                     Setters =
                     {
                         new Setter(Visual.OpacityProperty, 1.0),
-                        new Setter(ScaleTransform.ScaleXProperty, IsReversed ? 1.0 : 1.0),
-                        new Setter(ScaleTransform.ScaleYProperty, IsReversed ? 1.0 : 1.0)
+                        new Setter(ScaleTransform.ScaleXProperty, 1.0),
+                        new Setter(ScaleTransform.ScaleYProperty, 1.0)
                     },
                     Cue = new Cue(1d)
                 }

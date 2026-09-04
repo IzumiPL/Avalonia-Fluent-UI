@@ -12,8 +12,8 @@ namespace AvaloniaFluentUI.Controls.Primitives;
 /// <summary>
 /// Represents the visual elements of a NavigationViewItem.
 /// </summary>
-[PseudoClasses(s_pcExpanded)]
-[PseudoClasses(s_pcClosedCompactTop, s_pcNotClosedCompactTop)]
+[PseudoClasses(PC_EXPANDED)]
+[PseudoClasses(PC_CLOSED_COMPACT_TOP, PC_NOT_COLOSED_COMPACT_TOP)]
 [PseudoClasses(SharedPseudoclasses.s_pcLeftNav, SharedPseudoclasses.s_pcTopNav, SharedPseudoclasses.s_pcTopOverflow)]
 [PseudoClasses(SharedPseudoclasses.s_pcChevronOpen, SharedPseudoclasses.s_pcChevronClosed, SharedPseudoclasses.s_pcChevronHidden)]
 [PseudoClasses(SharedPseudoclasses.s_pcIconLeft, SharedPseudoclasses.s_pcIconOnly, SharedPseudoclasses.s_pcContentOnly)]
@@ -29,7 +29,7 @@ public class NavigationViewItemPresenter : ContentControl
     /// <summary>
     /// Defines the <see cref="InfoBadge"/> property
     /// </summary>
-    public static readonly StyledProperty<InfoBadge> InfoBadgeProperty =
+    public static readonly StyledProperty<InfoBadge?> InfoBadgeProperty =
         NavigationViewItem.InfoBadgeProperty.AddOwner<NavigationViewItemPresenter>();
 
     public static readonly StyledProperty<double> IconSizeProperty =
@@ -62,46 +62,47 @@ public class NavigationViewItemPresenter : ContentControl
     /// <summary>
     /// Gets or sets the InfoBadge used in the NavigationViewItemPresenter
     /// </summary>
-    public InfoBadge InfoBadge
+    public InfoBadge? InfoBadge
     {
         get => GetValue(InfoBadgeProperty);
         set => SetValue(InfoBadgeProperty, value);
     }
 
-    internal NavigationViewItem GetNVI
-    {
-        get
-        {
-            return this.FindAncestorOfType<NavigationViewItem>();
-        }
-    }
+    internal NavigationViewItem? GetNavigationViewItem => this.FindAncestorOfType<NavigationViewItem>();
 
-    internal Control SelectionIndicator => _selectionIndicator;
+    internal Control? SelectionIndicator => _selectionIndicator;
+    
+    private Panel? _contentGrid;
+    private Panel? _expandCollapseChevron;
+    private Control? _selectionIndicator;
+    private ContentPresenter? _infoBadgePresenter;
+    private double _compactPaneLengthValue = 40;
+    private double _leftIndentation;
 
-    private const string s_tpSelectionIndicator = "SelectionIndicator";
-    private const string s_tpPresenterContentRootGrid = "PresenterContentRootGrid";
-    private const string s_tpInfoBadgePresenter = "InfoBadgePresenter";
-    private const string s_tpExpandCollapseChevron = "ExpandCollapseChevron";
+    private const string SELECTION_INDICATOR = "SelectionIndicator";
+    private const string PRESENTER_CONTENT_ROOT_GRID = "PresenterContentRootGrid";
+    private const string INFO_BADGE_PRESENTER = "InfoBadgePresenter";
+    private const string EXPAND_COLLAPSE_CHEVRON = "ExpandCollapseChevron";
 
-    private const string s_pcClosedCompactTop = ":closedcompacttop";
-    private const string s_pcNotClosedCompactTop = ":notclosedcompacttop";
-    private const string s_pcExpanded = ":expanded";
+    private const string PC_CLOSED_COMPACT_TOP = ":closedcompacttop";
+    private const string PC_NOT_COLOSED_COMPACT_TOP = ":notclosedcompacttop";
+    private const string PC_EXPANDED = ":expanded";
     
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
 
-        _selectionIndicator = e.NameScope.Find<Border>(s_tpSelectionIndicator);
+        _selectionIndicator = e.NameScope.Find<Border>(SELECTION_INDICATOR);
 
         //This doesn't exist in the TopPane template, so use Find and allow it to be null
-        _contentGrid = e.NameScope.Find<Panel>(s_tpPresenterContentRootGrid);
+        _contentGrid = e.NameScope.Find<Panel>(PRESENTER_CONTENT_ROOT_GRID);
 
-        _infoBadgePresenter = e.NameScope.Find<ContentPresenter>(s_tpInfoBadgePresenter);
+        _infoBadgePresenter = e.NameScope.Find<ContentPresenter>(INFO_BADGE_PRESENTER);
 
-        var nvi = GetNVI;
+        var nvi = GetNavigationViewItem;
         if (nvi != null)
         {
-            _expandCollapseChevron = e.NameScope.Find<Panel>(s_tpExpandCollapseChevron);
+            _expandCollapseChevron = e.NameScope.Find<Panel>(EXPAND_COLLAPSE_CHEVRON);
 
             if (_expandCollapseChevron != null)
             {
@@ -150,7 +151,7 @@ public class NavigationViewItemPresenter : ContentControl
 
     internal void RotateExpandCollapseChevron(bool isExpanded)
     {
-        PseudoClasses.Set(s_pcExpanded, isExpanded);
+        PseudoClasses.Set(PC_EXPANDED, isExpanded);
     }
 
     internal void UpdateContentLeftIndentation(double leftIndent)
@@ -189,14 +190,7 @@ public class NavigationViewItemPresenter : ContentControl
 
         //states :closedcompacttop, :notclosedcompacttop
 
-        PseudoClasses.Set(s_pcClosedCompactTop, isClosedCompact && topLevel);
-        PseudoClasses.Set(s_pcNotClosedCompactTop, !isClosedCompact && topLevel);
+        PseudoClasses.Set(PC_CLOSED_COMPACT_TOP, isClosedCompact && topLevel);
+        PseudoClasses.Set(PC_NOT_COLOSED_COMPACT_TOP, !isClosedCompact && topLevel);
     }
-
-    private Panel? _contentGrid;
-    private Panel? _expandCollapseChevron;
-    private Control? _selectionIndicator;
-    private ContentPresenter? _infoBadgePresenter;
-    private double _compactPaneLengthValue = 40;
-    private double _leftIndentation;
 }

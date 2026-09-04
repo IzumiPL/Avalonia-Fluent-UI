@@ -176,7 +176,7 @@ internal static class SelectionTreeHelper
 
         public SelectionNode Node { get; }
         public IndexPath Path { get; }
-        public SelectionNode ParentNode { get; }
+        public SelectionNode? ParentNode { get; }
     };
 
 }

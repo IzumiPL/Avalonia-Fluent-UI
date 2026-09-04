@@ -6,7 +6,7 @@ using Avalonia.Input;
 /// </summary>
 public class DragItemsCompletedEventArgs
 {
-    internal DragItemsCompletedEventArgs(DragDropEffects result, IList<object> items)
+    internal DragItemsCompletedEventArgs(DragDropEffects result, IList<object>? items)
     {
         DropResult = result;
         Items = new List<object>(items);
@@ -21,5 +21,5 @@ public class DragItemsCompletedEventArgs
     /// <summary>
     /// Gets a loosely typed collection of objects that are selected for item drag action
     /// </summary>
-    public IReadOnlyList<object> Items { get; internal init; }
+    public IReadOnlyList<object>? Items { get; internal init; }
 }

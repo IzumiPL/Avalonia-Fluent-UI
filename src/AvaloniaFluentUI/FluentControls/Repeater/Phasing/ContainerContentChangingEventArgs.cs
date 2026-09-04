@@ -55,14 +55,14 @@ public class ContainerContentChangingEventArgs : EventArgs
     public int Phase { get; private set; }
 
     public void RegisterUpdateCallback(
-        TypedEventHandler<ItemsRepeater, ContainerContentChangingEventArgs> callback)
+        TypedEventHandler<ItemsRepeater, ContainerContentChangingEventArgs>? callback)
     {
         _phaser.PhaseElement(ItemContainer, _virtInfo, new ContainerContentChangingEventArgs(
             ItemIndex, Item, ItemContainer, _virtInfo, Phase + 1, _phaser)
         { callback = callback });
     }
 
-    internal TypedEventHandler<ItemsRepeater, ContainerContentChangingEventArgs> callback;
+    internal TypedEventHandler<ItemsRepeater, ContainerContentChangingEventArgs>? callback;
 
     private VirtualizationInfo _virtInfo;
     private readonly Phaser _phaser;

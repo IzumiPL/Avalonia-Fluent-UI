@@ -8,8 +8,7 @@ namespace AvaloniaFluentUI.Controls;
 
 public class ItemsRepeaterAutomationPeer : ControlAutomationPeer
 {
-    public ItemsRepeaterAutomationPeer(Control owner) 
-        : base(owner)
+    public ItemsRepeaterAutomationPeer(Control owner) : base(owner)
     {
     }
 

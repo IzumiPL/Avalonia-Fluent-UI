@@ -8,7 +8,7 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// Represents an icon that uses a glyph from the specified font.
 /// </summary>
-public partial class FontIcon : IconElement
+public class FontIcon : IconElement
 {
     /// <summary>
     /// Defines the <see cref="FontFamily"/> property
@@ -114,7 +114,7 @@ public partial class FontIcon : IconElement
             GenerateText();
         }
 
-        return new Size(_textLayout.Width, _textLayout.Height);
+        return new Size(_textLayout!.Width, _textLayout.Height);
     }
 
     public override void Render(DrawingContext context)
@@ -125,8 +125,8 @@ public partial class FontIcon : IconElement
         var dstRect = new Rect(Bounds.Size);
         using (context.PushClip(dstRect))
         {
-            var pt = new Point(dstRect.Center.X - _textLayout.Width * 0.5,
-                               dstRect.Center.Y - _textLayout.Height * 0.5);
+            var pt = new Point(dstRect.Center.X - _textLayout!.Width * 0.5,
+                dstRect.Center.Y - _textLayout.Height * 0.5);
             _textLayout.Draw(context, pt);
         }
     }
@@ -134,8 +134,8 @@ public partial class FontIcon : IconElement
     private void GenerateText()
     {
         _textLayout = new TextLayout(Glyph, new Typeface(FontFamily, FontStyle, FontWeight),
-           FontSize, Foreground, TextAlignment.Left);
+           FontSize, Foreground);
     }
 
-    private TextLayout _textLayout;
+    private TextLayout? _textLayout;
 }

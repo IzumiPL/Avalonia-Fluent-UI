@@ -8,6 +8,8 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public abstract class NonVirtualizingLayoutContext : LayoutContext
 {
+    private VirtualizingLayoutContext? _contextAdapter;
+    
     /// <summary>
     /// Gets the collection of child UIElements from the container that provides the context.
     /// </summary>
@@ -24,6 +26,4 @@ public abstract class NonVirtualizingLayoutContext : LayoutContext
 
         return _contextAdapter;
     }
-
-    private VirtualizingLayoutContext _contextAdapter;
 }

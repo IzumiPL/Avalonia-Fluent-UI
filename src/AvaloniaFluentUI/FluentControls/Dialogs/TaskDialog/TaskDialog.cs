@@ -22,14 +22,14 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// Represents and enhanced dialog with enhanced button, command, and progress support
 /// </summary>
-[PseudoClasses(s_pcHosted, s_pcHidden, SharedPseudoclasses.s_pcOpen)]
-[PseudoClasses(SharedPseudoclasses.s_pcHeader, s_pcSubheader, SharedPseudoclasses.s_pcIcon, s_pcFooter, s_pcFooterAuto, s_pcExpanded)]
-[PseudoClasses(s_pcProgress, s_pcProgressError, s_pcProgressSuspend)]
 [PseudoClasses(s_pcHeaderForeground, s_pcIconForeground)]
-[TemplatePart(s_tpButtonsHost, typeof(ItemsControl))]
-[TemplatePart(s_tpCommandsHost, typeof(ItemsControl))]
-[TemplatePart(s_tpMoreDetailsButton, typeof(Button))]
-[TemplatePart(s_tpProgressBar, typeof(ProgressBar))]
+[PseudoClasses(s_pcHosted, s_pcHidden, SharedPseudoclasses.s_pcOpen)]
+[PseudoClasses(s_pcProgress, s_pcProgressError, s_pcProgressSuspend)]
+[PseudoClasses(SharedPseudoclasses.s_pcHeader, s_pcSubheader, SharedPseudoclasses.s_pcIcon, s_pcFooter, s_pcFooterAuto, s_pcExpanded)]
+[TemplatePart(Name = s_tpProgressBar,       Type = typeof(ProgressBar))]
+[TemplatePart(Name = s_tpButtonsHost,       Type = typeof(ItemsControl))]
+[TemplatePart(Name = s_tpCommandsHost,      Type = typeof(ItemsControl))]
+[TemplatePart(Name = s_tpMoreDetailsButton, Type = typeof(Button))]
 public partial class TaskDialog : ContentControl
 {
     /// <summary>
@@ -474,7 +474,7 @@ public partial class TaskDialog : ContentControl
         }
 
         object result = null;
-        _previousFocus = TopLevel.GetTopLevel(owner)?.FocusManager?.GetFocusedElement();
+        _previousFocus = TopLevel.GetTopLevel(owner)?.FocusManager.GetFocusedElement();
 
         if (showHosted || !(owner is WindowBase))
         {
@@ -872,7 +872,7 @@ public partial class TaskDialog : ContentControl
 
     private void TrySetInitialFocus()
     {
-        var curFocus = TopLevel.GetTopLevel(this).FocusManager.GetFocusedElement() as Control;
+        var curFocus = TopLevel.GetTopLevel(this)?.FocusManager.GetFocusedElement() as Control;
         bool setFocus = false;
         if (curFocus?.FindAncestorOfType<TaskDialog>() == null)
         {
@@ -893,7 +893,6 @@ public partial class TaskDialog : ContentControl
         }
         else
         {
-            var fm = TopLevel.GetTopLevel(this).FocusManager;
             // TODO: v3 - does this work?
             var next = FocusManager.FindFirstFocusableElement(this);
             if (next != null)
@@ -924,9 +923,9 @@ public partial class TaskDialog : ContentControl
     private int _xamlOwnerChildIndex;
     private Control? _host;
     private TaskCompletionSource<object> _tcs;
-    internal bool _hasDeferralActive = false;
+    internal bool _hasDeferralActive;
 
-    private IInputElement _previousFocus;
+    private IInputElement? _previousFocus;
     private bool _ignoreWindowClosingEvent;
     private bool _isOpening;
 }

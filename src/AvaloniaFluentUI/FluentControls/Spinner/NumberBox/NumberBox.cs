@@ -18,14 +18,14 @@ namespace AvaloniaFluentUI.Controls;
 /// Represents a control that can be used to display and edit numbers.
 /// </summary>
 [PseudoClasses(SharedPseudoclasses.s_pcHeader)]
-[PseudoClasses(PC_SPIN_VISIBLE, PC_SPIN_POPUP, PC_SPIN_COLLAPSED)]
 [PseudoClasses(PC_UP_DISABLED, PC_DOWN_DISABLED)]
-[TemplatePart(DOWN_SPIN_BUTTON, typeof(RepeatButton))]
-[TemplatePart(POPUP_DOWN_SPIN_BUTTON, typeof(RepeatButton))]
-[TemplatePart(UP_SPIN_BUTTON, typeof(RepeatButton))]
-[TemplatePart(POPUP_UP_SPIN_BUTTON, typeof(RepeatButton))]
-[TemplatePart(INPUT_BOX, typeof(TextBox))]
-[TemplatePart(UP_DOWN_POPUP, typeof(Popup))]
+[PseudoClasses(PC_SPIN_VISIBLE, PC_SPIN_POPUP, PC_SPIN_COLLAPSED)]
+[TemplatePart(Name = INPUT_BOX,                 Type = typeof(TextBox))]
+[TemplatePart(Name = UP_DOWN_POPUP,             Type = typeof(Popup))]
+[TemplatePart(Name = UP_SPIN_BUTTON,            Type = typeof(RepeatButton))]
+[TemplatePart(Name = DOWN_SPIN_BUTTON,          Type = typeof(RepeatButton))]
+[TemplatePart(Name = POPUP_UP_SPIN_BUTTON,      Type = typeof(RepeatButton))]
+[TemplatePart(Name = POPUP_DOWN_SPIN_BUTTON,    Type = typeof(RepeatButton))]
 public partial class NumberBox : TemplatedControl
 {
     /// <summary>
@@ -122,14 +122,13 @@ public partial class NumberBox : TemplatedControl
     /// Defines the <see cref="SpinButtonPlacementMode"/> property
     /// </summary>
     public static readonly StyledProperty<NumberBoxSpinButtonPlacementMode> SpinButtonPlacementModeProperty =
-        AvaloniaProperty.Register<NumberBox, NumberBoxSpinButtonPlacementMode>(nameof(SpinButtonPlacementMode),
-            NumberBoxSpinButtonPlacementMode.Hidden);
+        AvaloniaProperty.Register<NumberBox, NumberBoxSpinButtonPlacementMode>(nameof(SpinButtonPlacementMode));
 
     /// <summary>
     /// Defines the <see cref="Text"/> property
     /// </summary>
-    public static readonly DirectProperty<NumberBox, string> TextProperty =
-        AvaloniaProperty.RegisterDirect<NumberBox, string>(nameof(Text),
+    public static readonly DirectProperty<NumberBox, string?> TextProperty =
+        AvaloniaProperty.RegisterDirect<NumberBox, string?>(nameof(Text),
             x => x.Text, (x, v) => x.Text = v, defaultBindingMode: BindingMode.TwoWay);
 
     /// <summary>
@@ -263,7 +262,7 @@ public partial class NumberBox : TemplatedControl
     /// requires a bit more manual work, and I'm not about to attempt to replicate the NumberFormatters :D
     /// NOTE: This cannot be used if <see cref="SimpleNumberFormat"/> is in use
     /// </remarks>
-    public Func<double, string> NumberFormatter { get; set; }
+    public Func<double, string>? NumberFormatter { get; set; }
 
     /// <summary>
     /// Use this for simple number formatting using normal .net formatting. Resulting string must still
@@ -321,7 +320,7 @@ public partial class NumberBox : TemplatedControl
     /// <summary>
     /// Gets or sets the string type representation of the Value property.
     /// </summary>
-    public string Text
+    public string? Text
     {
         get => _text;
         set
@@ -375,7 +374,18 @@ public partial class NumberBox : TemplatedControl
     /// </summary>
     public event TypedEventHandler<NumberBox, NumberBoxValueChangedEventArgs>? ValueChanged;
 
-    public string? _text = null;
+    public string? _text;
+    
+    //Template parts
+    private RepeatButton? _spinDown;
+    private RepeatButton? _spinUp;
+    private TextBox? _textBox;
+    private Popup? _popup;
+    private RepeatButton? _popupUpButton;
+    private RepeatButton? _popupDownButton;
+
+    private bool _textUpdating;
+    private bool _valueUpdating;
 
     private const string DOWN_SPIN_BUTTON = "DownSpinButton";
     private const string POPUP_DOWN_SPIN_BUTTON = "PopupDownSpinButton";
@@ -662,12 +672,12 @@ public partial class NumberBox : TemplatedControl
         return null;
     }
 
-    private void OnSpinDownClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void OnSpinDownClick(object? sender, RoutedEventArgs e)
     {
         StepValue(-SmallChange);
     }
 
-    private void OnSpinUpClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void OnSpinUpClick(object? sender, RoutedEventArgs e)
     {
         StepValue(SmallChange);
     }
@@ -926,15 +936,4 @@ public partial class NumberBox : TemplatedControl
 
         return val;
     }
-
-    //Template parts
-    private RepeatButton? _spinDown;
-    private RepeatButton? _spinUp;
-    private TextBox? _textBox;
-    private Popup? _popup;
-    private RepeatButton? _popupUpButton;
-    private RepeatButton? _popupDownButton;
-
-    private bool _textUpdating;
-    private bool _valueUpdating;
 }

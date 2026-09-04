@@ -10,11 +10,21 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// Represents a header for a group of menu items in a NavigationMenu.
 /// </summary>
-[PseudoClasses(s_pcHeaderTextCollapsed, s_pcHeaderTextVisible)]
 [PseudoClasses(s_pcTopMode)]
-[TemplatePart(s_tpRootGrid, typeof(Grid))]
+[PseudoClasses(s_pcHeaderTextCollapsed, s_pcHeaderTextVisible)]
+[TemplatePart(Name = s_tpRootGrid, Type = typeof(Grid))]
 public class NavigationViewItemHeader : NavigationViewItemBase
 {
+    private IDisposable? _splitViewRevokers;
+    private Grid? _rootGrid;
+    private bool _isClosedCompact;
+
+    private const string s_tpRootGrid = "RootGrid";
+
+    private const string s_pcTopMode = ":topmode";
+    private const string s_pcHeaderTextVisible = ":headertextvisible";
+    private const string s_pcHeaderTextCollapsed = ":headertextcollapsed";
+    
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         _splitViewRevokers?.Dispose();
@@ -86,14 +96,4 @@ public class NavigationViewItemHeader : NavigationViewItemBase
         var newLeft = Depth * _itemIndentation;
         _rootGrid.Margin = new Thickness(newLeft, oldMargin.Top, oldMargin.Right, oldMargin.Bottom);
     }
-
-    private IDisposable? _splitViewRevokers;
-    private Grid? _rootGrid;
-    private bool _isClosedCompact;
-
-    private const string s_tpRootGrid = "RootGrid";
-
-    private const string s_pcTopMode = ":topmode";
-    private const string s_pcHeaderTextVisible = ":headertextvisible";
-    private const string s_pcHeaderTextCollapsed = ":headertextcollapsed";
 }

@@ -23,8 +23,8 @@ namespace AvaloniaFluentUI.Controls.Primitives;
 /// <remarks>
 /// This control should not be used outside of a TabView
 /// </remarks>
-[PseudoClasses(s_pcReorder)]
-[TemplatePart(s_tpScrollViewer, typeof(ScrollViewer))]
+[PseudoClasses(PC_REORDER)]
+[TemplatePart(Name = SCROLL_VIEWER, Type = typeof(ScrollViewer))]
 public sealed class TabViewListView : ListBox
 {
     public TabViewListView()
@@ -79,12 +79,12 @@ public sealed class TabViewListView : ListBox
         set => SetValue(CanDragItemsProperty, value);
     }
 
-    internal ScrollViewer Scroller { get; private set; }
+    internal ScrollViewer? Scroller { get; private set; }
 
-    internal event EventHandler<DragEventArgs> DragEnter;
-    internal event EventHandler<DragEventArgs> DragOver;
-    internal event EventHandler<DragEventArgs> DragLeave;
-    internal event EventHandler<DragEventArgs> Drop;
+    internal event EventHandler<DragEventArgs>? DragEnter;
+    internal event EventHandler<DragEventArgs>? DragOver;
+    internal event EventHandler<DragEventArgs>? DragLeave;
+    internal event EventHandler<DragEventArgs>? Drop;
 
     /// <summary>
     /// Occurs when a drag operation that involves one of the items in the view is initiated.
@@ -95,11 +95,45 @@ public sealed class TabViewListView : ListBox
     /// Occurs when a drag operation that involves one of the items in the view is ended.
     /// </summary>
     public event TypedEventHandler<TabViewListView, DragItemsCompletedEventArgs> DragItemsCompleted;
+    
+    private TabViewItem? _dragItem;
+    private int _dragIndex = -1;
+    private bool _isDragItemFocused;
+    private bool _isDragItemSelected;
+    private bool _isInDrag = false;
+    private bool _isInReorder = false;
+    private IDisposable _dragItemOpacitySub;
+    private Point? _initialPoint;
+    private double _cxDrag = double.NaN;
+    private double _cyDrag = double.NaN;
+    private Control? _parent;
+    private bool _isDragWithinTabStrip;
+    // True if there is a drag drop operation started by this listview
+    private bool _isDraggingOverSelf;
+
+    private LiveReorderHelper? _liveReorderHelper;    
+    private Point? _lastDragOverPoint;
+
+    // For 12.0/v3 - Avalonia has decided to make the decision that the lowest common denominator
+    // in the platform backends decides the entire public API. As part of this, DoDragDrop now
+    // requires the initial pressed args, so we have to store them away so we can start DragDrop.
+    // I tried to object, and failed (https://github.com/AvaloniaUI/Avalonia/pull/20988)
+    // And you guessed it, freakin' Wayland
+    private PointerPressedEventArgs? _initArgs;
+    
+    private DispatcherTimer? _scrollTimer;
+    private Vector _currentAutoPanVelocity;
+
+    private const string SCROLL_VIEWER = "ScrollViewer";
+
+    private const string PC_REORDER = ":reorder";
+    private const string PC_LEFT_SHORT = ":leftShort";
+    private const string PC_RIGHT_SHORT = ":rightShort";
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-        Scroller = e.NameScope.Find<ScrollViewer>(s_tpScrollViewer);
+        Scroller = e.NameScope.Find<ScrollViewer>(SCROLL_VIEWER);
 
         // HACK: DragDrop events work differently in Avalonia than WinUI. In WinUI, they aren't true
         // routed events, so the OriginalSource parameter returns TabView or TabViewItem, etc., not
@@ -110,7 +144,7 @@ public sealed class TabViewListView : ListBox
         // So this seems to work - if we grab a drag enter handler on the TabView itself and do a bounds
         // check on this, we know if the pointer left the tab strip or not. 
         _parent = this.FindAncestorOfType<TabView>();
-        _parent.AddHandler(DragDrop.DragLeaveEvent, OnParentDragEnter);
+        _parent?.AddHandler(DragDrop.DragLeaveEvent, OnParentDragEnter);
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -123,14 +157,14 @@ public sealed class TabViewListView : ListBox
         }
     }
 
-    protected override bool NeedsContainerOverride(object item, int index, out object recycleKey)
+    protected override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
     {
         bool isItem = item is TabViewItem;
         recycleKey = isItem ? null : nameof(TabViewItem);
         return !isItem;
     }
 
-    protected override Control CreateContainerForItemOverride(object item, int index, object recycleKey)
+    protected override Control CreateContainerForItemOverride(object? item, int index, object? recycleKey)
     {
         var cont = this.FindDataTemplate(item, ItemTemplate)?.Build(item);
         
@@ -143,7 +177,7 @@ public sealed class TabViewListView : ListBox
         return new TabViewItem();
     }
 
-    protected override void ContainerForItemPreparedOverride(Control container, object item, int index)
+    protected override void ContainerForItemPreparedOverride(Control container, object? item, int index)
     {
         // NOTE: BE CAREFUL HERE! Avalonia has two separate preparation events
         // PrepareContainerForItemOverride - does not have the container connected yet
@@ -157,14 +191,14 @@ public sealed class TabViewListView : ListBox
         //        We know we are currently looking at a TabViewItem being recycled if its parent TabView has
         //        already been set.
         var tabLocation = TabViewTabStripLocation.Top; // Default to top
-        if (tvi.ParentTabView == null)
+        if (tvi?.ParentTabView == null)
         {
-            var parentTV = container.FindAncestorOfType<TabView>();
-            if (parentTV != null)
+            var tabView = container.FindAncestorOfType<TabView>();
+            if (tabView != null)
             {
-                tvi.OnTabViewWidthModeChanged(parentTV.TabWidthMode);
-                tvi.ParentTabView = parentTV;
-                tabLocation = parentTV.TabStripLocation;
+                tvi?.OnTabViewWidthModeChanged(tabView.TabWidthMode);
+                tvi?.ParentTabView = tabView;
+                tabLocation = tabView.TabStripLocation;
             }
         }
         else
@@ -321,8 +355,8 @@ public sealed class TabViewListView : ListBox
     private async void BeginDragReorder()
     {
         var package = new DataPackage();
-        DragItemsStartingEventArgs dragArgs = null;
-        object[] dragItems = null;
+        DragItemsStartingEventArgs? dragArgs = null;
+        object[]? dragItems = null;
         bool canReorder = CanReorderItems;
         bool canDrag = CanDragItems;
 
@@ -376,7 +410,7 @@ public sealed class TabViewListView : ListBox
             _isDraggingOverSelf = true;
         }
 
-        var effects = dragArgs?.Data.RequestedOperation ?? DragDropEffects.Move;
+        var effects = dragArgs?.Data?.RequestedOperation ?? DragDropEffects.Move;
 
         var dropResult = await DragDrop.DoDragDropAsync(_initArgs, package, effects);
 
@@ -739,7 +773,7 @@ public sealed class TabViewListView : ListBox
         _scrollTimer = null;
     }
 
-    private void StartEdgeScrollTimerTick(object sender, EventArgs args)
+    private void StartEdgeScrollTimerTick(object? sender, EventArgs args)
     {
         ScrollWithVelocity(_currentAutoPanVelocity);
     }
@@ -768,7 +802,7 @@ public sealed class TabViewListView : ListBox
         return null;
     }
 
-    internal void HandleTabStripLocationChanged(TabViewTabStripLocation newLocation, string oldClass, string newClass)
+    internal void HandleTabStripLocationChanged(TabViewTabStripLocation newLocation, string? oldClass, string newClass)
     {
         if (oldClass != null)
             PseudoClasses.Set(oldClass, false);
@@ -833,8 +867,8 @@ public sealed class TabViewListView : ListBox
 
     private void UpdateBottomBorderVisualState()
     {
-        PseudoClasses.Set(s_pcLeftShort, SelectedIndex == 0);
-        PseudoClasses.Set(s_pcRightShort, SelectedIndex == ItemsView.Count - 1);
+        PseudoClasses.Set(PC_LEFT_SHORT, SelectedIndex == 0);
+        PseudoClasses.Set(PC_RIGHT_SHORT, SelectedIndex == ItemsView.Count - 1);
     }
 
     private void OnItemsChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -848,38 +882,4 @@ public sealed class TabViewListView : ListBox
         var scaling = TopLevel.GetTopLevel(this)?.RenderScaling ?? 1;
         UISettings.GetSystemDragSize(scaling, out _cxDrag, out _cyDrag);
     }
-
-    private TabViewItem? _dragItem;
-    private int _dragIndex = -1;
-    private bool _isDragItemFocused;
-    private bool _isDragItemSelected;
-    private bool _isInDrag = false;
-    private bool _isInReorder = false;
-    private IDisposable _dragItemOpacitySub;
-    private Point? _initialPoint;
-    private double _cxDrag = double.NaN;
-    private double _cyDrag = double.NaN;
-    private Control? _parent;
-    private bool _isDragWithinTabStrip;
-    // True if there is a drag drop operation started by this listview
-    private bool _isDraggingOverSelf;
-
-    private LiveReorderHelper? _liveReorderHelper;    
-    private Point? _lastDragOverPoint;
-
-    // For 12.0/v3 - Avalonia has decided to make the decision that the lowest common denominator
-    // in the platform backends decides the entire public API. As part of this, DoDragDrop now
-    // requires the initial pressed args, so we have to store them away so we can start DragDrop.
-    // I tried to object, and failed (https://github.com/AvaloniaUI/Avalonia/pull/20988)
-    // And you guessed it, freakin' Wayland
-    private PointerPressedEventArgs _initArgs;
-    
-    private DispatcherTimer? _scrollTimer;
-    private Vector _currentAutoPanVelocity;
-
-    private const string s_tpScrollViewer = "ScrollViewer";
-
-    private const string s_pcReorder = ":reorder";
-    private const string s_pcLeftShort = ":leftShort";
-    private const string s_pcRightShort = ":rightShort";
 }

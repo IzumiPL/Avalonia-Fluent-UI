@@ -17,16 +17,46 @@ using AvaloniaFluentUI.Core;
 namespace AvaloniaFluentUI.Controls;
 
 //https://github.com/microsoft/microsoft-ui-xaml/issues/7213
-
-[TemplatePart(Name = "PART_LayoutRoot", Type = typeof(Grid))] // Required for Inline
-[TemplatePart(Name = s_itemEllipsisFlyoutPartName, Type = typeof(Flyout))] // Required for Inline
-[TemplatePart(Name = s_itemButtonPartName, Type = typeof(Button))] // Required for Inline
-[TemplatePart(Name = "PART_LastItemContentPresenter", Type = typeof(ContentPresenter), IsRequired = false)]
-[TemplatePart(Name = "PART_ChevronTextBlock", Type = typeof(TextBlock), IsRequired = false)]
-[TemplatePart(Name = "PART_EllipsisDropDownItemContentPresenter", Type = typeof(ContentPresenter), IsRequired = false)]
-[PseudoClasses(SharedPseudoclasses.s_pcPressed, s_pcInline, s_pcEllipsis, s_pcInline, s_pcEllipsisDropDown)]
+[TemplatePart(Name = "PART_LayoutRoot",                             Type = typeof(Grid))] // Required for Inline
+[TemplatePart(Name = PART_ELLIPSIS_FLYOUT,                  Type = typeof(Flyout))] // Required for Inline
+[TemplatePart(Name = PART_ITEM_BUTTON,                          Type = typeof(Button))] // Required for Inline
+[TemplatePart(Name = "PART_LastItemContentPresenter",               Type = typeof(ContentPresenter),    IsRequired = false)]
+[TemplatePart(Name = "PART_ChevronTextBlock",                       Type = typeof(TextBlock),           IsRequired = false)]
+[TemplatePart(Name = "PART_EllipsisDropDownItemContentPresenter",   Type = typeof(ContentPresenter),    IsRequired = false)]
+[PseudoClasses(SharedPseudoclasses.s_pcPressed, PC_INLINE, PC_ELLIPSIS, PC_INLINE, PC_ELLIPSIS_DROP_DOWN)]
 public class BreadcrumbBarItem : ContentControl
 {
+    private bool _childPreviewKeyDownToken;
+    private bool _isEllipsisDropDownItem;
+    private bool _isEllipsisItem;
+    private bool _isLastItem;
+    private bool _allowClickOnLastItem;
+    private Flyout? _ellipsisFlyout;
+    private Button? _button;
+
+    private WeakReference<BreadcrumbBar>? _parentBreadcrumb;
+    private ItemsRepeater? _ellipsisItemsRepeater;
+    private IDataTemplate? _ellipsisDropDownItemDataTemplate;
+    private BreadcrumbElementFactory? _ellipsisElementFactory;
+
+    private BreadcrumbBarItem? _ellipsisItem;
+    private int _index;
+
+    private bool _isPressed;
+    private int _trackedPointerId;
+
+    // Template Parts
+    private const string PART_ELLIPSIS_ITEMS_REPEATER = "PART_EllipsisItemsRepeater";
+    private const string PART_ITEM_BUTTON = "PART_ItemButton";
+    private const string PART_ELLIPSIS_FLYOUT = "PART_EllipsisFlyout";
+
+    private const string ELLIPSIS_ITEMS_REPEATER = "EllipsisItemsRepeater";
+
+    private const string PC_INLINE = ":inline";
+    private const string PC_ELLIPSIS = ":ellipsis";
+    private const string PC_LAST_ITEM = ":lastItem";
+    private const string PC_ELLIPSIS_DROP_DOWN = ":ellipsis-drop-down";
+    
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
@@ -36,12 +66,12 @@ public class BreadcrumbBarItem : ContentControl
         if (_isEllipsisItem)
         {
             var rootGrid = e.NameScope.Get<Grid>("PART_LayoutRoot");
-            _ellipsisFlyout = rootGrid.Resources[s_itemEllipsisFlyoutPartName] as Flyout;
+            _ellipsisFlyout = rootGrid.Resources[PART_ELLIPSIS_FLYOUT] as Flyout;
             if (_ellipsisFlyout == null)
                 throw new InvalidOperationException("PART_LayoutRoot on BreadcrumbBarItem is missing Flyout in resources");
         }
 
-        _button = e.NameScope.Find<Button>(s_itemButtonPartName);
+        _button = e.NameScope.Find<Button>(PART_ITEM_BUTTON);
         if (_button != null)
         {
             _button.Loaded += OnButtonLoadedEvent;
@@ -177,7 +207,7 @@ public class BreadcrumbBarItem : ContentControl
         }
     }
 
-    private void ProcessPointerCanceled(PointerEventArgs args, IPointer? p = null)
+    private void ProcessPointerCanceled(PointerEventArgs? args, IPointer? p = null)
     {
         if (IgnorePointerId(args?.Pointer ?? p))
         {
@@ -196,15 +226,15 @@ public class BreadcrumbBarItem : ContentControl
 
     private void OnButtonLoadedEvent(object? sender, RoutedEventArgs e)
     {
-        _button.Loaded -= OnButtonLoadedEvent;
+        _button?.Loaded -= OnButtonLoadedEvent;
 
         if (_isEllipsisItem)
         {
-            _button.Click += OnEllipsisItemClick;
+            _button?.Click += OnEllipsisItemClick;
         }
         else
         {
-            _button.Click += OnBreadcrumbBarItemClick;
+            _button?.Click += OnBreadcrumbBarItemClick;
         }
 
         if (_isEllipsisItem)
@@ -226,7 +256,7 @@ public class BreadcrumbBarItem : ContentControl
         _parentBreadcrumb = new WeakReference<BreadcrumbBar>(parent);
     }
 
-    internal void SetEllipsisDropDownItemDataTemplate(object newDataTemplate)
+    internal void SetEllipsisDropDownItemDataTemplate(object? newDataTemplate)
     {
         if (newDataTemplate is IDataTemplate dataTemplate)
         {
@@ -243,19 +273,19 @@ public class BreadcrumbBarItem : ContentControl
     internal void SetIsEllipsisDropDownItem(bool isEllipsisDropDownItem)
     {
         _isEllipsisDropDownItem = isEllipsisDropDownItem;
-        HookListeners(_isEllipsisDropDownItem);
+        HookListeners();
         UpdateItemTypeVisualState();
     }
 
     internal void RaiseItemClickedEvent(object? content, int index)
     {
-        if (_parentBreadcrumb.TryGetTarget(out var target))
+        if (_parentBreadcrumb != null && _parentBreadcrumb.TryGetTarget(out var target))
         {
             target.RaiseItemClickedEvent(content, index);
         }
     }
 
-    private void OnBreadcrumbBarItemClick(object? sender, RoutedEventArgs e)
+    private void OnBreadcrumbBarItemClick(object? sender, RoutedEventArgs? e)
     {
         RaiseItemClickedEvent(Content, _index - 1);
     }
@@ -275,7 +305,7 @@ public class BreadcrumbBarItem : ContentControl
         UpdateFlyoutIndex(args.Element, args.NewIndex);
     }
 
-    private void OnChildPreviewKeyDown(object sender, KeyEventArgs args)
+    private void OnChildPreviewKeyDown(object? sender, KeyEventArgs args)
     {
         if (_isEllipsisDropDownItem)
         {
@@ -318,7 +348,7 @@ public class BreadcrumbBarItem : ContentControl
         }
     }
 
-    private IList<object> CloneEllipsisItemSource(IEnumerable<object> ellipsisItemsSource)
+    private IList<object> CloneEllipsisItemSource(IEnumerable<object>? ellipsisItemsSource)
     {
         // The new list contains all the elements in reverse order
         int itemsSourceSize = ellipsisItemsSource.Count();
@@ -351,8 +381,8 @@ public class BreadcrumbBarItem : ContentControl
     private void UpdateItemTypeVisualState()
     {
         // Change the style based on whether the item is inline or in the dropdown
-        PseudoClasses.Set(s_pcInline, !_isEllipsisDropDownItem);
-        PseudoClasses.Set(s_pcEllipsisDropDown, _isEllipsisDropDownItem);
+        PseudoClasses.Set(PC_INLINE, !_isEllipsisDropDownItem);
+        PseudoClasses.Set(PC_ELLIPSIS_DROP_DOWN, _isEllipsisDropDownItem);
         //winrt::VisualStateManager::GoToState(*this, m_isEllipsisDropDownItem ? s_ellipsisDropDownStateName : s_inlineStateName, false /*useTransitions*/);
     }
 
@@ -365,8 +395,8 @@ public class BreadcrumbBarItem : ContentControl
 
     private void UpdateInlineItemTypeVisualState()
     {
-        PseudoClasses.Set(s_pcEllipsis, _isEllipsisItem);
-        PseudoClasses.Set(s_pcLastItem, _isLastItem);
+        PseudoClasses.Set(PC_ELLIPSIS, _isEllipsisItem);
+        PseudoClasses.Set(PC_LAST_ITEM, _isLastItem);
 
         PseudoClasses.Set(":allowClick", _allowClickOnLastItem);
     }
@@ -377,12 +407,12 @@ public class BreadcrumbBarItem : ContentControl
             return;
 
         var pc = _button.Classes as IPseudoClasses;
-        pc.Set(s_pcLastItem, _isLastItem && !_allowClickOnLastItem);
+        pc.Set(PC_LAST_ITEM, _isLastItem && !_allowClickOnLastItem);
     }
 
-    private void OnEllipsisItemClick(object? sender, RoutedEventArgs e)
+    private void OnEllipsisItemClick(object? sender, RoutedEventArgs? e)
     {
-        if (_parentBreadcrumb.TryGetTarget(out var target))
+        if (_parentBreadcrumb != null && _parentBreadcrumb.TryGetTarget(out var target))
         {
             var targetHidden = target.HiddenElements();
             var hiddenElements = CloneEllipsisItemSource(targetHidden);
@@ -408,7 +438,7 @@ public class BreadcrumbBarItem : ContentControl
         _isEllipsisItem = false;
         _isLastItem = true;
 
-        if (_parentBreadcrumb.TryGetTarget(out var target))
+        if (_parentBreadcrumb != null && _parentBreadcrumb.TryGetTarget(out var target))
         {
             _allowClickOnLastItem = target.IsLastItemClickEnabled;
         }
@@ -448,8 +478,8 @@ public class BreadcrumbBarItem : ContentControl
         {
             var repeater = new ItemsRepeater
             {
-                Name = s_ellipsisItemsRepeaterPartName,
-                [AutomationProperties.NameProperty] = s_ellipsisItemsRepeaterAutomationName,
+                Name = PART_ELLIPSIS_ITEMS_REPEATER,
+                [AutomationProperties.NameProperty] = ELLIPSIS_ITEMS_REPEATER,
                 HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch,
                 Layout = new StackLayout()
             };
@@ -490,7 +520,7 @@ public class BreadcrumbBarItem : ContentControl
         _ellipsisItem = ellipsisItem;
     }
 
-    internal void OnClickEvent(object? sender, RoutedEventArgs args)
+    internal void OnClickEvent(object? sender, RoutedEventArgs? args)
     {
         if (_isEllipsisDropDownItem)
         {
@@ -511,44 +541,22 @@ public class BreadcrumbBarItem : ContentControl
         }
     }
 
-    private void HookListeners(bool forEllipsisDropDownItem)
+    private void HookListeners()
     {
         if (!_childPreviewKeyDownToken)
         {
             AddHandler(KeyDownEvent, OnChildPreviewKeyDown, RoutingStrategies.Tunnel);
             _childPreviewKeyDownToken = true;
         }
-
-        //if (forEllipsisDropDownItem)
-        //{
-        //    if (_isEnabledChangedRevoker == null)
-        //    {
-        //        _isEnabledChangedRevoker = IsEnabledProperty.Changed.Subscribe(
-        //            new SimpleObserver<AvaloniaPropertyChangedEventArgs>(OnIsEnabledChanged));
-        //    }
-        //}
-        //else if (_flowDirectionChangedToken == null)
-        //{
-        //    _flowDirectionChangedToken = FlowDirectionProperty.Changed.Subscribe(
-        //        new SimpleObserver<AvaloniaPropertyChangedEventArgs>(OnFlowDirectionChanged));
-        //}
     }
 
     private void RevokeListeners()
     {
-        //if (_flowDirectionChangedToken != null)
-        //{
-        //    _flowDirectionChangedToken.Dispose();
-        //    _flowDirectionChangedToken = null;
-        //}
-
         if (_childPreviewKeyDownToken)
         {
             RemoveHandler(KeyDownEvent, OnChildPreviewKeyDown);
             _childPreviewKeyDownToken = false;
         }
-
-        // KeyDown -= OnKeyDown;
     }
 
     private void RevokePartsListeners()
@@ -575,8 +583,10 @@ public class BreadcrumbBarItem : ContentControl
 
     internal bool IsEllipsisDropDownItem() => _isEllipsisDropDownItem;
 
-    private bool IgnorePointerId(IPointer pointer)
+    private bool IgnorePointerId(IPointer? pointer)
     {
+        if (pointer == null) { return false; }
+        
         var pointerId = pointer.Id;
 
         if (_trackedPointerId == 0)
@@ -590,35 +600,4 @@ public class BreadcrumbBarItem : ContentControl
 
         return false;
     }
-
-    private bool _childPreviewKeyDownToken;
-    private bool _isEllipsisDropDownItem;
-    private bool _isEllipsisItem;
-    private bool _isLastItem;
-    private bool _allowClickOnLastItem;
-    private Flyout? _ellipsisFlyout;
-    private Button? _button;
-
-    private WeakReference<BreadcrumbBar>? _parentBreadcrumb;
-    private ItemsRepeater? _ellipsisItemsRepeater;
-    private IDataTemplate? _ellipsisDropDownItemDataTemplate;
-    private BreadcrumbElementFactory? _ellipsisElementFactory;
-
-    private BreadcrumbBarItem? _ellipsisItem;
-    private int _index;
-
-    private bool _isPressed;
-    private int _trackedPointerId;
-
-    // Template Parts
-    private const string s_ellipsisItemsRepeaterPartName = "PART_EllipsisItemsRepeater";
-    private const string s_itemButtonPartName = "PART_ItemButton";
-    private const string s_itemEllipsisFlyoutPartName = "PART_EllipsisFlyout";
-
-    private const string s_ellipsisItemsRepeaterAutomationName = "EllipsisItemsRepeater";
-
-    private const string s_pcInline = ":inline";
-    private const string s_pcEllipsis = ":ellipsis";
-    private const string s_pcLastItem = ":lastItem";
-    private const string s_pcEllipsisDropDown = ":ellipsisDropDown";
 }

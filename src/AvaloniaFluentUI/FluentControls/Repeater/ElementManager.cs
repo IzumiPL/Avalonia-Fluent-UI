@@ -15,6 +15,13 @@ internal enum ScrollOrientation
 
 internal class ElementManager
 {
+    
+    private bool _useLayoutBounds;
+    private List<Control?> _realizedElements = new List<Control?>();
+    private List<Rect> _realizedElementLayoutBounds = new List<Rect>();
+    private int _firstRealizedDataIndex = -1;
+    private VirtualizingLayoutContext? _context = null;
+    
     public ElementManager(bool useLayoutBounds = true)
     {
         _useLayoutBounds = useLayoutBounds;
@@ -22,8 +29,7 @@ internal class ElementManager
 
     public int FirstRealizedIndex => _firstRealizedDataIndex;
 
-    public int LastRealizedIndex =>
-        _firstRealizedDataIndex + _realizedElements.Count - 1;
+    public int LastRealizedIndex => _firstRealizedDataIndex + _realizedElements.Count - 1;
 
     public void SetContext(VirtualizingLayoutContext virtualContext)
     {
@@ -61,11 +67,11 @@ internal class ElementManager
     }
 
     public int GetRealizedElementCount() =>
-        IsVirtualizingContext() ? _realizedElements.Count : _context.ItemCount;
+        IsVirtualizingContext() ? _realizedElements.Count : _context?.ItemCount ?? 0;
 
-    public Control GetAt(int realizedIndex)
+    public Control? GetAt(int realizedIndex)
     {
-        Control element = null;
+        Control? element = null;
         if (IsVirtualizingContext())
         {
             if (_realizedElements[realizedIndex] == null)
@@ -75,8 +81,7 @@ internal class ElementManager
 #if DEBUG && REPEATER_TRACE
                 Log.Debug("Creating element for sentinal with data index {Index}", dataIndex);
 #endif
-                element = _context.GetOrCreateElementAt(dataIndex,
-                    ElementRealizationOptions.ForceCreate | ElementRealizationOptions.SuppressAutoRecycle);
+                element = _context?.GetOrCreateElementAt(dataIndex, ElementRealizationOptions.ForceCreate | ElementRealizationOptions.SuppressAutoRecycle);
                 _realizedElements[realizedIndex] = element;
             }
             else
@@ -86,14 +91,13 @@ internal class ElementManager
         }
         else
         {
-            element = _context.GetOrCreateElementAt(realizedIndex,
-                ElementRealizationOptions.ForceCreate | ElementRealizationOptions.SuppressAutoRecycle);
+            element = _context?.GetOrCreateElementAt(realizedIndex, ElementRealizationOptions.ForceCreate | ElementRealizationOptions.SuppressAutoRecycle);
         }
 
         return element;
     }
 
-    public void Add(Control element, int dataIndex)
+    public void Add(Control? element, int dataIndex)
     {
         Debug.Assert(IsVirtualizingContext());
 
@@ -108,7 +112,7 @@ internal class ElementManager
         }
     }
 
-    public void Insert(int realizedIndex, int dataIndex, Control element)
+    public void Insert(int realizedIndex, int dataIndex, Control? element)
     {
         Debug.Assert(IsVirtualizingContext());
         if (realizedIndex == 0)
@@ -135,7 +139,7 @@ internal class ElementManager
             var index = realizedIndex == 0 ? realizedIndex + i : (realizedIndex + count - 1) - i;
             if (_realizedElements[index] is Control c)
             {
-                _context.RecycleElement(c);
+                _context?.RecycleElement(c);
             }
         }
 
@@ -210,27 +214,25 @@ internal class ElementManager
         else
         {
             // Non virtualized - everything is realized
-            return index >= 0 && index < _context.ItemCount;
+            return index >= 0 && index < _context?.ItemCount;
         }
     }
 
-    public bool IsIndexValidInData(int currentIndex) =>
-        currentIndex >= 0 && currentIndex < _context.ItemCount;
+    public bool IsIndexValidInData(int currentIndex) => currentIndex >= 0 && currentIndex < _context?.ItemCount;
 
-    public Control GetRealizedElement(int dataIndex)
+    public Control? GetRealizedElement(int dataIndex)
     {
         Debug.Assert(IsDataIndexRealized(dataIndex));
         return IsVirtualizingContext() ?
             GetAt(GetRealizedRangeIndexFromDataIndex(dataIndex)) :
-            _context.GetOrCreateElementAt(dataIndex,
-                ElementRealizationOptions.ForceCreate | ElementRealizationOptions.SuppressAutoRecycle);
+            _context?.GetOrCreateElementAt(dataIndex, ElementRealizationOptions.ForceCreate | ElementRealizationOptions.SuppressAutoRecycle);
     }
 
     public void EnsureElementRealized(bool forward, int dataIndex, string layoutId)
     {
         if (IsDataIndexRealized(dataIndex) == false)
         {
-            var element = _context.GetOrCreateElementAt(dataIndex,
+            var element = _context?.GetOrCreateElementAt(dataIndex,
                 ElementRealizationOptions.ForceCreate | ElementRealizationOptions.SuppressAutoRecycle);
 
             if (forward)
@@ -282,7 +284,7 @@ internal class ElementManager
         return intersects;
     }
 
-    public void DataSourceChanged(object source, NotifyCollectionChangedEventArgs args)
+    public void DataSourceChanged(object? source, NotifyCollectionChangedEventArgs args)
     {
         Debug.Assert(IsVirtualizingContext());
         if (_realizedElements.Count == 0)
@@ -316,7 +318,7 @@ internal class ElementManager
                         {
                             if (_realizedElements[realizedIndex] is Control c)
                             {
-                                _context.RecycleElement(c);
+                                _context?.RecycleElement(c);
                                 _realizedElements[realizedIndex] = null;
                             }
                         }
@@ -492,10 +494,4 @@ internal class ElementManager
 
         return false;
     }
-
-    private bool _useLayoutBounds;
-    private List<Control> _realizedElements = new List<Control>();
-    private List<Rect> _realizedElementLayoutBounds = new List<Rect>();
-    private int _firstRealizedDataIndex = -1;
-    private VirtualizingLayoutContext _context = null;
 }

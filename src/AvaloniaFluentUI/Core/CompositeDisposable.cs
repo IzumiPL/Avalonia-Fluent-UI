@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace AvaloniaFluentUI.Core;
 
-internal class FADisposable : IDisposable
+internal class FluentDisposable : IDisposable
 {
-    public FADisposable(Action dispose)
+    public FluentDisposable(Action dispose)
     {
         _dispose = dispose;
     }
@@ -19,7 +19,7 @@ internal class FADisposable : IDisposable
     private Action _dispose;
 }
 
-internal class CompositeDisposable : ICollection<IDisposable>, IEnumerable<IDisposable>, IEnumerable, IDisposable
+internal class CompositeDisposable : ICollection<IDisposable>, IDisposable
 {
     public CompositeDisposable()
     {

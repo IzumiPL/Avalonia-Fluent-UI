@@ -15,14 +15,14 @@ public partial class FluentPathIcon : IconElement
     /// <summary>
     /// Defines the <see cref="Data"/> property
     /// </summary>
-    public static readonly StyledProperty<Geometry> DataProperty =
+    public static readonly StyledProperty<Geometry?> DataProperty =
         Path.DataProperty.AddOwner<FluentPathIcon>();
 
     /// <summary>
     /// Gets or sets a Geometry that specifies the shape to be drawn. 
     /// In XAML. this can also be set using a string that describes Move and draw commands syntax.
     /// </summary>
-    public Geometry Data
+    public Geometry? Data
     {
         get => GetValue(DataProperty);
         set => SetValue(DataProperty, value);
@@ -245,7 +245,7 @@ public partial class FluentPathIcon : IconElement
     /// don't have a Path.TryParse() method. This does still fail sometimes, but its better
     /// than nothing. Its really only meant to be called from the StringToIconElementConverter
     /// </summary>
-    public static bool IsDataValid(string data, out Geometry g)
+    public static bool IsDataValid(string data, out Geometry? g)
     {
         if (data.Length <= 1 || data.Contains(":") || data.Contains("/\\"))
         {
