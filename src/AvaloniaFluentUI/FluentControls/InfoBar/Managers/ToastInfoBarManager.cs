@@ -23,19 +23,19 @@ public class ToastInfoBarManager : InfoBarManagerBase<ToastInfoBar>
     }
 
     public void Success(string title, object content,
-        InfoBarPosition position, bool isClosable = false, int duration = 3000) 
+        InfoBarPosition position = InfoBarPosition.TopRight, bool isClosable = false, int duration = 3000) 
         => New(title, content, position, InfoBarSeverity.Success, isClosable, duration);
 
     public void Information(string title, object content,
-        InfoBarPosition position, bool isClosable = false, int duration = 3000)
+        InfoBarPosition position = InfoBarPosition.TopRight, bool isClosable = false, int duration = 3000)
         => New(title, content, position, InfoBarSeverity.Informational, isClosable, duration);
 
     public void Warning(string title, object content,
-        InfoBarPosition position, bool isClosable = false, int duration = 3000)
+        InfoBarPosition position = InfoBarPosition.TopRight, bool isClosable = false, int duration = 3000)
         => New(title, content, position, InfoBarSeverity.Warning, isClosable, duration);
 
     public void Error(string title, object content,
-        InfoBarPosition position, bool isClosable = true, int duration = -1)
+        InfoBarPosition position = InfoBarPosition.TopRight, bool isClosable = true, int duration = -1)
         => New(title, content, position, InfoBarSeverity.Error, isClosable, duration);
     
     public void Custom(string title, object content, InfoBarPosition position,
