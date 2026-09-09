@@ -12,8 +12,8 @@
   <Color x:Key="TextOnAccentFillColorSecondary">#B3FFFFFF</Color>
 
   <!--  Control  -->
-  <Color x:Key="ContentControlFillColorDefault">#B3FFFFFF</Color>
-  <Color x:Key="ControlFillColorDefault">#B3FFFFFF</Color>
+  <Color x:Key="ContentControlFillColorDefault">#90FFFFFF</Color>
+  <Color x:Key="ControlFillColorDefault">#A3FFFFFF</Color>
   <Color x:Key="ControlFillColorSecondary">#80F9F9F9</Color>
   <Color x:Key="ControlFillColorTertiary">#4DF9F9F9</Color>
   <Color x:Key="ControlFillColorTransparent">#00FFFFFF</Color>
@@ -132,7 +132,7 @@
   <SolidColorBrush x:Key="DividerStrokeColorDefaultBrush" Color="{StaticResource ControlStrokeColorDefault}"/>
   <SolidColorBrush x:Key="FocusStrokeColorOuterBrush" Color="{StaticResource TextFillColorPrimary}"/>
   <SolidColorBrush x:Key="FocusStrokeColorInnerBrush" Color="{StaticResource ControlFillColorDefault}"/>
-  <SolidColorBrush x:Key="CardBackgroundFillColorDefaultBrush" Color="{StaticResource LayerFillColor}"/>
+  <SolidColorBrush x:Key="CardBackgroundFillColorDefaultBrush" Color="{StaticResource ContentControlFillColorDefault}"/>
   <SolidColorBrush x:Key="SmokeFillColorDefaultBrush" Color="{StaticResource SmokeFillColorDefault}"/>
   <SolidColorBrush x:Key="LayerFillColorBrush" Color="{StaticResource LayerFillColor}"/>
   <SolidColorBrush x:Key="SolidBackgroundFillColorBaseBrush" Color="{StaticResource PopupControlColorDefault}"/>

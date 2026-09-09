@@ -47,7 +47,7 @@
   <Color x:Key="SurfaceStrokeColorDefault">#66757575</Color>
   <Color x:Key="SurfaceStrokeColorFlyout">#393939</Color>
   <Color x:Key="SmokeFillColorDefault">#4D000000</Color>
-  <Color x:Key="LayerFillColor">#0DFFFFFF</Color>
+  <Color x:Key="LayerFillColor">#2C2C2C</Color>
 
   <Color x:Key="PopupControlColorDefault">#323232</Color>
   <Color x:Key="PopupControlColorSecondary">#80212121</Color>
@@ -132,7 +132,7 @@
   <SolidColorBrush x:Key="DividerStrokeColorDefaultBrush" Color="{StaticResource ControlStrokeColorDefault}"/>
   <SolidColorBrush x:Key="FocusStrokeColorOuterBrush" Color="{StaticResource TextFillColorPrimary}"/>
   <SolidColorBrush x:Key="FocusStrokeColorInnerBrush" Color="{StaticResource ControlFillColorDefault}"/>
-  <SolidColorBrush x:Key="CardBackgroundFillColorDefaultBrush" Color="{StaticResource LayerFillColor}"/>
+  <SolidColorBrush x:Key="CardBackgroundFillColorDefaultBrush" Color="{StaticResource ContentControlFillColorDefault}"/>
   <SolidColorBrush x:Key="SmokeFillColorDefaultBrush" Color="{StaticResource SmokeFillColorDefault}"/>
   <SolidColorBrush x:Key="LayerFillColorBrush" Color="{StaticResource LayerFillColor}"/>
   <SolidColorBrush x:Key="SolidBackgroundFillColorBaseBrush" Color="{StaticResource SystemFillColorSolidNeutralBackground}"/>
