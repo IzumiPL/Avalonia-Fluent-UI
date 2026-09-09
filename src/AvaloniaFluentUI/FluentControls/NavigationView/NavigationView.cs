@@ -1493,7 +1493,7 @@ public class NavigationView : HeaderedContentControl
         if (_backButton != null)
         {
             var tip = LocalizationService.Instance.GetString("Backward");
-            ToolTip.SetTip(_backButton, this);
+            ToolTip.SetTip(_backButton, tip);
             AutomationProperties.SetName(_backButton, tip);
         }
 
