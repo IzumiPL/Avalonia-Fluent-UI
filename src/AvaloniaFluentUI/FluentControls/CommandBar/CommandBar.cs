@@ -15,7 +15,6 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// Represents a specialized command bar that provides layout for CommandBarButton and related command elements.
 /// </summary>
-
 [PseudoClasses(PC_DYNAMICOVERFLOW)]
 [PseudoClasses(SharedPseudoclasses.s_pcOpen)]
 [PseudoClasses(PC_PRIMARY_ONLY, PC_SECONDARY_ONLY)]
@@ -178,7 +177,10 @@ public class CommandBar : ContentControl
     /// </summary>
     public event TypedEventHandler<CommandBar, EventArgs>? Closing;
 
-    private bool _appliedTemplate = false;
+    private IAvaloniaList<ICommandBarElement> _primaryCommands;
+    private IAvaloniaList<ICommandBarElement> _secondaryCommands;
+    
+    private bool _appliedTemplate;
 
     // These are the actual lists sent to the Items Controls
     // We don't want to move items in the actual lists to not
@@ -193,13 +195,10 @@ public class CommandBar : ContentControl
 
     private CommandBarSeparator? _overflowSeparator;
 
-    private int _hasOrderedOverflow = 0;
+    private int _hasOrderedOverflow;
     private Dictionary<ICommandBarElement, double>? _widthCache;
-    private int _numInOverflow = 0;
+    private int _numInOverflow;
     private double _minRecoverWidth;
-    
-    private IAvaloniaList<ICommandBarElement> _primaryCommands;
-    private IAvaloniaList<ICommandBarElement> _secondaryCommands;
 
     private const string PRIMARY_ITEMS_CONTROL = "PrimaryItemsControl";
     private const string CONTENT_CONTROL = "ContentControl";
@@ -297,19 +296,14 @@ public class CommandBar : ContentControl
         bool isDynamic = IsDynamicOverflowEnabled;
         if (isDynamic)
         {
-            if (_moreButton == null)
-            {
-                return base.MeasureOverride(availableSize);
-            }
-            
-            if (!_moreButton.IsVisible)
+            if (_moreButton != null && !_moreButton.IsVisible)
                 _moreButton.IsVisible = true;
 
             var sz = base.MeasureOverride(Size.Infinity);
 
             if (_primaryCommands.Count == 0)
             {
-                _moreButton.IsVisible = true;
+                _moreButton?.IsVisible = true;
                 _overflowSeparator?.IsVisible = false;
                 return sz;
             }
@@ -322,9 +316,9 @@ public class CommandBar : ContentControl
             // 5px is to give us just a little more space
             var availWidForItems = availableSize.Width -
                 (_contentHost != null ? _contentHost.DesiredSize.Width : 0) -
-                _moreButton.DesiredSize.Width - 5;
+                _moreButton?.DesiredSize.Width - 5;
 
-            if (_minRecoverWidth < availWidForItems && _numInOverflow > 0 && _primaryItemsHost != null)
+            if (_minRecoverWidth < availWidForItems && _numInOverflow > 0 && _primaryItemsHost != null && _primaryItems != null && _widthCache != null)
             {
                 double trackWid = _primaryItemsHost.DesiredSize.Width;
                 while (_numInOverflow > 0)
@@ -334,11 +328,11 @@ public class CommandBar : ContentControl
 
                     for (int i = 0; i < items.Count; i++)
                     {
-                        groupWid += _widthCache?[items[i]] ?? 0;
+                        groupWid += _widthCache[items[i]];
 
                         _overflowItems?.Remove(items[i]);
-                        var originalIndex = Math.Min(_primaryItems?.Count ?? 0, _primaryCommands.IndexOf(items[i]));
-                        _primaryItems?.Insert(originalIndex, items[i]);
+                        var originalIndex = Math.Min(_primaryItems.Count, _primaryCommands.IndexOf(items[i]));
+                        _primaryItems.Insert(originalIndex, items[i]);
                         _numInOverflow--;
 
                         // Unhide
@@ -385,16 +379,13 @@ public class CommandBar : ContentControl
                 _minRecoverWidth = _primaryItemsHost.DesiredSize.Width;// + trackWid;
             }
 
-            if (_overflowSeparator != null)
+            if (_overflowSeparator != null && _overflowItems != null)
             { 
                 _overflowSeparator.IsVisible = _numInOverflow > 0 && SecondaryCommands.Count > 0;
 
                 var idx = _numInOverflow;
-                if (_overflowItems != null)
-                {
-                    var curIdx = _overflowItems.IndexOf(_overflowSeparator);
-                    _overflowItems.Move(curIdx, idx);
-                }
+                var curIdx = _overflowItems.IndexOf(_overflowSeparator);
+                _overflowItems.Move(curIdx, idx);
             }
         }
 
@@ -437,10 +428,7 @@ public class CommandBar : ContentControl
             // TODO: Focus via keyboard
             if (_overflowItems.Count > 0)
             {
-                if (_overflowItems[0] is Control control)
-                {
-                    control.Focus();
-                }
+                (_overflowItems[0] as Control)?.Focus();
             }
         }
 
@@ -573,8 +561,6 @@ SetState:
             goto SetState;
         }
 
-        if (e.NewItems == null || e.OldItems == null) { return; }
-
         // TODO: Test that this works...
         int startIndex = _numInOverflow == 0 ? 0 : _numInOverflow + 1;
         switch (e.Action)
@@ -669,7 +655,7 @@ SetState:
             case NotifyCollectionChangedAction.Add:
                 {
                     var items = e.NewItems;
-                    for (int i = 0; i < items?.Count; i++)
+                    for (int i = 0; i < items.Count; i++)
                     {
                         if (items[i] is Control c && c.Classes is IPseudoClasses pc)
                         {
@@ -706,9 +692,12 @@ SetState:
     {
         for (int i = _numInOverflow - 1; i >= 0; i--)
         {
-            var item = _overflowItems?[i];
-            _overflowItems?.RemoveAt(i);
-            _primaryItems?.Insert(Math.Min(_primaryItems.Count, _primaryCommands.IndexOf(item)), item);
+            if (_overflowItems != null)
+            {
+                var item = _overflowItems[i];
+                _overflowItems.RemoveAt(i);
+                _primaryItems?.Insert(Math.Min(_primaryItems.Count, _primaryCommands.IndexOf(item)), item);
+            }
         }
         _numInOverflow = 0;
     }
