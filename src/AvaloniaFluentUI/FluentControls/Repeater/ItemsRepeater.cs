@@ -453,11 +453,11 @@ public class ItemsRepeater : Panel
         }
         else if (property == ItemTemplateProperty)
         {
-            if (args.OldValue is IDataTemplate ot && args.NewValue is IDataTemplate nt)
-            {
-                OnItemTemplateChanged(ot, nt);
-            }
-            // OnItemTemplateChanged(args.OldValue as IDataTemplate, args.NewValue as IDataTemplate);
+            // if (args.OldValue is IDataTemplate ot && args.NewValue is IDataTemplate nt)
+            // {
+                // OnItemTemplateChanged(ot, nt);
+            // }
+            OnItemTemplateChanged(args.OldValue as IDataTemplate, args.NewValue as IDataTemplate);
         }
         else if (property == LayoutProperty)
         {
