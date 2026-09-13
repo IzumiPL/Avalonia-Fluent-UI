@@ -75,7 +75,7 @@ public partial class CarouselViewPageViewModel : ViewModelBase
 
     public FlipOrientation[] FlipOrientations => [FlipOrientation.Horizontal, FlipOrientation.Vertical];
 
-    public double[] Intervals => [500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 2000, 5000];
+    public double[] Intervals => [600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 2000, 5000];
 
     [ObservableProperty]
     private int _flipViewMaxVisiblePips = 6;

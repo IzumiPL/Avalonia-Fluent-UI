@@ -158,6 +158,7 @@
               Grid.Column="1"
               MinWidth="150"
               HorizontalAlignment="Stretch"
+              IsEnabled="{Binding FlipViewPipsPagerIsVisible}"
               ItemsSource="{Binding FlipViewMaxVisiblePipsItems}"
               SelectedItem="{Binding FlipViewMaxVisiblePips}"/>
 

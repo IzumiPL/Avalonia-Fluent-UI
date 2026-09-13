@@ -28,7 +28,7 @@
               <TextBlock
                 Grid.Row="1"
                 FontSize="12"
-                Foreground="Gray"
+                Foreground="{DynamicResource TextFillColorDisabledBrush}"
                 Text="avaloniafluentui.controls"/>
               <Grid
                 Grid.Row="2"
