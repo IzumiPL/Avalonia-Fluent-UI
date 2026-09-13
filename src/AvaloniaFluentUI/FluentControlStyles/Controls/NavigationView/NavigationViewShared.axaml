@@ -20,7 +20,7 @@
     Avalonia doesn't support (currently) double to GridLength conversion,
     so some resources have a duplicate GridLength resource
   -->
-  <Thickness x:Key="NavigationViewAutoSuggestBoxMargin">16,0</Thickness>
+  <Thickness x:Key="NavigationViewAutoSuggestBoxMargin">8,0</Thickness>
   <Thickness x:Key="TopNavigationViewAutoSuggestBoxMargin">4,0</Thickness>
   <x:Double x:Key="PaneToggleButtonHeight">36</x:Double>
   <GridLength x:Key="PaneToggleButtonHeightGridLength">36</GridLength>
@@ -57,7 +57,7 @@
   <Thickness x:Key="NavigationViewMinimalContentGridBorderThickness">0,1,0,0</Thickness>
   <Thickness x:Key="TopNavigationViewContentGridBorderThickness">0,1,0,0</Thickness>
   <Thickness x:Key="TopNavigationViewTopNavGridMargin">4,0</Thickness>
-  <Thickness x:Key="NavigationViewBorderThickness">1</Thickness>
+  <Thickness x:Key="NavigationViewBorderThickness">0</Thickness>
   <Thickness x:Key="NavigationViewHeaderMargin">56,44,0,0</Thickness>
   <Thickness x:Key="NavigationViewContentPresenterMargin">0</Thickness>
   <Thickness x:Key="NavigationViewContentMargin">0</Thickness>
