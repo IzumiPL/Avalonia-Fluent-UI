@@ -454,9 +454,22 @@ public partial class FluentWindow : Window
         {
             base.Icon = new WindowIcon(change.NewValue as Bitmap);
         }
-        else if (change.Property == FullScreenButtonIsVisibleProperty)
+        else if (change.Property == FullScreenButtonIsVisibleProperty || 
+                 change.Property == MinButtonIsVisibleProperty ||  
+                 change.Property == MaxButtonIsVisibleProperty || 
+                 change.Property == CloseButtonIsVisibleProperty)
         {
-            TitleBarContentMargin = change.GetNewValue<bool>() ?  new Thickness(8, 0, 185, 0) : new Thickness(8, 0, 140, 0);
+            double rm = 0;
+            if (FullScreenButtonIsVisible)
+                rm += 46;
+            if (MinButtonIsVisible)
+                rm += 46;
+            if (MaxButtonIsVisible)
+                rm += 46;
+            if (CloseButtonIsVisible)
+                rm += 46;
+
+            TitleBarContentMargin = new Thickness(8, 0, rm, 0);
         }
     }
 
