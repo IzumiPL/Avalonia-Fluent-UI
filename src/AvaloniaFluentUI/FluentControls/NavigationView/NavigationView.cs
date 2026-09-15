@@ -261,8 +261,8 @@ public class NavigationView : HeaderedContentControl
     /// <summary>
     /// Defines the <see cref="SettingsItem"/> property
     /// </summary>
-    public static readonly DirectProperty<NavigationView, NavigationViewItem> SettingsItemProperty =
-        AvaloniaProperty.RegisterDirect<NavigationView, NavigationViewItem>(nameof(SettingsItem),
+    public static readonly DirectProperty<NavigationView, NavigationViewItem?> SettingsItemProperty =
+        AvaloniaProperty.RegisterDirect<NavigationView, NavigationViewItem?>(nameof(SettingsItem),
             x => x.SettingsItem);
 
     //Ignore Shoulder Navigation (xbox)
@@ -562,7 +562,7 @@ public class NavigationView : HeaderedContentControl
     /// <summary>
     /// Gets the navigation item that represents the entry point to app settings.
     /// </summary>
-    public NavigationViewItem SettingsItem
+    public NavigationViewItem? SettingsItem
     {
         get => _settingsItem;
         internal set => SetAndRaise(SettingsItemProperty, ref _settingsItem, value);
@@ -1486,8 +1486,8 @@ public class NavigationView : HeaderedContentControl
         if (_paneSearchButton != null)
         {
             var tip = LocalizationService.Instance.GetString(RES_NAVIGATION_VIEW_SEARCH_BUTTON_NAME);
+            ToolTip.SetTip(_paneSearchButton, tip);
             AutomationProperties.SetName(_paneSearchButton, tip); 
-            ToolTip.SetTip(_paneSearchButton, this);
         }
 
         if (_backButton != null)
