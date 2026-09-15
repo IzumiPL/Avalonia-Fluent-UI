@@ -110,6 +110,7 @@
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Dialog/TaskDialog/TaskDialogCommand.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Windowing/FluentWindow.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Windowing/FluentTitleBar.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/View/FluentColorView.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/Tip/TeachingTip.axaml"/>

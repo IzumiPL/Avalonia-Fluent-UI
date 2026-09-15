@@ -21,10 +21,10 @@ namespace AvaloniaFluentUI.Windowing;
 /// <summary>
 /// 支持 Windows, MacOS, Linux三大平台的流畅窗口
 /// </summary>
-[TemplatePart(Name = PART_CLOSE_BUTTON,         Type = typeof(Button))]
-[TemplatePart(Name = PART_MINIMIZE_BUTTON,      Type = typeof(Button))]
-[TemplatePart(Name = PART_MAXIMIZE_BUTTON,      Type = typeof(Button))]
-[TemplatePart(Name = PART_DEFAULT_TITLE_BAR,    Type =  typeof(Grid))]
+[TemplatePart(Name = PART_CLOSE_BUTTON, Type = typeof(Button))]
+[TemplatePart(Name = PART_MINIMIZE_BUTTON, Type = typeof(Button))]
+[TemplatePart(Name = PART_MAXIMIZE_BUTTON, Type = typeof(Button))]
+[TemplatePart(Name = PART_FLUENT_TITLE_BAR, Type = typeof(FluentTitleBar))]
 public partial class FluentWindow : Window
 {
     /// <summary>
@@ -39,17 +39,8 @@ public partial class FluentWindow : Window
     public static readonly AttachedProperty<bool> AllowInteractionInTitleBarProperty =
         AvaloniaProperty.RegisterAttached<FluentWindow, Control, bool>("AllowInteractionInTitleBar");
 
-    public static readonly StyledProperty<double> IconSizeProperty =
-        AvaloniaProperty.Register<FluentWindow, double>(nameof(IconSize), defaultValue: 16);
-
     public static readonly StyledProperty<bool> FullScreenButtonIsVisibleProperty =
         AvaloniaProperty.Register<FluentWindow, bool>(nameof(FullScreenButtonIsVisible));
-
-    /// <summary>
-    ///     Defines the <see cref="TitleBarMargin" /> property.
-    /// </summary>
-    public static readonly StyledProperty<Thickness> TitleBarMarginProperty =
-        AvaloniaProperty.Register<FluentWindow, Thickness>(nameof(TitleBarMargin));
 
     /// <summary>
     ///     Defines the <see cref="MinButtonIsVisible" /> property.
@@ -68,83 +59,50 @@ public partial class FluentWindow : Window
     /// </summary>
     public static readonly StyledProperty<bool> CloseButtonIsVisibleProperty =
         AvaloniaProperty.Register<FluentWindow, bool>(nameof(CloseButtonIsVisible), defaultValue: true);
-    
-    /// <summary>
-    /// Defines the <see cref="TitleBarHeight"/> property
-    /// </summary>
-    public static readonly StyledProperty<double> TitleBarHeightProperty =
-        AvaloniaProperty.Register<FluentWindow, double>(nameof(TitleBarHeight), 45);
 
     /// <summary>
-    /// Defines the <see cref="TitleBarContentIsVisible"/> property
+    ///     Defines the <see cref="TitleBarContent" /> property.
     /// </summary>
-    public static readonly StyledProperty<bool> TitleBarContentIsVisibleProperty =
-        AvaloniaProperty.Register<FluentWindow, bool>(nameof(TitleBarContentIsVisible), defaultValue: true);
-
     public static readonly StyledProperty<object?> TitleBarContentProperty =
         AvaloniaProperty.Register<FluentWindow, object?>(nameof(TitleBarContent));
-    
+
+    /// <summary>
+    ///     Defines the <see cref="TitleBarContentTemplate" /> property.
+    /// </summary>
     public static readonly StyledProperty<IDataTemplate?> TitleBarContentTemplateProperty =
         AvaloniaProperty.Register<FluentWindow, IDataTemplate?>(nameof(TitleBarContentTemplate));
 
-    public static readonly StyledProperty<Thickness> TitleBarContentMarginProperty =
-        AvaloniaProperty.Register<FluentWindow, Thickness>(nameof(TitleBarContentMargin), new Thickness(8, 0, 140, 0));
-
-    public static readonly StyledProperty<bool> TitleBarIsVisibleProperty =
-        AvaloniaProperty.Register<FluentWindow, bool>(nameof(TitleBarIsVisible), defaultValue: true);
+    /// <summary>
+    ///     Defines the <see cref="FluentTitleBarTemplateSettings" /> property.
+    /// </summary>
+    public static readonly StyledProperty<FluentTitleBarTemplateSettings> TitleBarTemplateSettingsProperty =
+        AvaloniaProperty.Register<FluentWindow, FluentTitleBarTemplateSettings>(nameof(TitleBarTemplateSettings));
 
     /// <summary>
-    /// 获取或设置标题栏是否可见 
+    /// 获取标题栏设置模板
     /// </summary>
-    public bool TitleBarIsVisible
+    public FluentTitleBarTemplateSettings TitleBarTemplateSettings
     {
-        get => GetValue(TitleBarIsVisibleProperty);
-        set => SetValue(TitleBarIsVisibleProperty, value);
+        get => GetValue(TitleBarTemplateSettingsProperty);
+        private set => SetValue(TitleBarTemplateSettingsProperty, value);
     }
 
     /// <summary>
-    /// 获取或设置标题栏的内容外边距
-    /// </summary>
-    public Thickness TitleBarContentMargin
-    {
-        get => GetValue(TitleBarContentMarginProperty);
-        set => SetValue(TitleBarContentMarginProperty, value);
-    }
-    
-    /// <summary>
-    /// 获取或设置标题栏内容的模板
+    /// 获取或设置标题栏内容数据模板
     /// </summary>
     public IDataTemplate? TitleBarContentTemplate
     {
         get => GetValue(TitleBarContentTemplateProperty);
         set => SetValue(TitleBarContentTemplateProperty, value);
     }
-    
+
     /// <summary>
-    /// 获取或设置标题栏的内容
+    /// 获取或设置标题栏内容
     /// </summary>
     public object? TitleBarContent
     {
         get => GetValue(TitleBarContentProperty);
         set => SetValue(TitleBarContentProperty, value);
-    }
-
-    /// <summary>
-    /// Gets or sets the height of the managed titlebar for AppWindow
-    /// </summary>
-    public double TitleBarHeight
-    {
-        get => GetValue(TitleBarHeightProperty);
-        set => SetValue(TitleBarHeightProperty, value);
-    }
-
-    /// <summary>
-    /// Gets or sets whether the titlebar content is visible (Icon and App name text)
-    /// </summary>
-    public bool TitleBarContentIsVisible
-    {
-        get => GetValue(TitleBarContentIsVisibleProperty);
-        set => SetValue(TitleBarContentIsVisibleProperty, value);
     }
 
     /// <summary>
@@ -155,7 +113,7 @@ public partial class FluentWindow : Window
         get => GetValue(CloseButtonIsVisibleProperty);
         set => SetValue(CloseButtonIsVisibleProperty, value);
     }
-    
+
     /// <summary>
     /// 获取或设置最大化按钮是否显示
     /// </summary>
@@ -175,15 +133,6 @@ public partial class FluentWindow : Window
     }
 
     /// <summary>
-    /// 获取或设置标题栏的外边距
-    /// </summary>
-    public Thickness TitleBarMargin
-    {
-        get => GetValue(TitleBarMarginProperty);
-        set => SetValue(TitleBarMarginProperty, value);
-    }
-
-    /// <summary>
     /// 获取或设置全屏按钮是否显示
     /// TODO: 暂未实现
     /// </summary>
@@ -191,15 +140,6 @@ public partial class FluentWindow : Window
     {
         get => GetValue(FullScreenButtonIsVisibleProperty);
         set => SetValue(FullScreenButtonIsVisibleProperty, value);
-    }
-
-    /// <summary>
-    /// 获取或设置窗口的图标大小
-    /// </summary>
-    public double IconSize
-    {
-        get => GetValue(IconSizeProperty);
-        set => SetValue(IconSizeProperty, value);
     }
 
     /// <summary>
@@ -264,7 +204,7 @@ public partial class FluentWindow : Window
     /// Use this property to customize the colors, height, and whether the window contents should
     /// display in the titlebar area
     /// </remarks>
-    public FluentWindowTitleBar TitleBar => _titleBar;
+    public FluentTitleBar? TitleBar => _titleBar;
 
     /// <summary>
     /// Gets the interface for custom platform-specific features through the AppWindow class
@@ -288,7 +228,7 @@ public partial class FluentWindow : Window
     protected internal bool IsLinux { get; internal set; }
 
     protected override Type StyleKeyOverride => typeof(FluentWindow);
-    
+
     /// <summary>
     /// Gets the value of the <see cref="AllowInteractionInTitleBarProperty"/> attached property for the given control
     /// </summary>
@@ -299,33 +239,33 @@ public partial class FluentWindow : Window
     /// </summary>
     /// <param name="c"></param>
     /// <param name="b"></param>
-    public static void SetAllowInteractionInTitleBar(Control c, bool b) => c.SetValue(AllowInteractionInTitleBarProperty, b);
+    public static void SetAllowInteractionInTitleBar(Control c, bool b) =>
+        c.SetValue(AllowInteractionInTitleBarProperty, b);
 
     private SplashScreenContext? _splashContext;
-    private Grid? _defaultTitleBar;
-    private FluentWindowTitleBar _titleBar;
+    private FluentTitleBar? _titleBar;
     private bool _hideSizeButtons;
-    
+
     private Button? _minimizeButton;
     private Button? _maximizeButton;
     private Button? _closeButton;
-    
+
     /// <summary>
     /// 弹出信息体条的载体
     /// </summary>
     public InfoBarHost InfoBarHost { get; private set; }
-    
-    private const string PART_DEFAULT_TITLE_BAR = "PART_DefaultTitleBar";
+
+    private const string PART_FLUENT_TITLE_BAR = "PART_FluentTitleBar";
     private const string SPLASH_HOST = "SplashHost";
     private const string INFO_BAR_HOST = "InfoBarHost";
-    
+
     private const string PART_MINIMIZE_BUTTON = "PART_MinimizeButton";
     private const string PART_MAXIMIZE_BUTTON = "PART_MaximizeButton";
     private const string PART_CLOSE_BUTTON = "PART_CloseButton";
 
     public FluentWindow()
     {
-        _titleBar = new FluentWindowTitleBar(this);
+        TitleBarTemplateSettings = new FluentTitleBarTemplateSettings();
         PseudoClasses.Add(":noFullScreen");
 
         if (OperatingSystem.IsWindows() && !Design.IsDesignMode)
@@ -338,7 +278,7 @@ public partial class FluentWindow : Window
         }
 
         PointerPressed += OnWindowPointerPressed;
-        
+
         if (!IsWindows)
         {
             PseudoClasses.Add(":is-not-windows");
@@ -347,19 +287,17 @@ public partial class FluentWindow : Window
 
     private void OnWindowPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (_defaultTitleBar == null)
+        if (_titleBar == null)
             return;
 
         if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
         {
-            var point = e.GetPosition(_defaultTitleBar);
+            var point = e.GetPosition(_titleBar);
             if (HitTestTitleBar(point))
             {
                 if (CanMaximize && CanResize && e.ClickCount == 2)
                 {
-                    WindowState = WindowState == WindowState.Maximized
-                        ? WindowState.Normal
-                        : WindowState.Maximized;
+                    WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
                     e.Handled = true;
                 }
                 else
@@ -378,10 +316,11 @@ public partial class FluentWindow : Window
     {
         if (enable)
         {
-            Background = Brush.Parse(AvaloniaFluentTheme.Instance.IsDarkTheme ? "#30161616" : "#30F3F3F3");  
+            Background = Brush.Parse(AvaloniaFluentTheme.Instance.IsDarkTheme ? "#30161616" : "#30F3F3F3");
             TransparencyLevelHint = [WindowTransparencyLevel.AcrylicBlur];
             return;
-        } 
+        }
+
         ResetBackground();
     }
 
@@ -397,34 +336,35 @@ public partial class FluentWindow : Window
             TransparencyLevelHint = [WindowTransparencyLevel.Mica];
             return;
         }
+
         ResetBackground();
     }
 
     private void ResetBackground()
     {
         TransparencyLevelHint = [];
-        Background = Brush.Parse(AvaloniaFluentTheme.Instance.IsDarkTheme ? "#202020" : "#F0F4F9"); 
+        Background = Brush.Parse(AvaloniaFluentTheme.Instance.IsDarkTheme ? "#202020" : "#F0F4F9");
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
-        base.OnApplyTemplate(e);      
+        base.OnApplyTemplate(e);
         _minimizeButton?.Click -= OnMinimizeButtonClicked;
         _maximizeButton?.Click -= OnMaximizeButtonClicked;
         _closeButton?.Click -= OnCloseButtonClicked;
-        
+
         _minimizeButton = e.NameScope.Find<Button>(PART_MINIMIZE_BUTTON);
         _maximizeButton = e.NameScope.Find<Button>(PART_MAXIMIZE_BUTTON);
         _closeButton = e.NameScope.Find<Button>(PART_CLOSE_BUTTON);
         InfoBarHost = e.NameScope.Find<InfoBarHost>(INFO_BAR_HOST);
-        
+
         _minimizeButton?.Click += OnMinimizeButtonClicked;
         _maximizeButton?.Click += OnMaximizeButtonClicked;
         _closeButton?.Click += OnCloseButtonClicked;
 
         if (!Design.IsDesignMode)
         {
-            _defaultTitleBar = e.NameScope.Find<Grid>(PART_DEFAULT_TITLE_BAR);
+            _titleBar = e.NameScope.Find<FluentTitleBar>(PART_FLUENT_TITLE_BAR);
         }
 
         // 只在 Linux 平台使用
@@ -439,37 +379,40 @@ public partial class FluentWindow : Window
             }
         }
     }
-    
+
     private void OnCloseButtonClicked(object? sender, RoutedEventArgs e) => Close();
 
-    private void OnMaximizeButtonClicked(object? sender, RoutedEventArgs e) => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+    private void OnMaximizeButtonClicked(object? sender, RoutedEventArgs e) => WindowState =
+        WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
 
     private void OnMinimizeButtonClicked(object? sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
-        
+
         if (change.Property == IconProperty)
         {
             base.Icon = new WindowIcon(change.NewValue as Bitmap);
         }
-        else if (change.Property == FullScreenButtonIsVisibleProperty || 
-                 change.Property == MinButtonIsVisibleProperty ||  
-                 change.Property == MaxButtonIsVisibleProperty || 
+        else if (change.Property == FullScreenButtonIsVisibleProperty ||
+                 change.Property == MinButtonIsVisibleProperty ||
+                 change.Property == MaxButtonIsVisibleProperty ||
                  change.Property == CloseButtonIsVisibleProperty)
         {
+            var margin = TitleBarTemplateSettings.Margin;
+
             double rm = 0;
             if (FullScreenButtonIsVisible)
-                rm += 46;
+                rm += 45.33;
             if (MinButtonIsVisible)
-                rm += 46;
+                rm += 45.33;
             if (MaxButtonIsVisible)
-                rm += 46;
+                rm += 45.33;
             if (CloseButtonIsVisible)
-                rm += 46;
+                rm += 45.33;
 
-            TitleBarContentMargin = new Thickness(8, 0, rm, 0);
+            TitleBarTemplateSettings.Margin = new Thickness(margin.Left, margin.Top, rm, margin.Bottom);
         }
     }
 
@@ -486,7 +429,8 @@ public partial class FluentWindow : Window
             var delta = DateTime.Now - time;
             if (delta.TotalMilliseconds < _splashContext.SplashScreen.MinimumShowTime)
             {
-                await Task.Delay(Math.Max(1, _splashContext.SplashScreen.MinimumShowTime - (int)delta.TotalMilliseconds));
+                await Task.Delay(
+                    Math.Max(1, _splashContext.SplashScreen.MinimumShowTime - (int)delta.TotalMilliseconds));
             }
 
             LoadApp();
@@ -502,18 +446,12 @@ public partial class FluentWindow : Window
         base.OnClosed(e);
     }
 
-    internal void OnTitleBarHeightChanged(double height)
-    {
-        TitleBarHeight = height;
-        InfoBarHost?.Margin = new Thickness(0, height, 0, 0);
-    }
-
     internal bool HitTestTitleBar(Point p)
     {
-        if (_defaultTitleBar == null)
+        if (_titleBar == null)
             return false;
 
-        if (p.Y < TitleBarHeight)
+        if (p.Y < TitleBar?.Height)
         {
             if (!ComplexHitTest(p))
             {
@@ -530,12 +468,15 @@ public partial class FluentWindow : Window
     {
         var result = this.InputHitTest(p) as InputElement;
 
+        if (CustomComplexHitTest(result))
+            return false;
+        
         // Special case for TabViewListView during drag operations where blank space 
         // is inserted and causes HitTest to fail (since nothing focusable is there)
-        if (result is Visual v && v.TemplatedParent is TabViewListView)
+        if (result is Visual { TemplatedParent: TabViewListView })
             return false;
 
-        if (result == _defaultTitleBar)
+        if (result == _titleBar)
             return true;
 
         while (result != null)
@@ -549,6 +490,15 @@ public partial class FluentWindow : Window
         return true;
     }
 
+    /// <summary>
+    /// 自定义击中测试, 在window上决定是否弹出系统级右键菜单, 返回<c>True</c>则阻止显示
+    /// </summary>
+    /// <returns></returns>
+    protected virtual bool CustomComplexHitTest(InputElement? element)
+    {
+        return false;
+    }
+    
     private async void LoadApp()
     {
         if (Presenter == null) { return; }
