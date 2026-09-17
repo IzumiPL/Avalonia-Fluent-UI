@@ -114,12 +114,6 @@ public class TabView : TemplatedControl
         AvaloniaProperty.Register<TabView, IDataTemplate>(nameof(TabItemTemplate));
 
     /// <summary>
-    /// Defines the <see cref="CanDragTabs"/> property
-    /// </summary>
-    public static readonly StyledProperty<bool> CanDragTabsProperty =
-        AvaloniaProperty.Register<TabView, bool>(nameof(CanDragTabs));
-
-    /// <summary>
     /// Defines the <see cref="CanReorderTabs"/> property
     /// </summary>
     public static readonly StyledProperty<bool> CanReorderTabsProperty =
@@ -292,17 +286,10 @@ public class TabView : TemplatedControl
     }
 
     /// <summary>
-    /// Gets or sets a value that indicates whether tabs can be dragged as a data payload
-    /// </summary>
-    public bool CanDragTabs
-    {
-        get => GetValue(CanDragTabsProperty);
-        set => SetValue(CanDragTabsProperty, value);
-    }
-
-    /// <summary>
-    /// Gets or sets a value that indicates whether the tabs in the TabStrip can be reordered through
-    /// user interaction
+    /// Gets or sets a value that indicates whether the tabs can be dragged and reordered
+    /// through user interaction. This is the single switch for tab dragging: when true, a tab
+    /// can be reordered within the strip (and also dragged out as a data payload); when false,
+    /// dragging is disabled.
     /// </summary>
     public bool CanReorderTabs
     {
@@ -466,7 +453,7 @@ public class TabView : TemplatedControl
     private ContentPresenter? _tabContentPresenter;
     private ContentPresenter? _rightContentPresenter;
     private Grid? _tabContainerGrid;
-    private ScrollViewer? _scrollViewer;
+    private SingleDirectionScrollViewer? _scrollViewer;
     private RepeatButton? _scrollDecreaseButton;
     private RepeatButton? _scrollIncreaseButton;
     private Button? _addButton;
@@ -485,6 +472,13 @@ public class TabView : TemplatedControl
     private string _tabCloseButtonTooltipText;
     private Size _previousAvailableSize;
 
+    /// <summary>
+    /// The tab width most recently computed by <see cref="UpdateTabWidths"/> (NaN = auto).
+    /// Containers prepared later by virtualization pick this up, since the per-item width
+    /// loop may have run before those containers existed.
+    /// </summary>
+    internal double CurrentTabWidth { get; private set; } = double.NaN;
+
     private bool _isDragging = false;
     private bool _isItemDraggedOver;
     private double? _expandedWidthForDragOver;
@@ -494,7 +488,6 @@ public class TabView : TemplatedControl
 
     // (WinUI) TODO: what is the right number and should this be customizable?
     private static double _scrollAmount = 50d;
-
 
     // Internal for unit test access
     internal const string TAA_CONTENT_PRESENTER = "TabContentPresenter";
@@ -579,7 +572,7 @@ public class TabView : TemplatedControl
         {
             Gesture = new KeyGesture(Key.Tab, ctrl | KeyModifiers.Shift),
             Command = _keyboardAcceleratorHandler,
-            CommandParameter = TabViewCommandType.CtrlShftTab
+            CommandParameter = TabViewCommandType.CtrlShiftTab
         });
 
         _tabCloseButtonTooltipText = LocalizationService.Instance.GetString(RES_TAB_VIEW_CLOSE_BUTTON_TOOLTIP_WITH_KA);
@@ -721,6 +714,13 @@ public class TabView : TemplatedControl
 
     internal void SetTabSeparatorOpacity(int index, int opacityValue)
     {
+        // A negative index happens when the tab strip is empty (e.g. after clearing all
+        // tabs) - there's nothing to do in that case.
+        if (index < 0)
+        {
+            return;
+        }
+
         if (ContainerFromIndex(index) is TabViewItem tvi)
         {
             // The reason we set the opacity directly instead of using VisualState
@@ -832,7 +832,7 @@ public class TabView : TemplatedControl
 
     private void UpdateTabBottomBorderLineVisualStates()
     {
-        int numItems = TabItems.Count();
+        int numItems = GetItemCount();
         int selIndex = SelectedIndex;
 
         for (int i = 0; i < numItems; i++)
@@ -906,7 +906,7 @@ public class TabView : TemplatedControl
 
         var newValue = change.GetNewValue<TabViewWidthMode>();
         // Switch the visual states of all tab items to the correct TabViewWidthMode
-        int itemCount = TabItems.Count;
+        int itemCount = GetItemCount();
         for (int i = 0; i < itemCount; i++)
         {
             if (ContainerFromIndex(i) is TabViewItem tvi)
@@ -920,7 +920,7 @@ public class TabView : TemplatedControl
     {
         var newValue = change.GetNewValue<TabViewCloseButtonOverlayMode>();
         // Switch the visual states of all tab items to the correct TabViewWidthMode
-        int itemCount = TabItems.Count;
+        int itemCount = GetItemCount();
         for (int i = 0; i < itemCount; i++)
         {
             if (ContainerFromIndex(i) is TabViewItem tvi)
@@ -951,12 +951,17 @@ public class TabView : TemplatedControl
     private void OnListViewLoaded(object? sender, RoutedEventArgs args)
     {
         var listView = _listView;
-        var lvItems = listView?.Items;
+        if (listView == null)
+        {
+            return;
+        }
+
+        var lvItems = listView.Items;
         // 2nd condition added, if TabItems is already the ListView's ItemCollection, we just swapped in the same
         // orientation (top - bottom / left - right), so the ListView was reloaded, but its still the same one
-        if (lvItems != null && lvItems != TabItems)
+        if (lvItems != TabItems)
         {
-            if (listView?.ItemsSource == null)
+            if (listView.ItemsSource == null)
             {
                 if (_isSwitchingTabLocation)
                 {
@@ -996,7 +1001,7 @@ public class TabView : TemplatedControl
 
         // Ensure the ListView is configured correctly when it loads
         var stripLocation = TabStripLocation;
-        listView?.HandleTabStripLocationChanged(stripLocation, null, GetClassForStripLocation(stripLocation));
+        listView.HandleTabStripLocationChanged(stripLocation, null, GetClassForStripLocation(stripLocation));
 
         if (SelectedItem != null)
         {
@@ -1017,13 +1022,13 @@ public class TabView : TemplatedControl
             UpdateTabContent();
         }
 
+        _itemsPresenter = listView.Presenter;
         if (_itemsPresenter != null)
         {
-            _itemsPresenter = _listView?.Presenter;
-            _itemsPresenter?.SizeChanged += OnItemsPresenterSizeChanged;
+            _itemsPresenter.SizeChanged += OnItemsPresenterSizeChanged;
         }
         
-        var scrollViewer = _listView?.Scroller;
+        var scrollViewer = listView.Scroller;
         _scrollViewer = scrollViewer;
         if (scrollViewer != null)
         {
@@ -1064,6 +1069,11 @@ public class TabView : TemplatedControl
 
     private void OnScrollViewerLoaded(object? sender, RoutedEventArgs? args)
     {
+        if (_scrollViewer != null)
+        {
+            _scrollViewer.Loaded -= OnScrollViewerLoaded;
+        }
+
         var buttons = _scrollViewer?.GetTemplateDescendants().Where(x => x is RepeatButton);
 
         if (buttons != null)
@@ -1160,7 +1170,7 @@ public class TabView : TemplatedControl
         {
             TabItemsChanged?.Invoke(this, args);
 
-            int numItems = TabItems.Count;
+            int numItems = GetItemCount();
             var listViewInnerSelectedIndex = _listView.SelectedIndex;
             var selectedIndex = SelectedIndex;
 
@@ -1210,7 +1220,7 @@ public class TabView : TemplatedControl
 
                 if (TabWidthMode == TabViewWidthMode.Equal)
                 {
-                    if (!_pointerInTabstrip || args.OldStartingIndex == TabItems.Count)
+                    if (!_pointerInTabstrip || args.OldStartingIndex == numItems)
                     {
                         UpdateTabWidths(true, false);
                     }
@@ -1260,19 +1270,33 @@ public class TabView : TemplatedControl
         // UpdateNonClientRegion();
     }
 
-    private TabViewItem FindTabViewItemFromDragItem(object item)
+    private TabViewItem? FindTabViewItemFromDragItem(object? item)
     {
+        if (item == null)
+        {
+            return null;
+        }
+
+        // Fast path: the item is the data item of a container, so we can resolve
+        // the container directly. If the item is already (part of) a container,
+        // walk up the visual tree to find the TabViewItem.
         var tab = ContainerFromItem(item) as TabViewItem;
-        tab ??= tab.FindAncestorOfType<TabViewItem>();
-        
+
+        if (tab == null && item is Visual visual)
+        {
+            tab = visual.FindAncestorOfType<TabViewItem>(true);
+        }
+
         if (tab == null)
         {
             // This is a fallback scenario for tabs without a data context
-            var numItems = TabItems.Count;
+            int numItems = GetItemCount();
             for (int i = 0; i < numItems; i++)
             {
-                var tabItem = ContainerFromIndex(i) as TabViewItem;
-                if (tabItem?.Content == item)
+                if (ContainerFromIndex(i) is TabViewItem tabItem &&
+                    (ReferenceEquals(tabItem.Content, item) ||
+                     ReferenceEquals(tabItem.Header, item) ||
+                     ReferenceEquals(tabItem.DataContext, item)))
                 {
                     tab = tabItem;
                     break;
@@ -1287,7 +1311,11 @@ public class TabView : TemplatedControl
     {
         // _isItemBeingDragged = true;
 
-        var item = args.Items?[0];
+        if (args.Items == null || args.Items.Count == 0 || args.Items[0] is not { } item)
+        {
+            return;
+        }
+
         var tab = FindTabViewItemFromDragItem(item);
         var myArgs = new TabViewTabDragStartingEventArgs(args, item, tab);
         TabDragStarting?.Invoke(this, myArgs);
@@ -1311,12 +1339,21 @@ public class TabView : TemplatedControl
 
     private void OnListViewDragEnter(object? sender, DragEventArgs args)
     {
-        foreach (var item in TabItems)
+        // Don't show the "drop here" visual state if the item being dragged belongs
+        // to this TabView (that's a reorder, not a new tab coming in).
+        // NOTE: iterate the realized containers rather than TabItems as TabItems may not
+        // be populated when a TabItemsSource is used.
+        if (_listView?.IsInReorder == true)
         {
-            if (ContainerFromItem(item) is TabViewItem tvi)
+            return;
+        }
+
+        int itemCount = GetItemCount();
+        for (int i = 0; i < itemCount; i++)
+        {
+            if (ContainerFromIndex(i) is TabViewItem tvi && tvi.IsBeingDragged)
             {
-                if (tvi.IsBeingDragged)
-                    return;
+                return;
             }
         }
 
@@ -1341,7 +1378,12 @@ public class TabView : TemplatedControl
             BringSelectedTabIntoView();
         }
 
-        var item = args.Items[0];
+        if (args.Items == null || args.Items.Count == 0 || args.Items[0] is not { } item)
+        {
+            UpdateBottomBorderLineVisualStates();
+            return;
+        }
+
         var tab = FindTabViewItemFromDragItem(item);
         var myArgs = new TabViewTabDragCompletedEventArgs(args, item, tab);
         TabDragCompleted?.Invoke(this, myArgs);
@@ -1501,7 +1543,12 @@ public class TabView : TemplatedControl
         if (_scrollViewer != null)
         {
             var current = _scrollViewer.Offset;
-            _scrollViewer.Offset = current.WithX(current.X - _scrollAmount);
+            // _scrollViewer.Offset = current.WithX(current.X - _scrollAmount);
+
+            if (_scrollViewer.GetVisualDescendants().OfType<SingleDirectionScrollContentPresenter>().FirstOrDefault() is SingleDirectionScrollContentPresenter presenter)
+            {
+                _ = presenter.ScrollToAsync(current.WithX(current.X - _scrollAmount));
+            }
         }
     }
 
@@ -1510,7 +1557,12 @@ public class TabView : TemplatedControl
         if (_scrollViewer != null)
         {
             var current = _scrollViewer.Offset;
-            _scrollViewer.Offset = current.WithX(current.X + _scrollAmount);
+            // _scrollViewer.Offset = current.WithX(current.X + _scrollAmount);
+            
+            if (_scrollViewer.GetVisualDescendants().OfType<SingleDirectionScrollContentPresenter>().FirstOrDefault() is SingleDirectionScrollContentPresenter presenter)
+            {
+                _ = presenter.ScrollToAsync(current.WithX(current.X + _scrollAmount));
+            }
         }
     }
 
@@ -1525,7 +1577,23 @@ public class TabView : TemplatedControl
 
         var maxTabWidth = this.TryFindResource(_tabViewItemMaxWidth, out var mtw) ? (double)mtw : _tabMaximumWidth;
         double tabWidth = double.NaN;
-        int tabCount = TabItems.Count;
+        int itemCount = GetItemCount();
+        int tabCount = itemCount;
+
+        if (itemCount == 0)
+        {
+            if (_tabColumn != null)
+            {
+                _tabColumn.Width = new GridLength(1, GridUnitType.Auto);
+            }
+
+            if (_listView != null)
+            {
+                _listView.SetValue(ScrollViewer.HorizontalScrollBarVisibilityProperty, ScrollBarVisibility.Hidden);
+            }
+
+            return;
+        }
 
         // If an item is being dragged over this TabView, then we'll want to act like there's an extra item
         // when updating tab widths, which will create a hole into which the item can be dragged.
@@ -1574,40 +1642,58 @@ public class TabView : TemplatedControl
                         // just keep these variables around
                         double headerWidth = 0, footerWidth = 0;
 
-                        if (fillAllAvailableSpace)
+                        // Measure the natural content width of each tab: the widest one is used
+                        // for the uniform width when the strip needs to scroll.
+                        double widestTabWidth = 0;
+                        for (int i = 0; i < itemCount; i++)
                         {
-                            // Calculate the proportional width of each tab given the width of the ScrollViewer.
-                            var tabWidthForScroller = (availableWidth - (padding.Horizontal() + headerWidth + footerWidth)) / (double)TabItems.Count();
-                            tabWidth = double.Clamp(tabWidthForScroller, minTabWidth, maxTabWidth);
-                        }
-                        else
-                        {
-                            double availableTabViewSpace = (_tabColumn.ActualWidth - (padding.Horizontal() + headerWidth + footerWidth));
-                            if (_scrollIncreaseButton != null)
+                            if (ContainerFromIndex(i) is TabViewItem tvi)
                             {
-                                if (_scrollIncreaseButton.IsVisible)
+                                tvi.Width = double.NaN;
+
+                                // Tabs are measured while unselected, where the close button is
+                                // collapsed. Once selected (or hovered) the button appears; if the
+                                // natural width didn't account for it, the fixed tab width ends up
+                                // too small and part of the tab content gets cut off. Include it.
+                                var restoreCollapsed = false;
+                                if (tvi.IsClosable && tvi.IsCloseCollapsedState)
                                 {
-                                    availableTabViewSpace -= _scrollIncreaseButton.Bounds.Width;
+                                    restoreCollapsed = true;
+                                    tvi.SetCloseCollapsedState(false);
+                                }
+
+                                tvi.Measure(Size.Infinity);
+
+                                if (restoreCollapsed)
+                                {
+                                    tvi.SetCloseCollapsedState(true);
+                                }
+
+                                if (tvi.DesiredSize.Width > widestTabWidth)
+                                {
+                                    widestTabWidth = tvi.DesiredSize.Width;
                                 }
                             }
-
-                            if (_scrollDecreaseButton != null)
-                            {
-                                if (_scrollDecreaseButton.IsVisible)
-                                {
-                                    availableTabViewSpace -= _scrollDecreaseButton.Bounds.Width;
-                                }
-                            }
-
-                            // Use current size to update items to fill the currently occupied space
-                            var tabWidthUnclamped = availableTabViewSpace / (double)TabItems.Count();
-                            tabWidth = double.Clamp(tabWidthUnclamped, minTabWidth, maxTabWidth);
                         }
+                        var widestTabWidthClamped = double.Clamp(widestTabWidth > 0 ? widestTabWidth : minTabWidth, minTabWidth, maxTabWidth);
 
                         _tabColumn.MaxWidth = availableWidth + headerWidth + footerWidth;
-                        var requiredWidth = tabWidth * tabCount + headerWidth + footerWidth + padding.Horizontal();
-                        if (requiredWidth > availableWidth)
+
+                        // WinUI 等宽模式：让选项卡均匀拉伸以填充整个选项卡条，宽度限制在
+                        // [最小值, 最大值] 范围内。只有当即使使用最小宽度仍然无法容纳所有选项卡时，
+                        // 才回退到最宽选项卡的宽度，并启用滚动。
+                        //
+                        // 预留 18px 的余量，避免选项卡条被拉伸到完全贴合边缘；
+                        // 当选项卡填满整个选项卡条时，末尾仍保留一小段间距。
+                        var availableForTabs = availableWidth - (padding.Horizontal() + headerWidth + footerWidth) - 8;
+                        var evenTabWidth = double.Clamp(availableForTabs / itemCount, minTabWidth, maxTabWidth);
+
+                        var requiredWidthEven = evenTabWidth * tabCount + headerWidth + footerWidth + padding.Horizontal();
+                        if (requiredWidthEven > availableWidth)
                         {
+                            // Overflow: keep every tab at the widest tab's width (uniform) and show
+                            // the scroll buttons.
+                            tabWidth = widestTabWidthClamped;
                             _tabColumn.Width = new GridLength(availableWidth, GridUnitType.Pixel);
                             if (_listView != null)
                             {
@@ -1617,6 +1703,11 @@ public class TabView : TemplatedControl
                         }
                         else
                         {
+                            // Everything fits: stretch the tabs evenly to fill the entire strip.
+                            tabWidth = evenTabWidth;
+
+                            var requiredWidth = tabWidth * tabCount + headerWidth + footerWidth + padding.Horizontal();
+
                             // If we're dragging over the TabView, we need to set the width to a specific value,
                             // since we want it to be larger than the items actually in it in order to accommodate
                             // the item being dragged into the TabView.  Otherwise, we can just set its width to Auto.
@@ -1703,11 +1794,13 @@ public class TabView : TemplatedControl
                 double height = 0;
                 foreach (var item in _tabContainerGrid.Children)
                 {
-                    if (item is TabViewListView)
+                    // The list view is the item we're sizing, and the pane resize handle is an
+                    // overlay that spans every row - neither takes vertical space away from it.
+                    if (item is TabViewListView || item.Name == BORDER_RESIZE_HANDLE_HOST)
                         continue;
 
                     height += item.DesiredSize.Height;
-                }    
+                }
                 var maxSpace = _tabContainerGrid.Bounds.Height;
                 
                 if (_isItemDraggedOver)
@@ -1724,12 +1817,24 @@ public class TabView : TemplatedControl
             _scrollViewer.MaxHeight = double.PositiveInfinity;
         }
 
+        // Cache for containers that get prepared later by virtualization (NaN = auto).
+        CurrentTabWidth = tabWidth;
+
         if (shouldUpdateWidths || TabWidthMode != TabViewWidthMode.Equal)
         {
             foreach (var item in TabItems)
             {
                 var tvi = item as TabViewItem ?? ContainerFromItem(item) as TabViewItem;
-                tvi?.Width = tabWidth;
+                if (tvi == null)
+                    continue;
+
+                tvi.Width = tabWidth;
+
+                // Refresh the selected-background geometry immediately with the new size.
+                // Relying on SizeChanged leaves a window where the geometry still holds the
+                // previous Bounds, so the path renders narrower than the item (part of the
+                // selected tab then appears "missing").
+                tvi.RefreshTabGeometry();
             }
         }
     }
@@ -1834,10 +1939,19 @@ public class TabView : TemplatedControl
 
     private int GetItemCount()
     {
-        var src = TabItemsSource;
-        if (src != null)
+        if (_listView != null)
         {
-            return src.Count();
+            return _listView.ItemCount;
+        }
+
+        var src = TabItemsSource;
+        if (src is ICollection collection)
+        {
+            return collection.Count;
+        }
+        else if (src != null)
+        {
+            return src.Cast<object>().Count();
         }
         else
         {
@@ -1941,9 +2055,14 @@ public class TabView : TemplatedControl
     private bool MoveSelection(bool moveForward)
     {
         int originalIndex = SelectedIndex;
+        int itemCount = GetItemCount();
+        if (originalIndex < 0 || itemCount == 0)
+        {
+            return false;
+        }
+
         int increment = moveForward ? 1 : -1;
         int currentIndex = originalIndex + increment;
-        int itemCount = GetItemCount();
 
         while (currentIndex != originalIndex)
         {
@@ -1972,7 +2091,13 @@ public class TabView : TemplatedControl
     private bool RequestCloseCurrentTab()
     {
         bool handled = false;
-        if (SelectedItem is TabViewItem tvi)
+        var tvi = SelectedItem as TabViewItem;
+        if (tvi == null && SelectedItem != null)
+        {
+            tvi = ContainerFromItem(SelectedItem) as TabViewItem;
+        }
+
+        if (tvi != null)
         {
             if (tvi.IsClosable)
             {
@@ -1998,7 +2123,7 @@ public class TabView : TemplatedControl
                     MoveSelection(true);
                     break;
 
-                case TabViewCommandType.CtrlShftTab:
+                case TabViewCommandType.CtrlShiftTab:
                     MoveSelection(false);
                     break;
             }
@@ -2050,6 +2175,7 @@ public class TabView : TemplatedControl
         {
             _tabContainerGrid.PointerEntered -= OnTabStripPointerEnter;
             _tabContainerGrid.PointerExited -= OnTabStripPointerLeave;
+            _tabContainerGrid.SizeChanged -= HandleTabContainerGridSizeChangedForVerticalTabView;
         }
 
         if (_listView != null)
@@ -2057,6 +2183,7 @@ public class TabView : TemplatedControl
             _listView.Loaded -= OnListViewLoaded;
             LogicalChildren.Remove(_listView);
             _listView.SelectionChanged -= OnListViewSelectionChanged;
+            _listView.SizeChanged -= OnListViewSizeChanged;
             _listView.GettingFocus -= OnListViewGettingFocus;
 
             _listView.DragItemsStarting -= OnListViewDragItemsStarting;
@@ -2078,6 +2205,11 @@ public class TabView : TemplatedControl
         _scrollDecreaseButton?.Click -= OnScrollDecreaseClick;
 
         _scrollIncreaseButton?.Click -= OnScrollIncreaseClick;
+
+        if (_scrollViewer != null)
+        {
+            _scrollViewer.Loaded -= OnScrollViewerLoaded;
+        }
 
         _scrollViewer?.ScrollChanged -= OnScrollViewerViewChanged;
 
@@ -2103,6 +2235,7 @@ public class TabView : TemplatedControl
         _scrollIncreaseButton = null;
         _addButton = null;
         _itemsPresenter = null;
+        _verticalPaneResizeHandle = null;
     }
 
     internal static string GetClassForStripLocation(TabViewTabStripLocation loc)
@@ -2144,6 +2277,6 @@ public class TabView : TemplatedControl
     {
         CtrlF4,
         CtrlTab,
-        CtrlShftTab
+        CtrlShiftTab
     }
 }

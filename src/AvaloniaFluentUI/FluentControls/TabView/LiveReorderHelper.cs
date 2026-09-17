@@ -7,6 +7,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Layout;
+using Avalonia.Media;
 using Avalonia.Threading;
 using AvaloniaFluentUI.Collections;
 using AvaloniaFluentUI.Controls.Primitives;
@@ -50,6 +51,10 @@ internal class LiveReorderHelper
         var previousDragOverIndex = _liveReorderIndices.draggedOverIndex;
         int itemsCount = _owner.ItemCount;
 
+        // Nothing to reorder, or the pointer isn't over any realized container.
+        if (itemsCount <= 0)
+            return;
+
         if (draggedIndex == -1)
             draggedIndex = itemsCount;
 
@@ -73,6 +78,11 @@ internal class LiveReorderHelper
                 }
             }
         }
+
+        // Defensive: if no container matched the pointer we can't estimate where the
+        // item should land. Bail out rather than handing a bogus index downstream.
+        if (insertionIndex < 0)
+            return;
 
         // var old = dragOverIndex; // Keep this here for debug purposes, if needed
         if (insertionIndex == itemsCount)
@@ -133,6 +143,9 @@ internal class LiveReorderHelper
     {
         StopLiveReorderTimer();
 
+        // 清除被移动容器的渲染偏移。必须在集合被改动（插入/移除被拖 item）之前调用，
+        // 否则 sourceIndex 映射会错位，导致清错容器、真正的偏移残留（item 视觉上被挤
+        // 到别处甚至"消失"）。调用方（OnReorderDrop / CancelDrag）已在插入前调用本方法。
         foreach (var item in _movedItems.AsSpan())
         {
             if (item.destinationIndex != -1)
@@ -140,7 +153,7 @@ internal class LiveReorderHelper
                 var control = _owner.ContainerFromIndex(item.sourceIndex);
                 if (control != null)
                 {
-                    control.Arrange(item.sourceRect);
+                    control.RenderTransform = null;
                 }
             }
         }
@@ -229,51 +242,70 @@ internal class LiveReorderHelper
 
             return closestIndex;
         }
-        else if (panel is StackPanel)
+        else if (panel is StackPanel sp)
         {
-            //var children = sp.Children;
-            //var orientation = sp.Orientation;
-            //var movedItems = _movedItems.AsSpan();
+            var orientation = sp.Orientation;
+            var children = sp.Children;
 
-            //for (int i = 0; i < children.Count; i++)
-            //{
-            //    // If the item is currently in our MovedItems list, it may not be 
-            //    // where it usually is, so we can't test the actual Bounds or we'll
-            //    // estimate the wrong index, but we have the original bounds saved
-            //    if (IsInMovedItems(movedItems, i, out var rc))
-            //    {
-            //        if (rc.Contains(dragPoint))
-            //        {
-            //            return i;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        // The item is not in moved items, so it is safe to use the Bounds directly
-            //        if (children[i].Bounds.Contains(dragPoint))
-            //        {
-            //            return i;
-            //        }
-            //    }
-            //}
+            // Non-virtualizing StackPanel: all children are realized and laid out in
+            // index order, so we can estimate the closest index directly. Prefer the
+            // cached original bounds when available (during live reorder the children
+            // may have been temporarily arranged to other slots), otherwise fall back
+            // to the live Bounds.
+            bool hasCache = _cachedContainerBounds != null && _cachedContainerBounds.Count > 0;
+            int childCount = children.Count;
+            int closestIndex = -1;
+            double closestDist = double.PositiveInfinity;
+            Rect closestItemRect = default;
+
+            for (int i = 0; i < childCount; i++)
+            {
+                Rect rc = hasCache && i < _cachedContainerBounds.Count
+                    ? _cachedContainerBounds[i]
+                    : children[i].Bounds;
+
+                double dist;
+                if (orientation == Orientation.Horizontal)
+                {
+                    double cx = double.Clamp(dragPoint.X, rc.X, rc.Right);
+                    dist = double.Abs(dragPoint.X - cx);
+                }
+                else
+                {
+                    double cy = double.Clamp(dragPoint.Y, rc.Y, rc.Bottom);
+                    dist = double.Abs(dragPoint.Y - cy);
+                }
+
+                if (dist < closestDist)
+                {
+                    closestDist = dist;
+                    closestIndex = i;
+                    closestItemRect = rc;
+                }
+            }
+
+            if (requestingInsertionIndex && closestIndex >= 0)
+            {
+                if (orientation == Orientation.Horizontal)
+                {
+                    if (dragPoint.X - closestItemRect.X >= closestItemRect.Width * 0.5)
+                    {
+                        closestIndex++;
+                    }
+                }
+                else
+                {
+                    if (dragPoint.Y - closestItemRect.Y >= closestItemRect.Height * 0.5)
+                    {
+                        closestIndex++;
+                    }
+                }
+            }
+
+            return closestIndex;
         }
 
         return -1;
-
-        //static bool IsInMovedItems(ReadOnlySpan<MovedItem> items, int sourceIndex, out Rect srcRect)
-        //{
-        //    foreach (var item in items)
-        //    {
-        //        if (item.sourceIndex == sourceIndex)
-        //        {
-        //            srcRect = item.sourceRect;
-        //            return true;
-        //        }
-        //    }
-
-        //    srcRect = default;
-        //    return false;
-        //}
     }
 
     private void StartLiveReorderTimer()
@@ -373,7 +405,6 @@ internal class LiveReorderHelper
 
     private void MoveItemsForLiveReorder(bool areNewItems, PooledList<MovedItem> newItemsToMove)
     {
-        Rect rc;
         foreach (var item in newItemsToMove.AsSpan())
         {
             var container = _owner.ContainerFromIndex(item.sourceIndex);
@@ -382,14 +413,18 @@ internal class LiveReorderHelper
             {
                 if (areNewItems)
                 {
-                    rc = item.destinationRect;
+                    // 只做渲染层偏移，把容器视觉上移到目标槽位。直接用 Arrange() 会污染
+                    // StackPanel 的布局状态——面板仍认为 item 在原 slot，后续任何布局 pass
+                    // 都会把它弹回去再重新布局，造成"挤开"动画期间的卡顿。
+                    var offset = new Vector(
+                        item.destinationRect.X - item.sourceRect.X,
+                        item.destinationRect.Y - item.sourceRect.Y);
+                    container.RenderTransform = new TranslateTransform(offset.X, offset.Y);
                 }
                 else
                 {
-                    rc = item.sourceRect;
+                    container.RenderTransform = null;
                 }
-
-                container.Arrange(rc);
             }
         }
     }

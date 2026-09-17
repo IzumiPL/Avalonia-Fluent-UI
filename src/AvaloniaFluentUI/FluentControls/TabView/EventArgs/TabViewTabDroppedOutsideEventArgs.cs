@@ -7,7 +7,7 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class TabViewTabDroppedOutsideEventArgs : EventArgs
 {
-    internal TabViewTabDroppedOutsideEventArgs(object item, TabViewItem tab)
+    internal TabViewTabDroppedOutsideEventArgs(object item, TabViewItem? tab)
     {
         Item = item;
         Tab = tab;
@@ -19,7 +19,8 @@ public class TabViewTabDroppedOutsideEventArgs : EventArgs
     public object Item { get; }
 
     /// <summary>
-    /// Gets the TabViewItem that was dropped outside of the TabStrip
+    /// Gets the TabViewItem that was dropped outside of the TabStrip, or <c>null</c> if the
+    /// container could not be resolved
     /// </summary>
-    public TabViewItem Tab { get; }
+    public TabViewItem? Tab { get; }
 }

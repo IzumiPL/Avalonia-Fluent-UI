@@ -8,7 +8,7 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class TabViewTabDragCompletedEventArgs : EventArgs
 {
-    internal TabViewTabDragCompletedEventArgs(DragItemsCompletedEventArgs args, object item, TabViewItem tab)
+    internal TabViewTabDragCompletedEventArgs(DragItemsCompletedEventArgs args, object item, TabViewItem? tab)
     {
         _innerArgs = args;
         Item = item;
@@ -27,9 +27,10 @@ public class TabViewTabDragCompletedEventArgs : EventArgs
     public object Item { get; }
 
     /// <summary>
-    /// Gets the TabViewItem that was selected for the drag action
+    /// Gets the TabViewItem that was selected for the drag action, or <c>null</c> if the
+    /// container could not be resolved
     /// </summary>
-    public TabViewItem Tab { get; }
+    public TabViewItem? Tab { get; }
 
     private DragItemsCompletedEventArgs _innerArgs;
 }

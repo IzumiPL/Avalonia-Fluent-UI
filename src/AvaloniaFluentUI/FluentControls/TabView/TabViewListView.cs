@@ -10,10 +10,12 @@ using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Logging;
+using Avalonia.Media;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
 using AvaloniaFluentUI.Core;
 using AvaloniaFluentUI.Data;
+using AvaloniaFluentUI.Styling;
 
 namespace AvaloniaFluentUI.Controls.Primitives;
 
@@ -24,7 +26,7 @@ namespace AvaloniaFluentUI.Controls.Primitives;
 /// This control should not be used outside of a TabView
 /// </remarks>
 [PseudoClasses(PC_REORDER)]
-[TemplatePart(Name = SCROLL_VIEWER, Type = typeof(ScrollViewer))]
+[TemplatePart(Name = SCROLL_VIEWER, Type = typeof(SingleDirectionScrollViewer))]
 public sealed class TabViewListView : ListBox
 {
     public TabViewListView()
@@ -56,13 +58,9 @@ public sealed class TabViewListView : ListBox
         AvaloniaProperty.Register<TabViewListView, bool>(nameof(CanReorderItems));
 
     /// <summary>
-    /// Defines the <see cref="CanDragItems"/> property
-    /// </summary>
-    public static readonly StyledProperty<bool> CanDragItemsProperty =
-        AvaloniaProperty.Register<TabViewListView, bool>(nameof(CanDragItems));
-
-    /// <summary>
-    /// Gets or sets whether this ListView can reorder items
+    /// Gets or sets whether this ListView can reorder items. This is the single switch for
+    /// dragging: when true, items can be dragged (both reordered within the strip and torn
+    /// out as a data payload); when false, dragging is disabled entirely.
     /// </summary>
     public bool CanReorderItems
     {
@@ -70,16 +68,12 @@ public sealed class TabViewListView : ListBox
         set => SetValue(CanReorderItemsProperty, value);
     }
 
-    /// <summary>
-    /// Gets or sets whether dragging items is supported on this ListView
-    /// </summary>
-    public bool CanDragItems
-    {
-        get => GetValue(CanDragItemsProperty);
-        set => SetValue(CanDragItemsProperty, value);
-    }
+    internal SingleDirectionScrollViewer? Scroller { get; private set; }
 
-    internal ScrollViewer? Scroller { get; private set; }
+    /// <summary>
+    /// Gets whether a reorder drag initiated by this ListView is currently in progress.
+    /// </summary>
+    internal bool IsInReorder => _isInReorder;
 
     internal event EventHandler<DragEventArgs>? DragEnter;
     internal event EventHandler<DragEventArgs>? DragOver;
@@ -102,17 +96,40 @@ public sealed class TabViewListView : ListBox
     private bool _isDragItemSelected;
     private bool _isInDrag = false;
     private bool _isInReorder = false;
-    private IDisposable _dragItemOpacitySub;
     private Point? _initialPoint;
     private double _cxDrag = double.NaN;
     private double _cyDrag = double.NaN;
     private Control? _parent;
     private bool _isDragWithinTabStrip;
-    // True if there is a drag drop operation started by this listview
-    private bool _isDraggingOverSelf;
 
     private LiveReorderHelper? _liveReorderHelper;    
     private Point? _lastDragOverPoint;
+    private long _lastReorderProcessStamp;
+
+    // Drag ghost (a floating snapshot of the dragged tab that follows the cursor)
+    private Border? _dragGhost;
+    private OverlayLayer? _dragGhostLayer;
+    private Size _dragGhostSize;
+    private TranslateTransform? _dragGhostTransform;
+    private Point? _lastGhostPoint;
+    private Point? _pendingGhostPoint;
+    private bool _ghostUpdateQueued;
+
+    // Cursor management while a drag is over this list. The two cursors are cached
+    // statically so the per-DragOver hot path never allocates a new Cursor (which also
+    // re-triggers a hover refresh on every event and was a measurable source of jank).
+    private static readonly Cursor DragMoveCursor = new Cursor(StandardCursorType.DragMove);
+    private static readonly Cursor DragNoCursor = new Cursor(StandardCursorType.No);
+
+    private bool _dragCursorApplied;
+    private bool _dragCursorAccepted;
+    private Cursor? _previousCursor;
+    private Cursor? _previousTabViewCursor;
+
+    // Reorder drag: the dragged data item is removed from the list while dragging, and
+    // re-inserted on drop (or restored to its original position if the drag is cancelled).
+    private object? _dragData;
+    private bool _dragItemRemoved;
 
     // For 12.0/v3 - Avalonia has decided to make the decision that the lowest common denominator
     // in the platform backends decides the entire public API. As part of this, DoDragDrop now
@@ -132,8 +149,11 @@ public sealed class TabViewListView : ListBox
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
+        _parent?.RemoveHandler(DragDrop.DragLeaveEvent, OnParentDragEnter);
+        _parent = null;
+
         base.OnApplyTemplate(e);
-        Scroller = e.NameScope.Find<ScrollViewer>(SCROLL_VIEWER);
+        Scroller = e.NameScope.Find<SingleDirectionScrollViewer>(SCROLL_VIEWER);
 
         // HACK: DragDrop events work differently in Avalonia than WinUI. In WinUI, they aren't true
         // routed events, so the OriginalSource parameter returns TabView or TabViewItem, etc., not
@@ -145,6 +165,7 @@ public sealed class TabViewListView : ListBox
         // check on this, we know if the pointer left the tab strip or not. 
         _parent = this.FindAncestorOfType<TabView>();
         _parent?.AddHandler(DragDrop.DragLeaveEvent, OnParentDragEnter);
+        _parent?.AddHandler(DragDrop.DragOverEvent, OnParentDragOver);
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -171,6 +192,10 @@ public sealed class TabViewListView : ListBox
         if (cont is TabViewItem tvi)
         {
             tvi.IsContainerFromTemplate = true;
+            // Remember what the template declared as content - Avalonia's container preparation
+            // may replace it with the data item (it does so when recycling containers), and we
+            // need to be able to put it back. See ContainerForItemPreparedOverride.
+            tvi.TemplateContent = tvi.Content;
             return tvi;
         }
 
@@ -222,7 +247,35 @@ public sealed class TabViewListView : ListBox
                 tvi.ContentTemplate = this.FindDataTemplate(item);
             }
 
+            if (tvi.IsContainerFromTemplate)
+            {
+                // The same preparation can also have replaced the content declared inside the
+                // TabItemTemplate with the raw data item, which would leave the tab showing the
+                // data item's ToString(). Put the declared content back.
+                if (!ReferenceEquals(tvi.Content, tvi.TemplateContent))
+                {
+                    tvi.Content = tvi.TemplateContent;
+                    tvi.ContentTemplate = null;
+                }
+
+                // TabView moves the selected item's Content into its own content presenter
+                // (see TabView.UpdateTabContent). Once the content is no longer a visual child of
+                // this container, its inherited DataContext resolves to the TabView's one instead
+                // of the data item - silently breaking every binding inside the template.
+                // Pin it so the content keeps binding to its own tab (and re-pin when a recycled
+                // container is prepared for a different item).
+                if (tvi.Content is Control declaredContent &&
+                    (!declaredContent.IsSet(DataContextProperty) ||
+                     ReferenceEquals(declaredContent.GetValue(DataContextProperty), tvi.TemplateContentOwner)))
+                {
+                    tvi.TemplateContentOwner = item;
+                    declaredContent.SetValue(DataContextProperty, item);
+                }
+            }
+
             base.ContainerForItemPreparedOverride(container, item, index);
+
+            ApplyCurrentTabWidth(tvi);
             return;
         }
 
@@ -234,6 +287,8 @@ public sealed class TabViewListView : ListBox
             tvi.HeaderTemplate = itemTemplate;
 
         base.ContainerForItemPreparedOverride(container, item, index);
+
+        ApplyCurrentTabWidth(tvi);
 
         if (!tvi.IsSelected)
         {
@@ -277,12 +332,27 @@ public sealed class TabViewListView : ListBox
         }
     }
 
+    /// <summary>
+    /// Applies the TabView's most recent tab width to a freshly prepared container.
+    /// UpdateTabWidths may have run before this container was realized (virtualization /
+    /// late materialization of the last item), leaving the container at its natural width -
+    /// the visible symptom is the last tab being narrower/wider than the rest.
+    /// </summary>
+    private void ApplyCurrentTabWidth(TabViewItem tvi)
+    {
+        if (tvi.ParentTabView is { } tabView)
+        {
+            tvi.Width = tabView.CurrentTabWidth;
+            tvi.RefreshTabGeometry();
+        }
+    }
+
     protected override void OnPointerPressed(PointerPressedEventArgs args)
     {
         if (args.Handled)
             return;
 
-        if (CanDragItems || CanReorderItems)
+        if (CanReorderItems)
         {
             var currentPoint = args.GetCurrentPoint(this);
             if (currentPoint.Properties.IsLeftButtonPressed)
@@ -313,7 +383,7 @@ public sealed class TabViewListView : ListBox
 
         if (_initialPoint.HasValue)
         {
-            if (!_isInDrag || !_isInReorder)
+            if (!_isInDrag && !_isInReorder)
             {
                 var currentPoint = args.GetPosition(this);
                 var delta = currentPoint - _initialPoint.Value;
@@ -349,19 +419,33 @@ public sealed class TabViewListView : ListBox
     {
         base.OnDetachedFromVisualTree(e);
         _parent?.RemoveHandler(DragDrop.DragLeaveEvent, OnParentDragEnter);
+        _parent?.RemoveHandler(DragDrop.DragOverEvent, OnParentDragOver);
         _parent = null;
+        DestroyStartEdgeScrollTimer();
     }
 
     private async void BeginDragReorder()
     {
+        if (_dragIndex < 0 || _initArgs == null)
+        {
+            CancelDrag();
+            return;
+        }
+
         var package = new DataPackage();
+        // Avalonia 的 DataPackage.RequestedOperation 默认是 Copy，而重排需要 Move。若不显式
+        // 设置，DoDragDropAsync 会用 Copy 启动拖拽，DragOver 时 args.DragEffects 与 Move 位与
+        // 会变成 None，导致光标显示"禁止拖放"。这里默认 Move（用户可在 DragItemsStarting 里覆盖）。
+        package.RequestedOperation = DragDropEffects.Move;
         DragItemsStartingEventArgs? dragArgs = null;
         object[]? dragItems = null;
         bool canReorder = CanReorderItems;
-        bool canDrag = CanDragItems;
 
-        if (canDrag)
+        // "可重排序"现在是唯一开关：为 true 时才能拖动。拖动同时承担两个职责——
+        // 在标签条内重排（drop 回本 TabView），以及作为数据包拖出（drop 到别的 TabView）。
+        if (canReorder)
         {
+            // 准备数据包并触发 DragItemsStarting，让应用有机会取消本次拖动。
             dragItems = new object[] { ItemsView.GetAt(_dragIndex) };
             dragArgs = new DragItemsStartingEventArgs { Items = dragItems, Data = package };
             DragItemsStarting?.Invoke(this, dragArgs);
@@ -373,17 +457,9 @@ public sealed class TabViewListView : ListBox
             }
 
             _isInDrag = true;
-        }
 
-        if (canReorder)
-        {
-            // This is reorder only. We will handle this case ourselves
-            // WinUI will allow you to start the drag operation even if the underlying
-            // source is not INCC, which to me doesn't seem right. So...
-            // If TabItems are in use, we'll allow it b/c that is INCC
-            // If TabItemsSource is in use, we'll check if its INCC and only allow it if it is
-            // In addition, if user has disabled this as a DropTarget, reject
-
+            // 重排准备：校验 drop 目标已开启、集合可变更，并记下数据项供 drop 时插回。
+            // WinUI 允许在源集合非 INCC 时也发起拖拽，这里按更严谨的方式拒绝。
             if (!DragDrop.GetAllowDrop(this))
             {
                 CancelDrag();
@@ -392,8 +468,7 @@ public sealed class TabViewListView : ListBox
                 return;
             }
 
-            // Note: That Avalonia also has the restriction that INCC collections must also implement
-            // the non-generic IList, so we'll also check the IsReadOnly property
+            // Avalonia 要求 INCC 集合还必须实现非泛型 IList，这里一并校验 IsReadOnly。
             var src = ItemsSource;
             if (src != null && (src is not INotifyCollectionChanged || (src is IList l && l.IsReadOnly)))
             {
@@ -403,14 +478,33 @@ public sealed class TabViewListView : ListBox
                 return;
             }
 
-            _dragItemOpacitySub = _dragItem.SetValue(OpacityProperty, 0, BindingPriority.Animation);
-
-            // Cache the locations of all containers before we start for reorder hints
+            // 记下被拖的数据项，drop 时插回新位置，取消时恢复到原位。
+            _dragData = ItemsView.GetAt(_dragIndex);
             _isInReorder = true;
-            _isDraggingOverSelf = true;
         }
 
         var effects = dragArgs?.Data?.RequestedOperation ?? DragDropEffects.Move;
+
+        // Mark the source item as being dragged so the TabView skips its "drop-in hole"
+        // width adjustment (that is only meant for external drags).
+        if (_dragItem is { } draggedTab)
+        {
+            draggedTab.IsBeingDragged = true;
+        }
+
+        // Show a floating snapshot of the dragged tab. It keeps the exact width/height the
+        // tab occupied in the list and follows the cursor for the whole drag.
+        var dragWidth = _dragItem?.Bounds.Width ?? 0;
+        var dragHeight = _dragItem?.Bounds.Height ?? 0;
+        ShowDragGhost(_dragItem, dragWidth, dragHeight);
+
+        // For a reorder, remove the dragged item from the list so it disappears while
+        // dragging. It is re-inserted on drop, or restored if the drag is cancelled.
+        if (_isInReorder)
+        {
+            RemoveItemAt(_dragIndex);
+            _dragItemRemoved = true;
+        }
 
         var dropResult = await DragDrop.DoDragDropAsync(_initArgs, package, effects);
 
@@ -419,7 +513,6 @@ public sealed class TabViewListView : ListBox
 
         if (_isInReorder)
         {
-            _dragItemOpacitySub?.Dispose();
             _isInReorder = false;
         }
 
@@ -448,8 +541,11 @@ public sealed class TabViewListView : ListBox
         else
         {
             var pt = e.GetPosition(this);
-            if (double.Abs(pt.X - _lastDragOverPoint.Value.X) < 1e-5 &&
-                double.Abs(pt.Y - _lastDragOverPoint.Value.Y) < 1e-5)
+            // Use a small (0.5px) dead-zone instead of exact equality so the tiny
+            // pointer jitter OLE reports on every timer tick doesn't re-run the whole
+            // reorder pipeline (closest-element scan + timer restart) each frame.
+            if (double.Abs(pt.X - _lastDragOverPoint.Value.X) < 0.5 &&
+                double.Abs(pt.Y - _lastDragOverPoint.Value.Y) < 0.5)
             {
                 return;
             }
@@ -457,7 +553,7 @@ public sealed class TabViewListView : ListBox
         }
 
         bool canReorder = CanReorderItems;
-        bool isInReorderFromExternalSource = (!_isDraggingOverSelf && canReorder);
+        bool isInReorderFromExternalSource = (!_isInReorder && canReorder);
 
         if (!_isDragWithinTabStrip)
         {
@@ -466,27 +562,38 @@ public sealed class TabViewListView : ListBox
         }
         else
         {
-            // According to WinUI, TabStripDragOver doesn't fire if reordering is active
-            // even if CanDragTabs is true - so only raise if we're only dragging items
+            // 按 WinUI 语义：重排进行中不触发 TabStripDragOver，仅纯拖动时触发。
             if (!_isInReorder)
                 DragOver?.Invoke(this, e);
-
-            // If this ListView initiated drag drop, _dragItem will be set
-            _isDraggingOverSelf = _dragItem != null;            
         }
                 
         Process(_isInReorder, canReorder, e);
 
-        if (_scrollTimer == null)
+        // Update the drop cursor (accept vs reject). The drag ghost is tracked in
+        // OnParentDragOver, which receives the same event as it bubbles up to the
+        // TabView — updating it here too would run the position transform twice per
+        // event for no reason.
+        SetDragCursor(e.DragEffects != DragDropEffects.None);
+
+        if (_scrollTimer == null && (isInReorderFromExternalSource || _isInReorder))
         {
-            if (_isInReorder || isInReorderFromExternalSource)
+            // Throttle the live-reorder estimation to ~30ms. The per-frame DragOver
+            // stream fires far more often than the render loop, and the reorder math
+            // (two O(n) closest-element scans + a DispatcherTimer restart) doesn't need
+            // to run on every single event — the drop position is recomputed from the
+            // final pointer location anyway. This removes the last heavy per-event work.
+            var now = Environment.TickCount64;
+            if (now - _lastReorderProcessStamp >= 30)
             {
+                _lastReorderProcessStamp = now;
                 _liveReorderHelper ??= new LiveReorderHelper(this);
-                _liveReorderHelper.ProcessLiveReorder(e, _dragIndex);
+                _liveReorderHelper.ProcessLiveReorder(e, -1);
             }
         }
 
-        ComputeEdgeScrollVelocity(e.GetPosition(this), out var pVelocity);
+        // Reuse the position already captured in the filter above instead of walking
+        // the visual tree again with GetPosition on the same event.
+        ComputeEdgeScrollVelocity(_lastDragOverPoint!.Value, out var pVelocity);
         SetPendingAutoPanVelocity(pVelocity);
 
         static void Process(bool isInReorder, bool canReorder, DragEventArgs args)
@@ -499,7 +606,7 @@ public sealed class TabViewListView : ListBox
                 // Reorder operations have this
                 var effects = isInReorder || canReorder ? DragDropEffects.Move : DragDropEffects.None;
                 args.DragEffects &= effects;
-            }            
+            } 
         }
     }
 
@@ -515,11 +622,20 @@ public sealed class TabViewListView : ListBox
                 SetPendingAutoPanVelocity(default);
                 DestroyStartEdgeScrollTimer();
                 _isDragWithinTabStrip = false;
-                _isDraggingOverSelf = false;
                 _liveReorderHelper?.ResetAllItemsForLiveReorder();
+                // Leaving the strip means we can no longer accept the drop here.
+                SetDragCursor(false);
+                UpdateDragGhostPosition(e);
                 DragLeave?.Invoke(this, e);
             }
         }        
+    }
+
+    // Tracks the cursor over the whole TabView (strip + content) so the drag ghost keeps
+    // following even outside the tab strip / ListView bounds.
+    private void OnParentDragOver(object? sender, DragEventArgs e)
+    {
+        UpdateDragGhostPosition(e);
     }
 
     private void OnListViewDrop(object? sender, DragEventArgs e)
@@ -545,100 +661,119 @@ public sealed class TabViewListView : ListBox
 
     private void CancelDrag()
     {
+        // 在把被拖 item 插回集合之前，先清除 live reorder 的渲染偏移。此时集合仍处于
+        // "item 已移除"状态，_movedItems 里的 sourceIndex 映射正确；若先插入再清除，
+        // index 会整体后移一位，导致清错容器、偏移残留（item 视觉上被挤到别处/消失）。
+        _liveReorderHelper?.ResetAllItemsForLiveReorder();
+
+        // 若拖拽未完成（在条带外释放 / 取消），把被拖 item 恢复到原位。
+        if (_dragItemRemoved && _dragData != null)
+        {
+            InsertItemAt(_dragIndex, _dragData);
+            if (_isDragItemSelected)
+            {
+                SelectedIndex = _dragIndex;
+            }
+        }
+        _dragItemRemoved = false;
+        _dragData = null;
+
+        // 确保 ":dragging" 占位状态被清除（reorder-only 拖拽时 DragItemsCompleted /
+        // OnTabDragCompleted 不会触发），并释放 "being dragged" 标志，避免 TabView 的
+        // 拖入宽度逻辑被遗留。
+        if (_dragItem is { } draggedTab)
+        {
+            draggedTab.ClearDragDropVisualState();
+            draggedTab.IsBeingDragged = false;
+        }
+
         _initArgs = null;
         _initialPoint = null;
         _isInDrag = _isInReorder = false;
         _dragIndex = -1;
         _dragItem = null;
         _isDragItemSelected = _isDragItemFocused = false;
-        _isDraggingOverSelf = false;
         _lastDragOverPoint = null;
+        _lastReorderProcessStamp = 0;
         _isDragWithinTabStrip = false;
-        _liveReorderHelper?.ResetAllItemsForLiveReorder();
+
+        HideDragGhost();
+        ResetDragCursor();
     }
 
     private bool DropCausesReorder()
     {
-        if (_isDraggingOverSelf)
-        {
-            return CanReorderItems && DragDrop.GetAllowDrop(this);
-        }
-
-        return false;
+        // Only reorder when this ListView initiated the drag and reordering is allowed.
+        return _isInReorder && CanReorderItems && DragDrop.GetAllowDrop(this);
     }
 
     private void OnReorderDrop(Point dropPoint)
     {
-        // Container & original index - TabView does not support multi-item drag
-        // so we don't need anything else here
-        var dragIndex = _dragIndex;
-        bool isDragItemFocused = _isDragItemFocused;
-        bool isDragItemSelected = _isDragItemSelected;
+        if (!_dragItemRemoved || _dragData == null)
+        {
+            return;
+        }
 
-        var insertIndex = _liveReorderHelper.GetInsertionIndexForLiveReorder();
+        // 被拖 item 在拖起时已从列表移除，其余 item 已闭合。这里根据指针位置计算
+        // 应插入的 index。
+        UpdateLayout();
+
+        _liveReorderHelper ??= new LiveReorderHelper(this);
+        int insertIndex = _liveReorderHelper.GetClosestElement(dropPoint, true);
+
+        int itemCount = ItemsView.Count;
+        if (insertIndex < 0)
+            insertIndex = 0;
+        if (insertIndex > itemCount)
+            insertIndex = itemCount;
+
+        // 在插入被拖 item 之前先清除挤开的渲染偏移（此时集合未变，index 映射正确），
+        // 否则插入后 index 错位会清错容器、偏移残留，导致 item 视觉错位/消失。
         _liveReorderHelper.ResetAllItemsForLiveReorder();
 
-        if (dragIndex == insertIndex)
-            return;
+        InsertItemAt(insertIndex, _dragData);
+        _dragItemRemoved = false;
 
-        if (insertIndex == -1)
-        {
-            insertIndex = _liveReorderHelper.GetClosestElement(dropPoint, true);
-        }
-
-        // dragItem is the container, we need the actual data item here
-        var data = ItemsView.GetAt(_dragIndex);// ItemFromContainer(dragItem);
-
-        if (dragIndex < insertIndex)
-        {
-            insertIndex--;
-        }
-
-        var itemsSource = ItemsSource;
-        // Avalonia enforces the constraint that INCC must be IList, so this is safe
-        if (itemsSource is IList l)
-        {
-            try
-            {
-                // In the event the user has a list that isn't mutable and we got to this
-                // point somehow (we check when reorder starts), don't crash the app
-                // Just silently fail here
-
-                l.RemoveAt(dragIndex);
-                l.Insert(insertIndex, data);
-            }
-            catch { }
-        }
-        else if (itemsSource == null)
-        {
-            var items = Items;
-            try
-            {
-                items.RemoveAt(dragIndex);
-                items.Insert(insertIndex, data);
-            }
-            catch { }
-        }
-
-        // Note that _dragItem is no longer valid since the container
-        // may have changed, grab the new container from insertIndex
-        
-        UpdateLayout(); // Force an update so ScrollIntoView works
-
+        UpdateLayout();
         ScrollIntoView(insertIndex);
 
-        if (isDragItemFocused)
+        if (_isDragItemFocused)
         {
-            // If the old drag item was focused, we should refocus it
             if (ContainerFromIndex(insertIndex) is Control c)
             {
                 c.Focus();
             }
         }
 
-        if (isDragItemSelected)
+        if (_isDragItemSelected)
         {
             SelectedIndex = insertIndex;
+        }
+    }
+
+    private void RemoveItemAt(int index)
+    {
+        var itemsSource = ItemsSource;
+        if (itemsSource is IList l)
+        {
+            try { l.RemoveAt(index); } catch { }
+        }
+        else if (itemsSource == null)
+        {
+            try { Items.RemoveAt(index); } catch { }
+        }
+    }
+
+    private void InsertItemAt(int index, object? data)
+    {
+        var itemsSource = ItemsSource;
+        if (itemsSource is IList l)
+        {
+            try { l.Insert(index, data); } catch { }
+        }
+        else if (itemsSource == null)
+        {
+            try { Items.Insert(index, data); } catch { }
         }
     }
 
@@ -736,26 +871,21 @@ public sealed class TabViewListView : ListBox
                 _currentAutoPanVelocity = velocity;
             }
 
-            // While AutoScrolling, be sure the live reorder manager isn't trying to 
+            // While AutoScrolling, be sure the live reorder manager isn't trying to
             // do anything as container bounds are constantly changing and things
             // won't line up like it expects
             _liveReorderHelper?.ResetAllItemsForLiveReorder();
-            // Also reset the opacity on the drag item so it doesn't affect
-            // recycled containers
-            _dragItemOpacitySub?.Dispose();
         }
         else
         {
+            // Already stationary: skip the per-event ScrollViewer offset write (which
+            // re-raises scroll-changed and can force an extra render pass every frame).
+            if (IsStationary(_currentAutoPanVelocity))
+                return;
+
             DestroyStartEdgeScrollTimer();
             _currentAutoPanVelocity = default;
             ScrollWithVelocity(default);
-
-            _dragItemOpacitySub?.Dispose();
-            var cont = ContainerFromIndex(_dragIndex);
-            if (cont != null)
-            {
-                _dragItemOpacitySub = _dragItem.SetValue(OpacityProperty, 0, BindingPriority.Animation);
-            }
         }
     }
 
@@ -781,6 +911,11 @@ public sealed class TabViewListView : ListBox
     private void ScrollWithVelocity(in Vector velocity)
     {
         var s = Scroller;
+        if (s == null)
+        {
+            return;
+        }
+
         var off = s.Offset;
 
         off += velocity;
@@ -867,8 +1002,9 @@ public sealed class TabViewListView : ListBox
 
     private void UpdateBottomBorderVisualState()
     {
-        PseudoClasses.Set(PC_LEFT_SHORT, SelectedIndex == 0);
-        PseudoClasses.Set(PC_RIGHT_SHORT, SelectedIndex == ItemsView.Count - 1);
+        int count = ItemsView.Count;
+        PseudoClasses.Set(PC_LEFT_SHORT, count > 0 && SelectedIndex == 0);
+        PseudoClasses.Set(PC_RIGHT_SHORT, count > 0 && SelectedIndex == count - 1);
     }
 
     private void OnItemsChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -881,5 +1017,206 @@ public sealed class TabViewListView : ListBox
     {
         var scaling = TopLevel.GetTopLevel(this)?.RenderScaling ?? 1;
         UISettings.GetSystemDragSize(scaling, out _cxDrag, out _cyDrag);
+    }
+
+    // ---- Drag ghost & drop cursor ----
+
+    /// <summary>
+    /// Shows a floating snapshot of the dragged tab. It is hosted in the
+    /// <see cref="OverlayLayer"/> so it renders above everything else and follows the
+    /// pointer for the duration of the drag, making it clear which item is being moved.
+    /// </summary>
+    private void ShowDragGhost(TabViewItem? dragItem, double width, double height)
+    {
+        if (dragItem == null || _dragGhost != null)
+            return;
+
+        var topLevel = TopLevel.GetTopLevel(this);
+        var layer = topLevel != null ? OverlayLayer.GetOverlayLayer(topLevel) : null;
+        if (layer == null)
+            return;
+
+        var ghost = BuildDragGhost(dragItem, width, height);
+        _dragGhost = ghost;
+        _dragGhostLayer = layer;
+        layer.Children.Add(ghost);
+
+        // The ghost keeps the exact size the tab occupied in the list, so no measure is needed.
+        _dragGhostSize = new Size(width, height);
+
+        // Position via a render transform so updating it doesn't invalidate layout (which
+        // makes the ghost follow the cursor much more smoothly than Canvas.Left/Top).
+        _dragGhostTransform = new TranslateTransform(-10000, -10000);
+        ghost.RenderTransform = _dragGhostTransform;
+        Canvas.SetLeft(ghost, 0);
+        Canvas.SetTop(ghost, 0);
+    }
+
+    private void HideDragGhost()
+    {
+        if (_dragGhost != null && _dragGhostLayer != null)
+        {
+            _dragGhostLayer.Children.Remove(_dragGhost);
+        }
+
+        _dragGhost = null;
+        _dragGhostLayer = null;
+        _dragGhostSize = default;
+        _dragGhostTransform = null;
+        _lastGhostPoint = null;
+        _pendingGhostPoint = null;
+        _ghostUpdateQueued = false;
+    }
+
+    private void UpdateDragGhostPosition(DragEventArgs e)
+    {
+        if (_dragGhost == null || _dragGhostLayer == null || _dragGhostTransform == null)
+            return;
+
+        var pt = e.GetPosition(_dragGhostLayer);
+        var ghostPoint = new Point(pt.X - _dragGhostSize.Width / 2, pt.Y - _dragGhostSize.Height / 2);
+
+        // Skip redundant updates (OLE fires a constant stream of DragOver events even when
+        // the pointer hasn't moved).
+        if (_lastGhostPoint.HasValue &&
+            double.Abs(_lastGhostPoint.Value.X - ghostPoint.X) < 0.5 &&
+            double.Abs(_lastGhostPoint.Value.Y - ghostPoint.Y) < 0.5)
+        {
+            return;
+        }
+        _lastGhostPoint = ghostPoint;
+        _pendingGhostPoint = ghostPoint;
+
+        // Coalesce per-event updates into a single transform write per render pass. OLE
+        // delivers DragOver more often than the render loop, so applying the position on
+        // every event caused redundant invalidations and stutter.
+        if (!_ghostUpdateQueued)
+        {
+            _ghostUpdateQueued = true;
+            Dispatcher.UIThread.Post(ApplyPendingGhostPosition, DispatcherPriority.Render);
+        }
+    }
+
+    private void ApplyPendingGhostPosition()
+    {
+        _ghostUpdateQueued = false;
+
+        if (_dragGhostTransform == null || _pendingGhostPoint is not { } pt)
+            return;
+
+        _dragGhostTransform.X = pt.X;
+        _dragGhostTransform.Y = pt.Y;
+    }
+
+    private Border BuildDragGhost(TabViewItem dragItem, double width, double height)
+    {
+        // Fixed foreground/background colors derived from the current theme variant.
+        bool isDark = AvaloniaFluentTheme.Instance.IsDarkTheme;
+        var background = isDark ? Color.FromRgb(0x2C, 0x2C, 0x2C) : Color.FromRgb(0xFF, 0xFF, 0xFF);
+        var border = isDark ? Color.FromRgb(0x40, 0x40, 0x42) : Color.FromRgb(0xE0, 0xE0, 0xE0);
+        var foreground = isDark ? Color.FromRgb(0xFF, 0xFF, 0xFF) : Color.FromRgb(0x1A, 0x1A, 0x1A);
+
+        var ghost = new Border
+        {
+            Width = width,
+            Height = height,
+            IsHitTestVisible = false,
+            // Opacity 1.0 (instead of ~0.96) avoids forcing Avalonia to render the
+            // ghost into its own offscreen surface and re-composite it on every frame
+            // of the drag — a measurable source of jank when following the pointer.
+            Opacity = 1.0,
+            BorderThickness = new Thickness(1),
+            Padding = new Thickness(9, 3, 9, 3),
+            CornerRadius = new CornerRadius(4),
+            Background = new SolidColorBrush(background),
+            BorderBrush = new SolidColorBrush(border),
+            // A lighter shadow (6px blur vs 16px) keeps the floating look while shrinking
+            // the rasterized shadow region the renderer has to produce/sample each frame.
+            BoxShadow = BoxShadows.Parse("0 2 6 0 #1F000000"),
+            // Bake the ghost (shadow + text + icon) into a cached bitmap once. While
+            // the tab is being dragged the ghost content never changes, so the renderer
+            // only has to translate that bitmap instead of re-rasterizing the blurred
+            // box-shadow on every frame — the single biggest source of drag jank.
+            CacheMode = new BitmapCache(),
+        };
+
+        var panel = new StackPanel
+        {
+            Orientation = Orientation.Horizontal,
+            VerticalAlignment = VerticalAlignment.Center,
+        };
+
+        var icon = dragItem.IconSource;
+        if (icon != null && icon is not IconElement)
+        {
+            panel.Children.Add(new FluentIconElement
+            {
+                Source = icon,
+                MaxWidth = 16,
+                MaxHeight = 16,
+                Margin = new Thickness(0, 0, 10, 0),
+                VerticalAlignment = VerticalAlignment.Center,
+                Foreground = new SolidColorBrush(foreground),
+            });
+        }
+
+        var header = dragItem.Header?.ToString();
+        if (!string.IsNullOrEmpty(header))
+        {
+            panel.Children.Add(new TextBlock
+            {
+                Text = header,
+                VerticalAlignment = VerticalAlignment.Center,
+                FontSize = 12,
+                Foreground = new SolidColorBrush(foreground),
+            });
+        }
+
+        ghost.Child = panel;
+        return ghost;
+    }
+
+    /// <summary>
+    /// Applies a distinct cursor while a drag is in progress: a "move" cursor when the
+    /// drop can be accepted here, and a "not allowed" cursor when it can't.
+    /// </summary>
+    private void SetDragCursor(bool accepted)
+    {
+        if (!_dragCursorApplied)
+        {
+            _previousCursor = Cursor;
+            _previousTabViewCursor = (_parent as TabView)?.Cursor;
+            _dragCursorApplied = true;
+            _dragCursorAccepted = accepted;
+            ApplyDragCursor(accepted ? DragMoveCursor : DragNoCursor);
+        }
+        else if (_dragCursorAccepted != accepted)
+        {
+            // Only touch the Cursor property when the accept state actually flips.
+            _dragCursorAccepted = accepted;
+            ApplyDragCursor(accepted ? DragMoveCursor : DragNoCursor);
+        }
+    }
+
+    private void ApplyDragCursor(Cursor cursor)
+    {
+        Cursor = cursor;
+        if (_parent is TabView tv)
+        {
+            tv.Cursor = cursor;
+        }
+    }
+
+    private void ResetDragCursor()
+    {
+        if (!_dragCursorApplied)
+            return;
+
+        _dragCursorApplied = false;
+        Cursor = _previousCursor;
+        if (_parent is TabView tv)
+        {
+            tv.Cursor = _previousTabViewCursor;
+        }
     }
 }
