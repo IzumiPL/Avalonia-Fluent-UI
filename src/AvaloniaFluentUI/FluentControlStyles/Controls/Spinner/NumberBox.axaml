@@ -54,14 +54,11 @@
     </Border>
   </Design.PreviewWith>
 
+  <!--  Control-specific resources  -->
   <Thickness x:Key="NumberBoxSpinButtonBorderThickness">0,1,1,1</Thickness>
   <Thickness x:Key="NumberBoxIconMargin">10,0,0,0</Thickness>
-  <x:Double x:Key="NumberBoxPopupHorizonalOffset">-21</x:Double>
-  <x:Double x:Key="NumberBoxPopupVerticalOffset">-27</x:Double>
   <x:Double x:Key="NumberBoxPopupShadowDepth">16</x:Double>
   <Thickness x:Key="NumberBoxPopupIndicatorMargin">0,0,8,0</Thickness>
-
-  <!--  Control-specific resources  -->
   <Thickness x:Key="NumberBoxPopupSpinButtonBorderThickness">0</Thickness>
   <Thickness x:Key="NumberBoxPopupBorderThickness">1</Thickness>
 
@@ -263,18 +260,18 @@
               Grid.Column="1"
               HorizontalAlignment="Left"
               Focusable="False"
-              HorizontalOffset="{DynamicResource NumberBoxPopupHorizontalOffset}"
+              HorizontalOffset="-3"
               IsLightDismissEnabled="True"
               Placement="Right"
-              VerticalOffset="{DynamicResource NumberBoxPopupVerticalOffset}"
               WindowManagerAddShadowHint="False">
-
               <Border
                 Name="PopupContentRoot"
+                Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
                 Padding="6"
                 Background="{DynamicResource AcrylicBackgroundFillColorDefaultBrush}"
                 BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
                 BorderThickness="{DynamicResource NumberBoxPopupBorderThickness}"
+                BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
                 CornerRadius="{DynamicResource OverlayCornerRadius}">
 
                 <Grid RowDefinitions="*,*">
@@ -520,21 +517,18 @@
               Grid.Column="1"
               HorizontalAlignment="Left"
               Focusable="False"
-              HorizontalOffset="{DynamicResource NumberBoxPopupHorizontalOffset}"
+              HorizontalOffset="-3"
               IsLightDismissEnabled="True"
               Placement="Right"
-              VerticalOffset="{DynamicResource NumberBoxPopupVerticalOffset}"
               WindowManagerAddShadowHint="False">
-              <!--  Placement="AnchorAndGravity"  -->
-              <!--  PlacementAnchor="Right"  -->
-              <!--  PlacementGravity="Bottom"  -->
-
               <Border
                 Name="PopupContentRoot"
+                Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
                 Padding="6"
                 Background="{DynamicResource AcrylicBackgroundFillColorDefaultBrush}"
                 BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
                 BorderThickness="{DynamicResource NumberBoxPopupBorderThickness}"
+                BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
                 CornerRadius="{DynamicResource OverlayCornerRadius}">
 
                 <Grid RowDefinitions="*,*">

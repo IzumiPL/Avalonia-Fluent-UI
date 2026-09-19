@@ -26,7 +26,7 @@ namespace AvaloniaFluentUI.Controls;
 [TemplatePart(Name = DOWN_SPIN_BUTTON,          Type = typeof(RepeatButton))]
 [TemplatePart(Name = POPUP_UP_SPIN_BUTTON,      Type = typeof(RepeatButton))]
 [TemplatePart(Name = POPUP_DOWN_SPIN_BUTTON,    Type = typeof(RepeatButton))]
-public partial class NumberBox : TemplatedControl
+public class NumberBox : TemplatedControl
 {
     /// <summary>
     /// Defines the <see cref="AcceptsExpression"/> property
@@ -443,6 +443,7 @@ public partial class NumberBox : TemplatedControl
         if (_popup != null)
         {
             _popup.OverlayInputPassThroughElement = this;
+            _popup.VerticalOffset = 3;
         }
 
         UpdateSpinButtonPlacement();
