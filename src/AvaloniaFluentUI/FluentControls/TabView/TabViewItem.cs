@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using Avalonia;
-using Avalonia.Automation;
 using Avalonia.Automation.Peers;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
@@ -16,7 +15,6 @@ using Avalonia.Utilities;
 using Avalonia.VisualTree;
 using AvaloniaFluentUI.Core;
 using AvaloniaFluentUI.Controls.Internal;
-using AvaloniaFluentUI.Helpers;
 using Path = Avalonia.Controls.Shapes.Path;
 
 namespace AvaloniaFluentUI.Controls;
@@ -233,15 +231,6 @@ public partial class TabViewItem : SelectorItem
         var tabView = Parent as TabView ?? this.FindAncestorOfType<TabView>();
 
         _closeButton = e.NameScope.Find<Button>(CLOSE_BUTTON);
-
-        if (_closeButton != null && string.IsNullOrEmpty(AutomationProperties.GetName(_closeButton)))
-        {
-            // TODO: I need to remember how I made my json file and update it to include this
-            //var name = FALocalizationService.Instance.GetString(s_TabViewCloseButtonName);
-            //AutomationProperties.SetName(_closeButton, name);
-        }
-
-        // WinUI sets a default tooltip here, I'm removing that see OnHeaderChanged for more
 
         _closeButton?.Click += OnCloseButtonClick;
 

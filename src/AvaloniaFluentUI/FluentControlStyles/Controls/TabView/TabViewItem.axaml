@@ -3,6 +3,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:core="using:AvaloniaFluentUI.Core"
   xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:uip="clr-namespace:AvaloniaFluentUI.Controls.Primitives;assembly=AvaloniaFluentUI">
 
@@ -151,18 +152,15 @@
                 <ColumnDefinition Width="Auto"/>
               </Grid.ColumnDefinitions>
 
-              <Viewbox
-                Name="IconBox"
+              <ui:FluentIconElement
+                x:Name="PART_Icon"
                 MaxWidth="{DynamicResource TabViewItemHeaderIconSize}"
                 MaxHeight="{DynamicResource TabViewItemHeaderIconSize}"
                 Margin="{DynamicResource TabViewItemHeaderIconMargin}"
-                IsVisible="False">
-                <ui:FluentIconElement
-                  x:Name="IconControl"
-                  Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                  IsTabStop="False"
-                  Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IconSource}"/>
-              </Viewbox>
+                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                IsTabStop="False"
+                IsVisible="False"
+                Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IconSource}"/>
 
               <!--
                 If we template bind the ContentPresenter's Content property to the TabViewItem.Header property
@@ -193,6 +191,7 @@
                 IconHeight="8"
                 IconWidth="8"
                 IsTabStop="False"/>
+              <!--  ToolTip.Tip="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CloseTabCF]}"  -->
             </Grid>
           </Border>
         </Grid>
@@ -212,7 +211,7 @@
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
 
-        <Style Selector="^ /template/ ui|FluentIconElement#IconControl">
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
 
@@ -235,7 +234,7 @@
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/>
         </Style>
 
-        <Style Selector="^ /template/ ui|FluentIconElement#IconControl">
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/>
         </Style>
 
@@ -280,7 +279,7 @@
           <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
 
-        <Style Selector="^ /template/ ui|FluentIconElement#IconControl">
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
 
@@ -306,7 +305,7 @@
           <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
 
-        <Style Selector="^ /template/ ui|FluentIconElement#IconControl">
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
         </Style>
 
@@ -337,7 +336,7 @@
         to items there, so hide the header text and let the icon carry the tab.
       -->
       <Style Selector="^:compact">
-        <Style Selector="^ /template/ Viewbox#IconBox">
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Margin" Value="0"/>
         </Style>
 
@@ -399,18 +398,15 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"/>
 
-                  <Viewbox
-                    Name="IconBox"
+                  <ui:FluentIconElement
+                    Name="PART_Icon"
                     MaxWidth="{DynamicResource TabViewItemHeaderIconSize}"
                     MaxHeight="{DynamicResource TabViewItemHeaderIconSize}"
                     Margin="{DynamicResource TabViewItemHeaderIconMargin}"
-                    IsVisible="False">
-                    <ui:FluentIconElement
-                      Name="IconControl"
-                      Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                      KeyboardNavigation.IsTabStop="False"
-                      Source="{Binding IconSource, RelativeSource={RelativeSource TemplatedParent}}"/>
-                  </Viewbox>
+                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                    IsVisible="False"
+                    KeyboardNavigation.IsTabStop="False"
+                    Source="{Binding IconSource, RelativeSource={RelativeSource TemplatedParent}}"/>
 
                   <ContentPresenter
                     Name="ContentPresenter"
@@ -436,6 +432,7 @@
                     IconHeight="8"
                     IconWidth="8"
                     KeyboardNavigation.IsTabStop="False"/>
+                  <!--  ToolTip.Tip="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CloseTabCF]}"  -->
                 </Grid>
               </Border>
 
@@ -453,7 +450,7 @@
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
 
-        <Style Selector="^ /template/ ui|FluentIconElement#IconControl">
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
 
@@ -472,7 +469,7 @@
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
 
-        <Style Selector="^ /template/ ui|FluentIconElement#IconControl">
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
 
@@ -492,7 +489,7 @@
           <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
 
-        <Style Selector="^ /template/ ui|FluentIconElement#IconControl">
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
 
@@ -519,7 +516,7 @@
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
           </Style>
 
-          <Style Selector="^ /template/ ui|FluentIconElement#IconControl">
+          <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
           </Style>
 
@@ -538,7 +535,7 @@
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
           </Style>
 
-          <Style Selector="^ /template/ ui|FluentIconElement#IconControl">
+          <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
           </Style>
 
@@ -559,7 +556,7 @@
           <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
 
-        <Style Selector="^ /template/ ui|FluentIconElement#IconControl">
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
         </Style>
 
@@ -582,7 +579,7 @@
       </Style>
     </Style>
 
-    <Style Selector="^:icon /template/ Viewbox#IconBox">
+    <Style Selector="^:icon /template/ ui|FluentIconElement#PART_Icon">
       <Setter Property="IsVisible" Value="True"/>
     </Style>
 

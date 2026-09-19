@@ -19,9 +19,7 @@ using Avalonia.VisualTree;
 using AvaloniaFluentUI.Collections;
 using AvaloniaFluentUI.Core;
 using AvaloniaFluentUI.Controls.Primitives;
-using AvaloniaFluentUI.Locale;
 using System.Collections;
-using Avalonia.Automation;
 
 
 namespace AvaloniaFluentUI.Controls;
@@ -118,12 +116,6 @@ public class TabView : TemplatedControl
     /// </summary>
     public static readonly StyledProperty<bool> CanReorderTabsProperty =
         AvaloniaProperty.Register<TabView, bool>(nameof(CanReorderTabs), true);
-
-    /// <summary>
-    /// Defines the <see cref="AllowDropTabs"/> property
-    /// </summary>
-    public static readonly StyledProperty<bool> AllowDropTabsProperty =
-        AvaloniaProperty.Register<TabView, bool>(nameof(AllowDropTabs), true);
 
     /// <summary>
     /// Defines the <see cref="SelectedIndex"/> property
@@ -298,16 +290,6 @@ public class TabView : TemplatedControl
     }
 
     /// <summary>
-    /// Gets or sets a value that determines whether the TabView can be a drop target for the purposes
-    /// of drag-and-drop operations
-    /// </summary>
-    public bool AllowDropTabs
-    {
-        get => GetValue(AllowDropTabsProperty);
-        set => SetValue(AllowDropTabsProperty, value);
-    }
-
-    /// <summary>
     /// Gets or sets the index of the selected tab
     /// </summary>
     public int SelectedIndex
@@ -437,7 +419,7 @@ public class TabView : TemplatedControl
     
     private IList _tabItems;
     private int _selectedIndex;
-    private object _selectedItem;
+    private object? _selectedItem;
     
     private TabViewCommand _keyboardAcceleratorHandler;
 
@@ -469,7 +451,6 @@ public class TabView : TemplatedControl
     // A bunch of event revokers
     private IDisposable? _listViewCanReorderItemsPropertyChangedRevoker;
     private IDisposable? _listViewAllowDropPropertyChangedRevoker;
-    private string _tabCloseButtonTooltipText;
     private Size _previousAvailableSize;
 
     /// <summary>
@@ -503,8 +484,8 @@ public class TabView : TemplatedControl
     private const string BORDER_RESIZE_HANDLE_HOST = "BorderResizeHandleHost";
 
     // These two come from the WinUI port, so they don't follow the normal naming convention for parity upstream
-    private static string _tabViewItemMinWidth = "TabViewItemMinWidth";
-    private static string _tabViewItemMaxWidth = "TabViewItemMaxWidth";
+    private static string RES_TAB_VIEW_ITEM_MIN_WIDTH = "TabViewItemMinWidth";
+    private static string RES_TAB_VIEW_ITEM_MAX_WIDTH = "TabViewItemMaxWidth";
 
     private const string PC_SINGLE_BORDER = ":singleBorder";
 
@@ -512,12 +493,6 @@ public class TabView : TemplatedControl
     internal const string PC_LEFT = ":left";
     internal const string PC_RIGHT = ":right";
     internal const string PC_BOTTOM = ":bottom";
-
-    private const string RES_TAB_VIEW_CLOSE_BUTTON_TOOLTIP_WITH_KA = "TabViewCloseButtonTooltipWithKA";
-    private const string RES_TAB_VIEW_ADD_BUTTON_TOOLTIP = "TabViewAddButtonTooltip";
-    private const string RES_TAB_VIEW_SCROLL_DECREASE_BUTTON_TOOLTIP = "TabViewScrollDecreaseButtonTooltip";
-    private const string RES_TAB_VIEW_SCROLL_INCREASE_BUTTON_TOOLTIP = "TabViewScrollIncreaseButtonTooltip";
-    private const string RES_TAB_VIEW_ADD_BUTTON_NAME = "TabViewAddButtonName";
 
     // TabViewItem subs to these in OnApplyTemplate, but we need to make sure the strong ref to TabView isn't
     // held if the TabViewItem is removed
@@ -575,7 +550,6 @@ public class TabView : TemplatedControl
             CommandParameter = TabViewCommandType.CtrlShiftTab
         });
 
-        _tabCloseButtonTooltipText = LocalizationService.Instance.GetString(RES_TAB_VIEW_CLOSE_BUTTON_TOOLTIP_WITH_KA);
         PseudoClasses.Set(PC_TOP, true);
         DragDrop.SetAllowDrop(this, true);
     }
@@ -637,18 +611,6 @@ public class TabView : TemplatedControl
         _addButton = e.NameScope.Find<Button>(ADD_BUTTON);
         if (_addButton != null)
         {
-            var name = AutomationProperties.GetName(_addButton);
-            if (name == null)
-            {
-                // var addButtonName = LocalizationHelper.Instance.GetLocalizedStringResource(RES_TAB_VIEW_ADD_BUTTON_NAME);
-                // AutomationProperties.SetName(_addButton, addButtonName);
-            }
-
-            if (ToolTip.GetTip(_addButton) == null)
-            {
-                // ToolTip.SetTip(_addButton, FALocalizationHelper.Instance.GetLocalizedStringResource(RES_TAB_VIEW_ADD_BUTTON_TOOLTIP));
-            }
-
             _addButton.Click += OnAddButtonClick;
             _addButton.KeyDown += OnAddButtonKeyDown;
         }
@@ -662,8 +624,6 @@ public class TabView : TemplatedControl
             handle.PointerCaptureLost += OnPaneResizeHandlePointerCaptureLost;
             _verticalPaneResizeHandle = handle;
         }
-
-        //UpdateListViewItemContainerTransitions();
     }
 
     protected override Size MeasureOverride(Size availableSize)
@@ -709,6 +669,12 @@ public class TabView : TemplatedControl
         else if (change.Property == TabStripLocationProperty)
         {
             OnTabStripLocationPropertyChanged(change);
+        }
+        else if (change.Property == IsAddTabButtonVisibleProperty)
+        {
+            // 加号按钮可见性变化会改变它占用的列宽，需等下一次布局刷新后再重算，
+            // 否则 _addButtonColumn.ActualWidth 还是旧值，按钮会被挤出可视区。
+            Dispatcher.UIThread.Post(() => UpdateTabWidths());
         }
     }
 
@@ -1083,15 +1049,11 @@ public class TabView : TemplatedControl
                 if (button?.Name == SCROLL_DECREASE_BUTTON)
                 {
                     _scrollDecreaseButton = button;
-                    ToolTip.SetTip(_scrollDecreaseButton,
-                        LocalizationService.Instance.GetString(RES_TAB_VIEW_SCROLL_DECREASE_BUTTON_TOOLTIP));
                     _scrollDecreaseButton.Click += OnScrollDecreaseClick;
                 }
                 else if (button?.Name == SCROLL_INCREASE_BUTTON)
                 {
                     _scrollIncreaseButton = button;
-                    ToolTip.SetTip(_scrollIncreaseButton,
-                        LocalizationService.Instance.GetString(RES_TAB_VIEW_SCROLL_INCREASE_BUTTON_TOOLTIP));
                     _scrollIncreaseButton.Click += OnScrollIncreaseClick;
                 }
             }
@@ -1568,14 +1530,7 @@ public class TabView : TemplatedControl
 
     private void UpdateTabWidths(bool shouldUpdateWidths = true, bool fillAllAvailableSpace = true)
     {
-        // Don't update any tab widths when we're in the middle of a tab tear-out loop -
-        // we'll update tab widths when it's done.
-        //if (_isInTabTearOutLoop)
-        //{
-        //    return;
-        //}
-
-        var maxTabWidth = this.TryFindResource(_tabViewItemMaxWidth, out var mtw) ? (double)mtw : _tabMaximumWidth;
+        var maxTabWidth = this.TryFindResource(RES_TAB_VIEW_ITEM_MAX_WIDTH, out var mtw) ? (double)mtw : _tabMaximumWidth;
         double tabWidth = double.NaN;
         int itemCount = GetItemCount();
         int tabCount = itemCount;
@@ -1635,7 +1590,7 @@ public class TabView : TemplatedControl
                 {
                     if (TabWidthMode == TabViewWidthMode.Equal)
                     {
-                        var minTabWidth = this.TryFindResource(_tabViewItemMinWidth, out var value) ? (double)value : _tabMinimumWidth;
+                        var minTabWidth = this.TryFindResource(RES_TAB_VIEW_ITEM_MIN_WIDTH, out var value) ? (double)value : _tabMinimumWidth;
                         var padding = Padding;
 
                         // We don't have this, so skip what WinUI does, but to avoid messing up the math
@@ -2249,8 +2204,6 @@ public class TabView : TemplatedControl
         };
     }
 
-    internal string GetTabCloseButtonTooltipText() => _tabCloseButtonTooltipText;
-    
     class TabViewCommand : ICommand
     {
         public TabViewCommand(Action<object?>? execute)

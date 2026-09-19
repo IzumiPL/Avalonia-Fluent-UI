@@ -3,6 +3,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:conv="using:AvaloniaFluentUI.Converters"
   xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:uip="clr-namespace:AvaloniaFluentUI.Controls.Primitives;assembly=AvaloniaFluentUI"
   x:CompileBindings="True">
@@ -73,12 +74,21 @@
     <Style Selector="^:pointerover /template/ Border#PART_Border">
       <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
     </Style>
-    <Style Selector="^:pressed /template/ Border#PART_Border">
-      <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+
+    <Style Selector="^:pressed">
+      <Style Selector="^ /template/ Border#PART_Border">
+        <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
+      </Style>
+
+      <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
+        <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+      </Style>
     </Style>
+
     <Style Selector="^:disabled /template/ Border#PART_Border">
       <Setter Property="Background" Value="{DynamicResource SubtleFillColorDisabledBrush}"/>
     </Style>
+
     <Style Selector="^:disabled /template/ ui|FluentIconElement#PART_Icon">
       <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
     </Style>
@@ -129,7 +139,8 @@
                 Name="ScrollDecreaseButton"
                 AutomationProperties.AccessibilityView="Raw"
                 Content="{x:Static fi:FluentIcon.CareLeftSolid}"
-                Theme="{StaticResource TabViewScrollButtonTheme}"/>
+                Theme="{StaticResource TabViewScrollButtonTheme}"
+                ToolTip.Tip="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ScrollTabListBackward]}"/>
             </Border>
 
             <!--
@@ -167,7 +178,8 @@
                 Name="ScrollIncreaseButton"
                 AutomationProperties.AccessibilityView="Raw"
                 Content="{x:Static fi:FluentIcon.CareRightSolid}"
-                Theme="{StaticResource TabViewScrollButtonTheme}"/>
+                Theme="{StaticResource TabViewScrollButtonTheme}"
+                ToolTip.Tip="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ScrollTabListForward]}"/>
             </Border>
 
             <!--  This ScrollBar is here for Vertical tabs  -->

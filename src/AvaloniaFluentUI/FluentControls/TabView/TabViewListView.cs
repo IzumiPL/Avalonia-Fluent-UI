@@ -6,7 +6,6 @@ using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
-using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Logging;
@@ -979,7 +978,7 @@ public sealed class TabViewListView : ListBox
                     vsp.Orientation = Orientation.Vertical;
                 }
             }
-            else if (panel is Avalonia.Controls.StackPanel sp)
+            else if (panel is StackPanel sp)
             {
                 if (sp.Orientation == Orientation.Vertical &&
                     (newLocation == TabViewTabStripLocation.Top || newLocation == TabViewTabStripLocation.Bottom))
