@@ -1,4 +1,4 @@
-﻿<ui:ViewBase
+﻿<ui:PopupDrawerHostViewBase
   x:Class="Gallery.Pages.TabsPage"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,6 +7,7 @@
   xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:model="clr-namespace:Gallery.Models"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:viewModel="clr-namespace:Gallery.ViewModels"
   Title="{Binding Title}"
@@ -14,11 +15,52 @@
   x:DataType="viewModel:TabsPageViewModel"
   mc:Ignorable="d">
 
-  <ui:ViewBase.Styles>
+  <ui:PopupDrawerHostViewBase.Styles>
     <Style Selector="TextBlock">
       <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
-  </ui:ViewBase.Styles>
+  </ui:PopupDrawerHostViewBase.Styles>
+
+  <ui:PopupDrawerHostViewBase.PopupDrawerContent>
+    <StackPanel
+      Margin="12"
+      Orientation="Vertical"
+      Spacing="6">
+      <!-- <CheckBox Content="可拖拽" IsChecked="{Binding TabViewAllowDropTabs}"/> -->
+      <CheckBox Content="可重新排序" IsChecked="{Binding TabViewCanReorderTabs}"/>
+      <CheckBox Content="显示头部区域" IsChecked="{Binding TabViewStripHeaderIsVisible}"/>
+      <CheckBox Content="显示底部区域" IsChecked="{Binding TabViewStripFooterIsVisible}"/>
+      <CheckBox Content="显示添加按钮" IsChecked="{Binding TabViewIsAddButtonVisible}"/>
+
+      <TextBlock HorizontalAlignment="Left" Text="显示位置"/>
+      <ComboBox
+        MinWidth="128"
+        HorizontalAlignment="Stretch"
+        ItemsSource="{Binding TabViewTabStripLocations}"
+        SelectedItem="{Binding TabViewTabStripLocation}"/>
+
+      <TextBlock HorizontalAlignment="Left" Text="Item宽度模式"/>
+      <ComboBox
+        MinWidth="128"
+        HorizontalAlignment="Stretch"
+        ItemsSource="{Binding TabViewTabWidthModes}"
+        SelectedItem="{Binding TabViewTabWidthMode}"/>
+
+      <TextBlock HorizontalAlignment="Left" Text="Item关闭按钮显示模式"/>
+      <ComboBox
+        MinWidth="128"
+        HorizontalAlignment="Stretch"
+        ItemsSource="{Binding TabViewCloseButtonOverlayModes}"
+        SelectedItem="{Binding TabViewCloseButtonOverlayMode}"/>
+
+      <Button
+        HorizontalAlignment="Stretch"
+        Classes="Accent"
+        Command="{Binding ClearAllTabViewItemCommand}"
+        Content="清空所有Item"/>
+      <!--  2  -->
+    </StackPanel>
+  </ui:PopupDrawerHostViewBase.PopupDrawerContent>
 
   <StackPanel Spacing="50">
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Tabs]}">
@@ -42,5 +84,69 @@
         </StackPanel>
       </Grid>
     </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TabView]}" Padding="0">
+      <Panel>
+        <!--  AllowDropTabs="{Binding TabViewAllowDropTabs}"  -->
+        <fui:TabView
+          Name="TabView"
+          Margin="0,0,50,0"
+          AddTabButtonCommand="{Binding AddTabCommand}"
+          CanReorderTabs="{Binding TabViewCanReorderTabs}"
+          CloseButtonOverlayMode="{Binding TabViewCloseButtonOverlayMode}"
+          IsAddTabButtonVisible="{Binding TabViewIsAddButtonVisible}"
+          MinimumVerticalOpenPaneLength="88"
+          SelectedItem="{Binding TabViewSelectedItem, Mode=TwoWay}"
+          TabCloseRequested="OnTabViewCloseRequested"
+          TabItemsSource="{Binding TabViewItems}"
+          TabStripLocation="{Binding TabViewTabStripLocation}"
+          TabWidthMode="{Binding TabViewTabWidthMode}"
+          VerticalOpenPaneLength="240">
+
+          <fui:TabView.TabStripHeader>
+            <TextBlock
+              Classes="SubTitle"
+              IsVisible="{Binding TabViewStripHeaderIsVisible}"
+              Text="{Binding TabViewStripHeader}"/>
+          </fui:TabView.TabStripHeader>
+
+          <fui:TabView.TabStripFooter>
+            <TextBlock
+              Classes="Body"
+              IsVisible="{Binding TabViewStripFooterIsVisible}"
+              Opacity="0.8"
+              Text="{Binding TabViewStripFooter}"/>
+          </fui:TabView.TabStripFooter>
+
+          <fui:TabView.TabItemTemplate>
+            <DataTemplate DataType="model:TabIteModel">
+              <!--  1  -->
+              <fui:TabViewItem
+                Header="{Binding Title}"
+                IconSource="{Binding Icon}"
+                IsClosable="{Binding IsClosable}"
+                Tag="{Binding Tag}">
+                <Panel Height="456">
+                  <TextBlock
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Classes="Title"
+                    Text="{Binding Content}"/>
+                </Panel>
+              </fui:TabViewItem>
+            </DataTemplate>
+          </fui:TabView.TabItemTemplate>
+        </fui:TabView>
+
+        <fui:ToolButton
+          Margin="0,5,0,0"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Top"
+          Classes="Transparent"
+          Click="OpenPopupDrawer"
+          Content="{x:Static fi:FluentIcon.Setting}"/>
+
+      </Panel>
+    </ui:CodeCard>
   </StackPanel>
-</ui:ViewBase>
+</ui:PopupDrawerHostViewBase>

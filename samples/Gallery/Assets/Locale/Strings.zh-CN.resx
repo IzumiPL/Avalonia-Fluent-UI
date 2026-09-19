@@ -1928,4 +1928,7 @@
   <data name="CompactPaneLength" xml:space="preserve">
     <value>紧凑面板长度: </value>
   </data>
+  <data name="TabView" xml:space="preserve">
+    <value>标签视图</value>
+  </data>
 </root>

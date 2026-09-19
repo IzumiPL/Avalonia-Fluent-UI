@@ -87,5 +87,9 @@
       <DependentUpon>TimeLinePage.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Controls\View\PopupDrawerHostViewBase.axaml.cs">
+      <DependentUpon>PopupDrawerHostViewBase.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

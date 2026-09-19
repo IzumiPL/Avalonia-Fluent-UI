@@ -1928,4 +1928,7 @@
   <data name="CompactPaneLength" xml:space="preserve">
     <value>Compact Pane Length: </value>
   </data>
+  <data name="TabView" xml:space="preserve">
+    <value>TabView</value>
+  </data>
 </root>

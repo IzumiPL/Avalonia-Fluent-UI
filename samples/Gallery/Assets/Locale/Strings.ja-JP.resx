@@ -1928,4 +1928,7 @@
   <data name="CompactPaneLength" xml:space="preserve">
     <value>コンパクトなガラス長: </value>
   </data>
+  <data name="TabView" xml:space="preserve">
+    <value>タブビュー</value>
+  </data>
 </root>

@@ -63,8 +63,10 @@ public partial class MainWindow : FluentWindow
     public MainWindow()
     {
         Application.Current?.Resources["NavigationViewContentMargin"] = new Thickness(0, 55, 0, 0);
-        TitleBarIsVisible = false;
-        SplashScreen = new MainWindowSplashScreen(() => TitleBarIsVisible = true);
+        TitleBarTemplateSettings.IsVisible = false;
+        TitleBarTemplateSettings.IconSize = 20;
+        TitleBarTemplateSettings.Margin = new Thickness(40, 0, TitleBarTemplateSettings.Margin.Right, 0);
+        SplashScreen = new MainWindowSplashScreen(() => TitleBarTemplateSettings.IsVisible = true);
         InitializeComponent();
         
         RegisterMessages();
