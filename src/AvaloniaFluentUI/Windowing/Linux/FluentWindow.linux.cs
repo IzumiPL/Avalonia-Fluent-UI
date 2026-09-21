@@ -131,6 +131,8 @@ public partial class FluentWindow
 
     private void UpdateCursor(ResizeDirection direction)
     {
+        if (!CanResize) { return; }
+        
         Cursor = direction switch
         {
             ResizeDirection.TopLeft => new Cursor(StandardCursorType.TopLeftCorner),

@@ -20,7 +20,7 @@ public class FluentTitleBarTemplateSettings : AvaloniaObject
     ///     Defines the <see cref="Margin" /> property.
     /// </summary>
     public static readonly StyledProperty<Thickness> MarginProperty =
-        AvaloniaProperty.Register<FluentTitleBarTemplateSettings, Thickness>(nameof(Margin), new Thickness(0, 0, 135.99, 0));
+        AvaloniaProperty.Register<FluentTitleBarTemplateSettings, Thickness>(nameof(Margin));
 
     /// <summary>
     ///     Defines the <see cref="IsVisible" /> property.
