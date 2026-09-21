@@ -283,6 +283,8 @@ public partial class FluentWindow : Window
         {
             PseudoClasses.Add(":is-not-windows");
         }
+
+        TitleBarTemplateSettings.Margin = new Thickness(0, 0, IsWindows ? 135.99 : 135, 0);
     }
 
     private void OnWindowPointerPressed(object? sender, PointerPressedEventArgs e)
@@ -401,16 +403,17 @@ public partial class FluentWindow : Window
                  change.Property == CloseButtonIsVisibleProperty)
         {
             var margin = TitleBarTemplateSettings.Margin;
+            double value = IsWindows ? 45.33 : 45;
 
             double rm = 0;
             if (FullScreenButtonIsVisible)
-                rm += 45.33;
+                rm += value;
             if (MinButtonIsVisible)
-                rm += 45.33;
+                rm += value;
             if (MaxButtonIsVisible)
-                rm += 45.33;
+                rm += value;
             if (CloseButtonIsVisible)
-                rm += 45.33;
+                rm += value;
 
             TitleBarTemplateSettings.Margin = new Thickness(margin.Left, margin.Top, rm, margin.Bottom);
         }

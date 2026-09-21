@@ -30,7 +30,7 @@
 
 ## 安装🚀
 ```shell
-dotnet add package AvaloniaFluentUI --version 2.0.4
+dotnet add package AvaloniaFluentUI --version 2.0.5
 ```
 
 > [!Warning]
