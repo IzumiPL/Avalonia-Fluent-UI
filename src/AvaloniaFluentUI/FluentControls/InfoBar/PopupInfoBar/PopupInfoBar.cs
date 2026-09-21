@@ -2,6 +2,8 @@ using System;
 using System.Threading.Tasks;
 using Avalonia.Animation;
 using Avalonia.Animation.Easings;
+using Avalonia.Controls;
+using Avalonia.Layout;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -11,6 +13,16 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class PopupInfoBar : InfoBarBase
 {
+    protected override ColumnDefinitions GetColumnDefinitions()
+    {
+        return Orientation == Orientation.Horizontal ? new ColumnDefinitions("Auto, Auto, *, Auto") : new ColumnDefinitions("Auto, *, Auto");
+    }
+
+    protected override RowDefinitions GetRowDefinitions()
+    {
+        return Orientation == Orientation.Horizontal ? new RowDefinitions() : new RowDefinitions("32, *");
+    }
+
     public override void Run(double fromX, double fromY, double toX, double toY)
     {
         OffsetX = fromX;

@@ -32,10 +32,9 @@
             CornerRadius="{TemplateBinding CornerRadius}"
             Opacity="1">
             <Grid
+              Name="PART_Layout"
               Margin="{TemplateBinding Padding}"
-              VerticalAlignment="Center"
-              ColumnDefinitions="*, Auto"
-              RowDefinitions="Auto, *">
+              VerticalAlignment="Center">
               <TextBlock
                 Name="PART_TitleText"
                 Grid.Row="0"
@@ -46,8 +45,7 @@
               <ContentPresenter
                 Name="ContentPresenter"
                 Grid.Row="1"
-                Grid.ColumnSpan="2"
-                Margin="0,0,5,0"
+                Margin="0,-8,5,0"
                 Content="{TemplateBinding Content}"
                 FontSize="13"
                 TextWrapping="Wrap"/>
@@ -56,8 +54,8 @@
                 Name="PART_CloseButton"
                 Grid.Row="0"
                 Grid.Column="1"
-                Width="24"
-                Height="24"
+                Width="32"
+                Height="32"
                 Margin="6,0,0,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
@@ -65,14 +63,46 @@
                 Content="{x:Static fi:FluentIcon.Close}"
                 Cursor="Hand"
                 Foreground="{TemplateBinding Foreground}"
-                IconHeight="8"
-                IconWidth="8"
+                IconHeight="10"
+                IconWidth="10"
                 IsVisible="{TemplateBinding IsClosable}"/>
             </Grid>
           </Border>
         </Border>
       </ControlTemplate>
     </Setter>
+
+    <Style Selector="^[IsClosable=False]">
+      <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
+        <Setter Property="Margin" Value="0 2 5 0"/>
+      </Style>
+    </Style>
+
+    <Style Selector="^[Orientation=Horizontal]">
+      <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
+        <Setter Property="Grid.Row" Value="0"/>
+        <Setter Property="Grid.Column" Value="1"/>
+        <Setter Property="Margin" Value="12 6 5 0"/>
+      </Style>
+
+      <Style Selector="^ /template/ TextBlock#PART_TitleText">
+        <Setter Property="Margin" Value="0 6 0 0"/>
+      </Style>
+
+      <Style Selector="^ /template/ ui|ToolButton#PART_CloseButton">
+        <Setter Property="Grid.Column" Value="2"/>
+      </Style>
+
+      <Style Selector="^[IsClosable=False]">
+        <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
+          <Setter Property="Margin" Value="12 2 5 0"/>
+        </Style>
+
+        <Style Selector="^ /template/ TextBlock#PART_TitleText">
+          <Setter Property="Margin" Value="0 1 0 0"/>
+        </Style>
+      </Style>
+    </Style>
 
     <Style Selector="^[Severity=Informational]">
       <Setter Property="Background" Value="{DynamicResource SystemFillColorNeutralBrush}"/>
