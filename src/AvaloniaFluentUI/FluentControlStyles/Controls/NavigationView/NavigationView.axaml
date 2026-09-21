@@ -342,7 +342,7 @@
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
                       HorizontalScrollBarVisibility="Disabled"
-                      VerticalScrollBarVisibility="Hidden">
+                      VerticalScrollBarVisibility="{DynamicResource NavigationVerticalScrollBarVisibility}">
                       <ui:ItemsRepeater Name="MenuItemsHost">
                         <ui:ItemsRepeater.Layout>
                           <ui:StackLayout/>
