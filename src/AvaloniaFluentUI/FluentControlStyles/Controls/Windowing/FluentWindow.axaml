@@ -192,10 +192,12 @@
     </Style>
 
     <Style Selector="^:is-windows-10">
-      <!--  TODO: 在windows10上设置圆角边框会出现黑线, 暂未找到解决方法, 暂时退回直角边框, 后续找到解决方法再改回圆角!  -->
-      <Setter Property="CornerRadius" Value="0"/>
       <Setter Property="BorderThickness" Value="1"/>
       <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBrush}"/>
+
+      <Style Selector="^ /template/ Button#PART_CloseButton">
+        <Setter Property="CornerRadius" Value="0 7 0 0"/>
+      </Style>
     </Style>
 
     <Style Selector="^:is-not-windows">
@@ -203,7 +205,7 @@
       <Setter Property="BorderBrush" Value="{DynamicResource ControlBorderHighBrush}"/>
 
       <Style Selector="^ /template/ Button#PART_CloseButton">
-        <Setter Property="CornerRadius" Value="0 6 0 0"/>
+        <Setter Property="CornerRadius" Value="0 7 0 0"/>
       </Style>
 
       <Style Selector="^[WindowState=Maximized],     ^[WindowState=FullScreen]">

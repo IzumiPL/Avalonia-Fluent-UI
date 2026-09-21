@@ -24,6 +24,7 @@ public partial class FluentWindow
         if (!IsWindows11)
         {
             PseudoClasses.Add(":is-windows-10");
+            _win32Manager.EnableNonClientRenderingWorkaround();
         }
     }
 

@@ -36,8 +36,54 @@ internal unsafe class Win32WindowManager
 
     public HWND Hwnd { get; }
 
+    /// <summary>
+    /// 启用 Windows 10 的 NC 渲染禁用(见 <see cref="DisableNonClientRendering"/>)
+    /// </summary>
+    internal void EnableNonClientRenderingWorkaround()
+    {
+        _disableNonClientRendering = true;
+        DisableNonClientRendering();
+    }
+
+    /// <summary>
+    /// 关闭 DWM 对窗口非客户区的渲染
+    /// </summary>
+    private void DisableNonClientRendering()
+    {
+        if (!_disableNonClientRendering)
+        {
+            return;
+        }
+
+        var policy = DWMNCRENDERINGPOLICY.DWMNCRP_DISABLED;
+        _ = DwmSetWindowAttribute(Hwnd, DWMWINDOWATTRIBUTE.DWMWA_NCRENDERING_POLICY, &policy, sizeof(int));
+    }
+
+    /// <summary>
+    /// 会导致 DWM 重建窗口框架的消息, 处理完这些消息后需要重新关闭 NC 渲染
+    /// </summary>
+    private static bool IsFrameRebuildMessage(uint msg) => msg switch
+    {
+        0x0005 => true, // WM_SIZE
+        0x0006 => true, // WM_ACTIVATE
+        0x0047 => true, // WM_WINDOWPOSCHANGED
+        0x0086 => true, // WM_NCACTIVATE
+        0x02E0 => true, // WM_DPICHANGED
+        0x031A => true, // WM_THEMECHANGED
+        0x031E => true, // WM_DWMCOMPOSITIONCHANGED
+        0x001A => true, // WM_SETTINGCHANGE
+        _ => false
+    };
+
     private LRESULT WndProc(HWND hWnd, uint msg, WPARAM wParam, LPARAM lParam)
     {
+        // DWM 会在重建窗口框架时重新打开非客户区渲染, 所以这些消息处理完后要再关一次,
+        // 否则圆角缺口处会再次出现黑线.
+        if (IsFrameRebuildMessage(msg))
+        {
+            DisableNonClientRendering();
+        }
+
         switch (msg)
         {
             case WM_RBUTTONUP:
@@ -74,26 +120,33 @@ internal unsafe class Win32WindowManager
             bool isMax = _window.WindowState == WindowState.Maximized;
             bool isDialog = _window.ShowAsDialog;
 
+            bool canMinimize = _window.CanMinimize && !isDialog;
+            bool canMaximize = _window.CanMaximize && !isDialog;
+            bool canSize = _window.CanResize && !isDialog;
+            bool isNormalState = !isMax && !isDialog;
+
             var mii = new MENUITEMINFO
             {
                 cbSize = (uint)sizeof(MENUITEMINFO),
                 fMask = MIIM_STATE,
                 fState = MFS_ENABLED
             };
-            // Always enabled
             SetMenuItemInfo(sysMenu, SC_CLOSE, false, &mii);
 
-            mii.fState = (uint)(isDialog ? MFS_DISABLED : MFS_ENABLED);
+            mii.fState = (uint)(canMinimize ? MFS_ENABLED : MFS_DISABLED);
             SetMenuItemInfo(sysMenu, SC_MINIMIZE, false, &mii);
             
             // Restore only enabled if maximized
             mii.fState = (uint)((isMax && !isDialog) ? MFS_ENABLED : MFS_DISABLED);
             SetMenuItemInfo(sysMenu, SC_RESTORE, false, &mii);
 
-            // Only available if normal state
-            mii.fState = (uint)((isMax || isDialog) ? MFS_DISABLED : MFS_ENABLED);
+            mii.fState = (uint)(isNormalState ? MFS_ENABLED : MFS_DISABLED);
             SetMenuItemInfo(sysMenu, SC_MOVE, false, &mii);
+
+            mii.fState = (uint)((isNormalState && canSize) ? MFS_ENABLED : MFS_DISABLED);
             SetMenuItemInfo(sysMenu, SC_SIZE, false, &mii);
+
+            mii.fState = (uint)((isNormalState && canMaximize) ? MFS_ENABLED : MFS_DISABLED);
             SetMenuItemInfo(sysMenu, SC_MAXIMIZE, false, &mii);
 
             SetMenuDefaultItem(sysMenu, uint.MaxValue, 0);
@@ -114,6 +167,8 @@ internal unsafe class Win32WindowManager
         // in dark mode, which matches what windows do on Win 10/11, regardless of the actual
         // app or system theme.
         Win32Interop.ApplyTheme(Hwnd, true);
+        // ApplyTheme 内部会用 SWP_FRAMECHANGED 让 DWM 重建框架, 这会重置上面的禁用, 需要补一次.
+        DisableNonClientRendering();
     }
     
     private void WindowOnClosed(object? sender, EventArgs e)
@@ -139,6 +194,8 @@ internal unsafe class Win32WindowManager
 
 
     private readonly FluentWindow _window;
+
+    private bool _disableNonClientRendering;
 
     private readonly nint _oldWndProc;
     private readonly nint _wndProc;
