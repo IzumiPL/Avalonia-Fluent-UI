@@ -67,11 +67,11 @@
     </ui:CodeCard>
 
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_PopupInfoBar]}">
-      <Grid ColumnDefinitions="* Auto">
+      <Grid ColumnDefinitions="* Auto, Auto">
         <fui:ContentDialog
           Name="PopupInfoBarEditDialog"
           CloseButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Close]}"
-          ContentWidth="512"
+          ContentWidth="648"
           DefaultButton="Close"
           IsVisible="False">
           <Grid ColumnDefinitions="*, *" ColumnSpacing="12">
@@ -84,13 +84,13 @@
                 Name="InfoBarTitleEdit"
                 HorizontalAlignment="Stretch"
                 PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[PleaseEnterTheTitle]}"
-                Text="我是消息条的标题"/>
+                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_DefaultInfoBarTitle]}"/>
 
               <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SetInfoBarContent]}"/>
               <fui:OutlinedTextBox
                 Name="InfoBarContentEdit"
                 PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[PleaseEnterTheTitle]}"
-                Text="我是消息条的内容"/>
+                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_DefaultInfoBarContent]}"/>
 
               <TextBlock
                 MinHeight="32"
@@ -104,6 +104,30 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CustomBackground]}"/>
+              <TextBlock
+                MinHeight="32"
+                Padding="0,8,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Position]}"/>
+              <TextBlock
+                MinHeight="32"
+                Padding="0,8,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_LayoutDirection]}"/>
+              <CheckBox
+                Name="InfoBarIsClosableCheckBox"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_IsClosable]}"
+                IsChecked="True"/>
+              <CheckBox
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_AutoResize]}"
+                IsChecked="True"
+                IsCheckedChanged="OnPopupInfoBarAutoResizeChanged"/>
             </StackPanel>
 
             <StackPanel
@@ -127,6 +151,15 @@
                 HorizontalAlignment="Stretch"
                 Color="#000000"/>
               <fui:ColorPickerButton Name="InfoBarBackgroundEdit" HorizontalAlignment="Stretch"/>
+
+              <ComboBox
+                Name="PopupInfoBarPositionComboBox"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"/>
+              <ComboBox
+                Name="InfoBarOrientationComboBox"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"/>
             </StackPanel>
           </Grid>
         </fui:ContentDialog>
@@ -139,87 +172,140 @@
           <fui:FilledPushButton
             Classes="Information"
             Click="OnShowInformationInfoBar"
-            Content="Information"/>
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Information]}"/>
           <fui:FilledPushButton
             Classes="Success"
             Click="OnShowSuccessInfoBar"
-            Content="Success"/>
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Success]}"/>
           <fui:FilledPushButton
             Classes="Warning"
             Click="OnShowWarningInfoBar"
-            Content="Warning"/>
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Warning]}"/>
           <fui:FilledPushButton
             Classes="Error"
             Click="OnShowErrorInfoBar"
-            Content="Error"/>
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Error]}"/>
           <fui:FilledPushButton
             Background="{DynamicResource SystemAccentColor}"
             Classes="Custom"
             Click="OnShowCustomInfoBar"
-            Content="Custom"/>
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Custom]}"/>
         </StackPanel>
 
-        <ui:Card Grid.Column="1">
-          <Grid
-            ColumnDefinitions="Auto, *"
-            ColumnSpacing="8"
-            RowDefinitions="Auto, Auto, Auto, Auto, Auto"
-            RowSpacing="6">
-            <TextBlock
-              Grid.Row="0"
-              Grid.ColumnSpan="2"
-              FontWeight="Bold"
-              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Options]}"/>
-
-            <TextBlock
-              Grid.Row="1"
-              Grid.Column="0"
-              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Duration]}"/>
-            <fui:NumberBox
-              Name="InfoBarDurationNumberBox"
-              Grid.Row="1"
-              Grid.Column="1"
-              HorizontalAlignment="Stretch"
-              Maximum="10000"
-              Minimum="-1"
-              SpinButtonPlacementMode="Inline"
-              Value="3000"/>
-            <TextBlock
-              Grid.Row="2"
-              Grid.Column="0"
-              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Position]}"/>
-            <ComboBox
-              Name="PopupInfoBarPositionComboBox"
-              Grid.Row="2"
-              Grid.Column="1"
-              MinWidth="128"
-              ItemsSource="{Binding InfoBarPositions}"/>
-
-            <TextBlock
-              Grid.Row="3"
-              Grid.Column="0"
-              VerticalAlignment="Center"
-              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[EditCustom]}"/>
-            <fui:ToolButton
-              Grid.Row="3"
-              Grid.Column="1"
-              HorizontalAlignment="Stretch"
-              Classes="Transparent"
-              Click="OnShowInfoBarEditDialog"
-              Content="{x:Static fi:FluentIcon.Edit}"/>
-
-            <CheckBox
-              Name="InfoBarIsClosableCheckBox"
-              Grid.Row="4"
-              Grid.ColumnSpan="2"
-              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_IsClosable]}"/>
-          </Grid>
-        </ui:Card>
+        <TextBlock
+          Grid.Column="0"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Center"
+          Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Edit]}"/>
+        <fui:ToolButton
+          Grid.Column="1"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Center"
+          Classes="Transparent"
+          Click="OnShowInfoBarEditDialog"
+          Content="{x:Static fi:FluentIcon.Edit}"/>
       </Grid>
     </ui:CodeCard>
 
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_ToastInfoBar]}">
       <Grid ColumnDefinitions="* Auto">
+        <fui:ContentDialog
+          Name="ToastInfoBarEditDialog"
+          CloseButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Close]}"
+          ContentWidth="648"
+          DefaultButton="Close"
+          IsVisible="False">
+          <Grid ColumnDefinitions="*, *" ColumnSpacing="12">
+            <StackPanel
+              Grid.Column="0"
+              Orientation="Vertical"
+              Spacing="6">
+              <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SetInfoBarTitle]}"/>
+              <fui:OutlinedTextBox
+                Name="ToastInfoBarTitleEdit"
+                HorizontalAlignment="Stretch"
+                PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[PleaseEnterTheTitle]}"
+                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_DefaultInfoBarTitle]}"/>
+
+              <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SetInfoBarContent]}"/>
+              <fui:OutlinedTextBox
+                Name="ToastInfoBarContentEdit"
+                PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[PleaseEnterTheTitle]}"
+                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_DefaultInfoBarContent]}"/>
+
+              <TextBlock
+                MinHeight="32"
+                Padding="0,8,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CustomForeground]}"/>
+              <TextBlock
+                MinHeight="32"
+                Padding="0,8,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CustomBackground]}"/>
+              <TextBlock
+                MinHeight="32"
+                Padding="0,8,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Position]}"/>
+              <TextBlock
+                MinHeight="32"
+                Padding="0,8,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_LayoutDirection]}"/>
+
+              <CheckBox
+                Name="ToastInfoBarIsClosableCheckBox"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_IsClosable]}"
+                IsChecked="True"/>
+              <CheckBox
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_AutoResize]}"
+                IsChecked="True"
+                IsCheckedChanged="OnToastInfoBarAutoSizeChanged"/>
+            </StackPanel>
+
+            <StackPanel
+              Grid.Column="1"
+              Orientation="Vertical"
+              Spacing="6">
+              <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SetInfoBarDuration]}"/>
+              <ComboBox
+                Name="ToastInfoBarDurationEdit"
+                HorizontalAlignment="Stretch"
+                SelectedIndex="6"/>
+
+              <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SetInfoBarRadius]}"/>
+              <ComboBox
+                Name="ToastInfoBarRadiusEdit"
+                HorizontalAlignment="Stretch"
+                SelectedIndex="3"/>
+
+              <fui:ColorPickerButton
+                Name="ToastInfoBarForegroundEdit"
+                HorizontalAlignment="Stretch"
+                Color="#000000"/>
+              <fui:ColorPickerButton Name="ToastInfoBarBackgroundEdit" HorizontalAlignment="Stretch"/>
+
+              <ComboBox
+                Name="ToastInfoBarPositionComboBox"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"/>
+              <ComboBox
+                Name="ToastInfoBarOrientationComboBox"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"/>
+            </StackPanel>
+          </Grid>
+        </fui:ContentDialog>
+
         <StackPanel
           Grid.Column="0"
           VerticalAlignment="Center"
@@ -228,68 +314,38 @@
           <fui:FilledPushButton
             Classes="Information"
             Click="OnShowInformationToastInfoBar"
-            Content="Information"/>
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Information]}"/>
           <fui:FilledPushButton
             Classes="Success"
             Click="OnShowSuccessToastInfoBar"
-            Content="Success"/>
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Success]}"/>
           <fui:FilledPushButton
             Classes="Warning"
             Click="OnShowWarningToastInfoBar"
-            Content="Warning"/>
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Warning]}"/>
           <fui:FilledPushButton
             Classes="Error"
             Click="OnShowErrorToastInfoBar"
-            Content="Error"/>
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Error]}"/>
           <fui:FilledPushButton
             Background="{DynamicResource SystemAccentColor}"
             Classes="Custom"
             Click="OnShowCustomToastInfoBar"
-            Content="Custom"/>
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Custom]}"/>
         </StackPanel>
 
-        <ui:Card Grid.Column="1">
-          <Grid
-            ColumnDefinitions="Auto, *"
-            ColumnSpacing="8"
-            RowDefinitions="Auto, Auto, Auto, Auto"
-            RowSpacing="6">
-            <TextBlock
-              Grid.Row="0"
-              Grid.ColumnSpan="2"
-              FontWeight="Bold"
-              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_Options]}"/>
-
-            <TextBlock
-              Grid.Row="1"
-              Grid.Column="0"
-              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Duration]}"/>
-            <fui:NumberBox
-              Name="ToastDurationNumberBox"
-              Grid.Row="1"
-              Grid.Column="1"
-              HorizontalAlignment="Stretch"
-              Maximum="10000"
-              Minimum="-1"
-              SpinButtonPlacementMode="Inline"
-              Value="3000"/>
-            <TextBlock
-              Grid.Row="2"
-              Grid.Column="0"
-              Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Position]}"/>
-            <ComboBox
-              Name="ToastInfoBarPositionComboBox"
-              Grid.Row="2"
-              Grid.Column="1"
-              MinWidth="128"
-              ItemsSource="{Binding InfoBarPositions}"/>
-            <CheckBox
-              Name="ToastIsClosableCheckBox"
-              Grid.Row="3"
-              Grid.ColumnSpan="2"
-              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SI_IsClosable]}"/>
-          </Grid>
-        </ui:Card>
+        <TextBlock
+          Grid.Column="0"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Center"
+          Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Edit]}"/>
+        <fui:ToolButton
+          Grid.Column="1"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Center"
+          Classes="Transparent"
+          Click="OnShowToastInfoBarEditDialog"
+          Content="{x:Static fi:FluentIcon.Edit}"/>
       </Grid>
     </ui:CodeCard>
   </StackPanel>

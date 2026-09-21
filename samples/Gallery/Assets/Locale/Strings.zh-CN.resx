@@ -126,8 +126,20 @@
   <data name="BI_CheckBox" xml:space="preserve">
     <value>复选框</value>
   </data>
+  <data name="BI_ChipsCode" xml:space="preserve">
+    <value>代码块</value>
+  </data>
   <data name="BI_ChipsRadioButton" xml:space="preserve">
     <value>胶囊单选按钮</value>
+  </data>
+  <data name="BI_ChipsShared" xml:space="preserve">
+    <value>已共享</value>
+  </data>
+  <data name="BI_ChipsShoppingCart" xml:space="preserve">
+    <value>购物车</value>
+  </data>
+  <data name="BI_ChipsTag" xml:space="preserve">
+    <value>标签</value>
   </data>
   <data name="BI_ColorSlider" xml:space="preserve">
     <value>颜色滑动条</value>
@@ -771,6 +783,99 @@
   <data name="SV_AppTheme" xml:space="preserve">
     <value>应用主题</value>
   </data>
+  <data name="SV_WindowEffectNone" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="SV_WindowEffectMica" xml:space="preserve">
+    <value>Mica</value>
+  </data>
+  <data name="SV_WindowEffectAcrylic" xml:space="preserve">
+    <value>Acrylic</value>
+  </data>
+  <data name="SV_NavigationDescription" xml:space="preserve">
+    <value>调整导航栏设置</value>
+  </data>
+  <data name="SV_Navigation" xml:space="preserve">
+    <value>导航栏</value>
+  </data>
+  <data name="SV_NavigationPaneClosedWidth" xml:space="preserve">
+    <value>导航栏收缩宽度</value>
+  </data>
+  <data name="SV_NavigationPaneOpenWidth" xml:space="preserve">
+    <value>导航栏展开宽度</value>
+  </data>
+  <data name="SV_NavigationExpandedModeThresholdWidth" xml:space="preserve">
+    <value>扩展模式阈值宽度</value>
+  </data>
+  <data name="SV_NavigationScrollVisibility" xml:space="preserve">
+    <value>导航栏滚动条可见性</value>
+  </data>
+  <data name="SV_BackButtonVisible" xml:space="preserve">
+    <value>返回按钮可见</value>
+  </data>
+  <data name="SV_PaneToggleButtonVisible" xml:space="preserve">
+    <value>面板切换按钮可见</value>
+  </data>
+  <data name="SV_SettingsItemVisible" xml:space="preserve">
+    <value>设置项目可见</value>
+  </data>
+  <data name="SV_PaneFooterSeparatorVisible" xml:space="preserve">
+    <value>面板底部分割线可见</value>
+  </data>
+  <data name="SV_PaneVisible" xml:space="preserve">
+    <value>面板可见</value>
+  </data>
+  <data name="SV_TitleBarDescription" xml:space="preserve">
+    <value>调整标题栏设置</value>
+  </data>
+  <data name="SV_TitleBar" xml:space="preserve">
+    <value>标题栏</value>
+  </data>
+  <data name="SV_TitleBarHeight" xml:space="preserve">
+    <value>标题栏高度</value>
+  </data>
+  <data name="SV_TitleBarIconVisible" xml:space="preserve">
+    <value>标题栏图标是否可见</value>
+  </data>
+  <data name="SV_TitleBarTitleVisible" xml:space="preserve">
+    <value>标题栏标题是否可见</value>
+  </data>
+  <data name="SV_TitleBarContentVisible" xml:space="preserve">
+    <value>标题栏内容是否可见</value>
+  </data>
+  <data name="SV_TitleVisible" xml:space="preserve">
+    <value>标题是否可见</value>
+  </data>
+  <data name="SV_TitleBarBackground" xml:space="preserve">
+    <value>标题栏背景色</value>
+  </data>
+  <data name="SV_WindowDescription" xml:space="preserve">
+    <value>调整窗口设置</value>
+  </data>
+  <data name="SV_Window" xml:space="preserve">
+    <value>窗口</value>
+  </data>
+  <data name="SV_FullScreenButtonVisible" xml:space="preserve">
+    <value>全屏按钮可见</value>
+  </data>
+  <data name="SV_MinimizeButtonVisible" xml:space="preserve">
+    <value>最小化按钮可见</value>
+  </data>
+  <data name="SV_MaximizeButtonVisible" xml:space="preserve">
+    <value>最大化按钮可见</value>
+  </data>
+  <data name="SV_CloseButtonVisible" xml:space="preserve">
+    <value>关闭按钮可见</value>
+  </data>
+  <data name="SV_CanMinimize" xml:space="preserve">
+    <value>可最小化</value>
+  </data>
+  <data name="SV_CanMaximize" xml:space="preserve">
+    <value>可最大化</value>
+  </data>
+  <data name="SV_CanResize" xml:space="preserve">
+    <value>可改变大小</value>
+  </data>
   <data name="GettingStartedContent" xml:space="preserve">
     <value>应用程序开发选项和示例的概述。</value>
   </data>
@@ -1131,6 +1236,75 @@
   <data name="BI_RoundOutlineButton" xml:space="preserve">
     <value>圆角轮廓按钮</value>
   </data>
+  <data name="BI_RoundToolButton" xml:space="preserve">
+    <value>圆角工具按钮</value>
+  </data>
+  <data name="BI_AccentRoundToolButton" xml:space="preserve">
+    <value>圆角主题色工具按钮</value>
+  </data>
+  <data name="BI_OutlineToolButton" xml:space="preserve">
+    <value>轮廓工具按钮</value>
+  </data>
+  <data name="BI_RoundOutlineToolButton" xml:space="preserve">
+    <value>圆角轮廓工具按钮</value>
+  </data>
+  <data name="BI_TransparentToolButton" xml:space="preserve">
+    <value>透明工具按钮</value>
+  </data>
+  <data name="BI_AccentToolButton" xml:space="preserve">
+    <value>主题色工具按钮</value>
+  </data>
+  <data name="BI_FilledPushButton" xml:space="preserve">
+    <value>填充按钮</value>
+  </data>
+  <data name="BI_FilledPushButtonCustom" xml:space="preserve">
+    <value>自定义填充按钮</value>
+  </data>
+  <data name="BI_FilledPushButtonInformation" xml:space="preserve">
+    <value>信息填充按钮</value>
+  </data>
+  <data name="BI_FilledPushButtonSuccess" xml:space="preserve">
+    <value>成功填充按钮</value>
+  </data>
+  <data name="BI_FilledPushButtonAttention" xml:space="preserve">
+    <value>注意填充按钮</value>
+  </data>
+  <data name="BI_FilledPushButtonWarning" xml:space="preserve">
+    <value>警告填充按钮</value>
+  </data>
+  <data name="BI_FilledPushButtonError" xml:space="preserve">
+    <value>错误填充按钮</value>
+  </data>
+  <data name="BI_FilledToolButton" xml:space="preserve">
+    <value>填充工具按钮</value>
+  </data>
+  <data name="BI_FilledToolButtonCustom" xml:space="preserve">
+    <value>自定义填充工具按钮</value>
+  </data>
+  <data name="BI_FilledToolButtonInformation" xml:space="preserve">
+    <value>信息填充工具按钮</value>
+  </data>
+  <data name="BI_FilledToolButtonSuccess" xml:space="preserve">
+    <value>成功填充工具按钮</value>
+  </data>
+  <data name="BI_FilledToolButtonAttention" xml:space="preserve">
+    <value>注意填充工具按钮</value>
+  </data>
+  <data name="BI_FilledToolButtonWarning" xml:space="preserve">
+    <value>警告填充工具按钮</value>
+  </data>
+  <data name="BI_FilledToolButtonError" xml:space="preserve">
+    <value>错误填充工具按钮</value>
+  </data>
+  <data name="BI_RepeatButton" xml:space="preserve">
+    <value>重复按钮</value>
+  </data>
+  <data name="BI_SlowRepeatButton" xml:space="preserve">
+    <value>慢速重复按钮</value>
+  </data>
+  <data name="BI_TransparentRepeatButton" xml:space="preserve">
+    <value>透明重复按钮</value>
+  </data>
   <data name="MT_FileMenu" xml:space="preserve">
     <value>文件(_F)</value>
   </data>
@@ -1412,6 +1586,42 @@
   <data name="Button" xml:space="preserve">
     <value>按钮</value>
   </data>
+  <data name="PushButton" xml:space="preserve">
+    <value>按钮</value>
+  </data>
+  <data name="ToolButton" xml:space="preserve">
+    <value>工具按钮</value>
+  </data>
+  <data name="FilledButton" xml:space="preserve">
+    <value>填充按钮</value>
+  </data>
+  <data name="OutlineButton" xml:space="preserve">
+    <value>描边按钮</value>
+  </data>
+  <data name="DropDownButton" xml:space="preserve">
+    <value>下拉按钮</value>
+  </data>
+  <data name="ToggleButton" xml:space="preserve">
+    <value>切换按钮</value>
+  </data>
+  <data name="SplitButton" xml:space="preserve">
+    <value>拆分按钮</value>
+  </data>
+  <data name="RadioButton" xml:space="preserve">
+    <value>单选按钮</value>
+  </data>
+  <data name="HyperlinkButton" xml:space="preserve">
+    <value>超链接按钮</value>
+  </data>
+  <data name="ToggleSwitch" xml:space="preserve">
+    <value>开关</value>
+  </data>
+  <data name="CheckBox" xml:space="preserve">
+    <value>复选框</value>
+  </data>
+  <data name="RepeatButton" xml:space="preserve">
+    <value>重复按钮</value>
+  </data>
   <data name="ComboBox" xml:space="preserve">
     <value>下拉框</value>
   </data>
@@ -1594,6 +1804,33 @@
   </data>
   <data name="SI_ToastInfoBar" xml:space="preserve">
     <value>吐司信息条</value>
+  </data>
+  <data name="SI_DefaultInfoBarTitle" xml:space="preserve">
+    <value>我是消息条的标题</value>
+  </data>
+  <data name="SI_DefaultInfoBarContent" xml:space="preserve">
+    <value>我是消息条的内容</value>
+  </data>
+  <data name="SI_LayoutDirection" xml:space="preserve">
+    <value>布局方向</value>
+  </data>
+  <data name="SI_AutoResize" xml:space="preserve">
+    <value>自动改变大小</value>
+  </data>
+  <data name="SI_Information" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="SI_Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="SI_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="SI_Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="SI_Custom" xml:space="preserve">
+    <value>自定义</value>
   </data>
   <data name="DP_ColorDialog" xml:space="preserve">
     <value>颜色对话框</value>
@@ -1784,8 +2021,8 @@
   <data name="CustomBackground" xml:space="preserve">
     <value>自定义信息条的背景颜色</value>
   </data>
-  <data name="EditCustom" xml:space="preserve">
-    <value>编辑自定义</value>
+  <data name="Edit" xml:space="preserve">
+    <value>编辑</value>
   </data>
   <data name="TV_OutlinedTextBox" xml:space="preserve">
     <value>轮廓文本框</value>
@@ -1902,7 +2139,7 @@
     <value>通过提供反馈帮助我们改变 Avalonia-Fluent-UI</value>
   </data>
   <data name="AboutDesc" xml:space="preserve">
-    <value>版权所有 2024, Izumi, 当前版本 2.0.4</value>
+    <value>版权所有 2026, Izumi, 当前版本 2.0.4</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
     <value>检查更新</value>

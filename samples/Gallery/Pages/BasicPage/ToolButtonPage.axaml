@@ -1,0 +1,137 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.ToolButtonPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:ToolButtonPageViewModel"
+  mc:Ignorable="d">
+
+  <StackPanel Spacing="50">
+    <!--  工具按钮  -->
+    <ui:CodeCard Name="ToolButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ToolButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:ToolButton
+          Width="256"
+          Height="35"
+          HorizontalContentAlignment="{Binding ToolButtonContentAlignment}"
+          Content="{x:Static fi:FluentIcon.Setting}"
+          IsEnabled="{Binding !ToolButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding ToolButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  透明工具按钮  -->
+    <ui:CodeCard Name="TransparentToolButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_TransparentToolButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:ToolButton
+          Width="256"
+          Height="35"
+          HorizontalContentAlignment="{Binding ToolButtonContentAlignment}"
+          Classes="Transparent"
+          Content="{x:Static fi:FluentIcon.Save}"
+          IsEnabled="{Binding !TransparentToolButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding TransparentToolButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  主题色工具按钮  -->
+    <ui:CodeCard Name="AccentToolButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_AccentToolButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:ToolButton
+          Width="256"
+          Height="35"
+          HorizontalContentAlignment="{Binding ToolButtonContentAlignment}"
+          Classes="Accent"
+          Content="{x:Static fi:FluentIcon.Wifi}"
+          Foreground="OrangeRed"
+          IsEnabled="{Binding !AccentToolButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding AccentToolButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  圆角工具按钮  -->
+    <ui:CodeCard Name="RoundToolButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_RoundToolButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:ToolButton
+          Width="256"
+          Height="35"
+          HorizontalContentAlignment="{Binding ToolButtonContentAlignment}"
+          Classes="Round"
+          Content="{x:Static fi:FluentIcon.GitHub}"
+          IsEnabled="{Binding !RoundToolButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding RoundToolButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  主题色圆角工具按钮  -->
+    <ui:CodeCard Name="AccentRoundToolButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_AccentRoundToolButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:ToolButton
+          Width="256"
+          Height="35"
+          HorizontalContentAlignment="{Binding ToolButtonContentAlignment}"
+          Classes="Accent Round"
+          Content="{x:Static fi:FluentIcon.Wifi}"
+          IsEnabled="{Binding !AccentRoundToolButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding AccentRoundToolButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  描边工具按钮  -->
+    <ui:CodeCard Name="OutlineToolButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_OutlineToolButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:ToolButton
+          Width="256"
+          Height="35"
+          HorizontalContentAlignment="{Binding ToolButtonContentAlignment}"
+          Classes="Outlined"
+          Content="{x:Static fi:FluentIcon.Send}"
+          IsEnabled="{Binding !OutlineToolButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding OutlineToolButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  圆角描边工具按钮  -->
+    <ui:CodeCard Name="RoundOutlineToolButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_RoundOutlineToolButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:ToolButton
+          Width="256"
+          Height="35"
+          HorizontalContentAlignment="{Binding ToolButtonContentAlignment}"
+          Classes="Outlined Round"
+          Content="{x:Static fi:FluentIcon.View}"
+          IsEnabled="{Binding !RoundOutlineToolButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding RoundOutlineToolButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

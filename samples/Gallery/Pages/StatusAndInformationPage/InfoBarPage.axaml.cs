@@ -14,8 +14,8 @@ namespace Gallery.Pages;
 
 public partial class InfoBarPage : InfoBarHostViewBase
 {
-    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Pages/StatusAndInformationPage/InfoBarPage.axaml"); 
-    
+    public override Uri? Uri => new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/blob/master/samples/Gallery/Pages/StatusAndInformationPage/InfoBarPage.axaml");
+
     public InfoBarPage() : base("InfoBar")
     {
         InitializeComponent();
@@ -23,11 +23,19 @@ public partial class InfoBarPage : InfoBarHostViewBase
         CodeCards = new Dictionary<string, CodeCard> { { "InfoBar", InfoBarCard } };
 
         PopupInfoBarPositionComboBox.SelectedItem = InfoBarPosition.TopRight;
+
+        InfoBarDurationEdit.ItemsSource = new int[] { -1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 5000, 10000 };
+        InfoBarRadiusEdit.ItemsSource = new int[] { 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24 };
+        PopupInfoBarPositionComboBox.ItemsSource = new InfoBarPosition[] { InfoBarPosition.Top, InfoBarPosition.TopLeft, InfoBarPosition.TopRight, InfoBarPosition.Bottom, InfoBarPosition.BottomLeft, InfoBarPosition.BottomRight };
+        InfoBarOrientationComboBox.ItemsSource = new Orientation[] { Orientation.Horizontal, Orientation.Vertical };
+        InfoBarOrientationComboBox.SelectedItem = Orientation.Vertical;
+
+        ToastInfoBarDurationEdit.ItemsSource = new int[] { -1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 5000, 10000 };
+        ToastInfoBarRadiusEdit.ItemsSource = new int[] { 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24 };
+        ToastInfoBarPositionComboBox.ItemsSource = new InfoBarPosition[] { InfoBarPosition.Top, InfoBarPosition.TopLeft, InfoBarPosition.TopRight, InfoBarPosition.Bottom, InfoBarPosition.BottomLeft, InfoBarPosition.BottomRight };
+        ToastInfoBarOrientationComboBox.ItemsSource = new Orientation[] { Orientation.Horizontal, Orientation.Vertical };
+        ToastInfoBarOrientationComboBox.SelectedItem = Orientation.Vertical;
         ToastInfoBarPositionComboBox.SelectedItem = InfoBarPosition.TopRight;
-        
-        
-        InfoBarDurationEdit.ItemsSource = new int[] {-1, 500, 1000, 1500, 2000, 2500, 3000, 3500, 5000, 10000};
-        InfoBarRadiusEdit.ItemsSource = new int[] {0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24};
     }
 
     public PopupInfoBarManager PopupInfoBarManager
@@ -47,19 +55,24 @@ public partial class InfoBarPage : InfoBarHostViewBase
         InfoBarHost.RegisterManager<ToastInfoBarManager>();
     }
 
-    public InfoBarPosition GetPopupInfoBarPosition()
-    {
-        return (InfoBarPosition)PopupInfoBarPositionComboBox.SelectedItem;
-    }
-
     public string GetTitle()
     {
         return LocalizationService.Instance.GetString("Im_Title");
     }
 
+    public InfoBarPosition GetPopupInfoBarPosition()
+    {
+        return (InfoBarPosition)PopupInfoBarPositionComboBox.SelectedItem;
+    }
+
+    public Orientation GetPopupInfoBarOrientation()
+    {
+        return (Orientation)InfoBarOrientationComboBox.SelectedItem;
+    }
+
     public int GetPopupInfoBarDuration()
     {
-        return (int)InfoBarDurationNumberBox.Value;
+        return (int)InfoBarDurationEdit.SelectedItem;
     }
 
     public bool GetPopupInfoBarIsClosable()
@@ -67,19 +80,26 @@ public partial class InfoBarPage : InfoBarHostViewBase
         return InfoBarIsClosableCheckBox.IsChecked ?? false;
     }
 
+    ///
+
     public InfoBarPosition GetToastInfoBarPosition()
     {
         return (InfoBarPosition)ToastInfoBarPositionComboBox.SelectedItem;
     }
 
-    public int GetToastInfoBarDuration()
+    public Orientation GetToastInfoBarOrientation()
     {
-        return (int)ToastDurationNumberBox.Value;
+        return (Orientation)ToastInfoBarOrientationComboBox.SelectedItem;
+    }
+
+public int GetToastInfoBarDuration()
+    {
+        return (int)ToastInfoBarDurationEdit.SelectedItem;
     }
 
     public bool GetToastInfoBarIsClosable()
     {
-        return ToastIsClosableCheckBox.IsChecked ?? false;
+        return ToastInfoBarIsClosableCheckBox.IsChecked ?? false;
     }
 
     private void OnShowInformationInfoBar(object? sender, RoutedEventArgs e)
@@ -89,7 +109,8 @@ public partial class InfoBarPage : InfoBarHostViewBase
             LocalizationService.Instance.GetString("Information_Title_Bar_Content"),
             GetPopupInfoBarPosition(),
             GetPopupInfoBarIsClosable(),
-            GetPopupInfoBarDuration()
+            GetPopupInfoBarDuration(),
+            GetPopupInfoBarOrientation()
         );
     }
 
@@ -100,7 +121,8 @@ public partial class InfoBarPage : InfoBarHostViewBase
             LocalizationService.Instance.GetString("Success_Title_Bar_Content"),
             GetPopupInfoBarPosition(),
             GetPopupInfoBarIsClosable(),
-            GetPopupInfoBarDuration()
+            GetPopupInfoBarDuration(),
+            GetPopupInfoBarOrientation()
         );
     }
 
@@ -111,7 +133,8 @@ public partial class InfoBarPage : InfoBarHostViewBase
             LocalizationService.Instance.GetString("Warning_Title_Bar_Content"),
             GetPopupInfoBarPosition(),
             GetPopupInfoBarIsClosable(),
-            GetPopupInfoBarDuration()
+            GetPopupInfoBarDuration(),
+            GetPopupInfoBarOrientation()
         );
     }
 
@@ -122,7 +145,8 @@ public partial class InfoBarPage : InfoBarHostViewBase
             LocalizationService.Instance.GetString("Error_Title_Bar_Content"),
             GetPopupInfoBarPosition(),
             GetPopupInfoBarIsClosable(),
-            GetPopupInfoBarDuration()
+            GetPopupInfoBarDuration(),
+            GetPopupInfoBarOrientation()
         );
     }
 
@@ -156,7 +180,8 @@ public partial class InfoBarPage : InfoBarHostViewBase
                 Position = GetPopupInfoBarPosition(),
                 Severity = InfoBarSeverity.Custom,
                 IsClosable = GetPopupInfoBarIsClosable(),
-                Duration = InfoBarDurationEdit.Text.ToIntOrDefault(3000)
+                Duration = InfoBarDurationEdit.Text.ToIntOrDefault(3000),
+                Orientation = GetPopupInfoBarOrientation()
             }
         );
     }
@@ -164,23 +189,36 @@ public partial class InfoBarPage : InfoBarHostViewBase
     private void OnShowCustomToastInfoBar(object? sender, RoutedEventArgs e)
     {
         ToastInfoBarManager.New(
-            GetTitle(),
-            new StackPanel
+            new ToastInfoBar
             {
-                Spacing = 8,
-                Children =
+                CornerRadius = new CornerRadius(ToastInfoBarRadiusEdit.Text.ToIntOrDefault(6)),
+                Title = ToastInfoBarTitleEdit.Text,
+                Content = new StackPanel
                 {
-                    new TextBlock { Text = LocalizationService.Instance.GetString("Custom_Title_Bar_Content") },
-                    new Button
+                    Spacing = 8,
+                    Children =
                     {
-                        Content = "Action", HorizontalAlignment = HorizontalAlignment.Right, Width = 128
+                        new TextBlock
+                        {
+                            Text = ToastInfoBarContentEdit.Text
+                        },
+                        new Button
+                        {
+                            Content = "Action",
+                            HorizontalAlignment = HorizontalAlignment.Right,
+                            Width = 128
+                        }
                     }
-                }
-            },
-            GetToastInfoBarPosition(),
-            InfoBarSeverity.Error,
-            GetPopupInfoBarIsClosable(),
-            GetPopupInfoBarDuration()
+                },
+                MaxWidth = ToastInfoBarManager.InfoBarMaxWidth,
+                Background = new SolidColorBrush(ToastInfoBarBackgroundEdit.Color),
+                Foreground = new SolidColorBrush(ToastInfoBarForegroundEdit.Color),
+                Position = GetToastInfoBarPosition(),
+                Severity = InfoBarSeverity.Custom,
+                IsClosable = GetToastInfoBarIsClosable(),
+                Duration = ToastInfoBarDurationEdit.Text.ToIntOrDefault(3000),
+                Orientation = GetToastInfoBarOrientation()
+            }
         );
     }
 
@@ -191,7 +229,8 @@ public partial class InfoBarPage : InfoBarHostViewBase
             LocalizationService.Instance.GetString("Information_Title_Bar_Content"),
             GetToastInfoBarPosition(),
             GetToastInfoBarIsClosable(),
-            GetToastInfoBarDuration()
+            GetToastInfoBarDuration(),
+            GetToastInfoBarOrientation()
         );
     }
 
@@ -202,7 +241,8 @@ public partial class InfoBarPage : InfoBarHostViewBase
             LocalizationService.Instance.GetString("Information_Title_Bar_Content"),
             GetToastInfoBarPosition(),
             GetToastInfoBarIsClosable(),
-            GetToastInfoBarDuration()
+            GetToastInfoBarDuration(),
+            GetToastInfoBarOrientation()
         );
     }
 
@@ -213,7 +253,8 @@ public partial class InfoBarPage : InfoBarHostViewBase
             LocalizationService.Instance.GetString("Information_Title_Bar_Content"),
             GetToastInfoBarPosition(),
             GetToastInfoBarIsClosable(),
-            GetToastInfoBarDuration()
+            GetToastInfoBarDuration(),
+            GetToastInfoBarOrientation()
         );
     }
 
@@ -224,12 +265,34 @@ public partial class InfoBarPage : InfoBarHostViewBase
             LocalizationService.Instance.GetString("Information_Title_Bar_Content"),
             GetToastInfoBarPosition(),
             GetToastInfoBarIsClosable(),
-            GetToastInfoBarDuration()
+            GetToastInfoBarDuration(),
+            GetToastInfoBarOrientation()
         );
     }
 
     private void OnShowInfoBarEditDialog(object? sender, RoutedEventArgs e)
     {
         PopupInfoBarEditDialog.ShowAsync(TopLevel.GetTopLevel(this));
+    }
+
+    private void OnShowToastInfoBarEditDialog(object? sender, RoutedEventArgs e)
+    {
+        ToastInfoBarEditDialog.ShowAsync(TopLevel.GetTopLevel(this));
+    }
+
+    private void OnPopupInfoBarAutoResizeChanged(object? sender, RoutedEventArgs e)
+    {
+        if (sender is CheckBox cb)
+        {
+            PopupInfoBarManager.IsAutoResize = cb.IsChecked == true;
+        }
+    }
+
+    private void OnToastInfoBarAutoSizeChanged(object? sender, RoutedEventArgs e)
+    {
+        if (sender is CheckBox cb)
+        {
+            ToastInfoBarManager.IsAutoResize = cb.IsChecked == true;
+        }
     }
 }

@@ -1,0 +1,174 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.PushButtonPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:PushButtonPageViewModel"
+  mc:Ignorable="d">
+
+  <StackPanel Spacing="50">
+    <!--  标准按钮  -->
+    <ui:CodeCard Name="StandardButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_StandardButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:PushButton
+          Width="256"
+          Height="35"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          HorizontalContentAlignment="{Binding PushButtonContentAlignment}"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_StandardButton]}"
+          IsEnabled="{Binding !StandardButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding StandardButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="StandardButtonWithIconCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_StandardButtonWithIcon]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:PushButton
+          Width="256"
+          Height="35"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          HorizontalContentAlignment="{Binding PushButtonContentAlignment}"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_StandardButtonWithIcon]}"
+          IconSource="{x:Static fi:FluentIcon.GitHub}"
+          IsEnabled="{Binding !StandardButtonWithIconIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding StandardButtonWithIconIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="AccentStandardButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_AccentStandardButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:PushButton
+          Width="256"
+          Height="35"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          HorizontalContentAlignment="{Binding PushButtonContentAlignment}"
+          Classes="Accent"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_AccentStandardButton]}"
+          IconSource="{x:Static fi:FluentIcon.Home}"
+          IsEnabled="{Binding !AccentStandardButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding AccentStandardButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="TransparentStandardButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_TransparentStandardButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:PushButton
+          Width="256"
+          Height="35"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          HorizontalContentAlignment="{Binding PushButtonContentAlignment}"
+          Classes="Transparent"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_TransparentStandardButton]}"
+          IsEnabled="{Binding !TransparentStandardButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding TransparentStandardButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="TransparentStandardButtonWithIconCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_TransparentStandardButtonWithIcon]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:PushButton
+          Width="256"
+          Height="35"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Center"
+          HorizontalContentAlignment="{Binding PushButtonContentAlignment}"
+          Classes="Transparent"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_TransparentStandardButtonWithIcon]}"
+          IconSource="{x:Static fi:FluentIcon.GitHub}"
+          IsEnabled="{Binding !TransparentStandardButtonWithIconIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding TransparentStandardButtonWithIconIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  圆角按钮  -->
+    <ui:CodeCard Name="RoundButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_RoundButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:PushButton
+          Width="256"
+          Height="35"
+          Classes="Round"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_RoundButton]}"
+          IsEnabled="{Binding !RoundButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding RoundButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="AccentRoundButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_AccentRoundButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:PushButton
+          Width="256"
+          Height="35"
+          Classes="Accent Round"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_AccentRoundButton]}"
+          IsEnabled="{Binding !AccentRoundButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding AccentRoundButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  轮廓按钮  -->
+    <ui:CodeCard Name="OutlineButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_OutlineButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:PushButton
+          Width="256"
+          Height="35"
+          Classes="Outlined"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_OutlineButton]}"
+          IsEnabled="{Binding !OutlineButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding OutlineButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="RoundOutlineButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_RoundOutlineButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:PushButton
+          Width="256"
+          Height="35"
+          Classes="Outlined Round"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_RoundOutlineButton]}"
+          IconSource="{x:Static fi:FluentIcon.Menu}"
+          IsEnabled="{Binding !RoundOutlineButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding RoundOutlineButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+  </StackPanel>
+</ui:ViewBase>

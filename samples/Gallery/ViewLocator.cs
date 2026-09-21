@@ -28,7 +28,18 @@ public class ViewLocator : IDataTemplate
         _factory[typeof(SymbolIconPageViewModel)] = () => new SymbolIconPage();
         
         _factory[typeof(BasicInputViewModel)] = () => new BasicInputView();
-        _factory[typeof(ButtonPageViewModel)] = () => new ButtonPage();
+        _factory[typeof(PushButtonPageViewModel)] = () => new PushButtonPage();
+        _factory[typeof(ToolButtonPageViewModel)] = () => new ToolButtonPage();
+        _factory[typeof(FilledButtonPageViewModel)] = () => new FilledButtonPage();
+        _factory[typeof(OutlineButtonPageViewModel)] = () => new OutlineButtonPage();
+        _factory[typeof(DropDownButtonPageViewModel)] = () => new DropDownButtonPage();
+        _factory[typeof(ToggleButtonPageViewModel)] = () => new ToggleButtonPage();
+        _factory[typeof(SplitButtonPageViewModel)] = () => new SplitButtonPage();
+        _factory[typeof(RadioButtonPageViewModel)] = () => new RadioButtonPage();
+        _factory[typeof(HyperlinkButtonPageViewModel)] = () => new HyperlinkButtonPage();
+        _factory[typeof(ToggleSwitchPageViewModel)] = () => new ToggleSwitchPage();
+        _factory[typeof(CheckBoxPageViewModel)] = () => new CheckBoxPage();
+        _factory[typeof(RepeatButtonPageViewModel)] = () => new RepeatButtonPage();
         _factory[typeof(ComboBoxPageViewModel)] = () => new ComboBoxPage();
         _factory[typeof(SlierPageViewModel)] = () => new SliderPage();
         

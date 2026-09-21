@@ -1,0 +1,114 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.FilledButtonPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:FilledButtonPageViewModel"
+  mc:Ignorable="d">
+
+  <StackPanel Spacing="50">
+    <!--  填充按钮  -->
+    <ui:CodeCard Name="FilledPushButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_FilledPushButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <WrapPanel
+          Grid.Column="0"
+          VerticalAlignment="Center"
+          ItemSpacing="5"
+          LineSpacing="3">
+          <fui:FilledPushButton
+            Width="128"
+            Height="35"
+            Background="HotPink"
+            Content="Custom"
+            IsEnabled="{Binding !FilledPushButtonIsDisabled}"/>
+          <fui:FilledPushButton
+            Width="128"
+            Height="35"
+            Classes="Information"
+            Content="Information"
+            IsEnabled="{Binding !FilledPushButtonIsDisabled}"/>
+          <fui:FilledPushButton
+            Width="128"
+            Height="35"
+            Classes="Success"
+            Content="Success"
+            IconSource="{x:Static fi:FluentIcon.Share}"
+            IsEnabled="{Binding !FilledPushButtonIsDisabled}"/>
+          <fui:FilledPushButton
+            Width="128"
+            Height="35"
+            Classes="Attention"
+            Content="Attention"
+            IconSource="{x:Static fi:FluentIcon.Save}"
+            IsEnabled="{Binding !FilledPushButtonIsDisabled}"/>
+          <fui:FilledPushButton
+            Width="128"
+            Height="35"
+            Classes="Warning"
+            Content="Warning"
+            IconSource="{x:Static fi:FluentIcon.SpeedHigh}"
+            IsEnabled="{Binding !FilledPushButtonIsDisabled}"/>
+          <fui:FilledPushButton
+            Width="128"
+            Height="35"
+            Classes="Error"
+            Content="Error"
+            IconSource="{x:Static fi:FluentIcon.Info}"
+            IsEnabled="{Binding !FilledPushButtonIsDisabled}"/>
+        </WrapPanel>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding FilledPushButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  填充工具按钮  -->
+    <ui:CodeCard Name="FilledToolButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_FilledToolButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <WrapPanel
+          Grid.Column="0"
+          VerticalAlignment="Center"
+          ItemSpacing="5"
+          LineSpacing="3">
+          <fui:FilledToolButton
+            Background="HotPink"
+            Content="{x:Static fi:FluentIcon.Add}"
+            IsEnabled="{Binding !FilledToolButtonIsDisabled}"/>
+          <fui:FilledToolButton
+            Classes="Information"
+            Content="{x:Static fi:FluentIcon.Info}"
+            IsEnabled="{Binding !FilledToolButtonIsDisabled}"/>
+          <fui:FilledToolButton
+            Classes="Success"
+            Content="{x:Static fi:FluentIcon.Sync}"
+            IsEnabled="{Binding !FilledToolButtonIsDisabled}"/>
+          <fui:FilledToolButton
+            Classes="Attention"
+            Content="{x:Static fi:FluentIcon.Send}"
+            IsEnabled="{Binding !FilledToolButtonIsDisabled}"/>
+          <fui:FilledToolButton
+            Classes="Warning"
+            Content="{x:Static fi:FluentIcon.PowerButton}"
+            IsEnabled="{Binding !FilledToolButtonIsDisabled}"/>
+          <fui:FilledToolButton
+            Classes="Error"
+            Content="{x:Static fi:FluentIcon.Delete}"
+            IsEnabled="{Binding !FilledToolButtonIsDisabled}"/>
+        </WrapPanel>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding FilledToolButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

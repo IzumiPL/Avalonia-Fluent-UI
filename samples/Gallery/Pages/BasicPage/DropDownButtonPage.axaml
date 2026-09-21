@@ -1,0 +1,98 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.DropDownButtonPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:DropDownButtonPageViewModel"
+  mc:Ignorable="d">
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="DropDownButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_DropDownButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <DropDownButton Width="256" IsEnabled="{Binding !DropDownButtonIsDisable}">
+          <Grid ColumnDefinitions="Auto, *" ColumnSpacing="8">
+            <PathIcon Data="{x:Static fi:FluentIcon.Mail}"/>
+            <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Mail]}"/>
+          </Grid>
+          <DropDownButton.Flyout>
+            <fui:FluentMenuFlyout>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Send]}">
+                <MenuItem.Icon>
+                  <PathIcon Data="{x:Static fi:FluentIcon.Send}"/>
+                </MenuItem.Icon>
+                <MenuItem.Items>
+                  <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SendToLocal]}"/>
+                  <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SendToNetwork]}"/>
+                </MenuItem.Items>
+              </MenuItem>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Save]}">
+                <MenuItem.Icon>
+                  <PathIcon Data="{x:Static fi:FluentIcon.Save}"/>
+                </MenuItem.Icon>
+              </MenuItem>
+              <Separator HorizontalAlignment="Stretch"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Undo]}"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Resend]}"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SaveToLocal]}"/>
+            </fui:FluentMenuFlyout>
+          </DropDownButton.Flyout>
+        </DropDownButton>
+
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding DropDownButtonIsDisable}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="TransparentDropDownButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_TransparentDropDownButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <DropDownButton
+          Name="Test"
+          Width="256"
+          Classes="Transparent"
+          IsEnabled="{Binding !TransparentDropDownButtonIsDisable}">
+          <Grid ColumnDefinitions="Auto, *" ColumnSpacing="8">
+            <PathIcon Data="{x:Static fi:FluentIcon.Mail}"/>
+            <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Mail]}"/>
+          </Grid>
+          <DropDownButton.Flyout>
+            <fui:FluentMenuFlyout>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Send]}">
+                <MenuItem.Icon>
+                  <PathIcon Data="{x:Static fi:FluentIcon.Send}"/>
+                </MenuItem.Icon>
+                <MenuItem.Items>
+                  <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SendToLocal]}"/>
+                  <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SendToNetwork]}"/>
+                </MenuItem.Items>
+              </MenuItem>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Save]}">
+                <MenuItem.Icon>
+                  <PathIcon Data="{x:Static fi:FluentIcon.Save}"/>
+                </MenuItem.Icon>
+              </MenuItem>
+              <Separator HorizontalAlignment="Stretch"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Undo]}"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Resend]}"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SaveToLocal]}"/>
+            </fui:FluentMenuFlyout>
+          </DropDownButton.Flyout>
+        </DropDownButton>
+
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding TransparentDropDownButtonIsDisable}"/>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

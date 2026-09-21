@@ -1,0 +1,36 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.SplitButtonPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:SplitButtonPageViewModel"
+  mc:Ignorable="d">
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="SplitButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SplitButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <SplitButton Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Copy]}" IsEnabled="{Binding !SplitButtonIsDisable}">
+          <SplitButton.Flyout>
+            <fui:FluentMenuFlyout>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Copy]}" InputGesture="Ctrl+C"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Cut]}" InputGesture="Ctrl+X"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Paste]}" InputGesture="Ctrl+V"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Undo]}" InputGesture="Ctrl+Z"/>
+            </fui:FluentMenuFlyout>
+          </SplitButton.Flyout>
+        </SplitButton>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding SplitButtonIsDisable}"/>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

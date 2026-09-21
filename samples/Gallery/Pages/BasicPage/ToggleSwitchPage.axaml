@@ -1,0 +1,29 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.ToggleSwitchPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:ToggleSwitchPageViewModel"
+  mc:Ignorable="d">
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="ToggleSwitchButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ToggleSwitch]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <ToggleSwitch
+          Grid.Column="0"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_EnableBluetooth]}"
+          IsEnabled="{Binding !ToggleSwitchButtonIsDisable}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding ToggleSwitchButtonIsDisable}"/>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>
