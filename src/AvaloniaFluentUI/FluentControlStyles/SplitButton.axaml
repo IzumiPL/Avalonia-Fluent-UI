@@ -131,11 +131,11 @@
       </Style>
     </Style>
 
-    <Style Selector="^[Tag=checked-flyout-open] /template/ ContentPresenter">
+    <Style Selector="^[Tag=checked-flyout-open]">
       <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource AccentFillColorTertiaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlFillColorTransparentBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorSecondaryBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
       </Style>
     </Style>
   </ControlTheme>
