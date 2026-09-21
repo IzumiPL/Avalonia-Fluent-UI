@@ -9,12 +9,9 @@ using Avalonia.Threading;
 namespace AvaloniaFluentUI.Controls;
 
 /// <summary>
-/// Base class for info-bar managers.
-/// Handles host binding, positioning, stacking, show / remove lifecycle,
-/// and auto-resize when the host changes size.
-///
-/// Position enums must use the standard 6-position layout:
-/// TopLeft=0, Top=1, TopRight=2, BottomLeft=3, Bottom=4, BottomRight=5.
+/// 信息栏管理器的基础类
+/// 处理主机绑定、定位、堆栈、显示/移除生命周期
+/// <see cref="IsAutoResize"/>为<c>True</c>时, 当主机尺寸变化时会自动调整大小
 /// </summary>
 public abstract class InfoBarManagerBase<TControl> : IInfoBarManager where TControl : InfoBarBase
 {
@@ -28,7 +25,7 @@ public abstract class InfoBarManagerBase<TControl> : IInfoBarManager where TCont
 
     public double Margin { get; set; } = 12;
 
-    public bool IsAutoResize { get; } = true;
+    public bool IsAutoResize { get; set; } = true;
 
     public void SetHost(InfoBarHost host)
     {
@@ -91,12 +88,20 @@ public abstract class InfoBarManagerBase<TControl> : IInfoBarManager where TCont
         Show(bar);
     }
 
+    /// <summary>
+    /// 创建完全自定义的消息条
+    /// </summary>
+    /// <param name="bar">自定义的消息条</param>
     public void New(TControl bar)
     {
         Add(bar);
     }
 
-    protected async void CloseAsync(TControl bar)
+    /// <summary>
+    /// 关闭弹出的消息条
+    /// </summary>
+    /// <param name="bar">要关闭的消息条</param>
+    public async void CloseAsync(TControl bar)
     {
         var position = bar.Position;
         var size = _host.Bounds.Size;
@@ -109,6 +114,9 @@ public abstract class InfoBarManagerBase<TControl> : IInfoBarManager where TCont
         UpdateInfoBarPosition(position);
     }
 
+    /// <summary>
+    /// 关闭所有的消息条
+    /// </summary>
     public void CloseAll()
     {
         foreach (var position in Enum.GetValues<InfoBarPosition>())
@@ -117,6 +125,10 @@ public abstract class InfoBarManagerBase<TControl> : IInfoBarManager where TCont
         }
     }
     
+    /// <summary>
+    /// 按位置关闭指定位置所有的消息条
+    /// </summary>
+    /// <param name="position">指定的位置</param>
     public void CloseAll(InfoBarPosition position)
     {
         var bars = GetInfoBars(position);
@@ -139,7 +151,7 @@ public abstract class InfoBarManagerBase<TControl> : IInfoBarManager where TCont
         }, DispatcherPriority.Render);
     }
 
-    public (double x, double y) SlideEndPosition(TControl bar, Size hostSize)
+    private (double x, double y) SlideEndPosition(TControl bar, Size hostSize)
     {
         var position = bar.Position;
         double width = bar.Bounds.Width;
@@ -199,7 +211,7 @@ public abstract class InfoBarManagerBase<TControl> : IInfoBarManager where TCont
         return (x, y);
     }
 
-    public (double x, double y) SlideStartPosition(TControl bar, Size hostSize)
+    private (double x, double y) SlideStartPosition(TControl bar, Size hostSize)
     {
         var (x, y) = SlideEndPosition(bar, hostSize);
         var position =  bar.Position;
@@ -216,6 +228,10 @@ public abstract class InfoBarManagerBase<TControl> : IInfoBarManager where TCont
         };
     }
 
+    /// <summary>
+    /// 更新指定位置所有的信息条
+    /// </summary>
+    /// <param name="position">指定的位置</param>
     public void UpdateInfoBarPosition(InfoBarPosition position)
     {
         var bars = GetInfoBars(position);
@@ -229,6 +245,11 @@ public abstract class InfoBarManagerBase<TControl> : IInfoBarManager where TCont
         }
     }
 
+    /// <summary>
+    /// 获取指定位置所有的消息条
+    /// </summary>
+    /// <param name="position">指定的位置</param>
+    /// <returns></returns>
     public List<TControl> GetInfoBars(InfoBarPosition position)
     {
         if (_items.TryGetValue(position, out var items))
