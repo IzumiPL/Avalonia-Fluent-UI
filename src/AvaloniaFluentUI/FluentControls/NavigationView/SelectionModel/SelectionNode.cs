@@ -1,5 +1,4 @@
 ﻿using System;
-using Avalonia.Controls;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -25,13 +24,25 @@ internal enum SelectionState
 /// </remarks>
 internal class SelectionNode : IDisposable
 {
-    public SelectionNode(SelectionModel manager, SelectionNode parent)
+    private readonly SelectionModel _manager;
+    private readonly List<SelectionNode?> _childrenNodes = new List<SelectionNode?>();
+    private readonly SelectionNode? _parent;
+    private readonly List<IndexRange> _selected = new List<IndexRange>();
+    private object? _source;
+    private Avalonia.Controls.ItemsSourceView? _dataSource;
+    private int _selectedCount;
+    private readonly List<int> _selectedIndicesCached = new List<int>();
+    private bool _selectedIndicesCacheIsValid;
+    private int _anchorIndex = -1;
+    private int _realizedChildrenNodeCount;
+    
+    public SelectionNode(SelectionModel manager, SelectionNode? parent)
     {
         _manager = manager;
         _parent = parent;
     }
 
-    public object Source
+    public object? Source
     {
         get => _source;
         set
@@ -58,7 +69,7 @@ internal class SelectionNode : IDisposable
         }
     }
 
-    public Avalonia.Controls.ItemsSourceView ItemsSourceView => _dataSource;
+    public Avalonia.Controls.ItemsSourceView? ItemsSourceView => _dataSource;
 
     public int DataCount => _dataSource != null ? _dataSource.Count : 0;
 
@@ -99,9 +110,9 @@ internal class SelectionNode : IDisposable
     // create a bunch of leaf node instances - instead i use the same instance m_leafNode to avoid 
     // an explosion of node objects. However, I'm still creating the m_childrenNodes 
     // collection unfortunately.
-    public SelectionNode GetAt(int index, bool realizeChild)
+    public SelectionNode? GetAt(int index, bool realizeChild)
     {
-        SelectionNode child = null;
+        SelectionNode? child = null;
         if (realizeChild)
         {
             if (_childrenNodes.Count == 0)
@@ -119,7 +130,7 @@ internal class SelectionNode : IDisposable
 
             if (_childrenNodes[index] == null)
             {
-                var childData = _dataSource.GetAt(index);
+                var childData = _dataSource?.GetAt(index);
                 if (childData != null)
                 {
                     var childDataIndexPath = IndexPath.CloneWithChildIndex(index);
@@ -201,7 +212,9 @@ internal class SelectionNode : IDisposable
     public bool? IsSelectedWithPartial(int index)
     {
         var state = SelectionState.NotSelected;
+#if DEBUG
         Debug.Assert(index >= 0);
+#endif
 
         if (_childrenNodes.Count == 0 || //no nodes realized
             _childrenNodes.Count <= index || // target node is not realized
@@ -487,7 +500,7 @@ internal class SelectionNode : IDisposable
         return false;
     }
 
-    private void OnSourceListChanged(object dataSource, NotifyCollectionChangedEventArgs args)
+    private void OnSourceListChanged(object? dataSource, NotifyCollectionChangedEventArgs args)
     {
         bool selectionInvalidated = false;
         switch (args.Action)
@@ -597,7 +610,7 @@ internal class SelectionNode : IDisposable
     {
         bool selectionInvalidated = false;
         // Remove the items from the selection for leaf
-        if (ItemsSourceView.Count > 0)
+        if (ItemsSourceView?.Count > 0)
         {
             bool isSelected = false;
             for (int i = index; i <= index + count - 1; i++)
@@ -775,17 +788,4 @@ internal class SelectionNode : IDisposable
 
         return selectionState;
     }
-
-
-    private readonly SelectionModel _manager;
-    private readonly List<SelectionNode> _childrenNodes = new List<SelectionNode>();
-    private readonly SelectionNode _parent;
-    private readonly List<IndexRange> _selected = new List<IndexRange>();
-    private object _source;
-    private Avalonia.Controls.ItemsSourceView _dataSource;
-    private int _selectedCount;
-    private readonly List<int> _selectedIndicesCached = new List<int>();
-    private bool _selectedIndicesCacheIsValid;
-    private int _anchorIndex = -1;
-    private int _realizedChildrenNodeCount;
 }

@@ -5,18 +5,22 @@ namespace AvaloniaFluentUI.Controls;
 
 internal class BreadcrumbIterable : IEnumerable
 {
-    public BreadcrumbIterable(IEnumerable src)
+    public BreadcrumbIterable(IEnumerable? src)
     {
         ItemsSource = src;
     }
 
-    public IEnumerable ItemsSource { get; set; }
+    public IEnumerable? ItemsSource { get; set; }
 
     public IEnumerator GetEnumerator() => new BreadcrumbIterator(ItemsSource);
 
     public class BreadcrumbIterator : IEnumerator
     {
-        public BreadcrumbIterator(IEnumerable itemsSource)
+        private readonly ItemsSourceView _itemsSource;
+        private int _currentIndex = -1;
+        private readonly int _size;
+        
+        public BreadcrumbIterator(IEnumerable? itemsSource)
         {
             // WinUI sets this, but I think IIterator calls Current before MoveNext
             // whereas IEnumerator will call MoveNext then Current, so we will leave
@@ -34,7 +38,7 @@ internal class BreadcrumbIterable : IEnumerable
             }
         }
 
-        public object Current
+        public object? Current
         {
             get
             {
@@ -72,9 +76,5 @@ internal class BreadcrumbIterable : IEnumerable
         }
 
         private bool HasCurrent() => _currentIndex < _size;
-
-        private readonly ItemsSourceView _itemsSource;
-        private int _currentIndex = -1;
-        private readonly int _size;
     }
 }

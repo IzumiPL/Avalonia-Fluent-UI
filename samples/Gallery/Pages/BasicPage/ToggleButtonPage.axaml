@@ -1,0 +1,66 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.ToggleButtonPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:ToggleButtonPageViewModel"
+  mc:Ignorable="d">
+
+  <StackPanel Spacing="50">
+    <!--  状态开关按钮  -->
+    <ui:CodeCard Name="ToggleButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ToggleButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <ToggleButton
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ToggleButton]}"
+          IsEnabled="{Binding !ToggleButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding ToggleButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  透明状态开关按钮  -->
+    <ui:CodeCard Name="TransparentToggleButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_TransparentToggleButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <ToggleButton
+          Classes="Transparent"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_TransparentToggleButton]}"
+          IsEnabled="{Binding !TransparentToggleButtonIsDisabled}"/>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding TransparentToggleButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  分割状态开关按钮  -->
+    <ui:CodeCard Name="ToggleSplitButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ToggleSplitButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <ToggleSplitButton
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ToggleSplitButton]}"
+          IsEnabled="{Binding !ToggleSplitButtonIsDisabled}">
+          <ToggleSplitButton.Flyout>
+            <fui:FluentMenuFlyout>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Copy]}" InputGesture="Ctrl+C"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Cut]}" InputGesture="Ctrl+X"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Paste]}" InputGesture="Ctrl+V"/>
+              <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Undo]}" InputGesture="Ctrl+Z"/>
+            </fui:FluentMenuFlyout>
+          </ToggleSplitButton.Flyout>
+        </ToggleSplitButton>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding ToggleSplitButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

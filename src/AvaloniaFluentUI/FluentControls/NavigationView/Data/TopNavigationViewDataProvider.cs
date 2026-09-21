@@ -42,11 +42,11 @@ internal class TopNavigationViewDataProvider : SplitDataSourceBase<object, Navig
     }
 
     // The raw data is from MenuItems
-    public void SetDataSource(IEnumerable rawData)
+    public void SetDataSource(IEnumerable? rawData)
     {
         if (ShouldChangeDataSource(rawData)) // avoid to create multiple of datasource for the same raw data
         {
-            Avalonia.Controls.ItemsSourceView dataSource = null;
+            Avalonia.Controls.ItemsSourceView? dataSource = null;
             if (rawData != null)
             {
                 //Avalonia ItemsSourceView only accepts IEnumerable types
@@ -80,7 +80,7 @@ internal class TopNavigationViewDataProvider : SplitDataSourceBase<object, Navig
         return -1;
     }
 
-    public int IndexOf(object value, NavigationViewSplitVectorID id)
+    public int IndexOf(object? value, NavigationViewSplitVectorID id)
     {
         int indexInOriginalVector = IndexOf(value);
         int index = -1;
@@ -270,7 +270,7 @@ internal class TopNavigationViewDataProvider : SplitDataSourceBase<object, Navig
         return (index != -1);
     }
 
-    public void OnDataSourceChanged(object sender, NotifyCollectionChangedEventArgs args)
+    public void OnDataSourceChanged(object? sender, NotifyCollectionChangedEventArgs args)
     {
         switch (args.Action)
         {
@@ -373,7 +373,7 @@ internal class TopNavigationViewDataProvider : SplitDataSourceBase<object, Navig
 
 
     private Action<NotifyCollectionChangedEventArgs>? _dataChangedCallback;
-    private IEnumerable _rawDataSource;
+    private IEnumerable? _rawDataSource;
     private Avalonia.Controls.ItemsSourceView? _dataSource;
     private double _overflowButtonCachedWidth;
 }

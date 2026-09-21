@@ -17,7 +17,7 @@ public abstract partial class ViewModelBase : ObservableObject
         LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
     }
 
-    private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
+    protected virtual void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
     {
         OnPropertyChanged(nameof(Title));
     }

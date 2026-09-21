@@ -12,12 +12,12 @@ using AvaloniaFluentUI.Locale;
 
 namespace AvaloniaFluentUI.Controls;
 
-[PseudoClasses(SharedPseudoclasses.s_pcHidden, s_pcCloseHidden)]
-[PseudoClasses(s_pcSuccess, s_pcWarning, s_pcError, s_pcInformational)]
-[PseudoClasses(SharedPseudoclasses.s_pcIcon, s_pcStandardIcon)]
-[PseudoClasses(s_pcForegroundSet)]
-[TemplatePart(s_tpCloseButton, typeof(Button))]
-public partial class InfoBar : ContentControl
+[PseudoClasses(SharedPseudoclasses.s_pcHidden, PC_CLOSE_HIDDEN)]
+[PseudoClasses(PC_SUCCESS, PC_WARNING, PC_ERROR, PC_INFORMATIONAL)]
+[PseudoClasses(SharedPseudoclasses.s_pcIcon, PC_STANDARD_ICON)]
+[PseudoClasses(PC_FOREGROUND_SET)]
+[TemplatePart(CLOSE_BUTTON, typeof(Button))]
+public class InfoBar : ContentControl
 {    
     /// <summary>
     /// Defines the <see cref="IsOpen"/> property
@@ -46,8 +46,8 @@ public partial class InfoBar : ContentControl
     /// <summary>
     /// Defines the <see cref="IconSource"/> property
     /// </summary>
-    public static readonly StyledProperty<IconSource> IconSourceProperty =
-        AvaloniaProperty.Register<NavigationViewItem, IconSource>(nameof(IconSource));
+    public static readonly StyledProperty<IconSource?> IconSourceProperty =
+        AvaloniaProperty.Register<NavigationViewItem, IconSource?>(nameof(IconSource));
 
     /// <summary>
     /// Defines the <see cref="IsIconVisible"/> property
@@ -119,7 +119,7 @@ public partial class InfoBar : ContentControl
     /// <summary>
     /// Gets or sets the graphic content to appear alongside the title and message in the InfoBar.
     /// </summary>
-    public IconSource IconSource
+    public IconSource? IconSource
     {
         get => GetValue(IconSourceProperty);
         set => SetValue(IconSourceProperty, value);
@@ -173,40 +173,45 @@ public partial class InfoBar : ContentControl
     /// <summary>
     /// Occurs after the close button is clicked in the InfoBar.
     /// </summary>
-    public event TypedEventHandler<InfoBar, EventArgs> CloseButtonClick;
+    public event TypedEventHandler<InfoBar, EventArgs>? CloseButtonClick;
 
     /// <summary>
     /// Occurs just before the InfoBar begins to close.
     /// </summary>
-    public event TypedEventHandler<InfoBar, InfoBarClosingEventArgs> Closing;
+    public event TypedEventHandler<InfoBar, InfoBarClosingEventArgs>? Closing;
 
     /// <summary>
     /// Occurs after the InfoBar is closed.
     /// </summary>
-    public event TypedEventHandler<InfoBar, InfoBarClosedEventArgs> Closed;
+    public event TypedEventHandler<InfoBar, InfoBarClosedEventArgs>? Closed;
 
-    private const string s_tpCloseButton = "CloseButton";
+    private Button? _closeButton;
 
-    private const string s_pcSuccess = ":success";
-    private const string s_pcWarning = ":warning";
-    private const string s_pcError = ":error";
-    private const string s_pcInformational = ":informational";
-    private const string s_pcStandardIcon = ":standardIcon";
-    private const string s_pcCloseHidden = ":closehidden";
-    private const string s_pcForegroundSet = ":foregroundset";
+    private bool _appliedTemplate;
+    private bool _notifyOpen;
+    private bool _isVisible;
+
+    private InfoBarCloseReason _lastCloseReason;
+    
+    private const string CLOSE_BUTTON = "CloseButton";
+
+    private const string PC_SUCCESS = ":success";
+    private const string PC_WARNING = ":warning";
+    private const string PC_ERROR = ":error";
+    private const string PC_INFORMATIONAL = ":informational";
+    private const string PC_STANDARD_ICON = ":standardIcon";
+    private const string PC_CLOSE_HIDDEN = ":closehidden";
+    private const string PC_FOREGROUND_SET = ":foregroundset";
     
     /// <inheritdoc />
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         _appliedTemplate = false;
-        if (_closeButton != null)
-        {
-            _closeButton.Click -= OnCloseButtonClick;
-        }
+        _closeButton?.Click -= OnCloseButtonClick;
 
         base.OnApplyTemplate(e);
 
-        _closeButton = e.NameScope.Find<Button>(s_tpCloseButton);
+        _closeButton = e.NameScope.Find<Button>(CLOSE_BUTTON);
         if (_closeButton != null)
         {
             _closeButton.Click += OnCloseButtonClick;
@@ -216,7 +221,7 @@ public partial class InfoBar : ContentControl
 
         _appliedTemplate = true;
 
-        UpdateVisibility(_notifyOpen, true);
+        UpdateVisibility(_notifyOpen);
         _notifyOpen = false;
 
         UpdateSeverity();
@@ -272,7 +277,7 @@ public partial class InfoBar : ContentControl
         return base.RegisterContentPresenter(presenter);
     }
 
-    private void OnCloseButtonClick(object sender, RoutedEventArgs e)
+    private void OnCloseButtonClick(object? sender, RoutedEventArgs e)
     {
         CloseButtonClick?.Invoke(this, EventArgs.Empty);
         _lastCloseReason = InfoBarCloseReason.CloseButton;
@@ -336,31 +341,31 @@ public partial class InfoBar : ContentControl
         switch (Severity)
         {
             case InfoBarSeverity.Success:
-                PseudoClasses.Set(s_pcSuccess, true);
-                PseudoClasses.Set(s_pcWarning, false);
-                PseudoClasses.Set(s_pcError, false);
-                PseudoClasses.Set(s_pcInformational, false);
+                PseudoClasses.Set(PC_SUCCESS, true);
+                PseudoClasses.Set(PC_WARNING, false);
+                PseudoClasses.Set(PC_ERROR, false);
+                PseudoClasses.Set(PC_INFORMATIONAL, false);
                 break;
 
             case InfoBarSeverity.Warning:
-                PseudoClasses.Set(s_pcSuccess, false);
-                PseudoClasses.Set(s_pcWarning, true);
-                PseudoClasses.Set(s_pcError, false);
-                PseudoClasses.Set(s_pcInformational, false);
+                PseudoClasses.Set(PC_SUCCESS, false);
+                PseudoClasses.Set(PC_WARNING, true);
+                PseudoClasses.Set(PC_ERROR, false);
+                PseudoClasses.Set(PC_INFORMATIONAL, false);
                 break;
 
             case InfoBarSeverity.Error:
-                PseudoClasses.Set(s_pcSuccess, false);
-                PseudoClasses.Set(s_pcWarning, false);
-                PseudoClasses.Set(s_pcError, true);
-                PseudoClasses.Set(s_pcInformational, false);
+                PseudoClasses.Set(PC_SUCCESS, false);
+                PseudoClasses.Set(PC_WARNING, false);
+                PseudoClasses.Set(PC_ERROR, true);
+                PseudoClasses.Set(PC_INFORMATIONAL, false);
                 break;
 
             default: // default to informational
-                PseudoClasses.Set(s_pcSuccess, false);
-                PseudoClasses.Set(s_pcWarning, false);
-                PseudoClasses.Set(s_pcError, false);
-                PseudoClasses.Set(s_pcInformational, true);
+                PseudoClasses.Set(PC_SUCCESS, false);
+                PseudoClasses.Set(PC_WARNING, false);
+                PseudoClasses.Set(PC_ERROR, false);
+                PseudoClasses.Set(PC_INFORMATIONAL, true);
                 break;
         }
     }
@@ -376,31 +381,23 @@ public partial class InfoBar : ContentControl
         if (!IsIconVisible)
         {
             PseudoClasses.Set(SharedPseudoclasses.s_pcIcon, false);
-            PseudoClasses.Set(s_pcStandardIcon, false);
+            PseudoClasses.Set(PC_STANDARD_ICON, false);
         }
         else
         {
             bool hasUserIcon = IconSource != null;
             PseudoClasses.Set(SharedPseudoclasses.s_pcIcon, hasUserIcon);
-            PseudoClasses.Set(s_pcStandardIcon, !hasUserIcon);
+            PseudoClasses.Set(PC_STANDARD_ICON, !hasUserIcon);
         }
     }
 
     private void UpdateCloseButton()
     {
-        PseudoClasses.Set(s_pcCloseHidden, !IsClosable);
+        PseudoClasses.Set(PC_CLOSE_HIDDEN, !IsClosable);
     }
 
     private void UpdateForeground()
     {
-        PseudoClasses.Set(s_pcForegroundSet, this.GetValue(TextElement.ForegroundProperty) != AvaloniaProperty.UnsetValue);
+        PseudoClasses.Set(PC_FOREGROUND_SET, this.GetValue(TextElement.ForegroundProperty) != AvaloniaProperty.UnsetValue);
     }
-
-    private Button _closeButton;
-
-    private bool _appliedTemplate;
-    private bool _notifyOpen;
-    private bool _isVisible;
-
-    private InfoBarCloseReason _lastCloseReason;
 }

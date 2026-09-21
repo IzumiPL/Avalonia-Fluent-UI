@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using Avalonia;
+using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 using Avalonia.Styling;
 using AvaloniaFluentUI.Locale;
@@ -12,6 +13,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Gallery.Messages.MainWindowMessages;
 using Gallery.Models;
 using Gallery.Services;
+using Gallery.Settings;
 
 namespace Gallery.ViewModels;
 
@@ -19,18 +21,21 @@ public partial class SettingsViewModel : ViewModelBase
 {
     public override string Title => LocalizationService.Instance.GetString("Settings");
 
-    public string? BackgroundImagePath { get; set; } = null;
+    public string? BackgroundImagePath { get; set; }
     
-    public SettingsViewModel(AppConfig? config)
+    public AppSettings Settings { get; }
+    
+    public SettingsViewModel(AppConfig? config, AppSettings settings)
     {
         AvaloniaFluentTheme.Instance.ThemeChanged += OnThemeChanged;
-        LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
         
         LoadSetting(config);
+        Settings = settings;
     }
 
-    private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
+    protected override void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
     {
+        base.OnLanguageChanged(sender, e);
         OnPropertyChanged(nameof(WindowEffect));
         OnPropertyChanged(nameof(WindowEffectDescription));
         OnPropertyChanged(nameof(AppearanceDescription));
@@ -62,7 +67,14 @@ public partial class SettingsViewModel : ViewModelBase
             {
                 IsCustomColor = true;
                 IsDefaultAccentColor = false;
+                IsFollowSystemAccentColor = false;
                 SelectedAccentColor = Color.Parse(config.CustomAccentColor);
+            }
+            else if (config.IsFollowSystemAccentColor)
+            {
+                IsCustomColor = false;
+                IsDefaultAccentColor = false;
+                IsFollowSystemAccentColor = true;
             }
             
             string effect = config.WindowEffect;
@@ -100,16 +112,24 @@ public partial class SettingsViewModel : ViewModelBase
     {
         if (value)
         {
-            AvaloniaFluentTheme.Instance.CustomAccentColor = null;
+            AvaloniaFluentTheme.Instance.AccentColor = Colors.DeepSkyBlue;
         }
     }
 
     [ObservableProperty]
-    private Color _selectedAccentColor = Colors.Transparent;
+    private bool _isFollowSystemAccentColor;
+
+    partial void OnIsFollowSystemAccentColorChanged(bool value)
+    { 
+        AvaloniaFluentTheme.Instance.PreferUserAccentColor = value ;
+    }
+
+    [ObservableProperty]
+    private Color _selectedAccentColor = Colors.DeepSkyBlue;
 
     partial void OnSelectedAccentColorChanged(Color value)
     {
-        AvaloniaFluentTheme.Instance.CustomAccentColor = value;
+        AvaloniaFluentTheme.Instance.AccentColor = value;
     }
 
     [RelayCommand]
@@ -162,6 +182,28 @@ public partial class SettingsViewModel : ViewModelBase
     public bool IsMicaRadioChecked => CurrentEffect == "Mica";
     public bool IsAcrylicRadioChecked => CurrentEffect == "Acrylic";
 
+    [ObservableProperty]
+    private string _navigationScrollCurrentVisible = "Hidden";
+
+    public string[] NavigationScrollVisibles => ["Auto", "Disabled", "Hidden", "Visible"];
+
+    [ObservableProperty]
+    private Vector _smoothScrollViewerOffset;
+
+    partial void OnNavigationScrollCurrentVisibleChanged(string value)
+    {
+        var resources = Application.Current!.Resources;
+        var visibility = value switch
+        {
+            "Auto" => ScrollBarVisibility.Auto,
+            "Disabled" => ScrollBarVisibility.Disabled,
+            "Visible" => ScrollBarVisibility.Visible,
+            _ => ScrollBarVisibility.Hidden
+        };
+        
+        resources["NavigationVerticalScrollBarVisibility"] = visibility;
+    }
+
     [RelayCommand]
     private void EnabledWindowEffect(object value)
     {
@@ -176,6 +218,24 @@ public partial class SettingsViewModel : ViewModelBase
     [ObservableProperty]
     private string _currentLanguage;
 
+    [ObservableProperty]
+    private bool _themeExpanderIsExpanded;
+    
+    [ObservableProperty]
+    private bool _themeColorExpanderIsExpanded;
+    
+    [ObservableProperty]
+    private bool _backgroundImageExpanderIsExpanded;
+    
+    [ObservableProperty]
+    private bool _navigationExpanderIsExpanded;
+    
+    [ObservableProperty]
+    private bool _titleBarExpanderIsExpanded;
+    
+    [ObservableProperty]
+    private bool _windowExpanderIsExpanded;
+
     partial void OnCurrentLanguageChanged(string value)
     {
         // if (value == LocalizationService.Instance.CurrentLanguage) { return; }
@@ -189,7 +249,7 @@ public partial class SettingsViewModel : ViewModelBase
     {
         if (value)
         {
-            AvaloniaFluentTheme.Instance.CustomAccentColor = SelectedAccentColor;
+            AvaloniaFluentTheme.Instance.AccentColor = SelectedAccentColor;
         }
     }
 

@@ -10,10 +10,10 @@ namespace AvaloniaFluentUI.Controls;
 
     
 [PseudoClasses(PC_PRESSED)]
-public class PickerButton : TemplatedControl
+public abstract class PickerButton : TemplatedControl
 {
     public static readonly RoutedEvent<RoutedEventArgs> ClickEvent =
-        RoutedEvent.Register<ColorPickerButton, RoutedEventArgs>(nameof(Click), RoutingStrategies.Bubble);
+        RoutedEvent.Register<PickerButton, RoutedEventArgs>(nameof(Click), RoutingStrategies.Bubble);
     
     public event EventHandler<RoutedEventArgs> Click
     {

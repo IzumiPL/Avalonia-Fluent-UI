@@ -2,6 +2,8 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:core="using:AvaloniaFluentUI.Core"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:uip="clr-namespace:AvaloniaFluentUI.Controls.Primitives;assembly=AvaloniaFluentUI">
 
@@ -20,154 +22,30 @@
     </Border>
   </Design.PreviewWith>
 
-  <!--  Resources in TabViewStyles.axaml  -->
-
-  <ControlTheme x:Key="TabViewCloseButtonTheme" TargetType="Button">
-    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-    <Setter Property="VerticalContentAlignment" Value="Center"/>
-    <Setter Property="FontFamily" Value="{DynamicResource SymbolThemeFontFamily}"/>
-    <Setter Property="FontSize" Value="{DynamicResource TabViewItemHeaderCloseFontSize}"/>
-    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}"/>
-    <Setter Property="Width" Value="{DynamicResource TabViewItemHeaderCloseButtonWidth}"/>
-    <Setter Property="Height" Value="{DynamicResource TabViewItemHeaderCloseButtonHeight}"/>
-    <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
-    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-    <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
-    <Setter Property="BorderThickness" Value="{DynamicResource TabViewItemHeaderCloseButtonBorderThickness}"/>
-    <Setter Property="Template">
-      <ControlTemplate>
-        <ContentPresenter
-          Name="ContentPresenter"
-          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-          AutomationProperties.AccessibilityView="Raw"
-          Background="{TemplateBinding Background}"
-          BorderBrush="{TemplateBinding BorderBrush}"
-          BorderThickness="{TemplateBinding BorderThickness}"
-          Content="{TemplateBinding Content}"
-          ContentTemplate="{TemplateBinding ContentTemplate}"
-          CornerRadius="{TemplateBinding CornerRadius}"/>
-      </ControlTemplate>
-    </Setter>
-
-    <Style Selector="^:pointerover /template/ ContentPresenter">
-      <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
-      <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-      <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
-    </Style>
-    <Style Selector="^:pressed /template/ ContentPresenter">
-      <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
-      <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
-      <Setter Property="BorderBrush" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
-    </Style>
-  </ControlTheme>
-
-  <!--  ControlTemplate used when tabs are vertical (Left/Right location)  -->
-  <ControlTemplate x:Key="VerticalTabViewTabItemTemplate" TargetType="ui:TabViewItem">
-    <Border Name="LayoutRootBorder" Padding="{TemplateBinding Padding}">
-      <Panel Name="LayoutRoot">
-
-        <Rectangle
-          Name="SelectionIndicator"
-          Width="3"
-          Height="16"
-          Margin="2,0,0,0"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          Fill="{DynamicResource AccentFillColorDefaultBrush}"
-          IsVisible="False"
-          RadiusX="2"
-          RadiusY="2"
-          RenderTransform="scaleY(0)"
-          UseLayoutRounding="False">
-          <Rectangle.Transitions>
-            <Transitions>
-              <TransformOperationsTransition
-                Easing="0,0 0,1"
-                Property="RenderTransform"
-                Duration="00:00:00.167"/>
-            </Transitions>
-          </Rectangle.Transitions>
-        </Rectangle>
-
-
-        <Border
-          Name="TabContainerBorder"
-          Grid.Column="1"
-          Padding="{DynamicResource TabViewItemHeaderPadding}"
-          Background="{TemplateBinding Background}"
-          BorderBrush="{TemplateBinding BorderBrush}"
-          BorderThickness="{TemplateBinding BorderThickness}"
-          CornerRadius="{TemplateBinding CornerRadius}"
-          TemplatedControl.IsTemplateFocusTarget="True">
-          <Grid Name="TabContainer">
-            <Grid.ColumnDefinitions>
-              <!--  x:Name = "IconColumn"  -->
-              <ColumnDefinition Width="Auto"/>
-              <ColumnDefinition Width="*"/>
-              <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <!--
-              Since we can't change the icon column in the styles, to avoid locking it in
-              code, we use this Rectangle as the sizer for the column
-            -->
-            <Rectangle
-              Name="IconColumn"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Stretch"/>
-
-            <Viewbox
-              Name="IconBox"
-              MaxWidth="{DynamicResource TabViewItemHeaderIconSize}"
-              MaxHeight="{DynamicResource TabViewItemHeaderIconSize}"
-              Margin="{DynamicResource TabViewItemHeaderIconMargin}"
-              IsVisible="False">
-              <ContentControl
-                Name="IconControl"
-                Content="{Binding TabViewTemplateSettings.IconElement, RelativeSource={RelativeSource TemplatedParent}}"
-                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                KeyboardNavigation.IsTabStop="False"/>
-            </Viewbox>
-
-            <!--
-              If we template bind the ContentPresenter's Content property to the TabViewItem.Header property
-              we unfortunately run into the following issue if the header is [null] or empty:
-              The TabViewItem.Content property will be implictly bound to the Content property of the ContentPresenter.
-              To prevent this, we explicitly set a default empty content here and update the content in code behind.
-            -->
-
-            <ContentPresenter
-              Name="ContentPresenter"
-              Grid.Column="1"
-              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-              Content=""
-              ContentTemplate="{TemplateBinding HeaderTemplate}"
-              FontSize="{DynamicResource TabViewItemHeaderFontSize}"
-              FontWeight="{TemplateBinding FontWeight}"
-              Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
-
-            <Button
-              Name="CloseButton"
-              Grid.Column="2"
-              Margin="{DynamicResource TabViewItemHeaderCloseMargin}"
-              Content="&#xE711;"
-              KeyboardNavigation.IsTabStop="False"
-              Theme="{StaticResource TabViewCloseButtonTheme}"/>
-          </Grid>
-        </Border>
-
-      </Panel>
-    </Border>
-  </ControlTemplate>
-
-
-
-
+  <!--  TabViewItem-level resources  -->
+  <Thickness x:Key="TabViewItemHeaderPadding">8,3,4,3</Thickness>
+  <Thickness x:Key="TabViewSelectedItemHeaderPadding">9,3,5,4</Thickness>
+  <x:Double x:Key="TabViewItemMinHeight">32</x:Double>
+  <x:Double x:Key="TabViewItemMaxWidth">240</x:Double>
+  <x:Double x:Key="TabViewItemMinWidth">100</x:Double>
+  <x:Double x:Key="TabViewItemHeaderFontSize">12</x:Double>
+  <x:Double x:Key="TabViewItemHeaderIconSize">16</x:Double>
+  <Thickness x:Key="TabViewItemHeaderIconMargin">0,0,10,0</Thickness>
+  <x:Double x:Key="TabViewItemHeaderCloseButtonHeight">24</x:Double>
+  <x:Double x:Key="TabViewItemHeaderCloseButtonWidth">32</x:Double>
+  <Thickness x:Key="TabViewItemHeaderCloseMargin">4,0,0,0</Thickness>
+  <Thickness x:Key="TabViewItemHeaderPaddingWithCloseButton">8,3,4,3</Thickness>
+  <Thickness x:Key="TabViewItemHeaderPaddingWithoutCloseButton">8,3,8,3</Thickness>
+  <Thickness x:Key="TabViewItemSeparatorMargin">0,8,0,8</Thickness>
+  <Thickness x:Key="TabViewItemBorderThickness">1</Thickness>
+  <Thickness x:Key="TabViewSelectedItemBorderThickness">1,1,1,0</Thickness>
+  <Thickness x:Key="TabViewSelectedItemHeaderMargin">-1,0,-1,1</Thickness>
+  <Thickness x:Key="TabViewSelectedItemHeaderMarginBottom">-1,0,-1,0</Thickness>
+  <!--  Shadow applied to the tab being dragged while reordering  -->
+  <BoxShadows x:Key="TabViewItemDragShadow">0 4 16 0 #26000000</BoxShadows>
 
   <ControlTheme x:Key="{x:Type ui:TabViewItem}" TargetType="ui:TabViewItem">
-    <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
+    <Setter Property="Background" Value="Transparent"/>
     <Setter Property="HorizontalContentAlignment" Value="Left"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
     <Setter Property="MinHeight" Value="{DynamicResource TabViewItemMinHeight}"/>
@@ -258,18 +136,9 @@
             Background="{DynamicResource DividerStrokeColorDefaultBrush}"/>
 
           <Border
-            Name="TabDragVisualContainer"
-            Grid.Column="1"
-            Background="{DynamicResource SolidBackgroundFillColorTertiaryBrush}"
-            BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}"
-            BorderThickness="{TemplateBinding BorderThickness}"
-            CornerRadius="{TemplateBinding CornerRadius}"
-            IsVisible="False"/>
-
-          <Border
             Name="TabContainerBorder"
             Grid.Column="1"
-            Padding="{DynamicResource TabViewItemHeaderPadding}"
+            Padding="{DynamicResource TabViewItemHeaderPaddingWithCloseButton}"
             Background="{TemplateBinding Background}"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
@@ -283,17 +152,15 @@
                 <ColumnDefinition Width="Auto"/>
               </Grid.ColumnDefinitions>
 
-              <Viewbox
-                Name="IconBox"
+              <ui:FluentIconElement
+                x:Name="PART_Icon"
                 MaxWidth="{DynamicResource TabViewItemHeaderIconSize}"
                 MaxHeight="{DynamicResource TabViewItemHeaderIconSize}"
-                Margin="{DynamicResource TabViewItemHeaderIconMargin}">
-                <ContentControl
-                  x:Name="IconControl"
-                  Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TabViewTemplateSettings.IconElement}"
-                  Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                  IsTabStop="False"/>
-              </Viewbox>
+                Margin="{DynamicResource TabViewItemHeaderIconMargin}"
+                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                IsTabStop="False"
+                IsVisible="False"
+                Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IconSource}"/>
 
               <!--
                 If we template bind the ContentPresenter's Content property to the TabViewItem.Header property
@@ -311,13 +178,20 @@
                 FontSize="{DynamicResource TabViewItemHeaderFontSize}"
                 FontWeight="{TemplateBinding FontWeight}"
                 Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
-              <Button
+              <ui:ToolButton
                 Name="CloseButton"
                 Grid.Column="2"
+                Width="{DynamicResource TabViewItemHeaderCloseButtonWidth}"
+                Height="{DynamicResource TabViewItemHeaderCloseButtonHeight}"
                 Margin="{DynamicResource TabViewItemHeaderCloseMargin}"
-                Content="&#xE711;"
-                IsTabStop="False"
-                Theme="{DynamicResource TabViewCloseButtonTheme}"/>
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Classes="Transparent"
+                Content="{x:Static fi:FluentIcon.Close}"
+                IconHeight="8"
+                IconWidth="8"
+                IsTabStop="False"/>
+              <!--  ToolTip.Tip="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CloseTabCF]}"  -->
             </Grid>
           </Border>
         </Grid>
@@ -330,18 +204,22 @@
     <Style Selector="^:top, ^:bottom">
       <Style Selector="^:pointerover">
         <Style Selector="^ /template/ Border#TabContainerBorder">
-          <Setter Property="Background" Value="{DynamicResource LayerOnMicaBaseAltFillColorSecondaryBrush}"/>
+          <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
         </Style>
+
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ ContentControl#IconControl">
+
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ Button#CloseButton">
+
+        <Style Selector="^ /template/ ui|ToolButton#CloseButton">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
+
         <Style Selector="^ /template/ Border#TabSeparator">
           <Setter Property="Opacity" Value="0"/>
         </Style>
@@ -349,18 +227,22 @@
 
       <Style Selector="^:pressed">
         <Style Selector="^ /template/ Border#TabContainerBorder">
-          <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}"/>
+          <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
         </Style>
+
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ ContentControl#IconControl">
+
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ Button#CloseButton">
+
+        <Style Selector="^ /template/ ui|ToolButton#CloseButton">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
+
         <Style Selector="^ /template/ Border#TabSeparator">
           <Setter Property="Opacity" Value="0"/>
         </Style>
@@ -370,36 +252,40 @@
         <Style Selector="^ /template/ Border#BottomBorderLine">
           <Setter Property="IsVisible" Value="False"/>
         </Style>
+
         <Style Selector="^ /template/ Path#LeftRadiusRenderArc">
           <Setter Property="IsVisible" Value="True"/>
         </Style>
+
         <Style Selector="^ /template/ Path#RightRadiusRenderArc">
           <Setter Property="IsVisible" Value="True"/>
         </Style>
+
         <Style Selector="^ /template/ Path#SelectedBackgroundPath">
           <Setter Property="IsVisible" Value="True"/>
-          <Setter Property="Fill" Value="{DynamicResource SolidBackgroundFillColorTertiaryBrush}"/>
+          <Setter Property="Fill" Value="{DynamicResource LayerFillColorBrush}"/>
         </Style>
+
         <Style Selector="^ /template/ Border#TabContainerBorder">
           <Setter Property="Margin" Value="{DynamicResource TabViewSelectedItemHeaderMargin}"/>
-          <Setter Property="BorderBrush" Value="{DynamicResource LayerFillColorBrush}"/>
+          <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}"/>
           <Setter Property="BorderThickness" Value="{DynamicResource TabViewSelectedItemBorderThickness}"/>
           <Setter Property="Padding" Value="{DynamicResource TabViewSelectedItemHeaderPadding}"/>
-          <Setter Property="Background" Value="{DynamicResource SolidBackgroundFillColorTertiaryBrush}"/>
+          <Setter Property="Background" Value="{DynamicResource LayerFillColorBrush}"/>
         </Style>
+
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
           <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
-        <Style Selector="^ /template/ ContentControl#IconControl">
+
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ Button#CloseButton">
+
+        <Style Selector="^ /template/ ui|ToolButton#CloseButton">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-        </Style>
-        <Style Selector="^ /template/ Border#LayoutRootBorder">
-          <Setter Property="Background" Value="Transparent"/>
         </Style>
 
         <!--
@@ -413,14 +299,17 @@
         <Style Selector="^ /template/ Border#TabContainerBorder">
           <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
         </Style>
+
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
           <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
-        <Style Selector="^ /template/ ContentControl#IconControl">
+
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
         </Style>
-        <Style Selector="^ /template/ Button#CloseButton">
+
+        <Style Selector="^ /template/ ui|ToolButton#CloseButton">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
         </Style>
@@ -442,35 +331,130 @@
         <Setter Property="IsVisible" Value="False"/>
       </Style>
 
-      <!--  TabWidthMode is not respected in Left/Right Orientations, so this goes here  -->
+      <!--
+        TabWidthMode is not respected in Left/Right orientations, but "compact" is still applied
+        to items there, so hide the header text and let the icon carry the tab.
+      -->
       <Style Selector="^:compact">
-        <Style Selector="^ /template/ Viewbox#IconBox">
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Margin" Value="0"/>
         </Style>
+
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
           <Setter Property="IsVisible" Value="False"/>
-        </Style>
-        <Style Selector="^ /template/ Rectangle#IconColumn">
-          <Setter Property="Width" Value="{DynamicResource TabViewItemHeaderIconSize}"/>
         </Style>
       </Style>
     </Style>
 
     <Style Selector="^:left,^:right">
-      <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
-      <Setter Property="Template" Value="{DynamicResource VerticalTabViewTabItemTemplate}"/>
+      <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
+      <!--  Vertical template is inlined here (rather than a shared resource) so that switching  -->
+      <!--  tab strip location at runtime re-applies a fresh template with a populated NameScope.  -->
+      <Setter Property="Template">
+        <ControlTemplate TargetType="ui:TabViewItem">
+          <Border Name="LayoutRootBorder" Padding="{TemplateBinding Padding}">
+            <Panel Name="LayoutRoot">
+
+              <Rectangle
+                Name="SelectionIndicator"
+                Width="3"
+                Height="16"
+                Margin="2,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Fill="{DynamicResource AccentFillColorDefaultBrush}"
+                IsVisible="False"
+                RadiusX="2"
+                RadiusY="2"
+                RenderTransform="scaleY(0)"
+                UseLayoutRounding="False">
+                <Rectangle.Transitions>
+                  <Transitions>
+                    <TransformOperationsTransition
+                      Easing="0,0 0,1"
+                      Property="RenderTransform"
+                      Duration="00:00:00.167"/>
+                  </Transitions>
+                </Rectangle.Transitions>
+              </Rectangle>
+
+              <Border
+                Name="TabContainerBorder"
+                Padding="{DynamicResource TabViewItemHeaderPadding}"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{TemplateBinding CornerRadius}"
+                TemplatedControl.IsTemplateFocusTarget="True">
+                <Grid Name="TabContainer">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+
+                  <Rectangle
+                    Name="IconColumn"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"/>
+
+                  <ui:FluentIconElement
+                    Name="PART_Icon"
+                    MaxWidth="{DynamicResource TabViewItemHeaderIconSize}"
+                    MaxHeight="{DynamicResource TabViewItemHeaderIconSize}"
+                    Margin="{DynamicResource TabViewItemHeaderIconMargin}"
+                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                    IsVisible="False"
+                    KeyboardNavigation.IsTabStop="False"
+                    Source="{Binding IconSource, RelativeSource={RelativeSource TemplatedParent}}"/>
+
+                  <ContentPresenter
+                    Name="ContentPresenter"
+                    Grid.Column="1"
+                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    Content=""
+                    ContentTemplate="{TemplateBinding HeaderTemplate}"
+                    FontSize="{DynamicResource TabViewItemHeaderFontSize}"
+                    FontWeight="{TemplateBinding FontWeight}"
+                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+
+                  <ui:ToolButton
+                    Name="CloseButton"
+                    Grid.Column="2"
+                    Width="{DynamicResource TabViewItemHeaderCloseButtonWidth}"
+                    Height="{DynamicResource TabViewItemHeaderCloseButtonHeight}"
+                    Margin="{DynamicResource TabViewItemHeaderCloseMargin}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Classes="Transparent"
+                    Content="{x:Static fi:FluentIcon.Close}"
+                    IconHeight="8"
+                    IconWidth="8"
+                    KeyboardNavigation.IsTabStop="False"/>
+                  <!--  ToolTip.Tip="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CloseTabCF]}"  -->
+                </Grid>
+              </Border>
+
+            </Panel>
+          </Border>
+        </ControlTemplate>
+      </Setter>
 
       <Style Selector="^:pointerover">
         <Style Selector="^ /template/ Border#TabContainerBorder">
-          <Setter Property="Background" Value="{DynamicResource LayerOnMicaBaseAltFillColorSecondaryBrush}"/>
+          <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
         </Style>
+
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ ContentControl#IconControl">
+
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ Button#CloseButton">
+
+        <Style Selector="^ /template/ ui|ToolButton#CloseButton">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
@@ -480,13 +464,16 @@
         <Style Selector="^ /template/ Border#TabContainerBorder">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
         </Style>
+
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ ContentControl#IconControl">
+
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ Button#CloseButton">
+
+        <Style Selector="^ /template/ ui|ToolButton#CloseButton">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
@@ -496,34 +483,44 @@
         <Style Selector="^ /template/ Border#TabContainerBorder">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
         </Style>
+
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
           <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
-        <Style Selector="^ /template/ ContentControl#IconControl">
+
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
-        <Style Selector="^ /template/ Button#CloseButton">
+
+        <Style Selector="^ /template/ ui|ToolButton#CloseButton">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
+
         <Style Selector="^ /template/ Rectangle#SelectionIndicator">
           <Setter Property="IsVisible" Value="True"/>
           <Setter Property="RenderTransform" Value="scaleY(1)"/>
         </Style>
 
+        <Style Selector="^ /template/ Border#LayoutRootBorder">
+          <Setter Property="Background" Value="Transparent"/>
+        </Style>
 
         <Style Selector="^:pointerover">
           <Style Selector="^ /template/ Border#TabContainerBorder">
             <Setter Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/>
           </Style>
+
           <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
           </Style>
-          <Style Selector="^ /template/ ContentControl#IconControl">
+
+          <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
           </Style>
-          <Style Selector="^ /template/ Button#CloseButton">
+
+          <Style Selector="^ /template/ ui|ToolButton#CloseButton">
             <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
           </Style>
@@ -533,13 +530,16 @@
           <Style Selector="^ /template/ Border#TabContainerBorder">
             <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/>
           </Style>
+
           <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
           </Style>
-          <Style Selector="^ /template/ ContentControl#IconControl">
+
+          <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
           </Style>
-          <Style Selector="^ /template/ Button#CloseButton">
+
+          <Style Selector="^ /template/ ui|ToolButton#CloseButton">
             <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
           </Style>
@@ -550,14 +550,17 @@
         <Style Selector="^ /template/ Border#TabContainerBorder">
           <Setter Property="Background" Value="{DynamicResource ControlFillColorDisabledBrush}"/>
         </Style>
+
         <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
           <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
-        <Style Selector="^ /template/ ContentControl#IconControl">
+
+        <Style Selector="^ /template/ ui|FluentIconElement#PART_Icon">
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
         </Style>
-        <Style Selector="^ /template/ Button#CloseButton">
+
+        <Style Selector="^ /template/ ui|ToolButton#CloseButton">
           <Setter Property="Background" Value="{DynamicResource SubtleFillColorTransparentBrush}"/>
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/>
         </Style>
@@ -571,21 +574,52 @@
         <Setter Property="Padding" Value="{DynamicResource TabViewItemHeaderPaddingWithoutCloseButton}"/>
       </Style>
 
-      <Style Selector="^ /template/ Button#CloseButton">
+      <Style Selector="^ /template/ ui|ToolButton#CloseButton">
         <Setter Property="IsVisible" Value="False"/>
       </Style>
     </Style>
 
-    <Style Selector="^:icon /template/ Viewbox#IconBox">
+    <Style Selector="^:icon /template/ ui|FluentIconElement#PART_Icon">
       <Setter Property="IsVisible" Value="True"/>
     </Style>
 
-    <Style Selector="^:dragging /template/ Grid#LayoutRoot">
-      <Setter Property="Opacity" Value="0"/>
+    <!--
+      "compact" is applied regardless of the tab strip location, but only the vertical
+      template has the Rectangle used to size the icon column - so the sizer is updated
+      here rather than inside the horizontal-only block.
+    -->
+    <Style Selector="^:compact /template/ Rectangle#IconColumn">
+      <Setter Property="Width" Value="{DynamicResource TabViewItemHeaderIconSize}"/>
+    </Style>
+
+    <!--
+      While a tab is being dragged, the source item is dimmed into a placeholder so the
+      user can see both where it came from and (via the cursor-following drag ghost) the
+      item that is actually moving. An accent border marks it as the item being dragged.
+    -->
+    <!-- <Style Selector="^:dragging /template/ Grid#LayoutRoot"> -->
+    <!--   <Setter Property="Opacity" Value="0.35"/> -->
+    <!-- </Style> -->
+    <!-- <Style Selector="^:dragging /template/ Border#LayoutRootBorder"> -->
+    <!--   <Setter Property="Opacity" Value="0.35"/> -->
+    <!-- </Style> -->
+
+    <Style Selector="^:dragging">
+      <Style Selector="^ /template/ Grid#LayoutRoot,         ^ /template/ Border#LayoutRootBorder">
+        <Setter Property="Opacity" Value="0.35"/>
+      </Style>
     </Style>
 
     <Style Selector="^:bottom">
       <Style Selector="^ /template/ Border#BottomBorderLine">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+      </Style>
+
+      <!--
+        The geometry is the top-strip shape rotated 180deg, so its open side is at the
+        top and it must anchor to the top edge of the item to connect with the content.
+      -->
+      <Style Selector="^ /template/ Path#SelectedBackgroundPath">
         <Setter Property="VerticalAlignment" Value="Top"/>
       </Style>
 
@@ -594,20 +628,30 @@
         <Setter Property="RenderTransform" Value="scaleY(-1)"/>
         <Setter Property="Margin" Value="-4 1 0 0"/>
       </Style>
+
       <Style Selector="^ /template/ Path#RightRadiusRenderArc">
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="RenderTransform" Value="scaleY(-1)"/>
         <Setter Property="Margin" Value="0 1 -4 0"/>
       </Style>
 
+      <!--
+        The border stretches to the full item height so the hover background covers the
+        whole tab (matching the selected background path); the inner grid keeps the
+        content anchored to the divider at the top.
+      -->
       <Style Selector="^ /template/ Border#TabContainerBorder">
-        <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="CornerRadius" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CornerRadius, Converter={StaticResource BottomCornerRadiusFilterConverter}}"/>
       </Style>
+
+      <Style Selector="^ /template/ Grid#TabContainer">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+      </Style>
+
       <Style Selector="^:selected">
         <Style Selector="^ /template/ Border#TabContainerBorder">
           <Setter Property="Margin" Value="{DynamicResource TabViewSelectedItemHeaderMarginBottom}"/>
-          <Setter Property="BorderBrush" Value="{DynamicResource TabViewSelectedItemBorderBrushBottom}"/>
+          <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}"/>
           <Setter Property="BorderThickness" Value="1 0 1 1"/>
         </Style>
       </Style>

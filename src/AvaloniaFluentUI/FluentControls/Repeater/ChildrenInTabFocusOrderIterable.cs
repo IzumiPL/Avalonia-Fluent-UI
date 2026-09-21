@@ -11,8 +11,7 @@ internal class ChildrenInTabFocusOrderIterable : IEnumerable<Control>
         _repeater = owner;
     }
 
-    public IEnumerator<Control> GetEnumerator() =>
-        new ChildrenInTabFocusOrderIterator(_repeater);
+    public IEnumerator<Control> GetEnumerator() => new ChildrenInTabFocusOrderIterator(_repeater);
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

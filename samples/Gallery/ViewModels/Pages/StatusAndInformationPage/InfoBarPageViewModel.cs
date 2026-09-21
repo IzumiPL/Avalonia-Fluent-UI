@@ -31,14 +31,4 @@ public partial class InfoBarPageViewModel : ViewModelBase
     {
         InfoBarIsOpen = true;
     }
-    
-     public InfoBarPosition[] InfoBarPositions => 
-    [
-        InfoBarPosition.Top,
-        InfoBarPosition.TopLeft,
-        InfoBarPosition.TopRight,
-        InfoBarPosition.Bottom,
-        InfoBarPosition.BottomLeft,
-        InfoBarPosition.BottomRight
-    ];
 }

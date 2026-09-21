@@ -7,7 +7,9 @@ using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
+using Avalonia.Layout;
 using Avalonia.Media;
+using Avalonia.Metadata;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -19,6 +21,7 @@ namespace AvaloniaFluentUI.Controls;
 /// and register them as <see cref="StyledProperty{T}"/> fields.
 /// </summary>
 [TemplatePart(Name = PART_CLOSE_BUTTON, Type = typeof(Button))]
+[TemplatePart(Name = PART_LAYOUT, Type = typeof(Grid))]
 public abstract class InfoBarBase : TemplatedControl
 {
     public static readonly StyledProperty<string> TitleProperty =
@@ -47,24 +50,51 @@ public abstract class InfoBarBase : TemplatedControl
     public static readonly StyledProperty<InfoBarPosition> PositionProperty =
         AvaloniaProperty.Register<InfoBarBase, InfoBarPosition>(nameof(Position), InfoBarPosition.TopRight);
 
+    /// <summary>
+    ///     Defines the <see cref="Orientation" /> property.
+    /// </summary>
+    public static readonly StyledProperty<Orientation> OrientationProperty =
+        AvaloniaProperty.Register<InfoBarBase, Orientation>(nameof(Orientation), Orientation.Vertical);
+
+    /// <summary>
+    /// 获取或设置消息条内容的布局方向
+    /// </summary>
+    public Orientation Orientation
+    {
+        get => GetValue(OrientationProperty);
+        set => SetValue(OrientationProperty, value);
+    }
+
+    /// <summary>
+    /// 获取或设置消息条的弹出位置
+    /// </summary>
     public InfoBarPosition Position
     {
         get => GetValue(PositionProperty);
         set => SetValue(PositionProperty, value);
     }
     
+    /// <summary>
+    /// 获取或设置消息条的信息等级
+    /// </summary>
     public InfoBarSeverity Severity
     {
         get => GetValue(SeverityProperty);
         set => SetValue(SeverityProperty, value);
     }
 
+    /// <summary>
+    /// 获取或设置消息条的标题
+    /// </summary>
     public string Title
     {
         get => GetValue(TitleProperty);
         set => SetValue(TitleProperty, value);
     }
 
+    /// <summary>
+    /// 获取或设置消息条是否可以手动关闭
+    /// </summary>
     public bool IsClosable
     {
         get => GetValue(IsClosableProperty);
@@ -83,12 +113,16 @@ public abstract class InfoBarBase : TemplatedControl
         set => SetValue(OffsetYProperty, value);
     }
 
+    /// <summary>
+    /// 获取或设置消息条弹出的持续时间
+    /// </summary>
     public int Duration
     {
         get => GetValue(DurationProperty);
         set => SetValue(DurationProperty, value);
     }
 
+    [Content]
     public object? Content
     {
         get => GetValue(ContentProperty);
@@ -102,6 +136,7 @@ public abstract class InfoBarBase : TemplatedControl
     public event EventHandler? Closed;
 
     private const string PART_CLOSE_BUTTON = "PART_CloseButton";
+    private const string PART_LAYOUT = "PART_Layout";
 
     private Button? _closeButton;
 
@@ -120,11 +155,30 @@ public abstract class InfoBarBase : TemplatedControl
         StartAutoClose();
     }
 
+    /// <summary>
+    /// 获取消息条的列定义
+    /// </summary>
+    /// <returns></returns>
+    protected abstract ColumnDefinitions GetColumnDefinitions();
+    
+    /// <summary>
+    /// 获取消息条的行定义
+    /// </summary>
+    /// <returns></returns>
+    protected abstract RowDefinitions GetRowDefinitions();
+
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         _closeButton?.Click -= OnCloseButtonClick;
 
         _closeButton = e.NameScope.Find<Button>(PART_CLOSE_BUTTON);
+        var layout  = e.NameScope.Find<Grid>(PART_LAYOUT);
+
+        if (layout != null)
+        {
+            layout.RowDefinitions = GetRowDefinitions();
+            layout.ColumnDefinitions = GetColumnDefinitions();
+        }
 
         _closeButton?.Click += OnCloseButtonClick;
     }
@@ -199,7 +253,7 @@ public abstract class InfoBarBase : TemplatedControl
         await Task.Delay((int)AnimationDuration + 24);
     }
 
-    internal async void StartAutoClose()
+    private async void StartAutoClose()
     {
         if (Duration >= 0)
         {

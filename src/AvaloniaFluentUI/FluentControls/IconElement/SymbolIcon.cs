@@ -76,7 +76,7 @@ public class SymbolIcon : IconElement
         if (_textLayout == null)
             GenerateText();
 
-        return new Size(_textLayout.Width, _textLayout.Height);
+        return new Size(_textLayout!.Width, _textLayout.Height);
     }
 
     public override void Render(DrawingContext context)
@@ -87,7 +87,7 @@ public class SymbolIcon : IconElement
         var dstRect = new Rect(Bounds.Size);
         using (context.PushClip(dstRect))
         {
-            var pt = new Point(dstRect.Center.X - _textLayout.Width * 0.5,
+            var pt = new Point(dstRect.Center.X - _textLayout!.Width * 0.5,
                                dstRect.Center.Y - _textLayout.Height * 0.5);
             _textLayout.Draw(context, pt);
         }
@@ -95,11 +95,11 @@ public class SymbolIcon : IconElement
 
     private void GenerateText()
     {
-        var glyph = char.ConvertFromUtf32((int)Symbol).ToString();
+        var glyph = char.ConvertFromUtf32((int)Symbol);
 
         _textLayout = new TextLayout(glyph,
             new Typeface(_symbolFontFamily),
-           FontSize, Foreground, TextAlignment.Left);
+           FontSize, Foreground);
     }
 
     private TextLayout? _textLayout;

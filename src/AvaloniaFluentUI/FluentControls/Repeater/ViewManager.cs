@@ -328,7 +328,7 @@ internal class ViewManager
         }
     }
 
-    internal void OnItemsSourceChanged(object _, NotifyCollectionChangedEventArgs args)
+    internal void OnItemsSourceChanged(object? _, NotifyCollectionChangedEventArgs args)
     {
         // Note: For items that have been removed, the index will not be touched. It will hold
         // the old index before it was removed. It is not valid anymore.

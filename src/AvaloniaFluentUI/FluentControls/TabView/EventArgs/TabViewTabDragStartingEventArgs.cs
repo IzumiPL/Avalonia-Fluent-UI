@@ -8,7 +8,7 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class TabViewTabDragStartingEventArgs : EventArgs
 {
-    internal TabViewTabDragStartingEventArgs(DragItemsStartingEventArgs args, object item, TabViewItem tab)
+    internal TabViewTabDragStartingEventArgs(DragItemsStartingEventArgs args, object item, TabViewItem? tab)
     {
         _innerArgs = args;
         Item = item;
@@ -27,7 +27,7 @@ public class TabViewTabDragStartingEventArgs : EventArgs
     /// <summary>
     /// Gets the data payload associated with a drag action
     /// </summary>
-    public DataPackage Data => _innerArgs.Data;
+    public DataPackage? Data => _innerArgs.Data;
 
     /// <summary>
     /// Gets the item taht was selected for the drag action
@@ -35,9 +35,10 @@ public class TabViewTabDragStartingEventArgs : EventArgs
     public object Item { get; }
 
     /// <summary>
-    /// Gets the TabViewItem that was selected for the drag action
+    /// Gets the TabViewItem that was selected for the drag action, or <c>null</c> if the
+    /// container could not be resolved
     /// </summary>
-    public TabViewItem Tab { get; }
+    public TabViewItem? Tab { get; }
 
     private DragItemsStartingEventArgs _innerArgs;
 }

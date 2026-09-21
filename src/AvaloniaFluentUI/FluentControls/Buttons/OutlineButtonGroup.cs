@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Avalonia.Controls.Primitives;
 
 namespace AvaloniaFluentUI.Controls;
 
@@ -52,7 +53,7 @@ public class OutlineButtonGroup
         foreach (var weak in _members)
         {
             if (weak.TryGetTarget(out var btn) && btn != exclude && btn.IsChecked == true)
-                btn.SetCurrentValue(OutlineButtonBase.IsCheckedProperty, false);
+                btn.SetCurrentValue(ToggleButton.IsCheckedProperty, false);
         }
     }
 }

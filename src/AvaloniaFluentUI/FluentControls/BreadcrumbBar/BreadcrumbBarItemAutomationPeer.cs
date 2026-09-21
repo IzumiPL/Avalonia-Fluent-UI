@@ -10,8 +10,7 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class BreadcrumbBarItemAutomationPeer : ControlAutomationPeer, IInvokeProvider
 {
-    public BreadcrumbBarItemAutomationPeer(Control owner) 
-        : base(owner)
+    public BreadcrumbBarItemAutomationPeer(Control owner) : base(owner)
     {
     }
 
@@ -28,11 +27,12 @@ public class BreadcrumbBarItemAutomationPeer : ControlAutomationPeer, IInvokePro
     protected override AutomationControlType GetAutomationControlTypeCore() => 
         AutomationControlType.Button;
 
-    private BreadcrumbBarItem GetImpl() => Owner as BreadcrumbBarItem;
+    private BreadcrumbBarItem? GetImpl() => Owner as BreadcrumbBarItem;
 
     void IInvokeProvider.Invoke()
     {
-        if (GetImpl() is BreadcrumbBarItem item)
-            item.OnClickEvent(null, null);
+        var impl = GetImpl();
+        if (impl != null)
+            impl.OnClickEvent(null, null);
     }
 }

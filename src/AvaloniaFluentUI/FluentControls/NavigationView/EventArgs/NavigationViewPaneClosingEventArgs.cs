@@ -27,7 +27,7 @@ public class NavigationViewPaneClosingEventArgs : EventArgs
     /// <summary>
     /// Gets the events pane closing event args from the SplitView
     /// </summary>
-    public CancelRoutedEventArgs SplitViewClosingArgs { get; internal set; }
+    public CancelRoutedEventArgs? SplitViewClosingArgs { get; internal set; }
 
     private bool _cancel;
 }

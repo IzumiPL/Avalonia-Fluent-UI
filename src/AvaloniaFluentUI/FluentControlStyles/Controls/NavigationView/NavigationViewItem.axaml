@@ -28,7 +28,7 @@
     <Setter Property="KeyboardNavigation.TabNavigation" Value="Once"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <Grid Name="NVIRootGrid" RowDefinitions="*,Auto">
+        <Grid Name="NavigationViewItemRootGrid" RowDefinitions="*,Auto">
           <Grid.Styles>
             <Style Selector="FlyoutPresenter">
               <Setter Property="Theme" Value="{StaticResource NavViewFlyoutStyle}"/>
@@ -36,7 +36,7 @@
           </Grid.Styles>
 
           <uip:NavigationViewItemPresenter
-            Name="NVIPresenter"
+            Name="NavigationViewItemPresenter"
             Padding="{TemplateBinding Padding}"
             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
             VerticalAlignment="{TemplateBinding VerticalAlignment}"
@@ -54,7 +54,7 @@
             TemplatedControl.IsTemplateFocusTarget="True"/>
 
           <ui:ItemsRepeater
-            Name="NVIMenuItemsHost"
+            Name="NavigationViewItemMenuItemsHost"
             Grid.Row="1"
             IsVisible="False"
             KeyboardNavigation.TabNavigation="Continue"/>

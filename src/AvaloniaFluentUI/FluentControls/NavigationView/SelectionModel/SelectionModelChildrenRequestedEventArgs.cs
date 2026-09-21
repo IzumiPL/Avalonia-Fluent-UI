@@ -7,10 +7,7 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 internal class SelectionModelChildrenRequestedEventArgs : EventArgs
 {
-    internal SelectionModelChildrenRequestedEventArgs(
-        object source,
-        IndexPath sourceIndexPath,
-        bool throwOnAccess)
+    internal SelectionModelChildrenRequestedEventArgs(object? source, IndexPath sourceIndexPath, bool throwOnAccess)
     {
         source = source ?? throw new ArgumentNullException(nameof(source));
         Initialize(source, sourceIndexPath, throwOnAccess);
@@ -20,12 +17,12 @@ internal class SelectionModelChildrenRequestedEventArgs : EventArgs
     /// Gets or sets an observable which produces the children of the <see cref="Source"/>
     /// object.
     /// </summary>
-    public object Children { get; set; }
+    public object? Children { get; set; }
 
     /// <summary>
     /// Gets the object whose children are being requested.
     /// </summary>
-    public object Source
+    public object? Source
     {
         get
         {
@@ -55,7 +52,7 @@ internal class SelectionModelChildrenRequestedEventArgs : EventArgs
     }
         
     internal void Initialize(
-        object source,
+        object? source,
         IndexPath sourceIndexPath,
         bool throwOnAccess)
     {
@@ -70,7 +67,7 @@ internal class SelectionModelChildrenRequestedEventArgs : EventArgs
         Children = null;
     }
 
-    private object _source;
+    private object? _source;
     private IndexPath _sourceIndexPath;
     private bool _throwOnAccess;
 }

@@ -57,29 +57,52 @@
             Background="Transparent"
             ClipToBounds="False">
             <Rectangle
-              Name="ActiveRectangle"
+              Name="PART_ActiveRectangle"
               Height="{DynamicResource RangeSliderTrackThemeHeight}"
               HorizontalAlignment="Stretch"
               VerticalAlignment="Center"
               Fill="{TemplateBinding Foreground}"/>
 
             <!--
-              ToolTip container, this is removed in OnApplyTemplate and placed inside the ToolTip
-              You won't be able to target these in Styles as a result, but you can retemplate this
-              control if you want to customize the appearance
-              'ToolTip' can be any type of Control
-              'ToolTipText' should still be present as a TextBlock so the control can set the value
-              within the ToolTip
+              Value tooltips shown while interacting. One Popup per thumb (same display mode as
+              ToolTipSlider): each follows its thumb via PlacementTarget and stays visible briefly
+              after the interaction ends. Both are shown together whenever a value changes.
             -->
-            <Border Name="ToolTip">
-              <TextBlock
-                Name="ToolTipText"
-                Margin="{DynamicResource RangeSliderToolTipPadding}"
-                FontSize="{DynamicResource RangeSliderToolTipFontSize}"/>
-            </Border>
+            <Popup x:Name="PART_PopupMin" IsLightDismissEnabled="False">
+              <Border
+                Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
+                Padding="{DynamicResource ToolTipSliderPadding}"
+                Background="{DynamicResource AcrylicBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
+                BorderThickness="{DynamicResource ToolTipBorderThemeThickness}"
+                BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
+                CornerRadius="{DynamicResource OverlayCornerRadius}">
+                <TextBlock
+                  x:Name="PART_ToolTipTextMin"
+                  Margin="{DynamicResource RangeSliderToolTipPadding}"
+                  FontSize="{DynamicResource RangeSliderToolTipFontSize}"
+                  Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+              </Border>
+            </Popup>
+            <Popup x:Name="PART_PopupMax" IsLightDismissEnabled="False">
+              <Border
+                Margin="{DynamicResource ControlDefaultBoxShadowsMargin}"
+                Padding="{DynamicResource ToolTipSliderPadding}"
+                Background="{DynamicResource AcrylicBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource SurfaceStrokeColorFlyoutBrush}"
+                BorderThickness="{DynamicResource ToolTipBorderThemeThickness}"
+                BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
+                CornerRadius="{DynamicResource OverlayCornerRadius}">
+                <TextBlock
+                  x:Name="PART_ToolTipTextMax"
+                  Margin="{DynamicResource RangeSliderToolTipPadding}"
+                  FontSize="{DynamicResource RangeSliderToolTipFontSize}"
+                  Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+              </Border>
+            </Popup>
 
             <Thumb
-              Name="MinThumb"
+              Name="PART_MinThumb"
               Width="{DynamicResource SliderHorizontalThumbWidth}"
               Height="{DynamicResource SliderHorizontalThumbHeight}"
               VerticalAlignment="Center"
@@ -89,7 +112,7 @@
               TabIndex="0"
               Theme="{StaticResource RangeSliderThumbStyle}"/>
             <Thumb
-              Name="MaxThumb"
+              Name="PART_MaxThumb"
               Width="{DynamicResource SliderHorizontalThumbWidth}"
               Height="{DynamicResource SliderHorizontalThumbHeight}"
               VerticalAlignment="Center"
@@ -107,7 +130,7 @@
       <Setter Property="Fill" Value="{DynamicResource ControlStrongFillColorDisabledBrush}"/>
     </Style>
 
-    <Style Selector="^:disabled /template/ Rectangle#ActiveRectangle">
+    <Style Selector="^:disabled /template/ Rectangle#PART_ActiveRectangle">
       <Setter Property="Fill" Value="{DynamicResource AccentFillColorDisabledBrush}"/>
     </Style>
 

@@ -1,0 +1,58 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:wnd="clr-namespace:AvaloniaFluentUI.Windowing">
+
+  <ControlTheme x:Key="{x:Type wnd:FluentTitleBar}" TargetType="wnd:FluentTitleBar">
+    <Setter Property="ZIndex" Value="99"/>
+    <Setter Property="Height" Value="45"/>
+    <Setter Property="VerticalAlignment" Value="Top"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Margin" Value=" 0 0 140 0"/>
+    <Setter Property="TextElement.Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+    <Setter Property="WindowDecorationProperties.ElementRole" Value="TitleBar"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid
+          HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch"
+          Background="{TemplateBinding Background}"
+          ColumnDefinitions="Auto, Auto, *">
+          <Image
+            Name="Icon"
+            Grid.Column="0"
+            Width="{TemplateBinding IconSize}"
+            Height="{TemplateBinding IconSize}"
+            Margin="10,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            IsVisible="{TemplateBinding IconIsVisible}"
+            Source="{TemplateBinding Icon}"/>
+
+          <TextBlock
+            Name="TitleText"
+            Grid.Column="1"
+            Margin="8,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            FontSize="12"
+            IsVisible="{TemplateBinding TitleIsVisible}"
+            Text="{TemplateBinding Title}"/>
+
+          <ContentPresenter
+            Name="TitleBarContentPresenter"
+            Grid.Column="2"
+            Margin="{TemplateBinding ContentMargin}"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Content="{TemplateBinding Content}"
+            ContentTemplate="{TemplateBinding ContentTemplate}"
+            IsVisible="{TemplateBinding ContentIsVisible}"
+            WindowDecorationProperties.ElementRole="DecorationsElement"/>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>
+

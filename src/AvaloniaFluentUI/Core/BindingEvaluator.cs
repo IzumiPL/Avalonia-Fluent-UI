@@ -57,7 +57,7 @@ internal sealed class BindingEvaluator<T> : StyledElement, IDisposable
     }
 
     [return: NotNullIfNotNull(nameof(binding))]
-    public static BindingEvaluator<T> TryCreate(BindingBase binding)
+    public static BindingEvaluator<T>? TryCreate(BindingBase? binding)
     {
         if (binding is null)
             return null;

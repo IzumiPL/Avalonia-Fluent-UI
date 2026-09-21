@@ -11,7 +11,7 @@ namespace AvaloniaFluentUI.Controls.Primitives;
 /// <remarks>
 /// This control is specific to the <see cref="InfoBar"/> and generally should not be used elsewhere
 /// </remarks>
-public partial class InfoBarPanel : Panel
+public class InfoBarPanel : Panel
 {
     /// <summary>
     /// Defines the <see cref="HorizontalOrientationPadding"/> property

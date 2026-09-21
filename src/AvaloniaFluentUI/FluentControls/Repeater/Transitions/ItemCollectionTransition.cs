@@ -59,5 +59,5 @@ public class ItemCollectionTransition
     private ItemCollectionTransitionTriggers _triggers;
     private Rect _oldBounds;
     private Rect _newBounds;
-    private ItemCollectionTransitionProgress _progress;
+    private ItemCollectionTransitionProgress? _progress;
 }

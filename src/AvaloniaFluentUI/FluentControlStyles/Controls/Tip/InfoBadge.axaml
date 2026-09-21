@@ -83,7 +83,7 @@
 
 
     <Style Selector="^.Information">
-      <Setter Property="Background" Value="{DynamicResource SystemFillColorSolidNeutralBrush}"/>
+      <Setter Property="Background" Value="{DynamicResource SystemFillColorNeutralBrush}"/>
 
       <Style Selector="^.Icon">
         <Setter Property="Width" Value="16"/>

@@ -16,6 +16,10 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class CommandBarFlyout : PopupFlyoutBase
 {
+    
+    protected CommandBarFlyoutCommandBar _commandBar;
+    protected FlyoutPresenter _presenter;
+    
     public CommandBarFlyout()
     {
         // TEMPORARY FIX...REVERT TO CREATEPRESENTER() WHEN NRE ISSUE FIXED
@@ -27,9 +31,6 @@ public class CommandBarFlyout : PopupFlyoutBase
 
         PrimaryCommands.CollectionChanged += (s, e) =>
         {
-            if (_commandBar == null)
-                return;
-
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
@@ -55,9 +56,6 @@ public class CommandBarFlyout : PopupFlyoutBase
 
         SecondaryCommands.CollectionChanged += (sender, e) =>
         {
-            if (_commandBar == null)
-                return;
-
             // We want to ensure that any interaction with secondary items causes the CommandBarFlyout
             // to close, so we'll attach a Click handler to any buttons and Checked/Unchecked handlers
             // to any toggle buttons that we get and close the flyout when they're invoked.
@@ -233,7 +231,4 @@ public class CommandBarFlyout : PopupFlyoutBase
     {
         HideCore(false);
     }
-
-    protected CommandBarFlyoutCommandBar _commandBar;
-    protected FlyoutPresenter _presenter;
 }

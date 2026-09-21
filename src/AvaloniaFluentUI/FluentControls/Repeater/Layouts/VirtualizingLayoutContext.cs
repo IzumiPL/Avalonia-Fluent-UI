@@ -16,19 +16,19 @@ public abstract class VirtualizingLayoutContext : LayoutContext
     /// <summary>
     /// Retrieves the data item in the source found at the specified index.
     /// </summary>
-    public object GetItemAt(int index) =>
+    public object? GetItemAt(int index) =>
         GetItemAtCore(index);
 
     /// <summary>
     /// Retrieves a UIElement that represents the data item in the source found at the specified index.By default, if an element already exists, it is returned; otherwise, a new element is created.
     /// </summary>
-    public Control GetOrCreateElementAt(int index) =>
+    public Control? GetOrCreateElementAt(int index) =>
         GetOrCreateElementAtCore(index, ElementRealizationOptions.None);
 
     /// <summary>
     /// Retrieves a UIElement that represents the data item in the source found at the specified index using the specified options.
     /// </summary>
-    public Control GetOrCreateElementAt(int index, ElementRealizationOptions options) =>
+    public Control? GetOrCreateElementAt(int index, ElementRealizationOptions options) =>
         GetOrCreateElementAtCore(index, options);
 
     /// <summary>
@@ -59,13 +59,13 @@ public abstract class VirtualizingLayoutContext : LayoutContext
     /// <summary>
     /// When implemented in a derived class, retrieves the data item in the source found at the specified index.
     /// </summary>
-    protected abstract object GetItemAtCore(int index);
+    protected abstract object? GetItemAtCore(int index);
 
     /// <summary>
     /// When implemented in a derived class, retrieves a UIElement that represents the data item in the 
     /// source found at the specified index using the specified options.
     /// </summary>
-    protected abstract Control GetOrCreateElementAtCore(int index, ElementRealizationOptions options);
+    protected abstract Control? GetOrCreateElementAtCore(int index, ElementRealizationOptions options);
 
     /// <summary>
     /// When implemented in a derived class, clears the specified UIElement and allows it to be either re-used or released.
@@ -113,5 +113,5 @@ public abstract class VirtualizingLayoutContext : LayoutContext
         return _contextAdapter;
     }
 
-    private NonVirtualizingLayoutContext _contextAdapter;
+    private NonVirtualizingLayoutContext? _contextAdapter;
 }

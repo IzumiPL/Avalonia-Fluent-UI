@@ -154,16 +154,16 @@
   <data name="Stop" xml:space="preserve">
     <value>Stop</value>
   </data>
-  <data name="TabViewAddButtonTooltip" xml:space="preserve">
+  <data name="AddNewTab" xml:space="preserve">
     <value>Add new tab</value>
   </data>
-  <data name="TabViewCloseButtonTooltipWithKA" xml:space="preserve">
+  <data name="CloseTabCF" xml:space="preserve">
     <value>Close tab (Ctrl+F4)</value>
   </data>
-  <data name="TabViewScrollDecreaseButtonTooltip" xml:space="preserve">
+  <data name="ScrollTabListBackward" xml:space="preserve">
     <value>Scroll tab list backward</value>
   </data>
-  <data name="TabViewScrollIncreaseButtonTooltip" xml:space="preserve">
+  <data name="ScrollTabListForward" xml:space="preserve">
     <value>Scroll tab list forward</value>
   </data>
   <data name="Undo" xml:space="preserve">

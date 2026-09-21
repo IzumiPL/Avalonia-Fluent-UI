@@ -28,13 +28,9 @@ public partial class AvatarViewPageViewModel : ViewModelBase
     [ObservableProperty]
     private bool _avatarIsCircular = true;
 
-    public AvatarViewPageViewModel()
+    protected override void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
     {
-        LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
-    }
-
-    private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
-    {
+        base.OnLanguageChanged(sender, e);
         OnPropertyChanged(nameof(Title));
     }
 }

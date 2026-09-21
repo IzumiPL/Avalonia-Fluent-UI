@@ -93,7 +93,7 @@ public class MultiSelectionView : SelectingItemsControl
     {
         foreach (var item in Items)
         {
-            if (ContainerFromItem(item) is MultiSelectionComboBoxItem container)
+            if (item != null && ContainerFromItem(item) is MultiSelectionComboBoxItem container)
             {
                 container.IsSelected = SelectedItems?.Contains(item) ?? false;
             }

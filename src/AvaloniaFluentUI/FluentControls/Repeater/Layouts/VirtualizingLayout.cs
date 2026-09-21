@@ -32,7 +32,7 @@ public abstract class VirtualizingLayout : Layout
         // children during measure, then an ArrangeOverride is not required.
         finalSize;
 
-    protected internal virtual void OnItemsChangedCore(VirtualizingLayoutContext context, object source,
+    protected internal virtual void OnItemsChangedCore(VirtualizingLayoutContext context, object? source,
         NotifyCollectionChangedEventArgs args)
     {
         InvalidateMeasure();

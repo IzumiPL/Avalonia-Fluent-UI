@@ -23,7 +23,7 @@ public partial class ProgressPageViewModel : ViewModelBase
     public Orientation[] ProgressBarOrientations => [ Orientation.Horizontal, Orientation.Vertical ];
 
     [ObservableProperty]
-    private bool _filledProgressBarIsIndeterminate;
+    private bool _filledProgressBarIsIndeterminate = true;
 
     [ObservableProperty]
     private double _filledProgressBarCurrentValue = 64;

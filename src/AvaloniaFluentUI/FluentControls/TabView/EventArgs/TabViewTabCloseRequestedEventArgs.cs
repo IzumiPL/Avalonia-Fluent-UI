@@ -7,7 +7,7 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class TabViewTabCloseRequestedEventArgs : EventArgs
 {
-    internal TabViewTabCloseRequestedEventArgs(object item, TabViewItem tab)
+    internal TabViewTabCloseRequestedEventArgs(object? item, TabViewItem tab)
     {
         Item = item;
         Tab = tab;
@@ -17,7 +17,7 @@ public class TabViewTabCloseRequestedEventArgs : EventArgs
     /// Gets a value that represents the data context for the tab in which 
     /// a close is being requested
     /// </summary>
-    public object Item { get; }
+    public object? Item { get; }
 
     /// <summary>
     /// Gets the tab in which a close is being requested

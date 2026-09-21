@@ -11,7 +11,7 @@ internal sealed class TransitionManager
         _owner = owner;
     }
 
-    public void OnTransitionProviderChanged(ItemCollectionTransitionProvider newProvider)
+    public void OnTransitionProviderChanged(ItemCollectionTransitionProvider? newProvider)
     {
         // While an element is hiding, we have ownership of it. We need
         // to know when its animation completes so that we give it back
@@ -35,7 +35,7 @@ internal sealed class TransitionManager
         _hasRecordedLayoutTransitions = true;
     }
 
-    public void OnItemsSourceChanged(object _, NotifyCollectionChangedEventArgs args)
+    public void OnItemsSourceChanged(object? _, NotifyCollectionChangedEventArgs args)
     {
         switch (args.Action)
         {
@@ -150,7 +150,7 @@ internal sealed class TransitionManager
     }
 
     private readonly ItemsRepeater _owner;
-    private ItemCollectionTransitionProvider _transitionProvider;
+    private ItemCollectionTransitionProvider? _transitionProvider;
 
     private bool _hasRecordedAdds;
     private bool _hasRecordedRemoves;

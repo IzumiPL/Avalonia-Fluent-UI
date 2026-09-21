@@ -7,9 +7,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Collections;
-using Avalonia.Collections.Pooled;
 using Avalonia.Data;
 using Avalonia.Logging;
 using AvaloniaFluentUI.Core;
@@ -18,7 +16,7 @@ namespace AvaloniaFluentUI.Data;
 
 public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollectionView, IList
 {
-    public GroupedDataCollectionView(IEnumerable collection, BindingBase itemsBinding = null)
+    public GroupedDataCollectionView(IEnumerable collection, BindingBase? itemsBinding = null)
         : this(collection, itemsBinding, false, null, null, null) { }
 
     public GroupedDataCollectionView(IEnumerable collection, BindingBase itemsBinding,
@@ -37,10 +35,10 @@ public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollec
        IList<SortDescription> sortDescriptions)
         : this(collection, itemsBinding, false, null, null, sortDescriptions) { }
 
-    public GroupedDataCollectionView(IEnumerable collection, BindingBase itemsBinding,
+    public GroupedDataCollectionView(IEnumerable collection, BindingBase? itemsBinding,
         bool isLiveShaping,
-        Predicate<object> filter, IList<string> filterProperties,
-        IList<SortDescription> sortDescriptions)
+        Predicate<object>? filter, IList<string>? filterProperties,
+        IList<SortDescription>? sortDescriptions)
     {
         collection = collection ?? throw new ArgumentNullException(nameof(collection));
 
@@ -91,7 +89,7 @@ public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollec
 
     public object CurrentItem => GetItemAtIndex(CurrentPosition);
 
-    public object this[int index]
+    public object? this[int index]
     {
         get => GetItemAtIndex(index);
         set => ThrowICollectionViewNotMutableWhenGrouping();
@@ -185,7 +183,7 @@ public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollec
         return -1;
     }
 
-    public bool Contains(object item) => IndexOf(item) != -1;
+    public bool Contains(object? item) => IndexOf(item) != -1;
 
     public void CopyTo(object[] array, int arrayIndex)
     {
@@ -212,8 +210,8 @@ public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollec
         return new RefreshDeferer(ReleaseDefer, CurrentItem);
     }
 
-    internal void UpdateViewFromCollectionViewSource(Predicate<object> filter, IList<string> filterProperties,
-        IList<SortDescription> sortDescriptions)
+    internal void UpdateViewFromCollectionViewSource(Predicate<object> filter, IList<string>? filterProperties,
+        IList<SortDescription>? sortDescriptions)
     {
         using var defer = DeferRefresh();
                 
@@ -249,7 +247,7 @@ public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollec
         }
     }
 
-    private object GetItemAtIndex(int index)
+    private object? GetItemAtIndex(int index)
     {
         if (index == -1)
             return null;
@@ -511,7 +509,7 @@ public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollec
             return count + index;
         }
 
-        NotifyCollectionChangedEventArgs newArgs = null;
+        NotifyCollectionChangedEventArgs? newArgs = null;
 
         switch (args.Action)
         {
@@ -571,7 +569,7 @@ public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollec
 
     // SORTING & FILTERING 
 
-    internal IList<SortDescription> GetSortDescriptions()
+    internal IList<SortDescription>? GetSortDescriptions()
     {
         // The getter for the property will materialize the items
         // Therefore, we need a way to get the sort descriptions for SpecializedCollectionViewGroup
@@ -726,11 +724,11 @@ public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollec
 
     bool ICollectionView.HasMoreItems => false;
 
-    void IList.Insert(int index, object item) => ThrowICollectionViewNotMutableWhenGrouping();
+    void IList.Insert(int index, object? item) => ThrowICollectionViewNotMutableWhenGrouping();
 
     void IList.RemoveAt(int index) => ThrowICollectionViewNotMutableWhenGrouping();
 
-    int IList.Add(object item)
+    int IList.Add(object? item)
     {
         ThrowICollectionViewNotMutableWhenGrouping();
         return -1;
@@ -738,9 +736,9 @@ public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollec
 
     void IList.Clear() => ThrowICollectionViewNotMutableWhenGrouping();
 
-    bool IList.Contains(object value) => Contains(value);
+    bool IList.Contains(object? value) => Contains(value);
 
-    void IList.Remove(object value) => Remove(value);
+    void IList.Remove(object? value) => Remove(value);
 
     void ICollection.CopyTo(Array array, int index)
     {
@@ -761,7 +759,7 @@ public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollec
     private bool _hasSortOrFilter;
     private Predicate<object> _filter;
     private HashSet<string> _filterProperties;
-    private IList<SortDescription> _sortDescriptions;
+    private IList<SortDescription>? _sortDescriptions;
     private bool _ignoreGroupChanges;
 
 
@@ -772,7 +770,7 @@ public sealed class GroupedDataCollectionView : ICollectionView, IAdvancedCollec
             _owner = owner;
         }
 
-        public object Current { get; private set; }
+        public object? Current { get; private set; }
 
         public bool MoveNext()
         {

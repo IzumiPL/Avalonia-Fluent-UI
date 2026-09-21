@@ -24,7 +24,7 @@ internal struct IndexPath : IComparable<IndexPath>, IEquatable<IndexPath>
         };
     }
 
-    public IndexPath(IEnumerable<int> indices)
+    public IndexPath(IEnumerable<int>? indices)
     {
         _path = indices != null ? new List<int>(indices) : new List<int>();
     }

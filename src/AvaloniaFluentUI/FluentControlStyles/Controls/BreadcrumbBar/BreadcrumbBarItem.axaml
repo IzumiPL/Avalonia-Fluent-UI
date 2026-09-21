@@ -290,7 +290,7 @@
       </Style>
     </Style>
 
-    <Style Selector="^:ellipsisDropDown">
+    <Style Selector="^:ellipsis-drop-down">
       <Setter Property="Template" Value="{DynamicResource EllipsisDropDownBreadcrumbBarItemTemplate}"/>
 
       <Style Selector="^ /template/ Border#LayoutRoot">

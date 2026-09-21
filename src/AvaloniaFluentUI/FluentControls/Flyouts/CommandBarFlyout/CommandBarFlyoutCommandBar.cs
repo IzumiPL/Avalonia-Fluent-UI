@@ -15,7 +15,7 @@ namespace AvaloniaFluentUI.Controls;
 /// This class should be treated as internal to AvaloniaFluentUI and not used outside of 
 /// the CommandBarFlyout implementations.
 /// </remarks>
-[TemplatePart(s_tpMoreButton, typeof(Button))]
+[TemplatePart(MORE_BUTTON, typeof(Button))]
 public class CommandBarFlyoutCommandBar : CommandBar
 {
     // As said in the Template, this is a modified version of whats in WinUI b/c the WinUI version
@@ -27,13 +27,21 @@ public class CommandBarFlyoutCommandBar : CommandBar
     // present, b/c I cannot think of any reason for this design. Anyway, things are different, but
     // the end result behavior should still be the same (or very close to it)
     // One drawback, is we always open down, at least for now.
+    
+    private List<Control>? _horizontallyAccessibleControls;
+    private List<Control>? _verticallyAccessibleControls;
+
+    private Button? _moreButton;
+    private CommandBarFlyout? _owningFlyout;
+
+    private const string MORE_BUTTON = "MoreButton";
 
     public CommandBarFlyoutCommandBar()
     {
         // Yes, all this is done in the ctor in WinUI
 
         // Treated as Loaded Event
-        AttachedToVisualTree += (_, __) =>
+        AttachedToVisualTree += (_, _) =>
         {
             //UpdateUI(!_commandBarFlyoutIsOpening);
 
@@ -54,9 +62,12 @@ public class CommandBarFlyoutCommandBar : CommandBar
                         bool handled = false;
                         for (int i = 0; i < PrimaryCommands.Count; i++)
                         {
-                            if (IsControlFocusable(PrimaryCommands[i] as Control, false))
+                            if (IsControlFocusable(PrimaryCommands[i] as Control))
                             {
-                                (PrimaryCommands[i] as InputElement).Focus(NavigationMethod.Unspecified);
+                                if (PrimaryCommands[i] is InputElement ie)
+                                {
+                                    ie.Focus();
+                                }
                                 handled = true;
                                 break;
                             }
@@ -66,7 +77,7 @@ public class CommandBarFlyoutCommandBar : CommandBar
                         {
                             if (_moreButton != null && _moreButton.IsVisible)
                             {
-                                _moreButton.Focus(NavigationMethod.Unspecified);
+                                _moreButton.Focus();
                             }
                         }
                     }
@@ -74,7 +85,7 @@ public class CommandBarFlyoutCommandBar : CommandBar
                     {
                         if (_moreButton != null && _moreButton.IsVisible)
                         {
-                            _moreButton.Focus(NavigationMethod.Unspecified);
+                            _moreButton.Focus();
                         }
                     }
 
@@ -82,7 +93,7 @@ public class CommandBarFlyoutCommandBar : CommandBar
             }
         };
 
-        Closing += (_, __) =>
+        Closing += (_, _) =>
         {
             if (_owningFlyout != null && _owningFlyout.IsOpen)
             {
@@ -94,12 +105,12 @@ public class CommandBarFlyoutCommandBar : CommandBar
             }
         };
 
-        PrimaryCommands.CollectionChanged += (_, __) =>
+        PrimaryCommands.CollectionChanged += (_, _) =>
         {
             PopulateAccessibleControls();
         };
 
-        SecondaryCommands.CollectionChanged += (_, __) =>
+        SecondaryCommands.CollectionChanged += (_, _) =>
         {
             PopulateAccessibleControls();
         };
@@ -111,7 +122,7 @@ public class CommandBarFlyoutCommandBar : CommandBar
     {
         base.OnApplyTemplate(e);
 
-        _moreButton = e.NameScope.Find<Button>(s_tpMoreButton);
+        _moreButton = e.NameScope.Find<Button>(MORE_BUTTON);
 
         PopulateAccessibleControls();
     }
@@ -126,7 +137,7 @@ public class CommandBarFlyoutCommandBar : CommandBar
         else
         {
             _horizontallyAccessibleControls.Clear();
-            _verticallyAccessibleControls.Clear();
+            _verticallyAccessibleControls?.Clear();
         }
 
         for (int i = 0; i < PrimaryCommands.Count; i++)
@@ -134,21 +145,21 @@ public class CommandBarFlyoutCommandBar : CommandBar
             if (PrimaryCommands[i] is Control c)
             {
                 _horizontallyAccessibleControls.Add(c);
-                _verticallyAccessibleControls.Add(c);
+                _verticallyAccessibleControls?.Add(c);
             }
         }
 
         if (_moreButton != null)
         {
             _horizontallyAccessibleControls.Add(_moreButton);
-            _verticallyAccessibleControls.Add(_moreButton);
+            _verticallyAccessibleControls?.Add(_moreButton);
         }
 
         for (int i = 0; i < SecondaryCommands.Count; i++)
         {
             if (SecondaryCommands[i] is Control c)
             {
-                _verticallyAccessibleControls.Add(c);
+                _verticallyAccessibleControls?.Add(c);
             }
         }
     }
@@ -161,7 +172,7 @@ public class CommandBarFlyoutCommandBar : CommandBar
         switch (args.Key)
         {
             case Key.Tab:
-                var current = TopLevel.GetTopLevel(_owningFlyout.Target).FocusManager.GetFocusedElement();
+                var current = TopLevel.GetTopLevel(_owningFlyout?.Target)?.FocusManager.GetFocusedElement();
 
                 if (current == _moreButton)
                 {
@@ -173,20 +184,22 @@ public class CommandBarFlyoutCommandBar : CommandBar
 
                     for (int i = 0; i < SecondaryCommands.Count; i++)
                     {
-                        if (IsControlFocusable(SecondaryCommands[i] as Control, false))
+                        if (IsControlFocusable(SecondaryCommands[i] as Control))
                         {
-                            (SecondaryCommands[i] as InputElement).Focus(NavigationMethod.Tab);
+                            if (SecondaryCommands[i] is InputElement ie)
+                            {
+                                ie.Focus(NavigationMethod.Tab);
+                            }
                             args.Handled = true;
                             break;
                         }
                     }
                 }
 
-                if (!args.Handled && current != null)
+                if (!args.Handled && current != null && current is ICommandBarElement element)
                 {
-                    if (PrimaryCommands.Contains(current as ICommandBarElement))
+                    if (PrimaryCommands.Contains(element))
                     {
-
                         // Despite calling IsOpen above, apparently the SecondaryCommands aren't yet visible
                         // and added to the tree, which means the below will fail to move focus and it will take
                         // two tabs to actually move the focus on the first time. So we use this workaround
@@ -202,11 +215,13 @@ public class CommandBarFlyoutCommandBar : CommandBar
                         {
                             for (int i = 0; i < SecondaryCommands.Count; i++)
                             {
-                                if (IsControlFocusable(SecondaryCommands[i] as Control, false))
+                                if (IsControlFocusable(SecondaryCommands[i] as Control))
                                 {
-                                    (SecondaryCommands[i] as InputElement).Focus(NavigationMethod.Tab);
+                                    if (SecondaryCommands[i] is InputElement ie)
+                                    {
+                                        ie.Focus(NavigationMethod.Tab);
+                                    }
                                     args.Handled = true;
-                                    //Debug.Assert(FocusManager.Instance.Current == SecondaryCommands[i]);
                                     break;
                                 }
                             }
@@ -221,13 +236,16 @@ public class CommandBarFlyoutCommandBar : CommandBar
                             FocusFirstSecondary();
                         }
                     }
-                    else if (SecondaryCommands.Contains(current as ICommandBarElement))
+                    else if (current is ICommandBarElement ce && SecondaryCommands.Contains(ce))
                     {
                         for (int i = 0; i < PrimaryCommands.Count; i++)
                         {
-                            if (IsControlFocusable(PrimaryCommands[i] as Control, false))
+                            if (IsControlFocusable(PrimaryCommands[i] as Control))
                             {
-                                (PrimaryCommands[i] as InputElement).Focus(NavigationMethod.Tab);
+                                if (PrimaryCommands[i] is InputElement ie)
+                                {
+                                    ie.Focus(NavigationMethod.Tab);
+                                }
                                 args.Handled = true;
                                 break;
                             }
@@ -264,12 +282,12 @@ public class CommandBarFlyoutCommandBar : CommandBar
                 bool isUp = args.Key == Key.Up;
                 bool isDown = args.Key == Key.Down;
 
-                var accessibleCotnrols = (isUp || isDown) ? _verticallyAccessibleControls : _horizontallyAccessibleControls;
-                int startIndex = (isLeft || isUp) ? accessibleCotnrols.Count - 1 : 0;
-                int endIndex = (isLeft || isUp) ? -1 : accessibleCotnrols.Count;
+                var accessibleControls = (isUp || isDown) ? _verticallyAccessibleControls : _horizontallyAccessibleControls;
+                int startIndex = (isLeft || isUp) ? accessibleControls.Count - 1 : 0;
+                int endIndex = (isLeft || isUp) ? -1 : accessibleControls.Count;
                 int deltaIndex = (isLeft || isUp) ? -1 : 1;
                 bool shouldLoop = (isUp || isDown);
-                Control focused = null;
+                Control? focused = null;
                 int focusedIndex = -1;
 
                 for (int i = startIndex;
@@ -288,7 +306,7 @@ public class CommandBarFlyoutCommandBar : CommandBar
                         }
                     }
 
-                    var control = accessibleCotnrols[i];
+                    var control = accessibleControls[i];
 
                     if (focused == null)
                     {
@@ -298,7 +316,7 @@ public class CommandBarFlyoutCommandBar : CommandBar
                             focusedIndex = i;
                         }
                     }
-                    else if (IsControlFocusable(control, false))
+                    else if (IsControlFocusable(control))
                     {
                         if (control is ICommandBarElement ele)
                         {
@@ -324,23 +342,13 @@ public class CommandBarFlyoutCommandBar : CommandBar
         base.OnKeyDown(args);
     }
 
-    private bool IsControlFocusable(Control control, bool checkTabStop)
+    private bool IsControlFocusable(Control? control)
     {
-        return control != null &&
-            control.IsVisible && control.IsEnabled &&
-            control.Focusable;// && (checkTabStop && KeyboardNavigation.GetIsTabStop(control as InputElement));
+        return control != null && control.IsVisible && control.IsEnabled && control.Focusable;
     }
 
     internal void SetOwningFlyout(CommandBarFlyout f)
     {
         _owningFlyout = f;
     }
-    
-    private List<Control>? _horizontallyAccessibleControls;
-    private List<Control>? _verticallyAccessibleControls;
-
-    private Button? _moreButton;
-    private CommandBarFlyout? _owningFlyout;
-
-    private const string s_tpMoreButton = "MoreButton";
 }

@@ -24,7 +24,7 @@ public class SortDescription
     /// </summary>
     /// <param name="direction">The direction this description should sort items</param>
     /// <param name="comparer">The custom IComparer implementation</param>
-    public SortDescription(SortDirection direction, IComparer comparer = null)
+    public SortDescription(SortDirection direction, IComparer? comparer = null)
         : this(null, null, direction, comparer) { }
 
     /// <summary>
@@ -35,7 +35,7 @@ public class SortDescription
     /// from the binding, if applicable</param>
     /// <param name="comparer">The custom IComparer implementation</param>
     /// <remarks>Note: nested properties are not supported, particularly for live shaping</remarks>
-    public SortDescription(BindingBase property, string propertyName = null, IComparer comparer = null)
+    public SortDescription(BindingBase property, string? propertyName = null, IComparer? comparer = null)
         : this(property, propertyName, SortDirection.Ascending, comparer) { }
 
     /// <summary>
@@ -47,7 +47,7 @@ public class SortDescription
     /// <param name="direction">The direction this description should sort items</param>
     /// <param name="comparer">The custom IComparer implementation</param>
     /// <remarks>Note: nested properties are not supported, particularly for live shaping</remarks>
-    public SortDescription(BindingBase property, string propertyName, SortDirection direction, IComparer comparer)
+    public SortDescription(BindingBase? property, string? propertyName, SortDirection direction, IComparer? comparer)
     {
         Property = property;
         _propertyName = propertyName;
@@ -59,13 +59,13 @@ public class SortDescription
     /// Gets or sets the property this sort description uses to sort.
     /// </summary>
     [AssignBinding]
-    public BindingBase Property { get; set; }
+    public BindingBase? Property { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the property used for sorting. If the name hasn't been set,
     /// it will be set from the binding, if possible. Note that nested properties are not supported
     /// </summary>
-    public string PropertyName
+    public string? PropertyName
     {
         get
         {
@@ -77,7 +77,7 @@ public class SortDescription
                 }
                 else if (Property is CompiledBindingExtension cbe)
                 {
-                    _propertyName = cbe.Path.ToString();
+                    _propertyName = cbe.Path?.ToString();
                 }
             }
 
@@ -108,7 +108,7 @@ public class SortDescription
         Func<object, object> getter,
         Type propertyType,
         SortDirection direction,
-        IComparer comparer)
+        IComparer? comparer)
     {
         var x = new CompiledBindingPathBuilder();
         x = x.Property(
@@ -121,7 +121,7 @@ public class SortDescription
         return new SortDescription(cb, propertyName, direction, comparer);
     }
 
-    private string _propertyName;
+    private string? _propertyName;
 
     private class ObjectComparer : IComparer
     {
@@ -129,7 +129,7 @@ public class SortDescription
 
         public static readonly IComparer Instance = new ObjectComparer();
 
-        public int Compare(object x, object y)
+        public int Compare(object? x, object? y)
         {
             var cx = x as IComparable;
             var cy = y as IComparable;

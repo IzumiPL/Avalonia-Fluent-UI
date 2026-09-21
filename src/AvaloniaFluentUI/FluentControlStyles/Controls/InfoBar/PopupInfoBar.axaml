@@ -4,7 +4,7 @@
   xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
 
-  <Thickness x:Key="PopupInfoBarMargin">0,3,14,0</Thickness>
+  <Thickness x:Key="PopupInfoBarMargin">0,3.5,14,0</Thickness>
 
   <ControlTheme x:Key="{x:Type ui:PopupInfoBar}" TargetType="ui:PopupInfoBar">
     <Setter Property="Background" Value="{DynamicResource PopupControlBackgroundBrush}"/>
@@ -28,14 +28,14 @@
           BoxShadow="{DynamicResource PopupDefaultBoxShadow}"
           CornerRadius="{TemplateBinding CornerRadius}">
           <Grid
+            Name="PART_Layout"
             Margin="{TemplateBinding Padding}"
-            VerticalAlignment="Center"
-            ColumnDefinitions="Auto, *, Auto"
-            RowDefinitions="Auto, *">
+            VerticalAlignment="Center">
             <Panel
               Name="IconArea"
               Grid.Row="0"
-              Grid.Column="0">
+              Grid.Column="0"
+              Margin="0,-1,0,0">
               <Ellipse
                 Name="IconBackground"
                 Width="16"
@@ -54,6 +54,7 @@
               Name="PART_TitleText"
               Grid.Row="0"
               Grid.Column="1"
+              Margin="-5,0,0,0"
               Classes="StrongBody"
               Text="{TemplateBinding Title}"
               TextTrimming="CharacterEllipsis"/>
@@ -61,8 +62,7 @@
               Name="ContentPresenter"
               Grid.Row="1"
               Grid.Column="1"
-              Grid.ColumnSpan="2"
-              Margin="0,0,5,0"
+              Margin="-5,-10,5,0"
               Content="{TemplateBinding Content}"
               FontSize="13"
               TextWrapping="Wrap"/>
@@ -71,8 +71,8 @@
               Name="PART_CloseButton"
               Grid.Row="0"
               Grid.Column="2"
-              Width="24"
-              Height="24"
+              Width="32"
+              Height="32"
               Margin="6,0,0,0"
               HorizontalAlignment="Right"
               VerticalAlignment="Top"
@@ -80,13 +80,40 @@
               Content="{x:Static fi:FluentIcon.Close}"
               Cursor="Hand"
               Foreground="{TemplateBinding Foreground}"
-              IconHeight="8"
-              IconWidth="8"
+              IconHeight="10"
+              IconWidth="10"
               IsVisible="{TemplateBinding IsClosable}"/>
           </Grid>
         </Border>
       </ControlTemplate>
     </Setter>
+
+    <Style Selector="^[Orientation=Horizontal]">
+      <Setter Property="Padding" Value="10 8 5 8"/>
+
+      <Style Selector="^[IsClosable=False]">
+        <Setter Property="Padding" Value="10 8 5 14"/>
+      </Style>
+
+      <Style Selector="^ /template/ Panel#IconArea">
+        <Setter Property="Margin" Value="0 4.5 0 0"/>
+      </Style>
+
+      <Style Selector="^ /template/ TextBlock#PART_TitleText">
+        <Setter Property="Grid.Column" Value="1"/>
+        <Setter Property="Margin" Value="-5 7 0 0"/>
+      </Style>
+
+      <Style Selector="^ /template/ ContentPresenter#ContentPresenter">
+        <Setter Property="Grid.Row" Value="0"/>
+        <Setter Property="Grid.Column" Value="2"/>
+        <Setter Property="Margin" Value="12 6 5 0"/>
+      </Style>
+
+      <Style Selector="^ /template/ ui|ToolButton#PART_CloseButton">
+        <Setter Property="Grid.Column" Value="3"/>
+      </Style>
+    </Style>
 
     <Style Selector="^[Severity=Informational]">
       <Setter Property="Background" Value="{DynamicResource SystemFillColorAttentionBackgroundBrush}"/>
@@ -145,6 +172,14 @@
     <Style Selector="^[Severity=Custom]">
       <Style Selector="^ /template/ Panel#IconArea">
         <Setter Property="IsVisible" Value="False"/>
+      </Style>
+
+      <Style Selector="^[IsClosable=True]">
+        <Setter Property="Padding" Value="20 10 5 10"/>
+      </Style>
+
+      <Style Selector="^[IsClosable=False]">
+        <Setter Property="Padding" Value="20 10 5 14"/>
       </Style>
     </Style>
   </ControlTheme>

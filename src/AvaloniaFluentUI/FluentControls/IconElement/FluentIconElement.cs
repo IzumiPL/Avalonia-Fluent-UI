@@ -62,7 +62,7 @@ public class FluentIconElement : IconElement
         if (value == null)
             return;
 
-        IconElement icon = null;
+        IconElement? icon = null;
 
         // Already an IconElement — use directly
         if (value is IconElement existing)
@@ -129,5 +129,5 @@ public class FluentIconElement : IconElement
         return LayoutHelper.ArrangeChild(_child, finalSize, new Thickness());
     }
 
-    private Control _child;
+    private Control? _child;
 }

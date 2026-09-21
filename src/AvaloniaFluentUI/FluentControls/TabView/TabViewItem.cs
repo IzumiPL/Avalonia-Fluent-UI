@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using Avalonia;
-using Avalonia.Automation;
 using Avalonia.Automation.Peers;
 using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
@@ -16,19 +15,18 @@ using Avalonia.Utilities;
 using Avalonia.VisualTree;
 using AvaloniaFluentUI.Core;
 using AvaloniaFluentUI.Controls.Internal;
-using AvaloniaFluentUI.Helpers;
 using Path = Avalonia.Controls.Shapes.Path;
 
 namespace AvaloniaFluentUI.Controls;
 
 
-[PseudoClasses(SharedPseudoclasses.s_pcIcon, SharedPseudoclasses.s_pcCompact, s_pcCloseCollapsed)]
+[PseudoClasses(PC_DRAGGING)]
+[PseudoClasses(SharedPseudoclasses.s_pcIcon, SharedPseudoclasses.s_pcCompact, PC_CLOSE_COLLAPSED)]
 [PseudoClasses(SharedPseudoclasses.s_pcBorderRight, SharedPseudoclasses.s_pcBorderLeft, SharedPseudoclasses.s_pcNoBorder)]
-[PseudoClasses(s_pcDragging)]
-[TemplatePart(s_tpTabSeparator, typeof(Visual))]
-[TemplatePart(s_tpContentPresenter, typeof(ContentPresenter))]
-[TemplatePart(s_tpCloseButton, typeof(Button))]
-[TemplatePart(s_tpSelectedBackgroundPathName, typeof(Avalonia.Controls.Shapes.Path))]
+[TemplatePart(Name = CLOSE_BUTTON,              Type = typeof(Button))]
+[TemplatePart(Name = TAB_SEPARATOR,             Type = typeof(Visual))]
+[TemplatePart(Name = CONTENT_PRESENTER,         Type = typeof(ContentPresenter))]
+[TemplatePart(Name = SELECTED_BACKGROUND_PATH,  Type = typeof(Path))]
 public partial class TabViewItem : SelectorItem
 {
      /// <summary>
@@ -46,8 +44,8 @@ public partial class TabViewItem : SelectorItem
     /// <summary>
     /// Defines the <see cref="IconSource"/> property
     /// </summary>
-    public static readonly StyledProperty<IconSource> IconSourceProperty =
-        AvaloniaProperty.Register<NavigationViewItem, IconSource>(nameof(IconSource));
+    public static readonly StyledProperty<object?> IconSourceProperty =
+        AvaloniaProperty.Register<TabViewItem, object?>(nameof(IconSource));
 
     /// <summary>
     /// Defines the <see cref="IsClosable"/> property
@@ -80,9 +78,12 @@ public partial class TabViewItem : SelectorItem
     }
 
     /// <summary>
-    /// Gets or sets a value for the IconSource to be displayed within the tab
+    /// Gets or sets a value for the icon to be displayed within the tab. The icon is rendered
+    /// by a <see cref="FluentIconElement"/>, so any value it understands (a <see cref="Geometry"/>
+    /// such as <see cref="FluentIcon"/>, an <see cref="IconSource"/>, an <see cref="IImage"/>,
+    /// an <see cref="IconElement"/> or a string) is accepted directly.
     /// </summary>
-    public IconSource IconSource
+    public object? IconSource
     {
         get => GetValue(IconSourceProperty);
         set => SetValue(IconSourceProperty, value);
@@ -115,15 +116,51 @@ public partial class TabViewItem : SelectorItem
 
     internal bool IsContainerFromTemplate { get; set; }
 
-    internal Button CloseButton => _closeButton;
+    /// <summary>
+    /// When this item was created by the TabView's TabItemTemplate, holds the content that the
+    /// template declared so it can be restored if Avalonia's container preparation overwrites
+    /// <see cref="Content"/> while recycling containers.
+    /// </summary>
+    internal object? TemplateContent { get; set; }
 
-    private const string s_pcCloseCollapsed = ":closeCollapsed";
-    private const string s_pcDragging = ":dragging";
+    /// <summary>
+    /// The data item whose DataContext was pinned onto <see cref="TemplateContent"/>. Used to tell
+    /// our own pinned value apart from a DataContext the user set in their template.
+    /// </summary>
+    internal object? TemplateContentOwner { get; set; }
 
-    private const string s_tpSelectedBackgroundPathName = "SelectedBackgroundPath";
-    private const string s_tpTabSeparator = "TabSeparator";
-    private const string s_tpContentPresenter = "ContentPresenter";
-    internal const string s_tpCloseButton = "CloseButton";
+    internal Button? CloseButton => _closeButton;
+    
+    private Button? _closeButton;
+    private ContentPresenter? _headerContentPresenter;
+    private TabViewWidthMode _tabViewWidthMode = TabViewWidthMode.Equal;
+    private TabViewCloseButtonOverlayMode _closeButtonOverlayMode = TabViewCloseButtonOverlayMode.Auto;
+    private CompositeDisposable? _tabDragRevoker;
+    private Path? _selectedBackgroundPath;
+    private TabViewTabStripLocation _location;
+
+    private bool _hasPointerCapture;
+    private bool _isMiddlePointerButtonPressed;
+    private bool _isPointerOver;
+    private Point _lastPointerPressedPosition;
+    private int _dragPointerId;
+    private bool _isCheckingForDrag;
+
+    private WeakReference<TabView?>? _parentTabView;
+
+    private TargetWeakEventSubscriber<TabView, TabViewTabDragStartingEventArgs> _startingDragSub;
+    private TargetWeakEventSubscriber<TabView, TabViewTabDragCompletedEventArgs> _completedDragSub;
+    
+    private const string OVERLAY_CORNER_RADIUS = "OverlayCornerRadius";
+    private const int TARGET_RECT_WIDTH_INCREMENT = 2;
+    
+    private const string PC_CLOSE_COLLAPSED = ":closeCollapsed";
+    private const string PC_DRAGGING = ":dragging";
+
+    private const string SELECTED_BACKGROUND_PATH = "SelectedBackgroundPath";
+    private const string TAB_SEPARATOR = "TabSeparator";
+    private const string CONTENT_PRESENTER = "ContentPresenter";
+    internal const string CLOSE_BUTTON = "CloseButton";
     
     public TabViewItem()
     {
@@ -138,7 +175,7 @@ public partial class TabViewItem : SelectorItem
         FocusableProperty.OverrideDefaultValue<TabViewItem>(true);
     }
     
-    protected internal TabView ParentTabView
+    protected internal TabView? ParentTabView
     {
         get
         {
@@ -147,10 +184,10 @@ public partial class TabViewItem : SelectorItem
 
             return null;
         }
-        set => _parentTabView = new WeakReference<TabView>(value);
+        set => _parentTabView = new WeakReference<TabView?>(value);
     }
 
-    public Visual TabSeparator { get; private set; }
+    public Visual? TabSeparator { get; private set; }
 
     internal bool IsBeingDragged { get; set; }
 
@@ -184,25 +221,16 @@ public partial class TabViewItem : SelectorItem
 
         base.OnApplyTemplate(e);
 
-        _selectedBackgroundPath = e.NameScope.Find<Path>(s_tpSelectedBackgroundPathName);
+        _selectedBackgroundPath = e.NameScope.Find<Path>(SELECTED_BACKGROUND_PATH);
         _selectedBackgroundPath?.SizeChanged += OnSelectedBackgroundPathSizeChanged;
 
-        TabSeparator = e.NameScope.Find<Visual>(s_tpTabSeparator);
+        TabSeparator = e.NameScope.Find<Visual>(TAB_SEPARATOR);
 
-        _headerContentPresenter = e.NameScope.Find<ContentPresenter>(s_tpContentPresenter);
+        _headerContentPresenter = e.NameScope.Find<ContentPresenter>(CONTENT_PRESENTER);
 
         var tabView = Parent as TabView ?? this.FindAncestorOfType<TabView>();
 
-        _closeButton = e.NameScope.Get<Button>(s_tpCloseButton);
-
-        if (string.IsNullOrEmpty(AutomationProperties.GetName(_closeButton)))
-        {
-            // TODO: I need to remember how I made my json file and update it to include this
-            //var name = FALocalizationService.Instance.GetString(s_TabViewCloseButtonName);
-            //AutomationProperties.SetName(_closeButton, name);
-        }
-
-        // WinUI sets a default tooltip here, I'm removing that see OnHeaderChanged for more
+        _closeButton = e.NameScope.Find<Button>(CLOSE_BUTTON);
 
         _closeButton?.Click += OnCloseButtonClick;
 
@@ -235,8 +263,8 @@ public partial class TabViewItem : SelectorItem
             TabView.TabDragCompletedWeakEvent.Subscribe(tabView, _completedDragSub);
 
             _tabDragRevoker = new CompositeDisposable(
-                new FADisposable(() => TabView.TabDragStartingWeakEvent.Unsubscribe(tabView, _startingDragSub)),
-                new FADisposable(() => TabView.TabDragCompletedWeakEvent.Unsubscribe(tabView, _completedDragSub)));
+                new FluentDisposable(() => TabView.TabDragStartingWeakEvent.Unsubscribe(tabView, _startingDragSub)),
+                new FluentDisposable(() => TabView.TabDragCompletedWeakEvent.Unsubscribe(tabView, _completedDragSub)));
 
             // Add this to fix a bug that's clearly in WinUI, adding a new TabViewItem doesn't check
             // the CloseButtonOverlay mode, thus new tabs ALWAYS initialize with 'Auto' even if the 
@@ -305,8 +333,7 @@ public partial class TabViewItem : SelectorItem
     {
         base.OnPointerReleased(e);
 
-        var pointer = e.Pointer;
-
+        // var pointer = e.Pointer;
         StopCheckingForDrag(e.Pointer.Id);
         UpdateDragDropVisualState(false);
 
@@ -360,6 +387,11 @@ public partial class TabViewItem : SelectorItem
         base.OnPointerCaptureLost(e);
 
         StopCheckingForDrag(e.Pointer.Id);
+
+        // NOTE: the ":dragging" visual state is intentionally NOT cleared here. Pointer capture
+        // is lost exactly when a drag/drop operation starts, and the state is cleared by
+        // OnTabDragCompleted / OnPointerReleased when the drag ends - clearing it here would
+        // hide the tab being dragged for the whole drag operation.
 
         if (_hasPointerCapture)
         {
@@ -439,11 +471,21 @@ public partial class TabViewItem : SelectorItem
         if (_location == TabViewTabStripLocation.Left || _location == TabViewTabStripLocation.Right)
             return;
 
+        // Prefer the explicitly-set Width/Height over Bounds: UpdateTabWidths assigns the
+        // new size before the next arrange pass, so Bounds still holds the previous value
+        // here - using it would generate a geometry narrower/taller than the item will
+        // actually be (the selected background then visually misses part of the tab).
+        var width = double.IsNaN(Width) ? Bounds.Width : Width;
         bool isTop = _location == TabViewTabStripLocation.Top;
-        var height = Bounds.Height;
-        var popupRadius = this.TryFindResource(c_overlayCornerRadiusKey, out var value) ? (CornerRadius)value : default;
+        var height = double.IsNaN(Height) ? Bounds.Height : Height;
+        var popupRadius = this.TryFindResource(OVERLAY_CORNER_RADIUS, out var value) ? (CornerRadius)value : default;
         var leftCorner = popupRadius.TopLeft;
         var rightCorner = popupRadius.TopRight;
+
+        // A zero-size item (not yet arranged) would produce a degenerate geometry; keep
+        // the previous one instead.
+        if (width <= 0 || height <= 0)
+            return;
 
         const string data = "F1 M0,{0}  a 4,4 0 0 0 4,-4  L 4,{1}  a {2},{3} 0 0 1 {4},-{5}  l {6},0  a {7},{8} 0 0 1 {9},{10}  l 0,{11}  a 4,4 0 0 0 4,4 Z";
 
@@ -453,7 +495,7 @@ public partial class TabViewItem : SelectorItem
             data,
             height,
             leftCorner, leftCorner, leftCorner, leftCorner, leftCorner,
-            Bounds.Width - (leftCorner + rightCorner),
+            width - (leftCorner + rightCorner),
             rightCorner, rightCorner, rightCorner, rightCorner,
             height - (4 + rightCorner));
 
@@ -509,6 +551,24 @@ public partial class TabViewItem : SelectorItem
         UpdateCloseButton();
     }
 
+    /// <summary>
+    /// Gets whether the close button is currently collapsed (the :closeCollapsed pseudoclass).
+    /// </summary>
+    internal bool IsCloseCollapsedState => Classes.Contains(PC_CLOSE_COLLAPSED);
+
+    /// <summary>
+    /// Forces the close button collapsed state, e.g. while measuring the tab's natural
+    /// width so the width accounts for the button. Remember to restore the previous value.
+    /// </summary>
+    internal void SetCloseCollapsedState(bool collapsed) => PseudoClasses.Set(PC_CLOSE_COLLAPSED, collapsed);
+
+    /// <summary>
+    /// Regenerates the selected-background geometry from the item's current Width/Height.
+    /// Called by TabView right after it assigns item sizes, so the geometry never lags
+    /// behind the layout waiting for a SizeChanged round-trip.
+    /// </summary>
+    internal void RefreshTabGeometry() => UpdateTabGeometry();
+
     internal void OnTabViewWidthModeChanged(TabViewWidthMode mode)
     {
         _tabViewWidthMode = mode;
@@ -518,10 +578,10 @@ public partial class TabViewItem : SelectorItem
     internal void HandleTabStripLocationChanged(TabViewTabStripLocation newLocation)
     {
         _location = newLocation;
-        PseudoClasses.Set(TabView.s_pcTop, newLocation == TabViewTabStripLocation.Top);
-        PseudoClasses.Set(TabView.s_pcBottom, newLocation == TabViewTabStripLocation.Bottom);
-        PseudoClasses.Set(TabView.s_pcRight, newLocation == TabViewTabStripLocation.Right);
-        PseudoClasses.Set(TabView.s_pcLeft, newLocation == TabViewTabStripLocation.Left);
+        PseudoClasses.Set(TabView.PC_TOP, newLocation == TabViewTabStripLocation.Top);
+        PseudoClasses.Set(TabView.PC_BOTTOM, newLocation == TabViewTabStripLocation.Bottom);
+        PseudoClasses.Set(TabView.PC_RIGHT, newLocation == TabViewTabStripLocation.Right);
+        PseudoClasses.Set(TabView.PC_LEFT, newLocation == TabViewTabStripLocation.Left);
 
         UpdateTabGeometry();
         if (_selectedBackgroundPath != null)
@@ -544,28 +604,24 @@ public partial class TabViewItem : SelectorItem
         {
             switch (_closeButtonOverlayMode)
             {
+                case TabViewCloseButtonOverlayMode.Always:
+                    // All tabs always show the close button.
+                    isCollapsed = false;
+                    break;
                 case TabViewCloseButtonOverlayMode.OnPointerOver:
-                    {    // If we only want to show the button on hover, we also show it when we are selected, otherwise hide it
-                        if (IsSelected || _isPointerOver)
-                        {
-                            isCollapsed = false;
-                        }
-                        else
-                        {
-                            isCollapsed = true;
-                        }
-                        break;
-                    }
+                    // Only show the close button while the tab is hovered.
+                    isCollapsed = !_isPointerOver;
+                    break;
                 default:
-                    {
-                        // Default, use "Auto"
-                        isCollapsed = false;
-                        break;
-                    }
+                    // TabViewCloseButtonOverlayMode.Auto:
+                    // The selected tab always shows the close button; unselected tabs
+                    // show it only while hovered.
+                    isCollapsed = !(IsSelected || _isPointerOver);
+                    break;
             }
         }
 
-        PseudoClasses.Set(s_pcCloseCollapsed, isCollapsed);
+        PseudoClasses.Set(PC_CLOSE_COLLAPSED, isCollapsed);
     }
 
     private void UpdateWidthModeVisualState()
@@ -581,13 +637,20 @@ public partial class TabViewItem : SelectorItem
 
     private void UpdateDragDropVisualState(bool isVisible)
     {
-        PseudoClasses.Set(s_pcDragging, isVisible);
+        PseudoClasses.Set(PC_DRAGGING, isVisible);
     }
+
+    /// <summary>
+    /// Clears the ":dragging" visual state. Called by <see cref="TabViewListView"/> when a
+    /// drag operation finishes, including reorder-only drags where the higher-level
+    /// <see cref="OnTabDragCompleted"/> path is never invoked.
+    /// </summary>
+    internal void ClearDragDropVisualState() => UpdateDragDropVisualState(false);
 
     private void RequestClose()
     {
         var tabView = ParentTabView ?? this.FindAncestorOfType<TabView>();
-        tabView.RequestCloseTab(this, false);
+        tabView?.RequestCloseTab(this, false);
     }
 
     internal void RaiseRequestClose(TabViewTabCloseRequestedEventArgs args)
@@ -626,19 +689,21 @@ public partial class TabViewItem : SelectorItem
 
     private void HideLeftAdjacentTabSeparator()
     {
-        if (ParentTabView is TabView tv)
+        var tabView = ParentTabView;
+        if (tabView != null)
         {
-            var index = tv.IndexFromContainer(this);
-            tv.SetTabSeparatorOpacity(index - 1, 0);
+            var index = tabView.IndexFromContainer(this);
+            tabView.SetTabSeparatorOpacity(index - 1, 0);
         }
     }
 
     private void RestoreLeftAdjacentTabSeparatorVisibility()
     {
-        if (ParentTabView is TabView tv)
+        var tabView  = ParentTabView;
+        if (tabView != null)
         {
-            var index = tv.IndexFromContainer(this);
-            tv.SetTabSeparatorOpacity(index - 1);
+            var index = tabView.IndexFromContainer(this);
+            tabView.SetTabSeparatorOpacity(index - 1);
         }
     }
 
@@ -649,21 +714,12 @@ public partial class TabViewItem : SelectorItem
 
     private void OnIconSourceChanged()
     {
-        if (IconSource != null)
-        {
-            TabViewTemplateSettings.IconElement = IconHelpers.CreateFromUnknown(IconSource);
-            PseudoClasses.Set(SharedPseudoclasses.s_pcIcon, true);
-        }
-        else
-        {
-            TabViewTemplateSettings.IconElement = null;
-            PseudoClasses.Set(SharedPseudoclasses.s_pcIcon, false);
-        }
+        PseudoClasses.Set(SharedPseudoclasses.s_pcIcon, IconSource != null);
     }
 
     internal void StartBringTabIntoView()
     {
-        var targetRect = new Rect(0, 0, DesiredSize.Width + c_targetRectWidthIncrement, DesiredSize.Height);
+        var targetRect = new Rect(0, 0, DesiredSize.Width + TARGET_RECT_WIDTH_INCREMENT, DesiredSize.Height);
         RaiseEvent(new RequestBringIntoViewEventArgs
         {
             RoutedEvent = RequestBringIntoViewEvent,
@@ -707,33 +763,10 @@ public partial class TabViewItem : SelectorItem
 
     private void OnLoaded(object? sender, RoutedEventArgs e)
     {
-        if (ParentTabView is TabView tv)
+        var tabView = ParentTabView;
+        if (tabView != null)
         {
-            tv.SetTabSeparatorOpacity(tv.IndexFromContainer(this));
+            tabView.SetTabSeparatorOpacity(tabView.IndexFromContainer(this));
         }
     }
-
-    private Button? _closeButton;
-    private ContentPresenter? _headerContentPresenter;
-    private TabViewWidthMode _tabViewWidthMode = TabViewWidthMode.Equal;
-    private TabViewCloseButtonOverlayMode _closeButtonOverlayMode = TabViewCloseButtonOverlayMode.Auto;
-    private CompositeDisposable? _tabDragRevoker;
-    private Path? _selectedBackgroundPath;
-    private TabViewTabStripLocation _location;
-
-    private bool _hasPointerCapture = false;
-    private bool _isMiddlePointerButtonPressed = false;
-    //private bool _isBeingDragged = false;
-    private bool _isPointerOver = false;
-    private Point _lastPointerPressedPosition;
-    private int _dragPointerId;
-    private bool _isCheckingForDrag;
-
-    private WeakReference<TabView> _parentTabView;
-
-    private const string c_overlayCornerRadiusKey = "OverlayCornerRadius";
-    private const int c_targetRectWidthIncrement = 2;
-
-    private TargetWeakEventSubscriber<TabView, TabViewTabDragStartingEventArgs> _startingDragSub;
-    private TargetWeakEventSubscriber<TabView, TabViewTabDragCompletedEventArgs> _completedDragSub;
 }

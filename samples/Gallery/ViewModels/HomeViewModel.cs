@@ -26,19 +26,18 @@ public partial class HomeViewModel : ViewModelBase
 #if DEBUG
         Debug.WriteLine("HomeViewModel Init");
 #endif
-        LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
-
         ButtonItemSource = ButtonItemModel.CreateList(
-            ("Button", "Button", "Button", "A control that responds to user input and emit clicked signal."),
-            ("Checkbox", "CheckBox", "Button", "A control that a user can select or clear."),
+            ("Button", "Button", "PushButton", "A control that responds to user input and emit clicked signal."),
+            ("Checkbox", "CheckBox", "CheckBox", "A control that a user can select or clear."),
             ("ComboBox", "ComboBox", "ComboBox", "A drop-down list of items a user can select from."),
-            ("DropDownButton", "DropDownButton", "Button", "A button that display a flyout of choices when clicked."),
-            ("HyperlinkButton", "HyperlinkButton", "Button", "A button that appears as hyperlink text, and can navigate to a RUL or handle a Click event."),
-            ("RadioButton", "RadioButton", "Button", "A control that allows a user to select a single option from a group of options."),
+            ("DropDownButton", "DropDownButton", "DropDownButton", "A button that display a flyout of choices when clicked."),
+            ("HyperlinkButton", "HyperlinkButton", "HyperlinkButton", "A button that appears as hyperlink text, and can navigate to a RUL or handle a Click event."),
+            ("RadioButton", "RadioButton", "RadioButton", "A control that allows a user to select a single option from a group of options."),
             ("Slider", "Slider", "Slider", "A control that lets the user select from a range of values by moving a Thumb control along a track."),
-            ("SplitButton", "SplitButton", "Button", "A two-part button that displays a flyout when its secondary part is clicked."),
-            ("ToggleSwitch", "SwitchButton", "Button", "A switch that can be toggled between 2 states."),
-            ("ToggleButton", "ToggleButton", "Button", "A button that can be switched between two states like a CheckBox.")
+            ("SplitButton", "SplitButton", "SplitButton", "A two-part button that displays a flyout when its secondary part is clicked."),
+            ("ToggleSwitch", "SwitchButton", "ToggleSwitch", "A switch that can be toggled between 2 states."),
+            ("ToggleButton", "ToggleButton", "ToggleButton", "A button that can be switched between two states like a CheckBox."),
+            ("RepeatButton", "RepeatButton", "RepeatButton", "A button that raises its Click event repeatedly while it is pressed.")
         );
 
         DateTimeItemSource = ButtonItemModel.CreateList(
@@ -160,8 +159,9 @@ public partial class HomeViewModel : ViewModelBase
     public string SectionView => LocalizationService.Instance.GetString("Section_View");
     public string Media => LocalizationService.Instance.GetString("Media");
 
-    private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
+    protected override void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
     {
+        base.OnLanguageChanged(sender, e);
         OnPropertyChanged(nameof(GettingStartedTitle));
         OnPropertyChanged(nameof(GettingStartedContent));
         OnPropertyChanged(nameof(GitHubRepoTitle));

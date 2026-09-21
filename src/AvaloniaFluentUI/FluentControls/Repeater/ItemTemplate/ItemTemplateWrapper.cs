@@ -7,6 +7,9 @@ namespace AvaloniaFluentUI.Controls;
 
 public class ItemTemplateWrapper : IElementFactory
 {
+    private IDataTemplate _dataTemplate;
+    private DataTemplateSelector _dataTemplateSelector;
+    
     public ItemTemplateWrapper(IDataTemplate template)
     {
         _dataTemplate = template;
@@ -38,7 +41,7 @@ public class ItemTemplateWrapper : IElementFactory
             // Null template, use other SelectTemplate method
             try
             {
-                selectedTemplate = _dataTemplateSelector.SelectTemplate(args.Data, null);
+                selectedTemplate = _dataTemplateSelector?.SelectTemplate(args.Data, null);
             }
             catch
             {
@@ -55,7 +58,7 @@ public class ItemTemplateWrapper : IElementFactory
         }
 
         var recyclePool = RecyclePool.GetPoolInstance(selectedTemplate);
-        Control element = null;
+        Control? element = null;
 
         if (recyclePool != null)
         {
@@ -85,8 +88,7 @@ public class ItemTemplateWrapper : IElementFactory
     public void RecycleElement(ElementFactoryRecycleArgs args)
     {
         var element = args.Element;
-        var selectedTemplate = _dataTemplate ??
-            element.GetValue(RecyclePool.OriginTemplateProperty);
+        var selectedTemplate = _dataTemplate ?? element?.GetValue(RecyclePool.OriginTemplateProperty);
         var recyclePool = RecyclePool.GetPoolInstance(selectedTemplate);
         if (recyclePool == null)
         {
@@ -98,16 +100,13 @@ public class ItemTemplateWrapper : IElementFactory
         recyclePool.PutElement(args.Element, string.Empty, args.Parent);
     }
 
-    bool IDataTemplate.Match(object data)
+    bool IDataTemplate.Match(object? data)
     {
         throw new NotImplementedException();
     }
 
-    Control ITemplate<object, Control>.Build(object param)
+    Control? ITemplate<object?, Control?>.Build(object? param)
     {
         throw new NotImplementedException();
     }
-
-    private IDataTemplate _dataTemplate;
-    private DataTemplateSelector _dataTemplateSelector;
 }

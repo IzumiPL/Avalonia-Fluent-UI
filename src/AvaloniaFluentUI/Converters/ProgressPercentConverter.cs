@@ -21,7 +21,7 @@ public class ProgressPercentConverter : IMultiValueConverter
         if (maximum <= 0)
             return "0%";
 
-        var percent = (double)(value / maximum * 100);
+        var percent = value / maximum * 100;
         return $"{percent:F1}%";
     }
 }

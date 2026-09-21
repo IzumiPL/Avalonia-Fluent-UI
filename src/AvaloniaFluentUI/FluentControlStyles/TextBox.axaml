@@ -47,7 +47,7 @@
     </LinearGradientBrush.GradientStops>
   </LinearGradientBrush>
 
-  <SolidColorBrush x:Key="TemporaryTextFillColorDisabled" Color="#5C010101"/>
+  <SolidColorBrush x:Key="TemporaryTextFillColorDisabled" Color="{DynamicResource TextFillColorDisabled}"/>
 
   <!--  Control-specific resources  -->
   <Thickness x:Key="TextControlBorderThemeThickness">1</Thickness>

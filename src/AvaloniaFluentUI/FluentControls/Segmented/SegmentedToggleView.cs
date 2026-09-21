@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using Avalonia;
 using Avalonia.Animation;
 using Avalonia.Controls;
@@ -95,8 +94,9 @@ public class SegmentedToggleView : SegmentedView
         
         var animation = new Animation
         {
-            Duration = TimeSpan.FromMilliseconds(150),
+            Duration = AnimationDuration,
             FillMode = FillMode.Forward,
+            Easing = AnimationEasing,
             Children =
             {
                 new KeyFrame

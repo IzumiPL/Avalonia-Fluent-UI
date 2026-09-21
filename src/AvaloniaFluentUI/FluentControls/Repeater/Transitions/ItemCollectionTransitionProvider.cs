@@ -24,6 +24,10 @@ public enum ItemCollectionTransitionOperation
 
 public abstract class ItemCollectionTransitionProvider
 {
+    private List<ItemCollectionTransition> _transitions;
+    private List<ItemCollectionTransition> _transitionsWithAnimations;
+    private bool _rendering;
+    
     public event TypedEventHandler<ItemCollectionTransitionProvider, ItemCollectionTransitionCompletedEventArgs> TransitionCompleted;
 
     public void QueueTransition(ItemCollectionTransition transition)
@@ -87,8 +91,4 @@ public abstract class ItemCollectionTransitionProvider
         _transitions.Clear();
         _transitionsWithAnimations.Clear();
     }
-
-    private List<ItemCollectionTransition> _transitions;
-    private List<ItemCollectionTransition> _transitionsWithAnimations;
-    private bool _rendering;
 }

@@ -12,17 +12,18 @@
   xmlns:view="clr-namespace:AvaloniaFluentUI.Windowing;assembly=AvaloniaFluentUI"
   xmlns:vm="using:Gallery.ViewModels"
   Title="{Binding Title}"
-  Width="1200"
-  Height="800"
   MinWidth="760"
   MinHeight="500"
   d:DesignHeight="1080"
   d:DesignWidth="1920"
   x:DataType="vm:MainWindowViewModel"
+  CanMaximize="{Binding Settings.MainWindow.CanMaximize}"
+  CanMinimize="{Binding Settings.MainWindow.CanMinimize}"
+  CanResize="{Binding Settings.MainWindow.CanResize}"
+  CloseButtonIsVisible="{Binding Settings.MainWindow.CloseButtonIsVisible}"
   Icon="/Assets/app.ico"
-  IconSize="20"
-  TitleBarMargin="40 0 0 0"
-  WindowStartupLocation="CenterScreen"
+  MaxButtonIsVisible="{Binding Settings.MainWindow.MaximizeButtonIsVisible}"
+  MinButtonIsVisible="{Binding Settings.MainWindow.MinimizeButtonIsVisible}"
   mc:Ignorable="d">
   <!--  BorderBrush="{Binding BorderBrush}"  -->
   <!--  BorderThickness="{Binding BorderWidth}"  -->
@@ -158,7 +159,7 @@
               <fui:ColorPickerButton
                 Grid.Row="1"
                 Grid.Column="1"
-                Click="OnHideFlyout"
+                Click="OnHideFlyoutClicked"
                 ColorChanged="OnBorderColorChanged"/>
             </Grid>
           </fui:FluentFlyout>
@@ -234,11 +235,16 @@
       AlwaysShowHeader="False"
       BackCommand="{Binding GoBackCommand}"
       Background="Transparent"
-      IsBackButtonVisible="True"
+      CompactPaneLength="{Binding Settings.Navigation.PaneClosedWidth}"
+      ExpandedModeThresholdWidth="{Binding Settings.Navigation.ExpandedModeThresholdWidth}"
+      IsBackButtonVisible="{Binding Settings.Navigation.IsBackButtonVisible}"
       IsBackEnabled="True"
-      IsSettingsVisible="True"
+      IsPaneToggleButtonVisible="{Binding Settings.Navigation.IsPaneToggleButtonVisible}"
+      IsSettingsVisible="{Binding Settings.Navigation.IsSettingsItemVisible}"
+      IsVisible="{Binding Settings.Navigation.IsPaneVisible}"
+      OpenPaneLength="{Binding Settings.Navigation.PaneOpenWidth}"
       PaneDisplayMode="Auto"
-      PaneFooterSeparatorIsVisible="True"
+      PaneFooterSeparatorIsVisible="{Binding Settings.Navigation.IsPaneFooterSeparatorVisible}"
       SelectedItem="{Binding NavigationViewSelectedItem, Mode=TwoWay}">
 
       <fui:NavigationView.AutoCompleteBox>
@@ -249,7 +255,7 @@
         <Panel
           Height="35"
           Background="#01000000"
-          PointerReleased="OnPopupContextMenu">
+          PointerReleased="OnPopupContextMenuClicked">
           <fui:Avatar
             Name="Avatar"
             Width="28"
@@ -257,7 +263,7 @@
             Margin="12,0,0,0"
             HorizontalAlignment="Left"
             CornerRadius="14"
-            PointerReleased="OnPopupAvatarFlyout"
+            PointerReleased="OnPopupAvatarFlyoutClicked"
             Source="avares://Gallery/Assets/Images/na.jpg"/>
           <TextBlock
             Margin="50,0,0,0"
@@ -348,7 +354,18 @@
           IconSource="M3.922 32q-0.781 0-1.492-0.32t-1.25-0.859-0.859-1.25-0.32-1.492v-24.156q0-0.781 0.32-1.492t0.859-1.25 1.25-0.859 1.492-0.32h24.156q0.781 0 1.492 0.32t1.25 0.859 0.859 1.25 0.32 1.492v24.156q0 0.781-0.32 1.492t-0.859 1.25-1.25 0.859-1.492 0.32h-24.156zM28 30q0.422 0 0.781-0.156t0.633-0.43 0.43-0.633 0.156-0.781v-24q0-0.406-0.156-0.773t-0.43-0.641-0.641-0.43-0.773-0.156h-24q-0.422 0-0.781 0.156t-0.633 0.43-0.43 0.633-0.156 0.781v24q0 0.422 0.156 0.789t0.422 0.633 0.633 0.422 0.789 0.156h24zM6 15q0-0.406 0.297-0.703t0.703-0.297 0.703 0.297l5.297 5.281 11.297-11.281q0.297-0.297 0.703-0.297t0.703 0.297 0.297 0.703-0.297 0.703l-12 12q-0.297 0.297-0.703 0.297t-0.703-0.297l-6-6q-0.297-0.297-0.297-0.703z"
           Tag="BasicInput">
           <fui:NavigationViewItem.MenuItems>
-            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Button]}" Tag="Button"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[PushButton]}" Tag="PushButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ToolButton]}" Tag="ToolButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FilledButton]}" Tag="FilledButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[OutlineButton]}" Tag="OutlineButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DropDownButton]}" Tag="DropDownButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ToggleButton]}" Tag="ToggleButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SplitButton]}" Tag="SplitButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[RadioButton]}" Tag="RadioButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[HyperlinkButton]}" Tag="HyperlinkButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ToggleSwitch]}" Tag="ToggleSwitch"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CheckBox]}" Tag="CheckBox"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[RepeatButton]}" Tag="RepeatButton"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ComboBox]}" Tag="ComboBox"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Slider]}" Tag="Slider"/>
           </fui:NavigationViewItem.MenuItems>

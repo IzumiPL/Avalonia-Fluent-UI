@@ -25,10 +25,10 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// 图片轮播视图
 /// </summary>
-[TemplatePart(PART_CURRENT_IMAGE, typeof(ImageLabel))]
-[TemplatePart(PART_NEXT_IMAGE, typeof(ImageLabel))]
-[TemplatePart(PART_PREVIOUS_BUTTON, typeof(Button))]
-[TemplatePart(PART_NEXT_BUTTON, typeof(Button))]
+[TemplatePart(Name = PART_NEXT_IMAGE,       Type = typeof(ImageLabel))]
+[TemplatePart(Name = PART_NEXT_BUTTON,      Type = typeof(Button))]
+[TemplatePart(Name = PART_CURRENT_IMAGE,    Type = typeof(ImageLabel))]
+[TemplatePart(Name = PART_PREVIOUS_BUTTON,  Type = typeof(Button))]
 public class FlipView : TemplatedControl
 {
     public static readonly StyledProperty<IEnumerable<string>?> ImageSourceProperty =

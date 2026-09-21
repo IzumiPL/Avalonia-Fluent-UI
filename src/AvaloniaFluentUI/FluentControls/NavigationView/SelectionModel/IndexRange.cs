@@ -11,8 +11,8 @@ internal readonly struct IndexRange : IEquatable<IndexRange>
     {
         // Accept out of order begin/end pairs, just swap them.
         if (begin > end)
-        {
-            int temp = begin;
+        { 
+            int temp = begin; 
             begin = end;
             end = temp;
         }
@@ -59,7 +59,7 @@ internal readonly struct IndexRange : IEquatable<IndexRange>
         return Begin == other.End + 1 || End == other.Begin - 1;
     }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         return obj is IndexRange range && Equals(range);
     }
@@ -86,7 +86,7 @@ internal readonly struct IndexRange : IEquatable<IndexRange>
     public static int Add(
         IList<IndexRange> ranges,
         IndexRange range,
-        IList<IndexRange> added = null)
+        IList<IndexRange>? added = null)
     {
         var result = 0;
 
@@ -131,7 +131,7 @@ internal readonly struct IndexRange : IEquatable<IndexRange>
     public static int Intersect(
         IList<IndexRange> ranges,
         IndexRange range,
-        IList<IndexRange> removed = null)
+        IList<IndexRange>? removed = null)
     {
         var result = 0;
 
@@ -178,7 +178,7 @@ internal readonly struct IndexRange : IEquatable<IndexRange>
     public static int Remove(
         IList<IndexRange> ranges,
         IndexRange range,
-        IList<IndexRange> removed = null)
+        IList<IndexRange>? removed = null)
     {
         var result = 0;
 

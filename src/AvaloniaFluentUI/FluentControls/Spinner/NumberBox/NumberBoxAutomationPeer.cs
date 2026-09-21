@@ -29,7 +29,7 @@ public class NumberBoxAutomationPeer : ControlAutomationPeer, IRangeValueProvide
         return AutomationControlType.Spinner;
     }
 
-    protected override string GetNameCore()
+    protected override string? GetNameCore()
     {
         var name = base.GetNameCore();
         if (string.IsNullOrEmpty(name))

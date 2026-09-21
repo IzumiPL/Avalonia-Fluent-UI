@@ -14,7 +14,7 @@ public delegate void NavigationFailedEventHandler(object sender, NavigationFaile
 /// </summary>
 public class NavigationFailedEventArgs : EventArgs
 {
-    internal NavigationFailedEventArgs(Exception ex, Type srcPageType)
+    internal NavigationFailedEventArgs(Exception ex, Type? srcPageType)
     {
         Exception = ex;
         SourcePageType = srcPageType;
@@ -33,5 +33,5 @@ public class NavigationFailedEventArgs : EventArgs
     /// <summary>
     /// Gets the data type of the target page.
     /// </summary>
-    public Type SourcePageType { get; }
+    public Type? SourcePageType { get; }
 }

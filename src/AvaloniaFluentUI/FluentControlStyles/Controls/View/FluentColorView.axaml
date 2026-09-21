@@ -11,7 +11,7 @@
 
     <Setter Property="Template">
       <ControlTemplate>
-        <Grid RowDefinitions="Auto,Auto">
+        <Grid RowDefinitions="Auto,Auto" RowSpacing="28">
           <!--  Spectrum + Preview  -->
           <Grid
             Grid.Row="0"
@@ -28,7 +28,7 @@
               HorizontalAlignment="Left"
               CornerRadius="4"
               HsvColor="{Binding HsvColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
-              Shape="Box">
+              Shape="{TemplateBinding ColorSpectrumShape}">
               <primitives:ColorSpectrum.Styles>
                 <Style Selector="Rectangle#BorderRectangle">
                   <Setter Property="Stroke" Value="{DynamicResource ControlBorderHighBrush}"/>
@@ -64,10 +64,11 @@
               Grid.Row="0"
               Grid.ColumnSpan="3"
               Height="24"
-              Margin="0,28"
+              Margin="0,0,0,16"
               ColorComponent="Alpha"
               ColorModel="Rgba"
               HsvColor="{Binding HsvColor, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+              IsVisible="{TemplateBinding IsAlphaVisible}"
               Orientation="Horizontal"/>
 
             <!--  Edit  -->

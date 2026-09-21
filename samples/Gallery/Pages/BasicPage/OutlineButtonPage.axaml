@@ -1,0 +1,91 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.OutlineButtonPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:OutlineButtonPageViewModel"
+  mc:Ignorable="d">
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="StrokeButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_StrokeButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <WrapPanel
+          Grid.Column="0"
+          VerticalAlignment="Top"
+          ItemSpacing="5"
+          LineSpacing="3"
+          Orientation="Horizontal">
+          <fui:OutlinePushButton
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Music]}"
+            Group="{Binding OutlinePushButtonGroup}"
+            IconSource="{x:Static fi:FluentIcon.Music}"
+            IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
+          <fui:OutlinePushButton
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_MovieAndTV]}"
+            Group="{Binding OutlinePushButtonGroup}"
+            IconSource="{x:Static fi:FluentIcon.Video}"
+            IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
+          <fui:OutlinePushButton
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Game]}"
+            Group="{Binding OutlinePushButtonGroup}"
+            IconSource="{x:Static fi:FluentIcon.Game}"
+            IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
+          <fui:OutlinePushButton
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[GitHubRepo]}"
+            Group="{Binding OutlinePushButtonGroup}"
+            IconSource="{x:Static fi:FluentIcon.GitHub}"
+            IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
+          <fui:OutlinePushButton
+            Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_AboutUs]}"
+            Group="{Binding OutlinePushButtonGroup}"
+            IsEnabled="{Binding !OutlinePushButtonIsDisabled}"/>
+        </WrapPanel>
+        <ui:Card Grid.Column="1">
+          <StackPanel Orientation="Vertical" Spacing="3">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsMultiSelect]}" IsChecked="{Binding OutlinePushButtonIsMC}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}" IsChecked="{Binding OutlinePushButtonIsDisabled}"/>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="StrokeToolButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_StrokeToolButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <StackPanel
+          Grid.Column="0"
+          VerticalAlignment="Top"
+          Orientation="Horizontal"
+          Spacing="5">
+          <fui:OutlineToolButton
+            Content="{x:Static fi:FluentIcon.Add}"
+            Group="{Binding OutlineToolButtonGroup}"
+            IsEnabled="{Binding !OutlineToolButtonIsDisabled}"/>
+          <fui:OutlineToolButton
+            Content="{x:Static fi:FluentIcon.Bluetooth}"
+            Group="{Binding OutlineToolButtonGroup}"
+            IsEnabled="{Binding !OutlineToolButtonIsDisabled}"/>
+          <fui:OutlineToolButton
+            Content="{x:Static fi:FluentIcon.Brush}"
+            Group="{Binding OutlineToolButtonGroup}"
+            IsEnabled="{Binding !OutlineToolButtonIsDisabled}"/>
+        </StackPanel>
+        <ui:Card Grid.Column="1">
+          <StackPanel Orientation="Vertical" Spacing="3">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsMultiSelect]}" IsChecked="{Binding OutlineToolButtonIsMC}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}" IsChecked="{Binding OutlineToolButtonIsDisabled}"/>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

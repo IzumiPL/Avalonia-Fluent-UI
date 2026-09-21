@@ -84,7 +84,7 @@
     <!--  Information  -->
     <Style Selector="^.Information">
       <Style Selector="^ /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource InformationDefaultBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SystemFillColorNeutralBrush}"/>
       </Style>
 
       <Style Selector="^:pointerover">
@@ -118,7 +118,7 @@
     <!--  Success  -->
     <Style Selector="^.Success">
       <Style Selector="^ /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource SuccessDefaultBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SystemFillColorSuccessBrush}"/>
       </Style>
 
       <Style Selector="^:pointerover">
@@ -152,7 +152,7 @@
     <!--  Attention  -->
     <Style Selector="^.Attention">
       <Style Selector="^ /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource AttentionDefaultBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SystemFillColorAttentionBrush}"/>
       </Style>
 
       <Style Selector="^:pointerover">
@@ -186,7 +186,7 @@
     <!--  Warning  -->
     <Style Selector="^.Warning">
       <Style Selector="^ /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource WarningDefaultBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SystemFillColorCautionBrush}"/>
       </Style>
 
       <Style Selector="^:pointerover">
@@ -220,7 +220,7 @@
     <!--  Error  -->
     <Style Selector="^.Error">
       <Style Selector="^ /template/ Border#PART_Border">
-        <Setter Property="Background" Value="{DynamicResource ErrorDefaultBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource SystemFillColorCriticalBrush}"/>
       </Style>
 
       <Style Selector="^:pointerover">

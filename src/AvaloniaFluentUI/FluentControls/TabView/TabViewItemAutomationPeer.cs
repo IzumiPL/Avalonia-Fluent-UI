@@ -10,15 +10,13 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public sealed class TabViewItemAutomationPeer : ListItemAutomationPeer, ISelectionItemProvider
 {
-    public TabViewItemAutomationPeer(ContentControl owner) 
-        : base(owner)
+    public TabViewItemAutomationPeer(ContentControl owner) : base(owner)
     {
     }
 
-    protected override AutomationControlType GetAutomationControlTypeCore() =>
-        AutomationControlType.TabItem;
+    protected override AutomationControlType GetAutomationControlTypeCore() => AutomationControlType.TabItem;
 
-    protected override string GetNameCore()
+    protected override string? GetNameCore()
     {
         var name = base.GetNameCore();
 
@@ -39,9 +37,10 @@ public sealed class TabViewItemAutomationPeer : ListItemAutomationPeer, ISelecti
     {
         get
         {
-            if (GetParentTabView() is TabView tv)
+            var tabView = GetParentTabView();
+            if (tabView != null)
             {
-                return ControlAutomationPeer.CreatePeerForElement(tv) as ISelectionProvider;
+                return CreatePeerForElement(tabView) as ISelectionProvider;
             }
 
             return null;

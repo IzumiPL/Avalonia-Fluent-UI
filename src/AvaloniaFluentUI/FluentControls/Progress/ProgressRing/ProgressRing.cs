@@ -7,7 +7,7 @@ using AvaloniaFluentUI.Controls.Primitives;
 
 namespace AvaloniaFluentUI.Controls;
 
-[TemplatePart(_tpAnimatedVisual, typeof(ProgressRingAnimatedVisual))]
+[TemplatePart(Name = ANIMATED_VISUAL, Type = typeof(ProgressRingAnimatedVisual))]
 public class ProgressRing : RangeBase
 {
     /// <summary>
@@ -56,11 +56,15 @@ public class ProgressRing : RangeBase
         get => GetValue(ShowPercentProperty);
         set => SetValue(ShowPercentProperty, value);
     }
+    
+    private ProgressRingAnimatedVisual? _animatedVisualSource;
+    
+    private const string ANIMATED_VISUAL = "AnimatedVisual";
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-        _animatedVisualSource = e.NameScope.Get<ProgressRingAnimatedVisual>(_tpAnimatedVisual);
+        _animatedVisualSource = e.NameScope.Get<ProgressRingAnimatedVisual>(ANIMATED_VISUAL);
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
@@ -89,15 +93,11 @@ public class ProgressRing : RangeBase
         }
         else if (change.Property == ForegroundProperty)
         {
-            _animatedVisualSource?.SetForeground((IBrush)change.NewValue);
+            _animatedVisualSource?.SetForeground(change.GetNewValue<IBrush>());
         }
         else if (change.Property == BackgroundProperty)
         {
-            _animatedVisualSource?.SetBackground((IBrush)change.NewValue);
+            _animatedVisualSource?.SetBackground(change.GetNewValue<IBrush>());
         }
     }
-
-    private ProgressRingAnimatedVisual? _animatedVisualSource;
-
-    private const string _tpAnimatedVisual = "AnimatedVisual";
 }

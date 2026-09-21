@@ -179,7 +179,18 @@
           IconSource="M3.922 32q-0.781 0-1.492-0.32t-1.25-0.859-0.859-1.25-0.32-1.492v-24.156q0-0.781 0.32-1.492t0.859-1.25 1.25-0.859 1.492-0.32h24.156q0.781 0 1.492 0.32t1.25 0.859 0.859 1.25 0.32 1.492v24.156q0 0.781-0.32 1.492t-0.859 1.25-1.25 0.859-1.492 0.32h-24.156zM28 30q0.422 0 0.781-0.156t0.633-0.43 0.43-0.633 0.156-0.781v-24q0-0.406-0.156-0.773t-0.43-0.641-0.641-0.43-0.773-0.156h-24q-0.422 0-0.781 0.156t-0.633 0.43-0.43 0.633-0.156 0.781v24q0 0.422 0.156 0.789t0.422 0.633 0.633 0.422 0.789 0.156h24zM6 15q0-0.406 0.297-0.703t0.703-0.297 0.703 0.297l5.297 5.281 11.297-11.281q0.297-0.297 0.703-0.297t0.703 0.297 0.297 0.703-0.297 0.703l-12 12q-0.297 0.297-0.703 0.297t-0.703-0.297l-6-6q-0.297-0.297-0.297-0.703z"
           Tag="BasicInput">
           <fui:NavigationViewItem.MenuItems>
-            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Button]}" Tag="Button"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[PushButton]}" Tag="PushButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ToolButton]}" Tag="ToolButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FilledButton]}" Tag="FilledButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[OutlineButton]}" Tag="OutlineButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DropDownButton]}" Tag="DropDownButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ToggleButton]}" Tag="ToggleButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SplitButton]}" Tag="SplitButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[RadioButton]}" Tag="RadioButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[HyperlinkButton]}" Tag="HyperlinkButton"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ToggleSwitch]}" Tag="ToggleSwitch"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CheckBox]}" Tag="CheckBox"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[RepeatButton]}" Tag="RepeatButton"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ComboBox]}" Tag="ComboBox"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Slider]}" Tag="Slider"/>
           </fui:NavigationViewItem.MenuItems>
@@ -280,7 +291,7 @@
       </fui:NavigationView.MenuItems>
 
       <fui:NavigationView.Content>
-        <fui:StackContent Margin="0,10,0,0" Content="{Binding CurrentViewModel}"/>
+        <fui:StackContent Content="{Binding CurrentViewModel}"/>
       </fui:NavigationView.Content>
     </fui:NavigationView>
   </Grid>

@@ -8,20 +8,19 @@ namespace AvaloniaFluentUI.Controls;
 
 public sealed class NavigationViewAutomationPeer : ControlAutomationPeer, ISelectionProvider
 {
-    public NavigationViewAutomationPeer(Control owner) 
-        : base(owner)
+    public NavigationViewAutomationPeer(Control owner) : base(owner)
     {
     }
 
     public bool CanSelectMultiple => false;
     public bool IsSelectionRequired => false;
 
-    public IReadOnlyList<AutomationPeer> GetSelection()
+    public IReadOnlyList<AutomationPeer>? GetSelection()
     {
         if (Owner is NavigationView nv)
         {
             var nvi = nv.GetSelectedContainer();
-            var peer = ControlAutomationPeer.CreatePeerForElement(nvi);
+            var peer = CreatePeerForElement(nvi);
             return new[] { peer };
         }
 

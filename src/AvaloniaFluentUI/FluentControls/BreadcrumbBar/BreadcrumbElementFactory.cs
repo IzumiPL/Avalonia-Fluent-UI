@@ -5,7 +5,9 @@ namespace AvaloniaFluentUI.Controls;
 
 internal class BreadcrumbElementFactory : ElementFactory
 {
-    public void UserElementFactory(object newValue)
+    private IElementFactory? _itemTemplateWrapper;
+    
+    public void UserElementFactory(object? newValue)
     {
         if (newValue is IDataTemplate template)
         {
@@ -48,7 +50,7 @@ internal class BreadcrumbElementFactory : ElementFactory
 
         return newItem;
 
-        static object GetNewContent(IElementFactory factory, ElementFactoryGetArgs args0)
+        static object GetNewContent(IElementFactory? factory, ElementFactoryGetArgs args0)
         {
             if (args0.Data is BreadcrumbBarItem item)
             {
@@ -66,12 +68,13 @@ internal class BreadcrumbElementFactory : ElementFactory
 
     protected override void RecycleElementCore(ElementFactoryRecycleArgs args)
     {
-        if (args.Element is Control c)
+        var control = args.Element;
+        if (control != null)
         {
             bool isEllipsisDropDownItem = false; // Use of isEllipsisDropDownItem is workaround for
             // crashing bug when attempting to show ellipsis dropdown after clicking one of its items.
 
-            if (c is BreadcrumbBarItem bcbItem)
+            if (control is BreadcrumbBarItem bcbItem)
             {
                 bcbItem.ResetVisualProperties();
                 isEllipsisDropDownItem = bcbItem.IsEllipsisDropDownItem();
@@ -83,6 +86,4 @@ internal class BreadcrumbElementFactory : ElementFactory
             }
         }
     }
-
-    private IElementFactory? _itemTemplateWrapper;
 }

@@ -126,8 +126,20 @@
   <data name="BI_CheckBox" xml:space="preserve">
     <value>チェックボックス</value>
   </data>
+  <data name="BI_ChipsCode" xml:space="preserve">
+    <value>コード</value>
+  </data>
   <data name="BI_ChipsRadioButton" xml:space="preserve">
     <value>チップスラジオボタン</value>
+  </data>
+  <data name="BI_ChipsShared" xml:space="preserve">
+    <value>共有済み</value>
+  </data>
+  <data name="BI_ChipsShoppingCart" xml:space="preserve">
+    <value>ショッピングカート</value>
+  </data>
+  <data name="BI_ChipsTag" xml:space="preserve">
+    <value>タグ</value>
   </data>
   <data name="BI_ColorSlider" xml:space="preserve">
     <value>カラースライダー</value>
@@ -774,6 +786,99 @@
   <data name="SV_AppTheme" xml:space="preserve">
     <value>アプリテーマ</value>
   </data>
+  <data name="SV_WindowEffectNone" xml:space="preserve">
+    <value>なし</value>
+  </data>
+  <data name="SV_WindowEffectMica" xml:space="preserve">
+    <value>Mica</value>
+  </data>
+  <data name="SV_WindowEffectAcrylic" xml:space="preserve">
+    <value>Acrylic</value>
+  </data>
+  <data name="SV_NavigationDescription" xml:space="preserve">
+    <value>ナビゲーション設定を調整</value>
+  </data>
+  <data name="SV_Navigation" xml:space="preserve">
+    <value>ナビゲーション</value>
+  </data>
+  <data name="SV_NavigationPaneClosedWidth" xml:space="preserve">
+    <value>ナビゲーションペインの折りたたみ幅</value>
+  </data>
+  <data name="SV_NavigationPaneOpenWidth" xml:space="preserve">
+    <value>ナビゲーションペインの展開幅</value>
+  </data>
+  <data name="SV_NavigationExpandedModeThresholdWidth" xml:space="preserve">
+    <value>展開モードしきい値幅</value>
+  </data>
+  <data name="SV_NavigationScrollVisibility" xml:space="preserve">
+    <value>ナビゲーションスクロールバーの表示</value>
+  </data>
+  <data name="SV_BackButtonVisible" xml:space="preserve">
+    <value>戻るボタンを表示</value>
+  </data>
+  <data name="SV_PaneToggleButtonVisible" xml:space="preserve">
+    <value>ペイン切替ボタンを表示</value>
+  </data>
+  <data name="SV_SettingsItemVisible" xml:space="preserve">
+    <value>設定項目を表示</value>
+  </data>
+  <data name="SV_PaneFooterSeparatorVisible" xml:space="preserve">
+    <value>ペインフッター区切り線を表示</value>
+  </data>
+  <data name="SV_PaneVisible" xml:space="preserve">
+    <value>ペインを表示</value>
+  </data>
+  <data name="SV_TitleBarDescription" xml:space="preserve">
+    <value>タイトルバー設定を調整</value>
+  </data>
+  <data name="SV_TitleBar" xml:space="preserve">
+    <value>タイトルバー</value>
+  </data>
+  <data name="SV_TitleBarHeight" xml:space="preserve">
+    <value>タイトルバーの高さ</value>
+  </data>
+  <data name="SV_TitleBarIconVisible" xml:space="preserve">
+    <value>タイトルバーアイコンを表示</value>
+  </data>
+  <data name="SV_TitleBarTitleVisible" xml:space="preserve">
+    <value>タイトルバーのタイトルを表示</value>
+  </data>
+  <data name="SV_TitleBarContentVisible" xml:space="preserve">
+    <value>タイトルバーの内容を表示</value>
+  </data>
+  <data name="SV_TitleVisible" xml:space="preserve">
+    <value>タイトルを表示</value>
+  </data>
+  <data name="SV_TitleBarBackground" xml:space="preserve">
+    <value>タイトルバーの背景色</value>
+  </data>
+  <data name="SV_WindowDescription" xml:space="preserve">
+    <value>ウィンドウ設定を調整</value>
+  </data>
+  <data name="SV_Window" xml:space="preserve">
+    <value>ウィンドウ</value>
+  </data>
+  <data name="SV_FullScreenButtonVisible" xml:space="preserve">
+    <value>全画面ボタンを表示</value>
+  </data>
+  <data name="SV_MinimizeButtonVisible" xml:space="preserve">
+    <value>最小化ボタンを表示</value>
+  </data>
+  <data name="SV_MaximizeButtonVisible" xml:space="preserve">
+    <value>最大化ボタンを表示</value>
+  </data>
+  <data name="SV_CloseButtonVisible" xml:space="preserve">
+    <value>閉じるボタンを表示</value>
+  </data>
+  <data name="SV_CanMinimize" xml:space="preserve">
+    <value>最小化可能</value>
+  </data>
+  <data name="SV_CanMaximize" xml:space="preserve">
+    <value>最大化可能</value>
+  </data>
+  <data name="SV_CanResize" xml:space="preserve">
+    <value>サイズ変更可能</value>
+  </data>
   <data name="GettingStartedContent" xml:space="preserve">
     <value>アプリ開発のオプションとサンプルの概要。</value>
   </data>
@@ -1134,6 +1239,75 @@
   <data name="BI_RoundOutlineButton" xml:space="preserve">
     <value>丸アウトラインボタン</value>
   </data>
+  <data name="BI_RoundToolButton" xml:space="preserve">
+    <value>丸ツールボタン</value>
+  </data>
+  <data name="BI_AccentRoundToolButton" xml:space="preserve">
+    <value>アクセント丸ツールボタン</value>
+  </data>
+  <data name="BI_OutlineToolButton" xml:space="preserve">
+    <value>アウトラインツールボタン</value>
+  </data>
+  <data name="BI_RoundOutlineToolButton" xml:space="preserve">
+    <value>丸アウトラインツールボタン</value>
+  </data>
+  <data name="BI_TransparentToolButton" xml:space="preserve">
+    <value>透明ツールボタン</value>
+  </data>
+  <data name="BI_AccentToolButton" xml:space="preserve">
+    <value>アクセントツールボタン</value>
+  </data>
+  <data name="BI_FilledPushButton" xml:space="preserve">
+    <value>塗りつぶしボタン</value>
+  </data>
+  <data name="BI_FilledPushButtonCustom" xml:space="preserve">
+    <value>カスタム塗りつぶしボタン</value>
+  </data>
+  <data name="BI_FilledPushButtonInformation" xml:space="preserve">
+    <value>情報塗りつぶしボタン</value>
+  </data>
+  <data name="BI_FilledPushButtonSuccess" xml:space="preserve">
+    <value>成功塗りつぶしボタン</value>
+  </data>
+  <data name="BI_FilledPushButtonAttention" xml:space="preserve">
+    <value>注意塗りつぶしボタン</value>
+  </data>
+  <data name="BI_FilledPushButtonWarning" xml:space="preserve">
+    <value>警告塗りつぶしボタン</value>
+  </data>
+  <data name="BI_FilledPushButtonError" xml:space="preserve">
+    <value>エラー塗りつぶしボタン</value>
+  </data>
+  <data name="BI_FilledToolButton" xml:space="preserve">
+    <value>塗りつぶしツールボタン</value>
+  </data>
+  <data name="BI_FilledToolButtonCustom" xml:space="preserve">
+    <value>カスタム塗りつぶしツールボタン</value>
+  </data>
+  <data name="BI_FilledToolButtonInformation" xml:space="preserve">
+    <value>情報塗りつぶしツールボタン</value>
+  </data>
+  <data name="BI_FilledToolButtonSuccess" xml:space="preserve">
+    <value>成功塗りつぶしツールボタン</value>
+  </data>
+  <data name="BI_FilledToolButtonAttention" xml:space="preserve">
+    <value>注意塗りつぶしツールボタン</value>
+  </data>
+  <data name="BI_FilledToolButtonWarning" xml:space="preserve">
+    <value>警告塗りつぶしツールボタン</value>
+  </data>
+  <data name="BI_FilledToolButtonError" xml:space="preserve">
+    <value>エラー塗りつぶしツールボタン</value>
+  </data>
+  <data name="BI_RepeatButton" xml:space="preserve">
+    <value>繰り返しボタン</value>
+  </data>
+  <data name="BI_SlowRepeatButton" xml:space="preserve">
+    <value>スロー繰り返しボタン</value>
+  </data>
+  <data name="BI_TransparentRepeatButton" xml:space="preserve">
+    <value>透明繰り返しボタン</value>
+  </data>
   <data name="MT_FileMenu" xml:space="preserve">
     <value>ファイル(_F)</value>
   </data>
@@ -1415,6 +1589,42 @@
   <data name="Button" xml:space="preserve">
     <value>ボタン</value>
   </data>
+  <data name="PushButton" xml:space="preserve">
+    <value>ボタン</value>
+  </data>
+  <data name="ToolButton" xml:space="preserve">
+    <value>ツールボタン</value>
+  </data>
+  <data name="FilledButton" xml:space="preserve">
+    <value>塗りつぶしボタン</value>
+  </data>
+  <data name="OutlineButton" xml:space="preserve">
+    <value>アウトラインボタン</value>
+  </data>
+  <data name="DropDownButton" xml:space="preserve">
+    <value>ドロップダウンボタン</value>
+  </data>
+  <data name="ToggleButton" xml:space="preserve">
+    <value>トグルボタン</value>
+  </data>
+  <data name="SplitButton" xml:space="preserve">
+    <value>分割ボタン</value>
+  </data>
+  <data name="RadioButton" xml:space="preserve">
+    <value>ラジオボタン</value>
+  </data>
+  <data name="HyperlinkButton" xml:space="preserve">
+    <value>ハイパーリンクボタン</value>
+  </data>
+  <data name="ToggleSwitch" xml:space="preserve">
+    <value>トグルスイッチ</value>
+  </data>
+  <data name="CheckBox" xml:space="preserve">
+    <value>チェックボックス</value>
+  </data>
+  <data name="RepeatButton" xml:space="preserve">
+    <value>繰り返しボタン</value>
+  </data>
   <data name="ComboBox" xml:space="preserve">
     <value>ドロップダウンボックス</value>
   </data>
@@ -1594,6 +1804,33 @@
   </data>
   <data name="SI_ToastInfoBar" xml:space="preserve">
     <value>トースト情報バー</value>
+  </data>
+  <data name="SI_DefaultInfoBarTitle" xml:space="preserve">
+    <value>情報バーのタイトルです</value>
+  </data>
+  <data name="SI_DefaultInfoBarContent" xml:space="preserve">
+    <value>情報バーの内容です</value>
+  </data>
+  <data name="SI_LayoutDirection" xml:space="preserve">
+    <value>レイアウト方向</value>
+  </data>
+  <data name="SI_AutoResize" xml:space="preserve">
+    <value>自動サイズ変更</value>
+  </data>
+  <data name="SI_Information" xml:space="preserve">
+    <value>情報</value>
+  </data>
+  <data name="SI_Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="SI_Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="SI_Error" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="SI_Custom" xml:space="preserve">
+    <value>カスタム</value>
   </data>
   <data name="DP_ColorDialog" xml:space="preserve">
     <value>カラーダイアログ</value>
@@ -1784,8 +2021,8 @@
   <data name="CustomBackground" xml:space="preserve">
     <value>情報バーの背景色をカスタマイズする</value>
   </data>
-  <data name="EditCustom" xml:space="preserve">
-    <value>カスタムの編集</value>
+  <data name="Edit" xml:space="preserve">
+    <value>編集</value>
   </data>
   <data name="TV_OutlinedTextBox" xml:space="preserve">
     <value>アウトラインテキストボックス</value>
@@ -1902,7 +2139,7 @@
     <value>フィードバックを提供してAvalonia-Fluent-UIの変更を手伝ってください</value>
   </data>
   <data name="AboutDesc" xml:space="preserve">
-    <value>Copyright 2024、Izumi、現行バージョン2.0.4</value>
+    <value>Copyright 2026、Izumi、現行バージョン2.0.4</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
     <value>最新情報の確認</value>
@@ -1927,5 +2164,8 @@
   </data>
   <data name="CompactPaneLength" xml:space="preserve">
     <value>コンパクトなガラス長: </value>
+  </data>
+  <data name="TabView" xml:space="preserve">
+    <value>タブビュー</value>
   </data>
 </root>

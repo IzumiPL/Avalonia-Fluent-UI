@@ -7,9 +7,9 @@
 
   <ControlTheme x:Key="{x:Type TableViewRow}" TargetType="TableViewRow">
     <Setter Property="Background" Value="Transparent"/>
-    <Setter Property="Margin" Value="0 3"/>
+    <Setter Property="Margin" Value="0 2"/>
     <Setter Property="CornerRadius" Value="6"/>
-    <Setter Property="Height" Value="30"/>
+    <Setter Property="Height" Value="35"/>
     <Setter Property="Padding" Value="{DynamicResource TableViewRowPadding}"/>
     <Setter Property="Template">
       <ControlTemplate>

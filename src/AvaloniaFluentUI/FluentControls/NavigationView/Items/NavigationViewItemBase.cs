@@ -39,11 +39,11 @@ public class NavigationViewItemBase : ListBoxItem
         }
     }
 
-    internal NavigationView GetNavigationView
+    internal NavigationView? GetNavigationView
     {
         get
         {
-            if (_navView != null && _navView.TryGetTarget(out NavigationView target))
+            if (_navView != null && _navView.TryGetTarget(out NavigationView? target))
             {
                 return target;
             }
@@ -52,7 +52,7 @@ public class NavigationViewItemBase : ListBoxItem
         }
     }
 
-    internal SplitView GetSplitView
+    internal SplitView? GetSplitView
     {
         get
         {
@@ -74,9 +74,12 @@ public class NavigationViewItemBase : ListBoxItem
 
     internal bool IsInNavigationViewOwnedRepeater { get; set; }
 
-    internal void SetNavigationViewParent(NavigationView navView)
+    internal void SetNavigationViewParent(NavigationView? navView)
     {
-        _navView = new WeakReference<NavigationView>(navView);
+        if (navView != null)
+        {
+            _navView = new WeakReference<NavigationView>(navView);
+        }
     }
 
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)

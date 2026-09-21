@@ -87,5 +87,15 @@
       <DependentUpon>TimeLinePage.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Controls\View\PopupDrawerHostViewBase.axaml.cs">
+      <DependentUpon>PopupDrawerHostViewBase.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\BasicPage\CheckBoxPage.axaml.cs">
+      <DependentUpon>CheckBoxPage.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\BasicPage\RepeatButtonPage.axaml.cs">
+      <DependentUpon>RepeatButtonPage.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

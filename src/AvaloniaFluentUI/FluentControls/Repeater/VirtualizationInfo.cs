@@ -35,9 +35,9 @@ internal class VirtualizationInfo
 
     public Rect ArrangeBounds { get; set; }
 
-    public string UniqueId => _uniqueId;
+    public string? UniqueId => _uniqueId;
 
-    public object Data => _data == null ? null :
+    public object? Data => _data == null ? null :
         _data.TryGetTarget(out var target) ? target : null;
  
     internal void UpdatePhasingInfo(object data)
@@ -119,10 +119,10 @@ internal class VirtualizationInfo
 
     private uint _pinCounter;
     private int _index = -1;
-    private string _uniqueId;
+    private string? _uniqueId;
     private ElementOwner _owner;
 
-    private WeakReference<object> _data;    
+    private WeakReference<object>? _data;    
 
     internal const int PhaseReachedEnd = -1;
 

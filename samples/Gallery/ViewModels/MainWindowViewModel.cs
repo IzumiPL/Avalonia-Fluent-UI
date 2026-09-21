@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using Avalonia;
-using Avalonia.Media;
 using AvaloniaFluentUI.Locale;
 using AvaloniaFluentUI.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -13,6 +12,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Gallery.Messages;
 using Gallery.Models;
 using Gallery.Services;
+using Gallery.Settings;
 
 namespace Gallery.ViewModels;
 
@@ -64,6 +64,8 @@ public partial class MainWindowViewModel : ViewModelBase
     
     private readonly AppConfig? _config;
 
+    public AppSettings Settings { get; } = new AppSettings();
+
     public MainWindowViewModel(AppConfig? config)
     {
         _viewModels["Home"] = new HomeViewModel();
@@ -79,7 +81,18 @@ public partial class MainWindowViewModel : ViewModelBase
             { "Icons", () => new IconsViewModel() },
             
             { "BasicInput", () => new BasicInputViewModel() },
-            { "Button", () => new ButtonPageViewModel() },
+            { "PushButton", () => new PushButtonPageViewModel() },
+            { "ToolButton", () => new ToolButtonPageViewModel() },
+            { "FilledButton", () => new FilledButtonPageViewModel() },
+            { "OutlineButton", () => new OutlineButtonPageViewModel() },
+            { "DropDownButton", () => new DropDownButtonPageViewModel() },
+            { "ToggleButton", () => new ToggleButtonPageViewModel() },
+            { "SplitButton", () => new SplitButtonPageViewModel() },
+            { "RadioButton", () => new RadioButtonPageViewModel() },
+            { "HyperlinkButton", () => new HyperlinkButtonPageViewModel() },
+            { "ToggleSwitch", () => new ToggleSwitchPageViewModel() },
+            { "CheckBox", () => new CheckBoxPageViewModel() },
+            { "RepeatButton", () => new RepeatButtonPageViewModel() },
             { "ComboBox", () => new ComboBoxPageViewModel() },
             { "Slider", () => new SlierPageViewModel() },
             
@@ -133,18 +146,17 @@ public partial class MainWindowViewModel : ViewModelBase
             
             { "DateTime", () => new DateTimeViewModel() },
             
-            { "Settings", () => new SettingsViewModel(config) },
+            { "Settings", () => new SettingsViewModel(config, Settings) },
         };
         
         _config = config;
         CurrentViewModel = _viewModels["Home"];
         AutoCompleteBoxItems = _viewModelFactories.Keys.ToArray();
-
-        LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
     }
 
-    private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
+    protected override void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
     {
+        base.OnLanguageChanged(sender, e);
         OnPropertyChanged(nameof(Home));
         OnPropertyChanged(nameof(Icon));
         OnPropertyChanged(nameof(BasicInput));
@@ -183,7 +195,7 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             if (!_viewModels.TryGetValue("Settings", out var vm))
             {
-                vm = new SettingsViewModel(_config);
+                vm = new SettingsViewModel(_config, Settings);
                 _viewModels["Settings"] = vm;
             }
             return (SettingsViewModel)vm;
@@ -199,6 +211,9 @@ public partial class MainWindowViewModel : ViewModelBase
     public Thickness BorderWidth => new Thickness(SelectedBorderWidthItem);
     
     public string[] AutoCompleteBoxItems { get; }
+
+    [ObservableProperty]
+    private bool _isBack;
 
     [RelayCommand]
     private void ToggleTheme() => AvaloniaFluentTheme.Instance.ToggleTheme(); 
@@ -235,6 +250,8 @@ public partial class MainWindowViewModel : ViewModelBase
             }
         }
 
+
+        IsBack = false;
         CurrentViewModel = target;
         CanGoBack = _history.Count > 0;
 
@@ -246,16 +263,14 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand(CanExecute = nameof(CanGoBack))]
     private void GoBack()
     {
-        if (_history.Count <= 0)
-            return;
-
-        Console.WriteLine("Go Back");
+        if (_history.Count <= 0) { return; }
 
         var last = _history[^1];
         _history.RemoveAt(_history.Count - 1);
 
         if (GetOrCreateViewModel(last) is { } view)
         {
+            IsBack = true;
             CurrentViewModel = view; 
             
             Console.WriteLine($"Back, Tag: {last}, View: {view.Title}, Trigger Jump To ControlMessage");

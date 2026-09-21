@@ -16,8 +16,8 @@ public delegate void NavigatingCancelEventHandler(object sender, NavigatingCance
 /// </summary>
 public class NavigatingCancelEventArgs : RoutedEventArgs
 {
-    internal NavigatingCancelEventArgs(NavigationMode mode, NavigationTransitionInfo info,
-        object param, Type srcType)
+    internal NavigatingCancelEventArgs(NavigationMode mode, NavigationTransitionInfo? info,
+        object? param, Type? srcType)
     {
         NavigationMode = mode;
         NavigationTransitionInfo = info;
@@ -38,15 +38,15 @@ public class NavigatingCancelEventArgs : RoutedEventArgs
     /// <summary>
     /// Gets the value of the SourcePageType parameter from the originating Navigate call.
     /// </summary>
-    public Type SourcePageType { get; }
+    public Type? SourcePageType { get; }
 
     /// <summary>
     /// Gets a value that indicates the animated transition associated with the navigation.
     /// </summary>
-    public NavigationTransitionInfo NavigationTransitionInfo { get; }
+    public NavigationTransitionInfo? NavigationTransitionInfo { get; }
 
     /// <summary>
     /// Gets the navigation parameter associated with this navigation.
     /// </summary>
-    public object Parameter { get; }
+    public object? Parameter { get; }
 }

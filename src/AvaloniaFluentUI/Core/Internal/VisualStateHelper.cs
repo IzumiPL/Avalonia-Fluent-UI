@@ -45,7 +45,7 @@ public class VisualStateHelper
         }
     }
 
-    private static void SetClasses(StyledElement element, string classes, bool set)
+    private static void SetClasses(StyledElement element, string? classes, bool set)
     {
         if (string.IsNullOrEmpty(classes))
             return;

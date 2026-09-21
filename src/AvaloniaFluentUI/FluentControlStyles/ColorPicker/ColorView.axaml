@@ -437,7 +437,7 @@
                       Grid.Column="0"
                       Height="32"
                       Background="{DynamicResource ControlFillColorDisabledBrush}"
-                      BorderBrush="{DynamicResource ControlFillColorDefaultBrush}"
+                      BorderBrush="{DynamicResource ControlStrokeColorDefault}"
                       BorderThickness="1,1,0,1"
                       CornerRadius="4,0,0,4">
                       <TextBlock
@@ -468,7 +468,7 @@
                   Height="{Binding ElementName=Component1NumericUpDown, Path=Bounds.Height}"
                   VerticalAlignment="Center"
                   Background="{DynamicResource ControlFillColorDisabledBrush}"
-                  BorderBrush="{DynamicResource ControlFillColorDefaultBrush}"
+                  BorderBrush="{DynamicResource ControlStrokeColorDefault}"
                   BorderThickness="1,1,0,1"
                   CornerRadius="4,0,0,4"
                   IsVisible="{TemplateBinding IsComponentTextInputVisible}">
@@ -530,7 +530,7 @@
                   Height="{Binding ElementName=Component2NumericUpDown, Path=Bounds.Height}"
                   VerticalAlignment="Center"
                   Background="{DynamicResource ControlFillColorDisabledBrush}"
-                  BorderBrush="{DynamicResource ControlFillColorDefaultBrush}"
+                  BorderBrush="{DynamicResource ControlStrokeColorDefault}"
                   BorderThickness="1,1,0,1"
                   CornerRadius="4,0,0,4"
                   IsVisible="{TemplateBinding IsComponentTextInputVisible}">
@@ -592,7 +592,7 @@
                   Height="{Binding ElementName=Component3NumericUpDown, Path=Bounds.Height}"
                   VerticalAlignment="Center"
                   Background="{DynamicResource ControlFillColorDisabledBrush}"
-                  BorderBrush="{DynamicResource ControlFillColorDefaultBrush}"
+                  BorderBrush="{DynamicResource ControlStrokeColorDefault}"
                   BorderThickness="1,1,0,1"
                   CornerRadius="4,0,0,4"
                   IsVisible="{TemplateBinding IsComponentTextInputVisible}">
@@ -654,7 +654,7 @@
                   Height="{Binding ElementName=AlphaComponentNumericUpDown, Path=Bounds.Height}"
                   VerticalAlignment="Center"
                   Background="{DynamicResource ControlFillColorDisabledBrush}"
-                  BorderBrush="{DynamicResource ControlFillColorDefaultBrush}"
+                  BorderBrush="{DynamicResource ControlStrokeColorDefault}"
                   BorderThickness="1,1,0,1"
                   CornerRadius="4,0,0,4"
                   IsEnabled="{TemplateBinding IsAlphaEnabled}">

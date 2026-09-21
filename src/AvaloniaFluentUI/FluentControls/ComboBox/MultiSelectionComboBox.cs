@@ -63,7 +63,7 @@ public class MultiSelectionComboBox : TemplatedControl
     public AvaloniaList<MultiSelectionComboBoxItem> Items => _items;
 
     private const string PC_PRESSED = ":pressed";
-    private const string PC_HAS_PLACEHOLDER = ":hasplaceholder";
+    private const string PC_HAS_PLACEHOLDER = ":has-placeholder";
     
     private const string PART_MULTI_SELECTION_POPUP = "PART_MultiSelectionPopup";
     private const string PART_MULTI_SELECTION_VIEW = "PART_MultiSelectionView";
@@ -94,7 +94,7 @@ public class MultiSelectionComboBox : TemplatedControl
             {
                 var value = item.Content ?? item;
                 data.Add(value);
-                if (item.IsSelected && !SelectedItems.Contains(value)) 
+                if (item.IsSelected && SelectedItems!.Contains(value)) 
                 {
                     SelectedItems.Add(value);
                 }
@@ -139,7 +139,8 @@ public class MultiSelectionComboBox : TemplatedControl
     protected override void OnPointerReleased(PointerReleasedEventArgs e)
     {
         base.OnPointerReleased(e);
-        if (_multiSelectionPopup != null && e.Source is not SmoothScrollContentPresenter)
+        // if (_multiSelectionPopup != null && e.Source is not SmoothScrollContentPresenter)
+        if (_multiSelectionPopup != null)
         {
             _multiSelectionPopup.Width = Bounds.Width;
             _multiSelectionPopup.IsOpen = true;

@@ -15,17 +15,16 @@ namespace AvaloniaFluentUI.Controls;
 /// <summary>
 /// Represents a specialized command bar that provides layout for CommandBarButton and related command elements.
 /// </summary>
-
-[TemplatePart(s_tpPrimaryItemsControl, typeof(ItemsControl))]
-[TemplatePart(s_tpContentControl, typeof(ContentControl))]
-[TemplatePart(s_tpSecondaryItemsControl, typeof(CommandBarOverflowPresenter))]
-[TemplatePart(s_tpMoreButton, typeof(Button))]
-[PseudoClasses(s_pcDynamicOverflow)]
-[PseudoClasses(SharedPseudoclasses.s_pcCompact, s_pcMinimal, s_pcHidden)]
-[PseudoClasses(s_pcLabelBottom, s_pcLabelRight, s_pcLabelCollapsed)]
-[PseudoClasses(s_pcPrimaryOnly, s_pcSecondaryOnly)]
+[PseudoClasses(PC_DYNAMICOVERFLOW)]
 [PseudoClasses(SharedPseudoclasses.s_pcOpen)]
-public partial class CommandBar : ContentControl
+[PseudoClasses(PC_PRIMARY_ONLY, PC_SECONDARY_ONLY)]
+[PseudoClasses(PC_LABEL_BOTTOM, PC_LABEL_RIGHT, PC_LABEL_COLLAPSED)]
+[PseudoClasses(SharedPseudoclasses.s_pcCompact, PC_MINIMAL, PC_HIDDEN)]
+[TemplatePart(Name = MORE_BUTTON,               Type = typeof(Button))]
+[TemplatePart(Name = CONTENT_CONTROL,           Type = typeof(ContentControl))]
+[TemplatePart(Name = PRIMARY_ITEMS_CONTROL,     Type = typeof(ItemsControl))]
+[TemplatePart(Name = SECONDARY_ITEMS_CONTROL,   Type = typeof(CommandBarOverflowPresenter))]
+public class CommandBar : ContentControl
 {
     /// <summary>
     /// Define the <see cref="IsOpen"/> property
@@ -161,39 +160,59 @@ public partial class CommandBar : ContentControl
     /// <summary>
     /// Occurs when the CommandBar changes from hidden to visible.
     /// </summary>
-    public event TypedEventHandler<CommandBar, EventArgs> Opened;
+    public event TypedEventHandler<CommandBar, EventArgs>? Opened;
 
     /// <summary>
     /// Occurs when the CommandBar starts to change from hidden to visible.
     /// </summary>
-    public event TypedEventHandler<CommandBar, EventArgs> Opening;
+    public event TypedEventHandler<CommandBar, EventArgs>? Opening;
 
     /// <summary>
     /// Occurs when the CommandBar changes from visible to hidden.
     /// </summary>
-    public event TypedEventHandler<CommandBar, EventArgs> Closed;
+    public event TypedEventHandler<CommandBar, EventArgs>? Closed;
 
     /// <summary>
     /// Occurs when the CommandBar starts to change from visible to hidden.
     /// </summary>
-    public event TypedEventHandler<CommandBar, EventArgs> Closing;
+    public event TypedEventHandler<CommandBar, EventArgs>? Closing;
 
     private IAvaloniaList<ICommandBarElement> _primaryCommands;
     private IAvaloniaList<ICommandBarElement> _secondaryCommands;
+    
+    private bool _appliedTemplate;
 
-    private const string s_tpPrimaryItemsControl = "PrimaryItemsControl";
-    private const string s_tpContentControl = "ContentControl";
-    private const string s_tpSecondaryItemsControl = "SecondaryItemsControl";
-    private const string s_tpMoreButton = "MoreButton";
+    // These are the actual lists sent to the Items Controls
+    // We don't want to move items in the actual lists to not
+    // interfere with what user specified
+    private AvaloniaList<ICommandBarElement>? _primaryItems;
+    private AvaloniaList<ICommandBarElement>? _overflowItems;
 
-    private const string s_pcDynamicOverflow = ":dynamicoverflow";
-    private const string s_pcLabelBottom = ":labelbottom";
-    private const string s_pcLabelRight = ":labelright";
-    private const string s_pcLabelCollapsed = ":labelcollapsed";
-    private const string s_pcMinimal = ":minimal";
-    private const string s_pcHidden = ":hidden";
-    private const string s_pcPrimaryOnly = ":primaryOnly";
-    private const string s_pcSecondaryOnly = ":secondaryOnly";
+    private ItemsControl? _primaryItemsHost;
+    private CommandBarOverflowPresenter? _overflowItemsHost;
+    private ContentControl? _contentHost;
+    private Button? _moreButton;
+
+    private CommandBarSeparator? _overflowSeparator;
+
+    private int _hasOrderedOverflow;
+    private Dictionary<ICommandBarElement, double>? _widthCache;
+    private int _numInOverflow;
+    private double _minRecoverWidth;
+
+    private const string PRIMARY_ITEMS_CONTROL = "PrimaryItemsControl";
+    private const string CONTENT_CONTROL = "ContentControl";
+    private const string SECONDARY_ITEMS_CONTROL = "SecondaryItemsControl";
+    private const string MORE_BUTTON = "MoreButton";
+
+    private const string PC_DYNAMICOVERFLOW = ":dynamicoverflow";
+    private const string PC_LABEL_BOTTOM = ":labelbottom";
+    private const string PC_LABEL_RIGHT = ":labelright";
+    private const string PC_LABEL_COLLAPSED = ":labelcollapsed";
+    private const string PC_MINIMAL = ":minimal";
+    private const string PC_HIDDEN = ":hidden";
+    private const string PC_PRIMARY_ONLY = ":primaryOnly";
+    private const string PC_SECONDARY_ONLY = ":secondaryOnly";
     
     /// <summary>
     /// Initializes a new instance of the <see cref="CommandBar"/> class.
@@ -208,9 +227,9 @@ public partial class CommandBar : ContentControl
 
         // Don't initialize the actual item lists here, we'll do that as needed
 
-        PseudoClasses.Add(s_pcDynamicOverflow);
+        PseudoClasses.Add(PC_DYNAMICOVERFLOW);
         PseudoClasses.Add(SharedPseudoclasses.s_pcCompact);
-        PseudoClasses.Add(s_pcLabelBottom);
+        PseudoClasses.Add(PC_LABEL_BOTTOM);
     }
 
     /// <inheritdoc/>
@@ -225,12 +244,12 @@ public partial class CommandBar : ContentControl
 
         base.OnApplyTemplate(e);
 
-        _primaryItemsHost = e.NameScope.Find<ItemsControl>(s_tpPrimaryItemsControl);
-        _contentHost = e.NameScope.Find<ContentControl>(s_tpContentControl);
+        _primaryItemsHost = e.NameScope.Find<ItemsControl>(PRIMARY_ITEMS_CONTROL);
+        _contentHost = e.NameScope.Find<ContentControl>(CONTENT_CONTROL);
 
-        _overflowItemsHost = e.NameScope.Find<CommandBarOverflowPresenter>(s_tpSecondaryItemsControl);
+        _overflowItemsHost = e.NameScope.Find<CommandBarOverflowPresenter>(SECONDARY_ITEMS_CONTROL);
 
-        _moreButton = e.NameScope.Find<Button>(s_tpMoreButton);
+        _moreButton = e.NameScope.Find<Button>(MORE_BUTTON);
         if (_moreButton != null)
         {
             _moreButton.Click += OnMoreButtonClick;
@@ -253,16 +272,16 @@ public partial class CommandBar : ContentControl
         else if (change.Property == DefaultLabelPositionProperty)
         {
             var newVal = change.GetNewValue<CommandBarDefaultLabelPosition>();
-            PseudoClasses.Set(s_pcLabelRight, newVal == CommandBarDefaultLabelPosition.Right);
-            PseudoClasses.Set(s_pcLabelBottom, newVal == CommandBarDefaultLabelPosition.Bottom);
-            PseudoClasses.Set(s_pcLabelCollapsed, newVal == CommandBarDefaultLabelPosition.Collapsed);
+            PseudoClasses.Set(PC_LABEL_RIGHT, newVal == CommandBarDefaultLabelPosition.Right);
+            PseudoClasses.Set(PC_LABEL_BOTTOM, newVal == CommandBarDefaultLabelPosition.Bottom);
+            PseudoClasses.Set(PC_LABEL_COLLAPSED, newVal == CommandBarDefaultLabelPosition.Collapsed);
         }
         else if (change.Property == ClosedDisplayModeProperty)
         {
             var newVal = change.GetNewValue<CommandBarClosedDisplayMode>();
             PseudoClasses.Set(SharedPseudoclasses.s_pcCompact, newVal == CommandBarClosedDisplayMode.Compact);
-            PseudoClasses.Set(s_pcMinimal, newVal == CommandBarClosedDisplayMode.Minimal);
-            PseudoClasses.Set(s_pcHidden, newVal == CommandBarClosedDisplayMode.Hidden);
+            PseudoClasses.Set(PC_MINIMAL, newVal == CommandBarClosedDisplayMode.Minimal);
+            PseudoClasses.Set(PC_HIDDEN, newVal == CommandBarClosedDisplayMode.Hidden);
         }
         else if (change.Property == ItemsAlignmentProperty)
         {
@@ -277,15 +296,15 @@ public partial class CommandBar : ContentControl
         bool isDynamic = IsDynamicOverflowEnabled;
         if (isDynamic)
         {
-            if (!_moreButton.IsVisible)
+            if (_moreButton != null && !_moreButton.IsVisible)
                 _moreButton.IsVisible = true;
 
             var sz = base.MeasureOverride(Size.Infinity);
 
             if (_primaryCommands.Count == 0)
             {
-                _moreButton.IsVisible = true;
-                _overflowSeparator.IsVisible = false;
+                _moreButton?.IsVisible = true;
+                _overflowSeparator?.IsVisible = false;
                 return sz;
             }
 
@@ -297,9 +316,9 @@ public partial class CommandBar : ContentControl
             // 5px is to give us just a little more space
             var availWidForItems = availableSize.Width -
                 (_contentHost != null ? _contentHost.DesiredSize.Width : 0) -
-                _moreButton.DesiredSize.Width - 5;
+                _moreButton?.DesiredSize.Width - 5;
 
-            if (_minRecoverWidth < availWidForItems && _numInOverflow > 0)
+            if (_minRecoverWidth < availWidForItems && _numInOverflow > 0 && _primaryItemsHost != null && _primaryItems != null && _widthCache != null)
             {
                 double trackWid = _primaryItemsHost.DesiredSize.Width;
                 while (_numInOverflow > 0)
@@ -311,7 +330,7 @@ public partial class CommandBar : ContentControl
                     {
                         groupWid += _widthCache[items[i]];
 
-                        _overflowItems.Remove(items[i]);
+                        _overflowItems?.Remove(items[i]);
                         var originalIndex = Math.Min(_primaryItems.Count, _primaryCommands.IndexOf(items[i]));
                         _primaryItems.Insert(originalIndex, items[i]);
                         _numInOverflow--;
@@ -328,7 +347,7 @@ public partial class CommandBar : ContentControl
                         break;
                 }
             }
-            else if (_primaryItemsHost.DesiredSize.Width > availWidForItems)
+            else if (_primaryItemsHost?.DesiredSize.Width > availWidForItems)
             {
                 // Move to Overflow
                 double trackWid = 0;
@@ -345,8 +364,8 @@ public partial class CommandBar : ContentControl
 
                             trackWid += itemAsIControl.DesiredSize.Width;
 
-                            _primaryItems.Remove(items[i]);
-                            _overflowItems.Insert(_numInOverflow, items[i]);
+                            _primaryItems?.Remove(items[i]);
+                            _overflowItems?.Insert(_numInOverflow, items[i]);
                             _numInOverflow++;
 
                             // WinUI hides toplevel separartors when the go into overflow
@@ -360,7 +379,7 @@ public partial class CommandBar : ContentControl
                 _minRecoverWidth = _primaryItemsHost.DesiredSize.Width;// + trackWid;
             }
 
-            if (_overflowSeparator != null)
+            if (_overflowSeparator != null && _overflowItems != null)
             { 
                 _overflowSeparator.IsVisible = _numInOverflow > 0 && SecondaryCommands.Count > 0;
 
@@ -373,11 +392,11 @@ public partial class CommandBar : ContentControl
         var overflowVis = OverflowButtonVisibility;
         if (overflowVis == CommandBarOverflowButtonVisibility.Auto)
         {
-            _moreButton.IsVisible = _overflowItems != null && (isDynamic ? _overflowItems.Count > 1 : _overflowItems.Count > 0);
+            _moreButton?.IsVisible = _overflowItems != null && (isDynamic ? _overflowItems.Count > 1 : _overflowItems.Count > 0);
         }
         else
         {
-            _moreButton.IsVisible = overflowVis == CommandBarOverflowButtonVisibility.Visible;
+            _moreButton?.IsVisible = overflowVis == CommandBarOverflowButtonVisibility.Visible;
         }
 
         return base.MeasureOverride(availableSize);
@@ -409,7 +428,7 @@ public partial class CommandBar : ContentControl
             // TODO: Focus via keyboard
             if (_overflowItems.Count > 0)
             {
-                (_overflowItems[0] as Control).Focus();
+                (_overflowItems[0] as Control)?.Focus();
             }
         }
 
@@ -526,8 +545,8 @@ public partial class CommandBar : ContentControl
         }
 
 SetState:
-        PseudoClasses.Set(s_pcPrimaryOnly, _primaryCommands.Count > 0 && _secondaryCommands.Count == 0);
-        PseudoClasses.Set(s_pcSecondaryOnly, _primaryCommands.Count == 0 && _secondaryCommands.Count > 0);
+        PseudoClasses.Set(PC_PRIMARY_ONLY, _primaryCommands.Count > 0 && _secondaryCommands.Count == 0);
+        PseudoClasses.Set(PC_SECONDARY_ONLY, _primaryCommands.Count == 0 && _secondaryCommands.Count > 0);
         InvalidateMeasure();
     }
 
@@ -578,8 +597,8 @@ SetState:
         }
 
 SetState:
-        PseudoClasses.Set(s_pcPrimaryOnly, _primaryCommands.Count > 0 && _secondaryCommands.Count == 0);
-        PseudoClasses.Set(s_pcSecondaryOnly, _primaryCommands.Count == 0 && _secondaryCommands.Count > 0);
+        PseudoClasses.Set(PC_PRIMARY_ONLY, _primaryCommands.Count > 0 && _secondaryCommands.Count == 0);
+        PseudoClasses.Set(PC_SECONDARY_ONLY, _primaryCommands.Count == 0 && _secondaryCommands.Count > 0);
 
         // Rerun measure to ensure the MoreButton has the correct visibility
         InvalidateMeasure();
@@ -619,11 +638,11 @@ SetState:
             _overflowItems.Add(_overflowSeparator);
             _overflowItems.AddRange(_secondaryCommands);
 
-            _overflowItemsHost.ItemsSource = _overflowItems;
+            _overflowItemsHost?.ItemsSource = _overflowItems;
         }
 
-        PseudoClasses.Set(s_pcPrimaryOnly, _primaryCommands.Count > 0 && _secondaryCommands.Count == 0);
-        PseudoClasses.Set(s_pcSecondaryOnly, _primaryCommands.Count == 0 && _secondaryCommands.Count > 0);
+        PseudoClasses.Set(PC_PRIMARY_ONLY, _primaryCommands.Count > 0 && _secondaryCommands.Count == 0);
+        PseudoClasses.Set(PC_SECONDARY_ONLY, _primaryCommands.Count == 0 && _secondaryCommands.Count > 0);
     }
 
     private void PrimaryItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -640,9 +659,9 @@ SetState:
                     {
                         if (items[i] is Control c && c.Classes is IPseudoClasses pc)
                         {
-                            pc.Set(s_pcLabelCollapsed, pos == CommandBarDefaultLabelPosition.Collapsed);
-                            pc.Set(s_pcLabelRight, pos == CommandBarDefaultLabelPosition.Right);
-                            pc.Set(s_pcLabelBottom, pos == CommandBarDefaultLabelPosition.Bottom);
+                            pc.Set(PC_LABEL_COLLAPSED, pos == CommandBarDefaultLabelPosition.Collapsed);
+                            pc.Set(PC_LABEL_RIGHT, pos == CommandBarDefaultLabelPosition.Right);
+                            pc.Set(PC_LABEL_BOTTOM, pos == CommandBarDefaultLabelPosition.Bottom);
                         }
                     }
                 }
@@ -658,9 +677,9 @@ SetState:
                         {
                             if (items[i] is Control c && c.Classes is IPseudoClasses pc)
                             {
-                                pc.Set(s_pcLabelCollapsed, false);
-                                pc.Set(s_pcLabelRight, false);
-                                pc.Set(s_pcLabelBottom, false);
+                                pc.Set(PC_LABEL_COLLAPSED, false);
+                                pc.Set(PC_LABEL_RIGHT, false);
+                                pc.Set(PC_LABEL_BOTTOM, false);
                             }
                         }
                     }
@@ -673,9 +692,12 @@ SetState:
     {
         for (int i = _numInOverflow - 1; i >= 0; i--)
         {
-            var item = _overflowItems[i];
-            _overflowItems.RemoveAt(i);
-            _primaryItems.Insert(Math.Min(_primaryItems.Count, _primaryCommands.IndexOf(item)), item);
+            if (_overflowItems != null)
+            {
+                var item = _overflowItems[i];
+                _overflowItems.RemoveAt(i);
+                _primaryItems?.Insert(Math.Min(_primaryItems.Count, _primaryCommands.IndexOf(item)), item);
+            }
         }
         _numInOverflow = 0;
     }
@@ -689,7 +711,7 @@ SetState:
     {
         if (_hasOrderedOverflow > 0)
         {
-            if (_primaryItems?.Count == 0)
+            if (_primaryItems == null || _primaryItems.Count == 0)
                 return null;
 
             // TODO: Don't loop over this multiple times...
@@ -776,24 +798,4 @@ SetState:
             }
         }
     }
-
-    private bool _appliedTemplate = false;
-
-    // These are the actual lists sent to the Items Controls
-    // We don't want to move items in the actual lists to not
-    // interfere with what user specified
-    private AvaloniaList<ICommandBarElement>? _primaryItems;
-    private AvaloniaList<ICommandBarElement>? _overflowItems;
-
-    private ItemsControl? _primaryItemsHost;
-    private CommandBarOverflowPresenter _overflowItemsHost;
-    private ContentControl? _contentHost;
-    private Button? _moreButton;
-
-    private CommandBarSeparator? _overflowSeparator;
-
-    private int _hasOrderedOverflow = 0;
-    private Dictionary<ICommandBarElement, double>? _widthCache;
-    private int _numInOverflow = 0;
-    private double _minRecoverWidth;
 }

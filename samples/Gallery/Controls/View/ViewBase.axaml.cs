@@ -55,6 +55,7 @@ public class ViewBase : ContentControl
         _documentButton?.Click -= OnDocumentButtonClicked;
         _sourceCodeButton?.Click -= OnSourceCodeButtonClicked;
         _sendFeedbackButton?.Click -= OnSendFeedbackButtonClicked;
+        _scrollViewer?.RemoveHandler(RequestBringIntoViewEvent, OnScrollViewerRequestBringIntoView);
         
         _toggleThemeButton = e.NameScope.Find<Button>("ToggleThemeButton");
         _scrollViewer = e.NameScope.Find<SmoothScrollViewer>("SmoothScrollViewer");
@@ -72,9 +73,13 @@ public class ViewBase : ContentControl
            _scrollViewer?.HorizontalScrollBarVisibility = ScrollBarVisibility.Auto;
            _scrollViewer?.MaxWidth = 720;
        }
-        
-        base.OnApplyTemplate(e);
+       
+       _scrollViewer?.AddHandler(RequestBringIntoViewEvent, OnScrollViewerRequestBringIntoView, RoutingStrategies.Tunnel);
+
+       base.OnApplyTemplate(e);
     }
+
+    private void OnScrollViewerRequestBringIntoView(object? sender, RequestBringIntoViewEventArgs e) => e.Handled = true;
 
     private void OnSendFeedbackButtonClicked(object? sender, RoutedEventArgs e)
     {

@@ -132,7 +132,7 @@ internal class Phaser
 
         //Debug.Assert(!_registeredForCallbacks);
 
-        if (_pendingElements.Count > 0)
+        if (_pendingElements?.Count > 0)
             RegisterForCallback();        
     }
 
@@ -140,7 +140,7 @@ internal class Phaser
     {
         if (!_registeredForCallbacks)
         {
-            Debug.Assert(_pendingElements.Count > 0);
+            Debug.Assert(_pendingElements?.Count > 0);
             _registeredForCallbacks = true;
             BuildTreeScheduler.RegisterWork(
                 _pendingElements[_pendingElements.Count - 1].Phase,// Use the phase of the last one in the sorted list
@@ -165,7 +165,7 @@ internal class Phaser
     private void SortElements(Rect visibleWindow)
     {
         // TODO: std::sort returns true/false, C# wants -1,0,1; not sure if this is 100% correct
-        _pendingElements.Sort((lhs, rhs) =>
+        _pendingElements?.Sort((lhs, rhs) =>
         {
             var lhsBounds = lhs.LastArrangeBounds;
             var lhsIntersects = visibleWindow.Intersects(lhsBounds);
@@ -191,7 +191,7 @@ internal class Phaser
     }
 
     private readonly ItemsRepeater _owner;
-    private List<ElementInfo> _pendingElements;
+    private List<ElementInfo>? _pendingElements;
     private bool _registeredForCallbacks;
 
     private readonly struct ElementInfo

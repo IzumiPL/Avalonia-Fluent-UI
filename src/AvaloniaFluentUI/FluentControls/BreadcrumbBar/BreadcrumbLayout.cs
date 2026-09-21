@@ -6,6 +6,13 @@ namespace AvaloniaFluentUI.Controls;
 
 internal class BreadcrumbLayout : NonVirtualizingLayout
 {
+    private Size _availableSize;
+    private BreadcrumbBarItem _ellipsisButton;
+    private WeakReference<BreadcrumbBar> _breadcrumb; // weak_ref because the BreadcrumbBar already points to us via m_itemsRepeaterLayout
+    private bool _ellipsisIsRendered;
+    private int _firstRenderedItemIndexAfterEllipsis;
+    private int _visibleItemsCount;
+    
     public BreadcrumbLayout() { }
 
     public BreadcrumbLayout(BreadcrumbBar breadcrumb)
@@ -66,14 +73,7 @@ internal class BreadcrumbLayout : NonVirtualizingLayout
             }
         }
 
-        if (accumWidth > availableSize.Width)
-        {
-            _ellipsisIsRendered = true;
-        }
-        else
-        {
-            _ellipsisIsRendered = false;
-        }
+        _ellipsisIsRendered = accumHeight > availableSize.Width;
 
         return new Size(accumWidth, accumHeight);
     }
@@ -199,11 +199,4 @@ internal class BreadcrumbLayout : NonVirtualizingLayout
 
         return maxHeight;
     }
-
-    private Size _availableSize;
-    private BreadcrumbBarItem _ellipsisButton;
-    private WeakReference<BreadcrumbBar> _breadcrumb; // weak_ref because the BreadcrumbBar already points to us via m_itemsRepeaterLayout
-    private bool _ellipsisIsRendered;
-    private int _firstRenderedItemIndexAfterEllipsis;
-    private int _visibleItemsCount;
 }

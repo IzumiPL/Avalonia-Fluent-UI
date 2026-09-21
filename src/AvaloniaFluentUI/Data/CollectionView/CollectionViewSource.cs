@@ -252,7 +252,7 @@ public class CollectionViewSource : AvaloniaObject, ISupportInitialize
     private IEnumerable _source;
     private ICollectionView _view;
     private AvaloniaList<string> _liveFilterProperties;
-    private AvaloniaList<SortDescription> _sortDescriptions;
+    private AvaloniaList<SortDescription>? _sortDescriptions;
     private bool _isLiveShapingEnabled;
     private Predicate<object> _filter;
 }

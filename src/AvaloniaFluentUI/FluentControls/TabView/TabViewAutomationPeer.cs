@@ -11,8 +11,7 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public sealed class TabViewAutomationPeer : ControlAutomationPeer, ISelectionProvider
 {
-    public TabViewAutomationPeer(Control owner)
-        : base(owner)
+    public TabViewAutomationPeer(Control owner) : base(owner)
     {
     }
 

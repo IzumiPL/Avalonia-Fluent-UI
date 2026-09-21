@@ -1,0 +1,91 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.RepeatButtonPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:RepeatButtonPageViewModel"
+  mc:Ignorable="d">
+
+  <StackPanel Spacing="50">
+    <!--  重复按钮  -->
+    <ui:CodeCard Name="RepeatButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_RepeatButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <StackPanel
+          Grid.Column="0"
+          Orientation="Horizontal"
+          Spacing="12">
+          <RepeatButton
+            Width="120"
+            Height="35"
+            Content="Click"
+            Command="{Binding IncreaseRepeatCountCommand}"
+            IsEnabled="{Binding !RepeatButtonIsDisabled}"/>
+          <TextBlock
+            VerticalAlignment="Center"
+            Text="{Binding RepeatCountText}"/>
+        </StackPanel>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding RepeatButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  慢速重复按钮  -->
+    <ui:CodeCard Name="SlowRepeatButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SlowRepeatButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <StackPanel
+          Grid.Column="0"
+          Orientation="Horizontal"
+          Spacing="12">
+          <RepeatButton
+            Width="120"
+            Height="35"
+            Delay="500"
+            Interval="500"
+            Content="Click"
+            Command="{Binding IncreaseSlowRepeatCountCommand}"
+            IsEnabled="{Binding !SlowRepeatButtonIsDisabled}"/>
+          <TextBlock
+            VerticalAlignment="Center"
+            Text="{Binding SlowRepeatCountText}"/>
+        </StackPanel>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding SlowRepeatButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <!--  透明重复按钮  -->
+    <ui:CodeCard Name="TransparentRepeatButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_TransparentRepeatButton]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <StackPanel
+          Grid.Column="0"
+          Orientation="Horizontal"
+          Spacing="12">
+          <RepeatButton
+            Width="120"
+            Height="35"
+            Classes="Transparent"
+            Content="Click"
+            Command="{Binding IncreaseTransparentRepeatCountCommand}"
+            IsEnabled="{Binding !TransparentRepeatButtonIsDisabled}"/>
+          <TextBlock
+            VerticalAlignment="Center"
+            Text="{Binding TransparentRepeatCountText}"/>
+        </StackPanel>
+        <CheckBox
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding TransparentRepeatButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

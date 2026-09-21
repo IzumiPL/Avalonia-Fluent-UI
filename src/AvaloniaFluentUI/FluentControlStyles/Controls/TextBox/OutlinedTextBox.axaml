@@ -114,6 +114,14 @@
       </ControlTemplate>
     </Setter>
 
+    <Style Selector="^ /template/ Border#PART_BorderElement">
+      <Setter Property="Transitions">
+        <Transitions>
+          <BrushTransition Property="BorderBrush" Duration="0:0:0.114"/>
+        </Transitions>
+      </Setter>
+    </Style>
+
     <!--  Disabled State  -->
     <Style Selector="^:disabled">
       <Setter Property="Foreground" Value="{DynamicResource TemporaryTextFillColorDisabled}"/>

@@ -23,9 +23,9 @@ public delegate void NavigationStoppedEventHandler(object sender, NavigationEven
 /// </summary>
 public class NavigationEventArgs : RoutedEventArgs
 {
-    internal NavigationEventArgs(object content, NavigationMode mode,
-        NavigationTransitionInfo navInfo, object param,
-        Type srcPgType)
+    internal NavigationEventArgs(object? content, NavigationMode mode,
+        NavigationTransitionInfo? navInfo, object? param,
+        Type? srcPgType)
     {
         Content = content;
         NavigationMode = mode;
@@ -39,7 +39,7 @@ public class NavigationEventArgs : RoutedEventArgs
     /// <summary>
     /// Gets the root node of the target page's content.
     /// </summary>
-    public object Content { get; }
+    public object? Content { get; }
 
     /// <summary>
     /// Gets a value that indicates the direction of movement during navigation
@@ -49,15 +49,15 @@ public class NavigationEventArgs : RoutedEventArgs
     /// <summary>
     /// Gets any "Parameter" object passed to the target page for the navigation.
     /// </summary>
-    public object Parameter { get; }
+    public object? Parameter { get; }
 
     /// <summary>
     /// Gets the data type of the source page.
     /// </summary>
-    public Type SourcePageType { get; }
+    public Type? SourcePageType { get; }
 
     /// <summary>
     /// Gets a value that indicates the animated transition associated with the navigation.
     /// </summary>
-    public NavigationTransitionInfo NavigationTransitionInfo { get; }
+    public NavigationTransitionInfo? NavigationTransitionInfo { get; }
 }

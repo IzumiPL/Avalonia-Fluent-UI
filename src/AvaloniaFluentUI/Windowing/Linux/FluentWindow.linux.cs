@@ -86,9 +86,9 @@ public partial class FluentWindow
             _windowBorder.PointerMoved += OnResizePointerMoved;
         }
 
-        if (_defaultTitleBar != null && _systemMenu != null)
+        if (_titleBar != null && _systemMenu != null)
         {
-            _defaultTitleBar.ContextFlyout = _systemMenu;
+            _titleBar.ContextFlyout = _systemMenu;
         }
     }
 

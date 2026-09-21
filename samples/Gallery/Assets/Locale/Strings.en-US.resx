@@ -126,8 +126,20 @@
   <data name="BI_CheckBox" xml:space="preserve">
     <value>CheckBox</value>
   </data>
+  <data name="BI_ChipsCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
   <data name="BI_ChipsRadioButton" xml:space="preserve">
     <value>Chips Radio Button</value>
+  </data>
+  <data name="BI_ChipsShared" xml:space="preserve">
+    <value>Shared</value>
+  </data>
+  <data name="BI_ChipsShoppingCart" xml:space="preserve">
+    <value>Shopping Cart</value>
+  </data>
+  <data name="BI_ChipsTag" xml:space="preserve">
+    <value>Tag</value>
   </data>
   <data name="BI_ColorSlider" xml:space="preserve">
     <value>Color Slider</value>
@@ -148,10 +160,10 @@
     <value>Cut</value>
   </data>
   <data name="BI_DropDownButton" xml:space="preserve">
-    <value>Drop-Down Button</value>
+    <value>DropDownButton</value>
   </data>
   <data name="BI_FilledButton" xml:space="preserve">
-    <value>Filled Button</value>
+    <value>FilledButton</value>
   </data>
   <data name="BI_Game" xml:space="preserve">
     <value>Game</value>
@@ -160,7 +172,7 @@
     <value>Headphones</value>
   </data>
   <data name="BI_HyperlinkButton" xml:space="preserve">
-    <value>Hyperlink Button</value>
+    <value>HyperlinkButton</value>
   </data>
   <data name="BI_IsDisabled" xml:space="preserve">
     <value>Is Disabled</value>
@@ -181,13 +193,13 @@
     <value>Options</value>
   </data>
   <data name="BI_OutlineButton" xml:space="preserve">
-    <value>Outline Button</value>
+    <value>OutlineButton</value>
   </data>
   <data name="BI_Paste" xml:space="preserve">
     <value>Paste</value>
   </data>
   <data name="BI_RadioButton" xml:space="preserve">
-    <value>Radio Button</value>
+    <value>RadioButton</value>
   </data>
   <data name="BI_RangeSlider" xml:space="preserve">
     <value>Range Slider</value>
@@ -208,7 +220,7 @@
     <value>Speakers</value>
   </data>
   <data name="BI_SplitButton" xml:space="preserve">
-    <value>Split Button</value>
+    <value>SplitButton</value>
   </data>
   <data name="BI_StandardButton" xml:space="preserve">
     <value>Standard Button</value>
@@ -774,6 +786,99 @@
   <data name="SV_AppTheme" xml:space="preserve">
     <value>App Theme</value>
   </data>
+  <data name="SV_WindowEffectNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="SV_WindowEffectMica" xml:space="preserve">
+    <value>Mica</value>
+  </data>
+  <data name="SV_WindowEffectAcrylic" xml:space="preserve">
+    <value>Acrylic</value>
+  </data>
+  <data name="SV_NavigationDescription" xml:space="preserve">
+    <value>Adjust navigation pane settings</value>
+  </data>
+  <data name="SV_Navigation" xml:space="preserve">
+    <value>Navigation</value>
+  </data>
+  <data name="SV_NavigationPaneClosedWidth" xml:space="preserve">
+    <value>Navigation pane closed width</value>
+  </data>
+  <data name="SV_NavigationPaneOpenWidth" xml:space="preserve">
+    <value>Navigation pane open width</value>
+  </data>
+  <data name="SV_NavigationExpandedModeThresholdWidth" xml:space="preserve">
+    <value>Expanded mode threshold width</value>
+  </data>
+  <data name="SV_NavigationScrollVisibility" xml:space="preserve">
+    <value>Navigation scrollbar visibility</value>
+  </data>
+  <data name="SV_BackButtonVisible" xml:space="preserve">
+    <value>Back button visible</value>
+  </data>
+  <data name="SV_PaneToggleButtonVisible" xml:space="preserve">
+    <value>Pane toggle button visible</value>
+  </data>
+  <data name="SV_SettingsItemVisible" xml:space="preserve">
+    <value>Settings item visible</value>
+  </data>
+  <data name="SV_PaneFooterSeparatorVisible" xml:space="preserve">
+    <value>Pane footer separator visible</value>
+  </data>
+  <data name="SV_PaneVisible" xml:space="preserve">
+    <value>Pane visible</value>
+  </data>
+  <data name="SV_TitleBarDescription" xml:space="preserve">
+    <value>Adjust title bar settings</value>
+  </data>
+  <data name="SV_TitleBar" xml:space="preserve">
+    <value>Title bar</value>
+  </data>
+  <data name="SV_TitleBarHeight" xml:space="preserve">
+    <value>Title bar height</value>
+  </data>
+  <data name="SV_TitleBarIconVisible" xml:space="preserve">
+    <value>Title bar icon visible</value>
+  </data>
+  <data name="SV_TitleBarTitleVisible" xml:space="preserve">
+    <value>Title bar title visible</value>
+  </data>
+  <data name="SV_TitleBarContentVisible" xml:space="preserve">
+    <value>Title bar content visible</value>
+  </data>
+  <data name="SV_TitleVisible" xml:space="preserve">
+    <value>Title visible</value>
+  </data>
+  <data name="SV_TitleBarBackground" xml:space="preserve">
+    <value>Title bar background</value>
+  </data>
+  <data name="SV_WindowDescription" xml:space="preserve">
+    <value>Adjust window settings</value>
+  </data>
+  <data name="SV_Window" xml:space="preserve">
+    <value>Window</value>
+  </data>
+  <data name="SV_FullScreenButtonVisible" xml:space="preserve">
+    <value>Full screen button visible</value>
+  </data>
+  <data name="SV_MinimizeButtonVisible" xml:space="preserve">
+    <value>Minimize button visible</value>
+  </data>
+  <data name="SV_MaximizeButtonVisible" xml:space="preserve">
+    <value>Maximize button visible</value>
+  </data>
+  <data name="SV_CloseButtonVisible" xml:space="preserve">
+    <value>Close button visible</value>
+  </data>
+  <data name="SV_CanMinimize" xml:space="preserve">
+    <value>Can minimize</value>
+  </data>
+  <data name="SV_CanMaximize" xml:space="preserve">
+    <value>Can maximize</value>
+  </data>
+  <data name="SV_CanResize" xml:space="preserve">
+    <value>Can resize</value>
+  </data>
   <data name="GettingStartedContent" xml:space="preserve">
     <value>An overview of app development options and samples.</value>
   </data>
@@ -1066,7 +1171,7 @@
     <value>Transparent Drop-Down Button</value>
   </data>
   <data name="BI_ToggleButton" xml:space="preserve">
-    <value>Toggle Button</value>
+    <value>ToggleButton</value>
   </data>
   <data name="BI_ToggleSplitButton" xml:space="preserve">
     <value>Toggle Split Button</value>
@@ -1133,6 +1238,75 @@
   </data>
   <data name="BI_RoundOutlineButton" xml:space="preserve">
     <value>Round Outline Button</value>
+  </data>
+  <data name="BI_RoundToolButton" xml:space="preserve">
+    <value>Round Tool Button</value>
+  </data>
+  <data name="BI_AccentRoundToolButton" xml:space="preserve">
+    <value>Accent Round Tool Button</value>
+  </data>
+  <data name="BI_OutlineToolButton" xml:space="preserve">
+    <value>OutlineToolButton</value>
+  </data>
+  <data name="BI_RoundOutlineToolButton" xml:space="preserve">
+    <value>Round Outline Tool Button</value>
+  </data>
+  <data name="BI_TransparentToolButton" xml:space="preserve">
+    <value>Transparent Tool Button</value>
+  </data>
+  <data name="BI_AccentToolButton" xml:space="preserve">
+    <value>Accent Tool Button</value>
+  </data>
+  <data name="BI_FilledPushButton" xml:space="preserve">
+    <value>FilledButton</value>
+  </data>
+  <data name="BI_FilledPushButtonCustom" xml:space="preserve">
+    <value>Custom Filled Button</value>
+  </data>
+  <data name="BI_FilledPushButtonInformation" xml:space="preserve">
+    <value>Information Filled Button</value>
+  </data>
+  <data name="BI_FilledPushButtonSuccess" xml:space="preserve">
+    <value>Success Filled Button</value>
+  </data>
+  <data name="BI_FilledPushButtonAttention" xml:space="preserve">
+    <value>Attention Filled Button</value>
+  </data>
+  <data name="BI_FilledPushButtonWarning" xml:space="preserve">
+    <value>Warning Filled Button</value>
+  </data>
+  <data name="BI_FilledPushButtonError" xml:space="preserve">
+    <value>Error Filled Button</value>
+  </data>
+  <data name="BI_FilledToolButton" xml:space="preserve">
+    <value>FilledToolButton</value>
+  </data>
+  <data name="BI_FilledToolButtonCustom" xml:space="preserve">
+    <value>Custom Filled Tool Button</value>
+  </data>
+  <data name="BI_FilledToolButtonInformation" xml:space="preserve">
+    <value>Information Filled Tool Button</value>
+  </data>
+  <data name="BI_FilledToolButtonSuccess" xml:space="preserve">
+    <value>Success Filled Tool Button</value>
+  </data>
+  <data name="BI_FilledToolButtonAttention" xml:space="preserve">
+    <value>Attention Filled Tool Button</value>
+  </data>
+  <data name="BI_FilledToolButtonWarning" xml:space="preserve">
+    <value>Warning Filled Tool Button</value>
+  </data>
+  <data name="BI_FilledToolButtonError" xml:space="preserve">
+    <value>Error Filled Tool Button</value>
+  </data>
+  <data name="BI_RepeatButton" xml:space="preserve">
+    <value>RepeatButton</value>
+  </data>
+  <data name="BI_SlowRepeatButton" xml:space="preserve">
+    <value>Slow Repeat Button</value>
+  </data>
+  <data name="BI_TransparentRepeatButton" xml:space="preserve">
+    <value>Transparent Repeat Button</value>
   </data>
   <data name="MT_FileMenu" xml:space="preserve">
     <value>File(_F)</value>
@@ -1415,6 +1589,42 @@
   <data name="Button" xml:space="preserve">
     <value>Button</value>
   </data>
+  <data name="PushButton" xml:space="preserve">
+    <value>Button</value>
+  </data>
+  <data name="ToolButton" xml:space="preserve">
+    <value>ToolButton</value>
+  </data>
+  <data name="FilledButton" xml:space="preserve">
+    <value>Filled Button</value>
+  </data>
+  <data name="OutlineButton" xml:space="preserve">
+    <value>OutlineButton</value>
+  </data>
+  <data name="DropDownButton" xml:space="preserve">
+    <value>DropDownButton</value>
+  </data>
+  <data name="ToggleButton" xml:space="preserve">
+    <value>ToggleButton</value>
+  </data>
+  <data name="SplitButton" xml:space="preserve">
+    <value>SplitButton</value>
+  </data>
+  <data name="RadioButton" xml:space="preserve">
+    <value>RadioButton</value>
+  </data>
+  <data name="HyperlinkButton" xml:space="preserve">
+    <value>HyperlinkButton</value>
+  </data>
+  <data name="ToggleSwitch" xml:space="preserve">
+    <value>ToggleSwitch</value>
+  </data>
+  <data name="CheckBox" xml:space="preserve">
+    <value>CheckBox</value>
+  </data>
+  <data name="RepeatButton" xml:space="preserve">
+    <value>RepeatButton</value>
+  </data>
   <data name="ComboBox" xml:space="preserve">
     <value>ComboBox</value>
   </data>
@@ -1594,6 +1804,33 @@
   </data>
   <data name="SI_ToastInfoBar" xml:space="preserve">
     <value>Toast Info Bar</value>
+  </data>
+  <data name="SI_DefaultInfoBarTitle" xml:space="preserve">
+    <value>I am the title of the InfoBar</value>
+  </data>
+  <data name="SI_DefaultInfoBarContent" xml:space="preserve">
+    <value>I am the content of the InfoBar</value>
+  </data>
+  <data name="SI_LayoutDirection" xml:space="preserve">
+    <value>Layout direction</value>
+  </data>
+  <data name="SI_AutoResize" xml:space="preserve">
+    <value>Auto resize</value>
+  </data>
+  <data name="SI_Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="SI_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="SI_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="SI_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="SI_Custom" xml:space="preserve">
+    <value>Custom</value>
   </data>
   <data name="DP_ColorDialog" xml:space="preserve">
     <value>Color dialog</value>
@@ -1784,8 +2021,8 @@
   <data name="CustomForeground" xml:space="preserve">
     <value>Customize the frontline color of the infobar</value>
   </data>
-  <data name="EditCustom" xml:space="preserve">
-    <value>Edit custom</value>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="TV_OutlinedTextBox" xml:space="preserve">
     <value>Outlined Text Box</value>
@@ -1902,7 +2139,7 @@
     <value>Help us change Avalonia-Fluent-UI by providing feedback</value>
   </data>
   <data name="AboutDesc" xml:space="preserve">
-    <value>Copyright 2024, Izumi, current version 2.0.4</value>
+    <value>Copyright 2026, Izumi, current version 2.0.4</value>
   </data>
   <data name="CheckForUpdates" xml:space="preserve">
     <value>Check For Updates</value>
@@ -1927,5 +2164,8 @@
   </data>
   <data name="CompactPaneLength" xml:space="preserve">
     <value>Compact Pane Length: </value>
+  </data>
+  <data name="TabView" xml:space="preserve">
+    <value>TabView</value>
   </data>
 </root>

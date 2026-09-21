@@ -84,6 +84,11 @@ public class ExpanderSettingCardItem : HeaderedContentControl, ICommandSource
 
     internal bool IsContainerFromTemplate { get; set; }
 
+    private bool _commandCanExecute = true;
+    private bool _isPressed;
+    private IDisposable? _adaptiveWidthDisposable;
+    private double _adaptiveWidthTrigger = 460;
+
     private const string PC_PRESSED = ":pressed";
     private const string PC_DESCRIPTION = ":description";
 
@@ -258,9 +263,9 @@ public class ExpanderSettingCardItem : HeaderedContentControl, ICommandSource
         }
     }
 
-    private void OnAdaptiveWidthValueChanged(object value)
+    private void OnAdaptiveWidthValueChanged(object? value)
     {
-        if (value == AvaloniaProperty.UnsetValue)
+        if (value == AvaloniaProperty.UnsetValue || value == null)
             return;
 
         _adaptiveWidthTrigger = Unsafe.Unbox<double>(value);
@@ -269,9 +274,4 @@ public class ExpanderSettingCardItem : HeaderedContentControl, ICommandSource
 
     void ICommandSource.CanExecuteChanged(object sender, EventArgs e) =>
         CanExecuteChanged(sender, e);
-
-    private bool _commandCanExecute = true;
-    private bool _isPressed;
-    private IDisposable? _adaptiveWidthDisposable;
-    private double _adaptiveWidthTrigger = 460;
 }

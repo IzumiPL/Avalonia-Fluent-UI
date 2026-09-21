@@ -35,8 +35,8 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
         : this(collection, false, null, null, sortDescriptions) { }
 
     public IterableCollectionView(IEnumerable collection, bool isLiveShaping,
-        Predicate<object> filter, IList<string> filterProperties,
-        IList<SortDescription> sortDescriptions)
+        Predicate<object>? filter, IList<string>? filterProperties,
+        IList<SortDescription>? sortDescriptions)
     {
         collection = collection ?? throw new ArgumentNullException(nameof(collection));
 
@@ -148,9 +148,9 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
 
     public event EventHandler<object> CurrentChanged;
     public event CurrentChangingEventHandler CurrentChanging;
-    public event NotifyCollectionChangedEventHandler CollectionChanged;
-    public event PropertyChangedEventHandler PropertyChanged;
-    public void Add(object item) => Insert(Count, item);
+    public event NotifyCollectionChangedEventHandler? CollectionChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
+    public void Add(object? item) => Insert(Count, item);
 
     public void Clear()
     {
@@ -160,7 +160,7 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
         (_source as IList).Clear();
     }
 
-    public bool Contains(object item) =>
+    public bool Contains(object? item) =>
         _view?.Contains(item) ?? _source.Contains(item);
 
     public void CopyTo(object[] array, int arrayIndex)
@@ -212,7 +212,7 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
         }
     }
 
-    public void Insert(int index, object item)
+    public void Insert(int index, object? item)
     {
         if (!(_source is IList) || IsReadOnly)
             ThrowForNonMutableSource();
@@ -255,7 +255,7 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
         return true;
     }
 
-    public bool Remove(object item)
+    public bool Remove(object? item)
     {
         if (IsReadOnly || !(_source is IList))
             ThrowForNonMutableSource();
@@ -293,7 +293,7 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
         if (!IsLiveShapingEnabled)
             return;
 
-        _filterProperties.Add(propertyName);
+        _filterProperties?.Add(propertyName);
     }
 
     public void RemoveFilterProperty(string propertyName)
@@ -301,7 +301,7 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
         if (!IsLiveShapingEnabled)
             return;
 
-        _filterProperties.Remove(propertyName);
+        _filterProperties?.Remove(propertyName);
     }
 
     public void ClearFilterProperties()
@@ -309,7 +309,7 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
         if (!IsLiveShapingEnabled)
             return;
 
-        _filterProperties.Clear();
+        _filterProperties?.Clear();
     }
 
     public IDisposable DeferRefresh()
@@ -318,14 +318,14 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
         return new RefreshDeferer(ReleaseDefer, CurrentItem);
     }
 
-    internal void UpdateViewFromCollectionViewSource(Predicate<object> filter, IList<string> filterProperties,
-        IList<SortDescription> sortDescriptions)
+    internal void UpdateViewFromCollectionViewSource(Predicate<object> filter, IList<string>? filterProperties,
+        IList<SortDescription>? sortDescriptions)
     {
         using var defer = DeferRefresh();
                 
         if (filterProperties != null)
         {
-            _filterProperties.Clear();
+            _filterProperties?.Clear();
             foreach (var prop in filterProperties)
             {
                 AddFilterProperty(prop);
@@ -469,7 +469,7 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
         }
     }
 
-    private void AttachPropertyChangedHandler(IEnumerable items)
+    private void AttachPropertyChangedHandler(IEnumerable? items)
     {
         if (!IsLiveShapingEnabled || items == null)
         {
@@ -482,7 +482,7 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
         }
     }
 
-    private void DetachPropertyChangedHandler(IEnumerable items)
+    private void DetachPropertyChangedHandler(IEnumerable? items)
     {
         if (!IsLiveShapingEnabled || items == null)
         {
@@ -738,7 +738,7 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
 
     void IList.Insert(int index, object item) => Insert(index, item);
 
-    int IList.Add(object item)
+    int IList.Add(object? item)
     {
         Add(item);
         return Count - 1;
@@ -746,9 +746,9 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
 
     void IList.Clear() => Clear();
 
-    bool IList.Contains(object value) => Contains(value);
+    bool IList.Contains(object? value) => Contains(value);
 
-    void IList.Remove(object item) => Remove(item);
+    void IList.Remove(object? item) => Remove(item);
 
     void ICollection.CopyTo(Array array, int index) =>
         CopyTo((object[])array, index);
@@ -760,7 +760,7 @@ public sealed class IterableCollectionView : ICollectionView, IAdvancedCollectio
     }
 
     private IList<SortDescription> _sortDescriptions;
-    private Predicate<object> _filter;
+    private Predicate<object>? _filter;
     private IEnumerable _source;
     private ItemsSourceView _sourceView;
     private List<object> _view;

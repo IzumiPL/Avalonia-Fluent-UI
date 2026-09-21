@@ -46,7 +46,7 @@ public class IconElement : Control
 /// </summary>
 public class IconElementConverter : TypeConverter
 {
-    public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
     {
         if (sourceType == typeof(string) || sourceType == typeof(Symbol) || sourceType == typeof(IconSource) || sourceType == typeof(Geometry))
         {
@@ -55,7 +55,7 @@ public class IconElementConverter : TypeConverter
         return base.CanConvertFrom(context, sourceType);
     }
     
-    public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
     {
         if (value is Symbol symbol)
         {
@@ -97,19 +97,22 @@ public class IconElementConverter : TypeConverter
             }
 
             //Try a PathIcon
-            if (FluentPathIcon.IsDataValid(val, out Geometry g))
+            if (FluentPathIcon.IsDataValid(val, out Geometry? g))
             {
                 return new FluentPathIcon() { Data = g };
             }
 
             try
             {
-                if (Uri.TryCreate(val, UriKind.RelativeOrAbsolute, out Uri result))
+                if (Uri.TryCreate(val, UriKind.RelativeOrAbsolute, out Uri? result))
                 {
                     return new BitmapIcon() { UriSource = result };
                 }
             }
-            catch { }
+            catch
+            {
+                //
+            }
 
             // If we've reached this point, we'll make a FontIcon
             // Glyph can be anything (sort of), so we don't need to Try/Catch

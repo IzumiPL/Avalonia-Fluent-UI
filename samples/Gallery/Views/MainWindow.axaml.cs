@@ -26,6 +26,7 @@ using Gallery.Messages;
 using Gallery.Messages.MainWindowMessages;
 using Gallery.Models;
 using Gallery.Services;
+using Gallery.Settings;
 using Gallery.ViewModels;
 
 namespace Gallery.Views;
@@ -40,6 +41,7 @@ public class MainWindowSplashScreen : IApplicationSplashScreen
         Width = 128,
         Height = 128
     };
+    
     public async Task RunTasks(CancellationToken cancellationToken)
     {
         await Task.Delay(1500, cancellationToken);
@@ -62,24 +64,49 @@ public partial class MainWindow : FluentWindow
     
     public MainWindow()
     {
-        Application.Current?.Resources["NavigationViewContentMargin"] = new Thickness(0, 55, 0, 0);
-        TitleBarIsVisible = false;
-        SplashScreen = new MainWindowSplashScreen(() => TitleBarIsVisible = true);
+        InitializeTitleBar();
+        SplashScreen = new MainWindowSplashScreen(() => { ((MainWindowViewModel)DataContext!).Settings.TitleBar.TitleBarIsVisible = true; });
         InitializeComponent();
         
         RegisterMessages();
-        Loaded += OnLoaded;
+        InitializeKeyBindings();
+        InitializeToolTip();
+        UpdateResource();
         
-        KeyBindings.Add(
+        LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
+    }
+
+    private void InitializeKeyBindings()
+    {
+         KeyBindings.Add(
             new KeyBinding
             {
                 Gesture = new KeyGesture(Key.F, KeyModifiers.Control),
                 Command = new RelayCommand(() => AutoCompleteBox.Focus())
             }
-            );
-        
+        );       
+    }
+
+    private void InitializeToolTip()
+    {
         ToolTip.SetTip(PinButton, LocalizationService.Instance.GetString("Pin"));
-        LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
+    }
+
+    private void InitializeTitleBar()
+    {
+        TitleBarTemplateSettings.IsVisible = false;
+        TitleBarTemplateSettings.IconSize = 20;
+        TitleBarTemplateSettings.Margin = new Thickness(40, 0, TitleBarTemplateSettings.Margin.Right, 0);
+    }
+
+    private void UpdateResource()
+    {
+        var app = Application.Current;
+        if (app != null)
+        {
+            app.Resources["NavigationViewContentMargin"] = new Thickness(0, 55, 0, 0);
+            // app.Resources["NavigationVerticalScrollBarVisibility"] = ScrollBarVisibility.Auto;
+        }
     }
 
     private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
@@ -200,6 +227,7 @@ public partial class MainWindow : FluentWindow
                 var config = new AppConfig
                 {
                     IsCustomAccentColor = svm.IsCustomColor,
+                    IsFollowSystemAccentColor = svm.IsFollowSystemAccentColor,
                     Theme = AvaloniaFluentTheme.Instance.CurrentTheme.ToString(),
                     IsWindowEffectEnabled = svm.IsEnabledWindowEffect,
                     WindowEffect = svm.CurrentEffect,
@@ -232,7 +260,38 @@ public partial class MainWindow : FluentWindow
         base.OnClosing(e);
     }
 
-    private void OnLoaded(object? sender, RoutedEventArgs e)
+    protected override void OnLoaded(RoutedEventArgs e)
+    {
+        base.OnLoaded(e);
+
+        if (DataContext is MainWindowViewModel viewModel)
+        {
+            viewModel.Settings.TitleBar.PropertyChanged += (sender, _) =>
+            {
+                if (sender is TitleBarSettings settings)
+                {
+                    ApplyTitleBarSettings(settings);
+                }
+            };
+            
+            ApplyTitleBarSettings(viewModel.Settings.TitleBar);
+        }
+
+        InitializeBackgroundOrEffect(); 
+        InitializeInfoBarHost();
+    }
+
+    private void ApplyTitleBarSettings(TitleBarSettings settings)
+    {
+        TitleBar?.Background = new SolidColorBrush(settings.TitleBarBackground);
+        TitleBarTemplateSettings.Height = settings.TitleBarHeight;
+        TitleBarTemplateSettings.ContentIsVisible = settings.TitleBarContentIsVisible;
+        TitleBarTemplateSettings.IconIsVisible = settings.TitleBarIconIsVisible;
+        TitleBarTemplateSettings.IsVisible = settings.TitleBarIsVisible;
+        TitleBarTemplateSettings.TitleIsVisible = settings.TitleBarTitleIsVisible;
+    }
+
+    private void InitializeBackgroundOrEffect()
     {
         if (DataContext is MainWindowViewModel viewModel)
         {
@@ -269,8 +328,25 @@ public partial class MainWindow : FluentWindow
                 };
             }
         }
+    }
+
+    public override void Show()
+    {
+        if (Screens.Primary is { } screen)
+        {
+            var scaling = screen.Scaling;
+            var area = screen.WorkingArea;
+
+            Width = area.Width / scaling / 1.5;
+            Height = area.Height / scaling / 1.3;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+            Console.WriteLine(scaling);
+            Console.WriteLine(area.Width + " | " + area.Height);
+            Console.WriteLine(Width + " | " + Height);
+        }
         
-        InitializeInfoBarHost();
+        base.Show();
     }
 
     private void InitializeInfoBarHost()
@@ -312,7 +388,7 @@ public partial class MainWindow : FluentWindow
         }
     }
     
-    private void OnPopupAvatarFlyout(object? sender, PointerReleasedEventArgs e)
+    private void OnPopupAvatarFlyoutClicked(object? sender, PointerReleasedEventArgs e)
     {
         if (sender is Avatar ct)
         {
@@ -320,7 +396,7 @@ public partial class MainWindow : FluentWindow
         }
     }
 
-    private void OnPopupContextMenu(object? sender, PointerReleasedEventArgs e)
+    private void OnPopupContextMenuClicked(object? sender, PointerReleasedEventArgs e)
     {
         if (sender is Panel panel)
         {
@@ -328,7 +404,7 @@ public partial class MainWindow : FluentWindow
         }
     }
 
-    private void OnHideFlyout(object? sender, RoutedEventArgs routedEventArgs)
+    private void OnHideFlyoutClicked(object? sender, RoutedEventArgs routedEventArgs)
     {
         SettingButton.Flyout?.IsOpen = false;
     }
@@ -349,5 +425,10 @@ public partial class MainWindow : FluentWindow
             mv.TogglePageCommand?.Execute(page);
             OnJumpToControl(null, new JumpToControlMessage(page.ToString(), null));
         }
+    }
+
+    private void OnBackClicked(object? sender, NavigationViewBackRequestedEventArgs e)
+    {
+        // StackContent.IsBack = true;
     }
 }

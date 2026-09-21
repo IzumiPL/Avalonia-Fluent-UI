@@ -13,7 +13,12 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class ItemsSourceView
 {
-    public ItemsSourceView(IEnumerable source)
+    private int _cachedSize = -1;
+    private IEnumerable? _vector;
+    private IKeyIndexMapping? _uniqueIdMapping;
+    private IDisposable? _eventToken;
+    
+    public ItemsSourceView(IEnumerable? source)
     {
         if (source == null)
             throw new ArgumentNullException(nameof(source));
@@ -51,34 +56,29 @@ public class ItemsSourceView
     /// <summary>
     /// Occurs when the collection has changed to indicate the reason for the change and which items changed.
     /// </summary>
-    public event NotifyCollectionChangedEventHandler CollectionChanged;
+    public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
     /// <summary>
     /// Retrieves the item at the specified index.
     /// </summary>
-    public object GetAt(int index) =>
-        GetAtCore(index);
-
-    /// <summary>
-    /// /// <summary>
-    /// Retrieves the index of the item that has the specified unique identifier (key).
-    /// </summary>
-    public string KeyFromIndex(int index) =>
-        KeyFromIndexCore(index);
+    public object? GetAt(int index) => GetAtCore(index);
 
     /// <summary>
     /// Retrieves the index of the item that has the specified unique identifier (key).
     /// </summary>
-    public int IndexFromKey(string id) =>
-        IndexFromKeyCore(id);
+    public string KeyFromIndex(int index) => KeyFromIndexCore(index);
+
+    /// <summary>
+    /// Retrieves the index of the item that has the specified unique identifier (key).
+    /// </summary>
+    public int IndexFromKey(string id) => IndexFromKeyCore(id);
 
     /// <summary>
     /// Retrieves the index of the specified item.
     /// </summary>
     /// <param name="value"></param>
     /// <returns></returns>
-    public int IndexOf(object value) =>
-        IndexOfCore(value);
+    public int IndexOf(object value) => IndexOfCore(value);
 
     /// <summary>
     /// Called when the ItemsSource has raised a CollectionChanged event
@@ -108,7 +108,7 @@ public class ItemsSourceView
     /// <summary>
     /// Gets the item at the specified index from the underlying collection
     /// </summary>
-    protected virtual object GetAtCore(int index)
+    protected virtual object? GetAtCore(int index)
     {
         if (_vector is IList list)
         {
@@ -116,7 +116,7 @@ public class ItemsSourceView
         }
         else
         {
-            return _vector.ElementAt(index);
+            return _vector?.ElementAt(index);
         }
     }
 
@@ -124,8 +124,7 @@ public class ItemsSourceView
     /// Gets whether this underlying supports Key-Index mapping
     /// </summary>
     /// <returns></returns>
-    protected virtual bool HasKeyIndexMappingCore() => 
-        _uniqueIdMapping != null;
+    protected virtual bool HasKeyIndexMappingCore() => _uniqueIdMapping != null;
 
     /// <summary>
     /// Gets the key from the specified index
@@ -189,9 +188,4 @@ public class ItemsSourceView
     {
         OnItemsSourceChanged(args);
     }
-
-    private int _cachedSize = -1;
-    private IEnumerable _vector;
-    private IKeyIndexMapping _uniqueIdMapping;
-    private IDisposable _eventToken;
 }

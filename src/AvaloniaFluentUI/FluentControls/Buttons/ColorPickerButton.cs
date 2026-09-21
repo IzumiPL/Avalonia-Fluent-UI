@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
@@ -71,7 +72,7 @@ public class ColorPickerButton : PickerButton
     {
         base.OnClick();
         
-        ShowColorDialogAsync();
+        _=ShowColorDialogAsync();
     } 
 
     private void ExecuteCommand()
@@ -82,7 +83,7 @@ public class ColorPickerButton : PickerButton
         }
     }
     
-    private async void ShowColorDialogAsync()
+    private async Task ShowColorDialogAsync()
     {
         var dialog = new ColorDialog { Color = this.Color };
         var toplevel = TopLevel.GetTopLevel(this);

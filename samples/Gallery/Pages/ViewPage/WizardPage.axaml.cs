@@ -122,7 +122,7 @@ public partial class WizardPage : InfoBarHostViewBase
             }
         };
         ww.WizardView.Finished += (_, _) => ww.Close();
-        ww.TitleBarMargin = new Thickness(-20, 0, 0, 0);
+        ww.TitleBarTemplateSettings.Margin = new Thickness(-20, 0, 0, 0);
 
         if (TopLevel.GetTopLevel(this) is Window w)
         {

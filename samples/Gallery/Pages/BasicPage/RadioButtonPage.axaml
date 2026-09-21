@@ -1,0 +1,176 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.RadioButtonPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:RadioButtonPageViewModel"
+  mc:Ignorable="d">
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="RadioButtonCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_RadioButton]}">
+      <Grid
+        ColumnDefinitions="*, Auto"
+        ColumnSpacing="3"
+        RowDefinitions="Auto, Auto, Auto, Auto">
+        <RadioButton
+          Grid.Row="0"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Speakers]}"
+          IsEnabled="{Binding !RadioButtonIsDisabled}"/>
+        <RadioButton
+          Grid.Row="1"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Headphones]}"
+          IsEnabled="{Binding !RadioButtonIsDisabled}"/>
+        <RadioButton
+          Grid.Row="2"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Controller]}"
+          IsEnabled="{Binding !RadioButtonIsDisabled}"/>
+        <RadioButton
+          Grid.Row="3"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Bluetooth]}"
+          IsEnabled="{Binding !RadioButtonIsDisabled}"/>
+
+        <CheckBox
+          Grid.Row="0"
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding RadioButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ChipsRadioButton]}">
+      <Grid
+        Height="35"
+        VerticalAlignment="Center"
+        ColumnDefinitions="Auto, Auto, Auto, Auto, *"
+        ColumnSpacing="8">
+        <RadioButton
+          Grid.Column="0"
+          Content="Options 1"
+          IsEnabled="{Binding !ChipsRadioButtonIsEnabled}"
+          Theme="{StaticResource ChipsRadioButton}"/>
+        <RadioButton
+          Grid.Column="1"
+          Content="Options 2"
+          IsEnabled="{Binding !ChipsRadioButtonIsEnabled}"
+          Theme="{StaticResource ChipsRadioButton}"/>
+        <RadioButton
+          Grid.Column="2"
+          Content="Options 3"
+          IsEnabled="{Binding !ChipsRadioButtonIsEnabled}"
+          Theme="{StaticResource ChipsRadioButton}"/>
+        <RadioButton
+          Grid.Column="3"
+          Content="Options 4"
+          IsEnabled="{Binding !ChipsRadioButtonIsEnabled}"
+          Theme="{StaticResource ChipsRadioButton}"/>
+
+        <CheckBox
+          Grid.Column="4"
+          HorizontalAlignment="Right"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding ChipsRadioButtonIsEnabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ChipsRadioButton]}">
+      <Grid
+        Height="35"
+        VerticalAlignment="Center"
+        ColumnDefinitions="Auto, Auto, Auto, Auto, *"
+        ColumnSpacing="8">
+        <RadioButton
+          Grid.Column="0"
+          IsEnabled="{Binding !ChipsIconRadioButtonIsEnabled}"
+          Theme="{StaticResource ChipsRadioButton}">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <PathIcon Data="{x:Static fi:FluentIcon.Tag}"/>
+            <TextBlock VerticalAlignment="Center" Text="标签"/>
+          </StackPanel>
+        </RadioButton>
+        <RadioButton
+          Grid.Column="1"
+          IsEnabled="{Binding !ChipsIconRadioButtonIsEnabled}"
+          Theme="{StaticResource ChipsRadioButton}">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <PathIcon Data="{x:Static fi:FluentIcon.ShoppingCart}"/>
+            <TextBlock VerticalAlignment="Center" Text="购物车"/>
+          </StackPanel>
+        </RadioButton>
+        <RadioButton
+          Grid.Column="2"
+          IsEnabled="{Binding !ChipsIconRadioButtonIsEnabled}"
+          Theme="{StaticResource ChipsRadioButton}">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <PathIcon Data="{x:Static fi:FluentIcon.Code}"/>
+            <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ChipsCode]}"/>
+          </StackPanel>
+        </RadioButton>
+        <RadioButton
+          Grid.Column="3"
+          IsEnabled="{Binding !ChipsIconRadioButtonIsEnabled}"
+          Theme="{StaticResource ChipsRadioButton}">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <PathIcon Data="{x:Static fi:FluentIcon.People}"/>
+            <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_ChipsShared]}"/>
+          </StackPanel>
+        </RadioButton>
+
+        <CheckBox
+          Grid.Column="4"
+          HorizontalAlignment="Right"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding ChipsIconRadioButtonIsEnabled}"/>
+      </Grid>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_SubTitleRadioButton]}">
+      <Grid
+        ColumnDefinitions="*, Auto"
+        ColumnSpacing="3"
+        RowDefinitions="Auto, Auto, Auto, Auto">
+        <fui:SubTitleRadioButton
+          Grid.Row="0"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Speakers]}"
+          IsEnabled="{Binding !SubTitleRadioButtonIsDisabled}"
+          SubTitle="Realted(R) Audio"/>
+        <fui:SubTitleRadioButton
+          Grid.Row="1"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Headphones]}"
+          IsEnabled="{Binding !SubTitleRadioButtonIsDisabled}"
+          SubTitle="AirPods Pro 2"/>
+        <fui:SubTitleRadioButton
+          Grid.Row="2"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Controller]}"
+          IsEnabled="{Binding !SubTitleRadioButtonIsDisabled}"
+          SubTitle="Xbox Wireless Controller"/>
+        <fui:SubTitleRadioButton
+          Grid.Row="3"
+          Grid.ColumnSpan="2"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Bluetooth]}"
+          IsEnabled="{Binding !SubTitleRadioButtonIsDisabled}"
+          SubTitle="ProjectLuo M2"/>
+
+        <CheckBox
+          Grid.Row="0"
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}"
+          IsChecked="{Binding SubTitleRadioButtonIsDisabled}"/>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

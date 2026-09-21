@@ -18,14 +18,14 @@ public class ImageIcon : IconElement
     /// <summary>
     /// Defines the <see cref="Source"/> property
     /// </summary>
-    public static readonly StyledProperty<IImage> SourceProperty =
-        AvaloniaProperty.Register<ImageIcon, IImage>(nameof(Source));
+    public static readonly StyledProperty<IImage?> SourceProperty =
+        AvaloniaProperty.Register<ImageIcon, IImage?>(nameof(Source));
 
     /// <summary>
     /// Gets or sets the <see cref="Avalonia.Media.IImage"/> content this icon displays
     /// </summary>
     [Content]
-    public IImage Source
+    public IImage? Source
     {
         get => GetValue(SourceProperty);
         set => SetValue(SourceProperty, value);

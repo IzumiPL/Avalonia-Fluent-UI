@@ -53,6 +53,7 @@
 
               <Button
                 Name="TogglePaneButton"
+                Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.PaneToggleButtonWidth}"
                 MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.SmallerPaneToggleButtonWidth}"
                 HorizontalAlignment="Center"
                 IsVisible="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.PaneToggleButtonVisibility}"
@@ -251,12 +252,6 @@
                   <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="0"/>
-                    <!--  above button margin + back button space  -->
-                    <!--
-                      x:Name="PaneContentGridToggleButtonRow"
-                      Removed & set only in TogglePaneButtonVisible VisualState...TODO
-                      MinHeight="{StaticResource NavigationViewPaneHeaderRowMinHeight}"
-                    -->
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -293,7 +288,7 @@
                     Name="AutoSuggestArea"
                     Grid.Row="3"
                     Height="{DynamicResource NavigationViewAutoSuggestAreaHeight}"
-                    Margin="0,6,0,5"
+                    Margin="0,2,0,-4"
                     VerticalAlignment="Center">
                     <ContentControl
                       Name="PaneAutoSuggestBoxPresenter"
@@ -305,6 +300,7 @@
                     <Button
                       Name="PaneAutoSuggestButton"
                       Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.SmallerPaneToggleButtonWidth}"
+                      Padding="10,5,11,6"
                       FontSize="22"
                       IsVisible="False"
                       Theme="{StaticResource NavigationViewPaneSearchButtonStyle}"/>
@@ -325,7 +321,10 @@
                     IsVisible="{Binding #TogglePaneButton.IsVisible}"/>
 
                   <!--  "Non header" content  -->
-                  <Grid Name="ItemsContainerGrid" Grid.Row="6">
+                  <Grid
+                    Name="ItemsContainerGrid"
+                    Grid.Row="6"
+                    Margin="0,4,0,0">
                     <Grid.RowDefinitions>
                       <RowDefinition Height="*"/>
                       <!--  MenuItems  -->
@@ -343,7 +342,7 @@
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
                       HorizontalScrollBarVisibility="Disabled"
-                      VerticalScrollBarVisibility="Hidden">
+                      VerticalScrollBarVisibility="{DynamicResource NavigationVerticalScrollBarVisibility}">
                       <ui:ItemsRepeater Name="MenuItemsHost">
                         <ui:ItemsRepeater.Layout>
                           <ui:StackLayout/>
@@ -438,7 +437,7 @@
               Grid.RowSpan="2"
               Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.OpenPaneWidth}"
               HorizontalAlignment="Left"
-              BoxShadow="0 16 32 #17000000">
+              BoxShadow="0 8 32 #48000000">
               <Border.Transitions>
                 <Transitions>
                   <DoubleTransition Property="Opacity" Duration="00:00:00.35"/>
@@ -564,12 +563,32 @@
       <Setter Property="OpenPaneLength" Value="72"/>
       <Setter Property="IsPaneOpen" Value="True"/>
 
+      <Style Selector="^ /template/ :is(ui|NavigationViewItem)">
+        <Setter Property="IconSize" Value="22"/>
+
+        <Style Selector="^ /template/ primitives|NavigationViewItemPresenter">
+          <Setter Property="Theme" Value="{StaticResource MSNavigationViewItemPresenterStyle}"/>
+        </Style>
+      </Style>
+
       <Style Selector="^ /template/ Button#NavigationViewBackButton">
         <Setter Property="Width" Value="{DynamicResource NavigationBackButtonWidth}"/>
+        <Setter Property="FontSize" Value="22"/>
       </Style>
 
       <Style Selector="^[IsBackButtonVisible=False] SplitView /template/ ContentPresenter#PART_PanePresenter">
         <Setter Property="Margin" Value="0 40 0 0"/>
+      </Style>
+
+      <Style Selector="^[IsBackButtonVisible=True]">
+        <Style Selector="^ /template/ Button#NavigationViewBackButton">
+          <Setter Property="Width" Value="64"/>
+          <Setter Property="Height" Value="56"/>
+        </Style>
+
+        <Style Selector="^ /template/ Grid#ItemsContainerGrid">
+          <Setter Property="Margin" Value="0 24 0 0"/>
+        </Style>
       </Style>
     </Style>
   </ControlTheme>

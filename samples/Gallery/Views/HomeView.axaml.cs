@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
+using Avalonia.VisualTree;
 using AvaloniaFluentUI.Controls;
 using Gallery.Helpers;
 
@@ -135,5 +137,16 @@ public partial class HomeView : UserControl
     private void OnSendFeedBackClicked(object? sender, RoutedEventArgs e)
     {
         UrlHelpers.OpenUrl(new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/issues/new"), TopLevel.GetTopLevel(this));
+    }
+
+    private void ScrollTo(object? sender, RoutedEventArgs e)
+    {
+        var y = Math.Max(0, SmoothScrollViewer.Extent.Height - SmoothScrollViewer.Viewport.Height);
+        if (((Button)sender).CommandParameter == "Center")
+        {
+            y /= 2;
+        }
+        
+        _ = SmoothScrollViewer.GetVisualDescendants().OfType<SmoothScrollContentPresenter>().FirstOrDefault()?.ScrollToAsync(new Vector(SmoothScrollViewer.Offset.X, y));
     }
 }

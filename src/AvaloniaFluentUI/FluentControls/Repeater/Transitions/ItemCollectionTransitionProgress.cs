@@ -11,8 +11,7 @@ public class ItemCollectionTransitionProgress
         _transition = new WeakReference<ItemCollectionTransition>(transition);
     }
 
-    public Control Element() =>
-        _transition.TryGetTarget(out var target) ? target.Element : null;
+    public Control Element() => _transition.TryGetTarget(out var target) ? target.Element : null;
 
     public void Complete()
     {
