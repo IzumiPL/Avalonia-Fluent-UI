@@ -42,6 +42,7 @@ public class ViewLocator : IDataTemplate
         _factory[typeof(RepeatButtonPageViewModel)] = () => new RepeatButtonPage();
         _factory[typeof(ComboBoxPageViewModel)] = () => new ComboBoxPage();
         _factory[typeof(SlierPageViewModel)] = () => new SliderPage();
+        _factory[typeof(ColorPickerPageViewModel)] = () => new ColorPickerPage();
         
         _factory[typeof(DialogBoxAndPopupViewModel)] = () => new DialogBoxAndPopupView();
         _factory[typeof(DialogPageViewModel)] = () => new DialogPage();

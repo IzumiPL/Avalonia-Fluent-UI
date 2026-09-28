@@ -28,6 +28,9 @@ public partial class SettingsView : UserControl
         {
             ScrollViewer.Padding = new Thickness(18, 24, 0, 0);
             StackPanel.Margin = new Thickness(0, 0, 48, 64);
+
+            TitleExpanderSettingCard.IsEnabled = false;
+            WindowExpanderSettingCard.IsExpanded = false;
         }
     }
 
@@ -71,6 +74,8 @@ public partial class SettingsView : UserControl
 
     private void OnCheckForUpdateClicked(object? sender, RoutedEventArgs e)
     {
+        if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime)
+            return;
         InfoBarService.PopupInfoBarManager.Information("检查更新", "暂时没有可用的更新!", InfoBarPosition.Top, true, orientation: Orientation.Horizontal);
     }
 }

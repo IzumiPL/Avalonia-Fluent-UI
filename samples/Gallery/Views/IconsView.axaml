@@ -5,6 +5,7 @@
   xmlns:ani="clr-namespace:AvaloniaFluentUI.Media.Animation;assembly=AvaloniaFluentUI"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:ip="clr-namespace:Gallery.Pages.IconPage"
   xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ui="using:Gallery.Controls"
@@ -78,7 +79,7 @@
 
   <Grid
     Margin="18,24,24,12"
-    RowDefinitions="Auto, Auto, *"
+    RowDefinitions="Auto, *"
     RowSpacing="12">
     <Grid
       Grid.Row="0"
@@ -126,31 +127,38 @@
     <fui:SegmentedToggleView
       Grid.Row="1"
       HorizontalAlignment="Stretch"
-      SelectedItem="{Binding CurrentItem, Mode=TwoWay}">
+      SelectedItemChanged="OnSegmentedToggleViewSelectedItemChanged"
+      Spacing="8">
       <fui:SegmentedToggleView.Styles>
-        <Style Selector="fui|SegmentedToggleItem">
+        <Style Selector="fui|SegmentedToggleBarItem">
           <Setter Property="Padding" Value="24 8"/>
         </Style>
 
-        <Style Selector="fui|SegmentedToggleItem:pointerover[IsSelected=False]">
+        <Style Selector="fui|SegmentedToggleBarItem[IsSelected=False]:pointerover">
           <Setter Property="Background" Value="Transparent"/>
           <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
 
-        <Style Selector="fui|SegmentedToggleView">
+        <Style Selector="fui|SegmentedToggleBar">
           <Setter Property="CornerRadius" Value="28"/>
           <Setter Property="Background" Value="Transparent"/>
           <Setter Property="Padding" Value="12"/>
           <Setter Property="SelectionIndicatorBackground" Value="{DynamicResource SystemAccentColor}"/>
         </Style>
       </fui:SegmentedToggleView.Styles>
+
       <fui:SegmentedToggleItem
-        Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FluentIcon]}"
+        Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FluentIcon]}"
         IsSelected="True"
-        Tag="FluentIcon"/>
-      <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FontIcon]}" Tag="FontIcon"/>
-      <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SymbolIcon]}" Tag="SymbolIcon"/>
+        Tag="FluentIconPage">
+        <ip:FluentIconPage/>
+      </fui:SegmentedToggleItem>
+      <fui:SegmentedToggleItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FontIcon]}" Tag="FontIconPage">
+        <ip:FontIconPage/>
+      </fui:SegmentedToggleItem>
+      <fui:SegmentedToggleItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SymbolIcon]}" Tag="SymbolIconPage">
+        <ip:SymbolIconPage/>
+      </fui:SegmentedToggleItem>
     </fui:SegmentedToggleView>
-    <fui:StackContent Grid.Row="2" Content="{Binding CurrentViewModel}"/>
   </Grid>
 </UserControl>

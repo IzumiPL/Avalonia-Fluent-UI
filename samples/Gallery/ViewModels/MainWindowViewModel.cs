@@ -95,6 +95,7 @@ public partial class MainWindowViewModel : ViewModelBase
             { "RepeatButton", () => new RepeatButtonPageViewModel() },
             { "ComboBox", () => new ComboBoxPageViewModel() },
             { "Slider", () => new SlierPageViewModel() },
+            { "ColorPicker", () => new ColorPickerPageViewModel() },
             
             { "DialogBoxAndPopup", () => new DialogBoxAndPopupViewModel() },
             { "Dialog", () => new DialogPageViewModel() },

@@ -21,7 +21,7 @@
   </ui:ViewBase.Styles>
 
   <StackPanel Spacing="50">
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Avatar]}">
+    <ui:CodeCard Name="AvatarCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Avatar]}">
       <Grid ColumnDefinitions="Auto, Auto, Auto,*, Auto" ColumnSpacing="15">
         <fui:Avatar
           Grid.Column="0"

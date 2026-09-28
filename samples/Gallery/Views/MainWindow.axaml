@@ -368,6 +368,7 @@
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[RepeatButton]}" Tag="RepeatButton"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ComboBox]}" Tag="ComboBox"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Slider]}" Tag="Slider"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ColorPicker]}" Tag="ColorPicker"/>
           </fui:NavigationViewItem.MenuItems>
         </fui:NavigationViewItem>
 

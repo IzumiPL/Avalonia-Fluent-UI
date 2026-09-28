@@ -219,6 +219,7 @@
         </fui:ExpanderSettingCard>
 
         <fui:ExpanderSettingCard
+          Name="TitleExpanderSettingCard"
           Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SV_TitleBarDescription]}"
           Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SV_TitleBar]}"
           IsExpanded="{Binding TitleBarExpanderIsExpanded}">
@@ -247,6 +248,7 @@
         </fui:ExpanderSettingCard>
 
         <fui:ExpanderSettingCard
+          Name="WindowExpanderSettingCard"
           Description="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SV_WindowDescription]}"
           Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[SV_Window]}"
           IsExpanded="{Binding WindowExpanderIsExpanded}">

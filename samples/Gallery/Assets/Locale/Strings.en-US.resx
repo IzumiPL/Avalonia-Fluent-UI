@@ -2168,4 +2168,103 @@
   <data name="TabView" xml:space="preserve">
     <value>TabView</value>
   </data>
+  <data name="ColorPicker" xml:space="preserve">
+    <value>ColorPicker</value>
+  </data>
+  <data name="OpacityCanBeAdjusted" xml:space="preserve">
+    <value>Opacity can be adjusted</value>
+  </data>
+  <data name="LV_GroupBox" xml:space="preserve">
+    <value>Group box</value>
+  </data>
+  <data name="FullHeight" xml:space="preserve">
+    <value>Full height</value>
+  </data>
+  <data name="IV_UsageExampleXaml" xml:space="preserve">
+    <value>Usage example (XAML)</value>
+  </data>
+  <data name="IV_UsageExampleCSharp" xml:space="preserve">
+    <value>Usage example (C#)</value>
+  </data>
+  <data name="LV_PersonalInfo" xml:space="preserve">
+    <value>Personal information</value>
+  </data>
+  <data name="LV_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LV_EnterName" xml:space="preserve">
+    <value>Please enter your name</value>
+  </data>
+  <data name="LV_Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="LV_Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="LV_EnterGender" xml:space="preserve">
+    <value>Please enter your gender</value>
+  </data>
+  <data name="LV_PhoneNumber" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="LV_EnterPhoneNumber" xml:space="preserve">
+    <value>Please enter your phone number</value>
+  </data>
+  <data name="LV_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="LV_Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Tabs_CanReorder" xml:space="preserve">
+    <value>Allow reordering</value>
+  </data>
+  <data name="Tabs_ShowStripHeader" xml:space="preserve">
+    <value>Show header area</value>
+  </data>
+  <data name="Tabs_ShowStripFooter" xml:space="preserve">
+    <value>Show footer area</value>
+  </data>
+  <data name="Tabs_ShowAddButton" xml:space="preserve">
+    <value>Show add button</value>
+  </data>
+  <data name="Tabs_StripLocation" xml:space="preserve">
+    <value>Display location</value>
+  </data>
+  <data name="Tabs_ItemWidthMode" xml:space="preserve">
+    <value>Item width mode</value>
+  </data>
+  <data name="Tabs_CloseButtonOverlayMode" xml:space="preserve">
+    <value>Item close button display mode</value>
+  </data>
+  <data name="Tabs_ClearAllItems" xml:space="preserve">
+    <value>Clear all items</value>
+  </data>
+  <data name="VP_TimeLineCompleted" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="VP_TimeLineTodaySchedule" xml:space="preserve">
+    <value>Today's schedule</value>
+  </data>
+  <data name="VP_TimeLineTodo" xml:space="preserve">
+    <value>To-do items</value>
+  </data>
+  <data name="VP_TimeLineAllOut" xml:space="preserve">
+    <value>All out🐔, defend the pigeon to the death🏀!!</value>
+  </data>
+  <data name="VP_TimeLineUploadMv" xml:space="preserve">
+    <value>Upload my aiko's MV "Shiarise"</value>
+  </data>
+  <data name="VP_TimeLineDownloadSong" xml:space="preserve">
+    <value>Download my aiko's "Areta Kuchibiru wa Koi o Nakusu"</value>
+  </data>
+  <data name="VP_TimeLineLoopNewSong" xml:space="preserve">
+    <value>Loop my aiko's new song "Hoshi no Furu Hi ni"</value>
+  </data>
+  <data name="Music" xml:space="preserve">
+    <value>Music</value>
+  </data>
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
 </root>

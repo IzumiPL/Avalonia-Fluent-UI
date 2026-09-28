@@ -12,11 +12,15 @@
   d:DesignWidth="800"
   x:DataType="viewModel:FontIconPageViewModel"
   mc:Ignorable="d">
+  <UserControl.DataContext>
+    <viewModel:FontIconPageViewModel/>
+  </UserControl.DataContext>
+
   <StackPanel Spacing="8">
     <TextBlock
       HorizontalAlignment="Left"
       VerticalAlignment="Center"
-      Text="使用示例(XAML)"/>
+      Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[IV_UsageExampleXaml]}"/>
     <Border
       Height="35"
       Padding="8"
@@ -29,7 +33,7 @@
     <TextBlock
       HorizontalAlignment="Left"
       VerticalAlignment="Center"
-      Text="使用示例(C#)"/>
+      Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[IV_UsageExampleCSharp]}"/>
     <Border
       Height="35"
       Padding="8"

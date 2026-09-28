@@ -30,7 +30,7 @@
           <fui:TimeLineItem.Header>
             <StackPanel Orientation="Horizontal" Spacing="8">
               <fui:InfoBadge Classes="Success Icon"/>
-              <TextBlock VerticalAlignment="Center" Text="已完成"/>
+              <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_TimeLineCompleted]}"/>
             </StackPanel>
           </fui:TimeLineItem.Header>
           <fui:Card>
@@ -39,7 +39,7 @@
               <TextBlock
                 Margin="32,0,0,0"
                 VerticalAlignment="Center"
-                Text="全军出🐔, 誓死保卫鸽鸽🏀!!"
+                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_TimeLineAllOut]}"
                 TextDecorations="Strikethrough"/>
             </Panel>
           </fui:Card>
@@ -48,7 +48,7 @@
           <fui:TimeLineItem.Header>
             <StackPanel Orientation="Horizontal" Spacing="8">
               <fui:InfoBadge Classes="Attention Icon"/>
-              <TextBlock VerticalAlignment="Center" Text="今日安排"/>
+              <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_TimeLineTodaySchedule]}"/>
             </StackPanel>
           </fui:TimeLineItem.Header>
           <StackPanel Orientation="Vertical" Spacing="6">
@@ -58,7 +58,7 @@
                 <TextBlock
                   Margin="32,0,0,0"
                   VerticalAlignment="Center"
-                  Text="上传我家 aiko 的 MV『シアリセ』"/>
+                  Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_TimeLineUploadMv]}"/>
               </Panel>
             </fui:Card>
             <fui:Card>
@@ -67,7 +67,7 @@
                 <TextBlock
                   Margin="32,0,0,0"
                   VerticalAlignment="Center"
-                  Text="下载我家 aiko 的『荒れた唇は恋を失くす』"/>
+                  Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_TimeLineDownloadSong]}"/>
               </Panel>
             </fui:Card>
           </StackPanel>
@@ -76,7 +76,7 @@
           <fui:TimeLineItem.Header>
             <StackPanel Orientation="Horizontal" Spacing="8">
               <fui:InfoBadge Classes="Error Icon"/>
-              <TextBlock VerticalAlignment="Center" Text="代办事项"/>
+              <TextBlock VerticalAlignment="Center" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_TimeLineTodo]}"/>
             </StackPanel>
           </fui:TimeLineItem.Header>
           <fui:Card>
@@ -85,7 +85,7 @@
               <TextBlock
                 Margin="32,0,0,0"
                 VerticalAlignment="Center"
-                Text="单曲循环我家 aiko 的新歌「星の降る日に」"/>
+                Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[VP_TimeLineLoopNewSong]}"/>
             </Panel>
           </fui:Card>
         </fui:TimeLineItem>

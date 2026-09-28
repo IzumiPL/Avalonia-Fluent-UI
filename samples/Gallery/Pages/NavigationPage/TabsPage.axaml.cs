@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
@@ -15,6 +16,11 @@ public partial class TabsPage : PopupDrawerHostViewBase
     public TabsPage() : base("Tabs")
     {
         InitializeComponent();
+
+        CodeCards = new Dictionary<string, CodeCard>()
+        {
+            {"TabView", TabViewCard}
+        };
     }
 
     private void OnTabViewCloseRequested(TabView sender, TabViewTabCloseRequestedEventArgs args)

@@ -7,6 +7,7 @@
   xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:page="clr-namespace:Gallery.Pages.CustomPage"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:viewModel="clr-namespace:Gallery.ViewModels"
   Title="{Binding Title}"
@@ -21,270 +22,254 @@
   </ui:ViewBase.Styles>
 
   <StackPanel Spacing="50">
-    <ui:CodeCard
-      Name="SegmentedCard"
-      Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_SegmentedBar]}"
-      Height="400">
-      <Grid RowDefinitions="Auto, *">
-
-        <fui:SegmentedView
-          Width="512"
-          Margin="0,16,0,0"
-          HorizontalAlignment="Left"
-          SelectedIndex="0"
-          SelectedItem="{Binding SegmentedSelectedItem}"
-          SelectionChanged="OnSelectedItemChanged">
-          <fui:SegmentedView.Styles>
-            <Style Selector="fui|SegmentedItem">
-              <Setter Property="MinWidth" Value="88"/>
-            </Style>
-          </fui:SegmentedView.Styles>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Home]}" IsSelected="True"/>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Edit]}"/>
-          <fui:SegmentedItem>
-            <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
-              <PathIcon Data="{x:Static fi:FluentIcon.View}"/>
-              <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[View]}"/>
-            </Grid>
-          </fui:SegmentedItem>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BasicInput]}"/>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DialogAndPopup]}"/>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Run2]}"/>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Window]}"/>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_VideoHistory]}"/>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_AudioHistory]}"/>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_BrowsingHistory]}"/>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Help]}"/>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Settings]}"/>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_About]}"/>
-          <fui:SegmentedItem>
-            <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
-              <PathIcon Data="{x:Static fi:FluentIcon.Send}"/>
-              <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Send]}"/>
-            </Grid>
-          </fui:SegmentedItem>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Folders]}"/>
-          <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Apps]}"/>
-        </fui:SegmentedView>
-        <TextBlock
-          Grid.Row="1"
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          FontSize="24"
-          Text="{Binding SelectedItemFormat}"
-          TextAlignment="Center"/>
-      </Grid>
-    </ui:CodeCard>
-
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_SegmentedBar]}">
-      <fui:SegmentedView
-        Width="512"
-        Margin="0,16"
+      <fui:SegmentedBar
+        Width="328"
+        Margin="0,16,0,0"
         HorizontalAlignment="Left"
-        SelectedIndex="0"
-        SelectionChanged="OnSelectedItemChanged">
-        <fui:SegmentedView.Styles>
+        VerticalAlignment="Center"
+        SelectedIndex="0">
+        <fui:SegmentedBar.Styles>
           <Style Selector="fui|SegmentedItem">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="MinWidth" Value="88"/>
           </Style>
-
-          <Style Selector="fui|SegmentedItem:pointerover">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="Pink"/>
-          </Style>
-
-          <Style Selector="fui|SegmentedItem:selected">
-            <Setter Property="Foreground" Value="HotPink"/>
-          </Style>
-
-          <Style Selector="fui|SegmentedView">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <!-- <Setter Property="SelectionIndicatorWidthIsFixed" Value="True"/> -->
-            <Setter Property="SelectionIndicatorBackground" Value="Transparent"/>
-            <Setter Property="SelectionIndicatorBrush" Value="HotPink"/>
-          </Style>
-        </fui:SegmentedView.Styles>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Home]}"/>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Edit]}"/>
-        <fui:SegmentedItem>
+        </fui:SegmentedBar.Styles>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Home]}" IsSelected="True"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Edit]}"/>
+        <fui:SegmentedBarItem>
           <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
             <PathIcon Data="{x:Static fi:FluentIcon.View}"/>
             <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[View]}"/>
           </Grid>
-        </fui:SegmentedItem>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BasicInput]}"/>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DialogAndPopup]}"/>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Run2]}"/>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Window]}"/>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_VideoHistory]}"/>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_AudioHistory]}"/>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_BrowsingHistory]}"/>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Help]}"/>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Settings]}"/>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_About]}"/>
-        <fui:SegmentedItem>
+        </fui:SegmentedBarItem>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BasicInput]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DialogAndPopup]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Run2]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Window]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_VideoHistory]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_AudioHistory]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_BrowsingHistory]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Help]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Settings]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_About]}"/>
+        <fui:SegmentedBarItem>
           <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
             <PathIcon Data="{x:Static fi:FluentIcon.Send}"/>
             <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Send]}"/>
           </Grid>
+        </fui:SegmentedBarItem>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Folders]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Apps]}"/>
+      </fui:SegmentedBar>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="另一种样式的SegmentedBar">
+      <fui:SegmentedBar
+        Width="328"
+        Margin="0,16,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Center"
+        SelectedIndex="0">
+        <fui:SegmentedBar.Styles>
+          <Style Selector="fui|SegmentedBar">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="SelectionIndicatorBackground" Value="Transparent"/>
+            <Setter Property="MinWidth" Value="88"/>
+          </Style>
+
+          <Style Selector="fui|SegmentedBarItem:pointerover">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Pink"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+          </Style>
+
+          <Style Selector="fui|SegmentedBarItem[IsSelected=True]">
+            <Setter Property="Foreground" Value="{DynamicResource SystemAccentColor}"/>
+          </Style>
+
+          <Style Selector="fui|SegmentedBarItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+          </Style>
+        </fui:SegmentedBar.Styles>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Home]}" IsSelected="True"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Edit]}"/>
+        <fui:SegmentedBarItem>
+          <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
+            <PathIcon Data="{x:Static fi:FluentIcon.View}"/>
+            <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[View]}"/>
+          </Grid>
+        </fui:SegmentedBarItem>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BasicInput]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DialogAndPopup]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Run2]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Window]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_VideoHistory]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_AudioHistory]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_BrowsingHistory]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Help]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Settings]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_About]}"/>
+        <fui:SegmentedBarItem>
+          <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
+            <PathIcon Data="{x:Static fi:FluentIcon.Send}"/>
+            <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Send]}"/>
+          </Grid>
+        </fui:SegmentedBarItem>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Folders]}"/>
+        <fui:SegmentedBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Apps]}"/>
+      </fui:SegmentedBar>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="SegmentedToggleBar">
+      <fui:SegmentedToggleBar
+        Width="328"
+        Margin="0,16,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Center"
+        SelectedIndex="0">
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Home]}" IsSelected="True"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Edit]}"/>
+        <fui:SegmentedToggleBarItem>
+          <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
+            <PathIcon Data="{x:Static fi:FluentIcon.View}"/>
+            <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[View]}"/>
+          </Grid>
+        </fui:SegmentedToggleBarItem>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BasicInput]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DialogAndPopup]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Run2]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Window]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_VideoHistory]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_AudioHistory]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_BrowsingHistory]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Help]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Settings]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_About]}"/>
+        <fui:SegmentedToggleBarItem>
+          <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
+            <PathIcon Data="{x:Static fi:FluentIcon.Send}"/>
+            <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Send]}"/>
+          </Grid>
+        </fui:SegmentedToggleBarItem>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Folders]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Apps]}"/>
+      </fui:SegmentedToggleBar>
+    </ui:CodeCard>
+
+    <ui:CodeCard Title="另一种样式的SegmentedToggleBar">
+      <fui:SegmentedToggleBar
+        Width="328"
+        Margin="0,16,0,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Center"
+        SelectedIndex="0">
+        <fui:SegmentedToggleBar.Styles>
+          <Style Selector="fui|SegmentedToggleBar">
+            <Setter Property="CornerRadius" Value="28"/>
+          </Style>
+
+          <Style Selector="fui|SegmentedToggleBarItem">
+            <Setter Property="CornerRadius" Value="28"/>
+            <Setter Property="Padding" Value="24 8"/>
+          </Style>
+        </fui:SegmentedToggleBar.Styles>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Home]}" IsSelected="True"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Edit]}"/>
+        <fui:SegmentedToggleBarItem>
+          <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
+            <PathIcon Data="{x:Static fi:FluentIcon.View}"/>
+            <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[View]}"/>
+          </Grid>
+        </fui:SegmentedToggleBarItem>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BasicInput]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DialogAndPopup]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Run2]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Window]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_VideoHistory]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_AudioHistory]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_BrowsingHistory]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Help]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Settings]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_About]}"/>
+        <fui:SegmentedToggleBarItem>
+          <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
+            <PathIcon Data="{x:Static fi:FluentIcon.Send}"/>
+            <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Send]}"/>
+          </Grid>
+        </fui:SegmentedToggleBarItem>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Folders]}"/>
+        <fui:SegmentedToggleBarItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Apps]}"/>
+      </fui:SegmentedToggleBar>
+    </ui:CodeCard>
+
+    <ui:CodeCard Name="SegmentedCard" Title="SegmentedView">
+      <fui:SegmentedView Height="512">
+        <fui:SegmentedItem Header="Page 1" IsSelected="True">
+          <page:SegmentedPage/>
         </fui:SegmentedItem>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Folders]}"/>
-        <fui:SegmentedItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Apps]}"/>
+        <fui:SegmentedItem Header="Page 2">
+          <page:SegmentedPage/>
+        </fui:SegmentedItem>
+        <fui:SegmentedItem Header="Page 3">
+          <page:SegmentedPage/>
+        </fui:SegmentedItem>
+        <fui:SegmentedItem Header="Page 4">
+          <page:SegmentedPage/>
+        </fui:SegmentedItem>
+        <fui:SegmentedItem Header="Page 5">
+          <page:SegmentedPage/>
+        </fui:SegmentedItem>
+        <fui:SegmentedItem Header="Page 6">
+          <page:SegmentedPage/>
+        </fui:SegmentedItem>
       </fui:SegmentedView>
     </ui:CodeCard>
 
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_SegmentedToggleBar]}" Height="400">
-      <Grid RowDefinitions="Auto, *">
-        <fui:SegmentedToggleView
-          Width="512"
-          MaxHeight="256"
-          Margin="0,16,0,0"
-          HorizontalAlignment="Left"
-          SelectedIndex="0"
-          SelectedItem="{Binding SegmentedToggleSelectedItem}">
-          <fui:SegmentedToggleView.Styles>
-            <Style Selector="fui|SegmentedToggleItem">
-              <Setter Property="MinWidth" Value="88"/>
-            </Style>
-          </fui:SegmentedToggleView.Styles>
-          <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Home]}" IsSelected="True"/>
-          <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
-          <fui:SegmentedToggleItem>
-            <PathIcon Data="{x:Static fi:FluentIcon.Edit}"/>
-          </fui:SegmentedToggleItem>
-          <fui:SegmentedToggleItem>
-            <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
-              <PathIcon Data="{StaticResource View}"/>
-              <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[View]}"/>
-            </Grid>
-          </fui:SegmentedToggleItem>
-          <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BasicInput]}"/>
-          <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DialogAndPopup]}"/>
-          <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Run2]}"/>
-          <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Window]}"/>
-          <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_VideoHistory]}"/>
-          <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_AudioHistory]}"/>
-          <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_BrowsingHistory]}"/>
-          <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Help]}"/>
-          <fui:SegmentedToggleItem>
-            <PathIcon Data="{x:Static fi:FluentIcon.Setting}"/>
-          </fui:SegmentedToggleItem>
-          <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_About]}"/>
-          <fui:SegmentedToggleItem>
-            <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
-              <PathIcon Data="{x:Static fi:FluentIcon.Send}"/>
-              <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Send]}"/>
-            </Grid>
-          </fui:SegmentedToggleItem>
-          <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
-          <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Folders]}"/>
-          <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Apps]}"/>
-        </fui:SegmentedToggleView>
-        <TextBlock
-          Grid.Row="1"
-          HorizontalAlignment="Center"
-          VerticalAlignment="Center"
-          FontSize="24"
-          Text="{Binding SegmentedSelectedItemFormat}"
-          TextAlignment="Center"/>
-      </Grid>
-    </ui:CodeCard>
-
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_SegmentedToggleBar]}">
-      <fui:SegmentedToggleView
-        Width="512"
-        MaxHeight="256"
-        Margin="0,16"
-        HorizontalAlignment="Left">
-        <!--  SelectedIndex="0"  -->
+    <ui:CodeCard Title="SegmentedToggleView">
+      <fui:SegmentedToggleView Height="512">
         <fui:SegmentedToggleView.Styles>
-          <Style Selector="fui|SegmentedToggleItem">
+          <Style Selector="fui|SegmentedToggleBar">
+            <Setter Property="CornerRadius" Value="28"/>
+          </Style>
+
+          <Style Selector="fui|SegmentedToggleBarItem">
+            <Setter Property="CornerRadius" Value="28"/>
             <Setter Property="Padding" Value="24 8"/>
           </Style>
-          <Style Selector="fui|SegmentedToggleItem:pointerover[IsSelected=False]">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-          </Style>
-
-          <Style Selector="fui|SegmentedToggleView">
-            <Setter Property="CornerRadius" Value="28"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <!-- <Setter Property="BorderBrush" Value="#EFEFEF"/> -->
-            <!-- <Setter Property="BorderThickness" Value="1"/> -->
-            <Setter Property="Padding" Value="12"/>
-            <Setter Property="SelectionIndicatorBackground" Value="{DynamicResource SystemAccentColor}"/>
-          </Style>
         </fui:SegmentedToggleView.Styles>
-        <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Home]}"/>
-        <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
-        <fui:SegmentedToggleItem>
-          <PathIcon Data="{x:Static fi:FluentIcon.Edit}"/>
+        <fui:SegmentedToggleItem Header="Page 1" IsSelected="True">
+          <page:SegmentedPage/>
         </fui:SegmentedToggleItem>
-        <fui:SegmentedToggleItem>
-          <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
-            <PathIcon Data="{StaticResource View}"/>
-            <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[View]}"/>
-          </Grid>
+        <fui:SegmentedToggleItem Header="Page 2">
+          <page:SegmentedPage/>
         </fui:SegmentedToggleItem>
-        <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BasicInput]}"/>
-        <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DialogAndPopup]}"/>
-        <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Run2]}"/>
-        <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Window]}" IsSelected="True"/>
-        <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_VideoHistory]}"/>
-        <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_AudioHistory]}"/>
-        <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_BrowsingHistory]}"/>
-        <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Help]}"/>
-        <fui:SegmentedToggleItem>
-          <PathIcon Data="{x:Static fi:FluentIcon.Setting}"/>
+        <fui:SegmentedToggleItem Header="Page 3">
+          <page:SegmentedPage/>
         </fui:SegmentedToggleItem>
-        <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_About]}"/>
-        <fui:SegmentedToggleItem>
-          <Grid ColumnDefinitions="*, *" ColumnSpacing="5">
-            <PathIcon Data="{x:Static fi:FluentIcon.Send}"/>
-            <TextBlock Grid.Column="1" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Send]}"/>
-          </Grid>
+        <fui:SegmentedToggleItem Header="Page 4">
+          <page:SegmentedPage/>
         </fui:SegmentedToggleItem>
-        <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Files]}"/>
-        <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Folders]}"/>
-        <fui:SegmentedToggleItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[NV_Apps]}"/>
+        <fui:SegmentedToggleItem Header="Page 5">
+          <page:SegmentedPage/>
+        </fui:SegmentedToggleItem>
+        <fui:SegmentedToggleItem Header="Page 6">
+          <page:SegmentedPage/>
+        </fui:SegmentedToggleItem>
       </fui:SegmentedToggleView>
     </ui:CodeCard>
 
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Icon_Segmented_Item]}" Height="200">
-      <Grid ColumnDefinitions="*, Auto">
-        <fui:SegmentedToggleView
-          Width="{Binding IconSegmentedViewWidthFormat}"
-          MaxHeight="256"
-          HorizontalAlignment="Left"
-          VerticalAlignment="Center"
-          ItemsSource="{Binding IconSegmentedItems}"
-          SelectedIndex="0">
-          <fui:SegmentedToggleView.ItemTemplate>
-            <DataTemplate>
-              <PathIcon Data="{Binding}"/>
-            </DataTemplate>
-          </fui:SegmentedToggleView.ItemTemplate>
-        </fui:SegmentedToggleView>
-
-        <ui:Card Grid.Column="1">
-          <StackPanel Orientation="Vertical" Spacing="6">
-            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
-            <TextBox
-              MinWidth="128"
-              HorizontalAlignment="Stretch"
-              PlaceholderText="Width"
-              Text="{Binding IconSegmentedViewWidth}"/>
-          </StackPanel>
-        </ui:Card>
-      </Grid>
-    </ui:CodeCard>
   </StackPanel>
 </ui:ViewBase>

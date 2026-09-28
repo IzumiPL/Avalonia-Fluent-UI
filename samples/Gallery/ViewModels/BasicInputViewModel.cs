@@ -26,7 +26,8 @@ public partial class BasicInputViewModel : ViewModelBase
             ("SplitButton", "SplitButton", "SplitButton", "A two-part button that displays a flyout when its secondary part is clicked."),
             ("ToggleSwitch", "SwitchButton", "ToggleSwitch", "A switch that can be toggled between 2 states."),
             ("ToggleButton", "ToggleButton", "ToggleButton", "A button that can be switched between two states like a CheckBox."),
-            ("RepeatButton", "RepeatButton", "RepeatButton", "A button that raises its Click event repeatedly while it is pressed.")
+            ("RepeatButton", "RepeatButton", "RepeatButton", "A button that raises its Click event repeatedly while it is pressed."),
+            ("ColorPicker", "ColorView", "ColorPicker", "A control that displays a selectable color spectrum.")
         );
     }
 }

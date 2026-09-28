@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input.Platform;
-using Avalonia.Interactivity;
 using Avalonia.LogicalTree;
-using Avalonia.Markup.Xaml;
 using Avalonia.Media;
-using Avalonia.Styling;
 using Avalonia.Threading;
 using AvaloniaFluentUI.Controls;
 using CommunityToolkit.Mvvm.Input;
@@ -98,18 +94,21 @@ public partial class FluentIconPage : UserControl
 
         iconCard.PointerReleased += (sender, e) =>
         {
-            if (_currentItem != null) _currentItem.IsChecked = false;
-
-            if (sender is CheckedBorder border)
+            if (sender is CheckedBorder cb)
             {
-                var icon = border.FindLogicalDescendantOfType<PathIcon>();
-                if (icon == null) return;
+                if (cb == _currentItem)
+                    return;
 
-                _currentItem = border;
+                _currentItem?.IsChecked = false;
+
+                var icon = cb.FindLogicalDescendantOfType<PathIcon>();
+                if (icon == null)
+                    return;
+
+                _currentItem = cb;
                 WeakReferenceMessenger.Default.Send(new CheckedIconChangedMessage((string)icon.Tag!, icon.Data!));
+                e.Handled = true;
             }
-
-            e.Handled = true;
         };
 
         return iconCard;

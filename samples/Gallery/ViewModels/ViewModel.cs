@@ -13,9 +13,10 @@ public partial class ViewModel : ViewModelBase
     {
         ViewItemSource = ButtonItemModel.CreateList(
             ("FlipView", "FlipView", "CarouselView", "Carousel view, a control suitable for displaying multiple pictures"),
-            ("PageTransition", "PageTransition", "CarouselView", "Page switching control with animation"),
             ("ListBox", "ListBox", "List", "List box, can display multiple items"),
-            ("TreeView", "TreeView", "TreeView", "A tree view")
+            ("TreeView", "TreeView", "TreeView", "A tree view"),
+            ("PageTransition", "PageTransition", "CarouselView", "Page switching control with animation"),
+            ("PersonPicture", "Avatar", "AvatarView", "Displays the picture of a person/contact.")
         );
     }
 
