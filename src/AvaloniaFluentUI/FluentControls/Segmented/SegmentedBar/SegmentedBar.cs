@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using Avalonia;
 using Avalonia.Animation;
@@ -15,25 +15,25 @@ namespace AvaloniaFluentUI.Controls;
 
 [TemplatePart(Name = PART_HEADERS_AREA,         Type = typeof(Panel))]
 [TemplatePart(Name = PART_SELECTED_INDICATOR,   Type = typeof(SelectionIndicator))]
-public class SegmentedView : SelectingItemsControl
+public class SegmentedBar : SelectingItemsControl
 {
     /// <summary>
     ///     Defines the <see cref="SelectionIndicatorBackground" /> property.
     /// </summary>
     public static readonly StyledProperty<IBrush?> SelectionIndicatorBackgroundProperty =
-        AvaloniaProperty.Register<SegmentedView, IBrush?>(nameof(SelectionIndicatorBackground));
+        AvaloniaProperty.Register<SegmentedBar, IBrush?>(nameof(SelectionIndicatorBackground));
 
     /// <summary>
     ///     Defines the <see cref="SelectionIndicatorBrush" /> property.
     /// </summary>
     public static readonly StyledProperty<IBrush?> SelectionIndicatorBrushProperty =
-        AvaloniaProperty.Register<SegmentedView, IBrush?>(nameof(SelectionIndicatorBrush));
+        AvaloniaProperty.Register<SegmentedBar, IBrush?>(nameof(SelectionIndicatorBrush));
 
     /// <summary>
     ///     Defines the <see cref="SelectionIndicatorWidthIsFixed" /> property.
     /// </summary>
     public static readonly StyledProperty<bool> SelectionIndicatorWidthIsFixedProperty =
-        AvaloniaProperty.Register<SegmentedView, bool>(nameof(SelectionIndicatorWidthIsFixed));
+        AvaloniaProperty.Register<SegmentedBar, bool>(nameof(SelectionIndicatorWidthIsFixed));
 
     public bool SelectionIndicatorWidthIsFixed
     {
@@ -46,35 +46,35 @@ public class SegmentedView : SelectingItemsControl
         get => GetValue(SelectionIndicatorBrushProperty);
         set => SetValue(SelectionIndicatorBrushProperty, value);
     }
-    
+
     public IBrush? SelectionIndicatorBackground
     {
         get => GetValue(SelectionIndicatorBackgroundProperty);
         set => SetValue(SelectionIndicatorBackgroundProperty, value);
     }
-    
+
     protected SelectionIndicator? _selectedIndicator;
     protected Panel? _headersArea;
 
     protected CancellationTokenSource? _cts;
     protected TranslateTransform _transform = new TranslateTransform();
-    
+
     private const string PART_SELECTED_INDICATOR = "PART_SelectedIndicator";
     private const string PART_HEADERS_AREA = "PART_HeadersArea";
 
-    public TimeSpan AnimationDuration { get; set; } = TimeSpan.FromMilliseconds(150);
-    public Easing AnimationEasing { get; set; } = new CubicEaseOut();
+    public TimeSpan SliderDuration { get; set; } = TimeSpan.FromMilliseconds(150);
+    public Easing SliderEasing { get; set; } = new CubicEaseOut();
 
     protected override bool NeedsContainerOverride(object? item, int index, out object? recycleKey)
-        => NeedsContainer<SegmentedItem>(item, out recycleKey);
+        => NeedsContainer<SegmentedBarItem>(item, out recycleKey);
 
     protected override Control CreateContainerForItemOverride(object? item, int index, object? ecycleKey)
-        => new SegmentedItem();
+        => new SegmentedBarItem();
 
     protected override void PrepareContainerForItemOverride(Control container, object? item, int index)
     {
         base.PrepareContainerForItemOverride(container, item, index);
-        if (container is SegmentedItem segItem && segItem.Content == null)
+        if (container is SegmentedBarItem segItem && segItem.Content == null)
         {
             segItem.Content = item;
         }
@@ -83,14 +83,14 @@ public class SegmentedView : SelectingItemsControl
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-        
+
         _selectedIndicator = e.NameScope.Find<SelectionIndicator>(PART_SELECTED_INDICATOR);
         _headersArea = e.NameScope.Find<Panel>(PART_HEADERS_AREA);
 
-        if (e.NameScope.Find<SingleDirectionScrollViewer>("PART_ScrollViewer") is {} scroller)
+        if (e.NameScope.Find<SingleDirectionScrollViewer>("PART_ScrollViewer") is { } scroller)
         {
             scroller.RemoveHandler(RequestBringIntoViewEvent, OnScrollViewerRequestBringIntoViewEventChanged);
-            scroller.AddHandler(RequestBringIntoViewEvent, OnScrollViewerRequestBringIntoViewEventChanged);
+            scroller.AddHandler(RequestBringIntoViewEvent, OnScrollViewerRequestBringIntoViewEventChanged, RoutingStrategies.Tunnel);
         }
     }
 
@@ -111,17 +111,6 @@ public class SegmentedView : SelectingItemsControl
         }
     }
 
-    protected virtual void SyncContainerSelection(object? selectedItem)
-    {
-        foreach (var item in Items)
-        {
-            if (ContainerFromItem(item) is SegmentedItem container)
-            {
-                container.IsSelected = selectedItem != null && Equals(item, selectedItem);
-            }
-        }
-    }
-    
     protected async virtual void RunSliderAnimation(Point position)
     {
         if (_selectedIndicator == null) { return; }
@@ -132,26 +121,20 @@ public class SegmentedView : SelectingItemsControl
 
         var animation = new Animation
         {
-            Duration = AnimationDuration,
+            Duration = SliderDuration,
             FillMode = FillMode.Forward,
-            Easing = AnimationEasing,
+            Easing = SliderEasing,
             Children =
             {
                 new KeyFrame
                 {
-                    Cue = new Cue(0d),
-                    Setters = 
-                    {
-                        new Setter(TranslateTransform.XProperty, _transform.X)
-                    }
+                    Cue = new Cue(0d), 
+                    Setters = { new Setter(TranslateTransform.XProperty, _transform.X) }
                 },
                 new KeyFrame
                 {
-                    Cue = new Cue(1d),
-                    Setters =
-                    {
-                        new Setter(TranslateTransform.XProperty, position.X)
-                    }
+                    Cue = new Cue(1d), 
+                    Setters = { new Setter(TranslateTransform.XProperty, position.X) }
                 }
             }
         };
@@ -177,6 +160,7 @@ public class SegmentedView : SelectingItemsControl
             _selectedIndicator.IsVisible = false;
             return;
         }
+
         _selectedIndicator.IsVisible = true;
 
         var transform = container.TransformToVisual(_headersArea);
@@ -184,7 +168,7 @@ public class SegmentedView : SelectingItemsControl
         {
             var width = container.Bounds.Width;
             var height = container.Bounds.Height;
-            
+
             RunSliderAnimation(transform.Value.Transform(new Point(0, 0)));
             _selectedIndicator.Width = width;
             _selectedIndicator.Height = height;
@@ -196,10 +180,12 @@ public class SegmentedView : SelectingItemsControl
     }
 }
 
-public class SegmentedItem : ContentControl
+
+[PseudoClasses(PC_SELECTED)]
+public class SegmentedBarItem : ContentControl
 {
     public static readonly StyledProperty<bool> IsSelectedProperty =
-        SelectingItemsControl.IsSelectedProperty.AddOwner<SegmentedItem>();
+        SelectingItemsControl.IsSelectedProperty.AddOwner<SegmentedBarItem>();
 
     /// <summary>
     /// 设置或获取当前项是否选中
@@ -210,22 +196,23 @@ public class SegmentedItem : ContentControl
         set => SetValue(IsSelectedProperty, value);
     }
 
+    public const string PC_SELECTED = ":selected";
+
     protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
         base.OnPropertyChanged(change);
         if (change.Property == IsSelectedProperty)
         {
-            PseudoClasses.Set(":selected", change.GetNewValue<bool>());
+            PseudoClasses.Set(PC_SELECTED, change.GetNewValue<bool>());
         }
     }
 
-    protected override void OnPointerReleased(PointerReleasedEventArgs e)
+    protected virtual void SyncSelectedItem(PointerReleasedEventArgs e)
     {
-        base.OnPointerReleased(e);
         var pointe = e.GetPosition(this);
         if (!e.Handled && IsEffectivelyEnabled && new Rect(Bounds.Size).Contains(pointe))
         {
-            if (Parent is SegmentedView segmented)
+            if (Parent is SegmentedBar segmented)
             {
                 var dataItem = segmented.ItemFromContainer(this);
                 if (dataItem != null)
@@ -234,5 +221,11 @@ public class SegmentedItem : ContentControl
                 }
             }
         }
+    }
+
+    protected override void OnPointerReleased(PointerReleasedEventArgs e)
+    {
+        base.OnPointerReleased(e);
+        SyncSelectedItem(e);
     }
 }
