@@ -296,7 +296,10 @@
               IsEnabled="{TemplateBinding IsEnabled}"
               TemplatedControl.IsTemplateFocusTarget="True"
               Theme="{StaticResource DatePickerFlyoutButtonStyle}">
-              <Grid Name="PART_ButtonContentGrid" ColumnDefinitions="78*,Auto,132*,Auto,78*">
+              <Grid
+                Name="PART_ButtonContentGrid"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                ColumnDefinitions="78*,Auto,132*,Auto,78*">
                 <TextBlock
                   Name="PART_DayTextBlock"
                   Padding="{DynamicResource DatePickerHostPadding}"
