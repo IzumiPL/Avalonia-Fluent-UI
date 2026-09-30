@@ -309,7 +309,7 @@
           IconSource="{x:Static fi:FluentIcon.Info}">
           <Button
             Classes="Accent"
-            Click="OnCheckForUpdateClicked"
+            Command="{Binding CheckUpdateCommand}"
             Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[CheckForUpdates]}"/>
         </fui:SettingCard>
       </StackPanel>

@@ -304,9 +304,9 @@
                   Grid.Row="2"
                   Grid.Column="1"
                   HorizontalAlignment="Left"
-                  Classes="Transparent"
                   Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Logout]}"
-                  Foreground="{DynamicResource SystemAccentColor}"/>
+                  Foreground="{DynamicResource SystemAccentColor}"
+                  Theme="{StaticResource AccentForegroundButton}"/>
               </Grid>
               <Separator HorizontalAlignment="Stretch"/>
               <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_ManageAccounts]}">
