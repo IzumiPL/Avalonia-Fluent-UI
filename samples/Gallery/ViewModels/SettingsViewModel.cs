@@ -1,15 +1,22 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Net.Http;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Primitives;
+using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Styling;
+using AvaloniaFluentUI.Controls;
 using AvaloniaFluentUI.Locale;
 using AvaloniaFluentUI.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Gallery.Constants;
 using Gallery.Messages.MainWindowMessages;
 using Gallery.Models;
 using Gallery.Services;
@@ -265,5 +272,35 @@ public partial class SettingsViewModel : ViewModelBase
             CurrentEffect = "Null";
         }
         WeakReferenceMessenger.Default.Send(new EnabledBackgroundImageMessage(value, BackgroundImagePath));
+    }
+
+    [RelayCommand]
+    private async Task CheckUpdate()
+    {
+        if (Application.Current?.ApplicationLifetime is ISingleViewApplicationLifetime)
+            return;
+        
+        try
+        {
+            if (await UpdateService.HasUpdate())
+            {
+                var label = new HyperlinkLabel { Text = "点击下载更新", Uri = new Uri(Data.LATEST_URL) };
+                var panel = new StackPanel { Orientation = Orientation.Horizontal, VerticalAlignment = VerticalAlignment.Top, Spacing = 2, Children = { new TextBlock { Text = "有新版本可用" }, label } };
+
+                InfoBarService.PopupInfoBarManager.Information("检查更新", panel, InfoBarPosition.Top, true, orientation: Orientation.Horizontal, duration: -1);
+            }
+            else
+            {
+                InfoBarService.PopupInfoBarManager.Information("检查更新", "暂时没有可用的更新!", InfoBarPosition.Top, true, orientation: Orientation.Horizontal, duration: 6000);
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            InfoBarService.PopupInfoBarManager.Error("检查更新", $"网络请求失败：{ex.Message}", InfoBarPosition.Top, true, orientation: Orientation.Horizontal);
+        }
+        catch (TaskCanceledException ex)
+        {
+            InfoBarService.PopupInfoBarManager.Error("检查更新", $"请求超时：{ex.Message}", InfoBarPosition.Top, true, orientation: Orientation.Horizontal);
+        }
     }
 }

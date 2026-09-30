@@ -87,6 +87,14 @@ public partial class FluentIconPage : UserControl
                             TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync(data.ToString());
                             Console.WriteLine(data.ToString());
                         })
+                    },
+                    new MenuItem
+                    {
+                        Header = "复制图标名称",
+                        Command = new RelayCommand(() =>
+                        {
+                            TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync(name);
+                        })
                     }
                 }
             }
