@@ -29,7 +29,17 @@
       IsVisible="False"
       PrimaryButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Confirm]}"/>
     <ui:CodeCard Name="ContentDialogCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_DialogWithMask]}">
-      <Button Click="OnShowContentDialog" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Open]}"/>
+      <Grid ColumnDefinitions="*, Auto">
+        <Button
+          HorizontalAlignment="Left"
+          Click="OnShowContentDialog"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Open]}"/>
+
+        <CheckBox
+          Name="FullHeightCheckBox"
+          Grid.Column="1"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FullHeight]}"/>
+      </Grid>
     </ui:CodeCard>
 
     <fui:ContentDialog

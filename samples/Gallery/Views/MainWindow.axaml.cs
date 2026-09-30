@@ -170,7 +170,7 @@ public partial class MainWindow : FluentWindow
     {
         if (message.IsEnabled)
         {
-            switch (message.type)
+            switch (message.Type)
             {
                 case "Mica":
                     EnabledMica(true);

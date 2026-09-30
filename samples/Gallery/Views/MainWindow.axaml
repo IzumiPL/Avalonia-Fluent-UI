@@ -304,9 +304,9 @@
                   Grid.Row="2"
                   Grid.Column="1"
                   HorizontalAlignment="Left"
-                  Classes="Transparent"
                   Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_Logout]}"
-                  Foreground="{DynamicResource SystemAccentColor}"/>
+                  Foreground="{DynamicResource SystemAccentColor}"
+                  Theme="{StaticResource AccentForegroundButton}"/>
               </Grid>
               <Separator HorizontalAlignment="Stretch"/>
               <MenuItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[MT_ManageAccounts]}">
@@ -368,6 +368,7 @@
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[RepeatButton]}" Tag="RepeatButton"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ComboBox]}" Tag="ComboBox"/>
             <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Slider]}" Tag="Slider"/>
+            <fui:NavigationViewItem Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ColorPicker]}" Tag="ColorPicker"/>
           </fui:NavigationViewItem.MenuItems>
         </fui:NavigationViewItem>
 

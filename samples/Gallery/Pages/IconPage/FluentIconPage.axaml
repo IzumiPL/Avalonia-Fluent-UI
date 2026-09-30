@@ -12,6 +12,11 @@
   d:DesignWidth="800"
   x:DataType="viewModel:FluentIconPageViewModel"
   mc:Ignorable="d">
+
+  <UserControl.DataContext>
+    <viewModel:FluentIconPageViewModel/>
+  </UserControl.DataContext>
+
   <Grid ColumnDefinitions="*, 256" RowDefinitions="Auto Auto Auto Auto Auto, *">
     <!--  RowSpacing="8"  -->
     <!--  <TextBlock  -->

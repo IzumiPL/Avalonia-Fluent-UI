@@ -37,7 +37,8 @@ public partial class HomeViewModel : ViewModelBase
             ("SplitButton", "SplitButton", "SplitButton", "A two-part button that displays a flyout when its secondary part is clicked."),
             ("ToggleSwitch", "SwitchButton", "ToggleSwitch", "A switch that can be toggled between 2 states."),
             ("ToggleButton", "ToggleButton", "ToggleButton", "A button that can be switched between two states like a CheckBox."),
-            ("RepeatButton", "RepeatButton", "RepeatButton", "A button that raises its Click event repeatedly while it is pressed.")
+            ("RepeatButton", "RepeatButton", "RepeatButton", "A button that raises its Click event repeatedly while it is pressed."),
+            ("ColorPicker", "ColorView", "ColorPicker", "A control that displays a selectable color spectrum.")
         );
 
         DateTimeItemSource = ButtonItemModel.CreateList(
@@ -73,7 +74,8 @@ public partial class HomeViewModel : ViewModelBase
         NavigationViewItemSource = ButtonItemModel.CreateList(
             ("NavigationView", "NavigationView", "NavigationView", "Navigation panel for page switching and menu navigation"),
             ("BreadcrumbBar", "BreadcrumbBar", "BreadcrumbBar", "Breadcrumb navigation view"),
-            ("Pivot", "Segmented", "SegmentedView", "This is the segmented navigation bar")
+            ("Pivot", "Segmented", "SegmentedView", "This is the segmented navigation bar"),
+            ("TabView", "TabView", "Tabs", "A control that displays a collection of tabs that can be used to display several documents.")
         );
 
         StatusAndInformationItemSource = ButtonItemModel.CreateList(
@@ -94,9 +96,10 @@ public partial class HomeViewModel : ViewModelBase
 
         ViewItemSource = ButtonItemModel.CreateList(
             ("FlipView", "FlipView", "CarouselView", "Carousel view, a control suitable for displaying multiple pictures"),
-            ("PageTransition", "PageTransition", "CarouselView", "Page switching control with animation"),
             ("ListBox", "ListBox", "List", "List box, can display multiple items"),
-            ("TreeView", "TreeView", "TreeView", "A tree view")
+            ("TreeView", "TreeView", "TreeView", "A tree view"),
+            ("PageTransition", "PageTransition", "CarouselView", "Page switching control with animation"),
+            ("PersonPicture", "Avatar", "AvatarView", "Displays the picture of a person/contact.")
         );
 
         MediaItemSource = ButtonItemModel.CreateList(

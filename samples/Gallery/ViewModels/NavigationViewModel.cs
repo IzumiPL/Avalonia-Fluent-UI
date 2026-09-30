@@ -17,7 +17,8 @@ public partial class NavigationViewModel : ViewModelBase
         NavigationViewItemSource = ButtonItemModel.CreateList(
             ("NavigationView", "NavigationView", "NavigationView", "Navigation panel for page switching and menu navigation"),
             ("BreadcrumbBar", "BreadcrumbBar", "BreadcrumbBar", "Breadcrumb navigation view"),
-            ("Pivot", "Segmented", "SegmentedView", "This is the segmented navigation bar")
+            ("Pivot", "Segmented", "SegmentedView", "This is the segmented navigation bar"),
+            ("TabView", "TabView", "Tabs", "A control that displays a collection of tabs that can be used to display several documents.")
         );
     }
 }

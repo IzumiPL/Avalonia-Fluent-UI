@@ -153,8 +153,10 @@
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/ListBox/RoundListBox.axaml"/>
 
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Segmented/SegmentedView.axaml"/>
-        <MergeResourceInclude Source="/FluentControlStyles/Controls/Segmented/SegmentedToggleView.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Segmented/SegmentedBar/SegmentedBar.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Segmented/SegmentedBar/SegmentedToggleBar.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Segmented/SegmentedView/SegmentedView.axaml"/>
+        <MergeResourceInclude Source="/FluentControlStyles/Controls/Segmented/SegmentedView/SegmentedToggleView.axaml"/>
 
         <MergeResourceInclude Source="/FluentControlStyles/Controls/TextBox/SearchTextBox.axaml"/>
         <MergeResourceInclude Source="/FluentControlStyles/Controls/TextBox/LabelTextBox.axaml"/>

@@ -129,5 +129,58 @@
         </ui:Card>
       </Grid>
     </ui:CodeCard>
+
+    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_GroupBox]}">
+      <GroupBox Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_PersonalInfo]}">
+        <!--  a  -->
+        <StackPanel
+          Margin="12"
+          Orientation="Vertical"
+          Spacing="6">
+          <TextBlock
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Name]}"/>
+          <fui:OutlinedTextBox HorizontalAlignment="Stretch" PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_EnterName]}"/>
+
+          <TextBlock
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Age]}"/>
+          <NumericUpDown
+            HorizontalAlignment="Stretch"
+            Maximum="100"
+            Minimum="0"
+            Value="24"/>
+
+          <TextBlock
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Gender]}"/>
+          <fui:OutlinedTextBox HorizontalAlignment="Stretch" PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_EnterGender]}"/>
+
+          <TextBlock
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_PhoneNumber]}"/>
+          <fui:OutlinedTextBox HorizontalAlignment="Stretch" PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_EnterPhoneNumber]}"/>
+          <StackPanel
+            Margin="0,12,0,0"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal"
+            Spacing="8">
+            <Button
+              Width="128"
+              HorizontalAlignment="Stretch"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Cancel]}"/>
+            <Button
+              Width="128"
+              HorizontalAlignment="Stretch"
+              Classes="Accent"
+              Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[LV_Submit]}"/>
+          </StackPanel>
+        </StackPanel>
+      </GroupBox>
+    </ui:CodeCard>
   </StackPanel>
 </ui:ViewBase>

@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Styling;
+using AvaloniaFluentUI.Controls;
 using AvaloniaFluentUI.Media.Animation;
 
 namespace Gallery.Views;
@@ -21,6 +22,25 @@ public partial class IconsView : UserControl
         {
             var theme = app.RequestedThemeVariant == ThemeVariant.Light ? ThemeVariant.Dark : ThemeVariant.Light;
             app.RequestedThemeVariant = theme;
+        }
+    }
+
+    private void OnSegmentedToggleViewSelectedItemChanged(object? sender, SelectedItemChangedEventArgs e)
+    {
+        if (e.NewItem is SegmentedToggleItem item)
+        {
+            switch (item.Tag)
+            {
+                case "FluentIconPage":
+                    // Console.WriteLine("FIP");
+                    break;
+                case "FontIconPage":
+                    // Console.WriteLine("FIP");
+                    break;
+                case "SymbolIconPage":
+                    // Console.WriteLine("SIP");
+                    break;
+            }
         }
     }
 }

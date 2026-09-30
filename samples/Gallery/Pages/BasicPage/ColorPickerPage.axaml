@@ -1,0 +1,42 @@
+﻿<ui:ViewBase
+  x:Class="Gallery.Pages.ColorPickerPage"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
+  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:ui="clr-namespace:Gallery.Controls"
+  xmlns:viewModel="clr-namespace:Gallery.ViewModels"
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  x:DataType="viewModel:ColorPickerPageViewModel"
+  mc:Ignorable="d">
+
+  <StackPanel Spacing="50">
+    <ui:CodeCard Name="ColorViewCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[ColorPicker]}">
+      <Grid ColumnDefinitions="*, Auto">
+        <fui:FluentColorView
+          Grid.Column="0"
+          HorizontalAlignment="Left"
+          ColorSpectrumShape="{Binding FluentColorViewColorSpectrumShape}"
+          IsAlphaVisible="{Binding FluentColorViewIsAlphaVisible}"
+          IsEnabled="{Binding !FluentColorViewIsDisabled}"
+          Color="DeepPink"/>
+
+        <ui:Card Grid.Column="1" VerticalAlignment="Stretch">
+          <StackPanel Orientation="Vertical">
+            <TextBlock FontWeight="Bold" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_Options]}"/>
+
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[BI_IsDisabled]}" IsChecked="{Binding FluentColorViewIsDisabled}"/>
+            <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[OpacityCanBeAdjusted]}" IsChecked="{Binding FluentColorViewIsAlphaVisible}"/>
+            <ComboBox
+              HorizontalAlignment="Stretch"
+              ItemsSource="{Binding FluentColorViewColorSpectrumShapes}"
+              SelectedItem="{Binding FluentColorViewColorSpectrumShape}"/>
+          </StackPanel>
+        </ui:Card>
+      </Grid>
+    </ui:CodeCard>
+  </StackPanel>
+</ui:ViewBase>

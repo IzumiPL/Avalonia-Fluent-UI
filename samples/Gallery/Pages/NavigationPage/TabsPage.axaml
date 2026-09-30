@@ -27,26 +27,26 @@
       Orientation="Vertical"
       Spacing="6">
       <!-- <CheckBox Content="可拖拽" IsChecked="{Binding TabViewAllowDropTabs}"/> -->
-      <CheckBox Content="可重新排序" IsChecked="{Binding TabViewCanReorderTabs}"/>
-      <CheckBox Content="显示头部区域" IsChecked="{Binding TabViewStripHeaderIsVisible}"/>
-      <CheckBox Content="显示底部区域" IsChecked="{Binding TabViewStripFooterIsVisible}"/>
-      <CheckBox Content="显示添加按钮" IsChecked="{Binding TabViewIsAddButtonVisible}"/>
+      <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Tabs_CanReorder]}" IsChecked="{Binding TabViewCanReorderTabs}"/>
+      <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Tabs_ShowStripHeader]}" IsChecked="{Binding TabViewStripHeaderIsVisible}"/>
+      <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Tabs_ShowStripFooter]}" IsChecked="{Binding TabViewStripFooterIsVisible}"/>
+      <CheckBox Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Tabs_ShowAddButton]}" IsChecked="{Binding TabViewIsAddButtonVisible}"/>
 
-      <TextBlock HorizontalAlignment="Left" Text="显示位置"/>
+      <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Tabs_StripLocation]}"/>
       <ComboBox
         MinWidth="128"
         HorizontalAlignment="Stretch"
         ItemsSource="{Binding TabViewTabStripLocations}"
         SelectedItem="{Binding TabViewTabStripLocation}"/>
 
-      <TextBlock HorizontalAlignment="Left" Text="Item宽度模式"/>
+      <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Tabs_ItemWidthMode]}"/>
       <ComboBox
         MinWidth="128"
         HorizontalAlignment="Stretch"
         ItemsSource="{Binding TabViewTabWidthModes}"
         SelectedItem="{Binding TabViewTabWidthMode}"/>
 
-      <TextBlock HorizontalAlignment="Left" Text="Item关闭按钮显示模式"/>
+      <TextBlock HorizontalAlignment="Left" Text="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Tabs_CloseButtonOverlayMode]}"/>
       <ComboBox
         MinWidth="128"
         HorizontalAlignment="Stretch"
@@ -57,7 +57,7 @@
         HorizontalAlignment="Stretch"
         Classes="Accent"
         Command="{Binding ClearAllTabViewItemCommand}"
-        Content="清空所有Item"/>
+        Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Tabs_ClearAllItems]}"/>
       <!--  2  -->
     </StackPanel>
   </ui:PopupDrawerHostViewBase.PopupDrawerContent>
@@ -67,9 +67,9 @@
       <Grid ColumnDefinitions="*, Auto">
         <TabControl Grid.Column="0" TabStripPlacement="{Binding TabStripPlacement}">
           <TabItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Home]}"/>
-          <TabItem Header="GitHub"/>
-          <TabItem Header="Video"/>
-          <TabItem Header="Music"/>
+          <TabItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[GitHub]}"/>
+          <TabItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Video]}"/>
+          <TabItem Header="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[Music]}"/>
         </TabControl>
         <StackPanel
           Grid.Column="1"
@@ -85,7 +85,7 @@
       </Grid>
     </ui:CodeCard>
 
-    <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TabView]}" Padding="0">
+    <ui:CodeCard Name="TabViewCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[TabView]}" Padding="0">
       <Panel>
         <!--  AllowDropTabs="{Binding TabViewAllowDropTabs}"  -->
         <fui:TabView

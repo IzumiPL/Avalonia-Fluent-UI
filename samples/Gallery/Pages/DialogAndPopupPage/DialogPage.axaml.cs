@@ -28,6 +28,7 @@ public partial class DialogPage : ViewBase
     
     private async void OnShowContentDialog(object? sender, RoutedEventArgs e)
     {
+        ContentDialog.FullSizeDesired = FullHeightCheckBox.IsChecked == true;
         await ContentDialog.ShowAsync();
     }
 

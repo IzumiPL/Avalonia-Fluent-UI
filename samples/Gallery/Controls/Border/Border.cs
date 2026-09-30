@@ -18,9 +18,9 @@ public class CheckedBorder : Avalonia.Controls.Border
     {
         base.OnPointerReleased(e);
         
-        if (e.InitialPressMouseButton == MouseButton.Left)
+        if (e.InitialPressMouseButton == MouseButton.Left && !IsChecked)
         {
-            IsChecked = !IsChecked;
+            IsChecked = true;
         }
     }
 }

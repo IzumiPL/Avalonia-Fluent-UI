@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Media;
 using AvaloniaFluentUI.Locale;
 
@@ -12,9 +13,30 @@ namespace AvaloniaFluentUI.Controls;
 /// </summary>
 public class ColorDialog : ContentDialog
 {
+    /// <summary>
+    ///     Defines the <see cref="Color" /> property.
+    /// </summary>
     public static readonly StyledProperty<Color> ColorProperty =
-        AvaloniaProperty.Register<ColorDialog, Color>(nameof(Color));
+        FluentColorView.ColorProperty.AddOwner<ColorDialog>();
 
+    /// <summary>
+    ///     Defines the <see cref="ColorSpectrumShape" /> property.
+    /// </summary>
+    public static readonly StyledProperty<ColorSpectrumShape> ColorSpectrumShapeProperty =
+        FluentColorView.ColorSpectrumShapeProperty.AddOwner<ColorDialog>();
+
+    /// <summary>
+    /// 获取或设置当前色彩光谱形状
+    /// </summary>
+    public ColorSpectrumShape ColorSpectrumShape
+    {
+        get => GetValue(ColorSpectrumShapeProperty);
+        set => SetValue(ColorSpectrumShapeProperty, value);
+    }
+    
+    /// <summary>
+    /// 获取或设置当前颜色
+    /// </summary>
     public Color Color
     {
         get => GetValue(ColorProperty);
@@ -24,7 +46,7 @@ public class ColorDialog : ContentDialog
     public ColorDialog()
     {
         ColorView = new FluentColorView();
-
+        
         DefaultButton = ContentDialogButton.Primary;
         Content = ColorView;
 
@@ -35,6 +57,15 @@ public class ColorDialog : ContentDialog
     private void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
     {
         SetText();
+    }
+
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    {
+        base.OnPropertyChanged(change);
+        if (change.Property == ColorSpectrumShapeProperty)
+        {
+            ColorView.ColorSpectrumShape = ColorSpectrumShape;
+        }
     }
 
     private void SetText()

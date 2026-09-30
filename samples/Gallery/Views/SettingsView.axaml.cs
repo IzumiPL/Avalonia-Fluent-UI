@@ -4,13 +4,10 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
-using Avalonia.Layout;
 using Avalonia.Platform.Storage;
-using AvaloniaFluentUI.Controls;
 using CommunityToolkit.Mvvm.Messaging;
 using Gallery.Helpers;
 using Gallery.Messages.MainWindowMessages;
-using Gallery.Services;
 using Gallery.ViewModels;
 
 namespace Gallery.Views;
@@ -28,6 +25,9 @@ public partial class SettingsView : UserControl
         {
             ScrollViewer.Padding = new Thickness(18, 24, 0, 0);
             StackPanel.Margin = new Thickness(0, 0, 48, 64);
+
+            TitleExpanderSettingCard.IsEnabled = false;
+            WindowExpanderSettingCard.IsEnabled = false;
         }
     }
 
@@ -67,10 +67,5 @@ public partial class SettingsView : UserControl
     private void OnSendFeedbackClicked(object? sender, RoutedEventArgs e)
     {
         UrlHelpers.OpenUrl(new Uri("https://github.com/IzumiPL/Avalonia-Fluent-UI/issues/new"), TopLevel.GetTopLevel(this));
-    }
-
-    private void OnCheckForUpdateClicked(object? sender, RoutedEventArgs e)
-    {
-        InfoBarService.PopupInfoBarManager.Information("检查更新", "暂时没有可用的更新!", InfoBarPosition.Top, true, orientation: Orientation.Horizontal);
     }
 }

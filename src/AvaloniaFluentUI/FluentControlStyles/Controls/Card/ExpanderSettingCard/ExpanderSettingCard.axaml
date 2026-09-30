@@ -19,7 +19,7 @@
   <x:Double x:Key="ExpanderSettingCardMinHeight">68</x:Double>
   <Thickness x:Key="ExpanderSettingCardExpandCollapseChevronMargin">8 0 16 0</Thickness>
   <Thickness x:Key="ExpanderSettingCardHeaderBorderThickness">1</Thickness>
-  <Thickness x:Key="ExpanderSettingCardContentDownBorderThickness">1 0 1 1</Thickness>
+  <Thickness x:Key="ExpanderSettingCardContentDownBorderThickness">1 0</Thickness>
   <Thickness x:Key="ExpanderSettingCardIFooterMargin">16 0 0 0</Thickness>
   <x:Double x:Key="ExpanderSettingCardIconSize">24</x:Double>
 
@@ -109,23 +109,26 @@
       <ControlTemplate>
         <StackPanel>
           <ToggleButton
+            Name="ExpanderHeader"
             MinHeight="{TemplateBinding MinHeight}"
             Content="{TemplateBinding Header}"
             IsChecked="{TemplateBinding IsExpanded,
                                         Mode=TwoWay}"
             IsEnabled="{TemplateBinding IsEnabled}"
             Theme="{StaticResource SettingsExpanderToggleButtonStyle}"/>
-          <Border Name="ExpanderContentClip" ClipToBounds="True">
+          <Border
+            Name="ExpanderContentClip"
+            Background="{TemplateBinding Background}"
+            BackgroundSizing="InnerBorderEdge"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            ClipToBounds="True"
+            CornerRadius="{TemplateBinding CornerRadius,
+                                           Converter={StaticResource BottomCornerRadiusFilterConverter}}">
             <Border
               Name="PART_ExpanderContent"
               MinWidth="{TemplateBinding MinWidth}"
-              MinHeight="{DynamicResource FluentExpanderContentMinHeight}"
-              Background="{TemplateBinding Background}"
-              BackgroundSizing="InnerBorderEdge"
-              BorderBrush="{TemplateBinding BorderBrush}"
-              BorderThickness="{TemplateBinding BorderThickness}"
-              CornerRadius="{TemplateBinding CornerRadius,
-                                             Converter={StaticResource BottomCornerRadiusFilterConverter}}">
+              MinHeight="{DynamicResource FluentExpanderContentMinHeight}">
               <ContentPresenter
                 Name="PART_ContentPresenter"
                 Margin="0"
@@ -139,6 +142,13 @@
         </StackPanel>
       </ControlTemplate>
     </Setter>
+
+    <Style Selector="^:down">
+      <Style Selector="^:expanded /template/ Border#ExpanderContentClip">
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius, Converter={StaticResource BottomCornerRadiusFilterConverter}}"/>
+        <Setter Property="BorderThickness" Value="1 0 1 1"/>
+      </Style>
+    </Style>
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type ui:ExpanderSettingCard}" TargetType="ui:ExpanderSettingCard">

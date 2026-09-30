@@ -97,5 +97,9 @@
     <Compile Update="Pages\BasicPage\RepeatButtonPage.axaml.cs">
       <DependentUpon>RepeatButtonPage.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\BasicPage\ColorPickerPage.axaml.cs">
+      <DependentUpon>ColorPicker.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

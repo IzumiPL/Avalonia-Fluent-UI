@@ -1,0 +1,39 @@
+﻿<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
+
+  <ControlTheme x:Key="{x:Type ui:SegmentedToggleView}" TargetType="ui:SegmentedToggleView">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          Margin="{TemplateBinding Padding}"
+          HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+          VerticalAlignment="{TemplateBinding VerticalAlignment}"
+          Background="{TemplateBinding Background}"
+          BorderBrush="{TemplateBinding BorderBrush}"
+          BorderThickness="{TemplateBinding BorderThickness}"
+          CornerRadius="{TemplateBinding CornerRadius}">
+          <Grid
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ClipToBounds="True"
+            RowDefinitions="Auto, *"
+            RowSpacing="{TemplateBinding Spacing}">
+            <ui:SegmentedToggleBar
+              Name="PART_SegmentedToggleBar"
+              HorizontalAlignment="{TemplateBinding BarHorizontalAlignment}"
+              VerticalAlignment="Top"/>
+            <ContentPresenter
+              Name="PART_ContentPresenter"
+              Grid.Row="1"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              ClipToBounds="True"/>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>
+

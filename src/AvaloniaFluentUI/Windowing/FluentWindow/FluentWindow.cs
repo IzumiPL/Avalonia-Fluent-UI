@@ -21,9 +21,9 @@ namespace AvaloniaFluentUI.Windowing;
 /// <summary>
 /// 支持 Windows, MacOS, Linux三大平台的流畅窗口
 /// </summary>
-[TemplatePart(Name = PART_CLOSE_BUTTON, Type = typeof(Button))]
-[TemplatePart(Name = PART_MINIMIZE_BUTTON, Type = typeof(Button))]
-[TemplatePart(Name = PART_MAXIMIZE_BUTTON, Type = typeof(Button))]
+[TemplatePart(Name = PART_CLOSE_BUTTON,     Type = typeof(Button))]
+[TemplatePart(Name = PART_MINIMIZE_BUTTON,  Type = typeof(Button))]
+[TemplatePart(Name = PART_MAXIMIZE_BUTTON,  Type = typeof(Button))]
 [TemplatePart(Name = PART_FLUENT_TITLE_BAR, Type = typeof(FluentTitleBar))]
 public partial class FluentWindow : Window
 {
@@ -284,7 +284,8 @@ public partial class FluentWindow : Window
             PseudoClasses.Add(":is-not-windows");
         }
 
-        TitleBarTemplateSettings.Margin = new Thickness(0, 0, IsWindows ? 135.99 : 135, 0);
+        var margin = TitleBarTemplateSettings.Margin;
+        TitleBarTemplateSettings.Margin = new Thickness(margin.Left, margin.Top, IsWindows ? 135.99 : 135, margin.Bottom);
     }
 
     private void OnWindowPointerPressed(object? sender, PointerPressedEventArgs e)

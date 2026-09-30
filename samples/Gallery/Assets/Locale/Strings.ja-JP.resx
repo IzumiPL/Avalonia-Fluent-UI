@@ -2168,4 +2168,103 @@
   <data name="TabView" xml:space="preserve">
     <value>タブビュー</value>
   </data>
+  <data name="ColorPicker" xml:space="preserve">
+    <value>カラーピッカー</value>
+  </data>
+  <data name="OpacityCanBeAdjusted" xml:space="preserve">
+    <value>不透明度は調整可能です</value>
+  </data>
+  <data name="LV_GroupBox" xml:space="preserve">
+    <value>グループボックス</value>
+  </data>
+  <data name="FullHeight" xml:space="preserve">
+    <value>高さを埋める</value>
+  </data>
+  <data name="IV_UsageExampleXaml" xml:space="preserve">
+    <value>使用例 (XAML)</value>
+  </data>
+  <data name="IV_UsageExampleCSharp" xml:space="preserve">
+    <value>使用例 (C#)</value>
+  </data>
+  <data name="LV_PersonalInfo" xml:space="preserve">
+    <value>個人情報</value>
+  </data>
+  <data name="LV_Name" xml:space="preserve">
+    <value>氏名</value>
+  </data>
+  <data name="LV_EnterName" xml:space="preserve">
+    <value>名前を入力してください</value>
+  </data>
+  <data name="LV_Age" xml:space="preserve">
+    <value>年齢</value>
+  </data>
+  <data name="LV_Gender" xml:space="preserve">
+    <value>性別</value>
+  </data>
+  <data name="LV_EnterGender" xml:space="preserve">
+    <value>性別を入力してください</value>
+  </data>
+  <data name="LV_PhoneNumber" xml:space="preserve">
+    <value>電話番号</value>
+  </data>
+  <data name="LV_EnterPhoneNumber" xml:space="preserve">
+    <value>電話番号を入力してください</value>
+  </data>
+  <data name="LV_Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="LV_Submit" xml:space="preserve">
+    <value>送信</value>
+  </data>
+  <data name="Tabs_CanReorder" xml:space="preserve">
+    <value>並べ替えを許可</value>
+  </data>
+  <data name="Tabs_ShowStripHeader" xml:space="preserve">
+    <value>ヘッダー領域を表示</value>
+  </data>
+  <data name="Tabs_ShowStripFooter" xml:space="preserve">
+    <value>フッター領域を表示</value>
+  </data>
+  <data name="Tabs_ShowAddButton" xml:space="preserve">
+    <value>追加ボタンを表示</value>
+  </data>
+  <data name="Tabs_StripLocation" xml:space="preserve">
+    <value>表示位置</value>
+  </data>
+  <data name="Tabs_ItemWidthMode" xml:space="preserve">
+    <value>Item の幅モード</value>
+  </data>
+  <data name="Tabs_CloseButtonOverlayMode" xml:space="preserve">
+    <value>Item の閉じるボタン表示モード</value>
+  </data>
+  <data name="Tabs_ClearAllItems" xml:space="preserve">
+    <value>すべての Item をクリア</value>
+  </data>
+  <data name="VP_TimeLineCompleted" xml:space="preserve">
+    <value>完了</value>
+  </data>
+  <data name="VP_TimeLineTodaySchedule" xml:space="preserve">
+    <value>今日の予定</value>
+  </data>
+  <data name="VP_TimeLineTodo" xml:space="preserve">
+    <value>やること</value>
+  </data>
+  <data name="VP_TimeLineAllOut" xml:space="preserve">
+    <value>全軍出撃🐔、鳩鳩を死守せよ🏀!!</value>
+  </data>
+  <data name="VP_TimeLineUploadMv" xml:space="preserve">
+    <value>うちの aiko の MV『シアリセ』をアップロード</value>
+  </data>
+  <data name="VP_TimeLineDownloadSong" xml:space="preserve">
+    <value>うちの aiko の『荒れた唇は恋を失くす』をダウンロード</value>
+  </data>
+  <data name="VP_TimeLineLoopNewSong" xml:space="preserve">
+    <value>うちの aiko の新曲「星の降る日に」をリピート再生</value>
+  </data>
+  <data name="Music" xml:space="preserve">
+    <value>音楽</value>
+  </data>
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+  </data>
 </root>

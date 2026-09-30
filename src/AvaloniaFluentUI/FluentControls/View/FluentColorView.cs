@@ -18,18 +18,33 @@ namespace AvaloniaFluentUI.Controls;
 [TemplatePart(Name = PART_HEX_INPUT, Type = typeof(TextBox))]
 public class FluentColorView : TemplatedControl
 {
+    /// <summary>
+    ///     Defines the <see cref="Color" /> property.
+    /// </summary>
     public static readonly StyledProperty<Color> ColorProperty =
         AvaloniaProperty.Register<FluentColorView, Color>(nameof(Color));
 
+    /// <summary>
+    ///     Defines the <see cref="HsvColor" /> property.
+    /// </summary>
     public static readonly StyledProperty<HsvColor> HsvColorProperty =
         AvaloniaProperty.Register<FluentColorView, HsvColor>(nameof(HsvColor));
 
+    /// <summary>
+    ///     Defines the <see cref="OriginalColor" /> property.
+    /// </summary>
     public static readonly StyledProperty<IBrush> OriginalColorProperty =
         AvaloniaProperty.Register<FluentColorView, IBrush>(nameof(OriginalColor));
 
+    /// <summary>
+    ///     Defines the <see cref="NewColor" /> property.
+    /// </summary>
     public static readonly StyledProperty<IBrush> NewColorProperty =
         AvaloniaProperty.Register<FluentColorView, IBrush>(nameof(NewColor));
 
+    /// <summary>
+    ///     Defines the <see cref="HexText" /> property.
+    /// </summary>
     public static readonly StyledProperty<string> HexTextProperty =
         AvaloniaProperty.Register<FluentColorView, string>(nameof(HexText), "FF00BFFF");
 
@@ -39,18 +54,18 @@ public class FluentColorView : TemplatedControl
     public static readonly StyledProperty<ColorSpectrumShape> ColorSpectrumShapeProperty =
         AvaloniaProperty.Register<FluentColorView, ColorSpectrumShape>(nameof(ColorSpectrumShape));
 
-    public ColorSpectrumShape ColorSpectrumShape
-    {
-        get => GetValue(ColorSpectrumShapeProperty);
-        set => SetValue(ColorSpectrumShapeProperty, value);
-    }
-
     /// <summary>
     ///     Defines the <see cref="IsAlphaVisible" /> property.
     /// </summary>
     public static readonly StyledProperty<bool> IsAlphaVisibleProperty =
         AvaloniaProperty.Register<FluentColorView, bool>(nameof(IsAlphaVisible), true);
 
+    public ColorSpectrumShape ColorSpectrumShape
+    {
+        get => GetValue(ColorSpectrumShapeProperty);
+        set => SetValue(ColorSpectrumShapeProperty, value);
+    }
+    
     public bool IsAlphaVisible
     {
         get => GetValue(IsAlphaVisibleProperty);
