@@ -18,7 +18,7 @@ namespace AvaloniaFluentUI.Controls;
 /// the Windows 11 Settings app
 /// </summary>
 [PseudoClasses(PC_DESCRIPTION)]
-[TemplatePart(Name = PART_EXPANDER, Type = typeof(Expander))]
+[TemplatePart(Name = PART_EXPANDER, Type = typeof(FluentExpander))]
 public class ExpanderSettingCard : HeaderedItemsControl, ICommandSource
 {
     /// <summary>
@@ -132,7 +132,7 @@ public class ExpanderSettingCard : HeaderedItemsControl, ICommandSource
     }
     
     private bool _commandCanExecute = true;
-    private Expander? _expander;
+    private FluentExpander? _expander;
     private ToggleButton? _expanderToggleButton;
 
     private const string PART_EXPANDER = "PART_Expander";
@@ -144,7 +144,7 @@ public class ExpanderSettingCard : HeaderedItemsControl, ICommandSource
 
         _expander?.Loaded -= ExpanderLoaded;
         
-        _expander = e.NameScope.Get<Expander>(PART_EXPANDER);
+        _expander = e.NameScope.Get<FluentExpander>(PART_EXPANDER);
         _expander?.Loaded += ExpanderLoaded;
     }
 

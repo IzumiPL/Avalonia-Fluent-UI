@@ -29,15 +29,17 @@
                                         Mode=TwoWay}"
             IsEnabled="{TemplateBinding IsEnabled}"/>
 
-          <Border Name="ExpanderContentClip" ClipToBounds="True">
+          <Border
+            Name="ExpanderContentClip"
+            Background="{TemplateBinding Background}"
+            BackgroundSizing="InnerBorderEdge"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            ClipToBounds="True">
             <Border
               Name="PART_ExpanderContent"
               MinWidth="{TemplateBinding MinWidth}"
-              MinHeight="{DynamicResource FluentExpanderContentMinHeight}"
-              Background="{TemplateBinding Background}"
-              BackgroundSizing="InnerBorderEdge"
-              BorderBrush="{TemplateBinding BorderBrush}"
-              BorderThickness="{TemplateBinding BorderThickness}">
+              MinHeight="{DynamicResource FluentExpanderContentMinHeight}">
               <ContentPresenter
                 Name="PART_ContentPresenter"
                 Margin="0"
@@ -56,60 +58,71 @@
       <Setter Property="DockPanel.Dock" Value="Right"/>
       <Setter Property="Theme" Value="{DynamicResource ExpanderToggleButtonLeftTheme}"/>
     </Style>
+
     <Style Selector="^:up /template/ ToggleButton#ExpanderHeader">
       <Setter Property="DockPanel.Dock" Value="Bottom"/>
       <Setter Property="Theme" Value="{DynamicResource ExpanderToggleButtonUpTheme}"/>
     </Style>
+
     <Style Selector="^:right /template/ ToggleButton#ExpanderHeader">
       <Setter Property="DockPanel.Dock" Value="Left"/>
       <Setter Property="Theme" Value="{DynamicResource ExpanderToggleButtonRightTheme}"/>
     </Style>
+
     <Style Selector="^:down /template/ ToggleButton#ExpanderHeader">
       <Setter Property="DockPanel.Dock" Value="Top"/>
       <Setter Property="Theme" Value="{DynamicResource ExpanderToggleButtonDownTheme}"/>
     </Style>
 
     <Style Selector="^:down">
-      <Setter Property="BorderThickness" Value="{DynamicResource ExpanderContentDownBorderThickness}"/>
+      <Setter Property="BorderThickness" Value="1 0"/>
 
       <Style Selector="^:expanded /template/ ToggleButton#ExpanderHeader">
         <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius, Converter={StaticResource TopCornerRadiusFilterConverter}}"/>
       </Style>
-      <Style Selector="^:expanded /template/ Border#PART_ExpanderContent">
+
+      <Style Selector="^:expanded /template/ Border#ExpanderContentClip">
         <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius, Converter={StaticResource BottomCornerRadiusFilterConverter}}"/>
+        <Setter Property="BorderThickness" Value="{DynamicResource ExpanderContentDownBorderThickness}"/>
       </Style>
     </Style>
 
     <Style Selector="^:up">
-      <Setter Property="BorderThickness" Value="{DynamicResource ExpanderContentUpBorderThickness}"/>
+      <Setter Property="BorderThickness" Value="1 0"/>
 
       <Style Selector="^:expanded /template/ ToggleButton#ExpanderHeader">
         <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius, Converter={StaticResource BottomCornerRadiusFilterConverter}}"/>
       </Style>
-      <Style Selector="^:expanded /template/ Border#PART_ExpanderContent">
+
+      <Style Selector="^:expanded /template/ Border#ExpanderContentClip">
         <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius, Converter={StaticResource TopCornerRadiusFilterConverter}}"/>
+        <Setter Property="BorderThickness" Value="{DynamicResource ExpanderContentUpBorderThickness}"/>
       </Style>
     </Style>
 
     <Style Selector="^:left">
-      <Setter Property="BorderThickness" Value="{DynamicResource ExpanderContentLeftBorderThickness}"/>
+      <Setter Property="BorderThickness" Value="0 1"/>
 
       <Style Selector="^:expanded /template/ ToggleButton#ExpanderHeader">
         <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius, Converter={StaticResource RightCornerRadiusFilterConverter}}"/>
       </Style>
-      <Style Selector="^:expanded /template/ Border#PART_ExpanderContent">
+
+      <Style Selector="^:expanded /template/ Border#ExpanderContentClip">
         <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius, Converter={StaticResource LeftCornerRadiusFilterConverter}}"/>
+        <Setter Property="BorderThickness" Value="{DynamicResource ExpanderContentLeftBorderThickness}"/>
       </Style>
     </Style>
 
     <Style Selector="^:right">
-      <Setter Property="BorderThickness" Value="{DynamicResource ExpanderContentRightBorderThickness}"/>
+      <Setter Property="BorderThickness" Value="0 1"/>
 
       <Style Selector="^:expanded /template/ ToggleButton#ExpanderHeader">
         <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius, Converter={StaticResource LeftCornerRadiusFilterConverter}}"/>
       </Style>
-      <Style Selector="^:expanded /template/ Border#PART_ExpanderContent">
+
+      <Style Selector="^:expanded /template/ Border#ExpanderContentClip">
         <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius, Converter={StaticResource RightCornerRadiusFilterConverter}}"/>
+        <Setter Property="BorderThickness" Value="{DynamicResource ExpanderContentRightBorderThickness}"/>
       </Style>
     </Style>
 
