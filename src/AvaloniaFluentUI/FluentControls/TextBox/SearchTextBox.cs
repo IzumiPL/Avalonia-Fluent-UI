@@ -44,38 +44,31 @@ public class SearchTextBox : TextBox
     /// <summary>
     /// 搜索时触发
     /// </summary>
-    public event Action<string?>? OnSearchTriggered;
+    public event EventHandler<SearchTriggeredEventArgs>? OnSearchTriggered;
     
     private const string PART_SEARCH_BUTTON = "PART_SearchButton";
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
-        if (_searchButton != null)
-        {
-            _searchButton.Click -= OnSearchButtonClick;
-            _searchButton.KeyDown -= OnSearchButtonKeyDown;
-        }
+        _searchButton?.Click -= OnSearchButtonClick;
         base.OnApplyTemplate(e);
         
         _searchButton = e.NameScope.Find<Button>(PART_SEARCH_BUTTON);
         
-        if  (_searchButton != null)
-        {
-            _searchButton.Click += OnSearchButtonClick;
-            _searchButton.KeyDown += OnSearchButtonKeyDown;
-        }
+        _searchButton?.Click += OnSearchButtonClick;
     }
 
-    private void OnSearchButtonKeyDown(object? sender, KeyEventArgs e)
+    protected override void OnKeyDown(KeyEventArgs e)
     {
+        base.OnKeyDown(e);
         if (IsReturnSearch && e.Key == Key.Enter)
         {
-            OnSearchTriggered?.Invoke(Text);
+            OnSearchTriggered?.Invoke(this, new SearchTriggeredEventArgs(Text));
         }
     }
 
     private void OnSearchButtonClick(object? sender, RoutedEventArgs e)
     {
-        OnSearchTriggered?.Invoke(this.Text);
+        OnSearchTriggered?.Invoke(this, new SearchTriggeredEventArgs(Text));
     }
 }
