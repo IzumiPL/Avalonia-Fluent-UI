@@ -48,7 +48,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\ViewPage\WizardPage.axaml.cs">
-      <DependentUpon>WizardPage.axaml</DependentUpon>
+      <DependentUpon>WizardPagePage.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Pages\ViewPage\WizardPages\P1.axaml.cs">
@@ -99,6 +99,14 @@
     </Compile>
     <Compile Update="Pages\BasicPage\ColorPickerPage.axaml.cs">
       <DependentUpon>ColorPicker.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\WindowingPage\FluentWindowPage.axaml.cs">
+      <DependentUpon>WizardPage.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\WindowingPage\TitleBarPage.axaml.cs">
+      <DependentUpon>TitleBarPage.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

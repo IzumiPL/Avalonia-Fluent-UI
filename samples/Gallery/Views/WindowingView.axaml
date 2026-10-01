@@ -1,18 +1,16 @@
 ﻿<UserControl
-  x:Class="Gallery.Views.TextView"
+  x:Class="Gallery.Views.WindowingView"
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
-  xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale;assembly=AvaloniaFluentUI"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:viewModel="clr-namespace:Gallery.ViewModels"
   d:DesignHeight="450"
   d:DesignWidth="800"
-  x:DataType="viewModel:TextViewModel"
+  x:DataType="viewModel:WindowingViewModel"
   mc:Ignorable="d">
-
   <fui:SmoothScrollViewer Padding="0,0,15,0">
     <Grid Margin="18,24,24,0" RowDefinitions="Auto, *">
       <TextBlock
@@ -23,7 +21,7 @@
         Grid.Row="1"
         Margin="0,24,0,0"
         Command="{Binding GotoCommand}"
-        ItemsSource="{Binding TextItemSource}"/>
+        ItemsSource="{Binding WindowingViewItemSource}"/>
     </Grid>
   </fui:SmoothScrollViewer>
 </UserControl>

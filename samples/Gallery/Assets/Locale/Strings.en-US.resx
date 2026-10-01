@@ -778,7 +778,7 @@
     <value>Enable window topmost</value>
   </data>
   <data name="SV_LanguageDescription" xml:space="preserve">
-    <value>Set app language (requires restart)</value>
+    <value>Set the application language (no restart required)</value>
   </data>
   <data name="SV_EnableBackgroundImage" xml:space="preserve">
     <value>Enable background image</value>
@@ -1000,7 +1000,7 @@
     <value>Folders</value>
   </data>
   <data name="NV_Window" xml:space="preserve">
-    <value>Window</value>
+    <value>Windowi</value>
   </data>
   <data name="NV_BreadcrumbBar" xml:space="preserve">
     <value>Breadcrumb Bar</value>
@@ -2266,5 +2266,17 @@
   </data>
   <data name="GitHub" xml:space="preserve">
     <value>GitHub</value>
+  </data>
+  <data name="Window" xml:space="preserve">
+    <value>Windowing</value>
+  </data>
+  <data name="FluentTitleBar" xml:space="preserve">
+    <value>Fluent title bar</value>
+  </data>
+  <data name="TitleBar" xml:space="preserve">
+    <value>TitleBar</value>
+  </data>
+  <data name="FluentWindow" xml:space="preserve">
+    <value>FluentWindow</value>
   </data>
 </root>

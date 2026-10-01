@@ -778,7 +778,7 @@
     <value>ウィンドウを最前面に固定</value>
   </data>
   <data name="SV_LanguageDescription" xml:space="preserve">
-    <value>アプリの言語を設定 (再起動が必要)</value>
+    <value>アプリケーション言語の設定(再起動不要)</value>
   </data>
   <data name="SV_EnableBackgroundImage" xml:space="preserve">
     <value>背景画像を有効にする</value>
@@ -2266,5 +2266,17 @@
   </data>
   <data name="GitHub" xml:space="preserve">
     <value>GitHub</value>
+  </data>
+  <data name="Window" xml:space="preserve">
+    <value>ウィンドウ</value>
+  </data>
+  <data name="TitleBar" xml:space="preserve">
+    <value>タイトルバー</value>
+  </data>
+  <data name="FluentTitleBar" xml:space="preserve">
+    <value>流暢なタイトルバー</value>
+  </data>
+  <data name="FluentWindow" xml:space="preserve">
+    <value>滑らかな窓</value>
   </data>
 </root>

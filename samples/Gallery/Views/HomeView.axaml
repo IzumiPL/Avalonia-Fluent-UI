@@ -25,7 +25,7 @@
     VerticalAlignment="Stretch"
     HorizontalScrollBarVisibility="Disabled"
     Offset="{Binding ScrollViewerOffset, Mode=TwoWay}">
-    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
       <Border Grid.Row="0" Padding="35">
         <Border.Background>
           <ImageBrush Source="avares://Gallery/Assets/Images/header.png" Stretch="Fill"/>
@@ -78,8 +78,7 @@
       <ui:ButtonItemsPanel
         Grid.Row="2"
         Command="{Binding GotoCommand}"
-        ItemsSource="{Binding ButtonItemSource}"
-        Tag="BasicInput"/>
+        ItemsSource="{Binding ButtonItemSource}"/>
 
       <!--  Date Time  -->
       <TextBlock
@@ -90,8 +89,7 @@
       <ui:ButtonItemsPanel
         Grid.Row="4"
         Command="{Binding GotoCommand}"
-        ItemsSource="{Binding DateTimeItemSource}"
-        Tag="DateTime"/>
+        ItemsSource="{Binding DateTimeItemSource}"/>
 
       <!--  Dialog  -->
       <TextBlock
@@ -102,8 +100,7 @@
       <ui:ButtonItemsPanel
         Grid.Row="6"
         Command="{Binding GotoCommand}"
-        ItemsSource="{Binding DialogItemSource}"
-        Tag="DialogBoxAndPopup"/>
+        ItemsSource="{Binding DialogItemSource}"/>
 
       <!--  Layout  -->
       <TextBlock
@@ -114,8 +111,7 @@
       <ui:ButtonItemsPanel
         Grid.Row="8"
         Command="{Binding GotoCommand}"
-        ItemsSource="{Binding LayoutItemSource}"
-        Tag="Layout"/>
+        ItemsSource="{Binding LayoutItemSource}"/>
 
       <!--  Menu & ToolBar  -->
       <TextBlock
@@ -126,8 +122,7 @@
       <ui:ButtonItemsPanel
         Grid.Row="10"
         Command="{Binding GotoCommand}"
-        ItemsSource="{Binding MenuAndToolBarItemSource}"
-        Tag="MenuAndToolBar"/>
+        ItemsSource="{Binding MenuAndToolBarItemSource}"/>
 
       <!--  Navigation View  -->
       <TextBlock
@@ -138,8 +133,7 @@
       <ui:ButtonItemsPanel
         Grid.Row="12"
         Command="{Binding GotoCommand}"
-        ItemsSource="{Binding NavigationViewItemSource}"
-        Tag="Navigation"/>
+        ItemsSource="{Binding NavigationViewItemSource}"/>
 
       <!--  Status and Information  -->
       <TextBlock
@@ -150,8 +144,7 @@
       <ui:ButtonItemsPanel
         Grid.Row="14"
         Command="{Binding GotoCommand}"
-        ItemsSource="{Binding StatusAndInformationItemSource}"
-        Tag="StatusAndInformation"/>
+        ItemsSource="{Binding StatusAndInformationItemSource}"/>
 
       <!--  Text  -->
       <TextBlock
@@ -162,8 +155,7 @@
       <ui:ButtonItemsPanel
         Grid.Row="16"
         Command="{Binding GotoCommand}"
-        ItemsSource="{Binding TextItemSource}"
-        Tag="Text"/>
+        ItemsSource="{Binding TextItemSource}"/>
 
       <!--  View  -->
       <TextBlock
@@ -174,8 +166,7 @@
       <ui:ButtonItemsPanel
         Grid.Row="18"
         Command="{Binding GotoCommand}"
-        ItemsSource="{Binding ViewItemSource}"
-        Tag="View"/>
+        ItemsSource="{Binding ViewItemSource}"/>
 
       <!--  Media  -->
       <TextBlock
@@ -186,8 +177,18 @@
       <ui:ButtonItemsPanel
         Grid.Row="20"
         Command="{Binding GotoCommand}"
-        ItemsSource="{Binding MediaItemSource}"
-        Tag="Media"/>
+        ItemsSource="{Binding MediaItemSource}"/>
+
+      <!--  Windowing  -->
+      <TextBlock
+        Grid.Row="21"
+        Margin="35,35,0,8"
+        Classes="Title"
+        Text="{Binding Window}"/>
+      <ui:ButtonItemsPanel
+        Grid.Row="22"
+        Command="{Binding GotoCommand}"
+        ItemsSource="{Binding WindowingViewItemSource}"/>
     </Grid>
   </fui:SmoothScrollViewer>
 </UserControl>
