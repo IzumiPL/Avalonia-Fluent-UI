@@ -775,7 +775,7 @@
     <value>启用窗口置顶功能</value>
   </data>
   <data name="SV_LanguageDescription" xml:space="preserve">
-    <value>设置应用语言(需重启)</value>
+    <value>设置应用语言(无需重启)</value>
   </data>
   <data name="SV_EnableBackgroundImage" xml:space="preserve">
     <value>启用背景图</value>
@@ -2266,5 +2266,17 @@
   </data>
   <data name="GitHub" xml:space="preserve">
     <value>GitHub</value>
+  </data>
+  <data name="Window" xml:space="preserve">
+    <value>窗口</value>
+  </data>
+  <data name="TitleBar" xml:space="preserve">
+    <value>标题栏</value>
+  </data>
+  <data name="FluentTitleBar" xml:space="preserve">
+    <value>流畅标题栏</value>
+  </data>
+  <data name="FluentWindow" xml:space="preserve">
+    <value>流畅窗口</value>
   </data>
 </root>

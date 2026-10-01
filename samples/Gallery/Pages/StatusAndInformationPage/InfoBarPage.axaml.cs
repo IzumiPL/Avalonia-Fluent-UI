@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
@@ -272,11 +273,15 @@ public int GetToastInfoBarDuration()
 
     private void OnShowInfoBarEditDialog(object? sender, RoutedEventArgs e)
     {
+        PopupInfoBarEditDialog.ContentWidth = Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime ? 648 : 488;
+        
         PopupInfoBarEditDialog.ShowAsync(TopLevel.GetTopLevel(this));
     }
 
     private void OnShowToastInfoBarEditDialog(object? sender, RoutedEventArgs e)
     {
+        ToastInfoBarEditDialog.ContentWidth = Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime ? 648 : 488;
+        
         ToastInfoBarEditDialog.ShowAsync(TopLevel.GetTopLevel(this));
     }
 

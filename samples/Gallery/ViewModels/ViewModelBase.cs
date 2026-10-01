@@ -10,7 +10,7 @@ namespace Gallery.ViewModels;
 
 public abstract partial class ViewModelBase : ObservableObject
 {
-    public virtual string Title => String.Empty;
+    public virtual string Title => string.Empty;
 
     public ViewModelBase()
     {

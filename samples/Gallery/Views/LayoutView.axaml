@@ -24,8 +24,7 @@
         Grid.Row="1"
         Margin="0,24,0,0"
         Command="{Binding GotoCommand}"
-        ItemsSource="{Binding LayoutItemSource}"
-        Tag="BasicInput"/>
+        ItemsSource="{Binding LayoutItemSource}"/>
     </Grid>
   </fui:SmoothScrollViewer>
 </UserControl>

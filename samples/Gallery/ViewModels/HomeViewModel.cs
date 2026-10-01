@@ -20,7 +20,7 @@ public partial class HomeViewModel : ViewModelBase
     private Vector _scrollViewerOffset =  new Vector();
 
     public Vector Vector => ScrollViewerOffset;
-    
+
     public HomeViewModel()
     {
 #if DEBUG
@@ -30,19 +30,27 @@ public partial class HomeViewModel : ViewModelBase
             ("Button", "Button", "PushButton", "A control that responds to user input and emit clicked signal."),
             ("Checkbox", "CheckBox", "CheckBox", "A control that a user can select or clear."),
             ("ComboBox", "ComboBox", "ComboBox", "A drop-down list of items a user can select from."),
-            ("DropDownButton", "DropDownButton", "DropDownButton", "A button that display a flyout of choices when clicked."),
-            ("HyperlinkButton", "HyperlinkButton", "HyperlinkButton", "A button that appears as hyperlink text, and can navigate to a RUL or handle a Click event."),
-            ("RadioButton", "RadioButton", "RadioButton", "A control that allows a user to select a single option from a group of options."),
-            ("Slider", "Slider", "Slider", "A control that lets the user select from a range of values by moving a Thumb control along a track."),
-            ("SplitButton", "SplitButton", "SplitButton", "A two-part button that displays a flyout when its secondary part is clicked."),
+            ("DropDownButton", "DropDownButton", "DropDownButton",
+                "A button that display a flyout of choices when clicked."),
+            ("HyperlinkButton", "HyperlinkButton", "HyperlinkButton",
+                "A button that appears as hyperlink text, and can navigate to a RUL or handle a Click event."),
+            ("RadioButton", "RadioButton", "RadioButton",
+                "A control that allows a user to select a single option from a group of options."),
+            ("Slider", "Slider", "Slider",
+                "A control that lets the user select from a range of values by moving a Thumb control along a track."),
+            ("SplitButton", "SplitButton", "SplitButton",
+                "A two-part button that displays a flyout when its secondary part is clicked."),
             ("ToggleSwitch", "SwitchButton", "ToggleSwitch", "A switch that can be toggled between 2 states."),
-            ("ToggleButton", "ToggleButton", "ToggleButton", "A button that can be switched between two states like a CheckBox."),
-            ("RepeatButton", "RepeatButton", "RepeatButton", "A button that raises its Click event repeatedly while it is pressed."),
+            ("ToggleButton", "ToggleButton", "ToggleButton",
+                "A button that can be switched between two states like a CheckBox."),
+            ("RepeatButton", "RepeatButton", "RepeatButton",
+                "A button that raises its Click event repeatedly while it is pressed."),
             ("ColorPicker", "ColorView", "ColorPicker", "A control that displays a selectable color spectrum.")
         );
 
         DateTimeItemSource = ButtonItemModel.CreateList(
-            ("CalendarDatePicker", "CalendarDatePicker", "DateTime", "A control that lets a user pick a date value using a calendar."),
+            ("CalendarDatePicker", "CalendarDatePicker", "DateTime",
+                "A control that lets a user pick a date value using a calendar."),
             ("DatePicker", "DatePicker", "DateTime", "A control that lets a user pick a date value."),
             ("TimePicker", "TimePicker", "DateTime", "A configurable control that lets a user pick a time value.")
         );
@@ -51,13 +59,14 @@ public partial class HomeViewModel : ViewModelBase
             ("Flyout", "TaskDialog", "Dialog", "A task dialog."),
             ("Flyout", "Flyout", "Flyout", "Shows contextual information and enables user interaction."),
             ("ContentDialog", "ContentDialog", "Dialog", "A content dialog with mask."),
-            ("TeachingTip", "TeachingTip", "Flyout", "A content-rich flyout for guiding users and enabling teaching moments.")
+            ("TeachingTip", "TeachingTip", "Flyout",
+                "A content-rich flyout for guiding users and enabling teaching moments.")
         );
 
         LayoutItemSource = ButtonItemModel.CreateList(
             ("Border", "Border", "Border", "Simple border layout"),
             ("Canvas", "Canvas", "Border", "Can draw any shape canvas control"),
-            ("SplitView", "SplitView","Panel", "split view layout"),
+            ("SplitView", "SplitView", "Panel", "split view layout"),
             ("Grid", "Grid", "Panel", "A grid layout"),
             ("RelativePanel", "RelativePanel", "Panel", "Relative panel, control relative layout"),
             ("StackPanel", "StackPanel", "Panel", "A stackPanel layout"),
@@ -68,18 +77,21 @@ public partial class HomeViewModel : ViewModelBase
             ("MenuFlyout", "Menu", "ContextMenu", "Shows a contextual list of simple commands or options."),
             ("MenuBar", "MenuBar", "Menu", "Simple top menu bar"),
             ("CommandBar", "CommandBar", "CommandBar", "Display the command bar"),
-            ("CommandBarFlyout", "CommandBarFlyout", "CommandBar", "A mini-toolbar displaying proactive commands, and an optional menu of commands.")
+            ("CommandBarFlyout", "CommandBarFlyout", "CommandBar",
+                "A mini-toolbar displaying proactive commands, and an optional menu of commands.")
         );
 
         NavigationViewItemSource = ButtonItemModel.CreateList(
-            ("NavigationView", "NavigationView", "NavigationView", "Navigation panel for page switching and menu navigation"),
+            ("NavigationView", "NavigationView", "NavigationView",
+                "Navigation panel for page switching and menu navigation"),
             ("BreadcrumbBar", "BreadcrumbBar", "BreadcrumbBar", "Breadcrumb navigation view"),
             ("Pivot", "Segmented", "SegmentedView", "This is the segmented navigation bar"),
-            ("TabView", "TabView", "Tabs", "A control that displays a collection of tabs that can be used to display several documents.")
+            ("TabView", "TabView", "Tabs",
+                "A control that displays a collection of tabs that can be used to display several documents.")
         );
 
         StatusAndInformationItemSource = ButtonItemModel.CreateList(
-            ("ToolTip", "ToolTip", "ToolTip",  "A control tooltip, hover show tooltip"),
+            ("ToolTip", "ToolTip", "ToolTip", "A control tooltip, hover show tooltip"),
             ("InfoBadge", "InfoBadge", "Information", "Information badges can display a variety of information"),
             ("InfoBar", "InfoBar", "InfoBar", "Information bar can display a variety of information and can be closed"),
             ("ProgressBar", "ProgressBar", "ProgressBar", "The progress bar has two states: confirmed and uncertain."),
@@ -90,12 +102,14 @@ public partial class HomeViewModel : ViewModelBase
             ("TextBlock", "TextBlock", "TextBlock", "Text block, used to display text"),
             ("TextBox", "TextBox", "TextBox", "Text input box"),
             ("AutoSuggestBox", "AutoSuggestBox", "TextBox", "A control to provide suggestions as a user is typing."),
-            ("PasswordBox", "PasswordBox", "TextBox", "Password input box, which can be turned on and off to display the password"),
+            ("PasswordBox", "PasswordBox", "TextBox",
+                "Password input box, which can be turned on and off to display the password"),
             ("NumberBox", "NumberBox", "NumberBox", "Numeric input box that can be fine-tuned")
         );
 
         ViewItemSource = ButtonItemModel.CreateList(
-            ("FlipView", "FlipView", "CarouselView", "Carousel view, a control suitable for displaying multiple pictures"),
+            ("FlipView", "FlipView", "CarouselView",
+                "Carousel view, a control suitable for displaying multiple pictures"),
             ("ListBox", "ListBox", "List", "List box, can display multiple items"),
             ("TreeView", "TreeView", "TreeView", "A tree view"),
             ("PageTransition", "PageTransition", "CarouselView", "Page switching control with animation"),
@@ -104,6 +118,11 @@ public partial class HomeViewModel : ViewModelBase
 
         MediaItemSource = ButtonItemModel.CreateList(
             ("Image", "Image", "Media", "A control to display image content.")
+        );
+
+        WindowingViewItemSource = ButtonItemModel.CreateList(
+            ("FluentWindow", "FluentWindow", "FluentWindow", "A flexible, customizable window management system for app development."),
+            ("TitleBar", "FluentTitleBar", "TitleBar", "An example showing how to use the default TitleBar control.")
         );
     }
 
@@ -127,7 +146,10 @@ public partial class HomeViewModel : ViewModelBase
                 .Concat(NavigationViewItemSource)
                 .Concat(StatusAndInformationItemSource)
                 .Concat(TextItemSource)
-                .Concat(ViewItemSource);
+                .Concat(ViewItemSource)
+                .Concat(MediaItemSource)
+                .Concat(WindowingViewItemSource)
+                ;
         }
     }
 
@@ -141,6 +163,7 @@ public partial class HomeViewModel : ViewModelBase
     public List<ButtonItemModel> TextItemSource { get; }
     public List<ButtonItemModel> ViewItemSource { get; }
     public List<ButtonItemModel> MediaItemSource { get; }
+    public List<ButtonItemModel> WindowingViewItemSource { get; }
 
     // Localized string properties
     public string GettingStartedTitle => LocalizationService.Instance.GetString("GettingStarted");
@@ -161,6 +184,7 @@ public partial class HomeViewModel : ViewModelBase
     public string SectionText => LocalizationService.Instance.GetString("Section_Text");
     public string SectionView => LocalizationService.Instance.GetString("Section_View");
     public string Media => LocalizationService.Instance.GetString("Media");
+    public string Window => LocalizationService.Instance.GetString("Window");
 
     protected override void OnLanguageChanged(object? sender, PropertyChangedEventArgs e)
     {
@@ -183,5 +207,6 @@ public partial class HomeViewModel : ViewModelBase
         OnPropertyChanged(nameof(SectionText));
         OnPropertyChanged(nameof(SectionView));
         OnPropertyChanged(nameof(Media));
+        OnPropertyChanged(nameof(Window));
     }
 }
