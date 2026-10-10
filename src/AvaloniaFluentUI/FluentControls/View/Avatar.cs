@@ -8,7 +8,7 @@ using Avalonia.Media.TextFormatting;
 namespace AvaloniaFluentUI.Controls;
 
 /// <summary>
-/// 头像
+/// 头像控件, 支持文本和图片, 文本只取第一位
 /// </summary>
 public class Avatar : Control
 {
