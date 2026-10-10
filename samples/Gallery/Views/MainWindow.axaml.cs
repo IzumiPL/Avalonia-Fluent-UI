@@ -409,11 +409,11 @@ public partial class MainWindow : FluentWindow
         SettingButton.Flyout?.IsOpen = false;
     }
 
-    private void OnBorderColorChanged(object? sender, Color c)
+    private void OnBorderColorChanged(object? sender, ColorChangedEventArgs e)
     {
         if (!IsWindows11)
         {
-            BorderBrush = new SolidColorBrush(c);
+            BorderBrush = new SolidColorBrush(e.NewColor);
         }
     }
 
