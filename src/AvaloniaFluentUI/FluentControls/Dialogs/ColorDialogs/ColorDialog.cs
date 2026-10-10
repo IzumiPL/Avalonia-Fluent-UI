@@ -80,7 +80,7 @@ public class ColorDialog : ContentDialog
     /// <summary>
     ///     Raised when the user clicks Confirm, providing the final picked colour.
     /// </summary>
-    public event EventHandler<Color>? ColorChanged;
+    public event EventHandler<ColorChangedEventArgs>? ColorChanged;
 
     public FluentColorView ColorView { get; }
     
@@ -90,8 +90,8 @@ public class ColorDialog : ContentDialog
 
         if (Color != ColorView.Color)
         {
+            ColorChanged?.Invoke(this, new ColorChangedEventArgs(Color, ColorView.Color));
             Color = ColorView.Color;
-            ColorChanged?.Invoke(this, Color);
         }
     }
 
@@ -100,7 +100,8 @@ public class ColorDialog : ContentDialog
         base.OnOpening();
         
         ColorView.Color = Color;
-        ColorView.OriginalColor = new SolidColorBrush(Color);
-        ColorView.NewColor = new SolidColorBrush(Color);
+        var brush = new SolidColorBrush(Color);
+        ColorView.OriginalColor = brush;
+        ColorView.NewColor = brush;
     }
 }
