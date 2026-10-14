@@ -33,6 +33,7 @@ public partial class MainWindowViewModel : ViewModelBase
     public string StatusAndInformation => LocalizationService.Instance.GetString("StatusAndInformation");
     public string MenuAndToolBar => LocalizationService.Instance.GetString("MenuAndToolBar");
     public string DateTime => LocalizationService.Instance.GetString("DateTime");
+    public string Window => LocalizationService.Instance.GetString("Window");
     public string SearchWatermark => LocalizationService.Instance.GetString("MV_SearchWatermark");
     
     private readonly List<string> _history = new();
@@ -147,6 +148,10 @@ public partial class MainWindowViewModel : ViewModelBase
             
             { "DateTime", () => new DateTimeViewModel() },
             
+            { "Windowing", () => new WindowingViewModel() },
+            { "FluentWindow", () => new FluentWindowPageViewModel() },
+            { "TitleBar", () => new TitleBarPageViewModel() },
+            
             { "Settings", () => new SettingsViewModel(config, Settings) },
         };
         
@@ -172,6 +177,7 @@ public partial class MainWindowViewModel : ViewModelBase
         OnPropertyChanged(nameof(MenuAndToolBar));
         OnPropertyChanged(nameof(DateTime));
         OnPropertyChanged(nameof(Title));
+        OnPropertyChanged(nameof(Window));
         OnPropertyChanged(nameof(SearchWatermark));
     }
 

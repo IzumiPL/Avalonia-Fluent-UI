@@ -94,6 +94,10 @@ public class ViewLocator : IDataTemplate
         
         _factory[typeof(DateTimeViewModel)] = () => new DateTimeView();
         
+        _factory[typeof(WindowingViewModel)] = () => new WindowingView();
+        _factory[typeof(FluentWindowPageViewModel)] = () => new FluentWindowPage();
+        _factory[typeof(TitleBarPageViewModel)] = () => new TitleBarPage();
+        
         _factory[typeof(SettingsViewModel)] = () => new SettingsView();
     }
 

@@ -30,7 +30,7 @@ public class BreadcrumbBar : TemplatedControl
     private BreadcrumbElementFactory? _itemsRepeaterElementFactory;
     private BreadcrumbLayout? _itemsRepeaterLayout;
 
-    private BreadcrumbBarItem? _ellipsisBreadcrumBarItem;
+    private BreadcrumbBarItem? _ellipsisBreadcrumbBarItem;
     private BreadcrumbBarItem? _lastBreadcrumbBarItem;
     private int _focusedIndex;
 
@@ -154,7 +154,7 @@ public class BreadcrumbBar : TemplatedControl
     {
         var template = ItemTemplate;
 
-        _ellipsisBreadcrumBarItem?.SetEllipsisDropDownItemDataTemplate(template);
+        _ellipsisBreadcrumbBarItem?.SetEllipsisDropDownItemDataTemplate(template);
     }
 
     private void UpdateItemsRepeaterItemsSource()
@@ -250,7 +250,7 @@ public class BreadcrumbBar : TemplatedControl
             if (itemIndex == 0)
             {
                 item.SetPropertiesForEllipsisItem();
-                _ellipsisBreadcrumBarItem = item;
+                _ellipsisBreadcrumbBarItem = item;
                 UpdateEllipsisBreadcrumbBarItemDropDownItemTemplate();
 
                 var str = LocalizationService.Instance.GetString("AutomationNameEllipsisBreadcrumbBarItem");
@@ -343,10 +343,10 @@ public class BreadcrumbBar : TemplatedControl
 
             // In order to make the ellipsis inaccessible to accessbility tools when it's hidden,
             // we set the accessibilityView to raw and restore it to content when it becomes visible.
-            if (_ellipsisBreadcrumBarItem != null)
+            if (_ellipsisBreadcrumbBarItem != null)
             {
                 var accView = isEllipsisRendered ? AccessibilityView.Content : AccessibilityView.Raw;
-                _ellipsisBreadcrumBarItem.SetValue(AutomationProperties.AccessibilityViewProperty, accView);
+                _ellipsisBreadcrumbBarItem.SetValue(AutomationProperties.AccessibilityViewProperty, accView);
             }
 
             // For every BreadcrumbBar item we set the index (starting from 1 for the root/highest-level item)

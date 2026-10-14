@@ -22,6 +22,16 @@
   </Design.PreviewWith>
 
   <x:Double x:Key="TabItemLineWidth">28</x:Double>
+  <Thickness x:Key="TabControlTopPlacementItemMargin">0 0 0 2</Thickness>
+  <x:Double x:Key="TabItemMinHeight">48</x:Double>
+  <x:Double x:Key="TabItemVerticalPipeHeight">24</x:Double>
+  <x:Double x:Key="TabItemPipeThickness">2</x:Double>
+  <Thickness x:Key="TabItemHeaderMargin">12,0,12,0</Thickness>
+  <x:Double x:Key="TabItemHeaderFontSize">16</x:Double>
+  <Thickness x:Key="TabItemMargin">10,12,10,0</Thickness>
+  <FontWeight x:Key="TabItemHeaderThemeFontWeight">SemiLight</FontWeight>
+  <HorizontalAlignment x:Key="TabControlHeaderItemHorAlignment">Stretch</HorizontalAlignment>
+  <VerticalAlignment x:Key="TabControlHeaderItemVerAlignment">Stretch</VerticalAlignment>
   <!--
     Resources moved to BaseResources.axaml to be shared with TabStrip
     
@@ -45,6 +55,8 @@
           <DockPanel>
             <ItemsPresenter
               Name="PART_ItemsPresenter"
+              HorizontalAlignment="{DynamicResource TabControlHeaderItemHorAlignment}"
+              VerticalAlignment="{DynamicResource TabControlHeaderItemVerAlignment}"
               DockPanel.Dock="{TemplateBinding TabStripPlacement}"
               ItemsPanel="{TemplateBinding ItemsPanel}"/>
             <ContentPresenter

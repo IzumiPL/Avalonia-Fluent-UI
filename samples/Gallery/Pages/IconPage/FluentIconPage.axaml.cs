@@ -90,6 +90,14 @@ public partial class FluentIconPage : UserControl
                     },
                     new MenuItem
                     {
+                        Header = "复制引用图标名称",
+                        Command = new RelayCommand(() =>
+                        {
+                            TopLevel.GetTopLevel(this)?.Clipboard?.SetTextAsync("FluentIcon." + name);
+                        })
+                    },
+                    new MenuItem
+                    {
                         Header = "复制图标名称",
                         Command = new RelayCommand(() =>
                         {

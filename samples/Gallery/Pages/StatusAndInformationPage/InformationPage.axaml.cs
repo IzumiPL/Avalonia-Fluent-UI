@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Gallery.Controls;
@@ -20,9 +21,9 @@ public partial class InformationPage : ViewBase
         };
     }
 
-    private void OnSelectedColorChanged(object? sender, Color c)
+    private void OnSelectedColorChanged(object? sender,  ColorChangedEventArgs e)
     {
-        CtTag.Foreground = new SolidColorBrush(c);
+        CtTag.Foreground = new SolidColorBrush(e.NewColor);
     }
 
     private void OnClicked(object? sender, RoutedEventArgs e)

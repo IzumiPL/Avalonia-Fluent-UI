@@ -44,7 +44,7 @@ public class ColorPickerButton : PickerButton
         set => SetValue(CommandParameterProperty, value);
     }
 
-    public event EventHandler<Color>? ColorChanged;
+    public event EventHandler<ColorChangedEventArgs>? ColorChanged;
 
     static ColorPickerButton()
     {
@@ -91,8 +91,8 @@ public class ColorPickerButton : PickerButton
         var result = toplevel is PopupRoot ? await dialog.ShowAsync() : await dialog.ShowAsync(toplevel);
         if (result == ContentDialogResult.Primary)
         {
+            ColorChanged?.Invoke(this, new ColorChangedEventArgs(Color, dialog.Color));
             Color = dialog.Color;
-            ColorChanged?.Invoke(this, dialog.Color);
             ExecuteCommand();
         }
     }

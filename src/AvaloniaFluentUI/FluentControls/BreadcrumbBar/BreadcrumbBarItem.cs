@@ -17,9 +17,9 @@ using AvaloniaFluentUI.Core;
 namespace AvaloniaFluentUI.Controls;
 
 //https://github.com/microsoft/microsoft-ui-xaml/issues/7213
-[TemplatePart(Name = "PART_LayoutRoot",                             Type = typeof(Grid))] // Required for Inline
-[TemplatePart(Name = PART_ELLIPSIS_FLYOUT,                  Type = typeof(Flyout))] // Required for Inline
-[TemplatePart(Name = PART_ITEM_BUTTON,                          Type = typeof(Button))] // Required for Inline
+[TemplatePart(Name = "PART_LayoutRoot",                             Type = typeof(Grid))]   // Required for Inline
+[TemplatePart(Name = PART_ELLIPSIS_FLYOUT,                          Type = typeof(Flyout))] // Required for Inline
+[TemplatePart(Name = PART_ITEM_BUTTON,                              Type = typeof(Button))] // Required for Inline
 [TemplatePart(Name = "PART_LastItemContentPresenter",               Type = typeof(ContentPresenter),    IsRequired = false)]
 [TemplatePart(Name = "PART_ChevronTextBlock",                       Type = typeof(TextBlock),           IsRequired = false)]
 [TemplatePart(Name = "PART_EllipsisDropDownItemContentPresenter",   Type = typeof(ContentPresenter),    IsRequired = false)]

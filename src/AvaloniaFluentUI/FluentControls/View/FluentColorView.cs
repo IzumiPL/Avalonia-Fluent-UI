@@ -108,7 +108,7 @@ public class FluentColorView : TemplatedControl
         set => SetValue(HexTextProperty, value);
     }
 
-    public event EventHandler<Color>? ColorChanged;
+    public event EventHandler<ColorChangedEventArgs>? ColorChanged;
 
     private TextBox? _hexInput;
     private bool _suppressUpdate;
@@ -123,8 +123,8 @@ public class FluentColorView : TemplatedControl
             if (e.NewValue is Color c)
             {
                 s._suppressUpdate = true;
-                s.SetCurrentValue(HsvColorProperty, c.ToHsv());
                 s.SyncDisplay(c);
+                s.SetCurrentValue(HsvColorProperty, c.ToHsv());
                 s._suppressUpdate = false;
             }
         });
@@ -136,8 +136,8 @@ public class FluentColorView : TemplatedControl
             {
                 s._suppressUpdate = true;
                 var c = hsv.ToRgb();
-                s.SetCurrentValue(ColorProperty, c);
                 s.SyncDisplay(c);
+                s.SetCurrentValue(ColorProperty, c);
                 s._suppressUpdate = false;
             }
         });
@@ -147,7 +147,7 @@ public class FluentColorView : TemplatedControl
     {
         HexText = $"{c.A:X2}{c.R:X2}{c.G:X2}{c.B:X2}";
         NewColor = new SolidColorBrush(c);
-        ColorChanged?.Invoke(this, c);
+        ColorChanged?.Invoke(this, new ColorChangedEventArgs(Color, c));
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -168,8 +168,9 @@ public class FluentColorView : TemplatedControl
             _hexInput.LostFocus += OnHexBoxLostFocus;
         }
 
-        OriginalColor = new SolidColorBrush(Color);
-        NewColor = new SolidColorBrush(Color);
+        var brush = new SolidColorBrush(Color);
+        OriginalColor = brush;
+        NewColor = brush;
     }
 
     private void OnHexBoxKeyDown(object? sender, KeyEventArgs e)

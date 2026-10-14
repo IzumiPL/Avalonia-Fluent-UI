@@ -99,7 +99,6 @@ public class ShortcutKeyPicker : PickerButton
     {
         if (DefaultKeyGesture != null)
         {
-            Keys = FormatGesture(DefaultKeyGesture);
             _inputKeyGesture = null;
             KeyGesture = DefaultKeyGesture;
         }
@@ -108,7 +107,7 @@ public class ShortcutKeyPicker : PickerButton
     private void OnAcceptShortcutKey(ContentDialog sender, ContentDialogButtonClickEventArgs args)
     {
         if (_inputKeyGesture == null) return;
-        Keys = FormatGesture(_inputKeyGesture);
+        KeyGesture = _inputKeyGesture;
     }
 
     private void OnShortcutKeyDown(object? sender, KeyEventArgs e)
@@ -117,7 +116,7 @@ public class ShortcutKeyPicker : PickerButton
         
         if (e.KeyModifiers == KeyModifiers.None && !IsStandaloneShortcut(e.Key)) return;
 
-        _inputKeyGesture = new KeyGesture(e.Key, e.KeyModifiers); 
+        _inputKeyGesture = new KeyGesture(e.Key, e.KeyModifiers);
         _shortcutKeyPanel.Keys = FormatGesture(_inputKeyGesture);
         
         e.Handled = e.Key != Key.Escape;

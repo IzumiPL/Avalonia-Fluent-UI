@@ -4,7 +4,7 @@
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
   <!--  Add Resources Here  -->
 
-  <Thickness x:Key="ToolTipSliderPadding">8 6</Thickness>
+  <Thickness x:Key="ToolTipSliderPadding">6 4</Thickness>
 
   <ControlTheme x:Key="{x:Type ui:ToolTipSlider}" TargetType="ui:ToolTipSlider">
     <Setter Property="Background" Value="{DynamicResource ControlStrongFillColorDefaultBrush}"/>

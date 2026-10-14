@@ -173,6 +173,7 @@
     </Style>
 
     <Style Selector="^.Password[AcceptsReturn=False][IsReadOnly=False]:not(ui|OutlinedTextBox:empty)">
+      <Setter Property="PasswordChar" Value="*"/>
       <Setter Property="InnerRightContent">
         <Template>
           <ToggleButton

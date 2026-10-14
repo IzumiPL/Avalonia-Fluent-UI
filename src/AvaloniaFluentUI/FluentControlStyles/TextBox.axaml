@@ -340,6 +340,7 @@
     </Style>
 
     <Style Selector="^.Password[AcceptsReturn=False][IsReadOnly=False]:not(TextBox:empty)">
+      <Setter Property="PasswordChar" Value="*"/>
       <Setter Property="InnerRightContent">
         <Template>
           <ToggleButton

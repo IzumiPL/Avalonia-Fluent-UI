@@ -37,6 +37,11 @@ public class ButtonItemModel : IDisposable
         Content = content;
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="items">图片名称, 需要跳转的控件对于的Key, 所属页面, 描述</param>
+    /// <returns></returns>
     public static List<ButtonItemModel> CreateList(params (string imageName, string title, string page, string content)[] items)
     {
         var list = new List<ButtonItemModel>(items.Length);
