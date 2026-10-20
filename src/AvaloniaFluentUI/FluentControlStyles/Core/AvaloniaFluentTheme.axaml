@@ -21,9 +21,8 @@
       </ResourceDictionary.MergedDictionaries>
 
       <!--  Font Family  -->
-      <FontFamily x:Key="DefaultFontFamily">/Assets/Fonts/MiSans-Regular.otf#MiSans</FontFamily>
+      <FontFamily x:Key="DefaultFontFamily">Segoe UI, Inter, Noto Sans, Cantarell, SF Pro Text, sans-serif</FontFamily>
       <FontFamily x:Key="SymbolThemeFontFamily">/Assets/Fonts/#Symbols</FontFamily>
-
     </ResourceDictionary>
   </Styles.Resources>
 
