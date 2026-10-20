@@ -247,6 +247,8 @@ public partial class MainWindowViewModel : ViewModelBase
 
         if (CurrentViewModel != null)
         {
+            MemoryTrim.Request();
+            
             var currentPageKey = GetKeyByViewModel(CurrentViewModel);
             if (currentPageKey != null)
             {
@@ -279,7 +281,7 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             IsBack = true;
             CurrentViewModel = view; 
-            
+            MemoryTrim.Request();
             Console.WriteLine($"Back, Tag: {last}, View: {view.Title}, Trigger Jump To ControlMessage");
         }
 

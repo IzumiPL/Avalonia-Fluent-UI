@@ -37,6 +37,7 @@
       <!-- <FontFamily x:Key="DefaultFontFamily">avares://Gallery/Assets/Fonts/Microsoft YaHei.ttf#微软雅黑</FontFamily> -->
       <!-- <FontFamily x:Key="DefaultFontFamily">avares://Gallery/Assets/Fonts/#</FontFamily> -->
       <!-- <FontFamily x:Key="DefaultFontFamily">avares://Gallery/Assets/Fonts/#</FontFamily> -->
+      <!-- <FontFamily x:Key="DefaultFontFamily">avares://Gallery/Assets/Fonts/LXGWWenKai-Regular.ttf#LXGW WenKai</FontFamily> -->
       <ResourceDictionary.MergedDictionaries>
 
         <!--  Card  -->
