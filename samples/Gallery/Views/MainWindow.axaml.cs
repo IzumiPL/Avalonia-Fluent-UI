@@ -74,6 +74,7 @@ public partial class MainWindow : FluentWindow
         UpdateResource();
         
         LocalizationService.Instance.PropertyChanged += OnLanguageChanged;
+        AvaloniaFluentTheme.Instance.ThemeChanged += (_, _) => MemoryTrim.Request();
     }
 
     private void InitializeKeyBindings()
@@ -364,6 +365,10 @@ public partial class MainWindow : FluentWindow
         {
             Topmost = false;
             Topmost = true;
+        }
+        else if (change.Property == WindowStateProperty && WindowState == WindowState.Minimized)
+        {
+            MemoryTrim.Request();
         }
     }
 

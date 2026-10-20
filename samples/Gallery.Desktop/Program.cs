@@ -1,5 +1,6 @@
 using System;
 using Avalonia;
+using AvaloniaFluentUI.Fonts;
 
 namespace Gallery.Desktop;
 
@@ -15,5 +16,6 @@ sealed class Program
 #if DEBUG
             .WithDeveloperTools()
 #endif
+            .WithFont()
             .LogToTrace();
 }

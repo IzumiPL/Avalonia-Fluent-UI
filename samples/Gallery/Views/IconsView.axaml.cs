@@ -27,6 +27,7 @@ public partial class IconsView : UserControl
 
     private void OnSegmentedToggleViewSelectedItemChanged(object? sender, SelectedItemChangedEventArgs e)
     {
+        MemoryTrim.Request();
         if (e.NewItem is SegmentedToggleItem item)
         {
             switch (item.Tag)
