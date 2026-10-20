@@ -2,11 +2,9 @@
   <PropertyGroup Label="Package Info">
     <PackageTags>c-sharp;xaml;cross-platform;dotnet;dotnetcore;avalonia;avaloniaui;fluent;fluent-design</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>2.0.5</Version>
-    <AssemblyVersion>2.0.5.0</AssemblyVersion>
   </PropertyGroup>
-  
-    <PropertyGroup>
+     
+  <PropertyGroup>
     <EnableDefaultAvaloniaItems>false</EnableDefaultAvaloniaItems>
   </PropertyGroup>
   

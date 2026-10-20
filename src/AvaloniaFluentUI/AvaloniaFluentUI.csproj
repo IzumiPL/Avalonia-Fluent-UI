@@ -9,6 +9,9 @@
     <PackageId>AvaloniaFluentUI</PackageId>
 
     <NoWarn>$(NoWarn);NU1507;CS1591</NoWarn>
+    
+    <Version>2.0.6</Version>
+    <AssemblyVersion>2.0.6.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -27,6 +30,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  
   <ItemGroup>
     <AvaloniaResource Include="Assets\**\*.*" />
   </ItemGroup>
