@@ -10,6 +10,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Layout;
+using Avalonia.LogicalTree;
 using Avalonia.Media;
 using Avalonia.Metadata;
 using Avalonia.Styling;
@@ -228,9 +229,11 @@ public abstract class SegmentedViewBase<TBar> : SegmentedViewBase where TBar : S
         return 0;
     }
 
+    private object? _currentContent;
+
     private void UpdateContentPresenter()
     {
-        if (_contentPresenter is null || _segmentedBar is null) 
+        if (_contentPresenter is null || _segmentedBar is null)
             return;
 
         var index = _segmentedBar.SelectedIndex;
@@ -243,9 +246,30 @@ public abstract class SegmentedViewBase<TBar> : SegmentedViewBase where TBar : S
             content = GetContent(items[index]);
         }
 
+        if (!ReferenceEquals(_currentContent, content))
+        {
+            SetContentOwner(_currentContent, null);
+            SetContentOwner(content, _contentPresenter);
+            _currentContent = content;
+        }
+
         _contentPresenter.Content = content;
 
         UpdateItemsSelection();
+    }
+
+    private static void SetContentOwner(object? content, ILogical? owner)
+    {
+        if (content is not Control control)
+            return;
+
+        var setter = (ISetLogicalParent)control;
+        setter.SetParent(null);
+
+        if (owner is not null)
+        {
+            setter.SetParent(owner);
+        }
     }
 
     /// <summary>
