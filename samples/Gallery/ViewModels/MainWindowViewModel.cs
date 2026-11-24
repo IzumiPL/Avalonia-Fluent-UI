@@ -43,7 +43,10 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [ObservableProperty]
     [NotifyCanExecuteChangedFor(nameof(GoBackCommand))]
-    private bool _canGoBack;
+    public partial bool CanGoBack { get; set; } = false;
+
+    [ObservableProperty]
+    public partial bool NavigationIsBack { get; set; } = false;
 
     [ObservableProperty]
     private object _navigationViewSelectedItem;
@@ -219,9 +222,6 @@ public partial class MainWindowViewModel : ViewModelBase
     
     public string[] AutoCompleteBoxItems { get; }
 
-    [ObservableProperty]
-    private bool _isBack;
-
     [RelayCommand]
     private void ToggleTheme() => AvaloniaFluentTheme.Instance.ToggleTheme(); 
 
@@ -259,8 +259,7 @@ public partial class MainWindowViewModel : ViewModelBase
             }
         }
 
-
-        IsBack = false;
+        NavigationIsBack = false;
         CurrentViewModel = target;
         CanGoBack = _history.Count > 0;
 
@@ -279,7 +278,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         if (GetOrCreateViewModel(last) is { } view)
         {
-            IsBack = true;
+            NavigationIsBack = true;
             CurrentViewModel = view; 
             MemoryTrim.Request();
             Console.WriteLine($"Back, Tag: {last}, View: {view.Title}, Trigger Jump To ControlMessage");

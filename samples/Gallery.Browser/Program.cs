@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Browser;
+using AvaloniaFluentUI.Fonts;
 using Gallery;
 
 namespace Gallery.Browser;
@@ -24,5 +25,6 @@ internal sealed partial class Program
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UseBrowser()
+            .WithFont()
             .LogToTrace();
 }

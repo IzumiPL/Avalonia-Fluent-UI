@@ -3,6 +3,7 @@ using Android.App;
 using Android.Runtime;
 using Avalonia;
 using Avalonia.Android;
+using AvaloniaFluentUI.Fonts;
 
 namespace Gallery.Android;
 
@@ -19,6 +20,7 @@ public class MainApplication : AvaloniaAndroidApplication<App>
 #if DEBUG
             .WithDeveloperTools()
 #endif
+            .WithFont()
             .LogToTrace();
     }
 }
