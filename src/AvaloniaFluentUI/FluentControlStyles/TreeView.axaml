@@ -113,7 +113,6 @@
             Background="{TemplateBinding Background}"
             BorderBrush="{TemplateBinding BorderBrush}"
             BorderThickness="{TemplateBinding BorderThickness}"
-            Classes="TreeViewItemLayoutRoot"
             CornerRadius="{TemplateBinding CornerRadius}"
             Focusable="True"
             TemplatedControl.IsTemplateFocusTarget="True">

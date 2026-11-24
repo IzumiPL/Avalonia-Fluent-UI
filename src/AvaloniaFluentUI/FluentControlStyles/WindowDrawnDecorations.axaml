@@ -2,8 +2,7 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:cnnv="clr-namespace:AvaloniaFluentUI.Converters"
-  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls"
-  xmlns:wnd="clr-namespace:AvaloniaFluentUI.Windowing">
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls">
 
   <cnnv:WindowIconToImageConverter x:Key="IconConverter"/>
 
@@ -81,7 +80,6 @@
         <Setter Property="Foreground" Value="White"/>
       </Style>
     </Style>
-
   </ControlTheme>
 
   <ControlTheme x:Key="{x:Type WindowDrawnDecorations}" TargetType="WindowDrawnDecorations">

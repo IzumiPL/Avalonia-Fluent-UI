@@ -6,7 +6,7 @@
   xmlns:locale="clr-namespace:AvaloniaFluentUI.Locale"
   xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
   xmlns:uip="clr-namespace:AvaloniaFluentUI.Controls.Primitives;assembly=AvaloniaFluentUI"
-  x:CompileBindings="True">
+  x:CompileBindings="False">
 
   <Design.PreviewWith>
     <Border

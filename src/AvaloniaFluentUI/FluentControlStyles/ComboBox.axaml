@@ -75,7 +75,7 @@
 
   <ControlTheme TargetType="ComboBox" x:Key="{x:Type ComboBox}">
     <Setter Property="Padding" Value="{DynamicResource ComboBoxPadding}" />
-    <Setter Property="Margin" Value="2 0" />
+    <Setter Property="Margin" Value="0" />
     <Setter Property="MaxDropDownHeight" Value="504" />
     <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />

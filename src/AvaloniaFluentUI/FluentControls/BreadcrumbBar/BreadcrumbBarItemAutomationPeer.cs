@@ -16,7 +16,7 @@ public class BreadcrumbBarItemAutomationPeer : ControlAutomationPeer, IInvokePro
 
     protected override string GetLocalizedControlTypeCore()
     {
-        return LocalizationService.Instance.GetString("BreadcrumbBarItemLocalizedControlType");
+        return LocalizationService.Instance.GetString("BreadcrumbBar");
     }
 
     protected override string GetClassNameCore()
