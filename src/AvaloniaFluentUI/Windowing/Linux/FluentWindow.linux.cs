@@ -1,15 +1,19 @@
 using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using AvaloniaFluentUI.Controls;
 
 namespace AvaloniaFluentUI.Windowing;
 
 public partial class FluentWindow
 {
-    private MenuFlyout? _systemMenu;
+    private ContextMenu? _systemMenu;
+    private MenuItem? _minMenuItem;
+    private MenuItem? _maxMenuItem;
     private Border? _windowBorder;
     /// <summary>
     /// 可改变大小的范围
@@ -40,35 +44,40 @@ public partial class FluentWindow
 
     private void BuildSystemMenu()
     {
-        _systemMenu = new MenuFlyout();
+        _systemMenu = new ContextMenu();
 
         var restoreItem = new MenuItem { Header = "还原(_R)" };
         restoreItem.Click += (_, _) => WindowState = WindowState.Normal;
 
-        var moveItem = new MenuItem { Header = "移动(_M)" };
-        moveItem.IsEnabled = false;
+        var moveItem = new MenuItem { Header = "移动(_M)", IsEnabled = false };
+        var sizeItem = new MenuItem { Header = "大小(_S)", IsEnabled = false };
 
-        var sizeItem = new MenuItem { Header = "大小(_S)" };
-        sizeItem.IsEnabled = false;
+        _minMenuItem = new MenuItem { Header = "最小化(_N)" };
+        _minMenuItem.Click += OnMinimizeButtonClicked;
 
-        var minItem = new MenuItem { Header = "最小化(_N)" };
-        minItem.Click += OnMinimizeButtonClicked;
+        _maxMenuItem = new MenuItem { Header = "最大化(_X)" };
+        _maxMenuItem.Click += OnMaximizeButtonClicked;
 
-        var maxItem = new MenuItem { Header = "最大化(_X)" };
-        maxItem.Click += OnMaximizeButtonClicked;
-
-        var closeItem = new MenuItem { Header = "关闭(_C)" };
+        var closeItem = new MenuItem { Header = "关闭(_C)", InputGesture = new KeyGesture(Key.F4, KeyModifiers.Alt) };
         closeItem.Click += OnCloseButtonClicked;
-        closeItem.InputGesture = new KeyGesture(Key.F4, KeyModifiers.Alt);
 
         _systemMenu.Items.Add(restoreItem);
         _systemMenu.Items.Add(moveItem);
         _systemMenu.Items.Add(sizeItem);
         _systemMenu.Items.Add(new Separator());
-        _systemMenu.Items.Add(minItem);
-        _systemMenu.Items.Add(maxItem);
+        _systemMenu.Items.Add(_minMenuItem);
+        _systemMenu.Items.Add(_maxMenuItem);
         _systemMenu.Items.Add(new Separator());
         _systemMenu.Items.Add(closeItem);
+
+        _systemMenu.Opening -= OnSystemMenuOpening;
+        _systemMenu.Opening += OnSystemMenuOpening;
+    }
+
+    private void OnSystemMenuOpening(object? sender, CancelEventArgs e)
+    {
+        _minMenuItem?.IsEnabled = CanMinimize && CanResize;
+        _maxMenuItem?.IsEnabled = CanMaximize && CanResize;
     }
 
     protected override void OnLoaded(RoutedEventArgs e)
@@ -88,7 +97,7 @@ public partial class FluentWindow
 
         if (_titleBar != null && _systemMenu != null)
         {
-            _titleBar.ContextFlyout = _systemMenu;
+            _titleBar.ContextMenu = _systemMenu;
         }
     }
 
