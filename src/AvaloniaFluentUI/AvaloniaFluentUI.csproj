@@ -44,6 +44,6 @@
     <PackageReference Include="Avalonia.Controls.DataGrid" />
     <PackageReference Include="MicroCom.CodeGenerator.MSBuild" PrivateAssets="All" />
     <PackageReference Include="MicroCom.Runtime" />
-    <MicroComIdl Include="$(MSBuildThisFileDirectory)\FluentControls\Interop\WinRT\WinRT.idl" CSharpInteropPath="$(MSBuildThisFileDirectory)\FluentControls\Interop\WinRT\WinRT.Generated.cs" />
+    <MicroComIdl Include="$(MSBuildThisFileDirectory)\Interop\Win32\WinRT\WinRT.idl" CSharpInteropPath="$(MSBuildThisFileDirectory)\Interop\Win32\WinRT\WinRT.Generated.cs" />
   </ItemGroup>
 </Project>
