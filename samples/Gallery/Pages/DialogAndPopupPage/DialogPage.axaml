@@ -1,7 +1,10 @@
 ﻿<ui:ViewBase
+  Title="{Binding Title}"
+  d:DesignWidth="800"
+  mc:Ignorable="d"
   x:Class="Gallery.Pages.DialogPage"
+  x:DataType="viewModel:DialogPageViewModel"
   xmlns="https://github.com/avaloniaui"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:fi="clr-namespace:AvaloniaFluentUI.Icons;assembly=AvaloniaFluentUI"
   xmlns:fui="clr-namespace:AvaloniaFluentUI.Controls;assembly=AvaloniaFluentUI"
@@ -9,10 +12,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:ui="clr-namespace:Gallery.Controls"
   xmlns:viewModel="clr-namespace:Gallery.ViewModels"
-  Title="{Binding Title}"
-  d:DesignWidth="800"
-  x:DataType="viewModel:DialogPageViewModel"
-  mc:Ignorable="d">
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <StackPanel Spacing="50">
 
     <!--  Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ThisIsDialogWithMask]}"  -->
@@ -20,59 +20,52 @@
     <!--  Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_OptimisticContent]}"  -->
 
     <fui:ContentDialog
-      Name="ContentDialog"
-      Title="{locale:Localization DP_ThisIsDialogWithMask}"
       CloseButtonText="{locale:Localization DP_Close}"
       Content="{locale:Localization DP_OptimisticContent}"
       DefaultButton="Primary"
       IsPrimaryButtonEnabled="True"
       IsVisible="False"
-      PrimaryButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Confirm]}"/>
+      Name="ContentDialog"
+      PrimaryButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Confirm]}"
+      Title="{locale:Localization DP_ThisIsDialogWithMask}" />
     <ui:CodeCard Name="ContentDialogCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_DialogWithMask]}">
       <Grid ColumnDefinitions="*, Auto">
         <Button
-          HorizontalAlignment="Left"
           Click="OnShowContentDialog"
-          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Open]}"/>
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Open]}"
+          HorizontalAlignment="Left" />
 
         <CheckBox
-          Name="FullHeightCheckBox"
+          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FullHeight]}"
           Grid.Column="1"
-          Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[FullHeight]}"/>
+          Name="FullHeightCheckBox" />
       </Grid>
     </ui:CodeCard>
 
     <fui:ContentDialog
-      Name="CustomDialog"
-      Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_OpenURL]}"
       CloseButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Close]}"
       DefaultButton="Primary"
       IsPrimaryButtonEnabled="True"
       IsVisible="False"
-      PrimaryButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Open]}">
+      Name="CustomDialog"
+      PrimaryButtonText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Open]}"
+      Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_OpenURL]}">
       <TextBox
         HorizontalAlignment="Stretch"
-        VerticalAlignment="Center"
-        PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_URLWatermark]}"/>
+        PlaceholderText="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_URLWatermark]}"
+        VerticalAlignment="Center" />
     </fui:ContentDialog>
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_CustomDialog]}">
-      <Button Click="OnShowCustomDialog" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Open]}"/>
+      <Button Click="OnShowCustomDialog" Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_Open]}" />
     </ui:CodeCard>
 
     <ui:CodeCard Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ColorDialog]}">
       <fui:FilledPushButton
-        Name="FilledPushButton"
-        Padding="16,5"
         Background="DeepPink"
         Click="OnShowColorDialog"
-        Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ShowColorDialog]}"/>
-    </ui:CodeCard>
-
-    <ui:CodeCard Name="TaskDialogCard" Title="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_TaskDialog]}">
-      <Button
-        Click="OnShowTaskDialog"
-        Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ShowTaskDialog]}"
-        IsEnabled="False"/>
+        Content="{Binding Source={x:Static locale:LocalizationService.Instance}, Path=[DP_ShowColorDialog]}"
+        Name="FilledPushButton"
+        Padding="16,5" />
     </ui:CodeCard>
   </StackPanel>
 </ui:ViewBase>

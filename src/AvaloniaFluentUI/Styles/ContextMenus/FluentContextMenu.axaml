@@ -1,0 +1,80 @@
+﻿<ResourceDictionary
+  x:ClassModifier="internal"
+  xmlns="https://github.com/avaloniaui"
+  xmlns:ui="clr-namespace:AvaloniaFluentUI.Controls"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Design.PreviewWith>
+    <Border
+      Background="{DynamicResource SystemAccentColor}"
+      Height="200"
+      Margin="16"
+      Padding="48"
+      Width="400">
+      <Border.ContextMenu>
+        <ContextMenu>
+          <MenuItem Header="Standard _Menu Item" />
+          <MenuItem Header="Disabled" IsEnabled="False" />
+          <Separator />
+          <MenuItem Header="Menu with _Submenu">
+            <MenuItem Header="Submenu _1" />
+            <MenuItem Header="Submenu _2" />
+          </MenuItem>
+          <MenuItem Header="Menu Item with _Icon" />
+          <MenuItem Header="Menu Item with _Checkbox">
+            <MenuItem.Icon>
+              <CheckBox
+                BorderThickness="0"
+                IsChecked="True"
+                IsHitTestVisible="False" />
+            </MenuItem.Icon>
+          </MenuItem>
+        </ContextMenu>
+      </Border.ContextMenu>
+      <TextBlock Text="Defined in XAML" />
+    </Border>
+  </Design.PreviewWith>
+
+  <!--  Added missing resource  -->
+  <Thickness x:Key="MenuFlyoutScrollerMargin">0,4,0,4</Thickness>
+
+  <ControlTheme TargetType="ui:FluentContextMenu" x:Key="{x:Type ui:FluentContextMenu}">
+    <Setter Property="Background" Value="{DynamicResource AcrylicInAppFillColorDefaultBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource SurfaceStrokeColorFlyoutBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource MenuFlyoutPresenterBorderThemeThickness}" />
+    <Setter Property="CornerRadius" Value="{DynamicResource OverlayCornerRadius}" />
+    <Setter Property="Focusable" Value="True" />
+    <Setter Property="ClipToBounds" Value="False" />
+    <Setter Property="MaxWidth" Value="{DynamicResource FlyoutThemeMaxWidth}" />
+    <Setter Property="MinHeight" Value="{DynamicResource MenuFlyoutThemeMinHeight}" />
+    <Setter Property="Padding" Value="{DynamicResource MenuFlyoutPresenterThemePadding}" />
+    <Setter Property="HorizontalAlignment" Value="Stretch" />
+    <Setter Property="WindowManagerAddShadowHint" Value="False" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border
+          BoxShadow="{DynamicResource ControlDefaultBoxShadow}"
+          CornerRadius="{TemplateBinding CornerRadius}"
+          Margin="{DynamicResource ControlDefaultBoxShadowsMargin}">
+          <Border
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            CornerRadius="{TemplateBinding CornerRadius}"
+            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+            MaxWidth="{TemplateBinding MaxWidth}"
+            MinHeight="{TemplateBinding MinHeight}"
+            Padding="{TemplateBinding Padding}">
+            <ui:SmoothScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden">
+              <ItemsPresenter
+                Grid.IsSharedSizeScope="True"
+                ItemsPanel="{TemplateBinding ItemsPanel}"
+                KeyboardNavigation.TabNavigation="Continue"
+                Margin="{DynamicResource MenuFlyoutScrollerMargin}"
+                Name="PART_ItemsPresenter" />
+            </ui:SmoothScrollViewer>
+          </Border>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </ControlTheme>
+</ResourceDictionary>

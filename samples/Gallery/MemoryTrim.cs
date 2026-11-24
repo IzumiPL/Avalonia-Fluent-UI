@@ -6,7 +6,7 @@ namespace Gallery;
 
 internal static class MemoryTrim
 {
-    private const long MAX_WORKING_SET = 250L * 1024 * 1024;
+    private const long MAX_WORKING_SET = 300L * 1024 * 1024;
     /// <summary>Freed bytes below which returning the pages is not worth the page faults.</summary>
     private const long WORTH_RETURING = 4L * 1024 * 1024;
     
@@ -99,7 +99,7 @@ internal static class MemoryTrim
 
             if (process.WorkingSet64 > MAX_WORKING_SET)
             {
-                SetProcessWorkingSetSize(GetCurrentProcess(), -1, -1); 
+                SetProcessWorkingSetSize(GetCurrentProcess(), (nint)(50L * 1024 * 1024), (nint)(150L * 1024 * 1024)); 
             }
         }
         catch (Exception)

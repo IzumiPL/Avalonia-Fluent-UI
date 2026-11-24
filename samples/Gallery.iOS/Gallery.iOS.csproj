@@ -4,6 +4,8 @@
     <TargetFramework>net10.0-ios</TargetFramework>
     <SupportedOSPlatformVersion>13.0</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
+    <ApplicationVersion>2.0.6</ApplicationVersion>
+    <Authors>IzumiPL</Authors>
   </PropertyGroup>
 
   <ItemGroup>

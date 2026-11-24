@@ -1,0 +1,38 @@
+﻿using Avalonia.Automation.Peers;
+using Avalonia.Automation.Provider;
+using Avalonia.Controls;
+using AvaloniaFluentUI.Locale;
+
+namespace AvaloniaFluentUI.Controls;
+
+/// <summary>
+/// Defines the automation peer for a <see cref="BreadcrumbBarItem"/>
+/// </summary>
+public class BreadcrumbBarItemAutomationPeer : ControlAutomationPeer, IInvokeProvider
+{
+    public BreadcrumbBarItemAutomationPeer(Control owner) : base(owner)
+    {
+    }
+
+    protected override string GetLocalizedControlTypeCore()
+    {
+        return LocalizationService.Instance.GetString("BreadcrumbBar");
+    }
+
+    protected override string GetClassNameCore()
+    {
+        return nameof(BreadcrumbBarItem);
+    }
+
+    protected override AutomationControlType GetAutomationControlTypeCore() => 
+        AutomationControlType.Button;
+
+    private BreadcrumbBarItem? GetImpl() => Owner as BreadcrumbBarItem;
+
+    void IInvokeProvider.Invoke()
+    {
+        var impl = GetImpl();
+        if (impl != null)
+            impl.OnClickEvent(null, null);
+    }
+}

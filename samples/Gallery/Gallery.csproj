@@ -11,7 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AvaloniaResource Include="Assets\**" Exclude="Assets\Fonts\**;Assets\Locale\**"/>
+    <AvaloniaResource Include="Assets\**" Exclude="Assets\Fonts\**"/>
+<!--    <AvaloniaResource Include="Assets\**" Exclude="Assets\Fonts\**;Assets\Locale\**"/>-->
 <!--    <AvaloniaResource Include="Assets\**" Exclude="Assets\Locale\**"/>-->
     
   </ItemGroup>

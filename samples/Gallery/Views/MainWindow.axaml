@@ -66,6 +66,9 @@
     <!-- <Setter Property="BorderBrush" Value="#E2E5E9" /> -->
     <!-- <Setter Property="ClipToBounds" Value="True" /> -->
     <!-- </Style> -->
+
+
+
     <Style Selector="UserControl">
       <Setter Property="Background" Value="Transparent"/>
     </Style>
@@ -476,7 +479,7 @@
       </fui:NavigationView.MenuItems>
 
       <fui:NavigationView.Content>
-        <fui:StackContent Content="{Binding CurrentViewModel}"/>
+        <fui:StackContent Content="{Binding CurrentViewModel}" IsBack="{Binding NavigationIsBack}"/>
       </fui:NavigationView.Content>
     </fui:NavigationView>
   </Grid>

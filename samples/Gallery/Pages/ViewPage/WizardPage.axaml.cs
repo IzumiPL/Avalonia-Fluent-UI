@@ -28,6 +28,7 @@ public partial class WizardPage : InfoBarHostViewBase
     {
         base.OnLoaded(e);
         InfoBarHost.RegisterManager<PopupInfoBarManager>();
+        // InfoBarHost.Margin = new Thickness(0, 30, 0, 0);
     }
 
     private void OnNexting(object? sender, WizardNextingEventArgs e)
@@ -102,21 +103,21 @@ public partial class WizardPage : InfoBarHostViewBase
                     if ((p2.TokenEdit.Text != "tk_1") || (p2.ProxyEdit.Text != "locale"))
                     {
                         e.Cancel = true;
-                        ww.InfoBarHost.GetManager<PopupInfoBarManager>().Error(LocalizationService.Instance.GetString("Error"), LocalizationService.Instance.GetString("TkError"), InfoBarPosition.TopRight, duration: 3500);
+                        ww.InfoBarHost.GetManager<PopupInfoBarManager>().Error(LocalizationService.Instance.GetString("Error"), LocalizationService.Instance.GetString("TkError"), InfoBarPosition.Top, duration: 3500);
                     }
                     break;
                 case 2:               
                     if ((p3.FatherEdit.Text != "1") || (p3.MotherEdit.Text != "2"))
                     {
                         e.Cancel = true;
-                        ww.InfoBarHost.GetManager<PopupInfoBarManager>().Error(LocalizationService.Instance.GetString("Error"), LocalizationService.Instance.GetString("NameError"), InfoBarPosition.TopRight, duration: 3500);
+                        ww.InfoBarHost.GetManager<PopupInfoBarManager>().Error(LocalizationService.Instance.GetString("Error"), LocalizationService.Instance.GetString("NameError"), InfoBarPosition.Top, duration: 3500);
                     }
                     break;
                 case 3:                
                     if ((p4.UserNameEdit.Text != "1") || (p4.PasswordEdit.Text != "1"))
                     {
                         e.Cancel = true;
-                        ww.InfoBarHost.GetManager<PopupInfoBarManager>().Error(LocalizationService.Instance.GetString("Error"), LocalizationService.Instance.GetString("UnPsError"), InfoBarPosition.TopRight, duration: 3500);
+                        ww.InfoBarHost.GetManager<PopupInfoBarManager>().Error(LocalizationService.Instance.GetString("Error"), LocalizationService.Instance.GetString("UnPsError"), InfoBarPosition.Top, duration: 3500);
                     }
                     break;
             }
@@ -152,6 +153,12 @@ public class WizardWindow : FluentWindow
         MinButtonIsVisible = false;
         CanResize = false;
         EnabledMica(true);
+    }
+
+    protected override void OnLoaded(RoutedEventArgs e)
+    {
+        base.OnLoaded(e);
+        InfoBarHost.Margin = new Thickness(0, 30, 0, 0);
     }
 
     public WizardWindow(IEnumerable<Control> pages) : this()

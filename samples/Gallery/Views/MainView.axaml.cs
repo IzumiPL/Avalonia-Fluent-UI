@@ -20,11 +20,19 @@ public partial class MainView : UserControl
         }
     }
 
-    private void OnPopupContextMenu(object? sender, PointerReleasedEventArgs e)
+    private void OnPopupContextMenuClicked(object? sender, PointerReleasedEventArgs e)
     {
         if (sender is Panel panel)
         {
             panel.ContextMenu?.Open();
+        }
+    }
+    
+    private void OnPopupAvatarFlyoutClicked(object? sender, PointerReleasedEventArgs e)
+    {
+        if (sender is Avatar ct)
+        {
+            FlyoutBase.ShowAttachedFlyout(ct);
         }
     }
 }
